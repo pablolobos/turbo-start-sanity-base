@@ -221,6 +221,7 @@ export const queryFooterData = defineQuery(/* groq */ `
       }
     },
     "logo": *[_type == "settings"][0].logo.asset->url,
+    "siteTitle": *[_type == "settings"][0].siteTitle,
     "socialLinks": *[_type == "settings"][0].socialLinks,
   }
 `);
