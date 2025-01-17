@@ -220,9 +220,7 @@ export const queryFooterData = defineQuery(/* groq */ `
         ),
       }
     },
-    ...(*[_type == "settings"][0]{
-      'logo': logo.asset->url,
-      socialLinks,
-    })
+    "logo": *[_type == "settings"][0].logo.asset->url,
+    "socialLinks": *[_type == "settings"][0].socialLinks,
   }
 `);

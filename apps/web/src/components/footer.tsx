@@ -1,7 +1,13 @@
 import { sanityFetch } from "@/lib/sanity/live";
 import { queryFooterData } from "@/lib/sanity/query";
 import type { QueryFooterDataResult } from "@/lib/sanity/sanity.types";
-import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
+import {
+  Facebook,
+  Instagram,
+  Linkedin,
+  Twitter,
+  Youtube,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -49,10 +55,56 @@ export async function FooterServer() {
   if (!footerData.data) return null;
   return <Footer data={footerData.data} />;
 }
+function SocialLinks({
+  data,
+}: {
+  data: NonNullable<QueryFooterDataResult>["socialLinks"];
+}) {
+  const { facebook, twitter, instagram, youtube, linkedin } =
+    data ?? {};
+  return (
+    <ul className="flex items-center space-x-6 text-muted-foreground">
+      {instagram && (
+        <li className="font-medium hover:text-primary">
+          <Link href={instagram} target="_blank">
+            <Instagram className="size-6" />
+          </Link>
+        </li>
+      )}
+      {facebook && (
+        <li className="font-medium hover:text-primary">
+          <Link href={facebook} target="_blank">
+            <Facebook className="size-6" />
+          </Link>
+        </li>
+      )}
+      {twitter && (
+        <li className="font-medium hover:text-primary">
+          <Link href={twitter} target="_blank">
+            <Twitter className="size-6" />
+          </Link>
+        </li>
+      )}
+      {linkedin && (
+        <li className="font-medium hover:text-primary">
+          <Link href={linkedin} target="_blank">
+            <Linkedin className="size-6" />
+          </Link>
+        </li>
+      )}
+      {youtube && (
+        <li className="font-medium hover:text-primary">
+          <Link href={youtube} target="_blank">
+            <Youtube className="size-6" />
+          </Link>
+        </li>
+      )}
+    </ul>
+  );
+}
 
 function Footer({ data }: { data: QueryFooterDataResult }) {
-  const { subtitle, columns } = data ?? {};
-  console.log("🚀 ~ Footer ~ data:", data);
+  const { subtitle, columns, socialLinks, logo } = data ?? {};
   return (
     <section className="pb-8">
       <div className="container mx-auto px-4 md:px-6">
@@ -62,7 +114,7 @@ function Footer({ data }: { data: QueryFooterDataResult }) {
               <div>
                 <span className="flex items-center justify-center gap-4 lg:justify-start">
                   <Image
-                    src={LOGO_URL}
+                    src={logo ?? LOGO_URL}
                     alt="logo"
                     width={80}
                     height={40}
@@ -73,28 +125,7 @@ function Footer({ data }: { data: QueryFooterDataResult }) {
                   {subtitle}
                 </p>
               </div>
-              <ul className="flex items-center space-x-6 text-muted-foreground">
-                <li className="font-medium hover:text-primary">
-                  <Link href="#">
-                    <Instagram className="size-6" />
-                  </Link>
-                </li>
-                <li className="font-medium hover:text-primary">
-                  <Link href="#">
-                    <Facebook className="size-6" />
-                  </Link>
-                </li>
-                <li className="font-medium hover:text-primary">
-                  <Link href="#">
-                    <Twitter className="size-6" />
-                  </Link>
-                </li>
-                <li className="font-medium hover:text-primary">
-                  <Link href="#">
-                    <Linkedin className="size-6" />
-                  </Link>
-                </li>
-              </ul>
+              {socialLinks && <SocialLinks data={socialLinks} />}
             </div>
             <div className="grid grid-cols-3 gap-6 lg:gap-20">
               {columns?.map((column, columnIdx) => (

@@ -1497,7 +1497,7 @@ export type QueryGenericPageOGDataResult = {
   date: string;
 } | null;
 // Variable: queryFooterData
-// Query: *[_type == "footer"][0]{    _id,    subtitle,    columns[]{      _key,      title,      links[]{        _key,        name,        "openInNewTab": url.openInNewTab,        "href": select(          url.type == "internal" => url.internal->slug.current,          url.type == "external" => url.external,          url.href        ),      }    },    ...(*[_type == "settings"][0]{      'logo': logo.asset->url,      socialLinks,    })  }
+// Query: *[_type == "footer"][0]{    _id,    subtitle,    columns[]{      _key,      title,      links[]{        _key,        name,        "openInNewTab": url.openInNewTab,        "href": select(          url.type == "internal" => url.internal->slug.current,          url.type == "external" => url.external,          url.href        ),      }    },    "logo": *[_type == "settings"][0].logo.asset->url,    "socialLinks": *[_type == "settings"][0].socialLinks,  }
 export type QueryFooterDataResult = {
   _id: string;
   subtitle: string | null;
@@ -1519,19 +1519,6 @@ export type QueryFooterDataResult = {
     youtube?: string;
     linkedin?: string;
   } | null;
-} | {
-  _id: string;
-  subtitle: string | null;
-  columns: Array<{
-    _key: string;
-    title: string | null;
-    links: Array<{
-      _key: string;
-      name: string | null;
-      openInNewTab: boolean | null;
-      href: string | null;
-    }> | null;
-  }> | null;
 } | null;
 
 // Query TypeMap
@@ -1546,6 +1533,6 @@ declare module "@sanity/client" {
     "\n  *[_type == \"page\" && _id == $id][0]{\n    \n  _id,\n  _type,\n  \"title\": select(\n    defined(ogTitle) => ogTitle,\n    defined(seoTitle) => seoTitle,\n    title\n  ),\n  \"description\": select(\n    defined(ogDescription) => ogDescription,\n    defined(seoDescription) => seoDescription,\n    description\n  ),\n  \"image\": image.asset->url + \"?w=566&h=566&dpr=2&fit=max\",\n  \"dominantColor\": image.asset->metadata.palette.dominant.background,\n  \"seoImage\": seoImage.asset->url + \"?w=1200&h=630&dpr=2&fit=max\", \n  \"date\": coalesce(date, _createdAt)\n\n  }\n": QuerySlugPageOGDataResult;
     "\n  *[_type == \"blog\" && _id == $id][0]{\n    \n  _id,\n  _type,\n  \"title\": select(\n    defined(ogTitle) => ogTitle,\n    defined(seoTitle) => seoTitle,\n    title\n  ),\n  \"description\": select(\n    defined(ogDescription) => ogDescription,\n    defined(seoDescription) => seoDescription,\n    description\n  ),\n  \"image\": image.asset->url + \"?w=566&h=566&dpr=2&fit=max\",\n  \"dominantColor\": image.asset->metadata.palette.dominant.background,\n  \"seoImage\": seoImage.asset->url + \"?w=1200&h=630&dpr=2&fit=max\", \n  \"date\": coalesce(date, _createdAt)\n\n  }\n": QueryBlogPageOGDataResult;
     "\n  *[ defined(slug.current) && _id == $id][0]{\n    \n  _id,\n  _type,\n  \"title\": select(\n    defined(ogTitle) => ogTitle,\n    defined(seoTitle) => seoTitle,\n    title\n  ),\n  \"description\": select(\n    defined(ogDescription) => ogDescription,\n    defined(seoDescription) => seoDescription,\n    description\n  ),\n  \"image\": image.asset->url + \"?w=566&h=566&dpr=2&fit=max\",\n  \"dominantColor\": image.asset->metadata.palette.dominant.background,\n  \"seoImage\": seoImage.asset->url + \"?w=1200&h=630&dpr=2&fit=max\", \n  \"date\": coalesce(date, _createdAt)\n\n  }\n": QueryGenericPageOGDataResult;
-    "\n  *[_type == \"footer\"][0]{\n    _id,\n    subtitle,\n    columns[]{\n      _key,\n      title,\n      links[]{\n        _key,\n        name,\n        \"openInNewTab\": url.openInNewTab,\n        \"href\": select(\n          url.type == \"internal\" => url.internal->slug.current,\n          url.type == \"external\" => url.external,\n          url.href\n        ),\n      }\n    },\n    ...(*[_type == \"settings\"][0]{\n      'logo': logo.asset->url,\n      socialLinks,\n    })\n  }\n": QueryFooterDataResult;
+    "\n  *[_type == \"footer\"][0]{\n    _id,\n    subtitle,\n    columns[]{\n      _key,\n      title,\n      links[]{\n        _key,\n        name,\n        \"openInNewTab\": url.openInNewTab,\n        \"href\": select(\n          url.type == \"internal\" => url.internal->slug.current,\n          url.type == \"external\" => url.external,\n          url.href\n        ),\n      }\n    },\n    \"logo\": *[_type == \"settings\"][0].logo.asset->url,\n    \"socialLinks\": *[_type == \"settings\"][0].socialLinks,\n  }\n": QueryFooterDataResult;
   }
 }
