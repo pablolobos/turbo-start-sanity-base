@@ -13,13 +13,13 @@
     "@portabletext/react": "^3.2.0",
     "@radix-ui/react-accordion": "^1.2.2",
     "@sanity/asset-utils": "^2.2.1",
-    "@sanity/client": "^6.24.2",
+    "@sanity/client": "^6.24.4",
     "@sanity/image-url": "^1.1.0",
-    "@sanity/preview-url-secret": "^2.0.5",
+    "@sanity/preview-url-secret": "^2.1.0",
     "@workspace/ui": "workspace:*",
-    "lucide-react": "0.456.0",
-    "next": "^15.1.0",
-    "next-sanity": "^9.8.32",
+    "lucide-react": "0.471.1",
+    "next": "^15.1.4",
+    "next-sanity": "^9.8.37",
     "next-themes": "^0.4.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -33,6 +33,6 @@
     "@workspace/eslint-config": "workspace:^",
     "@workspace/typescript-config": "workspace:*",
     "postcss": "^8",
-    "tailwindcss": "^3.4.1"
+    "tailwindcss": "^3.4.17"
   }
 }
