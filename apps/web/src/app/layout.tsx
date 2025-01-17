@@ -1,11 +1,11 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { FooterServer } from "@/components/footer";
+import { Navbar } from "@/components/navbar";
 import { SanityLive } from "@/lib/sanity/live";
+import "@workspace/ui/globals.css";
 import { VisualEditing } from "next-sanity";
 import { revalidatePath, revalidateTag } from "next/cache";
+import { Geist, Geist_Mono } from "next/font/google";
 import { draftMode } from "next/headers";
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
-import "@workspace/ui/globals.css";
 
 const fontSans = Geist({
   subsets: ["latin"],
@@ -54,7 +54,7 @@ export default async function RootLayout({
         ) : (
           children
         )}
-        <Footer />
+        <FooterServer />
         <SanityLive />
       </body>
     </html>

@@ -6,7 +6,7 @@ import {
 
 const allLinkableTypes = [
   { type: "blog" },
-  //   { type: "page" },
+  { type: "page" },
   //   { type: "product" },
   //   { type: "category" },
 ];

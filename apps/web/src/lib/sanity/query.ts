@@ -200,3 +200,29 @@ export const queryGenericPageOGData = defineQuery(/* groq */ `
     ${ogFieldsFragment}
   }
 `);
+
+
+export const queryFooterData = defineQuery(/* groq */ `
+  *[_type == "footer"][0]{
+    _id,
+    subtitle,
+    columns[]{
+      _key,
+      title,
+      links[]{
+        _key,
+        name,
+        "openInNewTab": url.openInNewTab,
+        "href": select(
+          url.type == "internal" => url.internal->slug.current,
+          url.type == "external" => url.external,
+          url.href
+        ),
+      }
+    },
+    ...(*[_type == "settings"][0]{
+      'logo': logo.asset->url,
+      socialLinks,
+    })
+  }
+`);

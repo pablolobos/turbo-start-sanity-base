@@ -6,10 +6,12 @@ import { getTitleCase } from "./utils/helper";
 import type { SchemaType, SingletonType } from "./schemaTypes";
 import {
   BookMarked,
+  CogIcon,
   File,
   FileText,
   HomeIcon,
   MessageCircleQuestion,
+  PanelBottomIcon,
   User,
   type LucideIcon,
 } from "lucide-react";
@@ -80,7 +82,7 @@ const createIndexList = ({ S, index, list }: CreateIndexList) => {
                 .documentId(index.type)
             ),
           S.documentTypeListItem(list.type)
-            .title(`${listTitle}s`)
+            .title(`${listTitle}`)
             .icon(list.icon ?? File),
         ])
     );
@@ -89,35 +91,37 @@ const createIndexList = ({ S, index, list }: CreateIndexList) => {
 export const structure = (
   S: StructureBuilder,
   context: StructureResolverContext
-) =>
-  S.list()
+) => {
+  return S.list()
     .title("Content")
     .items([
       createSingleTon({ S, type: "homePage", icon: HomeIcon }),
       S.divider(),
-      createList({ S, type: "page" }),
+      createList({ S, type: "page", title: "Pages" }),
       createIndexList({
         S,
         index: { type: "blogIndex", icon: BookMarked },
-        list: { type: "blog", icon: FileText },
+        list: { type: "blog", title: "Blogs", icon: FileText },
       }),
-      createList({ S, type: "faq", icon: MessageCircleQuestion }),
-      createList({ S, type: "author", icon: User }),
-      //   createIndexList({
-      //     S,
-      //     index: { type: "blogIndex", icon: BookMarked },
-      //     list: { type: "blog", icon: FileText },
-      //   }),
-      //   createList({ S, type: "form", icon: ClipboardType }),
-      //   S.divider(),
-      //   createNestedList({
-      //     S,
-      //     title: "Settings",
-      //     icon: Settings,
-      //     items: [
-      //       createSingleTon({ S, type: "navbar", icon: Menu }),
-      //       createSingleTon({ S, type: "footer", icon: Footprints }),
-      //       createSingleTon({ S, type: "logo", icon: Building2 }),
-      //     ],
-      //   }),
+      createList({
+        S,
+        type: "faq",
+        title: "FAQs",
+        icon: MessageCircleQuestion,
+      }),
+      createList({ S, type: "author", title: "Authors", icon: User }),
+      S.divider(),
+      createSingleTon({
+        S,
+        type: "footer",
+        title: "Footer",
+        icon: PanelBottomIcon,
+      }),
+      createSingleTon({
+        S,
+        type: "settings",
+        title: "Global Settings",
+        icon: CogIcon,
+      }),
     ]);
+};

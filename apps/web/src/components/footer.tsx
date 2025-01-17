@@ -1,3 +1,6 @@
+import { sanityFetch } from "@/lib/sanity/live";
+import { queryFooterData } from "@/lib/sanity/query";
+import type { QueryFooterDataResult } from "@/lib/sanity/sanity.types";
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -35,7 +38,21 @@ const sections = [
   },
 ];
 
-export function Footer() {
+async function fetchFooterData() {
+  return await sanityFetch({
+    query: queryFooterData,
+  });
+}
+
+export async function FooterServer() {
+  const footerData = await fetchFooterData();
+  if (!footerData.data) return null;
+  return <Footer data={footerData.data} />;
+}
+
+function Footer({ data }: { data: QueryFooterDataResult }) {
+  const { subtitle, columns } = data ?? {};
+  console.log("🚀 ~ Footer ~ data:", data);
   return (
     <section className="pb-8">
       <div className="container mx-auto px-4 md:px-6">
@@ -53,8 +70,7 @@ export function Footer() {
                   />
                 </span>
                 <p className="mt-6 text-sm text-muted-foreground">
-                  A collection of 100+ responsive HTML templates for
-                  your startup business or side project.
+                  {subtitle}
                 </p>
               </div>
               <ul className="flex items-center space-x-6 text-muted-foreground">
@@ -81,16 +97,23 @@ export function Footer() {
               </ul>
             </div>
             <div className="grid grid-cols-3 gap-6 lg:gap-20">
-              {sections.map((section, sectionIdx) => (
-                <div key={section.title}>
-                  <h3 className="mb-6 font-bold">{section.title}</h3>
+              {columns?.map((column, columnIdx) => (
+                <div key={column._key}>
+                  <h3 className="mb-6 font-bold">{column.title}</h3>
                   <ul className="space-y-4 text-sm text-muted-foreground">
-                    {section.links.map((link, linkIdx) => (
+                    {column.links?.map((link, linkIdx) => (
                       <li
-                        key={link.name}
+                        key={link._key}
                         className="font-medium hover:text-primary"
                       >
-                        <Link href={link.href}>{link.name}</Link>
+                        <Link
+                          href={link.href ?? "#"}
+                          target={
+                            link.openInNewTab ? "_blank" : undefined
+                          }
+                        >
+                          {link.name}
+                        </Link>
                       </li>
                     ))}
                   </ul>
