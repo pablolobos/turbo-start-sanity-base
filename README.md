@@ -27,21 +27,13 @@ A modern, full-stack monorepo template built with Next.js App Router, Sanity CMS
 - Asset management
 
 
-### Getting Started
+### Deployment
 
-1. Install dependencies:
-   ```bash
-   pnpm install
-   ```
+#### Configure GitHub Actions secrets:
 
-2. Set up environment variables:
-   ```bash
-   cp .env.example .env
-   ```
-
-3. Start development servers:
-   ```bash
-   pnpm dev
-   ```
-
-### Project Structure
+   For Sanity Studio deployment, add these repository secrets:
+   - `SANITY_DEPLOY_TOKEN`: Your Sanity deployment token
+   - `SANITY_STUDIO_PROJECT_ID`: Your Sanity project ID
+   - `SANITY_STUDIO_DATASET`: Your dataset name (e.g., 'production')
+   - `SANITY_STUDIO_TITLE`: Your Studio title
+   - `SANITY_STUDIO_PRESENTATION_URL`: URL where your frontend is hosted
