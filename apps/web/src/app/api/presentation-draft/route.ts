@@ -5,13 +5,13 @@ import { type NextRequest, NextResponse } from "next/server";
 import { client } from "@/lib/sanity/client";
 
 const clientWithToken = client.withConfig({
-  token: process.env.SANITY_API_TOKEN,
+  token: process.env.SANITY_API_READ_TOKEN,
 });
 
 export async function GET(request: NextRequest) {
-  if (!process.env.SANITY_API_TOKEN) {
+  if (!process.env.SANITY_API_READ_TOKEN) {
     return new Response(
-      "Missing environment variable SANITY_API_TOKEN",
+      "Missing environment variable SANITY_API_READ_TOKEN",
       {
         status: 500,
       }
