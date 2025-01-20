@@ -37,11 +37,11 @@ export default async function BlogSlugPage({
               <SanityImage
                 asset={data.image}
                 alt="Decorative geometric pattern"
-                width={800}
+                width={1600}
                 loading="eager"
                 priority
-                height={400}
-                className="rounded-lg bg-muted"
+                height={900}
+                className="rounded-lg h-auto w-full"
               />
             </div>
           )}
