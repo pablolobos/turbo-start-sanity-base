@@ -203,7 +203,7 @@ export const queryGenericPageOGData = defineQuery(/* groq */ `
 
 
 export const queryFooterData = defineQuery(/* groq */ `
-  *[_type == "footer"][0]{
+  *[_type == "footer" && _id == "footer"][0]{
     _id,
     subtitle,
     columns[]{
@@ -223,5 +223,43 @@ export const queryFooterData = defineQuery(/* groq */ `
     "logo": *[_type == "settings"][0].logo.asset->url,
     "siteTitle": *[_type == "settings"][0].siteTitle,
     "socialLinks": *[_type == "settings"][0].socialLinks,
+  }
+`);
+
+export const queryNavbarData = defineQuery(/* groq */ `
+  *[_type == "navbar" && _id == "navbar"][0]{
+    _id,
+    columns[]{
+      _key,
+      _type == "navbarColumn" => {
+        "type": "column",
+        title,
+        links[]{
+          _key,
+          name,
+          description,
+          "openInNewTab": url.openInNewTab,
+          "href": select(
+            url.type == "internal" => url.internal->slug.current,
+            url.type == "external" => url.external,
+            url.href
+          )
+        }
+      },
+      _type == "navbarColumnLink" => {
+        "type": "link",
+        name,
+        description,
+        "openInNewTab": url.openInNewTab,
+        "href": select(
+          url.type == "internal" => url.internal->slug.current,
+          url.type == "external" => url.external,
+          url.href
+        )
+      }
+    },
+    ${buttonsFragment},
+    "logo": *[_type == "settings"][0].logo.asset->url,
+    "siteTitle": *[_type == "settings"][0].siteTitle,
   }
 `);

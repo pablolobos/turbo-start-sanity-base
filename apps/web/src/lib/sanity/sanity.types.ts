@@ -266,6 +266,36 @@ export type RichText = Array<{
   _key: string;
 }>;
 
+export type Navbar = {
+  _id: string;
+  _type: "navbar";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  label?: string;
+  columns?: Array<{
+    title?: string;
+    links?: Array<{
+      name?: string;
+      description?: string;
+      url?: CustomUrl;
+      _type: "navbarColumnLink";
+      _key: string;
+    }>;
+    _type: "navbarColumn";
+    _key: string;
+  } | {
+    name?: string;
+    description?: string;
+    url?: CustomUrl;
+    _type: "navbarColumnLink";
+    _key: string;
+  }>;
+  buttons?: Array<{
+    _key: string;
+  } & Button>;
+};
+
 export type Footer = {
   _id: string;
   _type: "footer";
@@ -483,6 +513,11 @@ export type CustomUrl = {
     _ref: string;
     _type: "reference";
     _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "blogIndex";
+  } | {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "page";
   };
 };
@@ -557,7 +592,7 @@ export type IconPicker = {
   svg?: string;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | FaqAccordion | FeatureCardsIcon | Cta | Hero | PageBuilder | Button | RichText | Footer | Settings | BlogIndex | HomePage | Author | Faq | Page | Blog | CustomUrl | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Slug | IconPicker;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | FaqAccordion | FeatureCardsIcon | Cta | Hero | PageBuilder | Button | RichText | Navbar | Footer | Settings | BlogIndex | HomePage | Author | Faq | Page | Blog | CustomUrl | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Slug | IconPicker;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../web/src/lib/sanity/query.ts
 // Variable: queryHomePageData
@@ -1497,7 +1532,7 @@ export type QueryGenericPageOGDataResult = {
   date: string;
 } | null;
 // Variable: queryFooterData
-// Query: *[_type == "footer"][0]{    _id,    subtitle,    columns[]{      _key,      title,      links[]{        _key,        name,        "openInNewTab": url.openInNewTab,        "href": select(          url.type == "internal" => url.internal->slug.current,          url.type == "external" => url.external,          url.href        ),      }    },    "logo": *[_type == "settings"][0].logo.asset->url,    "siteTitle": *[_type == "settings"][0].siteTitle,    "socialLinks": *[_type == "settings"][0].socialLinks,  }
+// Query: *[_type == "footer" && _id == "footer"][0]{    _id,    subtitle,    columns[]{      _key,      title,      links[]{        _key,        name,        "openInNewTab": url.openInNewTab,        "href": select(          url.type == "internal" => url.internal->slug.current,          url.type == "external" => url.external,          url.href        ),      }    },    "logo": *[_type == "settings"][0].logo.asset->url,    "siteTitle": *[_type == "settings"][0].siteTitle,    "socialLinks": *[_type == "settings"][0].socialLinks,  }
 export type QueryFooterDataResult = {
   _id: string;
   subtitle: string | null;
@@ -1521,6 +1556,40 @@ export type QueryFooterDataResult = {
     linkedin?: string;
   } | null;
 } | null;
+// Variable: queryNavbarData
+// Query: *[_type == "navbar" && _id == "navbar"][0]{    _id,    columns[]{      _key,      _type == "navbarColumn" => {        "type": "column",        title,        links[]{          _key,          name,          description,          "openInNewTab": url.openInNewTab,          "href": select(            url.type == "internal" => url.internal->slug.current,            url.type == "external" => url.external,            url.href          )        }      },      _type == "navbarColumnLink" => {        "type": "link",        name,        description,        "openInNewTab": url.openInNewTab,        "href": select(          url.type == "internal" => url.internal->slug.current,          url.type == "external" => url.external,          url.href        )      }    },      buttons[]{    text,    variant,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },    "logo": *[_type == "settings"][0].logo.asset->url,    "siteTitle": *[_type == "settings"][0].siteTitle,  }
+export type QueryNavbarDataResult = {
+  _id: string;
+  columns: Array<{
+    _key: string;
+    type: "link";
+    name: string | null;
+    description: string | null;
+    openInNewTab: boolean | null;
+    href: string | null;
+  } | {
+    _key: string;
+    type: "column";
+    title: string | null;
+    links: Array<{
+      _key: string;
+      name: string | null;
+      description: string | null;
+      openInNewTab: boolean | null;
+      href: string | null;
+    }> | null;
+  }> | null;
+  buttons: Array<{
+    text: string | null;
+    variant: "default" | "link" | "outline" | "secondary" | null;
+    _key: string;
+    _type: "button";
+    openInNewTab: boolean | null;
+    href: string | null;
+  }> | null;
+  logo: string | null;
+  siteTitle: string | null;
+} | null;
 
 // Query TypeMap
 import "@sanity/client";
@@ -1534,6 +1603,7 @@ declare module "@sanity/client" {
     "\n  *[_type == \"page\" && _id == $id][0]{\n    \n  _id,\n  _type,\n  \"title\": select(\n    defined(ogTitle) => ogTitle,\n    defined(seoTitle) => seoTitle,\n    title\n  ),\n  \"description\": select(\n    defined(ogDescription) => ogDescription,\n    defined(seoDescription) => seoDescription,\n    description\n  ),\n  \"image\": image.asset->url + \"?w=566&h=566&dpr=2&fit=max\",\n  \"dominantColor\": image.asset->metadata.palette.dominant.background,\n  \"seoImage\": seoImage.asset->url + \"?w=1200&h=630&dpr=2&fit=max\", \n  \"date\": coalesce(date, _createdAt)\n\n  }\n": QuerySlugPageOGDataResult;
     "\n  *[_type == \"blog\" && _id == $id][0]{\n    \n  _id,\n  _type,\n  \"title\": select(\n    defined(ogTitle) => ogTitle,\n    defined(seoTitle) => seoTitle,\n    title\n  ),\n  \"description\": select(\n    defined(ogDescription) => ogDescription,\n    defined(seoDescription) => seoDescription,\n    description\n  ),\n  \"image\": image.asset->url + \"?w=566&h=566&dpr=2&fit=max\",\n  \"dominantColor\": image.asset->metadata.palette.dominant.background,\n  \"seoImage\": seoImage.asset->url + \"?w=1200&h=630&dpr=2&fit=max\", \n  \"date\": coalesce(date, _createdAt)\n\n  }\n": QueryBlogPageOGDataResult;
     "\n  *[ defined(slug.current) && _id == $id][0]{\n    \n  _id,\n  _type,\n  \"title\": select(\n    defined(ogTitle) => ogTitle,\n    defined(seoTitle) => seoTitle,\n    title\n  ),\n  \"description\": select(\n    defined(ogDescription) => ogDescription,\n    defined(seoDescription) => seoDescription,\n    description\n  ),\n  \"image\": image.asset->url + \"?w=566&h=566&dpr=2&fit=max\",\n  \"dominantColor\": image.asset->metadata.palette.dominant.background,\n  \"seoImage\": seoImage.asset->url + \"?w=1200&h=630&dpr=2&fit=max\", \n  \"date\": coalesce(date, _createdAt)\n\n  }\n": QueryGenericPageOGDataResult;
-    "\n  *[_type == \"footer\"][0]{\n    _id,\n    subtitle,\n    columns[]{\n      _key,\n      title,\n      links[]{\n        _key,\n        name,\n        \"openInNewTab\": url.openInNewTab,\n        \"href\": select(\n          url.type == \"internal\" => url.internal->slug.current,\n          url.type == \"external\" => url.external,\n          url.href\n        ),\n      }\n    },\n    \"logo\": *[_type == \"settings\"][0].logo.asset->url,\n    \"siteTitle\": *[_type == \"settings\"][0].siteTitle,\n    \"socialLinks\": *[_type == \"settings\"][0].socialLinks,\n  }\n": QueryFooterDataResult;
+    "\n  *[_type == \"footer\" && _id == \"footer\"][0]{\n    _id,\n    subtitle,\n    columns[]{\n      _key,\n      title,\n      links[]{\n        _key,\n        name,\n        \"openInNewTab\": url.openInNewTab,\n        \"href\": select(\n          url.type == \"internal\" => url.internal->slug.current,\n          url.type == \"external\" => url.external,\n          url.href\n        ),\n      }\n    },\n    \"logo\": *[_type == \"settings\"][0].logo.asset->url,\n    \"siteTitle\": *[_type == \"settings\"][0].siteTitle,\n    \"socialLinks\": *[_type == \"settings\"][0].socialLinks,\n  }\n": QueryFooterDataResult;
+    "\n  *[_type == \"navbar\" && _id == \"navbar\"][0]{\n    _id,\n    columns[]{\n      _key,\n      _type == \"navbarColumn\" => {\n        \"type\": \"column\",\n        title,\n        links[]{\n          _key,\n          name,\n          description,\n          \"openInNewTab\": url.openInNewTab,\n          \"href\": select(\n            url.type == \"internal\" => url.internal->slug.current,\n            url.type == \"external\" => url.external,\n            url.href\n          )\n        }\n      },\n      _type == \"navbarColumnLink\" => {\n        \"type\": \"link\",\n        name,\n        description,\n        \"openInNewTab\": url.openInNewTab,\n        \"href\": select(\n          url.type == \"internal\" => url.internal->slug.current,\n          url.type == \"external\" => url.external,\n          url.href\n        )\n      }\n    },\n    \n  buttons[]{\n    text,\n    variant,\n    _key,\n    _type,\n    \"openInNewTab\": url.openInNewTab,\n    \"href\": select(\n      url.type == \"internal\" => url.internal->slug.current,\n      url.type == \"external\" => url.external,\n      url.href\n    ),\n  }\n,\n    \"logo\": *[_type == \"settings\"][0].logo.asset->url,\n    \"siteTitle\": *[_type == \"settings\"][0].siteTitle,\n  }\n": QueryNavbarDataResult;
   }
 }

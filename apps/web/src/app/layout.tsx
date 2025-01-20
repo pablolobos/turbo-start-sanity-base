@@ -1,5 +1,5 @@
 import { FooterServer } from "@/components/footer";
-import { Navbar } from "@/components/navbar";
+import { NavbarServer } from "@/components/navbar";
 import { SanityLive } from "@/lib/sanity/live";
 import "@workspace/ui/globals.css";
 import { VisualEditing } from "next-sanity";
@@ -27,7 +27,7 @@ export default async function RootLayout({
       <body
         className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased `}
       >
-        <Navbar />
+        <NavbarServer />
         {(await draftMode()).isEnabled ? (
           <>
             {children}

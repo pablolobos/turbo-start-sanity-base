@@ -29,6 +29,10 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@workspace/ui/components/sheet";
+import { queryNavbarData } from "@/lib/sanity/query";
+import { sanityFetch } from "@/lib/sanity/live";
+import type { QueryNavbarDataResult } from "@/lib/sanity/sanity.types";
+import { SanityButtons } from "./sanity-buttons";
 
 interface MenuItem {
   title: string;
@@ -124,15 +128,208 @@ const navLinks = [
   { title: "Blog", href: "/blog" },
 ];
 
-export function Navbar() {
+export async function NavbarServer() {
+  const navbarData = await sanityFetch({ query: queryNavbarData });
+  console.log("🚀 ~ NavbarServer ~ navbarData:", navbarData);
+  return <Navbar navbarData={navbarData.data} />;
+}
+
+function NavbarColumnLink({
+  column,
+}: {
+  column: NonNullable<
+    NonNullable<QueryNavbarDataResult>["columns"]
+  >[number];
+}) {
+  if (column.type !== "link") return null;
+  return (
+    <Link
+      className={cn(
+        "text-muted-foreground",
+        navigationMenuTriggerStyle(),
+        buttonVariants({
+          variant: "ghost",
+        })
+      )}
+      href={column.href ?? ""}
+    >
+      {column.name}
+    </Link>
+  );
+}
+
+function NavbarColumn({
+  column,
+}: {
+  column: NonNullable<
+    NonNullable<QueryNavbarDataResult>["columns"]
+  >[number];
+}) {
+  if (column.type !== "column") return null;
+  return (
+    <NavigationMenuList>
+      <NavigationMenuItem className="text-muted-foreground">
+        <NavigationMenuTrigger>{column.title}</NavigationMenuTrigger>
+        <NavigationMenuContent>
+          <ul className="w-80 p-3">
+            {column.links?.map((item) => (
+              <li key={item._key}>
+                <MenuItemLink
+                  item={{
+                    description: item.description ?? "",
+                    href: item.href ?? "",
+                    icon: <Book className="size-5 shrink-0" />,
+                    title: item.name ?? "",
+                  }}
+                />
+              </li>
+            ))}
+          </ul>
+        </NavigationMenuContent>
+      </NavigationMenuItem>
+    </NavigationMenuList>
+  );
+}
+
+function MobileNavbarAccordionColumn({
+  column,
+}: {
+  column: NonNullable<
+    NonNullable<QueryNavbarDataResult>["columns"]
+  >[number];
+}) {
+  if (column.type !== "column") return null;
+  return (
+    <AccordionItem
+      value={column.title ?? column._key}
+      className="border-b-0"
+    >
+      <AccordionTrigger className="mb-4 py-0 font-semibold hover:no-underline hover:bg-accent hover:text-accent-foreground pr-2 rounded-md">
+        <div
+          className={cn(
+            buttonVariants({ variant: "ghost" }),
+            "justify-start"
+          )}
+        >
+          {column.title}
+        </div>
+      </AccordionTrigger>
+      <AccordionContent className="mt-2">
+        {column.links?.map((item) => (
+          <MenuItemLink
+            key={item._key}
+            item={{
+              description: item.description ?? "",
+              href: item.href ?? "",
+              icon: <Book className="size-5 shrink-0" />,
+              title: item.name ?? "",
+            }}
+          />
+        ))}
+      </AccordionContent>
+    </AccordionItem>
+  );
+}
+
+function MobileNavbar({
+  navbarData,
+}: {
+  navbarData: QueryNavbarDataResult;
+}) {
+  const { logo, siteTitle, columns, buttons } = navbarData ?? {};
+  return (
+    <div className="block lg:hidden">
+      <div className="flex items-center justify-between">
+        <Link href="/" className="flex items-center gap-2">
+          <Image
+            src={logo ?? LOGO_URL}
+            alt={siteTitle ?? "logo"}
+            width={80}
+            height={80}
+            priority
+          />
+        </Link>
+
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button variant="outline" size="icon">
+              <Menu className="size-4" />
+              <span className="sr-only">Open menu</span>
+            </Button>
+          </SheetTrigger>
+          <SheetContent className="overflow-y-auto">
+            <SheetHeader>
+              <SheetTitle>
+                <Link href="/" className="flex items-center gap-2">
+                  <Image
+                    src={logo ?? LOGO_URL}
+                    alt={siteTitle ?? "logo"}
+                    width={80}
+                    height={80}
+                    priority
+                  />
+                </Link>
+              </SheetTitle>
+            </SheetHeader>
+
+            <div className="mb-8 mt-8 flex flex-col gap-4">
+              {columns?.map((column) => {
+                if (column.type === "link") {
+                  return (
+                    <Link
+                      key={column.name}
+                      href={column.href ?? ""}
+                      className={cn(
+                        buttonVariants({ variant: "ghost" }),
+                        "justify-start"
+                      )}
+                    >
+                      {column.name}
+                    </Link>
+                  );
+                }
+                return (
+                  <Accordion
+                    type="single"
+                    collapsible
+                    className="w-full"
+                    key={column._key}
+                  >
+                    <MobileNavbarAccordionColumn column={column} />
+                  </Accordion>
+                );
+              })}
+            </div>
+
+            <div className="border-t pt-4">
+              <SanityButtons
+                buttons={buttons ?? []}
+                buttonClassName="w-full"
+                className="flex mt-2 flex-col gap-3"
+              />
+            </div>
+          </SheetContent>
+        </Sheet>
+      </div>
+    </div>
+  );
+}
+
+export async function Navbar({
+  navbarData,
+}: {
+  navbarData: QueryNavbarDataResult;
+}) {
+  const { logo, siteTitle, columns, buttons } = navbarData ?? {};
+
   return (
     <section className="py-4">
       <div className="container mx-auto px-4 md:px-6">
         <nav className="hidden justify-between lg:flex">
           <Link href="/" className="flex items-center gap-2">
             <Image
-              src={LOGO_URL}
-              alt="logo"
+              src={logo ?? LOGO_URL}
+              alt={siteTitle ?? "logo"}
               width={80}
               height={40}
               priority
@@ -140,182 +337,28 @@ export function Navbar() {
           </Link>
           <div className="flex items-center gap-6 justify-center flex-grow">
             <div className="flex items-center">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.title}
-                  className={cn(
-                    "text-muted-foreground",
-                    navigationMenuTriggerStyle(),
-                    buttonVariants({
-                      variant: "ghost",
-                    })
-                  )}
-                  href={link.href}
-                >
-                  {link.title}
-                </Link>
-              ))}
-
               <NavigationMenu>
-                <NavigationMenuList>
-                  <NavigationMenuItem className="text-muted-foreground">
-                    <NavigationMenuTrigger>
-                      Products
-                    </NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                      <ul className="w-80 p-3">
-                        {menuItems.products.map((item) => (
-                          <li key={item.title}>
-                            <MenuItemLink item={item} />
-                          </li>
-                        ))}
-                      </ul>
-                    </NavigationMenuContent>
-                  </NavigationMenuItem>
-
-                  <NavigationMenuItem className="text-muted-foreground">
-                    <NavigationMenuTrigger>
-                      Resources
-                    </NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                      <ul className="w-80 p-3">
-                        {menuItems.resources.map((item) => (
-                          <li key={item.title}>
-                            <MenuItemLink item={item} />
-                          </li>
-                        ))}
-                      </ul>
-                    </NavigationMenuContent>
-                  </NavigationMenuItem>
-                </NavigationMenuList>
+                {columns?.map((column) =>
+                  column.type === "column" ? (
+                    <NavbarColumn key={column._key} column={column} />
+                  ) : (
+                    <NavbarColumnLink
+                      key={column._key}
+                      column={column}
+                    />
+                  )
+                )}
               </NavigationMenu>
             </div>
           </div>
 
-          <div className="flex gap-2">
-            <Button variant="outline">Log in</Button>
-            <Button>Sign up</Button>
-          </div>
+          <SanityButtons
+            buttons={buttons ?? []}
+            className="flex gap-2"
+          />
         </nav>
 
-        {/* Mobile Navigation */}
-        <div className="block lg:hidden">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center gap-2">
-              <Image
-                src={LOGO_URL}
-                // className="w-8"
-                alt="logo"
-                width={80}
-                height={80}
-                priority
-              />
-            </Link>
-
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button variant="outline" size="icon">
-                  <Menu className="size-4" />
-                  <span className="sr-only">Open menu</span>
-                </Button>
-              </SheetTrigger>
-              <SheetContent className="overflow-y-auto">
-                <SheetHeader>
-                  <SheetTitle>
-                    <Link
-                      href="/"
-                      className="flex items-center gap-2"
-                    >
-                      <Image
-                        src={LOGO_URL}
-                        // className="w-8"
-                        alt="logo"
-                        width={80}
-                        height={80}
-                        priority
-                      />
-                    </Link>
-                  </SheetTitle>
-                </SheetHeader>
-
-                <div className="mb-8 mt-8 flex flex-col gap-4">
-                  {navLinks.map((link) => (
-                    <Link
-                      key={link.title}
-                      href={link.href}
-                      className="font-semibold"
-                    >
-                      {link.title}
-                    </Link>
-                  ))}
-
-                  <Accordion
-                    type="single"
-                    collapsible
-                    className="w-full"
-                  >
-                    <AccordionItem
-                      value="products"
-                      className="border-b-0"
-                    >
-                      <AccordionTrigger className="mb-4 py-0 font-semibold hover:no-underline">
-                        Products
-                      </AccordionTrigger>
-                      <AccordionContent className="mt-2">
-                        {menuItems.products.map((item) => (
-                          <MenuItemLink
-                            key={item.title}
-                            item={item}
-                          />
-                        ))}
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem
-                      value="resources"
-                      className="border-b-0"
-                    >
-                      <AccordionTrigger className="py-0 font-semibold hover:no-underline">
-                        Resources
-                      </AccordionTrigger>
-                      <AccordionContent className="mt-2">
-                        {menuItems.resources.map((item) => (
-                          <MenuItemLink
-                            key={item.title}
-                            item={item}
-                          />
-                        ))}
-                      </AccordionContent>
-                    </AccordionItem>
-                  </Accordion>
-                </div>
-
-                <div className="border-t pt-4">
-                  <div className="grid grid-cols-2 justify-start">
-                    {footerLinks.map((link) => (
-                      <Link
-                        key={link.title}
-                        className={cn(
-                          buttonVariants({
-                            variant: "ghost",
-                          }),
-                          "justify-start text-muted-foreground"
-                        )}
-                        href={link.href}
-                      >
-                        {link.title}
-                      </Link>
-                    ))}
-                  </div>
-                  <div className="mt-2 flex flex-col gap-3">
-                    <Button variant="outline">Log in</Button>
-                    <Button>Sign up</Button>
-                  </div>
-                </div>
-              </SheetContent>
-            </Sheet>
-          </div>
-        </div>
+        <MobileNavbar navbarData={navbarData} />
       </div>
     </section>
   );
