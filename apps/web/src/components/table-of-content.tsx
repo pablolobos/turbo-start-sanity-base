@@ -2,43 +2,18 @@ import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { type FC, useMemo } from "react";
 import slugify from "slugify";
-import { cn } from "@workspace/ui/lib/utils";
 import type {
   SanityRichTextBlock,
   SanityRichTextProps,
 } from "@/types";
-import type { RichText } from "@/lib/sanity/sanity.types";
 
 export interface TableProps {
   richText?: SanityRichTextProps | null;
 }
 
-interface Heading {
-  style: keyof typeof headings;
-  children: Array<{ text: string }>;
-}
-
 interface ProcessedHeading {
   href: string;
   text: string;
-}
-
-const headings = {
-  h2: "pl-0",
-  h3: "pl-4",
-  h4: "pl-8",
-  h5: "pl-12",
-  h6: "pl-16",
-};
-
-function extractTextFromBlock(
-  block: Array<{ text: string }>
-): string {
-  return block?.[0]?.text ?? "";
-}
-
-function styleToNumber(style: string): number {
-  return Number(style.replace("h", ""));
 }
 
 function filterHeadings(richText?: SanityRichTextBlock[] | null) {
