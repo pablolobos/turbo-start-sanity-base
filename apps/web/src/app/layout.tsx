@@ -1,11 +1,12 @@
-import { FooterServer } from "@/components/footer";
-import { NavbarServer } from "@/components/navbar";
+import { FooterServer, FooterSkeleton } from "@/components/footer";
+import { NavbarServer, NavbarSkeleton } from "@/components/navbar";
 import { SanityLive } from "@/lib/sanity/live";
 import "@workspace/ui/globals.css";
 import { VisualEditing } from "next-sanity";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { Geist, Geist_Mono } from "next/font/google";
 import { draftMode } from "next/headers";
+import { Suspense } from "react";
 
 const fontSans = Geist({
   subsets: ["latin"],
@@ -27,7 +28,9 @@ export default async function RootLayout({
       <body
         className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased `}
       >
-        <NavbarServer />
+        <Suspense fallback={<NavbarSkeleton />}>
+          <NavbarServer />
+        </Suspense>
         {(await draftMode()).isEnabled ? (
           <>
             {children}
@@ -54,7 +57,9 @@ export default async function RootLayout({
         ) : (
           children
         )}
-        <FooterServer />
+        <Suspense fallback={<FooterSkeleton />}>
+          <FooterServer />
+        </Suspense>
         <SanityLive />
       </body>
     </html>
