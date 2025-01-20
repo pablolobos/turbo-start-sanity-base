@@ -579,6 +579,15 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
+export type MediaTag = {
+  _id: string;
+  _type: "media.tag";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: Slug;
+};
+
 export type Slug = {
   _type: "slug";
   current?: string;
@@ -592,7 +601,7 @@ export type IconPicker = {
   svg?: string;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | FaqAccordion | FeatureCardsIcon | Cta | Hero | PageBuilder | Button | RichText | Navbar | Footer | Settings | BlogIndex | HomePage | Author | Faq | Page | Blog | CustomUrl | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Slug | IconPicker;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | FaqAccordion | FeatureCardsIcon | Cta | Hero | PageBuilder | Button | RichText | Navbar | Footer | Settings | BlogIndex | HomePage | Author | Faq | Page | Blog | CustomUrl | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | MediaTag | Slug | IconPicker;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../web/src/lib/sanity/query.ts
 // Variable: queryHomePageData
@@ -1591,6 +1600,18 @@ export type QueryNavbarDataResult = {
   logo: string | null;
   siteTitle: string | null;
 } | null;
+// Variable: querySitemapData
+// Query: {  "slugPages": *[_type == "page" && defined(slug.current)]{    "slug": slug.current,    "lastModified": _updatedAt  },  "blogPages": *[_type == "blog" && defined(slug.current)]{    "slug": slug.current,    "lastModified": _updatedAt  }}
+export type QuerySitemapDataResult = {
+  slugPages: Array<{
+    slug: string | null;
+    lastModified: string;
+  }>;
+  blogPages: Array<{
+    slug: string | null;
+    lastModified: string;
+  }>;
+};
 
 // Query TypeMap
 import "@sanity/client";
@@ -1606,5 +1627,6 @@ declare module "@sanity/client" {
     "\n  *[ defined(slug.current) && _id == $id][0]{\n    \n  _id,\n  _type,\n  \"title\": select(\n    defined(ogTitle) => ogTitle,\n    defined(seoTitle) => seoTitle,\n    title\n  ),\n  \"description\": select(\n    defined(ogDescription) => ogDescription,\n    defined(seoDescription) => seoDescription,\n    description\n  ),\n  \"image\": image.asset->url + \"?w=566&h=566&dpr=2&fit=max\",\n  \"dominantColor\": image.asset->metadata.palette.dominant.background,\n  \"seoImage\": seoImage.asset->url + \"?w=1200&h=630&dpr=2&fit=max\", \n  \"date\": coalesce(date, _createdAt)\n\n  }\n": QueryGenericPageOGDataResult;
     "\n  *[_type == \"footer\" && _id == \"footer\"][0]{\n    _id,\n    subtitle,\n    columns[]{\n      _key,\n      title,\n      links[]{\n        _key,\n        name,\n        \"openInNewTab\": url.openInNewTab,\n        \"href\": select(\n          url.type == \"internal\" => url.internal->slug.current,\n          url.type == \"external\" => url.external,\n          url.href\n        ),\n      }\n    },\n    \"logo\": *[_type == \"settings\"][0].logo.asset->url,\n    \"siteTitle\": *[_type == \"settings\"][0].siteTitle,\n    \"socialLinks\": *[_type == \"settings\"][0].socialLinks,\n  }\n": QueryFooterDataResult;
     "\n  *[_type == \"navbar\" && _id == \"navbar\"][0]{\n    _id,\n    columns[]{\n      _key,\n      _type == \"navbarColumn\" => {\n        \"type\": \"column\",\n        title,\n        links[]{\n          _key,\n          name,\n          \"icon\": icon.svg,\n          description,\n          \"openInNewTab\": url.openInNewTab,\n          \"href\": select(\n            url.type == \"internal\" => url.internal->slug.current,\n            url.type == \"external\" => url.external,\n            url.href\n          )\n        }\n      },\n      _type == \"navbarLink\" => {\n        \"type\": \"link\",\n        name,\n        description,\n        \"openInNewTab\": url.openInNewTab,\n        \"href\": select(\n          url.type == \"internal\" => url.internal->slug.current,\n          url.type == \"external\" => url.external,\n          url.href\n        )\n      }\n    },\n    \n  buttons[]{\n    text,\n    variant,\n    _key,\n    _type,\n    \"openInNewTab\": url.openInNewTab,\n    \"href\": select(\n      url.type == \"internal\" => url.internal->slug.current,\n      url.type == \"external\" => url.external,\n      url.href\n    ),\n  }\n,\n    \"logo\": *[_type == \"settings\"][0].logo.asset->url,\n    \"siteTitle\": *[_type == \"settings\"][0].siteTitle,\n  }\n": QueryNavbarDataResult;
+    "{\n  \"slugPages\": *[_type == \"page\" && defined(slug.current)]{\n    \"slug\": slug.current,\n    \"lastModified\": _updatedAt\n  },\n  \"blogPages\": *[_type == \"blog\" && defined(slug.current)]{\n    \"slug\": slug.current,\n    \"lastModified\": _updatedAt\n  }\n}": QuerySitemapDataResult;
   }
 }

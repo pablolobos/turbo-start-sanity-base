@@ -264,3 +264,15 @@ export const queryNavbarData = defineQuery(/* groq */ `
     "siteTitle": *[_type == "settings"][0].siteTitle,
   }
 `);
+
+
+export const querySitemapData = defineQuery(/* groq */ `{
+  "slugPages": *[_type == "page" && defined(slug.current)]{
+    "slug": slug.current,
+    "lastModified": _updatedAt
+  },
+  "blogPages": *[_type == "blog" && defined(slug.current)]{
+    "slug": slug.current,
+    "lastModified": _updatedAt
+  }
+}`);
