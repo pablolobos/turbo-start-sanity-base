@@ -34,6 +34,7 @@ export function HeroBlock({
               <SanityImage
                 asset={image}
                 loading="eager"
+                decoding="sync"
                 priority
                 className="max-h-96 w-full rounded-md object-cover"
               />

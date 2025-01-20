@@ -31,6 +31,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { SanityButtons } from "./sanity-buttons";
 import { SanityIcon } from "./sanity-icon";
+import type { Maybe } from "@/types";
 
 interface MenuItem {
   title: string;
@@ -41,6 +42,35 @@ interface MenuItem {
 
 const LOGO_URL =
   "https://cdn.sanity.io/images/s6kuy1ts/production/68c438f68264717e93c7ba1e85f1d0c4b58b33c2-1200x621.svg";
+
+interface LogoProps {
+  src?: Maybe<string>;
+  alt?: Maybe<string>;
+  width?: number;
+  height?: number;
+  priority?: boolean;
+}
+
+function Logo({
+  src,
+  alt = "logo",
+  width = 80,
+  height = 40,
+  priority = false,
+}: LogoProps) {
+  return (
+    <Link href="/" className="flex items-center gap-2">
+      <Image
+        src={src ?? LOGO_URL}
+        alt={alt ?? "logo"}
+        width={width}
+        className="w-[80px] h-[40px]"
+        height={height}
+        priority={priority}
+      />
+    </Link>
+  );
+}
 
 function MenuItemLink({ item }: { item: MenuItem }) {
   return (
@@ -181,15 +211,7 @@ function MobileNavbar({
   return (
     <div className="block lg:hidden h-[75px]">
       <div className="flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2">
-          <Image
-            src={logo ?? LOGO_URL}
-            alt={siteTitle ?? "logo"}
-            width={80}
-            height={40}
-            priority
-          />
-        </Link>
+        <Logo src={logo} alt={siteTitle} priority />
 
         <Sheet>
           <SheetTrigger asChild>
@@ -201,15 +223,7 @@ function MobileNavbar({
           <SheetContent className="overflow-y-auto">
             <SheetHeader>
               <SheetTitle>
-                <Link href="/" className="flex items-center gap-2">
-                  <Image
-                    src={logo ?? LOGO_URL}
-                    alt={siteTitle ?? "logo"}
-                    width={80}
-                    height={40}
-                    priority
-                  />
-                </Link>
+                <Logo src={logo} alt={siteTitle} priority />
               </SheetTitle>
             </SheetHeader>
 
@@ -267,15 +281,7 @@ export function Navbar({
     <section className="py-4 h-[75px]">
       <div className="container mx-auto px-4 md:px-6">
         <nav className="hidden justify-between lg:flex">
-          <Link href="/" className="flex items-center gap-2">
-            <Image
-              src={logo ?? LOGO_URL}
-              alt={siteTitle ?? "logo"}
-              width={80}
-              height={40}
-              priority
-            />
-          </Link>
+          <Logo src={logo} alt={siteTitle} priority />
           <div className="flex items-center gap-6 justify-center flex-grow">
             <div className="flex items-center">
               <NavigationMenu>
