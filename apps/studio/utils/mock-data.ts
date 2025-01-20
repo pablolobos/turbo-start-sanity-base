@@ -13,6 +13,12 @@ import {
 } from "./const-mock-data";
 import { retryPromise } from "./helper";
 
+// Core types
+interface ImageAsset {
+  id: string;
+  type: ImageType;
+}
+
 type ImageType =
   | "heroBlock"
   | "slugPage"
@@ -20,125 +26,107 @@ type ImageType =
   | "blog"
   | "logo";
 
-type GenerateImageOptions = {
+interface ImageOptions {
   width?: number;
   height?: number;
   url?: string;
   category?: string;
   type: ImageType;
-};
-
-async function generateImage(
-  client: SanityClient,
-  { width, height, url, type, category }: GenerateImageOptions
-) {
-  const imageUrl =
-    url ??
-    (category === "author"
-      ? faker.image.avatar()
-      : faker.image.urlPicsumPhotos({
-          width: width ?? 800,
-          height: height ?? 600,
-          blur: 0,
-          grayscale: false,
-        }));
-  const imageBuffer = await fetch(imageUrl).then((res) =>
-    res.arrayBuffer()
-  );
-  const imageAsset = await client.assets.upload(
-    "image",
-    Buffer.from(imageBuffer),
-    {
-      title: faker.lorem.words(3),
-    }
-  );
-  return {
-    id: imageAsset._id,
-    type: type,
-  };
 }
+
+// Image generation
+const DEFAULT_IMAGE_CONFIG = {
+  width: 800,
+  height: 600,
+  blur: 0,
+  grayscale: false,
+} as const;
 
 const LOGO_URL =
   "https://cdn.sanity.io/images/s6kuy1ts/production/68c438f68264717e93c7ba1e85f1d0c4b58b33c2-1200x621.svg";
 
+async function generateImage(
+  client: SanityClient,
+  { width, height, url, type, category }: ImageOptions
+): Promise<ImageAsset> {
+  const imageUrl = url ?? getImageUrl({ width, height, category });
+  const imageBuffer = await fetchImageBuffer(imageUrl);
+  const imageAsset = await uploadImageToSanity(client, imageBuffer);
+
+  return {
+    id: imageAsset._id,
+    type,
+  };
+}
+
+function getImageUrl({
+  width,
+  height,
+  category,
+}: Partial<ImageOptions>): string {
+  if (category === "author") {
+    return faker.image.avatar();
+  }
+  return faker.image.urlPicsumPhotos({
+    width: width ?? DEFAULT_IMAGE_CONFIG.width,
+    height: height ?? DEFAULT_IMAGE_CONFIG.height,
+    blur: DEFAULT_IMAGE_CONFIG.blur,
+    grayscale: DEFAULT_IMAGE_CONFIG.grayscale,
+  });
+}
+
+async function fetchImageBuffer(url: string): Promise<ArrayBuffer> {
+  return fetch(url).then((res) => res.arrayBuffer());
+}
+
+async function uploadImageToSanity(
+  client: SanityClient,
+  buffer: ArrayBuffer
+) {
+  return client.assets.upload("image", Buffer.from(buffer), {
+    title: faker.lorem.words(3),
+  });
+}
+
+// Image asset configurations
+const IMAGE_ASSETS_CONFIG = [
+  { type: "heroBlock" as const, width: 1200, height: 1200 },
+  { type: "heroBlock" as const, width: 1200, height: 1200 },
+  { type: "slugPage" as const, width: 2560, height: 1440 },
+  { type: "slugPage" as const, width: 2560, height: 1440 },
+  { type: "slugPage" as const, width: 2560, height: 1440 },
+  { type: "author" as const, category: "author" },
+  { type: "author" as const, category: "author" },
+  { type: "blog" as const, width: 2560, height: 1440 },
+  { type: "blog" as const, width: 2560, height: 1440 },
+  { type: "blog" as const, width: 2560, height: 1440 },
+  { type: "logo" as const, url: LOGO_URL },
+] as const;
+
+// Main export for image generation
 export async function generateAndUploadMockImages(
   client: SanityClient
-) {
-  const imageAssets = [
-    {
-      type: "heroBlock" as const,
-      width: 1200,
-      height: 1200,
-    },
-    {
-      type: "heroBlock" as const,
-      width: 1200,
-      height: 1200,
-    },
-    {
-      type: "slugPage" as const,
-      width: 2560,
-      height: 1440,
-    },
-    {
-      type: "slugPage" as const,
-      width: 2560,
-      height: 1440,
-    },
-    {
-      type: "slugPage" as const,
-      width: 2560,
-      height: 1440,
-    },
-    {
-      type: "author" as const,
-      category: "author",
-    },
-    {
-      type: "author" as const,
-      category: "author",
-    },
-    {
-      type: "blog" as const,
-      width: 2560,
-      height: 1440,
-    },
-    {
-      type: "blog" as const,
-      width: 2560,
-      height: 1440,
-    },
-    {
-      type: "blog" as const,
-      width: 2560,
-      height: 1440,
-    },
-    { type: "logo" as const, url: LOGO_URL },
-  ];
-
+): Promise<ImageAsset[]> {
   console.log("🎨 Starting image generation...");
+
   const { results } = await PromisePool.withConcurrency(2)
-    .for(imageAssets)
+    .for(IMAGE_ASSETS_CONFIG)
     .process(async (asset, index) => {
       console.log(
-        `📸 Generating image ${index + 1}/${imageAssets.length} (${asset.type})`
+        `📸 Generating image ${index + 1}/${IMAGE_ASSETS_CONFIG.length} (${asset.type})`
       );
-      return await retryPromise(
-        async () => {
-          return await generateImage(client, asset);
-        },
-        {
-          onRetry(error, attempt) {
-            console.log(
-              `🔄 Retrying image generation attempt ${attempt} for ${asset.type}:`,
-              error.message
-            );
-          },
-        }
-      );
-    });
-  console.log(`✅ Created ${results.length} images`);
 
+      return retryPromise(async () => generateImage(client, asset), {
+        onRetry(error, attempt) {
+          console.log(
+            `🔄 Retrying image generation attempt ${attempt} for ${asset.type}:`,
+            error.message
+          );
+        },
+      });
+    });
+
+  console.log(`✅ Created ${results.length} images`);
   return results;
 }
 
@@ -146,6 +134,7 @@ type ImageStore = Awaited<
   ReturnType<typeof generateAndUploadMockImages>
 >;
 
+// Block generation utilities
 function generateHeroBlock(
   imagesStore: ImageStore,
   { title }: { title?: string } = {}
@@ -154,6 +143,7 @@ function generateHeroBlock(
     (image) => image.type === "heroBlock"
   );
   const heroImage = faker.helpers.arrayElement(heroImages);
+
   return {
     _key: faker.string.uuid(),
     _type: "hero" as const,
@@ -199,10 +189,12 @@ function generateFeatureIconsCard() {
     }),
   }));
 }
+
 function generateFeatureCardsIconBlock() {
   const selectedPair = faker.helpers.arrayElement(
     TITLE_EYEBROW_PAIRS
   );
+  
   return {
     _key: faker.string.uuid(),
     _type: "featureCardsIcon" as const,
@@ -216,36 +208,39 @@ function generateFeatureCardsIconBlock() {
   };
 }
 
-export function generateFAQs({
-  min = 5,
-  max = 7,
-}: {
+interface FAQGenerationOptions {
   min?: number;
   max?: number;
   minParagraphs?: number;
   maxParagraphs?: number;
-} = {}) {
+}
+
+export function generateFAQs({
+  min = 5,
+  max = 7,
+}: FAQGenerationOptions = {}) {
   const length = faker.number.int({ min, max });
 
-  const faqs = Array.from({ length }).map(() => {
-    const len = faker.number.int({ min: 20, max: 50 });
-    const faqsBuffer = Array.from({ length: len }, () =>
-      faker.helpers.arrayElement(QUESTIONS)
+  return Array.from({ length }).map(() => {
+    const questionsPool = Array.from(
+      { length: faker.number.int({ min: 20, max: 50 }) },
+      () => faker.helpers.arrayElement(QUESTIONS)
     );
-    const faq = faker.helpers.arrayElement(faqsBuffer);
+    const selectedQuestion =
+      faker.helpers.arrayElement(questionsPool);
+
     return {
       _type: "faq",
       _id: faker.string.uuid(),
-      title: faq.value,
-      richText: parseHTML(faq.answer),
+      title: selectedQuestion.value,
+      richText: parseHTML(selectedQuestion.answer),
     };
   });
-  return faqs;
 }
 
-type Faqs = ReturnType<typeof generateFAQs>;
+type FAQs = ReturnType<typeof generateFAQs>;
 
-function generateFAQBlock(faqs: Faqs) {
+function generateFAQBlock(faqs: FAQs) {
   return {
     _key: faker.string.uuid(),
     _type: "faqAccordion" as const,
@@ -260,23 +255,24 @@ function generateFAQBlock(faqs: Faqs) {
   };
 }
 
-export async function checkIfDataExists(client: SanityClient) {
-  const data = await client.fetch(`{
+export async function checkIfDataExists(
+  client: SanityClient
+): Promise<boolean> {
+  const { homePage } = await client.fetch(`{
     "homePage": defined(*[_type == 'homePage' && _id == 'homePage'][0]._id),
   }`);
-  if (data.homePage) {
-    return true;
-  }
-  return false;
+  return Boolean(homePage);
+}
+
+interface HomePageGenerationOptions {
+  imagesStore: ImageStore;
+  faqs: FAQs;
 }
 
 export function getMockHomePageData({
   imagesStore,
   faqs,
-}: {
-  imagesStore: ImageStore;
-  faqs: Faqs;
-}) {
+}: HomePageGenerationOptions) {
   const blocks = [
     generateHeroBlock(imagesStore, {
       title: "Welcome to our website",
@@ -285,6 +281,7 @@ export function getMockHomePageData({
     generateFeatureCardsIconBlock(),
     generateFAQBlock(faqs),
   ];
+
   return {
     _id: "homePage",
     _type: "homePage" as const,
@@ -298,17 +295,20 @@ export function getMockHomePageData({
   };
 }
 
+interface SlugPageGenerationOptions {
+  faqs: FAQs;
+  imagesStore: ImageStore;
+}
+
 export function generateMockSlugPages({
   faqs,
   imagesStore,
-}: {
-  faqs: Faqs;
-  imagesStore: ImageStore;
-}) {
+}: SlugPageGenerationOptions) {
   const length = faker.number.int({ min: 2, max: 5 });
   const slugPageImages = imagesStore.filter(
     (image) => image.type === "slugPage"
   );
+
   return Array.from({ length }).map(() => {
     const image = faker.helpers.arrayElement(slugPageImages);
     const blocks = [
@@ -345,10 +345,10 @@ export function generateMockSlugPages({
 
 export function generateMockAuthors(imagesStore: ImageStore) {
   const length = faker.number.int({ min: 2, max: 5 });
-
   const authorImages = imagesStore.filter(
     (image) => image.type === "author"
   );
+
   return Array.from({ length }).map(() => {
     const image = faker.helpers.arrayElement(authorImages);
     return {
@@ -370,20 +370,22 @@ export function generateMockAuthors(imagesStore: ImageStore) {
 
 type Author = ReturnType<typeof generateMockAuthors>[number];
 
+interface BlogPageGenerationOptions {
+  imagesStore: ImageStore;
+  authors: Author[];
+}
+
 export function generateMockBlogPages({
   imagesStore,
   authors,
-}: {
-  imagesStore: ImageStore;
-  authors: Author[];
-}) {
+}: BlogPageGenerationOptions) {
   const length = faker.number.int({ min: 2, max: 5 });
   const blogImages = imagesStore.filter(
     (image) => image.type === "blog"
   );
+
   return Array.from({ length }).map(() => {
     const title = generatePageTitle();
-
     const author = faker.helpers.arrayElement(authors);
     const image = faker.helpers.arrayElement(blogImages);
 
@@ -429,6 +431,7 @@ type Blog = ReturnType<typeof generateMockBlogPages>[number];
 
 export function generateBlogIndexPage(blogs: Blog[]) {
   const featuredBlog = faker.helpers.arrayElement(blogs);
+
   return {
     _id: "blogIndex" as const,
     _type: "blogIndex" as const,
@@ -452,4 +455,3 @@ export function generateBlogIndexPage(blogs: Blog[]) {
       : {}),
   };
 }
-
