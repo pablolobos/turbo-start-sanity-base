@@ -28,6 +28,8 @@ function SanityButton({
     <Link
       href={href || "#"}
       target={openInNewTab ? "_blank" : "_self"}
+      aria-label={`Navigate to ${text}`}
+      title={`Click to visit ${text}`}
     >
       <Button
         variant={variant === "default" ? "default" : "secondary"}
