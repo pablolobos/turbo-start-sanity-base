@@ -1,9 +1,12 @@
-import { Book, Menu, Sunset, Trees, Zap } from "lucide-react";
-import Link from "next/link";
+import { Book, Menu } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 import { cn } from "@workspace/ui/lib/utils";
 
+import { sanityFetch } from "@/lib/sanity/live";
+import { queryNavbarData } from "@/lib/sanity/query";
+import type { QueryNavbarDataResult } from "@/lib/sanity/sanity.types";
 import {
   Accordion,
   AccordionContent,
@@ -29,9 +32,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@workspace/ui/components/sheet";
-import { queryNavbarData } from "@/lib/sanity/query";
-import { sanityFetch } from "@/lib/sanity/live";
-import type { QueryNavbarDataResult } from "@/lib/sanity/sanity.types";
 import { SanityButtons } from "./sanity-buttons";
 
 interface MenuItem {
@@ -62,71 +62,6 @@ function MenuItemLink({ item }: { item: MenuItem }) {
     </Link>
   );
 }
-
-const menuItems = {
-  products: [
-    {
-      title: "Blog",
-      href: "/blog",
-      description: "The latest industry news, updates, and info",
-      icon: <Book className="size-5 shrink-0" />,
-    },
-    {
-      title: "Company",
-      description: "Our mission is to innovate and empower the world",
-      icon: <Trees className="size-5 shrink-0" />,
-    },
-    {
-      title: "Careers",
-      description: "Browse job listing and discover our workspace",
-      icon: <Sunset className="size-5 shrink-0" />,
-    },
-    {
-      title: "Support",
-      description:
-        "Get in touch with our support team or visit our community forums",
-      icon: <Zap className="size-5 shrink-0" />,
-    },
-  ],
-  resources: [
-    {
-      title: "Help Center",
-      description: "Get all the answers you need right here",
-      icon: <Zap className="size-5 shrink-0" />,
-    },
-    {
-      title: "Contact Us",
-      description:
-        "We are here to help you with any questions you have",
-      icon: <Sunset className="size-5 shrink-0" />,
-    },
-    {
-      title: "Status",
-      description:
-        "Check the current status of our services and APIs",
-      icon: <Trees className="size-5 shrink-0" />,
-    },
-    {
-      title: "Terms of Service",
-      description: "Our terms and conditions for using our services",
-      icon: <Book className="size-5 shrink-0" />,
-    },
-  ],
-};
-
-const footerLinks = [
-  { title: "Press", href: "/" },
-  { title: "Contact", href: "/" },
-  { title: "Imprint", href: "/" },
-  { title: "Sitemap", href: "/" },
-  { title: "Legal", href: "/" },
-  { title: "Cookie Settings", href: "/" },
-];
-
-const navLinks = [
-  { title: "Pricing", href: "/" },
-  { title: "Blog", href: "/blog" },
-];
 
 export async function NavbarServer() {
   const navbarData = await sanityFetch({ query: queryNavbarData });
