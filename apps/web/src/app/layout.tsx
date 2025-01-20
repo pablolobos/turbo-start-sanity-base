@@ -11,11 +11,15 @@ import { Suspense } from "react";
 const fontSans = Geist({
   subsets: ["latin"],
   variable: "--font-sans",
+  weight: ["400", "700"],
+  display: "swap",
 });
 
 const fontMono = Geist_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
+  weight: ["400", "700"],
+  display: "swap",
 });
 
 export default async function RootLayout({

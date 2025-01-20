@@ -7,6 +7,9 @@ const nextConfig: NextConfig = {
     ppr: true,
     inlineCss: true,
   },
+  logging: {
+    fetches: {},
+  },
   images: {
     minimumCacheTTL: 31536000,
     remotePatterns: [

@@ -45,7 +45,7 @@ export default async function BlogSlugPage({
               />
             </div>
           )}
-          <RichText richText={data.richText} />
+          <RichText richText={data.richText ?? []} />
         </main>
 
         <aside className="hidden lg:block">

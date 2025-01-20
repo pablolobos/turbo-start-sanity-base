@@ -35,6 +35,8 @@ export function HeroBlock({
                 asset={image}
                 loading="eager"
                 decoding="sync"
+                width={800}
+                height={800}
                 priority
                 className="max-h-96 w-full rounded-md object-cover"
               />

@@ -7,6 +7,8 @@ type Blog = NonNullable<
   NonNullable<QueryBlogIndexPageDataResult>["featuredBlog"]
 >;
 
+const currentDate = new Date();
+
 export function BlogAuthor({ author }: { author: Blog["authors"] }) {
   return (
     <div className="flex items-center gap-x-2.5 text-sm/6 font-semibold text-gray-900">
@@ -28,10 +30,10 @@ export function FeaturedBlogCard({ blog }: { blog: Blog }) {
   return (
     <article className="mx-auto w-full max-w-2xl lg:mx-0 lg:max-w-lg">
       <time
-        dateTime={new Date(publishedAt ?? new Date()).toISOString()}
+        dateTime={publishedAt ?? currentDate.toISOString()}
         className="block text-sm/6 text-gray-600"
       >
-        {new Date(blog?.publishedAt ?? new Date()).toLocaleDateString(
+        {new Date(publishedAt ?? currentDate).toLocaleDateString(
           "en-US",
           {
             year: "numeric",
@@ -72,12 +74,12 @@ export function BlogCard({ blog }: { blog: Blog }) {
       <div className="group relative max-w-xl">
         <time
           dateTime={new Date(
-            blog?.publishedAt ?? new Date()
+            blog?.publishedAt ?? currentDate
           ).toISOString()}
           className="block text-sm/6 text-gray-600"
         >
           {new Date(
-            blog?.publishedAt ?? new Date()
+            blog?.publishedAt ?? currentDate
           ).toLocaleDateString("en-US", {
             year: "numeric",
             month: "long",

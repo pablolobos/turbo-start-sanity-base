@@ -1,6 +1,5 @@
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
-import { type FC, useMemo } from "react";
 import slugify from "slugify";
 import type {
   SanityRichTextBlock,
@@ -41,23 +40,19 @@ function filterHeadings(richText?: SanityRichTextBlock[] | null) {
   return headings;
 }
 
-const Anchor: FC<{ heading: ProcessedHeading }> = ({ heading }) => {
+function Anchor({ heading }: { heading: ProcessedHeading }) {
   const { href, text } = heading;
   return (
     <li>
       <Link href={href}>{text}</Link>
     </li>
   );
-};
+}
 
 export function TableOfContent({ richText }: TableProps) {
-  const { showTableOfContent, headings } = useMemo(() => {
-    const exist = filterHeadings(richText as SanityRichTextBlock[]);
+  const headings = filterHeadings(richText as SanityRichTextBlock[]);
 
-    return { showTableOfContent: exist.length > 0, headings: exist };
-  }, [richText]);
-
-  if (!showTableOfContent) return null;
+  if (headings.length === 0) return null;
 
   return (
     <div className="sticky left-0 top-8 flex flex-col">

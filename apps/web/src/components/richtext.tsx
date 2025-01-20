@@ -1,5 +1,6 @@
 import {
   PortableText,
+  type PortableTextBlock,
   type PortableTextReactComponents,
 } from "next-sanity";
 import Link from "next/link";
@@ -83,18 +84,13 @@ const components: Partial<PortableTextReactComponents> = {
   hardBreak: () => <br />,
 };
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export function RichText<T extends Array<any>>({
-  richText,
-}: {
-  richText?: T | null;
-}) {
+export function RichText<T>({ richText }: { richText?: T | null }) {
   if (!richText) return null;
 
   return (
     <div className="prose prose-slate prose-headings:scroll-m-24 prose-headings:font-bold prose-headings:text-opacity-90 prose-p:text-opacity-80 prose-a:underline prose-a:decoration-dotted prose-ol:list-decimal prose-ol:text-opacity-80 prose-ul:list-disc prose-ul:text-opacity-80 prose-h2:border-b prose-h2:pb-2 prose-h2:text-3xl prose-h2:font-semibold prose-h2:tracking-tight prose-h2:first:mt-0">
       <PortableText
-        value={richText}
+        value={richText as unknown as PortableTextBlock[]}
         components={components}
         onMissingComponent={(_, { nodeType, type }) =>
           console.log("missing component", nodeType, type)
