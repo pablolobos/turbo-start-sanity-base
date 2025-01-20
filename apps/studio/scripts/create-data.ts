@@ -36,7 +36,6 @@ async function removePostinstallScript() {
         "package.json",
         JSON.stringify(parsedJson, null, 2)
       );
-      console.log("✅ Successfully removed postinstall script");
     }
   } catch (error) {
     console.error("❌ Error removing postinstall script:", error);

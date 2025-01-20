@@ -126,12 +126,6 @@ export const structure = (
         title: "Footer",
         icon: PanelBottomIcon,
       }),
-      createList({
-        S,
-        title: "Navbar Links",
-        type: "footer",
-        id: "navbar-links",
-      }),
       createSingleTon({
         S,
         type: "settings",
