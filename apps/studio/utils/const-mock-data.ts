@@ -255,3 +255,63 @@ export const BADGES = [
   "Exclusive Access",
   "Special Offer",
 ];
+
+export function generateButtons() {
+  const url = "https://robotostudio.com?ref=template-sanity";
+  return [
+    {
+      _key: faker.string.uuid(),
+      _type: "button",
+      text: faker.helpers.arrayElement(BUTTON_TEXT),
+      url: {
+        _type: "customUrl",
+        type: "external",
+        href: url,
+        openInNewTab: faker.datatype.boolean(),
+        external: url,
+      },
+      variant: "default",
+    },
+    {
+      _key: faker.string.uuid(),
+      _type: "button",
+      text: faker.helpers.arrayElement(BUTTON_TEXT),
+      url: {
+        _type: "customUrl",
+        type: "external",
+        href: url,
+        openInNewTab: faker.datatype.boolean(),
+        external: url,
+      },
+      variant: "secondary",
+    },
+  ];
+}
+
+export function generateNavbarColumns() {
+  return [
+    {
+      _key: faker.string.uuid(),
+      _type: "column",
+      type: "column",
+    },
+  ];
+}
+
+type Buttons = ReturnType<typeof generateButtons>;
+
+// export const getMockNavbarData = ({
+//   buttons,
+//   columns,
+// }: {
+//   buttons: Buttons;
+//   columns: any[];
+// }) => {
+//   return {
+//     _id: "navbar",
+//     _type: "navbar",
+//     buttons,
+//     columns,
+//     label: "Navbar",
+//   };
+// };

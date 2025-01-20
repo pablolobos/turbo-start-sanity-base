@@ -30,6 +30,7 @@ import {
   SheetTrigger,
 } from "@workspace/ui/components/sheet";
 import { SanityButtons } from "./sanity-buttons";
+import { SanityIcon } from "./sanity-icon";
 
 interface MenuItem {
   title: string;
@@ -45,14 +46,14 @@ function MenuItemLink({ item }: { item: MenuItem }) {
   return (
     <Link
       className={cn(
-        "flex select-none gap-4 rounded-md p-3 leading-none outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+        "flex select-none gap-4 rounded-md p-3 leading-none outline-none transition-colors hover:bg-accent hover:text-accent-foreground items-center focus:bg-accent focus:text-accent-foreground"
       )}
       href={item.href ?? "/"}
     >
       {item.icon}
-      <div>
+      <div className="">
         <div className="text-sm font-semibold">{item.title}</div>
-        <p className="text-sm leading-snug text-muted-foreground">
+        <p className="text-sm leading-snug text-muted-foreground line-clamp-2">
           {item.description}
         </p>
       </div>
@@ -108,7 +109,12 @@ function NavbarColumn({
                   item={{
                     description: item.description ?? "",
                     href: item.href ?? "",
-                    icon: <Book className="size-5 shrink-0" />,
+                    icon: (
+                      <SanityIcon
+                        icon={item.icon}
+                        className="size-5 shrink-0"
+                      />
+                    ),
                     title: item.name ?? "",
                   }}
                 />

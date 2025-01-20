@@ -1957,6 +1957,14 @@
                       "of": {
                         "type": "object",
                         "attributes": {
+                          "icon": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "inline",
+                              "name": "iconPicker"
+                            },
+                            "optional": true
+                          },
                           "name": {
                             "type": "objectAttribute",
                             "value": {
@@ -2032,13 +2040,6 @@
                     },
                     "optional": true
                   },
-                  "description": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    },
-                    "optional": true
-                  },
                   "url": {
                     "type": "objectAttribute",
                     "value": {
@@ -2051,7 +2052,7 @@
                     "type": "objectAttribute",
                     "value": {
                       "type": "string",
-                      "value": "navbarColumnLink"
+                      "value": "navbarLink"
                     }
                   }
                 },

@@ -1,9 +1,9 @@
 import { defineField, defineType } from "sanity";
-import { buttonsField } from "../common";
+import { buttonsField, iconField } from "../common";
 import { Link, LayoutPanelLeft, Navigation } from "lucide-react";
 
-const navbarColumnLink = defineField({
-  name: "navbarColumnLink",
+const navbarLink = defineField({
+  name: "navbarLink",
   type: "object",
   icon: Link,
   title: "Navigation Link",
@@ -17,11 +17,62 @@ const navbarColumnLink = defineField({
         "The text that will be displayed for this navigation link",
     }),
     defineField({
+      name: "url",
+      type: "customUrl",
+      title: "Link URL",
+      description:
+        "The URL that this link will navigate to when clicked",
+    }),
+  ],
+  preview: {
+    select: {
+      title: "name",
+      externalUrl: "url.external",
+      urlType: "url.type",
+      internalUrl: "url.internal.slug.current",
+      openInNewTab: "url.openInNewTab",
+    },
+    prepare({
+      title,
+      externalUrl,
+      urlType,
+      internalUrl,
+      openInNewTab,
+    }) {
+      const url = urlType === "external" ? externalUrl : internalUrl;
+      const newTabIndicator = openInNewTab ? " ↗" : "";
+      const truncatedUrl =
+        url?.length > 30 ? `${url.substring(0, 30)}...` : url;
+
+      return {
+        title: title || "Untitled Link",
+        subtitle: `${urlType === "external" ? "External" : "Internal"} • ${truncatedUrl}${newTabIndicator}`,
+        media: Link,
+      };
+    },
+  },
+});
+
+const navbarColumnLink = defineField({
+  name: "navbarColumnLink",
+  type: "object",
+  icon: LayoutPanelLeft,
+  title: "Navigation Column Link",
+  description: "A link within a navigation column",
+  fields: [
+    iconField,
+    defineField({
+      name: "name",
+      type: "string",
+      title: "Link Text",
+      description:
+        "The text that will be displayed for this navigation link",
+    }),
+    defineField({
       name: "description",
       type: "string",
       title: "Description",
-      description:
-        "The description for this navigation link (only displayed when link is part of a navigation column)",
+      description: "The description for this navigation link",
     }),
     defineField({
       name: "url",
@@ -121,7 +172,7 @@ export const navbar = defineType({
       title: "Navigation Structure",
       description:
         "Build your navigation menu using columns and links. Add either a column of links or individual links.",
-      of: [navbarColumn, navbarColumnLink],
+      of: [navbarColumn, navbarLink],
     }),
     buttonsField,
   ],

@@ -4,44 +4,12 @@ import { createFakeBlockContent, parseHTML } from "./parse-body";
 import slugify from "slugify";
 import {
   BADGES,
-  BUTTON_TEXT,
+  generateButtons,
   generatePageTitle,
   MOCK_SVGS,
   QUESTIONS,
   TITLE_EYEBROW_PAIRS,
 } from "./const-mock-data";
-
-function generateButtons() {
-  const url = "https://robotostudio.com?ref=template-sanity";
-  return [
-    {
-      _key: faker.string.uuid(),
-      _type: "button",
-      text: faker.helpers.arrayElement(BUTTON_TEXT),
-      url: {
-        _type: "customUrl",
-        type: "external",
-        href: url,
-        openInNewTab: faker.datatype.boolean(),
-        external: url,
-      },
-      variant: "default",
-    },
-    {
-      _key: faker.string.uuid(),
-      _type: "button",
-      text: faker.helpers.arrayElement(BUTTON_TEXT),
-      url: {
-        _type: "customUrl",
-        type: "external",
-        href: url,
-        openInNewTab: faker.datatype.boolean(),
-        external: url,
-      },
-      variant: "secondary",
-    },
-  ];
-}
 
 async function generateImage(
   client: SanityClient,
@@ -226,6 +194,23 @@ export async function getMockHomePageData(client: SanityClient) {
     pageBuilder: blocks,
   };
   return homePage;
+}
+
+export async function generateMockNavbarData(client: SanityClient) {
+  return {
+    _id: "navbar",
+    _type: "navbar" as const,
+    title: "Navbar",
+    description: faker.lorem.paragraph(),
+    columns: [
+      {
+        _key: faker.string.uuid(),
+        _type: "column" as const,
+        title: "Column 1",
+        links: [],
+      },
+    ],
+  };
 }
 
 export async function generateMockSlugPageData(client: SanityClient) {

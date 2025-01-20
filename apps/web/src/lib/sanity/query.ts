@@ -237,6 +237,7 @@ export const queryNavbarData = defineQuery(/* groq */ `
         links[]{
           _key,
           name,
+          "icon": icon.svg,
           description,
           "openInNewTab": url.openInNewTab,
           "href": select(
@@ -246,7 +247,7 @@ export const queryNavbarData = defineQuery(/* groq */ `
           )
         }
       },
-      _type == "navbarColumnLink" => {
+      _type == "navbarLink" => {
         "type": "link",
         name,
         description,
