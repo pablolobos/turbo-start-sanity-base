@@ -1,8 +1,10 @@
 import { defineField, defineType } from "sanity";
+import { Link, LayoutPanelLeft } from "lucide-react";
 
 const footerColumnLink = defineField({
   name: "footerColumnLink",
   type: "object",
+  icon: Link,
   fields: [
     defineField({
       name: "name",
@@ -15,11 +17,39 @@ const footerColumnLink = defineField({
       type: "customUrl",
     }),
   ],
+  preview: {
+    select: {
+      title: "name",
+      externalUrl: "url.external",
+      urlType: "url.type",
+      internalUrl: "url.internal.slug.current",
+      openInNewTab: "url.openInNewTab",
+    },
+    prepare({
+      title,
+      externalUrl,
+      urlType,
+      internalUrl,
+      openInNewTab,
+    }) {
+      const url = urlType === "external" ? externalUrl : internalUrl;
+      const newTabIndicator = openInNewTab ? " ↗" : "";
+      const truncatedUrl =
+        url?.length > 30 ? `${url.substring(0, 30)}...` : url;
+
+      return {
+        title: title || "Untitled Link",
+        subtitle: `${urlType === "external" ? "External" : "Internal"} • ${truncatedUrl}${newTabIndicator}`,
+        media: Link,
+      };
+    },
+  },
 });
 
 const footerColumn = defineField({
   name: "footerColumn",
   type: "object",
+  icon: LayoutPanelLeft,
   fields: [
     defineField({
       name: "title",
@@ -35,6 +65,18 @@ const footerColumn = defineField({
       of: [footerColumnLink],
     }),
   ],
+  preview: {
+    select: {
+      title: "title",
+      links: "links",
+    },
+    prepare({ title, links = [] }) {
+      return {
+        title: title || "Untitled Column",
+        subtitle: `${links.length} link${links.length === 1 ? "" : "s"}`,
+      };
+    },
+  },
 });
 
 export const footer = defineType({
@@ -71,5 +113,8 @@ export const footer = defineType({
     select: {
       title: "label",
     },
+    prepare: ({ title }) => ({
+      title: title || "Untitled",
+    }),
   },
 });

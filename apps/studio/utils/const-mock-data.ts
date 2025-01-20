@@ -1,16 +1,7 @@
 import { faker } from "@faker-js/faker";
-import { capitalize } from "./helper";
+import { capitalize, splitArray } from "./helper";
 
-export const MOCK_SVGS = [
-  `<svg fill="currentcolor" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 56 56" style="width: 1.5em; height: 1em; font-size: 20px;"><path d="M 14.5229 38.0135 C 20.5413 38.0135 25.3954 33.1199 25.4941 27.2199 C 26.3426 26.9042 27.2503 26.7858 28.0001 26.7858 C 28.7499 26.7858 29.6576 26.9042 30.5061 27.2199 C 30.6048 33.1791 35.4589 38.0135 41.4773 38.0135 C 47.1797 38.0135 51.8368 33.6921 52.4090 28.1868 L 54.7569 28.1868 C 55.6452 28.1868 56.0000 27.6540 56.0000 26.9240 L 56.0000 26.1741 C 56.0000 25.4243 55.6452 24.9112 54.7569 24.9112 L 52.2708 24.9112 C 51.2646 19.8993 46.8245 16.0712 41.4773 16.0712 C 36.3468 16.0712 32.0452 19.6033 30.8415 24.3587 C 29.9339 24.0036 28.8683 23.8852 28.0001 23.8852 C 27.1319 23.8852 26.0663 24.0036 25.1586 24.3587 C 23.9353 19.6033 19.6336 16.0712 14.5229 16.0712 C 9.1755 16.0712 4.7358 19.8993 3.7294 24.9112 L 1.2431 24.9112 C .3354 24.9112 0 25.4243 0 26.1741 L 0 26.9240 C 0 27.6540 .3354 28.1868 1.2431 28.1868 L 3.5913 28.1868 C 4.1635 33.6921 8.8203 38.0135 14.5229 38.0135 Z M 14.5229 35.0537 C 10.1029 35.0537 6.5116 31.4821 6.5116 27.0424 C 6.5116 22.6223 10.1029 19.0311 14.5229 19.0311 C 18.9232 19.0311 22.5343 22.6223 22.5343 27.0424 C 22.5343 31.4821 18.9824 35.0537 14.5229 35.0537 Z M 41.4773 35.0537 C 37.0178 35.0537 33.4659 31.4821 33.4659 27.0424 C 33.4659 22.6223 37.0178 19.0311 41.4773 19.0311 C 45.8971 19.0311 49.4885 22.6223 49.4885 27.0424 C 49.4885 31.4821 45.8971 35.0537 41.4773 35.0537 Z"></path></svg>`,
-  `<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style="width: 1.5em; height: 1em;"><path fill="none" d="M0 0h24v24H0z"></path><path d="M7 2v11h3v9l7-12h-4l4-8z"></path></svg>`,
-  `<svg stroke="currentColor" fill="currentColor" stroke-width="0" role="img" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style="width: 1.5em; height: 1em;"><title></title><path d="M7.533 0a1.816 1.816 0 0 0-1.816 1.816v2.832h11.178c1.043 0 1.888.855 1.888 1.91v8.204h2.906a1.816 1.816 0 0 0 1.817-1.817V1.816A1.816 1.816 0 0 0 21.689 0H7.533zM2.311 5.148A1.816 1.816 0 0 0 .494 6.965V23.09c0 .81.979 1.215 1.55.642l3.749-3.748h10.674a1.816 1.816 0 0 0 1.816-1.816V6.965a1.816 1.816 0 0 0-1.816-1.817H2.31Z"></path></svg>`,
-  `<svg fill="currentcolor" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 56 56" style="width: 1.5em; height: 1em; font-size: 20px;"><path d="M26,6.85139842 C28.7838328,2.77272553 34.0445029,0 39,0 C46.1797017,0 52,5.82029825 52,13 C52,20.1797017 46.1797017,26 39,26 C34.0445029,26 28.7838328,23.2272745 26,19.1486016 C23.2161672,23.2272745 17.9554971,26 13,26 C5.82029825,26 0,20.1797017 0,13 C0,5.82029825 5.82029825,0 13,0 C17.9554971,0 23.2161672,2.77272553 26,6.85139842 L26,6.85139842 Z M13,20 C17.4753345,20 22,16.2684294 22,13 C22,9.7315706 17.4753345,6 13,6 C9.13400675,6 6,9.13400675 6,13 C6,16.8659932 9.13400675,20 13,20 Z M39,20 C42.8659932,20 46,16.8659932 46,13 C46,9.13400675 42.8659932,6 39,6 C34.5246655,6 30,9.7315706 30,13 C30,16.2684294 34.5246655,20 39,20 Z" transform="translate(2 14)"></path></svg>`,
-  `<svg fill="currentcolor" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 56 56" style="width: 1.5em; height: 1em; font-size: 20px;"><path d="M 14.5229 38.0135 C 20.5413 38.0135 25.3954 33.1199 25.4941 27.2199 C 26.3426 26.9042 27.2503 26.7858 28.0001 26.7858 C 28.7499 26.7858 29.6576 26.9042 30.5061 27.2199 C 30.6048 33.1791 35.4589 38.0135 41.4773 38.0135 C 47.1797 38.0135 51.8368 33.6921 52.4090 28.1868 L 54.7569 28.1868 C 55.6452 28.1868 56.0000 27.6540 56.0000 26.9240 L 56.0000 26.1741 C 56.0000 25.4243 55.6452 24.9112 54.7569 24.9112 L 52.2708 24.9112 C 51.2646 19.8993 46.8245 16.0712 41.4773 16.0712 C 36.3468 16.0712 32.0452 19.6033 30.8415 24.3587 C 29.9339 24.0036 28.8683 23.8852 28.0001 23.8852 C 27.1319 23.8852 26.0663 24.0036 25.1586 24.3587 C 23.9353 19.6033 19.6336 16.0712 14.5229 16.0712 C 9.1755 16.0712 4.7358 19.8993 3.7294 24.9112 L 1.2431 24.9112 C .3354 24.9112 0 25.4243 0 26.1741 L 0 26.9240 C 0 27.6540 .3354 28.1868 1.2431 28.1868 L 3.5913 28.1868 C 4.1635 33.6921 8.8203 38.0135 14.5229 38.0135 Z M 14.5229 35.0537 C 10.1029 35.0537 6.5116 31.4821 6.5116 27.0424 C 6.5116 22.6223 10.1029 19.0311 14.5229 19.0311 C 18.9232 19.0311 22.5343 22.6223 22.5343 27.0424 C 22.5343 31.4821 18.9824 35.0537 14.5229 35.0537 Z M 41.4773 35.0537 C 37.0178 35.0537 33.4659 31.4821 33.4659 27.0424 C 33.4659 22.6223 37.0178 19.0311 41.4773 19.0311 C 45.8971 19.0311 49.4885 22.6223 49.4885 27.0424 C 49.4885 31.4821 45.8971 35.0537 41.4773 35.0537 Z"></path></svg>`,
-  `<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="200px" width="200px" xmlns="http://www.w3.org/2000/svg"><path d="M256,8C119,8,8,119,8,256S119,504,256,504,504,393,504,256,393,8,256,8Zm92.49,313h0l-20,25a16,16,0,0,1-22.49,2.5h0l-67-49.72a40,40,0,0,1-15-31.23V112a16,16,0,0,1,16-16h32a16,16,0,0,1,16,16V256l58,42.5A16,16,0,0,1,348.49,321Z"></path></svg>`,
-  `<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="200px" width="200px" xmlns="http://www.w3.org/2000/svg"><path d="M422.19 109.95L256.21 9.07c-19.91-12.1-44.52-12.1-64.43 0L25.81 109.95c-5.32 3.23-5.29 11.27.06 14.46L224 242.55l198.14-118.14c5.35-3.19 5.38-11.22.05-14.46zm13.84 44.63L240 271.46v223.82c0 12.88 13.39 20.91 24.05 14.43l152.16-92.48c19.68-11.96 31.79-33.94 31.79-57.7v-197.7c0-6.41-6.64-10.43-11.97-7.25zM0 161.83v197.7c0 23.77 12.11 45.74 31.79 57.7l152.16 92.47c10.67 6.48 24.05-1.54 24.05-14.43V271.46L11.97 154.58C6.64 151.4 0 155.42 0 161.83z"></path></svg>`,
-  `<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="200px" width="200px" xmlns="http://www.w3.org/2000/svg"><path d="M446.2 270.4c-6.2-19-26.9-29.1-46-22.9l-45.4 15.1-30.3-90 45.4-15.1c19.1-6.2 29.1-26.8 23-45.9-6.2-19-26.9-29.1-46-22.9l-45.4 15.1-15.7-47c-6.2-19-26.9-29.1-46-22.9-19.1 6.2-29.1 26.8-23 45.9l15.7 47-93.4 31.2-15.7-47c-6.2-19-26.9-29.1-46-22.9-19.1 6.2-29.1 26.8-23 45.9l15.7 47-45.3 15c-19.1 6.2-29.1 26.8-23 45.9 5 14.5 19.1 24 33.6 24.6 6.8 1 12-1.6 57.7-16.8l30.3 90L78 354.8c-19 6.2-29.1 26.9-23 45.9 5 14.5 19.1 24 33.6 24.6 6.8 1 12-1.6 57.7-16.8l15.7 47c5.9 16.9 24.7 29 46 22.9 19.1-6.2 29.1-26.8 23-45.9l-15.7-47 93.6-31.3 15.7 47c5.9 16.9 24.7 29 46 22.9 19.1-6.2 29.1-26.8 23-45.9l-15.7-47 45.4-15.1c19-6 29.1-26.7 22.9-45.7zm-254.1 47.2l-30.3-90.2 93.5-31.3 30.3 90.2-93.5 31.3z"></path></svg>`,
-];
+
 
 export const TITLE_EYEBROW_PAIRS = [
   {
@@ -288,30 +279,187 @@ export function generateButtons() {
   ];
 }
 
-export function generateNavbarColumns() {
+export const MOCK_ICONS = [
+  {
+    _type: "iconPicker",
+    name: "anchor",
+    provider: "fi",
+    svg: '<svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style="width: 1.5em; height: 1em;"><circle cx="12" cy="5" r="3"></circle><line x1="12" y1="22" x2="12" y2="8"></line><path d="M5 12H2a10 10 0 0 0 20 0h-3"></path></svg>',
+  },
+];
+
+type Link = {
+  id?: string;
+  name: string;
+};
+
+export function generateNavbarColumns({ links }: { links: Link[] }) {
+  const [firstPart, secondPart] = splitArray(links, 2);
+  const buildLinks = (links: Link[]) => {
+    return links.map((link) => ({
+      _key: faker.string.uuid(),
+      _type: "navbarColumnLink",
+      description: faker.lorem.paragraph(),
+      icon: faker.helpers.arrayElement(MOCK_ICONS),
+      name: link.name,
+      url: {
+        _type: "customUrl",
+        href: "#",
+        external: link.id ? undefined : "https://example.com",
+        internal: link.id
+          ? {
+              _ref: link.id,
+              _type: "reference",
+            }
+          : undefined,
+        openInNewTab: !link.id,
+        type: link.id ? "internal" : "external",
+      },
+    }));
+  };
   return [
     {
       _key: faker.string.uuid(),
-      _type: "column",
-      type: "column",
+      _type: "navbarLink",
+      name: "Blogs",
+      url: {
+        _type: "customUrl",
+        href: "#",
+        internal: {
+          _ref: "blogIndex",
+          _type: "reference",
+        },
+        openInNewTab: false,
+        type: "internal",
+      },
+    },
+    {
+      _key: faker.string.uuid(),
+      _type: "navbarLink",
+      name: "Pricing",
+      url: {
+        _type: "customUrl",
+        external: "https://example.com",
+        href: "#",
+        openInNewTab: false,
+        type: "external",
+      },
+    },
+    {
+      _key: faker.string.uuid(),
+      _type: "navbarColumn",
+      links: buildLinks(firstPart),
+      title: "Resources",
+    },
+    {
+      _key: faker.string.uuid(),
+      _type: "navbarColumn",
+      links: buildLinks(secondPart),
+      title: "Products",
     },
   ];
 }
 
-type Buttons = ReturnType<typeof generateButtons>;
+export function generateFooterColumns({ links }: { links: Link[] }) {
+  const [firstPart, secondPart, thirdPart] = splitArray(links, 3);
+  const buildLinks = (links: Link[]) => {
+    return links.map((link) => ({
+      _key: faker.string.uuid(),
+      _type: "footerColumnLink",
+      name: link.name,
+      url: {
+        _type: "customUrl",
+        external: link.id ? undefined : "https://example.com",
+        internal: link.id
+          ? {
+              _ref: link.id,
+              _type: "reference",
+            }
+          : undefined,
+        href: "#",
+        openInNewTab: !link.id,
+        type: link.id ? "internal" : "external",
+      },
+    }));
+  };
 
-// export const getMockNavbarData = ({
-//   buttons,
-//   columns,
-// }: {
-//   buttons: Buttons;
-//   columns: any[];
-// }) => {
-//   return {
-//     _id: "navbar",
-//     _type: "navbar",
-//     buttons,
-//     columns,
-//     label: "Navbar",
-//   };
-// };
+  return [
+    {
+      _key: faker.string.uuid(),
+      _type: "footerColumn",
+      links: buildLinks(firstPart),
+      title: "Product",
+    },
+    {
+      _key: faker.string.uuid(),
+      _type: "footerColumn",
+      links: buildLinks(secondPart),
+      title: "Company",
+    },
+    {
+      _key: faker.string.uuid(),
+      _type: "footerColumn",
+      links: buildLinks(thirdPart),
+      title: "Resources",
+    },
+  ];
+}
+
+type NavbarColumns = ReturnType<typeof generateNavbarColumns>;
+type FooterColumns = ReturnType<typeof generateFooterColumns>;
+
+export const getMockNavbarData = ({
+  columns,
+}: {
+  columns: NavbarColumns;
+}) => {
+  return {
+    _id: "navbar",
+    _type: "navbar",
+    buttons: generateButtons(),
+    columns,
+    label: "Navbar",
+  };
+};
+
+export function generateMockFooterData({
+  columns,
+}: {
+  columns: FooterColumns;
+}) {
+  return {
+    _id: "footer",
+    _type: "footer",
+    _createdAt: "2025-01-17T11:55:54Z",
+    label: "Footer",
+    columns,
+    subtitle:
+      "Powered by Next.js and Sanity, crafted in a seamless monorepo architecture.",
+  };
+}
+
+export function generateGlobalSettingsData(logoImageId?: string) {
+  return {
+    _id: "settings",
+    _type: "settings",
+    contactEmail: "hello@roboto.studio",
+    label: "Settings",
+    logo: logoImageId
+      ? {
+          _type: "image",
+          asset: {
+            _ref: logoImageId,
+            _type: "reference",
+          },
+        }
+      : undefined,
+    siteDescription:
+      "Powered by Next.js and Sanity, crafted in a seamless monorepo architecture.",
+    siteTitle: "Template Robot Next Sanity",
+    socialLinks: {
+      linkedin: "https://uk.linkedin.com/company/robotostudio",
+      twitter: "https://x.com/studioroboto",
+      youtube: "https://www.youtube.com/@robotostudio",
+    },
+  };
+}

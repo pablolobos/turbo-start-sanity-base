@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 
 type Base<T = SchemaType> = {
+  id?: string;
   type: T;
   preview?: boolean;
   title?: string;
@@ -50,9 +51,10 @@ type CreateList = {
 // and uses a default icon if not provided. It then returns a list item with the generated or
 // provided title and icon.
 
-const createList = ({ S, type, icon, title }: CreateList) => {
+const createList = ({ S, type, icon, title, id }: CreateList) => {
   const newTitle = title ?? getTitleCase(type);
   return S.documentTypeListItem(type)
+    .id(id ?? type)
     .title(newTitle)
     .icon(icon ?? File);
 };
@@ -123,6 +125,12 @@ export const structure = (
         type: "footer",
         title: "Footer",
         icon: PanelBottomIcon,
+      }),
+      createList({
+        S,
+        title: "Navbar Links",
+        type: "footer",
+        id: "navbar-links",
       }),
       createSingleTon({
         S,
