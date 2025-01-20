@@ -3,7 +3,7 @@ const nextConfig = {
   transpilePackages: ["@workspace/ui"],
   experimental: {
     ppr: true,
-    inlineCss: true,
+    // inlineCss: true,
   },
   images: {
     remotePatterns: [

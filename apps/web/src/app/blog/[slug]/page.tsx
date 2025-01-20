@@ -32,19 +32,18 @@ export default async function BlogSlugPage({
               {data.description}
             </p>
           </header>
-
           {data.image && (
             <div className="mb-12">
               <SanityImage
                 asset={data.image}
                 alt="Decorative geometric pattern"
                 width={800}
+                loading="eager"
                 height={400}
                 className="rounded-lg bg-muted"
               />
             </div>
           )}
-
           <RichText richText={data.richText} />
         </main>
 
