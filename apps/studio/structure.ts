@@ -12,6 +12,7 @@ import {
   HomeIcon,
   MessageCircleQuestion,
   PanelBottomIcon,
+  PanelTopDashedIcon,
   User,
   type LucideIcon,
 } from "lucide-react";
@@ -111,6 +112,12 @@ export const structure = (
       }),
       createList({ S, type: "author", title: "Authors", icon: User }),
       S.divider(),
+      createSingleTon({
+        S,
+        type: "navbar",
+        title: "Navbar",
+        icon: PanelTopDashedIcon,
+      }),
       createSingleTon({
         S,
         type: "footer",

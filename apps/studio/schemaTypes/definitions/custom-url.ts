@@ -6,9 +6,8 @@ import {
 
 const allLinkableTypes = [
   { type: "blog" },
+  { type: "blogIndex" },
   { type: "page" },
-  //   { type: "product" },
-  //   { type: "category" },
 ];
 
 export const customUrl = defineType({
@@ -69,4 +68,24 @@ export const customUrl = defineType({
       ],
     }),
   ],
+  preview: {
+    select: {
+      externalUrl: "external",
+      urlType: "type",
+      internalUrl: "internal.slug.current",
+      openInNewTab: "openInNewTab",
+    },
+    prepare({ externalUrl, urlType, internalUrl, openInNewTab }) {
+      const url =
+        urlType === "external" ? externalUrl : `/${internalUrl}`;
+      const newTabIndicator = openInNewTab ? " ↗" : "";
+      const truncatedUrl =
+        url?.length > 30 ? `${url.substring(0, 30)}...` : url;
+
+      return {
+        title: `${urlType === "external" ? "External" : "Internal"} Link`,
+        subtitle: `${truncatedUrl}${newTabIndicator}`,
+      };
+    },
+  },
 });
