@@ -58,3 +58,65 @@ export const parseRichTextToString = (
     return `${text.join(" ").split(" ").slice(0, maxWords).join(" ")}...`;
   return text.join(" ");
 };
+
+
+export function splitArray<T>(array: T[], numChunks: number): T[][] {
+  const result: T[][] = Array.from({ length: numChunks }, () => []);
+  for (let i = 0; i < array.length; i++) {
+    result[i % numChunks].push(array[i]);
+  }
+  return result;
+}
+
+
+
+export interface RetryOptions {
+  maxRetries?: number;
+  initialDelay?: number;
+  maxDelay?: number;
+  onRetry?: (error: Error, attempt: number) => void;
+}
+
+export async function retryPromise<T>(
+  promiseFn: () => Promise<T>,
+  options: RetryOptions = {}
+): Promise<T> {
+  const {
+    maxRetries = 3,
+    initialDelay = 1000,
+    maxDelay = 30000,
+    onRetry,
+  } = options;
+
+  let attempts = 0;
+
+  while (true) {
+    try {
+      return await promiseFn();
+    } catch (error) {
+      attempts++;
+
+      if (attempts >= maxRetries) {
+        throw error instanceof Error
+          ? error
+          : new Error("Promise retry failed");
+      }
+
+      if (onRetry) {
+        onRetry(
+          error instanceof Error ? error : new Error("Unknown error"),
+          attempts
+        );
+      }
+
+      const backoffDelay = Math.min(
+        initialDelay * 2 ** (attempts - 1),
+        maxDelay
+      );
+
+      await new Promise((resolve) =>
+        setTimeout(resolve, backoffDelay)
+      );
+    }
+  }
+}

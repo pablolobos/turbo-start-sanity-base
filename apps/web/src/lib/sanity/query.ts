@@ -200,3 +200,67 @@ export const queryGenericPageOGData = defineQuery(/* groq */ `
     ${ogFieldsFragment}
   }
 `);
+
+
+export const queryFooterData = defineQuery(/* groq */ `
+  *[_type == "footer" && _id == "footer"][0]{
+    _id,
+    subtitle,
+    columns[]{
+      _key,
+      title,
+      links[]{
+        _key,
+        name,
+        "openInNewTab": url.openInNewTab,
+        "href": select(
+          url.type == "internal" => url.internal->slug.current,
+          url.type == "external" => url.external,
+          url.href
+        ),
+      }
+    },
+    "logo": *[_type == "settings"][0].logo.asset->url,
+    "siteTitle": *[_type == "settings"][0].siteTitle,
+    "socialLinks": *[_type == "settings"][0].socialLinks,
+  }
+`);
+
+export const queryNavbarData = defineQuery(/* groq */ `
+  *[_type == "navbar" && _id == "navbar"][0]{
+    _id,
+    columns[]{
+      _key,
+      _type == "navbarColumn" => {
+        "type": "column",
+        title,
+        links[]{
+          _key,
+          name,
+          "icon": icon.svg,
+          description,
+          "openInNewTab": url.openInNewTab,
+          "href": select(
+            url.type == "internal" => url.internal->slug.current,
+            url.type == "external" => url.external,
+            url.href
+          )
+        }
+      },
+      _type == "navbarLink" => {
+        "type": "link",
+        name,
+        description,
+        "openInNewTab": url.openInNewTab,
+        "href": select(
+          url.type == "internal" => url.internal->slug.current,
+          url.type == "external" => url.external,
+          url.href
+        )
+      }
+    },
+    ${buttonsFragment},
+    "logo": *[_type == "settings"][0].logo.asset->url,
+    "siteTitle": *[_type == "settings"][0].siteTitle,
+  }
+`);

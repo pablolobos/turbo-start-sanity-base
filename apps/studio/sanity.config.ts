@@ -7,6 +7,7 @@ import { iconPicker } from "sanity-plugin-icon-picker";
 import { presentationUrl } from "./plugins/presentation-url";
 import { presentationTool } from "sanity/presentation";
 import { resolve } from "./resolve-presentation-document";
+import { media } from "sanity-plugin-media";
 
 const projectId = process.env.SANITY_STUDIO_PROJECT_ID ?? "";
 const dataset = process.env.SANITY_STUDIO_DATASET ?? "production";
@@ -25,6 +26,7 @@ export default defineConfig({
     }),
     visionTool(),
     iconPicker(),
+    media(),
     presentationTool({
       resolve: resolve,
       previewUrl: {

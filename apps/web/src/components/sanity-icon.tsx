@@ -3,9 +3,12 @@ import { cn } from "@workspace/ui/lib/utils";
 import { memo } from "react";
 
 interface IconProps extends Omit<ComponentProps<"span">, "src"> {
-  icon?: {
-    svg?: string | null;
-  };
+  icon?:
+    | {
+        svg?: string | null;
+      }
+    | string
+    | null;
 }
 
 export const SanityIcon = memo(function SanityIconUnmemorized({
@@ -13,7 +16,7 @@ export const SanityIcon = memo(function SanityIconUnmemorized({
   className,
   ...props
 }: IconProps) {
-  const svg = icon?.svg;
+  const svg = typeof icon === "object" ? icon?.svg : icon;
 
   if (!svg) {
     return null;
