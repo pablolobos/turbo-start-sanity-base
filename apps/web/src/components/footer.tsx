@@ -69,7 +69,7 @@ export function FooterSkeleton() {
   return (
     <section className="pb-8">
       <div className="container mx-auto px-4 md:px-6">
-        <footer className="h-[500px]">
+        <footer className="h-[500px] lg:h-auto">
           <div className="flex flex-col items-center justify-between gap-10 text-center lg:flex-row lg:text-left">
             <div className="flex w-full max-w-96 shrink flex-col items-center justify-between gap-6 lg:items-start">
               <div>
@@ -123,7 +123,7 @@ function Footer({ data }: FooterProps) {
   return (
     <section className="pb-8">
       <div className="container mx-auto px-4 md:px-6">
-        <footer className="h-[500px]">
+        <footer className="h-[500px] lg:h-auto">
           <div className="flex flex-col items-center justify-between gap-10 text-center lg:flex-row lg:text-left">
             <div className="flex w-full max-w-96 shrink flex-col items-center justify-between gap-6 lg:items-start">
               <div>
