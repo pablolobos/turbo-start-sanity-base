@@ -1,9 +1,7 @@
 import { Book, Menu } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-
 import { cn } from "@workspace/ui/lib/utils";
-
 import { sanityFetch } from "@/lib/sanity/live";
 import { queryNavbarData } from "@/lib/sanity/query";
 import type { QueryNavbarDataResult } from "@/lib/sanity/sanity.types";
@@ -23,7 +21,6 @@ import {
   NavigationMenuItem,
   NavigationMenuList,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
 } from "@workspace/ui/components/navigation-menu";
 import {
   Sheet,
@@ -65,7 +62,6 @@ function MenuItemLink({ item }: { item: MenuItem }) {
 
 export async function NavbarServer() {
   const navbarData = await sanityFetch({ query: queryNavbarData });
-  console.log("🚀 ~ NavbarServer ~ navbarData:", navbarData);
   return <Navbar navbarData={navbarData.data} />;
 }
 
@@ -81,7 +77,6 @@ function NavbarColumnLink({
     <Link
       className={cn(
         "text-muted-foreground",
-        navigationMenuTriggerStyle(),
         buttonVariants({
           variant: "ghost",
         })
@@ -250,7 +245,7 @@ function MobileNavbar({
   );
 }
 
-export async function Navbar({
+export function Navbar({
   navbarData,
 }: {
   navbarData: QueryNavbarDataResult;
