@@ -41,23 +41,33 @@ function SocialLinks({ data }: SocialLinksProps) {
   const { facebook, twitter, instagram, youtube, linkedin } = data;
 
   const socialLinks = [
-    { url: instagram, Icon: Instagram },
-    { url: facebook, Icon: Facebook },
-    { url: twitter, Icon: Twitter },
-    { url: linkedin, Icon: Linkedin },
-    { url: youtube, Icon: Youtube },
+    {
+      url: instagram,
+      Icon: Instagram,
+      label: "Follow us on Instagram",
+    },
+    { url: facebook, Icon: Facebook, label: "Follow us on Facebook" },
+    { url: twitter, Icon: Twitter, label: "Follow us on Twitter" },
+    { url: linkedin, Icon: Linkedin, label: "Follow us on LinkedIn" },
+    {
+      url: youtube,
+      Icon: Youtube,
+      label: "Subscribe to our YouTube channel",
+    },
   ].filter((link) => link.url);
 
   return (
     <ul className="flex items-center space-x-6 text-muted-foreground">
-      {socialLinks.map(({ url, Icon }) => (
+      {socialLinks.map(({ url, Icon, label }) => (
         <li key={url} className="font-medium hover:text-primary">
           <Link
             href={url ?? "#"}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={label}
           >
             <Icon className="size-6" />
+            <span className="sr-only">{label}</span>
           </Link>
         </li>
       ))}

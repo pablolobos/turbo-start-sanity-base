@@ -39,6 +39,7 @@ export default async function BlogSlugPage({
                 alt="Decorative geometric pattern"
                 width={800}
                 loading="eager"
+                priority
                 height={400}
                 className="rounded-lg bg-muted"
               />
