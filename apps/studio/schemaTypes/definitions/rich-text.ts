@@ -46,6 +46,9 @@ const richTextMembers = [
     title: "Image",
     type: "image",
     icon: ImageIcon,
+    options: {
+      hotspot: true,
+    },
     fields: [
       defineField({
         name: "caption",
