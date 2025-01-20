@@ -15,6 +15,8 @@ export function BlogAuthor({ author }: { author: Blog["authors"] }) {
       {author?.image && (
         <SanityImage
           asset={author?.image}
+          width={40}
+          height={40}
           alt={author?.name ?? "Author Image"}
           className="size-8 flex-none rounded-full bg-gray-50"
         />

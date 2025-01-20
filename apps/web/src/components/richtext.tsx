@@ -76,7 +76,13 @@ const components: Partial<PortableTextReactComponents> = {
     image: ({ value }) => {
       return (
         <div className="my-4">
-          <SanityImage asset={value} className="w-auto" />
+          <SanityImage
+            asset={value}
+            className="w-auto"
+            width={800}
+            height={800}
+            // priority
+          />
         </div>
       );
     },
