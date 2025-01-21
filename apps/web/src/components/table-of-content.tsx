@@ -1,12 +1,12 @@
-import type { SanityRichTextBlock } from "@/types";
 import { convertToSlug } from "@/utils";
 import { buttonVariants } from "@workspace/ui/components/button";
 import { cn } from "@workspace/ui/lib/utils";
 import { ChevronDown } from "lucide-react";
+import type { PortableTextBlock } from "next-sanity";
 import Link from "next/link";
 
-interface TableOfContentProps {
-  richText?: SanityRichTextBlock[] | null;
+interface TableOfContentProps<T> {
+  richText?: T | null;
 }
 
 interface ProcessedHeading {
@@ -15,7 +15,7 @@ interface ProcessedHeading {
 }
 
 function filterHeadings(
-  richText?: SanityRichTextBlock[] | null
+  richText?: PortableTextBlock[] | null
 ): ProcessedHeading[] {
   if (!Array.isArray(richText)) return [];
 
@@ -53,8 +53,10 @@ function TableOfContentLink({
   );
 }
 
-export function TableOfContent({ richText }: TableOfContentProps) {
-  const headings = filterHeadings(richText);
+export function TableOfContent<T>({
+  richText,
+}: TableOfContentProps<T>) {
+  const headings = filterHeadings(richText as PortableTextBlock[]);
   if (!headings.length) return null;
 
   return (
