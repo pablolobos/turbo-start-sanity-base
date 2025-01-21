@@ -220,7 +220,12 @@ export const queryFooterData = defineQuery(/* groq */ `
         ),
       }
     },
-    "logo": *[_type == "settings"][0].logo.asset->url,
+    "logo": *[_type == "settings"][0].logo{
+      ...,
+      "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),
+      "blurData": asset->metadata.lqip,
+      "dominantColor": asset->metadata.palette.dominant.background,
+    },
     "siteTitle": *[_type == "settings"][0].siteTitle,
     "socialLinks": *[_type == "settings"][0].socialLinks,
   }
@@ -260,7 +265,12 @@ export const queryNavbarData = defineQuery(/* groq */ `
       }
     },
     ${buttonsFragment},
-    "logo": *[_type == "settings"][0].logo.asset->url,
+    "logo": *[_type == "settings"][0].logo{
+      ...,
+      "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),
+      "blurData": asset->metadata.lqip,
+      "dominantColor": asset->metadata.palette.dominant.background,
+    },
     "siteTitle": *[_type == "settings"][0].siteTitle,
   }
 `);

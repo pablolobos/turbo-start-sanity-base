@@ -1,0 +1,54 @@
+import type { SanityImageProps } from "@/types";
+import type { Maybe } from "@/types";
+import Link from "next/link";
+import { SanityImage } from "./sanity-image";
+import Image from "next/image";
+
+const LOGO_URL =
+  "https://cdn.sanity.io/images/s6kuy1ts/production/68c438f68264717e93c7ba1e85f1d0c4b58b33c2-1200x621.svg";
+
+interface LogoProps {
+  src?: Maybe<string>;
+  image?: Maybe<SanityImageProps>;
+  alt?: Maybe<string>;
+  width?: number;
+  height?: number;
+  priority?: boolean;
+}
+
+export function Logo({
+  src,
+  alt = "logo",
+  image,
+  width = 80,
+  height = 40,
+  priority = true,
+}: LogoProps) {
+  return (
+    <Link href="/" className="flex items-center gap-2">
+      {image ? (
+        <SanityImage
+          asset={image}
+          alt={alt ?? "logo"}
+          width={width}
+          className="w-[80px] h-[40px]"
+          height={height}
+          priority={priority}
+          loading="eager"
+          decoding="sync"
+        />
+      ) : (
+        <Image
+          src={src ?? LOGO_URL}
+          alt={alt ?? "logo"}
+          width={width}
+          className="w-[80px] h-[40px]"
+          height={height}
+          loading="eager"
+          priority={priority}
+          decoding="sync"
+        />
+      )}
+    </Link>
+  );
+}

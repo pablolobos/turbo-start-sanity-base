@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { Logo } from "./logo";
 
 const LOGO_URL =
   "https://cdn.sanity.io/images/s6kuy1ts/production/68c438f68264717e93c7ba1e85f1d0c4b58b33c2-1200x621.svg";
@@ -138,13 +139,7 @@ function Footer({ data }: FooterProps) {
             <div className="flex w-full max-w-96 shrink flex-col items-center justify-between gap-6 lg:items-start">
               <div>
                 <span className="flex items-center justify-center gap-4 lg:justify-start">
-                  <Image
-                    src={logo ?? LOGO_URL}
-                    alt={`${siteTitle} logo`}
-                    width={80}
-                    height={40}
-                    priority
-                  />
+                  <Logo image={logo} alt={siteTitle} priority />
                 </span>
                 {subtitle && (
                   <p className="mt-6 text-sm text-muted-foreground">
