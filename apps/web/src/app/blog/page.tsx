@@ -3,6 +3,7 @@ import {
   BlogHeader,
   FeaturedBlogCard,
 } from "@/components/blog-card";
+import { PageBuilder } from "@/components/pagebuilder";
 import { sanityFetch } from "@/lib/sanity/live";
 import { queryBlogIndexPageData } from "@/lib/sanity/query";
 import { getMetaData } from "@/lib/seo";
@@ -22,7 +23,8 @@ export async function generateMetadata() {
 export default async function BlogIndexPage() {
   const { data } = await fetchBlogPosts();
   if (!data) return null;
-  const { featuredBlog, blogs, title, description } = data ?? {};
+  const { featuredBlog, blogs, title, description, pageBuilder } =
+    data ?? {};
 
   return (
     <main className="">
@@ -43,6 +45,7 @@ export default async function BlogIndexPage() {
           </div>
         </div>
       </div>
+      <PageBuilder pageBuilder={pageBuilder} />
     </main>
   );
 }

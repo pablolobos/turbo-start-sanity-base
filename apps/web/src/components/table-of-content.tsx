@@ -45,7 +45,7 @@ function TableOfContentLink({
       href={heading.href}
       className={cn(
         buttonVariants({ variant: "link" }),
-        "text-sm justify-start"
+        "text-sm justify-start truncate"
       )}
     >
       {heading.text}
