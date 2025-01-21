@@ -11,7 +11,9 @@ function getOgImage({ type, id }: OgImageOptions = {}): string {
   const params = new URLSearchParams();
   if (id) params.set("id", id);
   if (type) params.set("type", type);
-  return `api/og?${params.toString()}`;
+  const baseUrl = getBaseUrl();
+  const logoUrl = `${baseUrl}/api/og?${params.toString()}`;
+  return logoUrl;
 }
 
 interface MetaDataInput {
@@ -56,6 +58,18 @@ export function getMetaData(data: MetaDataInput): Metadata {
     metadataBase: new URL(baseUrl),
     creator: "Roboto Studio Demo",
     authors: [{ name: "Roboto" }],
+    icons: {
+      icon: `${baseUrl}/favicon.ico`,
+    },
+    keywords: [
+      "roboto",
+      "studio",
+      "demo",
+      "sanity",
+      "next",
+      "react",
+      "template",
+    ],
     twitter: {
       card: "summary_large_image",
       images: [ogImage],
