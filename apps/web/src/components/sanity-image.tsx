@@ -36,9 +36,8 @@ export function SanityImage({
       Number(width ?? dimensions.width),
       Number(height ?? dimensions.height)
     )
-    .dpr(2) // Reduced from 3 to 2 for faster loading
+    .dpr(2)
     .auto("format")
-    .format("webp") // Explicitly use WebP format
     .quality(Number(quality))
     .url();
 
@@ -50,8 +49,16 @@ export function SanityImage({
       width={width ?? dimensions.width}
       height={height ?? dimensions.height}
       className={cn(className)}
+      // Optimize image sizes for performance and LCP
+      // Use smaller percentages to reduce initial load size while maintaining quality
+      // Order from smallest to largest breakpoint for better browser parsing
+      // Define responsive image sizes for optimal loading:
+      // - Mobile (<640px): Image takes up 80% of viewport width
+      // - Tablet (<768px): Image takes up 50% of viewport width
+      // - Small desktop (<1200px): Image takes up 33% of viewport width
+      // - Large desktop (>1200px): Image takes up 25% of viewport width
       sizes={
-        "(min-width: 1200px) 33vw, (min-width: 768px) 50vw, (min-width: 640px) 75vw, 100vw"
+        "(max-width: 640px) 75vw, (max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
       }
       {...props}
       {...getBlurDataURL(asset)}

@@ -37,7 +37,6 @@ export function HeroBlock({
                 width={800}
                 height={800}
                 priority
-                fetchPriority="high"
                 className="max-h-96 w-full rounded-md object-cover"
               />
             </div>
