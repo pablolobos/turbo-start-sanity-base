@@ -64,7 +64,9 @@ export default async function RootLayout({
         <Suspense fallback={<FooterSkeleton />}>
           <FooterServer />
         </Suspense>
-        <SanityLive />
+        <Suspense>
+          <SanityLive />
+        </Suspense>
       </body>
     </html>
   );
