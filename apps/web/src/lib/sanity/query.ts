@@ -161,6 +161,10 @@ export const queryBlogSlugPageData = defineQuery(/* groq */ `
   }
 `);
 
+export const queryBlogPaths = defineQuery(`
+  *[_type == "blog" && defined(slug.current)].slug.current
+`);
+
 const ogFieldsFragment = /* groq */ `
   _id,
   _type,

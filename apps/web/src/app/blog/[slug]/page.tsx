@@ -1,8 +1,12 @@
 import { RichText } from "@/components/richtext";
 import { SanityImage } from "@/components/sanity-image";
 import { TableOfContent } from "@/components/table-of-content";
+import { client } from "@/lib/sanity/client";
 import { sanityFetch } from "@/lib/sanity/live";
-import { queryBlogSlugPageData } from "@/lib/sanity/query";
+import {
+  queryBlogPaths,
+  queryBlogSlugPageData,
+} from "@/lib/sanity/query";
 import { getMetaData } from "@/lib/seo";
 
 async function fetchBlogSlugPageData(slug: string) {
@@ -10,6 +14,16 @@ async function fetchBlogSlugPageData(slug: string) {
     query: queryBlogSlugPageData,
     params: { slug: `/blog/${slug}` },
   });
+}
+
+async function fetchBlogPaths() {
+  const slugs = await client.fetch(queryBlogPaths);
+  const paths: { slug: string }[] = [];
+  for (const slug of slugs) {
+    const [, , path] = slug.split("/");
+    paths.push({ slug: path });
+  }
+  return paths;
 }
 
 export async function generateMetadata({
@@ -22,6 +36,11 @@ export async function generateMetadata({
   if (!data) return getMetaData({});
   return getMetaData(data);
 }
+
+export async function generateStaticParams() {
+  return await fetchBlogPaths();
+}
+    
 
 export default async function BlogSlugPage({
   params,
