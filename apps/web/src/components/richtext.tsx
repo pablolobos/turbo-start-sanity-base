@@ -12,7 +12,6 @@ const components: Partial<PortableTextReactComponents> = {
     normal: ({ children }) => <p>{children}</p>,
     h2: ({ children, value }) => {
       const slug = parseChildrenToSlug(value.children);
-      console.log("🚀 ~ slug:", slug);
       return (
         <h2
           id={slug}
