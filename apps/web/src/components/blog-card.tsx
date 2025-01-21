@@ -56,6 +56,7 @@ export function FeaturedBlogCard({ blog }: { blog: Blog }) {
         <div className="flex">
           <Link
             href={slug ?? "#"}
+            aria-label={`Link to ${slug ?? title}`}
             aria-describedby="featured-post"
             className="text-sm/6 font-semibold text-indigo-600"
           >

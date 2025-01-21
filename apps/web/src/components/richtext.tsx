@@ -37,10 +37,8 @@ const components: Partial<PortableTextReactComponents> = {
     inline: ({ children }) => <span>{children}</span>,
   },
   marks: {
-    link: ({ children, value }) => {
-      return <a href={value.href}>{children}</a>;
-    },
     customLink: ({ children, value }) => {
+      console.log("🚀 ~ value:", value);
       if (!value.href || value.href === "#") {
         console.warn("🚀 link is not set", value);
         return (
@@ -53,6 +51,7 @@ const components: Partial<PortableTextReactComponents> = {
         <Link
           className="underline decoration-dotted underline-offset-2"
           href={value.href}
+          aria-label={`Link to ${value?.href}`}
           target={value.openInNewTab ? "_blank" : "_self"}
         >
           {children}
