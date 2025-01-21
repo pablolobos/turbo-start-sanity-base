@@ -53,10 +53,12 @@ export const blogIndex = defineType({
   preview: {
     select: {
       title: "title",
+      description: "description",
+      slug: "slug.current",
     },
-    prepare: ({ title }) => ({
+    prepare: ({ title, description, slug }) => ({
       title: title || "Untitled Blog Index",
-      subtitle: "Blog Index",
+      subtitle: description || slug || "Blog Index",
     }),
   },
 });

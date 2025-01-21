@@ -21,10 +21,12 @@ const featureCardIcon = defineField({
       title: "title",
       icon: "icon",
     },
-    prepare: ({ title, icon }) => ({
-      title: `${title ?? "Untitled"}`,
-      media: icon ? preview(icon) : null,
-    }),
+    prepare: ({ title, icon }) => {
+      return {
+        title: `${title ?? "Untitled"}`,
+        media: icon ? preview(icon) : null,
+      };
+    },
   },
 });
 

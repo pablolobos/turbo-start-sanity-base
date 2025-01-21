@@ -162,6 +162,7 @@ export const queryBlogSlugPageData = defineQuery(/* groq */ `
     ${blogAuthorFragment},
     ${imageFragment},
     ${richTextFragment},
+    ${pageBuilderFragment}
   }
 `);
 
