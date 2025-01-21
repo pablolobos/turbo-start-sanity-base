@@ -45,6 +45,7 @@ function MenuItemLink({ item }: { item: MenuItem }) {
       className={cn(
         "flex select-none gap-4 rounded-md p-3 leading-none outline-none transition-colors hover:bg-accent hover:text-accent-foreground items-center focus:bg-accent focus:text-accent-foreground"
       )}
+      aria-label={`Link to ${item.title ?? item.href}`}
       href={item.href ?? "/"}
     >
       {item.icon}
@@ -79,6 +80,7 @@ function NavbarColumnLink({
           variant: "ghost",
         })
       )}
+      aria-label={`Link to ${column.name ?? column.href}`}
       href={column.href ?? ""}
     >
       {column.name}
