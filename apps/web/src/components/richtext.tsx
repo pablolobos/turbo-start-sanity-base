@@ -50,6 +50,7 @@ const components: Partial<PortableTextReactComponents> = {
         <Link
           className="underline decoration-dotted underline-offset-2"
           href={value.href}
+          prefetch={false}
           aria-label={`Link to ${value?.href}`}
           target={value.openInNewTab ? "_blank" : "_self"}
         >
