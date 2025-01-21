@@ -20,8 +20,9 @@ async function fetchBlogPaths() {
   const slugs = await client.fetch(queryBlogPaths);
   const paths: { slug: string }[] = [];
   for (const slug of slugs) {
+    if (!slug) continue;
     const [, , path] = slug.split("/");
-    paths.push({ slug: path });
+    if (path) paths.push({ slug: path });
   }
   return paths;
 }

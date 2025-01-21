@@ -132,6 +132,10 @@ export const querySlugPageData = defineQuery(/* groq */ `
   }
   `);
 
+export const querySlugPagePaths = defineQuery(/* groq */ `
+  *[_type == "page" && defined(slug.current)].slug.current
+`);
+
 export const queryBlogIndexPageData = defineQuery(/* groq */ `
   *[_type == "blogIndex"][0]{
     _id,

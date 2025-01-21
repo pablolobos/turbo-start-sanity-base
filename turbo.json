@@ -6,7 +6,8 @@
     "SANITY_API_TOKEN",
     "VERCEL_URL",
     "VERCEL_PROJECT_PRODUCTION_URL",
-    "VERCEL_ENV"
+    "VERCEL_ENV",
+    "NODE_ENV"
   ],
   "tasks": {
     "build": {
