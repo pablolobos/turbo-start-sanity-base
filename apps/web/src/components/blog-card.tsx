@@ -1,5 +1,4 @@
 import type { QueryBlogIndexPageDataResult } from "@/lib/sanity/sanity.types";
-import { Badge } from "@workspace/ui/components/badge";
 import Link from "next/link";
 import { SanityImage } from "./sanity-image";
 
@@ -7,108 +6,188 @@ type Blog = NonNullable<
   NonNullable<QueryBlogIndexPageDataResult>["featuredBlog"]
 >;
 
-const currentDate = new Date();
+interface BlogImageProps {
+  image: Blog["image"];
+  title?: string | null;
+}
 
-export function BlogAuthor({ author }: { author: Blog["authors"] }) {
+function BlogImage({ image, title }: BlogImageProps) {
+  if (!image?.asset) return null;
+
+  return (
+    <SanityImage
+      asset={image}
+      width={800}
+      height={400}
+      alt={title ?? "Blog post image"}
+      className="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]"
+    />
+  );
+}
+
+interface AuthorImageProps {
+  author: Blog["authors"];
+}
+
+function AuthorImage({ author }: AuthorImageProps) {
+  if (!author?.image) return null;
+
+  return (
+    <SanityImage
+      asset={author.image}
+      width={40}
+      height={40}
+      alt={author.name ?? "Author image"}
+      className="size-8 flex-none rounded-full bg-gray-50"
+    />
+  );
+}
+
+interface BlogAuthorProps {
+  author: Blog["authors"];
+}
+
+export function BlogAuthor({ author }: BlogAuthorProps) {
+  if (!author) return null;
+
   return (
     <div className="flex items-center gap-x-2.5 text-sm/6 font-semibold text-gray-900">
-      {author?.image && (
-        <SanityImage
-          asset={author?.image}
-          width={40}
-          height={40}
-          alt={author?.name ?? "Author Image"}
-          className="size-8 flex-none rounded-full bg-gray-50"
-        />
-      )}
-      {author?.name}
+      <AuthorImage author={author} />
+      {author.name}
     </div>
   );
 }
 
-export function FeaturedBlogCard({ blog }: { blog: Blog }) {
-  const { title, publishedAt, slug, authors, description } =
-    blog ?? {};
+interface BlogCardProps {
+  blog: Blog;
+}
+
+function BlogMeta({ publishedAt }: { publishedAt: string | null }) {
   return (
-    <article className="mx-auto w-full max-w-2xl lg:mx-0 lg:max-w-lg">
+    <div className="flex items-center gap-x-4 text-xs my-4">
       <time
-        dateTime={publishedAt ?? currentDate.toISOString()}
-        className="block text-sm/6 text-gray-600"
+        dateTime={publishedAt ?? ""}
+        className="text-muted-foreground"
       >
-        {new Date(publishedAt ?? currentDate).toLocaleDateString(
-          "en-US",
-          {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          }
-        )}
+        {publishedAt}
       </time>
-      <h2
-        id="featured-post"
-        className="my-4 text-pretty text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl"
-      >
-        {title}
-      </h2>
-      <Badge variant="outline">Featured</Badge>
-      <p className="mt-4 text-lg/8 text-gray-600">{description}</p>
-      <div className="mt-4 flex flex-col justify-between gap-6 sm:mt-8 sm:flex-row-reverse sm:gap-8 lg:mt-4 lg:flex-col">
-        <div className="flex">
-          <Link
-            href={slug ?? "#"}
-            aria-label={`Link to ${slug ?? title}`}
-            aria-describedby="featured-post"
-            className="text-sm/6 font-semibold text-indigo-600"
-          >
-            Continue reading <span aria-hidden="true">&rarr;</span>
-          </Link>
+    </div>
+  );
+}
+
+function BlogContent({
+  title,
+  slug,
+  description,
+  isFeatured,
+}: {
+  title: string | null;
+  slug: string | null;
+  description: string | null;
+  isFeatured?: boolean;
+}) {
+  const HeadingTag = isFeatured ? "h2" : "h3";
+  const headingClasses = isFeatured
+    ? "mt-3 text-3xl font-semibold leading-tight"
+    : "mt-3 text-lg font-semibold leading-6";
+
+  return (
+    <div className="group relative">
+      <HeadingTag className={headingClasses}>
+        <Link href={slug ?? "#"}>
+          <span className="absolute inset-0" />
+          {title}
+        </Link>
+      </HeadingTag>
+      <p className="mt-5 text-sm leading-6 text-muted-foreground">
+        {description}
+      </p>
+    </div>
+  );
+}
+
+function AuthorSection({ authors }: { authors: Blog["authors"] }) {
+  if (!authors) return null;
+
+  return (
+    <div className="mt-6 flex border-t border-gray-900/5 pt-6">
+      <div className="relative flex items-center gap-x-4">
+        <AuthorImage author={authors} />
+        <div className="text-sm leading-6">
+          <p className="font-semibold">
+            <span className="absolute inset-0" />
+            {authors.name}
+          </p>
         </div>
-        <div className="flex lg:border-t lg:border-gray-900/10 lg:pt-8">
-          <BlogAuthor author={authors} />
-        </div>
+      </div>
+    </div>
+  );
+}
+
+export function FeaturedBlogCard({ blog }: BlogCardProps) {
+  const { title, publishedAt, slug, authors, description, image } =
+    blog;
+
+  return (
+    <article className="flex flex-col lg:flex-row items-start gap-x-8">
+      <div className="relative w-full lg:w-1/2">
+        <BlogImage image={image} title={title} />
+        <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
+      </div>
+      <div className="w-full lg:w-1/2 mt-8 lg:mt-0">
+        <BlogMeta publishedAt={publishedAt} />
+        <BlogContent
+          title={title}
+          slug={slug}
+          description={description}
+          isFeatured={true}
+        />
+        <AuthorSection authors={authors} />
       </div>
     </article>
   );
 }
 
-export function BlogCard({ blog }: { blog: Blog }) {
+export function BlogCard({ blog }: BlogCardProps) {
+  const { title, publishedAt, slug, authors, description, image } =
+    blog;
+
   return (
-    <article className="py-12">
-      <div className="group relative max-w-xl">
-        <time
-          dateTime={new Date(
-            blog?.publishedAt ?? currentDate
-          ).toISOString()}
-          className="block text-sm/6 text-gray-600"
-        >
-          {new Date(
-            blog?.publishedAt ?? currentDate
-          ).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
-        </time>
-        <h2 className="mt-2 text-lg font-semibold text-gray-900 group-hover:text-gray-600">
-          <span className="absolute inset-0" />
-          {blog.title}
-        </h2>
-        <p className="mt-4 text-sm/6 text-gray-600">
-          {blog.description}
-        </p>
+    <article className="flex flex-col items-start w-full">
+      <div className="relative w-full">
+        <BlogImage image={image} title={title} />
+        <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
       </div>
-      <div className="mt-4 flex items-center gap-x-2.5">
-        <BlogAuthor author={blog.authors} />
-      </div>
-      <div className="mt-4">
-        <Link
-          href={blog.slug ?? "#"}
-          aria-describedby="featured-post"
-          className="text-sm/6 font-semibold text-indigo-600"
-        >
-          Continue reading <span aria-hidden="true">&rarr;</span>
-        </Link>
+      <div className="w-full sm:max-w-xl">
+        <BlogMeta publishedAt={publishedAt} />
+        <BlogContent
+          title={title}
+          slug={slug}
+          description={description}
+        />
+        <AuthorSection authors={authors} />
       </div>
     </article>
+  );
+}
+
+export function BlogHeader({
+  title,
+  description,
+}: {
+  title: string | null;
+  description: string | null;
+}) {
+  return (
+    <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="mx-auto max-w-2xl text-center">
+        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+          {title}
+        </h1>
+        <p className="mt-4 text-lg leading-8 text-muted-foreground">
+          {description}
+        </p>
+      </div>
+    </div>
   );
 }

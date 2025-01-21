@@ -51,7 +51,7 @@ const blogCardFragment = /* groq */ `
   description,
   "slug":slug.current,
   richText,
-  image,
+  ${imageFragment},
   publishedAt,
   ${blogAuthorFragment}
 `;

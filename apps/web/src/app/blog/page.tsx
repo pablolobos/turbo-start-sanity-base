@@ -1,4 +1,8 @@
-import { BlogCard, FeaturedBlogCard } from "@/components/blog-card";
+import {
+  BlogCard,
+  BlogHeader,
+  FeaturedBlogCard,
+} from "@/components/blog-card";
 import { sanityFetch } from "@/lib/sanity/live";
 import { queryBlogIndexPageData } from "@/lib/sanity/query";
 import { getMetaData } from "@/lib/seo";
@@ -18,16 +22,21 @@ export async function generateMetadata() {
 export default async function BlogIndexPage() {
   const { data } = await fetchBlogPosts();
   if (!data) return null;
+  const { featuredBlog, blogs, title, description } = data ?? {};
+
   return (
-    <div className="my-16">
-      <div className="container mx-auto grid grid-cols-1 gap-x-8 gap-y-12 px-4 md:px-6 sm:gap-y-16 ">
-        {data?.featuredBlog && (
-          <FeaturedBlogCard blog={data?.featuredBlog} />
-        )}
-        <div className="mx-auto w-full  border-t border-gray-900/10 pt-12 sm:pt-16 lg:mx-0 lg:max-w-none lg:border-t-0 lg:pt-0">
-          <div className="-my-12 divide-y divide-gray-900/10">
-            {data?.blogs?.map((blog, indx) => (
-              <BlogCard key={`${blog._id}-${indx}`} blog={blog} />
+    <div className="bg-white py-12 sm:py-16 md:py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <BlogHeader title={title} description={description} />
+        <div className="mx-auto mt-8 sm:mt-12 md:mt-16 space-y-12 lg:space-y-20">
+          {featuredBlog && (
+            <div className="w-full">
+              <FeaturedBlogCard blog={featuredBlog} />
+            </div>
+          )}
+          <div className="grid grid-cols-1 gap-8 md:gap-12 lg:grid-cols-2">
+            {blogs.map((blog, index) => (
+              <BlogCard key={`${blog._id}-${index}`} blog={blog} />
             ))}
           </div>
         </div>
