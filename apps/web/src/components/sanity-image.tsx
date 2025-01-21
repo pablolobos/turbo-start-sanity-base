@@ -36,8 +36,9 @@ export function SanityImage({
       Number(width ?? dimensions.width),
       Number(height ?? dimensions.height)
     )
-    .dpr(3)
+    .dpr(2) // Reduced from 3 to 2 for faster loading
     .auto("format")
+    .format("webp") // Explicitly use WebP format
     .quality(Number(quality))
     .url();
 
@@ -49,9 +50,7 @@ export function SanityImage({
       width={width ?? dimensions.width}
       height={height ?? dimensions.height}
       className={cn(className)}
-      sizes={
-        "(min-width: 1200px) 33vw, (min-width: 768px) 50vw, (min-width: 640px) 75vw, 100vw"
-      }
+      sizes="(max-width: 640px) 100vw, (max-width: 768px) 75vw, (max-width: 1200px) 50vw, 33vw"
       {...props}
       {...getBlurDataURL(asset)}
     />
