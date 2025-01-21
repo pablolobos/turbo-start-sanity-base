@@ -50,7 +50,9 @@ export function SanityImage({
       width={width ?? dimensions.width}
       height={height ?? dimensions.height}
       className={cn(className)}
-      sizes="(max-width: 640px) 100vw, (max-width: 768px) 75vw, (max-width: 1200px) 50vw, 33vw"
+      sizes={
+        "(min-width: 1200px) 33vw, (min-width: 768px) 50vw, (min-width: 640px) 75vw, 100vw"
+      }
       {...props}
       {...getBlurDataURL(asset)}
     />
