@@ -178,7 +178,7 @@ function MobileNavbar({
   return (
     <div className="block lg:hidden h-[75px]">
       <div className="flex items-center justify-between">
-        <Logo image={logo} alt={siteTitle} priority />
+        <Logo src={logo} alt={siteTitle} priority />
 
         <Sheet>
           <SheetTrigger asChild>
@@ -190,7 +190,7 @@ function MobileNavbar({
           <SheetContent className="overflow-y-auto">
             <SheetHeader>
               <SheetTitle>
-                <Logo image={logo} alt={siteTitle} priority />
+                <Logo src={logo} alt={siteTitle} priority />
               </SheetTitle>
             </SheetHeader>
 
@@ -248,7 +248,7 @@ export function Navbar({
     <section className="py-4 h-[75px]">
       <div className="container mx-auto px-4 md:px-6">
         <nav className="hidden justify-between lg:flex">
-          <Logo image={logo} alt={siteTitle} priority />
+          <Logo src={logo} alt={siteTitle} priority />
           <div className="flex items-center gap-6 justify-center flex-grow">
             <div className="flex items-center">
               <NavigationMenu>
