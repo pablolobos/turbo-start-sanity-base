@@ -1,3 +1,4 @@
+import { parseChildrenToSlug } from "@/utils";
 import {
   PortableText,
   type PortableTextBlock,
@@ -9,31 +10,62 @@ import { SanityImage } from "./sanity-image";
 const components: Partial<PortableTextReactComponents> = {
   block: {
     normal: ({ children }) => <p>{children}</p>,
-    h2: ({ children }) => (
-      <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
-        {children}
-      </h2>
-    ),
-    h3: ({ children }) => (
-      <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-        {children}
-      </h3>
-    ),
-    h4: ({ children }) => (
-      <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
-        {children}
-      </h4>
-    ),
-    h5: ({ children }) => (
-      <h5 className="scroll-m-20 text-lg font-semibold tracking-tight">
-        {children}
-      </h5>
-    ),
-    h6: ({ children }) => (
-      <h6 className="scroll-m-20 text-base font-semibold tracking-tight">
-        {children}
-      </h6>
-    ),
+    h2: ({ children, value }) => {
+      const slug = parseChildrenToSlug(value.children);
+      console.log("🚀 ~ slug:", slug);
+      return (
+        <h2
+          id={slug}
+          className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0"
+        >
+          {children}
+        </h2>
+      );
+    },
+    h3: ({ children, value }) => {
+      const slug = parseChildrenToSlug(value.children);
+      return (
+        <h3
+          id={slug}
+          className="scroll-m-20 text-2xl font-semibold tracking-tight"
+        >
+          {children}
+        </h3>
+      );
+    },
+    h4: ({ children, value }) => {
+      const slug = parseChildrenToSlug(value.children);
+      return (
+        <h4
+          id={slug}
+          className="scroll-m-20 text-xl font-semibold tracking-tight"
+        >
+          {children}
+        </h4>
+      );
+    },
+    h5: ({ children, value }) => {
+      const slug = parseChildrenToSlug(value.children);
+      return (
+        <h5
+          id={slug}
+          className="scroll-m-20 text-lg font-semibold tracking-tight"
+        >
+          {children}
+        </h5>
+      );
+    },
+    h6: ({ children, value }) => {
+      const slug = parseChildrenToSlug(value.children);
+      return (
+        <h6
+          id={slug}
+          className="scroll-m-20 text-base font-semibold tracking-tight"
+        >
+          {children}
+        </h6>
+      );
+    },
     inline: ({ children }) => <span>{children}</span>,
   },
   marks: {

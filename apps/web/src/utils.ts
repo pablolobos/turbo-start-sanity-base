@@ -1,3 +1,6 @@
+import type { PortableTextBlock } from "next-sanity";
+import slugify from "slugify";
+
 export const isRelativeUrl = (url: string) =>
   url.startsWith("/") || url.startsWith("#") || url.startsWith("?");
 
@@ -33,4 +36,21 @@ export async function handleErrors<T>(
       err instanceof Error ? err.message : JSON.stringify(err),
     ];
   }
+}
+
+export function convertToSlug(
+  text?: string,
+  { fallback }: { fallback?: string } = { fallback: "top-level" }
+) {
+  if (!text) return fallback;
+  return slugify(text.trim(), {
+    lower: true,
+    remove: /[^a-zA-Z0-9 ]/g,
+  });
+}
+
+export function parseChildrenToSlug(
+  children: PortableTextBlock["children"]
+) {
+  return convertToSlug(children.map((child) => child.text).join(""));
 }

@@ -1,13 +1,12 @@
+import type { SanityRichTextBlock } from "@/types";
+import { convertToSlug } from "@/utils";
+import { buttonVariants } from "@workspace/ui/components/button";
+import { cn } from "@workspace/ui/lib/utils";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
-import slugify from "slugify";
-import type {
-  SanityRichTextBlock,
-  SanityRichTextProps,
-} from "@/types";
 
-export interface TableProps {
-  richText?: SanityRichTextProps | null;
+interface TableOfContentProps {
+  richText?: SanityRichTextBlock[] | null;
 }
 
 interface ProcessedHeading {
@@ -15,62 +14,69 @@ interface ProcessedHeading {
   text: string;
 }
 
-function filterHeadings(richText?: SanityRichTextBlock[] | null) {
+function filterHeadings(
+  richText?: SanityRichTextBlock[] | null
+): ProcessedHeading[] {
   if (!Array.isArray(richText)) return [];
 
-  const headings: ProcessedHeading[] = [];
-
-  for (const block of richText) {
-    if (block._type !== "block") continue;
-    if (block.style?.startsWith("h")) {
-      const text = block.children
-        ?.map((child) => child.text)
-        .join("");
-      if (!text) continue;
-      headings.push({
-        href: `#${slugify(text, {
-          lower: true,
-          strict: true,
-        })}`,
-        text,
-      });
+  return richText.reduce<ProcessedHeading[]>((headings, block) => {
+    if (block._type !== "block" || !block.style?.startsWith("h")) {
+      return headings;
     }
-  }
 
-  return headings;
+    const text = block.children
+      ?.map((child) => child.text)
+      .join("")
+      .trim();
+    if (!text) return headings;
+    const slug = convertToSlug(text);
+    headings.push({ href: `#${slug}`, text });
+    return headings;
+  }, []);
 }
 
-function Anchor({ heading }: { heading: ProcessedHeading }) {
-  const { href, text } = heading;
+function TableOfContentLink({
+  heading,
+}: {
+  heading: ProcessedHeading;
+}) {
   return (
-    <li>
-      <Link href={href}>{text}</Link>
-    </li>
+    <Link
+      href={heading.href}
+      className={cn(
+        buttonVariants({ variant: "link" }),
+        "text-sm justify-start"
+      )}
+    >
+      {heading.text}
+    </Link>
   );
 }
 
-export function TableOfContent({ richText }: TableProps) {
-  const headings = filterHeadings(richText as SanityRichTextBlock[]);
-
-  if (headings.length === 0) return null;
+export function TableOfContent({ richText }: TableOfContentProps) {
+  const headings = filterHeadings(richText);
+  if (!headings.length) return null;
 
   return (
     <div className="sticky left-0 top-8 flex flex-col">
       <details className="group mb-4 rounded-xl bg-zinc-100 p-8">
         <summary className="flex cursor-pointer items-center justify-between text-lg font-semibold">
-          Table of Contents
-          <ChevronDown className="h-5 w-5 transform transition-transform duration-200 group-open:rotate-180" />
+          <span>Table of Contents</span>
+          <ChevronDown
+            className="h-5 w-5 transform transition-transform duration-200 group-open:rotate-180"
+            aria-hidden="true"
+          />
         </summary>
-        <div className="mt-4 prose prose-sm prose-links:underline prose-links:decoration-dotted prose-links:underline-offset-4">
-          <ul className="flex flex-col">
-            {headings.map((heading, index) => (
-              <Anchor
+        <nav className="mt-4 " aria-label="Table of contents">
+          <ul className="flex flex-col space-y-2">
+            {headings.map((heading) => (
+              <TableOfContentLink
+                key={heading.href}
                 heading={heading}
-                key={`${index.toString()}-${heading.text}`}
               />
             ))}
           </ul>
-        </div>
+        </nav>
       </details>
     </div>
   );
