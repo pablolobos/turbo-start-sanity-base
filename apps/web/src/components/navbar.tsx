@@ -27,13 +27,10 @@ import {
 } from "@workspace/ui/components/sheet";
 import { cn } from "@workspace/ui/lib/utils";
 import { Menu } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
+import { Logo } from "./logo";
 import { SanityButtons } from "./sanity-buttons";
 import { SanityIcon } from "./sanity-icon";
-import type { Maybe, SanityImageProps } from "@/types";
-import { SanityImage } from "./sanity-image";
-import { Logo } from "./logo";
 
 interface MenuItem {
   title: string;

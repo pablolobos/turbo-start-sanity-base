@@ -18,7 +18,7 @@ interface MetaDataInput {
   _type?: Maybe<string>;
   seoDescription?: Maybe<string>;
   seoTitle?: Maybe<string>;
-  slug?: Maybe<{ current: Maybe<string> }> | Maybe<string>;
+  slug?: Maybe<{ current: string | null }> | string | null;
   title?: Maybe<string>;
   description?: Maybe<string>;
   _id?: Maybe<string>;

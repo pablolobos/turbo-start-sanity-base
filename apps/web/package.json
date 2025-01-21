@@ -17,6 +17,7 @@
     "@sanity/image-url": "^1.1.0",
     "@sanity/preview-url-secret": "^2.1.0",
     "@workspace/ui": "workspace:*",
+    "babel-plugin-react-compiler": "19.0.0-beta-decd7b8-20250118",
     "lucide-react": "0.471.1",
     "next": "15.2.0-canary.17",
     "next-sanity": "^9.8.37",

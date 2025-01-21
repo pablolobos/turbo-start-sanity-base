@@ -3,12 +3,24 @@ import { SanityImage } from "@/components/sanity-image";
 import { TableOfContent } from "@/components/table-of-content";
 import { sanityFetch } from "@/lib/sanity/live";
 import { queryBlogSlugPageData } from "@/lib/sanity/query";
+import { getMetaData } from "@/lib/seo";
 
 async function fetchBlogSlugPageData(slug: string) {
   return await sanityFetch({
     query: queryBlogSlugPageData,
     params: { slug: `/blog/${slug}` },
   });
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const { data } = await fetchBlogSlugPageData(slug);
+  if (!data) return getMetaData({});
+  return getMetaData(data);
 }
 
 export default async function BlogSlugPage({

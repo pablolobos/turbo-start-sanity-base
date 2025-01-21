@@ -127,6 +127,7 @@ export const queryHomePageData =
 export const querySlugPageData = defineQuery(/* groq */ `
   *[_type == "page" && slug.current == $slug][0]{
     ...,
+    "slug": slug.current,
     ${pageBuilderFragment}
   }
   `);
@@ -138,6 +139,7 @@ export const queryBlogIndexPageData = defineQuery(/* groq */ `
     description,
     type,
     ${pageBuilderFragment},
+    "slug": slug.current,
     "featuredBlog": featured[0]->{
       ${blogCardFragment}
     }
@@ -152,6 +154,7 @@ export const queryBlogIndexPageData = defineQuery(/* groq */ `
 export const queryBlogSlugPageData = defineQuery(/* groq */ `
   *[_type == "blog" && slug.current == $slug][0]{
     ...,
+    "slug": slug.current,
     ${blogAuthorFragment},
     ${imageFragment},
     ${richTextFragment},
@@ -201,7 +204,6 @@ export const queryGenericPageOGData = defineQuery(/* groq */ `
   }
 `);
 
-
 export const queryFooterData = defineQuery(/* groq */ `
   *[_type == "footer" && _id == "footer"][0]{
     _id,
@@ -242,7 +244,7 @@ export const queryNavbarData = defineQuery(/* groq */ `
         links[]{
           _key,
           name,
-          "icon": icon.svg,
+          icon,
           description,
           "openInNewTab": url.openInNewTab,
           "href": select(

@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
   /* config options here */
   transpilePackages: ["@workspace/ui"],
   experimental: {
+    reactCompiler: true,
     ppr: true,
     inlineCss: true,
   },

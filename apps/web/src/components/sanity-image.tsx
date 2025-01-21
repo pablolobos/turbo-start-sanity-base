@@ -25,6 +25,7 @@ export function SanityImage({
   width,
   height,
   className,
+  quality = 75,
   ...props
 }: ImageProps) {
   if (!asset?.asset) return null;
@@ -32,14 +33,16 @@ export function SanityImage({
 
   const url = urlFor({ ...asset, _id: asset.asset._ref })
     .width(width ? Number(width) : dimensions.width)
-    .dpr(2)
+    .dpr(3)
     .height(height ? Number(height) : dimensions.height)
     .auto("format")
+    .quality(Number(quality))
     .url();
 
   return (
     <Image
       alt={alt ?? asset.alt ?? "Image"}
+      aria-label={alt ?? asset.alt ?? "Image"}
       src={url}
       width={width ?? dimensions.width}
       height={height ?? dimensions.height}

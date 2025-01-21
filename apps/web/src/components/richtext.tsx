@@ -38,7 +38,6 @@ const components: Partial<PortableTextReactComponents> = {
   },
   marks: {
     customLink: ({ children, value }) => {
-      console.log("🚀 ~ value:", value);
       if (!value.href || value.href === "#") {
         console.warn("🚀 link is not set", value);
         return (
