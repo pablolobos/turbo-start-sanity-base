@@ -5,6 +5,7 @@ import {
   querySlugPageData,
   querySlugPagePaths,
 } from "@/lib/sanity/query";
+import { getMetaData } from "@/lib/seo";
 import { notFound } from "next/navigation";
 
 async function fetchSlugPageData(slug: string) {
@@ -23,6 +24,20 @@ async function fetchSlugPagePaths() {
     paths.push({ slug: parts });
   }
   return paths;
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string[] }>;
+}) {
+  const { slug } = await params;
+  const slugString = slug.join("/");
+  const { data: pageData } = await fetchSlugPageData(slugString);
+  if (!pageData) {
+    return getMetaData({});
+  }
+  return getMetaData(pageData);
 }
 
 export async function generateStaticParams() {

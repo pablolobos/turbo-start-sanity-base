@@ -51,7 +51,7 @@ export function getMetaData(data: MetaDataInput): Metadata {
   });
 
   return {
-    title: meta.title,
+    title: `${meta.title} | Roboto Studio Demo`,
     description: meta.description,
     metadataBase: new URL(baseUrl),
     creator: "Roboto Studio Demo",
