@@ -37,6 +37,7 @@ type DominantColorSeoImageRenderProps = {
   dominantColor?: Maybe<string>;
   date?: Maybe<string>;
   _type?: Maybe<string>;
+  description?: Maybe<string>;
 };
 
 const seoImageRender = ({ seoImage }: SeoImageRenderProps) => {
@@ -58,6 +59,7 @@ const dominantColorSeoImageRender = ({
   logo,
   dominantColor,
   date,
+  description,
   _type,
 }: DominantColorSeoImageRenderProps) => {
   return (
@@ -113,7 +115,7 @@ const dominantColorSeoImageRender = ({
         <h1 tw="text-5xl font-bold leading-tight max-w-[90%] text-white">
           {title}
         </h1>
-
+        {description && <p tw="text-lg text-white">{description}</p>}
         {_type && (
           <div
             tw={`bg-white text-[${
@@ -275,7 +277,6 @@ export async function GET({ url }: Request): Promise<ImageResponse> {
   const image = block[type] ?? getGenericPageContent;
   try {
     const content = await image(para);
-    console.log({ content, para });
     return new ImageResponse(
       content ? content : errorContent,
       options
