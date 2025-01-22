@@ -18,12 +18,14 @@ import type { ListItemProps, PageTreeNode } from "../../utils/types";
 import { useNavigatorContext } from "./navigator-context";
 import { PreviewElement } from "./preview";
 
-interface PreviewStyleProps {
+interface StyledComponentProps {
   isPreviewed?: boolean;
   currentScheme?: string;
+  muted?: boolean;
+  variant?: "publish" | "edit";
 }
 
-const ListWrapper = styled(Box)`
+const NavigatorList = styled(Box)`
   border: 2px solid transparent;
   padding: 2px;
   border-radius: 8px;
@@ -35,7 +37,7 @@ const ListWrapper = styled(Box)`
   flex-direction: column;
 `;
 
-const ListItemWrapper = styled(Stack)<PreviewStyleProps>`
+const NavigatorItem = styled(Stack)<StyledComponentProps>`
   --bg-selected: ${({ currentScheme }) =>
     currentScheme === "light" ? "#D5E2FB" : "#26344B"};
   --fg-selected: ${({ currentScheme }) =>
@@ -50,9 +52,9 @@ const ListItemWrapper = styled(Stack)<PreviewStyleProps>`
   justify-content: space-between;
   align-items: center;
   background-color: ${({ isPreviewed }) =>
-    !isPreviewed ? "var(--card-bg-color)" : "var(--bg-selected)"};
+    isPreviewed ? "var(--bg-selected)" : "var(--card-bg-color)"};
   color: ${({ isPreviewed }) =>
-    !isPreviewed ? "inherit" : "var(--fg-selected)"};
+    isPreviewed ? "var(--fg-selected)" : "inherit"};
   transition: background-color 0.2s ease-in-out;
   border: 2px solid transparent;
   min-height: 33px;
@@ -67,7 +69,7 @@ const ListItemWrapper = styled(Stack)<PreviewStyleProps>`
   }
 `;
 
-const TextContainer = styled(Stack)`
+const ContentContainer = styled(Stack)`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -76,15 +78,13 @@ const TextContainer = styled(Stack)`
   gap: 8px;
 `;
 
-const TextElement = styled(Text)<PreviewStyleProps>`
+const StyledText = styled(Text)<StyledComponentProps>`
   --fg-selected: ${({ currentScheme }) =>
     currentScheme === "light" ? "#20386B" : "#B2CBF9"};
   color: ${({ isPreviewed }) => isPreviewed && "var(--fg-selected)"};
 `;
 
-const IconContainer = styled(Text)<
-  PreviewStyleProps & { variant: "publish" | "edit" }
->`
+const StatusIcon = styled(Text)<StyledComponentProps>`
   --published: ${({ currentScheme }) =>
     currentScheme === "light" ? "#3e7147" : "#8fd89f"};
   --edited: ${({ currentScheme }) =>
@@ -98,9 +98,13 @@ const IconContainer = styled(Text)<
       : `var(--${variant === "publish" ? "published" : "edited"})`};
 `;
 
-
-function ListItem({ item, active, idx, setActive }: ListItemProps) {
-  const { setCurrentDir, currentDir } = useNavigatorContext();
+function NavigatorListItem({
+  item,
+  active,
+  idx,
+  setActive,
+}: ListItemProps) {
+  const { setCurrentDir } = useNavigatorContext();
   const listItemId = `item-${idx}`;
   const { preview } = usePresentationParams();
   const navigate = usePresentationNavigate();
@@ -115,6 +119,9 @@ function ListItem({ item, active, idx, setActive }: ListItemProps) {
   const childrenCount = isFolder
     ? Object.keys(item.children).length
     : 0;
+  const isUnpublished =
+    item._id.startsWith("drafts.") &&
+    item?._updatedAt === item?._createdAt;
 
   const handleClick = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
@@ -131,12 +138,81 @@ function ListItem({ item, active, idx, setActive }: ListItemProps) {
     [isFolder, item, navigate, path, setCurrentDir]
   );
 
-  const isUnpublished =
-    item._id.startsWith("drafts.") &&
-    item?._updatedAt === item?._createdAt;
+  const renderIcon = useCallback(
+    () => (
+      <Flex
+        align="center"
+        justify="center"
+        style={{
+          position: "relative",
+          width: 33,
+          height: 33,
+          flexShrink: 0,
+        }}
+      >
+        {isFolder ? (
+          <FolderIcon style={{ width: 20, height: 20 }} />
+        ) : (
+          <DocumentIcon style={{ width: 20, height: 20 }} />
+        )}
+        <div
+          style={{
+            boxShadow: "inset 0 0 0 1px var(--card-fg-color)",
+            opacity: 0.1,
+            position: "absolute",
+            inset: 0,
+            pointerEvents: "none",
+          }}
+        />
+      </Flex>
+    ),
+    [isFolder]
+  );
+
+  const renderContent = useCallback(
+    () => (
+      <ContentContainer>
+        <StyledText
+          size={1}
+          textOverflow="ellipsis"
+          isPreviewed={previewed}
+          currentScheme={scheme}
+          weight="medium"
+        >
+          {!isFolder ? (
+            <PreviewElement
+              fallback={item.title}
+              type="title"
+              item={item}
+            />
+          ) : (
+            item.title
+          )}
+        </StyledText>
+        <StyledText
+          size={1}
+          muted
+          textOverflow="ellipsis"
+          isPreviewed={previewed}
+          currentScheme={scheme}
+        >
+          {!isFolder ? (
+            <PreviewElement
+              fallback={path}
+              type="subtitle"
+              item={item}
+            />
+          ) : (
+            path
+          )}
+        </StyledText>
+      </ContentContainer>
+    ),
+    [isFolder, item, path, previewed, scheme]
+  );
 
   return (
-    <ListItemWrapper
+    <NavigatorItem
       as="li"
       role="option"
       padding={3}
@@ -149,72 +225,8 @@ function ListItem({ item, active, idx, setActive }: ListItemProps) {
       tabIndex={0}
     >
       <Flex gap={2} align="center" flex={1}>
-        <Flex
-          align="center"
-          justify="center"
-          style={{
-            position: "relative",
-            width: 33,
-            height: 33,
-            flexShrink: 0,
-          }}
-        >
-          {isFolder ? (
-            <FolderIcon style={{ width: 20, height: 20 }} />
-          ) : (
-            <DocumentIcon style={{ width: 20, height: 20 }} />
-          )}
-          <div
-            style={{
-              boxShadow: "inset 0 0 0 1px var(--card-fg-color)",
-              opacity: 0.1,
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              pointerEvents: "none",
-              display: "block",
-            }}
-          />
-        </Flex>
-
-        <TextContainer>
-          <TextElement
-            size={1}
-            textOverflow="ellipsis"
-            isPreviewed={previewed}
-            currentScheme={scheme}
-            weight="medium"
-          >
-            {!isFolder ? (
-              <PreviewElement
-                fallback={item.title}
-                type="title"
-                item={item}
-              />
-            ) : (
-              item.title
-            )}
-          </TextElement>
-          <TextElement
-            size={1}
-            muted
-            textOverflow="ellipsis"
-            isPreviewed={previewed}
-            currentScheme={scheme}
-          >
-            {!isFolder ? (
-              <PreviewElement
-                fallback={path}
-                type="subtitle"
-                item={item}
-              />
-            ) : (
-              path
-            )}
-          </TextElement>
-        </TextContainer>
+        {renderIcon()}
+        {renderContent()}
       </Flex>
 
       {isFolder ? (
@@ -239,7 +251,7 @@ function ListItem({ item, active, idx, setActive }: ListItemProps) {
         </Flex>
       ) : (
         <Flex gap={2}>
-          <IconContainer
+          <StatusIcon
             size={1}
             muted={isUnpublished}
             currentScheme={scheme}
@@ -262,8 +274,8 @@ function ListItem({ item, active, idx, setActive }: ListItemProps) {
             >
               <PublishIcon />
             </Tooltip>
-          </IconContainer>
-          <IconContainer
+          </StatusIcon>
+          <StatusIcon
             size={1}
             muted={!(item as PageTreeNode).edited}
             currentScheme={scheme}
@@ -286,14 +298,14 @@ function ListItem({ item, active, idx, setActive }: ListItemProps) {
             >
               <EditIcon />
             </Tooltip>
-          </IconContainer>
+          </StatusIcon>
         </Flex>
       )}
-    </ListItemWrapper>
+    </NavigatorItem>
   );
 }
 
-export function List() {
+export function NavigatorListView() {
   const { items } = useNavigatorContext();
   const { preview } = usePresentationParams();
 
@@ -307,15 +319,15 @@ export function List() {
   );
 
   return (
-    <ListWrapper
-      id="list"
+    <NavigatorList
+      id="navigator-list"
       as="ul"
       role="listbox"
       aria-label="Pages and folders"
       aria-activedescendant={activeDescendant}
     >
       {items.map((item, idx) => (
-        <ListItem
+        <NavigatorListItem
           key={item._id}
           idx={idx}
           item={item}
@@ -323,7 +335,6 @@ export function List() {
           setActive={setActiveDescendant}
         />
       ))}
-    </ListWrapper>
+    </NavigatorList>
   );
 }
-

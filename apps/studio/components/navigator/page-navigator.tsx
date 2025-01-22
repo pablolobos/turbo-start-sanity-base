@@ -3,7 +3,7 @@ import { useObservable } from "react-rx";
 import { useDocumentStore } from "sanity";
 import { NavigatorProvider } from "./navigator-context";
 import { Header } from "./header";
-import { List } from "./list";
+import { NavigatorListView } from "./list";
 import { SearchBox } from "./search-box";
 
 export function createPagesNavigator() {
@@ -46,7 +46,7 @@ function DefaultNavigator() {
         ]}
       >
         <SearchBox />
-        <List />
+        <NavigatorListView />
       </Header>
     </NavigatorProvider>
   );
