@@ -1,14 +1,13 @@
-import {defineConfig} from 'sanity'
-import {structureTool} from 'sanity/structure'
-import {visionTool} from '@sanity/vision'
-import {schemaTypes} from './schemaTypes'
-import { structure } from "./structure";
+import { visionTool } from "@sanity/vision";
+import { defineConfig } from "sanity";
 import { iconPicker } from "sanity-plugin-icon-picker";
-import { presentationUrl } from "./plugins/presentation-url";
-import { presentationTool } from "sanity/presentation";
-import { resolve } from "./resolve-presentation-document";
 import { media } from "sanity-plugin-media";
+import { presentationTool } from "sanity/presentation";
+import { structureTool } from "sanity/structure";
 import { createPagesNavigator } from "./components/navigator/page-navigator";
+import { presentationUrl } from "./plugins/presentation-url";
+import { schemaTypes } from "./schemaTypes";
+import { structure } from "./structure";
 import { createPageTemplate } from "./utils/helper";
 
 const projectId = process.env.SANITY_STUDIO_PROJECT_ID ?? "";
@@ -23,12 +22,7 @@ export default defineConfig({
   projectId: projectId,
   dataset: dataset,
   plugins: [
-    structureTool({
-      structure: structure,
-    }),
-    visionTool(),
     presentationTool({
-      title: "Pages",
       components: {
         unstable_navigator: {
           component: createPagesNavigator(),
@@ -43,17 +37,12 @@ export default defineConfig({
         },
       },
     }),
+    structureTool({
+      structure: structure,
+    }),
+    visionTool(),
     iconPicker(),
     media(),
-    // presentationTool({
-    //   resolve: resolve,
-    //   previewUrl: {
-    //     origin: presentationOriginUrl,
-    //     previewMode: {
-    //       enable: "/api/presentation-draft",
-    //     },
-    //   },
-    // }),
     presentationUrl(),
   ],
 
