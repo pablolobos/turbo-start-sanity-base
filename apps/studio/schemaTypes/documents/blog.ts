@@ -2,7 +2,7 @@ import { defineArrayMember, defineField, defineType } from "sanity";
 import { GROUP, GROUPS } from "../../utils/constant";
 import { ogFields } from "../../utils/og-fields";
 import { seoFields } from "../../utils/seo-fields";
-import { createSlug } from "../../utils/slug";
+import { createSlug, defineSlug } from "../../utils/slug";
 
 export const blog = defineType({
   name: "blog",
@@ -23,14 +23,8 @@ export const blog = defineType({
       group: GROUP.MAIN_CONTENT,
     }),
     defineField({
-      name: "slug",
-      type: "slug",
-      title: "Slug",
+      ...defineSlug(),
       group: GROUP.MAIN_CONTENT,
-      options: {
-        source: "title",
-        slugify: createSlug,
-      },
     }),
     defineField({
       name: "authors",

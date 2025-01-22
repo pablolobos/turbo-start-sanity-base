@@ -1,13 +1,59 @@
 import type { SlugifierFn } from "sanity";
 import slugify from "slugify";
 
+import {
+  defineField,
+  type FieldDefinition,
+  type SlugValidationContext,
+} from "sanity";
 
+import type { PathnameParams } from "./types";
+import { PathnameFieldComponent } from "../components/slug-field-component";
+
+export function defineSlug(
+  schema: PathnameParams = { name: "slug" }
+): FieldDefinition<"slug"> {
+  const slugOptions = schema?.options;
+
+  return defineField({
+    ...schema,
+    name: schema.name ?? "slug",
+    title: schema?.title ?? "URL",
+    type: "slug",
+    components: {
+      ...schema.components,
+      field: schema.components?.field ?? PathnameFieldComponent,
+    },
+    options: {
+      ...(slugOptions ?? {}),
+      isUnique: slugOptions?.isUnique ?? isUnique,
+    },
+  });
+}
+
+async function isUnique(
+  slug: string,
+  context: SlugValidationContext
+): Promise<boolean> {
+  const { document, getClient } = context;
+  const client = getClient({ apiVersion: "2023-06-21" });
+  const id = document?._id.replace(/^drafts\./, "");
+  const params = {
+    draft: `drafts.${id}`,
+    published: id,
+    slug,
+  };
+  const query =
+    "*[!(_id in [$draft, $published]) && slug.current == $slug]";
+  const result = await client.fetch(query, params);
+  console.log("🚀 ~ isUnique:", result);
+  return result.length === 0;
+}
 
 export const getDocTypePrefix = (type: string) => {
   if (["page"].includes(type)) return "";
   return type;
 };
-
 
 const slugMapper = {
   homePage: "/",

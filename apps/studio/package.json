@@ -16,12 +16,16 @@
     "sanity"
   ],
   "dependencies": {
+    "@sanity/asset-utils": "^2.2.1",
     "@sanity/icons": "^3.5.7",
+    "@sanity/image-url": "^1.1.0",
     "@sanity/ui": "^2.11.2",
     "@sanity/vision": "^3.70.0",
     "lucide-react": "0.471.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-is": "^19.0.0",
+    "react-rx": "^4.1.16",
     "sanity": "^3.70.0",
     "sanity-plugin-icon-picker": "^3.3.0",
     "sanity-plugin-media": "^2.3.2",
@@ -37,6 +41,7 @@
     "@types/jsdom": "^21.1.7",
     "@types/node": "^20",
     "@types/react": "^18.0.25",
+    "@types/react-is": "^19.0.0",
     "eslint": "^9.9.0",
     "jsdom": "^26.0.0",
     "p-limit": "^6.2.0"
