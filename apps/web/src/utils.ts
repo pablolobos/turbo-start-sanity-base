@@ -52,5 +52,6 @@ export function convertToSlug(
 export function parseChildrenToSlug(
   children: PortableTextBlock["children"]
 ) {
+  if (!children) return "";
   return convertToSlug(children.map((child) => child.text).join(""));
 }

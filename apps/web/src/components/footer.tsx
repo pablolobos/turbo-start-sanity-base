@@ -55,8 +55,11 @@ function SocialLinks({ data }: SocialLinksProps) {
 
   return (
     <ul className="flex items-center space-x-6 text-muted-foreground">
-      {socialLinks.map(({ url, Icon, label }) => (
-        <li key={url} className="font-medium hover:text-primary">
+      {socialLinks.map(({ url, Icon, label }, index) => (
+        <li
+          key={`social-link-${url}-${index.toString()}`}
+          className="font-medium hover:text-primary"
+        >
           <Link
             href={url ?? "#"}
             target="_blank"
@@ -146,16 +149,18 @@ function Footer({ data }: FooterProps) {
               </div>
               {socialLinks && <SocialLinks data={socialLinks} />}
             </div>
-            {columns && columns?.length > 0 && (
+            {Array.isArray(columns) && columns?.length > 0 && (
               <div className="grid grid-cols-3 gap-6 lg:gap-20">
-                {columns.map((column) => (
-                  <div key={column._key}>
-                    <h3 className="mb-6 font-bold">{column.title}</h3>
-                    {column.links && column.links.length > 0 && (
+                {columns.map((column, index) => (
+                  <div key={`column-${column?._key}-${index}`}>
+                    <h3 className="mb-6 font-bold">
+                      {column?.title}
+                    </h3>
+                    {column?.links && column?.links?.length > 0 && (
                       <ul className="space-y-4 text-sm text-muted-foreground">
-                        {column.links.map((link) => (
+                        {column?.links?.map((link, index) => (
                           <li
-                            key={link._key}
+                            key={`${link?._key}-${index}-column-${column?._key}`}
                             className="font-medium hover:text-primary"
                           >
                             <Link

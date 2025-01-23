@@ -181,7 +181,6 @@ function MobileNavbar({
     <div className="block lg:hidden h-[75px]">
       <div className="flex items-center justify-between">
         <Logo src={logo} alt={siteTitle} priority />
-
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="outline" size="icon">
@@ -201,7 +200,7 @@ function MobileNavbar({
                 if (column.type === "link") {
                   return (
                     <Link
-                      key={column.name}
+                      key={`column-link-${column.name}-${column._key}`}
                       href={column.href ?? ""}
                       className={cn(
                         buttonVariants({ variant: "ghost" }),
@@ -256,10 +255,13 @@ export function Navbar({
               <NavigationMenu>
                 {columns?.map((column) =>
                   column.type === "column" ? (
-                    <NavbarColumn key={column._key} column={column} />
+                    <NavbarColumn
+                      key={`column-${column._key}`}
+                      column={column}
+                    />
                   ) : (
                     <NavbarColumnLink
-                      key={column._key}
+                      key={`column-link-${column.name}-${column._key}`}
                       column={column}
                     />
                   )
@@ -362,7 +364,7 @@ function SkeletonMobileNavbar() {
             <div className="mb-8 mt-8 flex flex-col gap-4">
               {[1, 2, 3].map((i) => (
                 <Accordion
-                  key={i}
+                  key={`accordion-skeleton-${i}`}
                   type="single"
                   collapsible
                   className="w-full"
@@ -376,7 +378,7 @@ function SkeletonMobileNavbar() {
               <div className="flex mt-2 flex-col gap-3">
                 {[1, 2].map((i) => (
                   <div
-                    key={i}
+                    key={`button-skeleton-${i}`}
                     className="h-10 bg-muted rounded animate-pulse"
                   />
                 ))}
@@ -402,7 +404,9 @@ export function NavbarSkeleton() {
             <div className="flex items-center">
               <NavigationMenu>
                 {[1, 2, 3].map((i) => (
-                  <SkeletonNavbarColumn key={i} />
+                  <SkeletonNavbarColumn
+                    key={`column-skeleton-${i}`}
+                  />
                 ))}
               </NavigationMenu>
             </div>
@@ -411,7 +415,7 @@ export function NavbarSkeleton() {
           <div className="flex gap-2">
             {[1, 2].map((i) => (
               <div
-                key={i}
+                key={`button-skeleton-${i}`}
                 className="h-10 w-24 bg-muted rounded animate-pulse"
               />
             ))}

@@ -14,7 +14,8 @@ const projectId = process.env.SANITY_STUDIO_PROJECT_ID ?? "";
 const dataset = process.env.SANITY_STUDIO_DATASET ?? "production";
 const title = process.env.SANITY_STUDIO_TITLE ?? "";
 const presentationOriginUrl =
-  process.env.SANITY_STUDIO_PRESENTATION_URL ?? "";
+  process.env.SANITY_STUDIO_PRESENTATION_URL ??
+  "http://localhost:3000";
 
 export default defineConfig({
   name: "default",

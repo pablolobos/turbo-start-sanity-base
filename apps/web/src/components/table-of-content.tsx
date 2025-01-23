@@ -23,7 +23,6 @@ function filterHeadings(
     if (block._type !== "block" || !block.style?.startsWith("h")) {
       return headings;
     }
-
     const text = block.children
       ?.map((child) => child.text)
       .join("")
@@ -73,7 +72,7 @@ export function TableOfContent<T>({
           <ul className="flex flex-col space-y-2">
             {headings.map((heading) => (
               <TableOfContentLink
-                key={heading.href}
+                key={`${heading.href}-${heading.text}-heading`}
                 heading={heading}
               />
             ))}

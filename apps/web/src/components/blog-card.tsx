@@ -126,7 +126,7 @@ function AuthorSection({ authors }: { authors: Blog["authors"] }) {
 
 export function FeaturedBlogCard({ blog }: BlogCardProps) {
   const { title, publishedAt, slug, authors, description, image } =
-    blog;
+    blog ?? {};
 
   return (
     <article className="flex flex-col lg:flex-row items-start gap-x-8">

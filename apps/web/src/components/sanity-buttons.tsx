@@ -53,7 +53,7 @@ export function SanityButtons({
     <div className={cn("flex flex-col sm:flex-row gap-4", className)}>
       {buttons.map((button) => (
         <SanityButton
-          key={button._key}
+          key={`button-${button._key}`}
           {...button}
           className={buttonClassName}
         />
