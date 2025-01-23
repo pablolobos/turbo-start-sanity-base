@@ -32,15 +32,15 @@ export function FaqAccordion({
           >
             {faqs?.map((faq) => (
               <AccordionItem
-                value={faq._id}
-                key={faq._id}
+                value={faq?._id}
+                key={faq?._id}
                 className="py-2"
               >
                 <AccordionTrigger className="py-2 text-[15px] leading-6 hover:no-underline">
-                  {faq.title}
+                  {faq?.title}
                 </AccordionTrigger>
                 <AccordionContent className="pb-2 text-muted-foreground">
-                  <RichText richText={faq.richText} />
+                  <RichText richText={faq?.richText ?? []} />
                 </AccordionContent>
               </AccordionItem>
             ))}

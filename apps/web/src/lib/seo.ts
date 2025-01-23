@@ -35,7 +35,7 @@ export function getMetaData(data: MetaDataInput): Metadata {
     title,
     description,
     _id,
-  } = data;
+  } = data ?? {};
 
   const baseUrl = getBaseUrl();
   const pageSlug =

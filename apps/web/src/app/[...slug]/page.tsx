@@ -58,7 +58,6 @@ export default async function SlugPage({
   }
 
   const { title, pageBuilder } = pageData ?? {};
-  console.log("🚀 ~ pageBuilder:", pageBuilder);
 
   return !Array.isArray(pageBuilder) || pageBuilder?.length === 0 ? (
     <div className="flex flex-col items-center justify-center min-h-[50vh] text-center p-4">

@@ -14,17 +14,17 @@ export function PageBuilder({ pageBuilder }: PageBuilderProps) {
   return (
     <main className="flex flex-col gap-16 my-16">
       {pageBuilder.map((block, index) => {
-        switch (block._type) {
+        switch (block?._type) {
           case "hero":
-            return <HeroBlock key={block._key} {...block} />;
+            return <HeroBlock key={block?._key} {...block} />;
           case "cta":
-            return <CTABlock key={block._key} {...block} />;
+            return <CTABlock key={block?._key} {...block} />;
           case "featureCardsIcon":
             return (
-              <FeatureCardsWithIcon key={block._key} {...block} />
+              <FeatureCardsWithIcon key={block?._key} {...block} />
             );
           case "faqAccordion":
-            return <FaqAccordion key={block._key} {...block} />;
+            return <FaqAccordion key={block?._key} {...block} />;
           default:
             return (
               <div
