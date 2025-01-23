@@ -11,16 +11,16 @@ import { structure } from "./structure";
 import { createPageTemplate } from "./utils/helper";
 
 const projectId = process.env.SANITY_STUDIO_PROJECT_ID ?? "";
-const dataset = process.env.SANITY_STUDIO_DATASET ?? "production";
-const title = process.env.SANITY_STUDIO_TITLE ?? "Turbo Studio";
+const dataset = process.env.SANITY_STUDIO_DATASET;
+const title = process.env.SANITY_STUDIO_TITLE;
 const presentationOriginUrl =
   process.env.SANITY_STUDIO_PRESENTATION_URL;
 
 export default defineConfig({
   name: "default",
-  title: title,
+  title: title ?? "Turbo Studio",
   projectId: projectId,
-  dataset: dataset,
+  dataset: dataset ?? "production",
   plugins: [
     presentationTool({
       components: {
