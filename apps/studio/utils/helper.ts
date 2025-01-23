@@ -69,12 +69,11 @@ export function splitArray<T>(array: T[], numChunks: number): T[][] {
 }
 
 export interface RetryOptions {
-	maxRetries?: number;
-	initialDelay?: number;
-	maxDelay?: number;
-	onRetry?: (error: Error, attempt: number) => void;
+  maxRetries?: number;
+  initialDelay?: number;
+  maxDelay?: number;
+  onRetry?: (error: Error, attempt: number) => void;
 }
-
 export async function retryPromise<T>(
 	promiseFn: () => Promise<T>,
 	options: RetryOptions = {},
@@ -86,35 +85,36 @@ export async function retryPromise<T>(
 		onRetry,
 	} = options;
 
-	let attempts = 0;
+	for (let attempts = 0; attempts < maxRetries; attempts++) {
+    try {
+      return await promiseFn();
+    } catch (error) {
+      const isLastAttempt = attempts === maxRetries - 1;
+      if (isLastAttempt) {
+        throw error instanceof Error
+          ? error
+          : new Error("Promise retry failed");
+      }
 
-	while (true) {
-		try {
-			return await promiseFn();
-		} catch (error) {
-			attempts++;
+      const normalizedError =
+        error instanceof Error ? error : new Error("Unknown error");
 
-			if (attempts >= maxRetries) {
-				throw error instanceof Error
-					? error
-					: new Error("Promise retry failed");
-			}
+      if (onRetry) {
+        onRetry(normalizedError, attempts + 1);
+      }
 
-			if (onRetry) {
-				onRetry(
-					error instanceof Error ? error : new Error("Unknown error"),
-					attempts,
-				);
-			}
+      const backoffDelay = Math.min(
+        initialDelay * 2 ** attempts,
+        maxDelay
+      );
 
-			const backoffDelay = Math.min(
-				initialDelay * 2 ** (attempts - 1),
-				maxDelay,
-			);
+      await new Promise((resolve) =>
+        setTimeout(resolve, backoffDelay)
+      );
+    }
+  }
 
-			await new Promise((resolve) => setTimeout(resolve, backoffDelay));
-		}
-	}
+  throw new Error("Promise retry failed");
 }
 
 /**
@@ -295,7 +295,6 @@ export function stringToPathname(
 }
 
 export function createPageTemplate() {
-  console.log("🚀 ~ createPageTemplate ~ createPageTemplate:");
   const pages = [
     {
       title: "Page",

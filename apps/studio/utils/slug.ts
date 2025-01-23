@@ -31,7 +31,7 @@ export function defineSlug(
   });
 }
 
-async function isUnique(
+export async function isUnique(
   slug: string,
   context: SlugValidationContext
 ): Promise<boolean> {
