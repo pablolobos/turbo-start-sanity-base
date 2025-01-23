@@ -90,12 +90,12 @@ const heroBlock = /* groq */ `
 `;
 
 const faqFragment = /* groq */ `
-  faqs[]->{
+  "faqs": array::compact(faqs[]->{
     title,
     _id,
     _type,
     ${richTextFragment}
-  }
+  })
 `;
 
 const faqAccordionBlock = /* groq */ `

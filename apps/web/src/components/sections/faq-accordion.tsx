@@ -30,10 +30,10 @@ export function FaqAccordion({
             className="w-full"
             defaultValue="3"
           >
-            {faqs?.map((faq) => (
+            {faqs?.map((faq, index) => (
               <AccordionItem
                 value={faq?._id}
-                key={faq?._id}
+                key={`AccordionItem-${faq?._id}-${index}`}
                 className="py-2"
               >
                 <AccordionTrigger className="py-2 text-[15px] leading-6 hover:no-underline">
