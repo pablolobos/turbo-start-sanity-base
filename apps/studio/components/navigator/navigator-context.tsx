@@ -82,7 +82,6 @@ export function NavigatorProvider({
 
   // Set up reducer for state management
   const [state, dispatch] = useReducer(reducer, initialState);
-  console.log("🚀 ~ state:", state);
 
   // Build and filter tree based on search term
   const rootTree = useMemo(() => {

@@ -11,8 +11,8 @@ export default defineCliConfig({
   },
   studioHost:
     host && host !== "main"
-      ? `${host}-roboto-next-sanity-template`
-      : "roboto-next-sanity-template",
+      ? `${host}-turbo-start-sanity`
+      : "turbo-start-sanity",
   autoUpdates: false,
 });
   

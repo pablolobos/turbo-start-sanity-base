@@ -14,7 +14,6 @@ export const resolve: PresentationPluginOptions["resolve"] = {
         slug: "slug.current",
       },
       resolve: (doc) => {
-        console.log("🚀 ~ doc:", doc);
         return {
           locations: [
             {
