@@ -57,7 +57,7 @@ export default async function SlugPage({
     return notFound();
   }
 
-  const { title, pageBuilder } = pageData ?? {};
+  const { title, pageBuilder, _id, _type } = pageData ?? {};
 
   return !Array.isArray(pageBuilder) || pageBuilder?.length === 0 ? (
     <div className="flex flex-col items-center justify-center min-h-[50vh] text-center p-4">
@@ -69,6 +69,6 @@ export default async function SlugPage({
       </p>
     </div>
   ) : (
-    <PageBuilder pageBuilder={pageData.pageBuilder} />
+    <PageBuilder pageBuilder={pageBuilder} id={_id} type={_type} />
   );
 }

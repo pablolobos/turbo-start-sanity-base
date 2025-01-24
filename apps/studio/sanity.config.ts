@@ -2,6 +2,7 @@ import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
 import { iconPicker } from "sanity-plugin-icon-picker";
 import { media } from "sanity-plugin-media";
+import { assist } from "@sanity/assist";
 import { presentationTool } from "sanity/presentation";
 import { structureTool } from "sanity/structure";
 import { createPagesNavigator } from "./components/navigator/page-navigator";
@@ -37,8 +38,9 @@ export default defineConfig({
         },
       },
     }),
+    assist(),
     structureTool({
-      structure: structure,
+      structure,
     }),
     visionTool(),
     iconPicker(),

@@ -20,9 +20,14 @@ export async function generateMetadata() {
 export default async function Page() {
   const { data: homePageData } = await fetchHomePageData();
 
+
   if (!homePageData) {
     return <div>No home page data</div>;
   }
 
-  return <PageBuilder pageBuilder={homePageData.pageBuilder} />;
+  const { _id, _type, pageBuilder } = homePageData ?? {};
+
+  return (
+    <PageBuilder pageBuilder={pageBuilder} id={_id} type={_type} />
+  );
 }

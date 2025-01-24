@@ -139,9 +139,9 @@ export const querySlugPagePaths = defineQuery(/* groq */ `
 export const queryBlogIndexPageData = defineQuery(/* groq */ `
   *[_type == "blogIndex"][0]{
     _id,
+    _type,
     title,
     description,
-    type,
     ${pageBuilderFragment},
     "slug": slug.current,
     "featuredBlog": featured[0]->{

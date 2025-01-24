@@ -23,8 +23,15 @@ export async function generateMetadata() {
 export default async function BlogIndexPage() {
   const { data } = await fetchBlogPosts();
   if (!data) return null;
-  const { featuredBlog, blogs, title, description, pageBuilder } =
-    data ?? {};
+  const {
+    featuredBlog,
+    blogs,
+    title,
+    description,
+    pageBuilder,
+    _id,
+    _type,
+  } = data ?? {};
 
   return (
     <main className="">
@@ -45,7 +52,13 @@ export default async function BlogIndexPage() {
           </div>
         </div>
       </div>
-      <PageBuilder pageBuilder={pageBuilder} />
+      {pageBuilder && (
+        <PageBuilder
+          pageBuilder={pageBuilder}
+          id={_id}
+          type={_type}
+        />
+      )}
     </main>
   );
 }
