@@ -15,7 +15,7 @@ interface ProcessedHeading {
 }
 
 function filterHeadings(
-  richText?: PortableTextBlock[] | null
+  richText?: PortableTextBlock[] | null,
 ): ProcessedHeading[] {
   if (!Array.isArray(richText)) return [];
 
@@ -34,17 +34,13 @@ function filterHeadings(
   }, []);
 }
 
-function TableOfContentLink({
-  heading,
-}: {
-  heading: ProcessedHeading;
-}) {
+function TableOfContentLink({ heading }: { heading: ProcessedHeading }) {
   return (
     <Link
       href={heading.href}
       className={cn(
         buttonVariants({ variant: "link" }),
-        "text-sm justify-start truncate"
+        "text-sm justify-start truncate",
       )}
     >
       {heading.text}
@@ -52,9 +48,7 @@ function TableOfContentLink({
   );
 }
 
-export function TableOfContent<T>({
-  richText,
-}: TableOfContentProps<T>) {
+export function TableOfContent<T>({ richText }: TableOfContentProps<T>) {
   const headings = filterHeadings(richText as PortableTextBlock[]);
   if (!headings.length) return null;
 

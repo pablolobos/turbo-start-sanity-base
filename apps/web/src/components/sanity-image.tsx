@@ -34,7 +34,7 @@ export function SanityImage({
   const url = urlFor({ ...asset, _id: asset?.asset?._ref })
     .size(
       Number(width ?? dimensions.width),
-      Number(height ?? dimensions.height)
+      Number(height ?? dimensions.height),
     )
     .dpr(2)
     .auto("format")

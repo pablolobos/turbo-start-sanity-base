@@ -1,13 +1,7 @@
 import { sanityFetch } from "@/lib/sanity/live";
 import { queryFooterData } from "@/lib/sanity/query";
 import type { QueryFooterDataResult } from "@/lib/sanity/sanity.types";
-import {
-  Facebook,
-  Instagram,
-  Linkedin,
-  Twitter,
-  Youtube,
-} from "lucide-react";
+import { Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
 import Link from "next/link";
 import { Logo } from "./logo";
 
@@ -153,9 +147,7 @@ function Footer({ data }: FooterProps) {
               <div className="grid grid-cols-3 gap-6 lg:gap-20">
                 {columns.map((column, index) => (
                   <div key={`column-${column?._key}-${index}`}>
-                    <h3 className="mb-6 font-bold">
-                      {column?.title}
-                    </h3>
+                    <h3 className="mb-6 font-bold">{column?.title}</h3>
                     {column?.links && column?.links?.length > 0 && (
                       <ul className="space-y-4 text-sm text-muted-foreground">
                         {column?.links?.map((link, index) => (
@@ -165,11 +157,7 @@ function Footer({ data }: FooterProps) {
                           >
                             <Link
                               href={link.href ?? "#"}
-                              target={
-                                link.openInNewTab
-                                  ? "_blank"
-                                  : undefined
-                              }
+                              target={link.openInNewTab ? "_blank" : undefined}
                               rel={
                                 link.openInNewTab
                                   ? "noopener noreferrer"

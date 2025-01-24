@@ -45,9 +45,7 @@ export default async function RootLayout({
                   revalidatePath("/", "layout");
                   return;
                 }
-                const id = payload?.document?._id?.startsWith(
-                  "drafts."
-                )
+                const id = payload?.document?._id?.startsWith("drafts.")
                   ? payload?.document?._id.slice(7)
                   : payload?.document?._id;
                 const slug = payload?.document?.slug?.current;

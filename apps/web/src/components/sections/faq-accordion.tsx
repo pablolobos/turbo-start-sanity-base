@@ -19,9 +19,7 @@ export function FaqAccordion({
     <section className="">
       <div className="container mx-auto px-4 md:px-6">
         <div className="space-y-4">
-          <span className="text-sm text-muted-foreground">
-            {eyebrow}
-          </span>
+          <span className="text-sm text-muted-foreground">{eyebrow}</span>
           <h2 className="text-xl font-bold">{title}</h2>
           <p>{subtitle}</p>
           <Accordion

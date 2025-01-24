@@ -3,10 +3,7 @@ import { SanityImage } from "@/components/sanity-image";
 import { TableOfContent } from "@/components/table-of-content";
 import { client } from "@/lib/sanity/client";
 import { sanityFetch } from "@/lib/sanity/live";
-import {
-  queryBlogPaths,
-  queryBlogSlugPageData,
-} from "@/lib/sanity/query";
+import { queryBlogPaths, queryBlogSlugPageData } from "@/lib/sanity/query";
 import { getMetaData } from "@/lib/seo";
 import { notFound } from "next/navigation";
 
@@ -58,12 +55,8 @@ export default async function BlogSlugPage({
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_300px]">
         <main>
           <header className="mb-8">
-            <h1 className="mt-2 text-4xl font-bold tracking-tight">
-              {title}
-            </h1>
-            <p className="mt-4 text-lg text-muted-foreground">
-              {description}
-            </p>
+            <h1 className="mt-2 text-4xl font-bold tracking-tight">{title}</h1>
+            <p className="mt-4 text-lg text-muted-foreground">{description}</p>
           </header>
           {image && (
             <div className="mb-12">
@@ -86,7 +79,6 @@ export default async function BlogSlugPage({
             <TableOfContent richText={richText} />
           </div>
         </aside>
-
       </div>
     </div>
   );

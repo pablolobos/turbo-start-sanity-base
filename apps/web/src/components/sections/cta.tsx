@@ -4,11 +4,7 @@ import { RichText } from "../richtext";
 
 export type CTABlockProps = PagebuilderType<"cta">;
 
-export function CTABlock({
-  buttons,
-  richText,
-  title,
-}: CTABlockProps) {
+export function CTABlock({ buttons, richText, title }: CTABlockProps) {
   return (
     <section className="">
       <div className="container mx-auto px-4 md:px-6">

@@ -6,6 +6,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "dev": "sanity dev",
+    "format": "prettier --write .",
     "start": "sanity start",
     "lint": "eslint . --fix",
     "build": "sanity build",

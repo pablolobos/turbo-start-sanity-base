@@ -277,7 +277,6 @@ export const queryNavbarData = defineQuery(/* groq */ `
   }
 `);
 
-
 export const querySitemapData = defineQuery(/* groq */ `{
   "slugPages": *[_type == "page" && defined(slug.current)]{
     "slug": slug.current,

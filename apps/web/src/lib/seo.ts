@@ -27,19 +27,11 @@ interface MetaDataInput {
 }
 
 export function getMetaData(data: MetaDataInput): Metadata {
-  const {
-    _type,
-    seoDescription,
-    seoTitle,
-    slug,
-    title,
-    description,
-    _id,
-  } = data ?? {};
+  const { _type, seoDescription, seoTitle, slug, title, description, _id } =
+    data ?? {};
 
   const baseUrl = getBaseUrl();
-  const pageSlug =
-    typeof slug === "string" ? slug : (slug?.current ?? "");
+  const pageSlug = typeof slug === "string" ? slug : (slug?.current ?? "");
   const pageUrl = `${baseUrl}${pageSlug}`;
 
   const meta = {

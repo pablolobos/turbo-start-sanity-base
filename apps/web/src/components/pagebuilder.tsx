@@ -6,10 +6,7 @@ import { FaqAccordion } from "./sections/faq-accordion";
 import { FeatureCardsWithIcon } from "./sections/feature-cards-with-icon";
 import { HeroBlock } from "./sections/hero";
 import type { PagebuilderType } from "@/types";
-import {
-  createDataAttribute,
-  type SanityDocument,
-} from "next-sanity";
+import { createDataAttribute, type SanityDocument } from "next-sanity";
 import { dataset, projectId, studioUrl } from "@/lib/sanity/api";
 import type { ComponentType } from "react";
 
@@ -43,16 +40,16 @@ export function PageBuilder({
   id,
   type,
 }: PageBuilderProps) {
-  const pageBuilder = useOptimistic<
-    PageBlock[],
-    SanityDocument<PageData>
-  >(initialPageBuilder, (currentPageBuilder, action) => {
-    if (action.id === id && action.document.pageBuilder) {
-      return action.document.pageBuilder;
-    }
+  const pageBuilder = useOptimistic<PageBlock[], SanityDocument<PageData>>(
+    initialPageBuilder,
+    (currentPageBuilder, action) => {
+      if (action.id === id && action.document.pageBuilder) {
+        return action.document.pageBuilder;
+      }
 
-    return currentPageBuilder;
-  });
+      return currentPageBuilder;
+    },
+  );
 
   return (
     <main
@@ -67,9 +64,9 @@ export function PageBuilder({
       }).toString()}
     >
       {pageBuilder.map((block) => {
-        const Component = BLOCK_COMPONENTS[
-          block._type
-        ] as ComponentType<PagebuilderType<BlockType>>;
+        const Component = BLOCK_COMPONENTS[block._type] as ComponentType<
+          PagebuilderType<BlockType>
+        >;
 
         if (!Component) {
           return (

@@ -1,10 +1,7 @@
 import { PageBuilder } from "@/components/pagebuilder";
 import { client } from "@/lib/sanity/client";
 import { sanityFetch } from "@/lib/sanity/live";
-import {
-  querySlugPageData,
-  querySlugPagePaths,
-} from "@/lib/sanity/query";
+import { querySlugPageData, querySlugPagePaths } from "@/lib/sanity/query";
 import { getMetaData } from "@/lib/seo";
 import { notFound } from "next/navigation";
 
@@ -61,9 +58,7 @@ export default async function SlugPage({
 
   return !Array.isArray(pageBuilder) || pageBuilder?.length === 0 ? (
     <div className="flex flex-col items-center justify-center min-h-[50vh] text-center p-4">
-      <h1 className="text-2xl font-semibold mb-4 capitalize">
-        {title}
-      </h1>
+      <h1 className="text-2xl font-semibold mb-4 capitalize">{title}</h1>
       <p className="text-muted-foreground mb-6">
         This page has no content blocks yet.
       </p>

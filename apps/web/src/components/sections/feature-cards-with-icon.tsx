@@ -35,9 +35,7 @@ export function FeatureCardsWithIcon({
         <div className="flex w-full flex-col items-center">
           <div className="flex flex-col items-center space-y-4 text-center sm:space-y-6 md:max-w-3xl md:text-center">
             <p className="text-sm text-muted-foreground">{eyebrow}</p>
-            <h2 className="text-3xl font-medium md:text-5xl">
-              {title}
-            </h2>
+            <h2 className="text-3xl font-medium md:text-5xl">{title}</h2>
             <RichText richText={richText} />
           </div>
         </div>
