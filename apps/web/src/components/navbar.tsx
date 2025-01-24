@@ -1,6 +1,3 @@
-import { sanityFetch } from "@/lib/sanity/live";
-import { queryNavbarData } from "@/lib/sanity/query";
-import type { QueryNavbarDataResult } from "@/lib/sanity/sanity.types";
 import {
   Accordion,
   AccordionContent,
@@ -25,6 +22,11 @@ import {
 import { cn } from "@workspace/ui/lib/utils";
 import { Menu } from "lucide-react";
 import Link from "next/link";
+
+import { sanityFetch } from "@/lib/sanity/live";
+import { queryNavbarData } from "@/lib/sanity/query";
+import type { QueryNavbarDataResult } from "@/lib/sanity/sanity.types";
+
 import { Logo } from "./logo";
 import { SanityButtons } from "./sanity-buttons";
 import { SanityIcon } from "./sanity-icon";

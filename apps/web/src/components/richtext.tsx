@@ -1,10 +1,12 @@
-import { parseChildrenToSlug } from "@/utils";
+import Link from "next/link";
 import {
   PortableText,
   type PortableTextBlock,
   type PortableTextReactComponents,
 } from "next-sanity";
-import Link from "next/link";
+
+import { parseChildrenToSlug } from "@/utils";
+
 import { SanityImage } from "./sanity-image";
 
 const components: Partial<PortableTextReactComponents> = {

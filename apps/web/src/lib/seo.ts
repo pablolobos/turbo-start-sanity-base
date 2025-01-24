@@ -1,6 +1,7 @@
+import type { Metadata } from "next";
+
 import { getBaseUrl } from "@/config";
 import type { Maybe } from "@/types";
-import type { Metadata } from "next";
 
 interface OgImageOptions {
   type?: string;

@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation";
+
 import { RichText } from "@/components/richtext";
 import { SanityImage } from "@/components/sanity-image";
 import { TableOfContent } from "@/components/table-of-content";
@@ -5,7 +7,6 @@ import { client } from "@/lib/sanity/client";
 import { sanityFetch } from "@/lib/sanity/live";
 import { queryBlogPaths, queryBlogSlugPageData } from "@/lib/sanity/query";
 import { getMetaData } from "@/lib/seo";
-import { notFound } from "next/navigation";
 
 async function fetchBlogSlugPageData(slug: string) {
   return await sanityFetch({

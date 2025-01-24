@@ -1,10 +1,12 @@
-import type { PagebuilderType } from "@/types";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@workspace/ui/components/accordion";
+
+import type { PagebuilderType } from "@/types";
+
 import { RichText } from "../richtext";
 
 type FaqAccordionProps = PagebuilderType<"faqAccordion">;

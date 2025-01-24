@@ -1,9 +1,11 @@
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable @next/next/no-img-element */
-import type { Maybe } from "@/types";
-import { getTitleCase } from "@/utils";
 import { ImageResponse } from "next/og";
 import type { ImageResponseOptions } from "next/server";
+
+import type { Maybe } from "@/types";
+import { getTitleCase } from "@/utils";
+
 import { getOgMetaData } from "./og-config";
 import {
   getBlogPageOGData,

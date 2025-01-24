@@ -1,4 +1,5 @@
 import type { PagebuilderType } from "@/types";
+
 import { RichText } from "../richtext";
 import { SanityIcon } from "../sanity-icon";
 

@@ -1,8 +1,10 @@
-import type { PagebuilderType } from "@/types";
 import { Badge } from "@workspace/ui/components/badge";
+
+import type { PagebuilderType } from "@/types";
+
+import { RichText } from "../richtext";
 import { SanityButtons } from "../sanity-buttons";
 import { SanityImage } from "../sanity-image";
-import { RichText } from "../richtext";
 
 type HeroBlockProps = PagebuilderType<"hero">;
 

@@ -1,9 +1,10 @@
+import { notFound } from "next/navigation";
+
 import { PageBuilder } from "@/components/pagebuilder";
 import { client } from "@/lib/sanity/client";
 import { sanityFetch } from "@/lib/sanity/live";
 import { querySlugPageData, querySlugPagePaths } from "@/lib/sanity/query";
 import { getMetaData } from "@/lib/seo";
-import { notFound } from "next/navigation";
 
 async function fetchSlugPageData(slug: string) {
   return await sanityFetch({

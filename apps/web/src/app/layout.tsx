@@ -1,12 +1,14 @@
-import { FooterServer, FooterSkeleton } from "@/components/footer";
-import { NavbarServer, NavbarSkeleton } from "@/components/navbar";
-import { SanityLive } from "@/lib/sanity/live";
 import "@workspace/ui/globals.css";
-import { VisualEditing } from "next-sanity";
+
 import { revalidatePath, revalidateTag } from "next/cache";
 import { Geist, Geist_Mono } from "next/font/google";
 import { draftMode } from "next/headers";
+import { VisualEditing } from "next-sanity";
 import { Suspense } from "react";
+
+import { FooterServer, FooterSkeleton } from "@/components/footer";
+import { NavbarServer, NavbarSkeleton } from "@/components/navbar";
+import { SanityLive } from "@/lib/sanity/live";
 
 const fontSans = Geist({
   subsets: ["latin"],

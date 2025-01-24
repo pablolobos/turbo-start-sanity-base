@@ -1,5 +1,7 @@
-import type { QueryBlogIndexPageDataResult } from "@/lib/sanity/sanity.types";
 import Link from "next/link";
+
+import type { QueryBlogIndexPageDataResult } from "@/lib/sanity/sanity.types";
+
 import { SanityImage } from "./sanity-image";
 
 type Blog = NonNullable<

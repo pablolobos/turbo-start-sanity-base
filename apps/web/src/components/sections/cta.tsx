@@ -1,6 +1,7 @@
 import type { PagebuilderType } from "@/types";
-import { SanityButtons } from "../sanity-buttons";
+
 import { RichText } from "../richtext";
+import { SanityButtons } from "../sanity-buttons";
 
 export type CTABlockProps = PagebuilderType<"cta">;
 

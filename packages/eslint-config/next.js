@@ -2,11 +2,14 @@ import js from "@eslint/js"
 import pluginNext from "@next/eslint-plugin-next"
 import eslintConfigPrettier from "eslint-config-prettier"
 import pluginReact from "eslint-plugin-react"
-import pluginReactHooks from "eslint-plugin-react-hooks"
-import globals from "globals"
-import tseslint from "typescript-eslint"
+import eslintPluginPrettier from "eslint-plugin-prettier";
+import eslintPluginSimpleImportSort from "eslint-plugin-simple-import-sort";
+import eslintPluginImport from "eslint-plugin-import";
+import pluginReactHooks from "eslint-plugin-react-hooks";
+import globals from "globals";
+import tseslint from "typescript-eslint";
 
-import { config as baseConfig } from "./base.js"
+import { config as baseConfig } from "./base.js";
 
 /**
  * A custom ESLint configuration for libraries that use Next.js.
@@ -30,7 +33,12 @@ export const nextJsConfig = [
   {
     plugins: {
       "@next/next": pluginNext,
+      prettier: eslintPluginPrettier,
+      "simple-import-sort": eslintPluginSimpleImportSort,
+      import: eslintPluginImport,
+      "@typescript-eslint": tseslint.plugin,
     },
+    ignores: ["node_modules", ".next"],
     rules: {
       ...pluginNext.configs.recommended.rules,
       ...pluginNext.configs["core-web-vitals"].rules,
@@ -43,9 +51,12 @@ export const nextJsConfig = [
     settings: { react: { version: "detect" } },
     rules: {
       ...pluginReactHooks.configs.recommended.rules,
-      // React scope no longer necessary with new JSX transform.
+      "prettier/prettier": "error",
+      "simple-import-sort/imports": "error",
+      "simple-import-sort/exports": "error",
       "react/react-in-jsx-scope": "off",
+      "@typescript-eslint/consistent-type-imports": "error",
       "react/prop-types": "off",
     },
   },
-]
+];

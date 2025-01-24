@@ -1,14 +1,16 @@
 "use client";
-import type { QueryHomePageDataResult } from "@/lib/sanity/sanity.types";
-import { CTABlock } from "./sections/cta";
 import { useOptimistic } from "@sanity/visual-editing/react";
+import { createDataAttribute, type SanityDocument } from "next-sanity";
+import type { ComponentType } from "react";
+
+import { dataset, projectId, studioUrl } from "@/lib/sanity/api";
+import type { QueryHomePageDataResult } from "@/lib/sanity/sanity.types";
+import type { PagebuilderType } from "@/types";
+
+import { CTABlock } from "./sections/cta";
 import { FaqAccordion } from "./sections/faq-accordion";
 import { FeatureCardsWithIcon } from "./sections/feature-cards-with-icon";
 import { HeroBlock } from "./sections/hero";
-import type { PagebuilderType } from "@/types";
-import { createDataAttribute, type SanityDocument } from "next-sanity";
-import { dataset, projectId, studioUrl } from "@/lib/sanity/api";
-import type { ComponentType } from "react";
 
 type PageBlock = NonNullable<
   NonNullable<QueryHomePageDataResult>["pageBuilder"]

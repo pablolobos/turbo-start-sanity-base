@@ -1,8 +1,10 @@
+import { Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
+import Link from "next/link";
+
 import { sanityFetch } from "@/lib/sanity/live";
 import { queryFooterData } from "@/lib/sanity/query";
 import type { QueryFooterDataResult } from "@/lib/sanity/sanity.types";
-import { Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
-import Link from "next/link";
+
 import { Logo } from "./logo";
 
 interface SocialLinksProps {
