@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "sanity dev",
     "start": "sanity start",
+    "lint": "eslint . --fix",
     "build": "sanity build",
     "deploy": "sanity deploy",
     "type": "sanity schema extract && sanity typegen generate --enforce-required-fields",
@@ -45,7 +46,11 @@
     "@types/react": "^18.0.25",
     "@types/react-is": "^19.0.0",
     "eslint": "^9.18.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-prettier": "^5.2.3",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
     "jsdom": "^26.0.0",
-    "p-limit": "^6.2.0"
+    "p-limit": "^6.2.0",
+    "prettier": "^3.2.5"
   }
 }

@@ -1,5 +1,6 @@
-import { defineField, defineType } from "sanity";
 import { MobileDeviceIcon } from "@sanity/icons";
+import { defineField, defineType } from "sanity";
+
 import { buttonsField, richTextField } from "../common";
 
 export const cta = defineType({

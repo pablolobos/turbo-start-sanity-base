@@ -1,4 +1,5 @@
 import { defineField } from "sanity";
+
 import { GROUP } from "../utils/constant";
 
 export const richTextField = defineField({

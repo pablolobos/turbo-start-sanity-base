@@ -1,9 +1,6 @@
+import { isImageSource, type SanityImageSource } from "@sanity/asset-utils";
+import { DocumentIcon } from "@sanity/icons";
 import imageUrlBuilder from "@sanity/image-url";
-import {
-  isImageSource,
-  type SanityImageSource,
-} from "@sanity/asset-utils";
-import { isValidElementType } from "react-is";
 import type React from "react";
 import {
   type ComponentType,
@@ -12,6 +9,8 @@ import {
   useCallback,
   useMemo,
 } from "react";
+import { isValidElementType } from "react-is";
+import { useObservable } from "react-rx";
 import {
   getPreviewStateObservable,
   getPreviewValueWithFallback,
@@ -24,9 +23,7 @@ import {
   useSchema,
 } from "sanity";
 
-import { useObservable } from "react-rx";
 import type { FolderTreeNode, TreeNode } from "../../utils/types";
-import { DocumentIcon } from "@sanity/icons";
 
 export const PreviewElement = (props: {
   item: Exclude<TreeNode, FolderTreeNode>; // Only accepts a PageTreeNode, FolderTreeNode is forbidden
@@ -60,13 +57,8 @@ const Preview = ({
   const documentPreviewStore = useDocumentPreviewStore();
   const observable = useMemo(
     () =>
-      getPreviewStateObservable(
-        documentPreviewStore,
-        schemaType,
-        item._id,
-        ""
-      ),
-    [item._id, documentPreviewStore, schemaType]
+      getPreviewStateObservable(documentPreviewStore, schemaType, item._id, ""),
+    [item._id, documentPreviewStore, schemaType],
   );
   const previewState = useObservable(observable);
 
@@ -82,8 +74,7 @@ const Preview = ({
 
   const showPreview =
     schemaType?.icon ||
-    (typeof schemaType?.preview?.prepare === "function" &&
-      !isLoading);
+    (typeof schemaType?.preview?.prepare === "function" && !isLoading);
 
   if (type === "media") {
     return showPreview ? (
@@ -120,17 +111,14 @@ const Preview = ({
 Preview.displayName = "Preview";
 
 export const PreviewMedia = (
-  props: SanityDefaultPreviewProps
+  props: SanityDefaultPreviewProps,
 ): React.ReactElement => {
   const { icon, media: mediaProp, imageUrl, title } = props;
 
   const client = useClient({
     apiVersion: "2024-03-12",
   });
-  const imageBuilder = useMemo(
-    () => imageUrlBuilder(client),
-    [client]
-  );
+  const imageBuilder = useMemo(() => imageUrlBuilder(client), [client]);
 
   // NOTE: This function exists because the previews provides options
   // for the rendering of the media (dimensions)
@@ -160,7 +148,7 @@ export const PreviewMedia = (
           src={
             imageBuilder
               .image(
-                mediaProp as SanityImageSource /*will only enter this code path if it's compatible*/
+                mediaProp as SanityImageSource /*will only enter this code path if it's compatible*/,
               )
               .width(dimensions?.width || 100)
               .height(dimensions.height || 100)
@@ -171,7 +159,7 @@ export const PreviewMedia = (
         />
       );
     },
-    [imageBuilder, mediaProp, title]
+    [imageBuilder, mediaProp, title],
   );
 
   const renderIcon = useCallback(() => {

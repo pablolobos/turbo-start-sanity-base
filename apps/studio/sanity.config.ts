@@ -1,14 +1,15 @@
+import { assist } from "@sanity/assist";
 import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
-import { iconPicker } from "sanity-plugin-icon-picker";
-import { media, mediaAssetSource } from "sanity-plugin-media";
-import { assist } from "@sanity/assist";
 import { presentationTool } from "sanity/presentation";
+import { structureTool } from "sanity/structure";
 import {
   unsplashAssetSource,
   unsplashImageAsset,
 } from "sanity-plugin-asset-source-unsplash";
-import { structureTool } from "sanity/structure";
+import { iconPicker } from "sanity-plugin-icon-picker";
+import { media, mediaAssetSource } from "sanity-plugin-media";
+
 import { createPagesNavigator } from "./components/navigator/page-navigator";
 import { presentationUrl } from "./plugins/presentation-url";
 import { schemaTypes } from "./schemaTypes";
@@ -18,8 +19,7 @@ import { createPageTemplate } from "./utils/helper";
 const projectId = process.env.SANITY_STUDIO_PROJECT_ID ?? "";
 const dataset = process.env.SANITY_STUDIO_DATASET;
 const title = process.env.SANITY_STUDIO_TITLE;
-const presentationOriginUrl =
-  process.env.SANITY_STUDIO_PRESENTATION_URL;
+const presentationOriginUrl = process.env.SANITY_STUDIO_PRESENTATION_URL;
 
 export default defineConfig({
   name: "default",
@@ -59,7 +59,7 @@ export default defineConfig({
         return previousAssetSources.filter(
           (assetSource) =>
             assetSource === mediaAssetSource ||
-            assetSource === unsplashAssetSource
+            assetSource === unsplashAssetSource,
         );
       },
     },

@@ -68,8 +68,7 @@ export const settings = defineType({
       name: "siteDescription",
       type: "text",
       title: "Site Description",
-      description:
-        "A brief description of your website for SEO purposes",
+      description: "A brief description of your website for SEO purposes",
       validation: (rule) => rule.required().min(50).max(160),
     }),
     defineField({

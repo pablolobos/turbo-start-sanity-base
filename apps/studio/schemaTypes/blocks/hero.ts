@@ -1,6 +1,7 @@
-import { defineField, defineType } from "sanity";
-import { buttonsField, richTextField } from "../common";
 import { StarIcon } from "@sanity/icons";
+import { defineField, defineType } from "sanity";
+
+import { buttonsField, richTextField } from "../common";
 
 export const hero = defineType({
   name: "hero",

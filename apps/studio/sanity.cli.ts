@@ -15,4 +15,3 @@ export default defineCliConfig({
       : "turbo-start-sanity",
   autoUpdates: true,
 });
-  

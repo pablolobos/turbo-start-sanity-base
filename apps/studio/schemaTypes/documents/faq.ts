@@ -1,7 +1,8 @@
 import { MessageCircleQuestion } from "lucide-react";
 import { defineField, defineType } from "sanity";
-import { richTextField } from "../common";
+
 import { parseRichTextToString } from "../../utils/helper";
+import { richTextField } from "../common";
 
 export const faq = defineType({
   name: "faq",

@@ -1,8 +1,8 @@
 import { faker } from "@faker-js/faker";
 import { PromisePool } from "@supercharge/promise-pool";
 import type { SanityClient } from "sanity";
-import { createFakeBlockContent, parseHTML } from "./parse-body";
 import slugify from "slugify";
+
 import {
   BADGES,
   generateButtons,
@@ -12,6 +12,7 @@ import {
   TITLE_EYEBROW_PAIRS,
 } from "./const-mock-data";
 import { retryPromise } from "./helper";
+import { createFakeBlockContent, parseHTML } from "./parse-body";
 
 // Core types
 interface ImageAsset {
@@ -19,12 +20,7 @@ interface ImageAsset {
   type: ImageType;
 }
 
-type ImageType =
-  | "heroBlock"
-  | "slugPage"
-  | "author"
-  | "blog"
-  | "logo";
+type ImageType = "heroBlock" | "slugPage" | "author" | "blog" | "logo";
 
 interface ImageOptions {
   width?: number;
@@ -47,7 +43,7 @@ const LOGO_URL =
 
 async function generateImage(
   client: SanityClient,
-  { width, height, url, type, category }: ImageOptions
+  { width, height, url, type, category }: ImageOptions,
 ): Promise<ImageAsset> {
   const imageUrl = url ?? getImageUrl({ width, height, category });
   const imageBuffer = await fetchImageBuffer(imageUrl);
@@ -79,10 +75,7 @@ async function fetchImageBuffer(url: string): Promise<ArrayBuffer> {
   return fetch(url).then((res) => res.arrayBuffer());
 }
 
-async function uploadImageToSanity(
-  client: SanityClient,
-  buffer: ArrayBuffer
-) {
+async function uploadImageToSanity(client: SanityClient, buffer: ArrayBuffer) {
   return client.assets.upload("image", Buffer.from(buffer), {
     title: faker.lorem.words(3),
   });
@@ -105,7 +98,7 @@ const IMAGE_ASSETS_CONFIG = [
 
 // Main export for image generation
 export async function generateAndUploadMockImages(
-  client: SanityClient
+  client: SanityClient,
 ): Promise<ImageAsset[]> {
   console.log("🎨 Starting image generation...");
 
@@ -113,14 +106,14 @@ export async function generateAndUploadMockImages(
     .for(IMAGE_ASSETS_CONFIG)
     .process(async (asset, index) => {
       console.log(
-        `📸 Generating image ${index + 1}/${IMAGE_ASSETS_CONFIG.length} (${asset.type})`
+        `📸 Generating image ${index + 1}/${IMAGE_ASSETS_CONFIG.length} (${asset.type})`,
       );
 
       return retryPromise(async () => generateImage(client, asset), {
         onRetry(error, attempt) {
           console.log(
             `🔄 Retrying image generation attempt ${attempt} for ${asset.type}:`,
-            error.message
+            error.message,
           );
         },
       });
@@ -130,18 +123,14 @@ export async function generateAndUploadMockImages(
   return results;
 }
 
-type ImageStore = Awaited<
-  ReturnType<typeof generateAndUploadMockImages>
->;
+type ImageStore = Awaited<ReturnType<typeof generateAndUploadMockImages>>;
 
 // Block generation utilities
 function generateHeroBlock(
   imagesStore: ImageStore,
-  { title }: { title?: string } = {}
+  { title }: { title?: string } = {},
 ) {
-  const heroImages = imagesStore.filter(
-    (image) => image.type === "heroBlock"
-  );
+  const heroImages = imagesStore.filter((image) => image.type === "heroBlock");
   const heroImage = faker.helpers.arrayElement(heroImages);
 
   return {
@@ -191,10 +180,8 @@ function generateFeatureIconsCard() {
 }
 
 function generateFeatureCardsIconBlock() {
-  const selectedPair = faker.helpers.arrayElement(
-    TITLE_EYEBROW_PAIRS
-  );
-  
+  const selectedPair = faker.helpers.arrayElement(TITLE_EYEBROW_PAIRS);
+
   return {
     _key: faker.string.uuid(),
     _type: "featureCardsIcon" as const,
@@ -215,19 +202,15 @@ interface FAQGenerationOptions {
   maxParagraphs?: number;
 }
 
-export function generateFAQs({
-  min = 5,
-  max = 7,
-}: FAQGenerationOptions = {}) {
+export function generateFAQs({ min = 5, max = 7 }: FAQGenerationOptions = {}) {
   const length = faker.number.int({ min, max });
 
   return Array.from({ length }).map(() => {
     const questionsPool = Array.from(
       { length: faker.number.int({ min: 20, max: 50 }) },
-      () => faker.helpers.arrayElement(QUESTIONS)
+      () => faker.helpers.arrayElement(QUESTIONS),
     );
-    const selectedQuestion =
-      faker.helpers.arrayElement(questionsPool);
+    const selectedQuestion = faker.helpers.arrayElement(questionsPool);
 
     return {
       _type: "faq",
@@ -256,7 +239,7 @@ function generateFAQBlock(faqs: FAQs) {
 }
 
 export async function checkIfDataExists(
-  client: SanityClient
+  client: SanityClient,
 ): Promise<boolean> {
   const { homePage } = await client.fetch(`{
     "homePage": defined(*[_type == 'homePage' && _id == 'homePage'][0]._id),
@@ -306,7 +289,7 @@ export function generateMockSlugPages({
 }: SlugPageGenerationOptions) {
   const length = faker.number.int({ min: 2, max: 5 });
   const slugPageImages = imagesStore.filter(
-    (image) => image.type === "slugPage"
+    (image) => image.type === "slugPage",
   );
 
   return Array.from({ length }).map(() => {
@@ -345,9 +328,7 @@ export function generateMockSlugPages({
 
 export function generateMockAuthors(imagesStore: ImageStore) {
   const length = faker.number.int({ min: 2, max: 5 });
-  const authorImages = imagesStore.filter(
-    (image) => image.type === "author"
-  );
+  const authorImages = imagesStore.filter((image) => image.type === "author");
 
   return Array.from({ length }).map(() => {
     const image = faker.helpers.arrayElement(authorImages);
@@ -380,9 +361,7 @@ export function generateMockBlogPages({
   authors,
 }: BlogPageGenerationOptions) {
   const length = faker.number.int({ min: 2, max: 5 });
-  const blogImages = imagesStore.filter(
-    (image) => image.type === "blog"
-  );
+  const blogImages = imagesStore.filter((image) => image.type === "blog");
 
   return Array.from({ length }).map(() => {
     const title = generatePageTitle();
@@ -400,9 +379,7 @@ export function generateMockBlogPages({
           _type: "reference",
         },
       },
-      publishedAt: new Date(faker.date.past())
-        .toISOString()
-        .split("T")[0],
+      publishedAt: new Date(faker.date.past()).toISOString().split("T")[0],
       description: faker.lorem.paragraph(),
       slug: {
         type: "slug",

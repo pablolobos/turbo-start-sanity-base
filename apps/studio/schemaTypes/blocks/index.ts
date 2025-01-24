@@ -1,11 +1,6 @@
 import { cta } from "./cta";
-import { hero } from "./hero";
-import { featureCardsIcon } from "./feature-cards-icon";
 import { faqAccordion } from "./faq-accordion";
+import { featureCardsIcon } from "./feature-cards-icon";
+import { hero } from "./hero";
 
-export const pageBuilderBlocks = [
-  hero,
-  cta,
-  featureCardsIcon,
-  faqAccordion,
-];
+export const pageBuilderBlocks = [hero, cta, featureCardsIcon, faqAccordion];

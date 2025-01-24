@@ -1,17 +1,16 @@
 import type { SlugifierFn } from "sanity";
-import slugify from "slugify";
-
 import {
   defineField,
   type FieldDefinition,
   type SlugValidationContext,
 } from "sanity";
+import slugify from "slugify";
 
-import type { PathnameParams } from "./types";
 import { PathnameFieldComponent } from "../components/slug-field-component";
+import type { PathnameParams } from "./types";
 
 export function defineSlug(
-  schema: PathnameParams = { name: "slug" }
+  schema: PathnameParams = { name: "slug" },
 ): FieldDefinition<"slug"> {
   const slugOptions = schema?.options;
 
@@ -33,7 +32,7 @@ export function defineSlug(
 
 export async function isUnique(
   slug: string,
-  context: SlugValidationContext
+  context: SlugValidationContext,
 ): Promise<boolean> {
   const { document, getClient } = context;
   const client = getClient({ apiVersion: "2023-06-21" });
@@ -43,8 +42,7 @@ export async function isUnique(
     published: id,
     slug,
   };
-  const query =
-    "*[!(_id in [$draft, $published]) && slug.current == $slug]";
+  const query = "*[!(_id in [$draft, $published]) && slug.current == $slug]";
   const result = await client.fetch(query, params);
   console.log("🚀 ~ isUnique:", result);
   return result.length === 0;

@@ -6,10 +6,9 @@ import type {
   SlugDefinition,
   SlugOptions,
 } from "sanity";
-
 import type {
-  PresentationPluginOptions,
   NavigatorOptions as PresentationNavigatorOptions,
+  PresentationPluginOptions,
 } from "sanity/presentation";
 
 export type NormalizedCreatablePage = {
@@ -18,26 +17,14 @@ export type NormalizedCreatablePage = {
 };
 
 export type PagesNavigatorOptions = {
-  //   i18n?: {
-  //     locales: Locale[];
-  //     defaultLocaleId?: string;
-  //   };
   creatablePages?: Array<NormalizedCreatablePage>;
 };
 
-export type PagesNavigatorPluginOptions =
-  PresentationPluginOptions & {
-    // i18n?: {
-    //   locales: Locale[];
-    //   defaultLocaleId?: string;
-    // };
-    navigator?: Pick<
-      PresentationNavigatorOptions,
-      "maxWidth" | "minWidth"
-    >;
-    creatablePages?: Array<NormalizedCreatablePage | string>;
-    title?: string;
-  };
+export type PagesNavigatorPluginOptions = PresentationPluginOptions & {
+  navigator?: Pick<PresentationNavigatorOptions, "maxWidth" | "minWidth">;
+  creatablePages?: Array<NormalizedCreatablePage | string>;
+  title?: string;
+};
 
 export type Page = {
   _rev: string;
@@ -47,8 +34,7 @@ export type Page = {
   _updatedAt: string;
   _createdAt: string;
   slug: string | null;
-  //   locale?: string;
-  children: {};
+  children: Record<string, unknown>;
 };
 
 export type PageTreeNode = Page & {
@@ -90,7 +76,7 @@ export type ListItemProps = {
   active?: string;
   setActive?: (value: string) => void;
   idx?: number;
-  virtualChild?: Record<string, any>;
+  virtualChild?: Record<string, unknown>;
 };
 
 export type SkeletonListItemsProps = {
@@ -98,18 +84,15 @@ export type SkeletonListItemsProps = {
 };
 
 export type LocaleProps = {
-  //   locales: Locale[];
   domRef?: React.RefObject<HTMLDivElement>;
 };
 
 export type ReducerAction = {
   type: string;
-  payload?: any;
+  payload?: unknown;
 };
 
-export interface DocumentWithLocale extends SanityDocument {
-  //   locale: Locale["id"];
-}
+export interface DocumentWithLocale extends SanityDocument {}
 
 export interface SectionOptions extends ObjectOptions {
   variants?: SectionVariant[];
@@ -120,8 +103,7 @@ export interface SectionOptions extends ObjectOptions {
  *
  * The `custom` property is strictly typed to include what the toolkit needs for scaffolding the website & studio.
  */
-export interface SectionSchema
-  extends Omit<ObjectDefinition, "options"> {
+export interface SectionSchema extends Omit<ObjectDefinition, "options"> {
   options: SectionOptions;
 }
 
@@ -143,7 +125,7 @@ export interface SectionVariant {
    *  initialValue: { centeredTitle: true, bg: "dark" }
    * }
    */
-  initialValue?: {};
+  initialValue?: Record<string, unknown>;
 }
 
 export type SectionType = ObjectSchemaType & {
@@ -154,12 +136,12 @@ export type SectionVariantType = {
   sectionName: string;
   title: string;
   assetUrl?: string;
-  initialValue?: any;
+  initialValue?: Record<string, unknown>;
 };
 
 export type SectionAddHandler = (params: {
   sectionName: string;
-  initialValue?: any;
+  initialValue?: Record<string, unknown>;
 }) => void;
 
 export type PathnameOptions = SlugOptions & {

@@ -11,11 +11,12 @@ import {
   Tooltip,
   type TooltipProps,
 } from "@sanity/ui";
-import type { PropsWithChildren, ReactNode } from "react";
-import { useNavigator } from "./navigator-context";
+import type { PropsWithChildren } from "react";
 import { useIntentLink } from "sanity/router";
-import type { HeaderProps } from "../../utils/types";
+
 import { getTemplateName, pathnameToTitle } from "../../utils/helper";
+import type { HeaderProps } from "../../utils/types";
+import { useNavigator } from "./navigator-context";
 
 type TooltipWrapperProps = PropsWithChildren & {
   tooltipText: string;
@@ -49,7 +50,7 @@ function TooltipWrapper({
 export function Header({ pages, domRef, children }: HeaderProps) {
   const { currentDir, setCurrentDir, items } = useNavigator();
   const types = Array.from(
-    new Set(items.map((item) => item._type))
+    new Set(items.map((item) => item._type)),
   ) as string[];
   const handleBack = () => {
     if (!currentDir) return;
@@ -65,13 +66,7 @@ export function Header({ pages, domRef, children }: HeaderProps) {
       <Flex align="center" gap={2} width="100%">
         <Button
           mode="bleed"
-          icon={
-            <ArrowLeftIcon
-              viewBox="2.5 6 20 20"
-              height={18}
-              width={24}
-            />
-          }
+          icon={<ArrowLeftIcon viewBox="2.5 6 20 20" height={18} width={24} />}
           padding={2}
           disabled={!currentDir}
           onClick={handleBack}
@@ -99,9 +94,7 @@ export function Header({ pages, domRef, children }: HeaderProps) {
       {pages && pages.length > 0 && (
         <MenuButton
           id="create-new-page"
-          button={
-            <Button fontSize={0} mode="bleed" icon={<AddIcon />} />
-          }
+          button={<Button fontSize={0} mode="bleed" icon={<AddIcon />} />}
           popover={{ portal: true }}
           menu={
             <Menu>
@@ -110,6 +103,7 @@ export function Header({ pages, domRef, children }: HeaderProps) {
                 .map(({ type, title }) => (
                   <MenuItem
                     key={type}
+                    // eslint-disable-next-line react-hooks/rules-of-hooks
                     {...useIntentLink({
                       intent: "create",
                       params: [
@@ -146,12 +140,7 @@ export function Header({ pages, domRef, children }: HeaderProps) {
       paddingBottom={1}
       flex={1}
     >
-      <Flex
-        paddingX={1}
-        paddingBottom={3}
-        flex={1}
-        justify="space-between"
-      >
+      <Flex paddingX={1} paddingBottom={3} flex={1} justify="space-between">
         {renderNavigationButtons()}
         {renderActionButtons()}
       </Flex>
@@ -161,7 +150,6 @@ export function Header({ pages, domRef, children }: HeaderProps) {
     </Card>
   );
 }
-
 
 function resolveTitle(currentDir: string): string {
   if (!currentDir) {

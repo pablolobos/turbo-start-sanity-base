@@ -1,12 +1,7 @@
 import { SearchIcon } from "@sanity/icons";
-import {
-  Box,
-  Card,
-  Flex,
-  TextInput,
-  useGlobalKeyDown,
-} from "@sanity/ui";
+import { Box, Card, Flex, TextInput, useGlobalKeyDown } from "@sanity/ui";
 import { useCallback, useRef } from "react";
+
 import { useNavigator } from "./navigator-context";
 
 interface SearchBoxProps {
@@ -17,26 +12,23 @@ export function SearchBox({ domRef }: SearchBoxProps): JSX.Element {
   const { searchTerm, handleSearch } = useNavigator();
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleGlobalKeyDown = useCallback(
-    (event: KeyboardEvent): void => {
-      const isSearchHotkey =
-        event.key.toLowerCase() === "f" &&
-        (event.ctrlKey || event.metaKey) &&
-        event.shiftKey;
+  const handleGlobalKeyDown = useCallback((event: KeyboardEvent): void => {
+    const isSearchHotkey =
+      event.key.toLowerCase() === "f" &&
+      (event.ctrlKey || event.metaKey) &&
+      event.shiftKey;
 
-      if (isSearchHotkey) {
-        event.preventDefault();
-        inputRef.current?.focus();
-      }
-    },
-    []
-  );
+    if (isSearchHotkey) {
+      event.preventDefault();
+      inputRef.current?.focus();
+    }
+  }, []);
 
   const handleInputChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>): void => {
       handleSearch(event.currentTarget.value);
     },
-    [handleSearch]
+    [handleSearch],
   );
 
   useGlobalKeyDown(handleGlobalKeyDown);

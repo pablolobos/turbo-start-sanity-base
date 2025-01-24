@@ -38,9 +38,8 @@ const initialContextValue: NavigatorContextType = {
 };
 
 // Create context for navigator state management
-const NavigatorContext = createContext<NavigatorContextType>(
-  initialContextValue
-);
+const NavigatorContext =
+  createContext<NavigatorContextType>(initialContextValue);
 
 // Action types for the reducer
 enum ActionType {
@@ -52,9 +51,9 @@ enum ActionType {
 function reducer(state: State, action: ReducerAction): State {
   switch (action.type) {
     case ActionType.SET_CURRENT_DIR:
-      return { ...state, currentDir: action.payload };
+      return { ...state, currentDir: action.payload as string };
     case ActionType.SET_SEARCH_TERM:
-      return { ...state, searchTerm: action.payload };
+      return { ...state, searchTerm: action.payload as string };
     default:
       return state;
   }
@@ -67,16 +66,11 @@ interface NavigatorProviderProps {
 }
 
 // Main provider component that manages navigation state
-export function NavigatorProvider({
-  data,
-  children,
-}: NavigatorProviderProps) {
+export function NavigatorProvider({ data, children }: NavigatorProviderProps) {
   // Initialize state with URL params
   const initialState: State = {
     currentDir:
-      new URLSearchParams(window.location.search).get(
-        CURRENT_DIR_PARAM
-      ) ?? "",
+      new URLSearchParams(window.location.search).get(CURRENT_DIR_PARAM) ?? "",
     searchTerm: "",
   };
 
@@ -112,7 +106,7 @@ export function NavigatorProvider({
   // Get current tree based on selected directory
   const targetTree = useMemo(
     () => findTreeByPath(rootTree, state.currentDir),
-    [rootTree, state.currentDir]
+    [rootTree, state.currentDir],
   );
 
   const currentTree = targetTree || rootTree;
@@ -121,9 +115,9 @@ export function NavigatorProvider({
   const items = useMemo(
     () =>
       Object.values(currentTree).sort((a, b) =>
-        a.slug && b.slug ? a.slug.localeCompare(b.slug) : 0
+        a.slug && b.slug ? a.slug.localeCompare(b.slug) : 0,
       ),
-    [currentTree]
+    [currentTree],
   );
 
   // Reset directory if current path becomes invalid
@@ -142,7 +136,7 @@ export function NavigatorProvider({
       setCurrentDir,
       handleSearch,
     }),
-    [items, rootTree, state, setCurrentDir, handleSearch]
+    [items, rootTree, state, setCurrentDir, handleSearch],
   );
 
   return (
@@ -162,10 +156,7 @@ interface SearchTreeParams {
 }
 
 // Function to filter tree based on search term
-function searchTree({
-  tree: root,
-  searchTerm,
-}: SearchTreeParams): Tree {
+function searchTree({ tree: root, searchTerm }: SearchTreeParams): Tree {
   const query = searchTerm.toLowerCase().trim();
   if (!query) return root;
 
@@ -179,7 +170,7 @@ function searchTree({
       ].some(
         (text) =>
           text.startsWith(query) ||
-          text.split(/[\s/]/).some((word) => word.startsWith(query))
+          text.split(/[\s/]/).some((word) => word.startsWith(query)),
       );
 
       if (matchesSearch) {
@@ -188,7 +179,7 @@ function searchTree({
 
       // Recursively search through child items
       if (item.children) {
-        searchInTree(item.children);
+        searchInTree(item.children as Tree);
       }
     }
   };

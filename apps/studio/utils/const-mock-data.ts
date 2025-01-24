@@ -1,7 +1,6 @@
 import { faker } from "@faker-js/faker";
+
 import { capitalize, splitArray } from "./helper";
-
-
 
 export const TITLE_EYEBROW_PAIRS = [
   {
@@ -40,24 +39,20 @@ export const TITLE_EYEBROW_PAIRS = [
 
 export const QUESTIONS = [
   {
-    value: faker.helpers.fake(
-      "What is {{company.name}}'s return policy?"
-    ),
+    value: faker.helpers.fake("What is {{company.name}}'s return policy?"),
     answer: `
           <p>Our <strong>return policy</strong> allows returns within <em>30 days</em> of purchase with original receipt. Items must be <strong>unused</strong> and in <strong>original packaging</strong>. Refunds are processed within <em>5-7 business days</em>.</p>
         `,
   },
   {
-    value: faker.helpers.fake(
-      "How do I track my {{commerce.product}} order?"
-    ),
+    value: faker.helpers.fake("How do I track my {{commerce.product}} order?"),
     answer: `
           <p>You can <strong>track your order</strong> by logging into your account and viewing the order status. We also send <em>tracking information</em> via email once your order ships.</p>
         `,
   },
   {
     value: faker.helpers.fake(
-      "What payment methods do you accept for {{commerce.product}}?"
+      "What payment methods do you accept for {{commerce.product}}?",
     ),
     answer: `
           <p>We accept all <strong>major credit cards</strong> (<em>Visa</em>, <em>Mastercard</em>, <em>American Express</em>), <strong>PayPal</strong>, and <strong>Apple Pay</strong>. Payment information is securely encrypted.</p>
@@ -65,7 +60,7 @@ export const QUESTIONS = [
   },
   {
     value: faker.helpers.fake(
-      "How long does shipping take to {{location.city}}?"
+      "How long does shipping take to {{location.city}}?",
     ),
     answer: `
           <p><strong>Standard shipping</strong> typically takes <em>3-5 business days</em>. <strong>Express shipping</strong> options are available for <em>1-2 day delivery</em> in most areas.</p>
@@ -73,7 +68,7 @@ export const QUESTIONS = [
   },
   {
     value: faker.helpers.fake(
-      "Do you offer international shipping to {{location.country}}?"
+      "Do you offer international shipping to {{location.country}}?",
     ),
     answer: `
           <p>Yes, we offer <strong>international shipping</strong> to most countries. Delivery times vary by location, typically <em>7-14 business days</em>. Additional <strong>customs fees</strong> may apply.</p>
@@ -81,23 +76,21 @@ export const QUESTIONS = [
   },
   {
     value: faker.helpers.fake(
-      "What are your shipping rates to {{location.state}}?"
+      "What are your shipping rates to {{location.state}}?",
     ),
     answer: `
           <p><strong>Shipping rates</strong> are calculated based on weight and destination. <strong>Standard shipping</strong> starts at <em>$5.99</em>. <strong>Free shipping</strong> is available for orders over <em>$50</em>.</p>
         `,
   },
   {
-    value: faker.helpers.fake(
-      "Why should I choose {{company.buzzPhrase}}?"
-    ),
+    value: faker.helpers.fake("Why should I choose {{company.buzzPhrase}}?"),
     answer: `
           <p>We offer <strong>industry-leading quality</strong>, <strong>exceptional customer service</strong>, and <strong>competitive pricing</strong>. Our products are backed by a <em>satisfaction guarantee</em>.</p>
         `,
   },
   {
     value: faker.helpers.fake(
-      "What makes your {{commerce.productName}} different from competitors?"
+      "What makes your {{commerce.productName}} different from competitors?",
     ),
     answer: `
           <p>Our products feature <strong>premium materials</strong>, <strong>innovative design</strong>, and <strong>rigorous quality testing</strong>. We also provide <em>comprehensive post-purchase support</em>.</p>
@@ -105,23 +98,21 @@ export const QUESTIONS = [
   },
   {
     value: faker.helpers.fake(
-      "Do you have any {{commerce.productAdjective}} {{commerce.product}} in stock?"
+      "Do you have any {{commerce.productAdjective}} {{commerce.product}} in stock?",
     ),
     answer: `
           <p>Our <strong>inventory</strong> is updated in <em>real-time</em> on our website. You can check <strong>current availability</strong> and set up notifications for <strong>out-of-stock</strong> items.</p>
         `,
   },
   {
-    value: faker.helpers.fake(
-      "Can I get a refund on my {{commerce.product}}?"
-    ),
+    value: faker.helpers.fake("Can I get a refund on my {{commerce.product}}?"),
     answer: `
           <p>Yes, <strong>refunds</strong> are available within our <em>30-day return window</em>. Contact our <strong>customer service team</strong> to initiate the refund process.</p>
         `,
   },
   {
     value: faker.helpers.fake(
-      "What is your {{company.name}}'s warranty policy?"
+      "What is your {{company.name}}'s warranty policy?",
     ),
     answer: `
           <p>Our products come with a <strong>comprehensive warranty</strong> that covers <em>manufacturing defects</em> for up to <strong>one year</strong> from the purchase date. Extended warranty options are also available.</p>
@@ -129,23 +120,21 @@ export const QUESTIONS = [
   },
   {
     value: faker.helpers.fake(
-      "How can I contact {{company.name}}'s customer support?"
+      "How can I contact {{company.name}}'s customer support?",
     ),
     answer: `
           <p>Our <strong>customer support team</strong> is available through multiple channels: <em>live chat</em>, <em>email</em>, and <em>phone</em>. Support hours are <strong>24/7</strong> for your convenience.</p>
         `,
   },
   {
-    value: faker.helpers.fake(
-      "What is {{company.name}}'s price match policy?"
-    ),
+    value: faker.helpers.fake("What is {{company.name}}'s price match policy?"),
     answer: `
           <p>We offer <strong>price matching</strong> on identical items from authorized retailers. Simply provide proof of the lower price within <em>14 days</em> of your purchase for a <strong>price adjustment</strong>.</p>
         `,
   },
   {
     value: faker.helpers.fake(
-      "Do you offer bulk discounts for {{commerce.product}}?"
+      "Do you offer bulk discounts for {{commerce.product}}?",
     ),
     answer: `
           <p>Yes, we provide <strong>volume discounts</strong> for bulk orders. Discounts start at <em>10% off</em> for orders over $500 and increase based on quantity. Contact our <strong>sales team</strong> for custom quotes.</p>
@@ -153,7 +142,7 @@ export const QUESTIONS = [
   },
   {
     value: faker.helpers.fake(
-      "What is your {{company.name}}'s privacy policy?"
+      "What is your {{company.name}}'s privacy policy?",
     ),
     answer: `
           <p>We take your privacy seriously. Your <strong>personal information</strong> is securely encrypted and never shared with third parties. View our detailed <em>privacy policy</em> for complete information.</p>
@@ -161,7 +150,7 @@ export const QUESTIONS = [
   },
   {
     value: faker.helpers.fake(
-      "How do I set up my {{commerce.product}} account?"
+      "How do I set up my {{commerce.product}} account?",
     ),
     answer: `
           <p>Setting up your account is <strong>quick and simple</strong>. Visit our website, click <em>'Create Account'</em>, and follow the <strong>step-by-step instructions</strong>. Verification is usually completed within minutes.</p>
@@ -169,7 +158,7 @@ export const QUESTIONS = [
   },
   {
     value: faker.helpers.fake(
-      "What loyalty programs does {{company.name}} offer?"
+      "What loyalty programs does {{company.name}} offer?",
     ),
     answer: `
           <p>Our <strong>rewards program</strong> offers <em>points on every purchase</em>, <strong>exclusive member discounts</strong>, and <strong>early access</strong> to new products and sales. Membership is completely free.</p>
@@ -177,7 +166,7 @@ export const QUESTIONS = [
   },
   {
     value: faker.helpers.fake(
-      "How do I report a defective {{commerce.product}}?"
+      "How do I report a defective {{commerce.product}}?",
     ),
     answer: `
           <p>For defective products, please <strong>document the issue</strong> with photos and contact our <em>quality assurance team</em>. We'll provide <strong>immediate assistance</strong> and arrange replacement if needed.</p>
@@ -185,7 +174,7 @@ export const QUESTIONS = [
   },
   {
     value: faker.helpers.fake(
-      "What certifications does {{company.name}} have?"
+      "What certifications does {{company.name}} have?",
     ),
     answer: `
           <p>We maintain <strong>ISO 9001 certification</strong> and are <em>industry-certified</em> in all operating regions. Our facilities undergo <strong>regular audits</strong> to ensure compliance with international standards.</p>
@@ -193,7 +182,7 @@ export const QUESTIONS = [
   },
   {
     value: faker.helpers.fake(
-      "Do you offer custom {{commerce.product}} solutions?"
+      "Do you offer custom {{commerce.product}} solutions?",
     ),
     answer: `
           <p>Yes, our <strong>customization team</strong> works directly with clients to develop <em>tailored solutions</em>. We offer <strong>flexible customization options</strong> to meet specific requirements and preferences.</p>
@@ -227,12 +216,8 @@ export const BUTTON_TEXT = [
 export function generatePageTitle() {
   const length = faker.number.int({ min: 40, max: 80 });
   const names = Array.from({ length }, () => {
-    const adjective = capitalize(
-      faker.company.catchPhraseAdjective()
-    );
-    const descriptor = capitalize(
-      faker.company.catchPhraseDescriptor()
-    );
+    const adjective = capitalize(faker.company.catchPhraseAdjective());
+    const descriptor = capitalize(faker.company.catchPhraseDescriptor());
     const noun = capitalize(faker.company.catchPhraseNoun());
     return `${adjective} ${descriptor} ${noun}`;
   });
@@ -278,7 +263,6 @@ export function generateButtons() {
     },
   ];
 }
-
 
 export const MOCK_ICONS = [
   {
@@ -421,7 +405,6 @@ export const MOCK_ICONS = [
   },
 ];
 
-
 type Link = {
   id?: string;
   name: string;
@@ -542,11 +525,7 @@ export function generateFooterColumns({ links }: { links: Link[] }) {
 type NavbarColumns = ReturnType<typeof generateNavbarColumns>;
 type FooterColumns = ReturnType<typeof generateFooterColumns>;
 
-export const getMockNavbarData = ({
-  columns,
-}: {
-  columns: NavbarColumns;
-}) => {
+export const getMockNavbarData = ({ columns }: { columns: NavbarColumns }) => {
   return {
     _id: "navbar",
     _type: "navbar",
