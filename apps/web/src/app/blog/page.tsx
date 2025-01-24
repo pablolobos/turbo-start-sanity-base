@@ -52,13 +52,12 @@ export default async function BlogIndexPage() {
           </div>
         </div>
       </div>
-      {pageBuilder && (
-        <PageBuilder
-          pageBuilder={pageBuilder}
-          id={_id}
-          type={_type}
-        />
-      )}
+
+      <PageBuilder
+        pageBuilder={pageBuilder ?? []}
+        id={_id}
+        type={_type}
+      />
     </main>
   );
 }

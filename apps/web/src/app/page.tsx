@@ -28,6 +28,10 @@ export default async function Page() {
   const { _id, _type, pageBuilder } = homePageData ?? {};
 
   return (
-    <PageBuilder pageBuilder={pageBuilder} id={_id} type={_type} />
+    <PageBuilder
+      pageBuilder={pageBuilder ?? []}
+      id={_id}
+      type={_type}
+    />
   );
 }
