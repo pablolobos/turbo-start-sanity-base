@@ -1,9 +1,13 @@
 import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
 import { iconPicker } from "sanity-plugin-icon-picker";
-import { media } from "sanity-plugin-media";
+import { media, mediaAssetSource } from "sanity-plugin-media";
 import { assist } from "@sanity/assist";
 import { presentationTool } from "sanity/presentation";
+import {
+  unsplashAssetSource,
+  unsplashImageAsset,
+} from "sanity-plugin-asset-source-unsplash";
 import { structureTool } from "sanity/structure";
 import { createPagesNavigator } from "./components/navigator/page-navigator";
 import { presentationUrl } from "./plugins/presentation-url";
@@ -46,8 +50,20 @@ export default defineConfig({
     iconPicker(),
     media(),
     presentationUrl(),
+    unsplashImageAsset(),
   ],
 
+  form: {
+    image: {
+      assetSources: (previousAssetSources) => {
+        return previousAssetSources.filter(
+          (assetSource) =>
+            assetSource === mediaAssetSource ||
+            assetSource === unsplashAssetSource
+        );
+      },
+    },
+  },
   document: {
     newDocumentOptions: (prev, { creationContext }) => {
       const { type } = creationContext;

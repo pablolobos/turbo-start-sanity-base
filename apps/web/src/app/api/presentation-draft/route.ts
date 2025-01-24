@@ -1,40 +1,8 @@
-import { validatePreviewUrl } from "@sanity/preview-url-secret";
-import { draftMode } from "next/headers";
-import { type NextRequest, NextResponse } from "next/server";
+import { defineEnableDraftMode } from "next-sanity/draft-mode";
 
 import { client } from "@/lib/sanity/client";
+import { token } from "@/lib/sanity/token";
 
-const clientWithToken = client.withConfig({
-  token: process.env.SANITY_API_READ_TOKEN,
+export const { GET } = defineEnableDraftMode({
+  client: client.withConfig({ token }),
 });
-
-export async function GET(request: NextRequest) {
-  if (!process.env.SANITY_API_READ_TOKEN) {
-    return new Response(
-      "Missing environment variable SANITY_API_READ_TOKEN",
-      {
-        status: 500,
-      }
-    );
-  }
-
-  const { isValid } = await validatePreviewUrl(
-    clientWithToken,
-    request.url
-  );
-
-  const params = new URLSearchParams(request.nextUrl.searchParams);
-  const preview = params.get("sanity-preview-pathname");
-
-  if (!isValid) {
-    return new Response("Invalid secret", { status: 401 });
-  }
-
-  (await draftMode()).enable();
-  if (preview) {
-    return NextResponse.redirect(new URL(preview, request.url));
-  }
-  return NextResponse.redirect(new URL("/", request.url));
-}
-
-
