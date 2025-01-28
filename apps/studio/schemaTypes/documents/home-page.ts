@@ -1,3 +1,4 @@
+import { HomeIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
 
 import { GROUP, GROUPS } from "../../utils/constant";
@@ -48,4 +49,16 @@ export const homePage = defineType({
     ),
     ...ogFields,
   ],
+  preview: {
+    select: {
+      title: "title",
+      description: "description",
+      slug: "slug.current",
+    },
+    prepare: ({ title, description, slug }) => ({
+      title: title || "Untitled Home Page",
+      media: HomeIcon,
+      subtitle: slug || "Home Page",
+    }),
+  },
 });

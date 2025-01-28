@@ -89,4 +89,13 @@ export const settings = defineType({
     }),
     socialLinks,
   ],
+  preview: {
+    select: {
+      title: "label",
+    },
+    prepare: ({ title }) => ({
+      title: title || "Untitled Settings",
+      media: CogIcon,
+    }),
+  },
 });

@@ -1,4 +1,4 @@
-import { MobileDeviceIcon } from "@sanity/icons";
+import { PhoneIcon } from "lucide-react";
 import { defineField, defineType } from "sanity";
 
 import { buttonsField, richTextField } from "../common";
@@ -6,7 +6,7 @@ import { buttonsField, richTextField } from "../common";
 export const cta = defineType({
   name: "cta",
   type: "object",
-  icon: MobileDeviceIcon,
+  icon: PhoneIcon,
   fields: [
     defineField({
       name: "title",

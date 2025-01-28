@@ -1,10 +1,12 @@
 import { draftMode } from "next/headers";
-import { type NextRequest, NextResponse } from "next/server";
+import { redirect } from "next/navigation";
+import type { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
   const params = new URLSearchParams(request.nextUrl.searchParams);
-  const redirectUrl = params.get("redirectUrl") || "/";
+  const redirectUrl = params.get("slug") || "/";
 
   (await draftMode()).disable();
-  return NextResponse.redirect(new URL(redirectUrl, request.url));
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  redirect(redirectUrl);
 }

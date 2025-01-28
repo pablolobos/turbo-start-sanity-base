@@ -8,6 +8,7 @@ import { Suspense } from "react";
 
 import { FooterServer, FooterSkeleton } from "@/components/footer";
 import { NavbarServer, NavbarSkeleton } from "@/components/navbar";
+import { PreviewBar } from "@/components/preview-bar";
 import { SanityLive } from "@/lib/sanity/live";
 
 const fontSans = Geist({
@@ -57,6 +58,7 @@ export default async function RootLayout({
                 }
               }}
             />
+            <PreviewBar />
           </>
         ) : (
           children
@@ -64,9 +66,7 @@ export default async function RootLayout({
         <Suspense fallback={<FooterSkeleton />}>
           <FooterServer />
         </Suspense>
-        <Suspense>
-          <SanityLive />
-        </Suspense>
+        <SanityLive />
       </body>
     </html>
   );
