@@ -1,6 +1,8 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
 
 import { GROUP, GROUPS } from "../../utils/constant";
+import { ogFields } from "../../utils/og-fields";
+import { seoFields } from "../../utils/seo-fields";
 import { createSlug, isUnique } from "../../utils/slug";
 import { pageBuilderField } from "../common";
 
@@ -51,6 +53,10 @@ export const blogIndex = defineType({
       group: GROUP.MAIN_CONTENT,
     }),
     pageBuilderField,
+    ...seoFields.filter(
+      (field) => !["seoNoIndex", "seoHideFromLists"].includes(field.name),
+    ),
+    ...ogFields,
   ],
   preview: {
     select: {

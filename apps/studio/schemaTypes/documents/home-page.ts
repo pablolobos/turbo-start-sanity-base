@@ -32,8 +32,6 @@ export const homePage = defineType({
           .warning("We advise writing a description above 100 characters"),
         rule.max(320).warning("Any more and it will get truncated"),
       ],
-      ...seoFields,
-      ...ogFields,
     }),
     defineField({
       name: "slug",
@@ -45,5 +43,9 @@ export const homePage = defineType({
       },
     }),
     pageBuilderField,
+    ...seoFields.filter(
+      (field) => !["seoNoIndex", "seoHideFromLists"].includes(field.name),
+    ),
+    ...ogFields,
   ],
 });
