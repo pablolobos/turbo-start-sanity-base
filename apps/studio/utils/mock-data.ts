@@ -307,6 +307,8 @@ export function generateMockSlugPages({
       _type: "page" as const,
       title,
       description: faker.lorem.paragraph(),
+      seoNoIndex: false,
+      seoHideFromLists: false,
       image: {
         _type: "image",
         asset: {
@@ -379,6 +381,8 @@ export function generateMockBlogPages({
           _type: "reference",
         },
       },
+      seoNoIndex: false,
+      seoHideFromLists: false,
       publishedAt: new Date(faker.date.past()).toISOString().split("T")[0],
       description: faker.lorem.paragraph(),
       slug: {

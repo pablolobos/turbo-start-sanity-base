@@ -1,6 +1,8 @@
 import { defineField, defineType } from "sanity";
 
 import { GROUP, GROUPS } from "../../utils/constant";
+import { ogFields } from "../../utils/og-fields";
+import { seoFields } from "../../utils/seo-fields";
 import { createSlug } from "../../utils/slug";
 import { pageBuilderField } from "../common";
 
@@ -30,6 +32,8 @@ export const homePage = defineType({
           .warning("We advise writing a description above 100 characters"),
         rule.max(320).warning("Any more and it will get truncated"),
       ],
+      ...seoFields,
+      ...ogFields,
     }),
     defineField({
       name: "slug",

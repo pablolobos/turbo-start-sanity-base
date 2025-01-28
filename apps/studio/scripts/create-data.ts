@@ -1,5 +1,3 @@
-// ./scripts/createData.ts
-
 import fs from "node:fs/promises";
 
 import { faker } from "@faker-js/faker";
