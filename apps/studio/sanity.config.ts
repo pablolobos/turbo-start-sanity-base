@@ -10,6 +10,7 @@ import {
 import { iconPicker } from "sanity-plugin-icon-picker";
 import { media, mediaAssetSource } from "sanity-plugin-media";
 
+import { Logo } from "./components/logo";
 import { createPagesNavigator } from "./components/navigator/page-navigator";
 import { presentationUrl } from "./plugins/presentation-url";
 import { schemaTypes } from "./schemaTypes";
@@ -25,6 +26,7 @@ export default defineConfig({
   name: "default",
   title: title ?? "Turbo Studio",
   projectId: projectId,
+  icon: Logo,
   dataset: dataset ?? "production",
   plugins: [
     presentationTool({
