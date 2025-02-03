@@ -14,8 +14,8 @@ type SubscribeNewsletterProps = PagebuilderType<"subscribeNewsletter">;
 export default function SubscribeNewsletterForm() {
   const { pending } = useFormStatus();
   return (
-    <Button type="submit" disabled={pending}>
-      <span className="flex items-center gap-2">
+    <Button type="submit" disabled={pending} className="w-full sm:w-auto">
+      <span className="flex items-center justify-center gap-2">
         {pending ? (
           <>
             <LoaderCircle
@@ -48,17 +48,19 @@ export function SubscribeNewsletter({
   helperText,
 }: SubscribeNewsletterProps) {
   return (
-    <section className="">
-      <div className="container mx-auto px-4 bg-gray-50 py-16">
+    <section className="px-4 py-8 sm:py-12 md:py-16">
+      <div className="container mx-auto bg-gray-50 px-4 py-8 sm:py-12 md:py-16">
         <div className="mx-auto max-w-[600px] text-center">
-          <h2 className="mb-4 text-2xl font-semibold text-gray-900">{title}</h2>
+          <h2 className="mb-4 text-xl font-semibold text-gray-900 sm:text-2xl md:text-3xl">
+            {title}
+          </h2>
           {subTitle && (
-            <div className="mb-8 text-gray-600">
+            <div className="mb-6 text-sm text-gray-600 sm:mb-8 sm:text-base">
               <RichText richText={subTitle} />
             </div>
           )}
           <Form
-            className="flex items-center justify-center gap-2"
+            className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-2"
             action={async (formData) => {
               // TODO: Implement newsletter subscription flow
               // 1. Validate email format and domain
@@ -83,12 +85,12 @@ export function SubscribeNewsletter({
               name="email"
               required
               placeholder="Enter your email address"
-              className="max-w-[300px] bg-white"
+              className="w-full bg-white sm:max-w-[300px]"
             />
             <SubscribeNewsletterForm />
           </Form>
           {helperText && (
-            <div className="mt-4 text-xs text-gray-500">
+            <div className="mt-3 text-xs text-gray-500 sm:mt-4">
               <RichText richText={helperText} />
             </div>
           )}

@@ -21,7 +21,7 @@ export function Logo({
   src,
   alt = "logo",
   image,
-  width = 80,
+  width = 170,
   height = 40,
   priority = true,
 }: LogoProps) {
@@ -32,7 +32,7 @@ export function Logo({
           asset={image}
           alt={alt ?? "logo"}
           width={width}
-          className="w-[80px] h-[40px]"
+          className="w-[170px] h-[40px]"
           height={height}
           priority={priority}
           loading="eager"
@@ -44,7 +44,7 @@ export function Logo({
           src={src ?? LOGO_URL}
           alt={alt ?? "logo"}
           width={width}
-          className="w-[80px] h-[40px]"
+          className="w-[170px] h-[40px]"
           height={height}
           loading="eager"
           priority={priority}

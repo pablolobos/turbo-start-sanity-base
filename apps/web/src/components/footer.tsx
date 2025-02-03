@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
+import { Facebook, Instagram } from "lucide-react";
 import Link from "next/link";
 
 import { sanityFetch } from "@/lib/sanity/live";
@@ -6,6 +6,7 @@ import { queryFooterData } from "@/lib/sanity/query";
 import type { QueryFooterDataResult } from "@/lib/sanity/sanity.types";
 
 import { Logo } from "./logo";
+import { LinkedinIcon, XIcon, YoutubeIcon } from "./social-icons";
 
 interface SocialLinksProps {
   data: NonNullable<QueryFooterDataResult>["socialLinks"];
@@ -40,11 +41,11 @@ function SocialLinks({ data }: SocialLinksProps) {
       label: "Follow us on Instagram",
     },
     { url: facebook, Icon: Facebook, label: "Follow us on Facebook" },
-    { url: twitter, Icon: Twitter, label: "Follow us on Twitter" },
-    { url: linkedin, Icon: Linkedin, label: "Follow us on LinkedIn" },
+    { url: twitter, Icon: XIcon, label: "Follow us on Twitter" },
+    { url: linkedin, Icon: LinkedinIcon, label: "Follow us on LinkedIn" },
     {
       url: youtube,
-      Icon: Youtube,
+      Icon: YoutubeIcon,
       label: "Subscribe to our YouTube channel",
     },
   ].filter((link) => link.url);
