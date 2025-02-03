@@ -1,9 +1,8 @@
 "use client";
 import { Button } from "@workspace/ui/components/button";
-import { Input } from "@workspace/ui/components/input";
 import { InteractiveGridPattern } from "@workspace/ui/components/interactive-grid-pattern";
 import { cn } from "@workspace/ui/lib/utils";
-import { LoaderCircle, Mail } from "lucide-react";
+import { ChevronRight, LoaderCircle, Mail } from "lucide-react";
 import Form from "next/form";
 import { useFormStatus } from "react-dom";
 
@@ -16,28 +15,27 @@ type SubscribeNewsletterProps = PagebuilderType<"subscribeNewsletter">;
 export default function SubscribeNewsletterButton() {
   const { pending } = useFormStatus();
   return (
-    <Button type="submit" disabled={pending} className="w-full sm:w-auto">
+    <Button
+      size="icon"
+      type="submit"
+      disabled={pending}
+      className="size-8 bg-zinc-200 hover:bg-zinc-300"
+    >
       <span className="flex items-center justify-center gap-2">
         {pending ? (
-          <>
-            <LoaderCircle
-              className="-ms-1 me-2 animate-spin"
-              size={16}
-              strokeWidth={2}
-              aria-hidden="true"
-            />
-            <p>Subscribing...</p>
-          </>
+          <LoaderCircle
+            className="animate-spin text-black"
+            size={16}
+            strokeWidth={2}
+            aria-hidden="true"
+          />
         ) : (
-          <>
-            <Mail
-              className="-ms-1 me-2"
-              size={16}
-              strokeWidth={2}
-              aria-hidden="true"
-            />
-            <p>Subscribe</p>
-          </>
+          <ChevronRight
+            className="text-black"
+            size={16}
+            strokeWidth={2}
+            aria-hidden="true"
+          />
         )}
       </span>
     </Button>
@@ -51,15 +49,16 @@ export function SubscribeNewsletter({
 }: SubscribeNewsletterProps) {
   return (
     <section className="px-4 py-8 sm:py-12 md:py-16">
-      <div className="relative container mx-auto px-4 py-8 sm:py-12 md:py-16 bg-gray-50 rounded-xl overflow-hidden">
-        <div className="relative z-10 mx-auto max-w-[600px] text-center">
-          <h2 className="mb-4 text-xl font-semibold text-gray-900 sm:text-2xl md:text-3xl">
+      <div className="relative container mx-auto px-4 py-8 sm:py-16 md:py-28 bg-gray-50 rounded-3xl overflow-hidden">
+        <div className="relative z-10 mx-auto text-center">
+          <h2 className="mb-4 text-xl font-semibold text-gray-900 sm:text-2xl md:text-5xl">
             {title}
           </h2>
           {subTitle && (
-            <div className="mb-6 text-sm text-gray-600 sm:mb-8 sm:text-base">
-              <RichText richText={subTitle} />
-            </div>
+            <RichText
+              richText={subTitle}
+              className="mb-6 text-sm text-gray-600 sm:mb-8 sm:text-base"
+            />
           )}
           <Form
             className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-2"
@@ -82,24 +81,27 @@ export function SubscribeNewsletter({
               };
             }}
           >
-            <Input
-              type="email"
-              name="email"
-              required
-              placeholder="Enter your email address"
-              className="w-full bg-white sm:max-w-[300px]"
-            />
-            <SubscribeNewsletterButton />
+            <div className="flex bg-white items-center border rounded-xl p-2 drop-shadow-lg md:w-96 justify-between pl-4">
+              <input
+                type="email"
+                name="email"
+                required
+                placeholder="Enter your email address"
+                className="rounded-e-none border-e-0 focus-visible:ring-0 outline-none bg-transparent w-full"
+              />
+              <SubscribeNewsletterButton />
+            </div>
           </Form>
           {helperText && (
-            <div className="mt-3 text-xs text-gray-500 sm:mt-4">
-              <RichText richText={helperText} />
-            </div>
+            <RichText
+              richText={helperText}
+              className="mt-3 text-sm text-gray-800 opacity-80 sm:mt-4"
+            />
           )}
         </div>
         <InteractiveGridPattern
           className={cn(
-            "absolute inset-0 -z-0 size-full opacity-50",
+            "absolute scale-125 inset-0 -z-0 w-full opacity-50",
             "[mask-image:radial-gradient(1000px_circle_at_center,transparent,white)]",
           )}
         />

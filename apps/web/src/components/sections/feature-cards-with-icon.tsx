@@ -1,3 +1,5 @@
+import { Badge } from "@workspace/ui/components/badge";
+
 import type { PagebuilderType } from "@/types";
 
 import { RichText } from "../richtext";
@@ -12,13 +14,17 @@ type FeatureCardProps = {
 function FeatureCard({ card }: FeatureCardProps) {
   const { icon, title, richText } = card ?? {};
   return (
-    <div className="flex flex-col justify-between rounded-lg bg-accent p-6 md:min-h-[300px] md:p-8">
-      <span className="mb-6 flex w-fit p-2 items-center justify-center rounded-full bg-background">
+    <div className="flex flex-col justify-between rounded-3xl bg-accent p-8 md:min-h-[300px] md:p-12">
+      <span className="mb-9 flex w-fit p-3 items-center justify-center rounded-full bg-background drop-shadow-xl">
         <SanityIcon icon={icon} />
       </span>
-      <div>
-        <h3 className="text-lg font-medium md:text-2xl">{title}</h3>
-        <RichText richText={richText} />
+
+      <div className="">
+        <h3 className="text-lg font-medium md:text-2xl mb-2">{title}</h3>
+        <RichText
+          richText={richText}
+          className="font-normal text-sm md:text-[16px] text-black/90"
+        />
       </div>
     </div>
   );
@@ -31,16 +37,18 @@ export function FeatureCardsWithIcon({
   cards,
 }: FeatureCardsWithIconProps) {
   return (
-    <section className="">
+    <section className="my-6 md:my-16">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex w-full flex-col items-center">
-          <div className="flex flex-col items-center space-y-4 text-center sm:space-y-6 md:max-w-3xl md:text-center">
-            <p className="text-sm text-muted-foreground">{eyebrow}</p>
-            <h2 className="text-3xl font-medium md:text-5xl">{title}</h2>
-            <RichText richText={richText} />
+          <div className="flex flex-col items-center space-y-4 text-center sm:space-y-6 md:text-center">
+            <Badge variant="secondary">{eyebrow}</Badge>
+            <h2 className="text-3xl font-semibold md:text-5xl capitalize">
+              {title}
+            </h2>
+            <RichText richText={richText} className="text-base md:text-lg text-balance max-w-3xl" />
           </div>
         </div>
-        <div className="mx-auto mt-20 grid max-w-5xl gap-6 md:grid-cols-2">
+        <div className="mx-auto mt-20 grid gap-8 md:grid-cols-3">
           {cards?.map((card, index) => (
             <FeatureCard
               key={`FeatureCard-${card?._key}-${index}`}
