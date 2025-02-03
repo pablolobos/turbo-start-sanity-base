@@ -1,6 +1,8 @@
 "use client";
 import { Button } from "@workspace/ui/components/button";
 import { Input } from "@workspace/ui/components/input";
+import { InteractiveGridPattern } from "@workspace/ui/components/interactive-grid-pattern";
+import { cn } from "@workspace/ui/lib/utils";
 import { LoaderCircle, Mail } from "lucide-react";
 import Form from "next/form";
 import { useFormStatus } from "react-dom";
@@ -11,7 +13,7 @@ import { RichText } from "../richtext";
 
 type SubscribeNewsletterProps = PagebuilderType<"subscribeNewsletter">;
 
-export default function SubscribeNewsletterForm() {
+export default function SubscribeNewsletterButton() {
   const { pending } = useFormStatus();
   return (
     <Button type="submit" disabled={pending} className="w-full sm:w-auto">
@@ -49,8 +51,8 @@ export function SubscribeNewsletter({
 }: SubscribeNewsletterProps) {
   return (
     <section className="px-4 py-8 sm:py-12 md:py-16">
-      <div className="container mx-auto bg-gray-50 px-4 py-8 sm:py-12 md:py-16">
-        <div className="mx-auto max-w-[600px] text-center">
+      <div className="relative container mx-auto px-4 py-8 sm:py-12 md:py-16 bg-gray-50 rounded-xl overflow-hidden">
+        <div className="relative z-10 mx-auto max-w-[600px] text-center">
           <h2 className="mb-4 text-xl font-semibold text-gray-900 sm:text-2xl md:text-3xl">
             {title}
           </h2>
@@ -87,7 +89,7 @@ export function SubscribeNewsletter({
               placeholder="Enter your email address"
               className="w-full bg-white sm:max-w-[300px]"
             />
-            <SubscribeNewsletterForm />
+            <SubscribeNewsletterButton />
           </Form>
           {helperText && (
             <div className="mt-3 text-xs text-gray-500 sm:mt-4">
@@ -95,6 +97,12 @@ export function SubscribeNewsletter({
             </div>
           )}
         </div>
+        <InteractiveGridPattern
+          className={cn(
+            "absolute inset-0 -z-0 size-full opacity-50",
+            "[mask-image:radial-gradient(1000px_circle_at_center,transparent,white)]",
+          )}
+        />
       </div>
     </section>
   );
