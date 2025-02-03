@@ -28,7 +28,7 @@ export function HeroBlock({
 
               <RichText
                 richText={richText}
-                className="text-base md:text-lg font-normal text-balance"
+                className="text-base md:text-lg font-normal"
               />
             </div>
 

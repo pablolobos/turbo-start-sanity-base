@@ -72,10 +72,10 @@ function NavbarColumnLink({
   return (
     <Link
       className={cn(
-        "text-muted-foreground",
         buttonVariants({
           variant: "ghost",
         }),
+        "text-muted-foreground",
       )}
       aria-label={`Link to ${column.name ?? column.href}`}
       href={column.href ?? ""}
