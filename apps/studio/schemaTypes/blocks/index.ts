@@ -2,5 +2,12 @@ import { cta } from "./cta";
 import { faqAccordion } from "./faq-accordion";
 import { featureCardsIcon } from "./feature-cards-icon";
 import { hero } from "./hero";
+import { subscribeNewsletter } from "./subscribe-newsletter";
 
-export const pageBuilderBlocks = [hero, cta, featureCardsIcon, faqAccordion];
+export const pageBuilderBlocks = [
+  hero,
+  cta,
+  featureCardsIcon,
+  faqAccordion,
+  subscribeNewsletter,
+];

@@ -68,6 +68,47 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type SubscribeNewsletter = {
+  _type: "subscribeNewsletter";
+  title?: string;
+  subTitle?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6" | "inline";
+    listItem?: "number" | "bullet";
+    markDefs?: Array<{
+      customLink?: CustomUrl;
+      _type: "customLink";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  helperText?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6" | "inline";
+    listItem?: "number" | "bullet";
+    markDefs?: Array<{
+      customLink?: CustomUrl;
+      _type: "customLink";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+};
+
 export type FaqAccordion = {
   _type: "faqAccordion";
   eyebrow?: string;
@@ -241,6 +282,9 @@ export type PageBuilder = Array<
   | ({
       _key: string;
     } & FaqAccordion)
+  | ({
+      _key: string;
+    } & SubscribeNewsletter)
 >;
 
 export type Button = {
@@ -387,6 +431,21 @@ export type BlogIndex = {
     [internalGroqTypeReferenceTo]?: "blog";
   }>;
   pageBuilder?: PageBuilder;
+  seoTitle?: string;
+  seoDescription?: string;
+  seoImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  ogTitle?: string;
+  ogDescription?: string;
 };
 
 export type HomePage = {
@@ -399,6 +458,21 @@ export type HomePage = {
   description?: string;
   slug?: Slug;
   pageBuilder?: PageBuilder;
+  seoTitle?: string;
+  seoDescription?: string;
+  seoImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  ogTitle?: string;
+  ogDescription?: string;
 };
 
 export type Author = {
@@ -768,6 +842,7 @@ export type AllSanitySchemaTypes =
   | SanityImageDimensions
   | SanityFileAsset
   | Geopoint
+  | SubscribeNewsletter
   | FaqAccordion
   | FeatureCardsIcon
   | Cta
@@ -1045,6 +1120,47 @@ export type QueryHomePageDataResult = {
           href: string | null;
         }> | null;
       }
+    | {
+        _key: string;
+        _type: "subscribeNewsletter";
+        title?: string;
+        subTitle?: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "h2" | "h3" | "h4" | "h5" | "h6" | "inline" | "normal";
+          listItem?: "bullet" | "number";
+          markDefs?: Array<{
+            customLink?: CustomUrl;
+            _type: "customLink";
+            _key: string;
+          }>;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }>;
+        helperText?: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "h2" | "h3" | "h4" | "h5" | "h6" | "inline" | "normal";
+          listItem?: "bullet" | "number";
+          markDefs?: Array<{
+            customLink?: CustomUrl;
+            _type: "customLink";
+            _key: string;
+          }>;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }>;
+      }
   > | null;
 } | null;
 // Variable: querySlugPageData
@@ -1299,6 +1415,47 @@ export type QuerySlugPageDataResult = {
           openInNewTab: boolean | null;
           href: string | null;
         }> | null;
+      }
+    | {
+        _key: string;
+        _type: "subscribeNewsletter";
+        title?: string;
+        subTitle?: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "h2" | "h3" | "h4" | "h5" | "h6" | "inline" | "normal";
+          listItem?: "bullet" | "number";
+          markDefs?: Array<{
+            customLink?: CustomUrl;
+            _type: "customLink";
+            _key: string;
+          }>;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }>;
+        helperText?: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "h2" | "h3" | "h4" | "h5" | "h6" | "inline" | "normal";
+          listItem?: "bullet" | "number";
+          markDefs?: Array<{
+            customLink?: CustomUrl;
+            _type: "customLink";
+            _key: string;
+          }>;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }>;
       }
   > | null;
   seoTitle?: string;
@@ -1560,6 +1717,47 @@ export type QueryBlogIndexPageDataResult = {
           href: string | null;
         }> | null;
       }
+    | {
+        _key: string;
+        _type: "subscribeNewsletter";
+        title?: string;
+        subTitle?: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "h2" | "h3" | "h4" | "h5" | "h6" | "inline" | "normal";
+          listItem?: "bullet" | "number";
+          markDefs?: Array<{
+            customLink?: CustomUrl;
+            _type: "customLink";
+            _key: string;
+          }>;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }>;
+        helperText?: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "h2" | "h3" | "h4" | "h5" | "h6" | "inline" | "normal";
+          listItem?: "bullet" | "number";
+          markDefs?: Array<{
+            customLink?: CustomUrl;
+            _type: "customLink";
+            _key: string;
+          }>;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }>;
+      }
   > | null;
   slug: string | null;
   featuredBlog: {
@@ -1766,7 +1964,7 @@ export type QueryHomePageOGDataResult = {
   description: string | null;
   image: null;
   dominantColor: null;
-  seoImage: null;
+  seoImage: string | null;
   logo: string | null;
   date: string;
 } | null;
@@ -1817,7 +2015,7 @@ export type QueryGenericPageOGDataResult =
       description: string | null;
       image: null;
       dominantColor: null;
-      seoImage: null;
+      seoImage: string | null;
       logo: string | null;
       date: string;
     }
@@ -1828,7 +2026,7 @@ export type QueryGenericPageOGDataResult =
       description: string | null;
       image: null;
       dominantColor: null;
-      seoImage: null;
+      seoImage: string | null;
       logo: string | null;
       date: string;
     }

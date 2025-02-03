@@ -11,6 +11,7 @@ import { CTABlock } from "./sections/cta";
 import { FaqAccordion } from "./sections/faq-accordion";
 import { FeatureCardsWithIcon } from "./sections/feature-cards-with-icon";
 import { HeroBlock } from "./sections/hero";
+import { SubscribeNewsletter } from "./sections/subscribe-newsletter";
 
 type PageBlock = NonNullable<
   NonNullable<QueryHomePageDataResult>["pageBuilder"]
@@ -33,6 +34,7 @@ const BLOCK_COMPONENTS = {
   faqAccordion: FaqAccordion,
   featureCardsIcon: FeatureCardsWithIcon,
   hero: HeroBlock,
+  subscribeNewsletter: SubscribeNewsletter,
 } as const;
 
 type BlockType = keyof typeof BLOCK_COMPONENTS;

@@ -105,13 +105,28 @@ const faqAccordionBlock = /* groq */ `
   }
 `;
 
+const subscribeNewsletterBlock = /* groq */ `
+  _type == "subscribeNewsletter" => {
+    ...,
+    "subTitle": subTitle[]{
+      ...,
+      ${markDefsFragment}
+    },
+    "helperText": helperText[]{
+      ...,
+      ${markDefsFragment}
+    }
+  }
+`;
+
 const pageBuilderFragment = /* groq */ `
   pageBuilder[]{
     ...,
     _type,
     ${ctaBlock},
     ${heroBlock},
-    ${faqAccordionBlock}
+    ${faqAccordionBlock},
+    ${subscribeNewsletterBlock}
   }
 `;
 
