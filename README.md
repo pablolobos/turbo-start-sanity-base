@@ -73,7 +73,7 @@ When you initialize the template using the Sanity CLI, sample content is automat
 
 #### 3. Extending the Sanity schema
 
-The schema for the `Blog` document type is defined in the `studio/schemaTypes/documents/blog.ts` file. You can [add more document types](https://www.sanity.io/docs/schema-types) to the schema to suit your needs.
+The schemas for all document types are defined in the `studio/schemaTypes/documents` directory. You can [add more document types](https://www.sanity.io/docs/schema-types) to the schema to suit your needs.
 
 ### Deploying your application and inviting editors
 
