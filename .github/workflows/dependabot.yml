@@ -1,3 +1,9 @@
+name: Dependabot
+on:
+  schedule:
+    - cron: "0 0 * * 0"  # Run weekly at midnight on Sunday
+  workflow_dispatch:      # Allow manual trigger
+
 version: 2
 updates:
   - package-ecosystem: "github-actions"
