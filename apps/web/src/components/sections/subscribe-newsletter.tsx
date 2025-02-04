@@ -19,7 +19,7 @@ export default function SubscribeNewsletterButton() {
       size="icon"
       type="submit"
       disabled={pending}
-      className="size-8 bg-zinc-200 hover:bg-zinc-300"
+      className="size-8 aspect-square bg-zinc-200 hover:bg-zinc-300"
     >
       <span className="flex items-center justify-center gap-2">
         {pending ? (
@@ -49,9 +49,9 @@ export function SubscribeNewsletter({
 }: SubscribeNewsletterProps) {
   return (
     <section className="px-4 py-8 sm:py-12 md:py-16">
-      <div className="relative container mx-auto px-4 py-8 sm:py-16 md:py-28 bg-gray-50 rounded-3xl overflow-hidden">
+      <div className="relative container mx-auto px-4 py-8 sm:py-16 md:py-24 lg:py-32 bg-gray-50 rounded-3xl overflow-hidden">
         <div className="relative z-10 mx-auto text-center">
-          <h2 className="mb-4 text-xl font-semibold text-gray-900 sm:text-2xl md:text-5xl">
+          <h2 className="mb-4 text-xl font-semibold text-gray-900 sm:text-3xl md:text-5xl">
             {title}
           </h2>
           {subTitle && (
