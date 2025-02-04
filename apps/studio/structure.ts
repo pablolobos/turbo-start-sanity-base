@@ -8,6 +8,7 @@ import {
   MessageCircleQuestion,
   PanelBottomIcon,
   PanelTopDashedIcon,
+  Settings2,
   User,
 } from "lucide-react";
 import type {
@@ -110,23 +111,32 @@ export const structure = (
       }),
       createList({ S, type: "author", title: "Authors", icon: User }),
       S.divider(),
-      createSingleTon({
-        S,
-        type: "navbar",
-        title: "Navbar",
-        icon: PanelTopDashedIcon,
-      }),
-      createSingleTon({
-        S,
-        type: "footer",
-        title: "Footer",
-        icon: PanelBottomIcon,
-      }),
-      createSingleTon({
-        S,
-        type: "settings",
-        title: "Global Settings",
-        icon: CogIcon,
-      }),
+      S.listItem()
+        .title("Site Configuration")
+        .icon(Settings2)
+        .child(
+          S.list()
+            .title("Site Configuration")
+            .items([
+              createSingleTon({
+                S,
+                type: "navbar",
+                title: "Navigation",
+                icon: PanelTopDashedIcon,
+              }),
+              createSingleTon({
+                S,
+                type: "footer",
+                title: "Footer",
+                icon: PanelBottomIcon,
+              }),
+              createSingleTon({
+                S,
+                type: "settings",
+                title: "Global Settings",
+                icon: CogIcon,
+              }),
+            ]),
+        ),
     ]);
 };
