@@ -4,7 +4,13 @@ on:
     - cron: "0 0 * * 0"  # Run weekly at midnight on Sunday
   workflow_dispatch:      # Allow manual trigger
 
-version: 2
+jobs:
+  dependabot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dependabot
+        uses: dependabot/dependabot-core@v2
+
 updates:
   - package-ecosystem: "github-actions"
     directory: "/"
