@@ -1,16 +1,15 @@
-import { Schema } from "@sanity/schema";
-import { JSDOM } from "jsdom";
-import schemaTypes from "../schemaTypes";
-import type { FieldDefinition, SanityClient } from "sanity";
 import { faker } from "@faker-js/faker";
 import { htmlToBlocks } from "@sanity/block-tools";
+import { Schema } from "@sanity/schema";
+import { JSDOM } from "jsdom";
+import type { FieldDefinition } from "sanity";
+
+import schemaTypes from "../schemaTypes";
 
 const defaultSchema = Schema.compile({ types: schemaTypes });
 const blockContentSchema = defaultSchema
   .get("blog")
-  .fields.find(
-    (field: FieldDefinition) => field.name === "richText"
-  ).type;
+  .fields.find((field: FieldDefinition) => field.name === "richText").type;
 
 interface HTMLGeneratorOptions {
   enableLists?: boolean;
@@ -18,10 +17,7 @@ interface HTMLGeneratorOptions {
   marks?: Array<"strong" | "em">;
 }
 
-function generateHTML(
-  count: number,
-  options: HTMLGeneratorOptions = {}
-) {
+function generateHTML(count: number, options: HTMLGeneratorOptions = {}) {
   const {
     enableLists = false,
     headingLevels = [],
@@ -43,19 +39,15 @@ function generateHTML(
   };
 
   const generateParagraph = () => {
-    if (
-      headingLevels.length > 0 &&
-      faker.number.int({ min: 1, max: 10 }) > 8
-    ) {
+    if (headingLevels.length > 0 && faker.number.int({ min: 1, max: 10 }) > 8) {
       const level = faker.helpers.arrayElement(headingLevels);
       return `<${level}>${faker.lorem.sentence()}</${level}>`;
     }
 
     if (enableLists && faker.number.int({ min: 1, max: 10 }) > 8) {
-      const items = faker.helpers.multiple(
-        () => faker.lorem.sentence(),
-        { count: faker.number.int({ min: 2, max: 5 }) }
-      );
+      const items = faker.helpers.multiple(() => faker.lorem.sentence(), {
+        count: faker.number.int({ min: 2, max: 5 }),
+      });
       return `<ul>${items.map((item) => `<li>${item}</li>`).join("")}</ul>`;
     }
 
@@ -64,9 +56,7 @@ function generateHTML(
     return `<p>${formattedWords.join(" ")}</p>`;
   };
 
-  return faker.helpers
-    .multiple(generateParagraph, { count })
-    .join("");
+  return faker.helpers.multiple(generateParagraph, { count }).join("");
 }
 
 // Create 2-5 paragraphs of fake block content
@@ -75,13 +65,9 @@ export function createFakeBlockContent(
     minParagraphs?: number;
     maxParagraphs?: number;
     rich?: boolean;
-  } = {}
+  } = {},
 ) {
-  const {
-    minParagraphs = 2,
-    maxParagraphs = 5,
-    rich = false,
-  } = options ?? {};
+  const { minParagraphs = 2, maxParagraphs = 5, rich = false } = options ?? {};
   const count = faker.number.int({
     min: minParagraphs,
     max: maxParagraphs,

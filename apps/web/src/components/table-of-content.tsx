@@ -1,9 +1,10 @@
-import { convertToSlug } from "@/utils";
 import { buttonVariants } from "@workspace/ui/components/button";
 import { cn } from "@workspace/ui/lib/utils";
 import { ChevronDown } from "lucide-react";
-import type { PortableTextBlock } from "next-sanity";
 import Link from "next/link";
+import type { PortableTextBlock } from "next-sanity";
+
+import { convertToSlug } from "@/utils";
 
 interface TableOfContentProps<T> {
   richText?: T | null;
@@ -15,7 +16,7 @@ interface ProcessedHeading {
 }
 
 function filterHeadings(
-  richText?: PortableTextBlock[] | null
+  richText?: PortableTextBlock[] | null,
 ): ProcessedHeading[] {
   if (!Array.isArray(richText)) return [];
 
@@ -23,7 +24,6 @@ function filterHeadings(
     if (block._type !== "block" || !block.style?.startsWith("h")) {
       return headings;
     }
-
     const text = block.children
       ?.map((child) => child.text)
       .join("")
@@ -35,17 +35,13 @@ function filterHeadings(
   }, []);
 }
 
-function TableOfContentLink({
-  heading,
-}: {
-  heading: ProcessedHeading;
-}) {
+function TableOfContentLink({ heading }: { heading: ProcessedHeading }) {
   return (
     <Link
       href={heading.href}
       className={cn(
         buttonVariants({ variant: "link" }),
-        "text-sm justify-start truncate"
+        "text-sm justify-start truncate",
       )}
     >
       {heading.text}
@@ -53,9 +49,7 @@ function TableOfContentLink({
   );
 }
 
-export function TableOfContent<T>({
-  richText,
-}: TableOfContentProps<T>) {
+export function TableOfContent<T>({ richText }: TableOfContentProps<T>) {
   const headings = filterHeadings(richText as PortableTextBlock[]);
   if (!headings.length) return null;
 
@@ -73,7 +67,7 @@ export function TableOfContent<T>({
           <ul className="flex flex-col space-y-2">
             {headings.map((heading) => (
               <TableOfContentLink
-                key={heading.href}
+                key={`${heading.href}-${heading.text}-heading`}
                 heading={heading}
               />
             ))}

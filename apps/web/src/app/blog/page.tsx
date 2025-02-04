@@ -1,8 +1,4 @@
-import {
-  BlogCard,
-  BlogHeader,
-  FeaturedBlogCard,
-} from "@/components/blog-card";
+import { BlogCard, BlogHeader, FeaturedBlogCard } from "@/components/blog-card";
 import { PageBuilder } from "@/components/pagebuilder";
 import { sanityFetch } from "@/lib/sanity/live";
 import { queryBlogIndexPageData } from "@/lib/sanity/query";
@@ -23,7 +19,7 @@ export async function generateMetadata() {
 export default async function BlogIndexPage() {
   const { data } = await fetchBlogPosts();
   if (!data) return null;
-  const { featuredBlog, blogs, title, description, pageBuilder } =
+  const { featuredBlog, blogs, title, description, pageBuilder, _id, _type } =
     data ?? {};
 
   return (
@@ -39,13 +35,14 @@ export default async function BlogIndexPage() {
             )}
             <div className="grid grid-cols-1 gap-8 md:gap-12 lg:grid-cols-2">
               {blogs.map((blog, index) => (
-                <BlogCard key={`${blog._id}-${index}`} blog={blog} />
+                <BlogCard key={`${blog?._id}-${index}`} blog={blog} />
               ))}
             </div>
           </div>
         </div>
       </div>
-      <PageBuilder pageBuilder={pageBuilder} />
+
+      <PageBuilder pageBuilder={pageBuilder ?? []} id={_id} type={_type} />
     </main>
   );
 }

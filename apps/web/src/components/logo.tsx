@@ -1,8 +1,9 @@
-import type { SanityImageProps } from "@/types";
-import type { Maybe } from "@/types";
-import Link from "next/link";
-import { SanityImage } from "./sanity-image";
 import Image from "next/image";
+import Link from "next/link";
+
+import type { Maybe, SanityImageProps } from "@/types";
+
+import { SanityImage } from "./sanity-image";
 
 const LOGO_URL =
   "https://cdn.sanity.io/images/s6kuy1ts/production/68c438f68264717e93c7ba1e85f1d0c4b58b33c2-1200x621.svg";
@@ -20,7 +21,7 @@ export function Logo({
   src,
   alt = "logo",
   image,
-  width = 80,
+  width = 170,
   height = 40,
   priority = true,
 }: LogoProps) {
@@ -31,7 +32,7 @@ export function Logo({
           asset={image}
           alt={alt ?? "logo"}
           width={width}
-          className="w-[80px] h-[40px]"
+          className="w-[170px] h-[40px]"
           height={height}
           priority={priority}
           loading="eager"
@@ -43,7 +44,7 @@ export function Logo({
           src={src ?? LOGO_URL}
           alt={alt ?? "logo"}
           width={width}
-          className="w-[80px] h-[40px]"
+          className="w-[170px] h-[40px]"
           height={height}
           loading="eager"
           priority={priority}

@@ -1,15 +1,12 @@
+import { Facebook, Instagram } from "lucide-react";
+import Link from "next/link";
+
 import { sanityFetch } from "@/lib/sanity/live";
 import { queryFooterData } from "@/lib/sanity/query";
 import type { QueryFooterDataResult } from "@/lib/sanity/sanity.types";
-import {
-  Facebook,
-  Instagram,
-  Linkedin,
-  Twitter,
-  Youtube,
-} from "lucide-react";
-import Link from "next/link";
+
 import { Logo } from "./logo";
+import { LinkedinIcon, XIcon, YoutubeIcon } from "./social-icons";
 
 interface SocialLinksProps {
   data: NonNullable<QueryFooterDataResult>["socialLinks"];
@@ -44,19 +41,22 @@ function SocialLinks({ data }: SocialLinksProps) {
       label: "Follow us on Instagram",
     },
     { url: facebook, Icon: Facebook, label: "Follow us on Facebook" },
-    { url: twitter, Icon: Twitter, label: "Follow us on Twitter" },
-    { url: linkedin, Icon: Linkedin, label: "Follow us on LinkedIn" },
+    { url: twitter, Icon: XIcon, label: "Follow us on Twitter" },
+    { url: linkedin, Icon: LinkedinIcon, label: "Follow us on LinkedIn" },
     {
       url: youtube,
-      Icon: Youtube,
+      Icon: YoutubeIcon,
       label: "Subscribe to our YouTube channel",
     },
   ].filter((link) => link.url);
 
   return (
     <ul className="flex items-center space-x-6 text-muted-foreground">
-      {socialLinks.map(({ url, Icon, label }) => (
-        <li key={url} className="font-medium hover:text-primary">
+      {socialLinks.map(({ url, Icon, label }, index) => (
+        <li
+          key={`social-link-${url}-${index.toString()}`}
+          className="font-medium hover:text-primary"
+        >
           <Link
             href={url ?? "#"}
             target="_blank"
@@ -146,25 +146,21 @@ function Footer({ data }: FooterProps) {
               </div>
               {socialLinks && <SocialLinks data={socialLinks} />}
             </div>
-            {columns && columns?.length > 0 && (
+            {Array.isArray(columns) && columns?.length > 0 && (
               <div className="grid grid-cols-3 gap-6 lg:gap-20">
-                {columns.map((column) => (
-                  <div key={column._key}>
-                    <h3 className="mb-6 font-bold">{column.title}</h3>
-                    {column.links && column.links.length > 0 && (
+                {columns.map((column, index) => (
+                  <div key={`column-${column?._key}-${index}`}>
+                    <h3 className="mb-6 font-bold">{column?.title}</h3>
+                    {column?.links && column?.links?.length > 0 && (
                       <ul className="space-y-4 text-sm text-muted-foreground">
-                        {column.links.map((link) => (
+                        {column?.links?.map((link, index) => (
                           <li
-                            key={link._key}
+                            key={`${link?._key}-${index}-column-${column?._key}`}
                             className="font-medium hover:text-primary"
                           >
                             <Link
                               href={link.href ?? "#"}
-                              target={
-                                link.openInNewTab
-                                  ? "_blank"
-                                  : undefined
-                              }
+                              target={link.openInNewTab ? "_blank" : undefined}
                               rel={
                                 link.openInNewTab
                                   ? "noopener noreferrer"

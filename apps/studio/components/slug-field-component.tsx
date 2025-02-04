@@ -28,9 +28,9 @@ import {
   usePresentationNavigate,
   usePresentationParams,
 } from "sanity/presentation";
+import slugify from "slugify";
 import { styled } from "styled-components";
 
-import slugify from "slugify";
 import { getDocumentPath, stringToPathname } from "../utils/helper";
 import type { DocumentWithLocale } from "../utils/types";
 
@@ -58,13 +58,11 @@ interface PreviewButtonProps {
   localizedPathname: string;
 }
 
-export function PathnameFieldComponent(
-  props: ObjectFieldProps<SlugValue>
-) {
+export function PathnameFieldComponent(props: ObjectFieldProps<SlugValue>) {
   const document = useFormValue([]) as DocumentWithLocale;
   const validation = useValidationStatus(
     document?._id.replace(/^drafts\./, ""),
-    document?._type
+    document?._type,
   );
   const {
     inputProps: { onChange, value, readOnly },
@@ -91,10 +89,10 @@ export function PathnameFieldComponent(
               current: finalValue,
               _type: "slug",
             })
-          : unset()
+          : unset(),
       );
     },
-    [onChange]
+    [onChange],
   );
 
   const updateFinalSegment = useCallback(
@@ -108,32 +106,29 @@ export function PathnameFieldComponent(
         .join("/");
       handleChange(finalValue);
     },
-    [folder, handleChange]
+    [folder, handleChange],
   );
 
   const updateFullPath = useCallback(
     (e: FormEvent<HTMLInputElement>) => {
       handleChange(e.currentTarget.value);
     },
-    [handleChange]
+    [handleChange],
   );
 
-  const unlockFolder = useCallback(
-    (e: MouseEvent<HTMLButtonElement>) => {
-      e.preventDefault();
-      setFolderLocked(false);
-      requestAnimationFrame(() => {
-        fullPathInputRef.current?.focus();
-      });
-    },
-    []
-  );
+  const unlockFolder = useCallback((e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setFolderLocked(false);
+    requestAnimationFrame(() => {
+      fullPathInputRef.current?.focus();
+    });
+  }, []);
 
   const handleBlur = useCallback(
     (e: FocusEvent<HTMLInputElement>) => {
       setFolderLocked(!!folder);
     },
-    [folder]
+    [folder],
   );
 
   const localizedPathname = getDocumentPath({
@@ -187,9 +182,7 @@ export function PathnameFieldComponent(
               />
             </Box>
           </Flex>
-          <PreviewButton
-            localizedPathname={localizedPathname || ""}
-          />
+          <PreviewButton localizedPathname={localizedPathname || ""} />
         </Stack>
       );
     }
@@ -299,6 +292,7 @@ function useSafeNavigate() {
 
 function useSafePreview() {
   try {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const { preview } = usePresentationParams();
     return preview;
   } catch {

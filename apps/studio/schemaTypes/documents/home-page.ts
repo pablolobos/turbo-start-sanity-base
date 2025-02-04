@@ -1,7 +1,11 @@
+import { HomeIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
-import { pageBuilderField } from "../common";
+
 import { GROUP, GROUPS } from "../../utils/constant";
+import { ogFields } from "../../utils/og-fields";
+import { seoFields } from "../../utils/seo-fields";
 import { createSlug } from "../../utils/slug";
+import { pageBuilderField } from "../common";
 
 export const homePage = defineType({
   name: "homePage",
@@ -26,9 +30,7 @@ export const homePage = defineType({
         rule.required(),
         rule
           .min(100)
-          .warning(
-            "We advise writing a description above 100 characters"
-          ),
+          .warning("We advise writing a description above 100 characters"),
         rule.max(320).warning("Any more and it will get truncated"),
       ],
     }),
@@ -42,5 +44,21 @@ export const homePage = defineType({
       },
     }),
     pageBuilderField,
+    ...seoFields.filter(
+      (field) => !["seoNoIndex", "seoHideFromLists"].includes(field.name),
+    ),
+    ...ogFields,
   ],
+  preview: {
+    select: {
+      title: "title",
+      description: "description",
+      slug: "slug.current",
+    },
+    prepare: ({ title, description, slug }) => ({
+      title: title || "Untitled Home Page",
+      media: HomeIcon,
+      subtitle: slug || "Home Page",
+    }),
+  },
 });

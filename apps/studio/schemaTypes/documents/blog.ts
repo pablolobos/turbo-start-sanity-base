@@ -1,8 +1,9 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
+
 import { GROUP, GROUPS } from "../../utils/constant";
 import { ogFields } from "../../utils/og-fields";
 import { seoFields } from "../../utils/seo-fields";
-import { createSlug, defineSlug } from "../../utils/slug";
+import { defineSlug } from "../../utils/slug";
 
 export const blog = defineType({
   name: "blog",

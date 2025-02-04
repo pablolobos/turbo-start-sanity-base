@@ -1,8 +1,8 @@
-// ./scripts/createData.ts
+import fs from "node:fs/promises";
 
 import { faker } from "@faker-js/faker";
-import fs from "node:fs/promises";
 import { getCliClient } from "sanity/cli";
+
 import {
   generateFooterColumns,
   generateGlobalSettingsData,
@@ -11,6 +11,7 @@ import {
   generatePageTitle,
   getMockNavbarData,
 } from "../utils/const-mock-data";
+import { retryPromise } from "../utils/helper";
 import {
   generateAndUploadMockImages,
   generateBlogIndexPage,
@@ -20,7 +21,6 @@ import {
   generateMockSlugPages,
   getMockHomePageData,
 } from "../utils/mock-data";
-import { retryPromise } from "../utils/helper";
 
 const client = getCliClient();
 
@@ -32,33 +32,30 @@ async function removePostinstallScript() {
     if (parsedJson.scripts?.postinstall) {
       // biome-ignore lint/performance/noDelete: <explanation>
       delete parsedJson.scripts.postinstall;
-      await fs.writeFile(
-        "package.json",
-        JSON.stringify(parsedJson, null, 2)
-      );
+      await fs.writeFile("package.json", JSON.stringify(parsedJson, null, 2));
     }
   } catch (error) {
     console.error("❌ Error removing postinstall script:", error);
     console.log(
-      "\n\x1b[34m┌────────────────────────────────────────────┐\x1b[0m"
+      "\n\x1b[34m┌────────────────────────────────────────────┐\x1b[0m",
     );
     console.log(
-      "\x1b[34m│                                            │\x1b[0m"
+      "\x1b[34m│                                            │\x1b[0m",
     );
     console.log(
-      "\x1b[34m│  Please remove the postinstall script      │\x1b[0m"
+      "\x1b[34m│  Please remove the postinstall script      │\x1b[0m",
     );
     console.log(
-      "\x1b[34m│  from package.json to prevent multiple     │\x1b[0m"
+      "\x1b[34m│  from package.json to prevent multiple     │\x1b[0m",
     );
     console.log(
-      "\x1b[34m│  executions                                │\x1b[0m"
+      "\x1b[34m│  executions                                │\x1b[0m",
     );
     console.log(
-      "\x1b[34m│                                            │\x1b[0m"
+      "\x1b[34m│                                            │\x1b[0m",
     );
     console.log(
-      "\x1b[34m└────────────────────────────────────────────┘\x1b[0m\n"
+      "\x1b[34m└────────────────────────────────────────────┘\x1b[0m\n",
     );
   }
 }
@@ -157,7 +154,7 @@ async function createData() {
     (page) => ({
       id: page?._id,
       name: page.title,
-    })
+    }),
   );
   console.log("\n");
 
@@ -206,10 +203,10 @@ async function main() {
       onRetry(error, attempt) {
         console.log(
           `🔄 Retrying transaction attempt ${attempt}:`,
-          error.message
+          error.message,
         );
       },
-    }
+    },
   );
 
   console.log("\n🧹 Removing postinstall script...");
@@ -219,7 +216,7 @@ async function main() {
   } catch (error) {
     console.error("❌ Error removing postinstall script:", error);
     console.error(
-      "⚠️ Please manually remove the postinstall script from package.json if it still exists"
+      "⚠️ Please manually remove the postinstall script from package.json if it still exists",
     );
   }
 }

@@ -1,9 +1,10 @@
 import { useMemo } from "react";
 import { useObservable } from "react-rx";
 import { useDocumentStore } from "sanity";
-import { NavigatorProvider } from "./navigator-context";
+
 import { Header } from "./header";
 import { NavigatorListView } from "./list";
+import { NavigatorProvider } from "./navigator-context";
 import { SearchBox } from "./search-box";
 
 export function createPagesNavigator() {
@@ -31,9 +32,9 @@ function DefaultNavigator() {
       documentStore.listenQuery(
         pagesRouteQuery,
         {},
-        { perspective: "previewDrafts" }
+        { perspective: "previewDrafts" },
       ),
-    [documentStore]
+    [documentStore],
   );
   const results = useObservable(observable, []);
 

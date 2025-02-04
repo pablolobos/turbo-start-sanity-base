@@ -1,8 +1,6 @@
 import { defineField, defineType } from "sanity";
-import {
-  createRadioListLayout,
-  isValidUrl,
-} from "../../utils/helper";
+
+import { createRadioListLayout, isValidUrl } from "../../utils/helper";
 
 const allLinkableTypes = [
   { type: "blog" },
@@ -76,8 +74,7 @@ export const customUrl = defineType({
       openInNewTab: "openInNewTab",
     },
     prepare({ externalUrl, urlType, internalUrl, openInNewTab }) {
-      const url =
-        urlType === "external" ? externalUrl : `/${internalUrl}`;
+      const url = urlType === "external" ? externalUrl : `/${internalUrl}`;
       const newTabIndicator = openInNewTab ? " ↗" : "";
       const truncatedUrl =
         url?.length > 30 ? `${url.substring(0, 30)}...` : url;

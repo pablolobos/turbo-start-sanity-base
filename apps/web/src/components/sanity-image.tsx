@@ -1,8 +1,9 @@
-import { urlFor } from "@/lib/sanity/client";
-import type { SanityImageProps } from "@/types";
 import { getImageDimensions } from "@sanity/asset-utils";
 import { cn } from "@workspace/ui/lib/utils";
 import Image, { type ImageProps as NextImageProps } from "next/image";
+
+import { urlFor } from "@/lib/sanity/client";
+import type { SanityImageProps } from "@/types";
 
 type ImageProps = {
   asset: SanityImageProps;
@@ -31,10 +32,10 @@ export function SanityImage({
   if (!asset?.asset) return null;
   const dimensions = getImageDimensions(asset.asset);
 
-  const url = urlFor({ ...asset, _id: asset.asset._ref })
+  const url = urlFor({ ...asset, _id: asset?.asset?._ref })
     .size(
       Number(width ?? dimensions.width),
-      Number(height ?? dimensions.height)
+      Number(height ?? dimensions.height),
     )
     .dpr(2)
     .auto("format")

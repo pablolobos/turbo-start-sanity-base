@@ -1,21 +1,22 @@
-import type {
-  StructureBuilder,
-  StructureResolverContext,
-} from "sanity/structure";
-import { getTitleCase } from "./utils/helper";
-import type { SchemaType, SingletonType } from "./schemaTypes";
 import {
   BookMarked,
   CogIcon,
   File,
   FileText,
   HomeIcon,
+  type LucideIcon,
   MessageCircleQuestion,
   PanelBottomIcon,
   PanelTopDashedIcon,
   User,
-  type LucideIcon,
 } from "lucide-react";
+import type {
+  StructureBuilder,
+  StructureResolverContext,
+} from "sanity/structure";
+
+import type { SchemaType, SingletonType } from "./schemaTypes";
+import { getTitleCase } from "./utils/helper";
 
 type Base<T = SchemaType> = {
   id?: string;
@@ -29,12 +30,7 @@ type CreateSingleTon = {
   S: StructureBuilder;
 } & Base<SingletonType>;
 
-const createSingleTon = ({
-  S,
-  type,
-  title,
-  icon,
-}: CreateSingleTon) => {
+const createSingleTon = ({ S, type, title, icon }: CreateSingleTon) => {
   const newTitle = title ?? getTitleCase(type);
   return S.listItem()
     .title(newTitle)
@@ -82,18 +78,18 @@ const createIndexList = ({ S, index, list }: CreateIndexList) => {
               S.document()
                 .views([S.view.form()])
                 .schemaType(index.type)
-                .documentId(index.type)
+                .documentId(index.type),
             ),
           S.documentTypeListItem(list.type)
             .title(`${listTitle}`)
             .icon(list.icon ?? File),
-        ])
+        ]),
     );
 };
 
 export const structure = (
   S: StructureBuilder,
-  context: StructureResolverContext
+  context: StructureResolverContext,
 ) => {
   return S.list()
     .title("Content")

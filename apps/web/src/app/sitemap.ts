@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+
 import { getBaseUrl } from "@/config";
 import { client } from "@/lib/sanity/client";
 import { querySitemapData } from "@/lib/sanity/query";
@@ -6,8 +7,7 @@ import { querySitemapData } from "@/lib/sanity/query";
 const baseUrl = getBaseUrl();
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const { slugPages, blogPages } =
-    await client.fetch(querySitemapData);
+  const { slugPages, blogPages } = await client.fetch(querySitemapData);
   return [
     {
       url: baseUrl,

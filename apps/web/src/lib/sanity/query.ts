@@ -90,12 +90,12 @@ const heroBlock = /* groq */ `
 `;
 
 const faqFragment = /* groq */ `
-  faqs[]->{
+  "faqs": array::compact(faqs[]->{
     title,
     _id,
     _type,
     ${richTextFragment}
-  }
+  })
 `;
 
 const faqAccordionBlock = /* groq */ `
@@ -105,13 +105,28 @@ const faqAccordionBlock = /* groq */ `
   }
 `;
 
+const subscribeNewsletterBlock = /* groq */ `
+  _type == "subscribeNewsletter" => {
+    ...,
+    "subTitle": subTitle[]{
+      ...,
+      ${markDefsFragment}
+    },
+    "helperText": helperText[]{
+      ...,
+      ${markDefsFragment}
+    }
+  }
+`;
+
 const pageBuilderFragment = /* groq */ `
   pageBuilder[]{
     ...,
     _type,
     ${ctaBlock},
     ${heroBlock},
-    ${faqAccordionBlock}
+    ${faqAccordionBlock},
+    ${subscribeNewsletterBlock}
   }
 `;
 
@@ -139,9 +154,9 @@ export const querySlugPagePaths = defineQuery(/* groq */ `
 export const queryBlogIndexPageData = defineQuery(/* groq */ `
   *[_type == "blogIndex"][0]{
     _id,
+    _type,
     title,
     description,
-    type,
     ${pageBuilderFragment},
     "slug": slug.current,
     "featuredBlog": featured[0]->{
@@ -276,7 +291,6 @@ export const queryNavbarData = defineQuery(/* groq */ `
     "siteTitle": *[_type == "settings"][0].siteTitle,
   }
 `);
-
 
 export const querySitemapData = defineQuery(/* groq */ `{
   "slugPages": *[_type == "page" && defined(slug.current)]{

@@ -1,16 +1,10 @@
-import { sanityFetch } from "@/lib/sanity/live";
-import { queryNavbarData } from "@/lib/sanity/query";
-import type { QueryNavbarDataResult } from "@/lib/sanity/sanity.types";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@workspace/ui/components/accordion";
-import {
-  Button,
-  buttonVariants,
-} from "@workspace/ui/components/button";
+import { Button, buttonVariants } from "@workspace/ui/components/button";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -28,6 +22,11 @@ import {
 import { cn } from "@workspace/ui/lib/utils";
 import { Menu } from "lucide-react";
 import Link from "next/link";
+
+import { sanityFetch } from "@/lib/sanity/live";
+import { queryNavbarData } from "@/lib/sanity/query";
+import type { QueryNavbarDataResult } from "@/lib/sanity/sanity.types";
+
 import { Logo } from "./logo";
 import { SanityButtons } from "./sanity-buttons";
 import { SanityIcon } from "./sanity-icon";
@@ -43,7 +42,7 @@ function MenuItemLink({ item }: { item: MenuItem }) {
   return (
     <Link
       className={cn(
-        "flex select-none gap-4 rounded-md p-3 leading-none outline-none transition-colors hover:bg-accent hover:text-accent-foreground items-center focus:bg-accent focus:text-accent-foreground"
+        "flex select-none gap-4 rounded-md p-3 leading-none outline-none transition-colors hover:bg-accent hover:text-accent-foreground items-center focus:bg-accent focus:text-accent-foreground",
       )}
       aria-label={`Link to ${item.title ?? item.href}`}
       href={item.href ?? "/"}
@@ -67,9 +66,7 @@ export async function NavbarServer() {
 function NavbarColumnLink({
   column,
 }: {
-  column: NonNullable<
-    NonNullable<QueryNavbarDataResult>["columns"]
-  >[number];
+  column: NonNullable<NonNullable<QueryNavbarDataResult>["columns"]>[number];
 }) {
   if (column.type !== "link") return null;
   return (
@@ -78,7 +75,7 @@ function NavbarColumnLink({
         "text-muted-foreground",
         buttonVariants({
           variant: "ghost",
-        })
+        }),
       )}
       aria-label={`Link to ${column.name ?? column.href}`}
       href={column.href ?? ""}
@@ -91,9 +88,7 @@ function NavbarColumnLink({
 function NavbarColumn({
   column,
 }: {
-  column: NonNullable<
-    NonNullable<QueryNavbarDataResult>["columns"]
-  >[number];
+  column: NonNullable<NonNullable<QueryNavbarDataResult>["columns"]>[number];
 }) {
   if (column.type !== "column") return null;
   return (
@@ -129,22 +124,14 @@ function NavbarColumn({
 function MobileNavbarAccordionColumn({
   column,
 }: {
-  column: NonNullable<
-    NonNullable<QueryNavbarDataResult>["columns"]
-  >[number];
+  column: NonNullable<NonNullable<QueryNavbarDataResult>["columns"]>[number];
 }) {
   if (column.type !== "column") return null;
   return (
-    <AccordionItem
-      value={column.title ?? column._key}
-      className="border-b-0"
-    >
+    <AccordionItem value={column.title ?? column._key} className="border-b-0">
       <AccordionTrigger className="mb-4 py-0 font-semibold hover:no-underline hover:bg-accent hover:text-accent-foreground pr-2 rounded-md">
         <div
-          className={cn(
-            buttonVariants({ variant: "ghost" }),
-            "justify-start"
-          )}
+          className={cn(buttonVariants({ variant: "ghost" }), "justify-start")}
         >
           {column.title}
         </div>
@@ -156,12 +143,7 @@ function MobileNavbarAccordionColumn({
             item={{
               description: item.description ?? "",
               href: item.href ?? "",
-              icon: (
-                <SanityIcon
-                  icon={item.icon}
-                  className="size-5 shrink-0"
-                />
-              ),
+              icon: <SanityIcon icon={item.icon} className="size-5 shrink-0" />,
               title: item.name ?? "",
             }}
           />
@@ -171,17 +153,12 @@ function MobileNavbarAccordionColumn({
   );
 }
 
-function MobileNavbar({
-  navbarData,
-}: {
-  navbarData: QueryNavbarDataResult;
-}) {
+function MobileNavbar({ navbarData }: { navbarData: QueryNavbarDataResult }) {
   const { logo, siteTitle, columns, buttons } = navbarData ?? {};
   return (
     <div className="block lg:hidden h-[75px]">
       <div className="flex items-center justify-between">
         <Logo src={logo} alt={siteTitle} priority />
-
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="outline" size="icon">
@@ -201,11 +178,11 @@ function MobileNavbar({
                 if (column.type === "link") {
                   return (
                     <Link
-                      key={column.name}
+                      key={`column-link-${column.name}-${column._key}`}
                       href={column.href ?? ""}
                       className={cn(
                         buttonVariants({ variant: "ghost" }),
-                        "justify-start"
+                        "justify-start",
                       )}
                     >
                       {column.name}
@@ -239,11 +216,7 @@ function MobileNavbar({
   );
 }
 
-export function Navbar({
-  navbarData,
-}: {
-  navbarData: QueryNavbarDataResult;
-}) {
+export function Navbar({ navbarData }: { navbarData: QueryNavbarDataResult }) {
   const { logo, siteTitle, columns, buttons } = navbarData ?? {};
 
   return (
@@ -256,22 +229,22 @@ export function Navbar({
               <NavigationMenu>
                 {columns?.map((column) =>
                   column.type === "column" ? (
-                    <NavbarColumn key={column._key} column={column} />
-                  ) : (
-                    <NavbarColumnLink
-                      key={column._key}
+                    <NavbarColumn
+                      key={`column-${column._key}`}
                       column={column}
                     />
-                  )
+                  ) : (
+                    <NavbarColumnLink
+                      key={`column-link-${column.name}-${column._key}`}
+                      column={column}
+                    />
+                  ),
                 )}
               </NavigationMenu>
             </div>
           </div>
 
-          <SanityButtons
-            buttons={buttons ?? []}
-            className="flex gap-2"
-          />
+          <SanityButtons buttons={buttons ?? []} className="flex gap-2" />
         </nav>
 
         <MobileNavbar navbarData={navbarData} />
@@ -318,10 +291,7 @@ function SkeletonMobileNavbarAccordionColumn() {
     <AccordionItem value="skeleton" className="border-b-0">
       <AccordionTrigger className="mb-4 py-0 pr-2 rounded-md">
         <div
-          className={cn(
-            buttonVariants({ variant: "ghost" }),
-            "justify-start"
-          )}
+          className={cn(buttonVariants({ variant: "ghost" }), "justify-start")}
         >
           <div className="h-4 w-24 bg-muted rounded animate-pulse" />
         </div>
@@ -362,7 +332,7 @@ function SkeletonMobileNavbar() {
             <div className="mb-8 mt-8 flex flex-col gap-4">
               {[1, 2, 3].map((i) => (
                 <Accordion
-                  key={i}
+                  key={`accordion-skeleton-${i}`}
                   type="single"
                   collapsible
                   className="w-full"
@@ -376,7 +346,7 @@ function SkeletonMobileNavbar() {
               <div className="flex mt-2 flex-col gap-3">
                 {[1, 2].map((i) => (
                   <div
-                    key={i}
+                    key={`button-skeleton-${i}`}
                     className="h-10 bg-muted rounded animate-pulse"
                   />
                 ))}
@@ -402,7 +372,7 @@ export function NavbarSkeleton() {
             <div className="flex items-center">
               <NavigationMenu>
                 {[1, 2, 3].map((i) => (
-                  <SkeletonNavbarColumn key={i} />
+                  <SkeletonNavbarColumn key={`column-skeleton-${i}`} />
                 ))}
               </NavigationMenu>
             </div>
@@ -411,7 +381,7 @@ export function NavbarSkeleton() {
           <div className="flex gap-2">
             {[1, 2].map((i) => (
               <div
-                key={i}
+                key={`button-skeleton-${i}`}
                 className="h-10 w-24 bg-muted rounded animate-pulse"
               />
             ))}

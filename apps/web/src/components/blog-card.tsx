@@ -1,5 +1,7 @@
-import type { QueryBlogIndexPageDataResult } from "@/lib/sanity/sanity.types";
 import Link from "next/link";
+
+import type { QueryBlogIndexPageDataResult } from "@/lib/sanity/sanity.types";
+
 import { SanityImage } from "./sanity-image";
 
 type Blog = NonNullable<
@@ -65,10 +67,7 @@ interface BlogCardProps {
 function BlogMeta({ publishedAt }: { publishedAt: string | null }) {
   return (
     <div className="flex items-center gap-x-4 text-xs my-4">
-      <time
-        dateTime={publishedAt ?? ""}
-        className="text-muted-foreground"
-      >
+      <time dateTime={publishedAt ?? ""} className="text-muted-foreground">
         {publishedAt}
       </time>
     </div>
@@ -125,8 +124,7 @@ function AuthorSection({ authors }: { authors: Blog["authors"] }) {
 }
 
 export function FeaturedBlogCard({ blog }: BlogCardProps) {
-  const { title, publishedAt, slug, authors, description, image } =
-    blog;
+  const { title, publishedAt, slug, authors, description, image } = blog ?? {};
 
   return (
     <article className="flex flex-col lg:flex-row items-start gap-x-8">
@@ -149,8 +147,7 @@ export function FeaturedBlogCard({ blog }: BlogCardProps) {
 }
 
 export function BlogCard({ blog }: BlogCardProps) {
-  const { title, publishedAt, slug, authors, description, image } =
-    blog;
+  const { title, publishedAt, slug, authors, description, image } = blog;
 
   return (
     <article className="flex flex-col items-start w-full">
@@ -160,11 +157,7 @@ export function BlogCard({ blog }: BlogCardProps) {
       </div>
       <div className="w-full sm:max-w-xl">
         <BlogMeta publishedAt={publishedAt} />
-        <BlogContent
-          title={title}
-          slug={slug}
-          description={description}
-        />
+        <BlogContent title={title} slug={slug} description={description} />
         <AuthorSection authors={authors} />
       </div>
     </article>

@@ -1,6 +1,7 @@
+import type { Metadata } from "next";
+
 import { getBaseUrl } from "@/config";
 import type { Maybe } from "@/types";
-import type { Metadata } from "next";
 
 interface OgImageOptions {
   type?: string;
@@ -27,19 +28,11 @@ interface MetaDataInput {
 }
 
 export function getMetaData(data: MetaDataInput): Metadata {
-  const {
-    _type,
-    seoDescription,
-    seoTitle,
-    slug,
-    title,
-    description,
-    _id,
-  } = data;
+  const { _type, seoDescription, seoTitle, slug, title, description, _id } =
+    data ?? {};
 
   const baseUrl = getBaseUrl();
-  const pageSlug =
-    typeof slug === "string" ? slug : (slug?.current ?? "");
+  const pageSlug = typeof slug === "string" ? slug : (slug?.current ?? "");
   const pageUrl = `${baseUrl}${pageSlug}`;
 
   const meta = {

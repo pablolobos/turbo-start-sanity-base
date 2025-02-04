@@ -1,6 +1,5 @@
 import { MessageCircleQuestion } from "lucide-react";
 import { defineType } from "sanity";
-
 import { defineField } from "sanity";
 
 export const faqAccordion = defineType({

@@ -1,4 +1,5 @@
 import { defineField } from "sanity";
+
 import { GROUP } from "./constant";
 
 export const seoFields = [
@@ -38,8 +39,7 @@ export const seoFields = [
   defineField({
     name: "seoNoIndex",
     title: "Do not index this page",
-    description:
-      "If checked, this content won't be indexed by search engines.",
+    description: "If checked, this content won't be indexed by search engines.",
     type: "boolean",
     initialValue: () => false,
     group: GROUP.SEO,
@@ -47,8 +47,7 @@ export const seoFields = [
   defineField({
     name: "seoHideFromLists",
     title: "Hide from lists",
-    description:
-      "If checked, this content won't appear in any list pages.",
+    description: "If checked, this content won't appear in any list pages.",
     type: "boolean",
     initialValue: () => false,
     group: GROUP.SEO,

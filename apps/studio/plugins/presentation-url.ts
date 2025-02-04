@@ -3,8 +3,8 @@ import { useToast } from "@sanity/ui";
 import { useCallback } from "react";
 import {
   definePlugin,
-  useGetFormValue,
   type DocumentActionComponent,
+  useGetFormValue,
 } from "sanity";
 import { useRouter } from "sanity/router";
 
@@ -32,8 +32,7 @@ export const presentationUrl = definePlugin(() => {
                   toast.push({
                     title: "No slug found",
                     status: "error",
-                    description:
-                      "Please ensure the document has a valid slug",
+                    description: "Please ensure the document has a valid slug",
                   });
                   return;
                 }

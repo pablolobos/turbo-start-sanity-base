@@ -1,9 +1,9 @@
-import type { SanityButtonProps } from "@/types";
 import { Button } from "@workspace/ui/components/button";
 import { cn } from "@workspace/ui/lib/utils";
-
 import Link from "next/link";
 import type { ComponentProps } from "react";
+
+import type { SanityButtonProps } from "@/types";
 
 type SanityButtonsProps = {
   buttons: SanityButtonProps[] | null;
@@ -53,7 +53,7 @@ export function SanityButtons({
     <div className={cn("flex flex-col sm:flex-row gap-4", className)}>
       {buttons.map((button) => (
         <SanityButton
-          key={button._key}
+          key={`button-${button._key}`}
           {...button}
           className={buttonClassName}
         />

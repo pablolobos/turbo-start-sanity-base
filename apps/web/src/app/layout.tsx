@@ -1,12 +1,15 @@
-import { FooterServer, FooterSkeleton } from "@/components/footer";
-import { NavbarServer, NavbarSkeleton } from "@/components/navbar";
-import { SanityLive } from "@/lib/sanity/live";
 import "@workspace/ui/globals.css";
-import { VisualEditing } from "next-sanity";
+
 import { revalidatePath, revalidateTag } from "next/cache";
 import { Geist, Geist_Mono } from "next/font/google";
 import { draftMode } from "next/headers";
+import { VisualEditing } from "next-sanity";
 import { Suspense } from "react";
+
+import { FooterServer, FooterSkeleton } from "@/components/footer";
+import { NavbarServer, NavbarSkeleton } from "@/components/navbar";
+import { PreviewBar } from "@/components/preview-bar";
+import { SanityLive } from "@/lib/sanity/live";
 
 const fontSans = Geist({
   subsets: ["latin"],
@@ -45,9 +48,7 @@ export default async function RootLayout({
                   revalidatePath("/", "layout");
                   return;
                 }
-                const id = payload?.document?._id?.startsWith(
-                  "drafts."
-                )
+                const id = payload?.document?._id?.startsWith("drafts.")
                   ? payload?.document?._id.slice(7)
                   : payload?.document?._id;
                 const slug = payload?.document?.slug?.current;
@@ -57,6 +58,7 @@ export default async function RootLayout({
                 }
               }}
             />
+            <PreviewBar />
           </>
         ) : (
           children
@@ -64,9 +66,7 @@ export default async function RootLayout({
         <Suspense fallback={<FooterSkeleton />}>
           <FooterServer />
         </Suspense>
-        <Suspense>
-          <SanityLive />
-        </Suspense>
+        <SanityLive />
       </body>
     </html>
   );

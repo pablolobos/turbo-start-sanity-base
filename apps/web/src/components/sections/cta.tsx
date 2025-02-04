@@ -1,14 +1,11 @@
 import type { PagebuilderType } from "@/types";
-import { SanityButtons } from "../sanity-buttons";
+
 import { RichText } from "../richtext";
+import { SanityButtons } from "../sanity-buttons";
 
 export type CTABlockProps = PagebuilderType<"cta">;
 
-export function CTABlock({
-  buttons,
-  richText,
-  title,
-}: CTABlockProps) {
+export function CTABlock({ buttons, richText, title }: CTABlockProps) {
   return (
     <section className="">
       <div className="container mx-auto px-4 md:px-6">

@@ -13,6 +13,7 @@ import {
   usePresentationParams,
 } from "sanity/presentation";
 import styled from "styled-components";
+
 import { formatPath } from "../../utils/helper";
 import type { ListItemProps, PageTreeNode } from "../../utils/types";
 import { useNavigatorContext } from "./navigator-context";
@@ -98,30 +99,19 @@ const StatusIcon = styled(Text)<StyledComponentProps>`
       : `var(--${variant === "publish" ? "published" : "edited"})`};
 `;
 
-function NavigatorListItem({
-  item,
-  active,
-  idx,
-  setActive,
-}: ListItemProps) {
+function NavigatorListItem({ item, active, idx, setActive }: ListItemProps) {
   const { setCurrentDir } = useNavigatorContext();
   const listItemId = `item-${idx}`;
   const { preview } = usePresentationParams();
   const navigate = usePresentationNavigate();
   const scheme = useColorSchemeValue();
 
-  const path = useMemo(
-    () => formatPath(item.slug ?? ""),
-    [item.slug]
-  );
+  const path = useMemo(() => formatPath(item.slug ?? ""), [item.slug]);
   const previewed = preview === path;
   const isFolder = item._type === "folder";
-  const childrenCount = isFolder
-    ? Object.keys(item.children).length
-    : 0;
+  const childrenCount = isFolder ? Object.keys(item.children).length : 0;
   const isUnpublished =
-    item._id.startsWith("drafts.") &&
-    item?._updatedAt === item?._createdAt;
+    item._id.startsWith("drafts.") && item?._updatedAt === item?._createdAt;
 
   const handleClick = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
@@ -135,7 +125,7 @@ function NavigatorListItem({
         });
       }
     },
-    [isFolder, item, navigate, path, setCurrentDir]
+    [isFolder, item, navigate, path, setCurrentDir],
   );
 
   const renderIcon = useCallback(
@@ -166,7 +156,7 @@ function NavigatorListItem({
         />
       </Flex>
     ),
-    [isFolder]
+    [isFolder],
   );
 
   const renderContent = useCallback(
@@ -180,11 +170,7 @@ function NavigatorListItem({
           weight="medium"
         >
           {!isFolder ? (
-            <PreviewElement
-              fallback={item.title}
-              type="title"
-              item={item}
-            />
+            <PreviewElement fallback={item.title} type="title" item={item} />
           ) : (
             item.title
           )}
@@ -197,18 +183,14 @@ function NavigatorListItem({
           currentScheme={scheme}
         >
           {!isFolder ? (
-            <PreviewElement
-              fallback={path}
-              type="subtitle"
-              item={item}
-            />
+            <PreviewElement fallback={path} type="subtitle" item={item} />
           ) : (
             path
           )}
         </StyledText>
       </ContentContainer>
     ),
-    [isFolder, item, path, previewed, scheme]
+    [isFolder, item, path, previewed, scheme],
   );
 
   return (
@@ -262,9 +244,7 @@ function NavigatorListItem({
               content={
                 <Box padding={2}>
                   <Text size={1}>
-                    {isUnpublished
-                      ? "Not published yet"
-                      : "Published"}
+                    {isUnpublished ? "Not published yet" : "Published"}
                   </Text>
                 </Box>
               }
@@ -311,11 +291,11 @@ export function NavigatorListView() {
 
   const activeDescendantIndex = useMemo(
     () => items.findIndex((item) => item.slug === preview) ?? 0,
-    [items, preview]
+    [items, preview],
   );
 
   const [activeDescendant, setActiveDescendant] = useState(
-    `item-${activeDescendantIndex}`
+    `item-${activeDescendantIndex}`,
   );
 
   return (

@@ -1,10 +1,12 @@
-import { parseChildrenToSlug } from "@/utils";
+import Link from "next/link";
 import {
   PortableText,
   type PortableTextBlock,
   type PortableTextReactComponents,
 } from "next-sanity";
-import Link from "next/link";
+
+import { parseChildrenToSlug } from "@/utils";
+
 import { SanityImage } from "./sanity-image";
 
 const components: Partial<PortableTextReactComponents> = {
@@ -91,12 +93,8 @@ const components: Partial<PortableTextReactComponents> = {
     },
   },
   list: {
-    bullet: ({ children }) => (
-      <ul className="list-disc">{children}</ul>
-    ),
-    number: ({ children }) => (
-      <ol className="list-decimal">{children}</ol>
-    ),
+    bullet: ({ children }) => <ul className="list-disc">{children}</ul>,
+    number: ({ children }) => <ol className="list-decimal">{children}</ol>,
   },
   listItem: {
     bullet: ({ children }) => <li className="">{children}</li>,

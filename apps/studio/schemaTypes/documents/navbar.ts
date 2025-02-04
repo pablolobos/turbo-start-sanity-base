@@ -1,6 +1,7 @@
+import { LayoutPanelLeft, Link, Navigation, PanelTop } from "lucide-react";
 import { defineField, defineType } from "sanity";
+
 import { buttonsField, iconField } from "../common";
-import { Link, LayoutPanelLeft, Navigation } from "lucide-react";
 
 const navbarLink = defineField({
   name: "navbarLink",
@@ -13,15 +14,13 @@ const navbarLink = defineField({
       name: "name",
       type: "string",
       title: "Link Text",
-      description:
-        "The text that will be displayed for this navigation link",
+      description: "The text that will be displayed for this navigation link",
     }),
     defineField({
       name: "url",
       type: "customUrl",
       title: "Link URL",
-      description:
-        "The URL that this link will navigate to when clicked",
+      description: "The URL that this link will navigate to when clicked",
     }),
   ],
   preview: {
@@ -32,13 +31,7 @@ const navbarLink = defineField({
       internalUrl: "url.internal.slug.current",
       openInNewTab: "url.openInNewTab",
     },
-    prepare({
-      title,
-      externalUrl,
-      urlType,
-      internalUrl,
-      openInNewTab,
-    }) {
+    prepare({ title, externalUrl, urlType, internalUrl, openInNewTab }) {
       const url = urlType === "external" ? externalUrl : internalUrl;
       const newTabIndicator = openInNewTab ? " ↗" : "";
       const truncatedUrl =
@@ -65,8 +58,7 @@ const navbarColumnLink = defineField({
       name: "name",
       type: "string",
       title: "Link Text",
-      description:
-        "The text that will be displayed for this navigation link",
+      description: "The text that will be displayed for this navigation link",
     }),
     defineField({
       name: "description",
@@ -78,8 +70,7 @@ const navbarColumnLink = defineField({
       name: "url",
       type: "customUrl",
       title: "Link URL",
-      description:
-        "The URL that this link will navigate to when clicked",
+      description: "The URL that this link will navigate to when clicked",
     }),
   ],
   preview: {
@@ -90,13 +81,7 @@ const navbarColumnLink = defineField({
       internalUrl: "url.internal.slug.current",
       openInNewTab: "url.openInNewTab",
     },
-    prepare({
-      title,
-      externalUrl,
-      urlType,
-      internalUrl,
-      openInNewTab,
-    }) {
+    prepare({ title, externalUrl, urlType, internalUrl, openInNewTab }) {
       const url = urlType === "external" ? externalUrl : internalUrl;
       const newTabIndicator = openInNewTab ? " ↗" : "";
       const truncatedUrl =
@@ -130,8 +115,7 @@ const navbarColumn = defineField({
       type: "array",
       title: "Column Links",
       validation: (rule) => [rule.required(), rule.unique()],
-      description:
-        "The list of navigation links to display in this column",
+      description: "The list of navigation links to display in this column",
       of: [navbarColumnLink],
     }),
   ],
@@ -153,9 +137,8 @@ export const navbar = defineType({
   name: "navbar",
   title: "Site Navigation",
   type: "document",
-  icon: Navigation,
-  description:
-    "Configure the main navigation structure for your site",
+  icon: PanelTop,
+  description: "Configure the main navigation structure for your site",
   fields: [
     defineField({
       name: "label",
@@ -181,7 +164,7 @@ export const navbar = defineType({
       title: "label",
     },
     prepare: ({ title }) => ({
-      title: title || "Untitled",
+      title: title || "Untitled Navigation",
     }),
   },
 });

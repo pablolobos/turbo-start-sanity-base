@@ -1,6 +1,9 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
+
 import { GROUP, GROUPS } from "../../utils/constant";
-import { createSlug } from "../../utils/slug";
+import { ogFields } from "../../utils/og-fields";
+import { seoFields } from "../../utils/seo-fields";
+import { createSlug, isUnique } from "../../utils/slug";
 import { pageBuilderField } from "../common";
 
 export const blogIndex = defineType({
@@ -25,6 +28,7 @@ export const blogIndex = defineType({
       options: {
         source: "title",
         slugify: createSlug,
+        isUnique: isUnique,
       },
     }),
     defineField({
@@ -45,10 +49,14 @@ export const blogIndex = defineType({
           validation: (rule) => [rule.required()],
         }),
       ],
-      validation: (rule) => [rule.max(3), rule.unique()],
+      validation: (rule) => [rule.max(1), rule.unique()],
       group: GROUP.MAIN_CONTENT,
     }),
     pageBuilderField,
+    ...seoFields.filter(
+      (field) => !["seoNoIndex", "seoHideFromLists"].includes(field.name),
+    ),
+    ...ogFields,
   ],
   preview: {
     select: {

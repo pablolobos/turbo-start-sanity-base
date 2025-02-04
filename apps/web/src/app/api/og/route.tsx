@@ -1,9 +1,11 @@
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable @next/next/no-img-element */
-import type { Maybe } from "@/types";
-import { getTitleCase } from "@/utils";
 import { ImageResponse } from "next/og";
 import type { ImageResponseOptions } from "next/server";
+
+import type { Maybe } from "@/types";
+import { getTitleCase } from "@/utils";
+
 import { getOgMetaData } from "./og-config";
 import {
   getBlogPageOGData,
@@ -17,9 +19,7 @@ export const runtime = "edge";
 const errorContent = (
   <div tw="flex flex-col w-full h-full items-center justify-center">
     <div tw=" flex w-full h-full items-center justify-center ">
-      <h1 tw="text-white">
-        Something went Wrong with image generation
-      </h1>
+      <h1 tw="text-white">Something went Wrong with image generation</h1>
     </div>
   </div>
 );
@@ -43,12 +43,7 @@ type DominantColorSeoImageRenderProps = {
 const seoImageRender = ({ seoImage }: SeoImageRenderProps) => {
   return (
     <div tw="flex flex-col w-full h-full items-center justify-center">
-      <img
-        src={seoImage}
-        alt="SEO preview"
-        width={1200}
-        height={630}
-      />
+      <img src={seoImage} alt="SEO preview" width={1200} height={630} />
     </div>
   );
 };
@@ -76,39 +71,23 @@ const dominantColorSeoImageRender = ({
         aria-hidden="true"
       >
         <defs>
-          <linearGradient
-            id="gradient"
-            x1="0%"
-            y1="100%"
-            x2="100%"
-            y2="0%"
-          >
+          <linearGradient id="gradient" x1="0%" y1="100%" x2="100%" y2="0%">
             <stop offset="0%" style={{ stopColor: "transparent" }} />
             <stop offset="100%" style={{ stopColor: "white" }} />
           </linearGradient>
         </defs>
-        <rect
-          width="100%"
-          height="100%"
-          fill="url(#gradient)"
-          opacity="0.2"
-        />
+        <rect width="100%" height="100%" fill="url(#gradient)" opacity="0.2" />
       </svg>
 
       <div tw="flex-1 p-10 flex flex-col justify-between relative z-10">
         <div tw="flex justify-between items-start w-full">
-          {logo && (
-            <img src={logo} alt="Logo" width={70} height={48} />
-          )}
+          {logo && <img src={logo} alt="Logo" width={70} height={48} />}
           <div tw="bg-white flex bg-opacity-20 text-white px-4 py-2 rounded-full text-sm font-medium">
-            {new Date(date ?? new Date()).toLocaleDateString(
-              "en-US",
-              {
-                month: "long",
-                day: "numeric",
-                year: "numeric",
-              }
-            )}
+            {new Date(date ?? new Date()).toLocaleDateString("en-US", {
+              month: "long",
+              day: "numeric",
+              year: "numeric",
+            })}
           </div>
         </div>
 
@@ -165,7 +144,7 @@ const dominantColorSeoImageRender = ({
 async function getTtfFont(
   family: string,
   axes: string[],
-  value: number[]
+  value: number[],
 ): Promise<ArrayBuffer> {
   const familyParam = `${axes.join(",")}@${value.join(",")}`;
 
@@ -176,7 +155,7 @@ async function getTtfFont(
       headers: {
         "User-Agent": "Mozilla/5.0 Firefox/1.0",
       },
-    }
+    },
   );
 
   const css = await cssCall.text();
@@ -231,16 +210,14 @@ const getHomePageContent = async ({ id }: ContentProps) => {
   if (!id) return undefined;
   const [result, err] = await getHomePageOGData(id);
   if (err || !result) return undefined;
-  if (result?.seoImage)
-    return seoImageRender({ seoImage: result.seoImage });
+  if (result?.seoImage) return seoImageRender({ seoImage: result.seoImage });
   return dominantColorSeoImageRender(result);
 };
 const getSlugPageContent = async ({ id }: ContentProps) => {
   if (!id) return undefined;
   const [result, err] = await getSlugPageOGData(id);
   if (err || !result) return undefined;
-  if (result?.seoImage)
-    return seoImageRender({ seoImage: result.seoImage });
+  if (result?.seoImage) return seoImageRender({ seoImage: result.seoImage });
   return dominantColorSeoImageRender(result);
 };
 
@@ -248,8 +225,7 @@ const getBlogPageContent = async ({ id }: ContentProps) => {
   if (!id) return undefined;
   const [result, err] = await getBlogPageOGData(id);
   if (err || !result) return undefined;
-  if (result?.seoImage)
-    return seoImageRender({ seoImage: result.seoImage });
+  if (result?.seoImage) return seoImageRender({ seoImage: result.seoImage });
   return dominantColorSeoImageRender(result);
 };
 
@@ -257,8 +233,7 @@ const getGenericPageContent = async ({ id }: ContentProps) => {
   if (!id) return undefined;
   const [result, err] = await getGenericPageOGData(id);
   if (err || !result) return undefined;
-  if (result?.seoImage)
-    return seoImageRender({ seoImage: result.seoImage });
+  if (result?.seoImage) return seoImageRender({ seoImage: result.seoImage });
   return dominantColorSeoImageRender(result);
 };
 
@@ -277,10 +252,7 @@ export async function GET({ url }: Request): Promise<ImageResponse> {
   const image = block[type] ?? getGenericPageContent;
   try {
     const content = await image(para);
-    return new ImageResponse(
-      content ? content : errorContent,
-      options
-    );
+    return new ImageResponse(content ? content : errorContent, options);
   } catch (err) {
     console.log({ err });
     return new ImageResponse(errorContent, options);
