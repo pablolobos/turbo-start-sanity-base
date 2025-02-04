@@ -213,6 +213,25 @@ export type Cta = {
       _key: string;
     } & Button
   >;
+  ctaCards?: Array<{
+    title?: string;
+    description?: string;
+    logo?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    };
+    url?: string;
+    _type: "ctaCard";
+    _key: string;
+  }>;
 };
 
 export type Hero = {
@@ -947,6 +966,25 @@ export type QueryHomePageDataResult = {
           openInNewTab: boolean | null;
           href: string | null;
         }> | null;
+        ctaCards?: Array<{
+          title?: string;
+          description?: string;
+          logo?: {
+            asset?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+            };
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            alt?: string;
+            _type: "image";
+          };
+          url?: string;
+          _type: "ctaCard";
+          _key: string;
+        }>;
       }
     | {
         _key: string;
@@ -1262,6 +1300,25 @@ export type QuerySlugPageDataResult = {
           openInNewTab: boolean | null;
           href: string | null;
         }> | null;
+        ctaCards?: Array<{
+          title?: string;
+          description?: string;
+          logo?: {
+            asset?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+            };
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            alt?: string;
+            _type: "image";
+          };
+          url?: string;
+          _type: "ctaCard";
+          _key: string;
+        }>;
       }
     | {
         _key: string;
@@ -1582,6 +1639,25 @@ export type QueryBlogIndexPageDataResult = {
           openInNewTab: boolean | null;
           href: string | null;
         }> | null;
+        ctaCards?: Array<{
+          title?: string;
+          description?: string;
+          logo?: {
+            asset?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+            };
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            alt?: string;
+            _type: "image";
+          };
+          url?: string;
+          _type: "ctaCard";
+          _key: string;
+        }>;
       }
     | {
         _key: string;

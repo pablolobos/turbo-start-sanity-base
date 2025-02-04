@@ -1,17 +1,20 @@
 import { cn } from "@workspace/ui/lib/utils";
-import type { LucideIcon } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
+
+import { SanityImage } from "./sanity-image";
+
 interface CTACardProps {
   href: string;
-  icon: LucideIcon | React.ComponentType<{ className?: string }>;
   title: string;
   description: string;
+  logo: any;
   className?: string;
 }
 
 export function CTACard({
   href,
-  icon: Icon,
+  logo,
   title,
   description,
   className,
@@ -25,7 +28,13 @@ export function CTACard({
       )}
     >
       <div className="flex flex-col space-y-2">
-        <Icon className="size-10 text-[#6B7280] mb-6" />
+        <SanityImage
+          asset={logo}
+          loading="eager"
+          priority
+          quality={100}
+          className="mb-6"
+        />
         <h3 className="text-xl font-[500] text-[#111827]">{title}</h3>
         <p className="text-sm text-[#374151]">{description}</p>
       </div>

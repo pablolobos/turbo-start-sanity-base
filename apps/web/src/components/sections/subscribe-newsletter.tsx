@@ -2,7 +2,7 @@
 import { Button } from "@workspace/ui/components/button";
 import { InteractiveGridPattern } from "@workspace/ui/components/interactive-grid-pattern";
 import { cn } from "@workspace/ui/lib/utils";
-import { ChevronRight, LoaderCircle, Mail } from "lucide-react";
+import { ChevronRight, LoaderCircle } from "lucide-react";
 import Form from "next/form";
 import { useFormStatus } from "react-dom";
 
@@ -48,7 +48,7 @@ export function SubscribeNewsletter({
   helperText,
 }: SubscribeNewsletterProps) {
   return (
-    <section className="px-4 py-8 sm:py-12 md:py-16">
+    <section id="subscribe" className="px-4 py-8 sm:py-12 md:py-16">
       <div className="relative container mx-auto px-4 py-8 sm:py-16 md:py-24 lg:py-32 bg-gray-50 rounded-3xl overflow-hidden">
         <div className="relative z-10 mx-auto text-center">
           <h2 className="mb-4 text-xl font-semibold text-gray-900 sm:text-3xl md:text-5xl">

@@ -14,7 +14,7 @@ type FeatureCardProps = {
 function FeatureCard({ card }: FeatureCardProps) {
   const { icon, title, richText } = card ?? {};
   return (
-    <div className="flex flex-col justify-between rounded-3xl bg-accent p-8 md:min-h-[300px] md:p-12">
+    <div className="flex flex-col justify-between rounded-3xl bg-accent p-8 md:min-h-[300px] md:p-8">
       <span className="mb-9 flex w-fit p-3 items-center justify-center rounded-full bg-background drop-shadow-xl">
         <SanityIcon icon={icon} />
       </span>
@@ -37,14 +37,12 @@ export function FeatureCardsWithIcon({
   cards,
 }: FeatureCardsWithIconProps) {
   return (
-    <section className="my-6 md:my-16">
+    <section id="features" className="my-6 md:my-16">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex w-full flex-col items-center">
           <div className="flex flex-col items-center space-y-4 text-center sm:space-y-6 md:text-center">
             <Badge variant="secondary">{eyebrow}</Badge>
-            <h2 className="text-3xl font-semibold md:text-5xl capitalize">
-              {title}
-            </h2>
+            <h2 className="text-3xl font-semibold md:text-5xl">{title}</h2>
             <RichText
               richText={richText}
               className="text-base md:text-lg text-balance max-w-3xl"

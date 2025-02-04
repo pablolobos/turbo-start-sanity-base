@@ -5,7 +5,7 @@ import {
   AccordionTrigger,
 } from "@workspace/ui/components/accordion";
 import { Badge } from "@workspace/ui/components/badge";
-import { ArrowUpRight, Plus } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
 import type { PagebuilderType } from "@/types";
@@ -21,7 +21,7 @@ export function FaqAccordion({
   faqs,
 }: FaqAccordionProps) {
   return (
-    <section className="my-16">
+    <section id="faq" className="my-8">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex w-full flex-col items-center">
           <div className="flex flex-col items-center space-y-4 text-center sm:space-y-6 md:text-center">
@@ -47,7 +47,6 @@ export function FaqAccordion({
               >
                 <AccordionTrigger className="py-2 text-[15px] leading-6 hover:no-underline group">
                   {faq?.title}
-                  {/* <Plus className="h-4 w-4 shrink-0 transition-transform duration-200 group-data-[state=open]:rotate-45" /> */}
                 </AccordionTrigger>
                 <AccordionContent className="pb-2 text-muted-foreground">
                   <RichText
