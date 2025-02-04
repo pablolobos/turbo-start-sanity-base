@@ -93,7 +93,7 @@ You have the freedom to deploy your Next.js app to your hosting provider of choi
 
 1. Create a GitHub repository from this project. [Learn more](https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github).
 2. Create a new Vercel project and connect it to your Github repository.
-3. Set the `Root Directory` to your Next.js app.
+3. Set the `Root Directory` to your Next.js app (`/apps/web`).
 4. Configure your Environment Variables.
 
 #### 3. Invite a collaborator
