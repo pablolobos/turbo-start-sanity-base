@@ -40,7 +40,7 @@ Run the command in your Terminal to initialize this template on your local compu
 See the documentation if you are [having issues with the CLI](https://www.sanity.io/help/cli-errors).
 
 ```shell
-npm create sanity@latest -- --template robotostudio/turbo-start-sanity
+pnpm create sanity@latest -- --template robotostudio/turbo-start-sanity
 ```
 
 #### 2. Run Studio and Next.js app locally
@@ -48,7 +48,7 @@ npm create sanity@latest -- --template robotostudio/turbo-start-sanity
 Navigate to the template directory using `cd <your app name>`, and start the development servers by running the following command
 
 ```shell
-npm run dev
+pnpm run dev
 ```
 
 #### 3. Open the app and sign in to the Studio
