@@ -23,7 +23,7 @@ function FeatureCard({ card }: FeatureCardProps) {
         <h3 className="text-lg font-medium md:text-2xl mb-2">{title}</h3>
         <RichText
           richText={richText}
-          className="font-normal text-sm md:text-[16px] text-black/90"
+          className="font-normal text-sm md:text-[16px] text-black/90 leading-7"
         />
       </div>
     </div>
@@ -45,7 +45,10 @@ export function FeatureCardsWithIcon({
             <h2 className="text-3xl font-semibold md:text-5xl capitalize">
               {title}
             </h2>
-            <RichText richText={richText} className="text-base md:text-lg text-balance max-w-3xl" />
+            <RichText
+              richText={richText}
+              className="text-base md:text-lg text-balance max-w-3xl"
+            />
           </div>
         </div>
         <div className="mx-auto mt-20 grid gap-8 md:grid-cols-3">

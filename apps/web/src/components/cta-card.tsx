@@ -25,9 +25,9 @@ export function CTACard({
       )}
     >
       <div className="flex flex-col space-y-2">
-        <Icon className="size-10 text-muted-foreground mb-6" />
-        <h3 className="text-xl font-[500]">{title}</h3>
-        <p className="text-sm text-muted-foreground">{description}</p>
+        <Icon className="size-10 text-[#6B7280] mb-6" />
+        <h3 className="text-xl font-[500] text-[#111827]">{title}</h3>
+        <p className="text-sm text-[#374151]">{description}</p>
       </div>
     </Link>
   );
