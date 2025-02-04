@@ -1,26 +1,49 @@
+import { Badge } from "@workspace/ui/components/badge";
+import { cn } from "@workspace/ui/lib/utils";
+
 import type { PagebuilderType } from "@/types";
 
+import { CTACard } from "../cta-card";
 import { RichText } from "../richtext";
-import { SanityButtons } from "../sanity-buttons";
 
 export type CTABlockProps = PagebuilderType<"cta">;
 
-export function CTABlock({ buttons, richText, title }: CTABlockProps) {
+export function CTABlock({
+  richText,
+  title,
+  eyebrow,
+  ctaCards,
+}: CTABlockProps) {
   return (
-    <section className="">
+    <section id="cta" className="my-16">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="flex w-full flex-col gap-16 overflow-hidden rounded-lg bg-accent p-8 md:rounded-xl lg:flex-row lg:items-center lg:p-16">
-          <div className="flex-1">
-            <h2 className="mb-3 text-2xl font-semibold md:mb-4 md:text-4xl lg:mb-6">
-              {title}
-            </h2>
+        <div className="flex w-full flex-col items-center">
+          <div className="flex flex-col items-center space-y-4 text-center sm:space-y-6 md:text-center">
+            <Badge variant="secondary">{eyebrow}</Badge>
+            <h2 className="text-3xl font-semibold md:text-5xl">{title}</h2>
             <RichText richText={richText} />
           </div>
-          <SanityButtons
-            buttons={buttons}
-            buttonClassName="w-full sm:w-auto"
-            // className="flex w-full flex-col justify-center gap-2 sm:flex-row lg:justify-start"
-          />
+
+          {/* Social Media Grid */}
+          {Array.isArray(ctaCards) && ctaCards.length > 0 && (
+            <div className="mt-16 grid w-full grid-cols-1 gap-4 lg:gap-1 sm:grid-cols-2 lg:grid-cols-4">
+              {ctaCards?.map((card, idx) => (
+                <CTACard
+                  key={card._key}
+                  card={card}
+                  className={cn(
+                    "hover:bg-muted-foreground/20 duration-300 transition-colors",
+                    idx === 0 && "lg:rounded-l-3xl lg:rounded-r-none",
+                    idx === ctaCards.length - 1 &&
+                      "lg:rounded-r-3xl lg:rounded-l-none",
+                    idx !== 0 &&
+                      idx !== ctaCards.length - 1 &&
+                      "lg:rounded-none",
+                  )}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>

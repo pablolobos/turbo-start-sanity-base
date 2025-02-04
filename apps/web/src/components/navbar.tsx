@@ -72,10 +72,10 @@ function NavbarColumnLink({
   return (
     <Link
       className={cn(
-        "text-muted-foreground",
         buttonVariants({
           variant: "ghost",
         }),
+        "text-muted-foreground",
       )}
       aria-label={`Link to ${column.name ?? column.href}`}
       href={column.href ?? ""}
@@ -220,10 +220,11 @@ export function Navbar({ navbarData }: { navbarData: QueryNavbarDataResult }) {
   const { logo, siteTitle, columns, buttons } = navbarData ?? {};
 
   return (
-    <section className="py-4 h-[75px]">
-      <div className="container mx-auto px-4 md:px-6">
+    <section className="py-4 h-[75px] md:border-b">
+      <div className="container max-w-7xl mx-auto px-4 md:px-6">
         <nav className="hidden justify-between lg:flex">
           <Logo src={logo} alt={siteTitle} priority />
+
           <div className="flex items-center gap-6 justify-center flex-grow">
             <div className="flex items-center">
               <NavigationMenu>
@@ -244,7 +245,11 @@ export function Navbar({ navbarData }: { navbarData: QueryNavbarDataResult }) {
             </div>
           </div>
 
-          <SanityButtons buttons={buttons ?? []} className="flex gap-2" />
+          <SanityButtons
+            buttons={buttons ?? []}
+            className="flex gap-2"
+            buttonClassName="rounded-[10px]"
+          />
         </nav>
 
         <MobileNavbar navbarData={navbarData} />

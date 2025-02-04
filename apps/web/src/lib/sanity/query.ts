@@ -76,7 +76,11 @@ const ctaBlock = /* groq */ `
   _type == "cta" => {
     ...,
     ${richTextFragment},
-    ${buttonsFragment}
+    ${buttonsFragment},
+    "ctaCards": array::compact(ctaCards[]{
+      ...,
+      ${imageFragment},
+    })
   }
 `;
 

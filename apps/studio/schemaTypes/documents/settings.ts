@@ -9,6 +9,12 @@ const socialLinks = defineField({
   options: {},
   fields: [
     defineField({
+      name: "linkedin",
+      title: "LinkedIn URL",
+      description: "Full URL to your LinkedIn profile/company page",
+      type: "string",
+    }),
+    defineField({
       name: "facebook",
       title: "Facebook URL",
       description: "Full URL to your Facebook profile/page",
@@ -30,12 +36,6 @@ const socialLinks = defineField({
       name: "youtube",
       title: "YouTube URL",
       description: "Full URL to your YouTube channel",
-      type: "string",
-    }),
-    defineField({
-      name: "linkedin",
-      title: "LinkedIn URL",
-      description: "Full URL to your LinkedIn profile/company page",
       type: "string",
     }),
   ],

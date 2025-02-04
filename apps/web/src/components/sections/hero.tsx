@@ -16,36 +16,38 @@ export function HeroBlock({
   richText,
 }: HeroBlockProps) {
   return (
-    <section className="">
+    <section id="hero" className="mt-4 md:my-16">
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid items-center gap-8 lg:grid-cols-2">
           <div className="grid h-full grid-rows-[auto_1fr_auto] gap-4 items-center justify-items-center text-center lg:items-start lg:justify-items-start lg:text-left">
-            <Badge variant="outline">{badge}</Badge>
+            <Badge variant="secondary">{badge}</Badge>
             <div className="grid gap-4">
-              <h1 className="text-pretty text-4xl font-bold lg:text-6xl">
+              <h1 className="text-pretty text-4xl lg:text-6xl font-semibold ">
                 {title}
               </h1>
-              <div className="text-base text-balance">
-                <RichText richText={richText} />
-              </div>
-            </div>
-            <div>
-              <SanityButtons
-                buttons={buttons}
-                buttonClassName="w-full sm:w-auto"
-                className="grid w-full gap-2 sm:grid-flow-col lg:justify-start"
+              <RichText
+                richText={richText}
+                className="text-base md:text-lg font-normal"
               />
             </div>
+
+            <SanityButtons
+              buttons={buttons}
+              buttonClassName="w-full sm:w-auto"
+              className="w-full sm:w-fit grid gap-2 sm:grid-flow-col lg:justify-start mb-8"
+            />
           </div>
+
           {image && (
             <div className="h-96 w-full">
               <SanityImage
                 asset={image}
                 loading="eager"
-                width={800}
-                height={800}
+                // width={800}
+                // height={800}
                 priority
-                className="max-h-96 w-full rounded-md object-cover"
+                quality={100}
+                className="max-h-96 w-full rounded-3xl object-cover"
               />
             </div>
           )}

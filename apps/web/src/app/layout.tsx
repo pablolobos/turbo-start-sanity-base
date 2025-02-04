@@ -11,10 +11,10 @@ import { NavbarServer, NavbarSkeleton } from "@/components/navbar";
 import { PreviewBar } from "@/components/preview-bar";
 import { SanityLive } from "@/lib/sanity/live";
 
-const fontSans = Geist({
+const fontGeist = Geist({
   subsets: ["latin"],
-  variable: "--font-sans",
-  weight: ["400", "700"],
+  variable: "--font-geist",
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -33,7 +33,7 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased `}
+        className={`${fontGeist.variable} ${fontMono.variable} font-geist antialiased`}
       >
         <Suspense fallback={<NavbarSkeleton />}>
           <NavbarServer />
