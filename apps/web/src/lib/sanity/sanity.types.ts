@@ -407,11 +407,11 @@ export type Settings = {
   };
   contactEmail?: string;
   socialLinks?: {
+    linkedin?: string;
     facebook?: string;
     twitter?: string;
     instagram?: string;
     youtube?: string;
-    linkedin?: string;
   };
 };
 
@@ -2118,11 +2118,11 @@ export type QueryFooterDataResult = {
   logo: string | null;
   siteTitle: string | null;
   socialLinks: {
+    linkedin?: string;
     facebook?: string;
     twitter?: string;
     instagram?: string;
     youtube?: string;
-    linkedin?: string;
   } | null;
 } | null;
 // Variable: queryNavbarData

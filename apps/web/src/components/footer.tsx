@@ -178,7 +178,7 @@ function Footer({ data }: FooterProps) {
               </div>
             )}
           </div>
-          <div className="mt-20 border-t pt-8 px-4 md:px-6">
+          <div className="mt-20 border-t pt-8">
             <div className="flex flex-col justify-between gap-4  text-center text-sm font-normal text-muted-foreground lg:flex-row lg:items-center lg:text-left mx-auto max-w-7xl px-4 md:px-6">
               <p>
                 © {year} {siteTitle}. All rights reserved.

@@ -2757,6 +2757,13 @@
         "value": {
           "type": "object",
           "attributes": {
+            "linkedin": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              },
+              "optional": true
+            },
             "facebook": {
               "type": "objectAttribute",
               "value": {
@@ -2779,13 +2786,6 @@
               "optional": true
             },
             "youtube": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "string"
-              },
-              "optional": true
-            },
-            "linkedin": {
               "type": "objectAttribute",
               "value": {
                 "type": "string"
