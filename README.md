@@ -5,11 +5,13 @@ A modern, full-stack monorepo template built with Next.js App Router, Sanity CMS
 ## Features
 
 ### Monorepo Structure
+
 - Apps: web (Next.js frontend) and studio (Sanity Studio)
 - Shared packages: UI components, TypeScript config, ESLint config
 - Turborepo for build orchestration and caching
 
 ### Frontend (Web)
+
 - Next.js App Router with TypeScript
 - Shadcn UI components with Tailwind CSS
 - Server Components and Server Actions
@@ -19,6 +21,7 @@ A modern, full-stack monorepo template built with Next.js App Router, Sanity CMS
 - Responsive layouts
 
 ### Content Management (Studio)
+
 - Sanity Studio v3
 - Custom document types (Blog, FAQ, Pages)
 - Visual editing integration
@@ -26,14 +29,75 @@ A modern, full-stack monorepo template built with Next.js App Router, Sanity CMS
 - Live preview capabilities
 - Asset management
 
+## Getting Started
 
-### Deployment
+### Installing the template
 
-#### Configure GitHub Actions secrets:
+#### 1. Initialize template with Sanity CLI
 
-   For Sanity Studio deployment, add these repository secrets:
-   - `SANITY_DEPLOY_TOKEN`: Your Sanity deployment token
-   - `SANITY_STUDIO_PROJECT_ID`: Your Sanity project ID
-   - `SANITY_STUDIO_DATASET`: Your dataset name (e.g., 'production')
-   - `SANITY_STUDIO_TITLE`: Your Studio title
-   - `SANITY_STUDIO_PRESENTATION_URL`: URL where your frontend is hosted
+Run the command in your Terminal to initialize this template on your local computer.
+
+See the documentation if you are [having issues with the CLI](https://www.sanity.io/help/cli-errors).
+
+```shell
+npm create sanity@latest -- --template robotostudio/turbo-start-sanity
+```
+
+#### 2. Run Studio and Next.js app locally
+
+Navigate to the template directory using `cd <your app name>`, and start the development servers by running the following command
+
+```shell
+npm run dev
+```
+
+#### 3. Open the app and sign in to the Studio
+
+Open the Next.js app running locally in your browser on [http://localhost:3000](http://localhost:3000).
+
+Open the Studio running locally in your browser on [http://localhost:3333](http://localhost:3333). You should now see a screen prompting you to log in to the Studio. Use the same service (Google, GitHub, or email) that you used when you logged in to the CLI.
+
+### Adding content with Sanity
+
+#### 1. Publish your first document
+
+The template comes pre-defined with a schema containing `Author`, `Blog`, `BlogIndex`, `FAQ`, `Footer`, `HomePage`, `Navbar`, `Page`, and `Settings` document types.
+
+From the Studio, click "+ Create" and select the `Blog` document type. Go ahead and create and publish the document.
+
+Your content should now appear in your Next.js app ([http://localhost:3000](http://localhost:3000)) as well as in the Studio on the "Presentation" Tab
+
+#### 2. Sample Content
+
+When you initialize the template using the Sanity CLI, sample content is automatically imported into your project. This includes example blog posts, authors, and other content types to help you get started quickly.
+
+#### 3. Extending the Sanity schema
+
+The schema for the `Blog` document type is defined in the `studio/schemaTypes/documents/blog.ts` file. You can [add more document types](https://www.sanity.io/docs/schema-types) to the schema to suit your needs.
+
+### Deploying your application and inviting editors
+
+#### 1. Deploy Sanity Studio
+
+Your Next.js frontend (`/web`) and Sanity Studio (`/studio`) are still only running on your local computer. It's time to deploy and get it into the hands of other content editors.
+
+Back in your Studio directory (`/studio`), run the following command to deploy your Sanity Studio.
+
+```shell
+npx sanity deploy
+```
+
+#### 2. Deploy Next.js app to Vercel
+
+You have the freedom to deploy your Next.js app to your hosting provider of choice. With Vercel and GitHub being a popular choice, we'll cover the basics of that approach.
+
+1. Create a GitHub repository from this project. [Learn more](https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github).
+2. Create a new Vercel project and connect it to your Github repository.
+3. Set the `Root Directory` to your Next.js app.
+4. Configure your Environment Variables.
+
+#### 3. Invite a collaborator
+
+Now that you’ve deployed your Next.js application and Sanity Studio, you can optionally invite a collaborator to your Studio. Open up [Manage](https://www.sanity.io/manage), select your project and click "Invite project members"
+
+They will be able to access the deployed Studio, where you can collaborate together on creating content.
