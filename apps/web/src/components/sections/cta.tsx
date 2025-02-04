@@ -1,6 +1,5 @@
 import { Badge } from "@workspace/ui/components/badge";
 import { cn } from "@workspace/ui/lib/utils";
-import { Github, Twitter } from "lucide-react";
 
 import type { PagebuilderType } from "@/types";
 
@@ -96,13 +95,13 @@ const SOCIAL_LINKS = [
 
 export type CTABlockProps = PagebuilderType<"cta">;
 
-export function CTABlock({ buttons, richText, title }: CTABlockProps) {
+export function CTABlock({ buttons, richText, title, eyebrow }: CTABlockProps) {
   return (
     <section className="my-16">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex w-full flex-col items-center">
           <div className="flex flex-col items-center space-y-4 text-center sm:space-y-6 md:text-center">
-            <Badge variant="secondary">Stay informed</Badge>
+            <Badge variant="secondary">{eyebrow}</Badge>
             <h2 className="text-3xl font-semibold md:text-5xl">{title}</h2>
             <RichText richText={richText} />
           </div>

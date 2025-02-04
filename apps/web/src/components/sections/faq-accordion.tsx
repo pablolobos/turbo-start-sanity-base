@@ -32,7 +32,7 @@ export function FaqAccordion({
             <h3 className="text-lg font-normal text-[#374151]">{subtitle}</h3>
           </div>
         </div>
-        <div className="my-16 max-w-3xl mx-auto">
+        <div className="my-16 max-w-xl mx-auto">
           <Accordion
             type="single"
             collapsible

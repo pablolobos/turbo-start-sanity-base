@@ -9,8 +9,17 @@ export const cta = defineType({
   icon: PhoneIcon,
   fields: [
     defineField({
-      name: "title",
+      name: "eyebrow",
+      title: "Eyebrow",
       type: "string",
+      description:
+        "The smaller text that sits above the title to provide context",
+    }),
+    defineField({
+      name: "title",
+      title: "Title",
+      type: "string",
+      description: "The large text that is the primary focus of the block",
     }),
     richTextField,
     buttonsField,

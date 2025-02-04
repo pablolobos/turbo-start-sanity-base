@@ -173,6 +173,7 @@ export type FeatureCardsIcon = {
 
 export type Cta = {
   _type: "cta";
+  eyebrow?: string;
   title?: string;
   richText?: Array<
     | {
@@ -893,6 +894,7 @@ export type QueryHomePageDataResult = {
     | {
         _key: string;
         _type: "cta";
+        eyebrow?: string;
         title?: string;
         richText: Array<
           | {
@@ -1207,6 +1209,7 @@ export type QuerySlugPageDataResult = {
     | {
         _key: string;
         _type: "cta";
+        eyebrow?: string;
         title?: string;
         richText: Array<
           | {
@@ -1526,6 +1529,7 @@ export type QueryBlogIndexPageDataResult = {
     | {
         _key: string;
         _type: "cta";
+        eyebrow?: string;
         title?: string;
         richText: Array<
           | {
