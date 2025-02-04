@@ -3,7 +3,6 @@ import { defineField, defineType } from "sanity";
 
 import { buttonsField, richTextField } from "../common";
 
-// Define the CTA card subcomponent
 const ctaCard = defineField({
   name: "ctaCard",
   type: "object",
@@ -21,18 +20,10 @@ const ctaCard = defineField({
       description: "A brief description of the CTA card content",
     }),
     defineField({
-      name: "logo",
+      name: "image",
       title: "Logo",
       type: "image",
       description: "The logo or icon to display on the CTA card",
-      fields: [
-        defineField({
-          name: "alt",
-          type: "string",
-          title: "Alt Text",
-          description: "Alternative text for accessibility and SEO",
-        }),
-      ],
     }),
     defineField({
       name: "url",
@@ -44,7 +35,7 @@ const ctaCard = defineField({
   preview: {
     select: {
       title: "title",
-      media: "logo",
+      media: "image",
     },
     prepare: ({ title, media }) => ({
       title: title || "Untitled CTA Card",
