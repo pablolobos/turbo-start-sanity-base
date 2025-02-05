@@ -15,7 +15,7 @@ import {
   TextInput,
 } from "@sanity/ui";
 import type { FocusEvent, FormEvent, MouseEvent } from "react";
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   type ObjectFieldProps,
   set,
@@ -94,6 +94,23 @@ export function PathnameFieldComponent(props: ObjectFieldProps<SlugValue>) {
     },
     [onChange],
   );
+
+  // useEffect(() => {
+  //   console.log("🚀 ~ PathnameFieldComponent ~ document:", {
+  //     title: document.title,
+  //     slug: document?.slug?.current,
+  //   });
+
+  //   // if (!document.title) return;
+
+  //   const finalValue = document?.title
+  //     ? stringToPathname(document?.title, {
+  //         allowTrailingSlash: true,
+  //       })
+  //     : undefined;
+
+  //   handleChange(finalValue);
+  // }, [document.title, handleChange, document?.slug]);
 
   const updateFinalSegment = useCallback(
     (e: FormEvent<HTMLInputElement>) => {
@@ -266,6 +283,10 @@ function PreviewButton({ localizedPathname }: PreviewButtonProps) {
       navigate(localizedPathname);
     }
   }, [navigate, localizedPathname]);
+
+  if (isDisabled) {
+    return null;
+  }
 
   return (
     <Button

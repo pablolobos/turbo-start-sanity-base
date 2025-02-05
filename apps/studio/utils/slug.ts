@@ -21,7 +21,7 @@ export function defineSlug(
     type: "slug",
     components: {
       ...schema.components,
-      field: schema.components?.field ?? PathnameFieldComponent,
+      // field: schema.components?.field ?? PathnameFieldComponent,
     },
     options: {
       ...(slugOptions ?? {}),

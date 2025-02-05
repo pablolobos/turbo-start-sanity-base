@@ -11,7 +11,7 @@ import { iconPicker } from "sanity-plugin-icon-picker";
 import { media, mediaAssetSource } from "sanity-plugin-media";
 
 import { Logo } from "./components/logo";
-import { createPagesNavigator } from "./components/navigator/page-navigator";
+import { locations } from "./location";
 import { presentationUrl } from "./plugins/presentation-url";
 import { schemaTypes } from "./schemaTypes";
 import { structure } from "./structure";
@@ -30,12 +30,8 @@ export default defineConfig({
   dataset: dataset ?? "production",
   plugins: [
     presentationTool({
-      components: {
-        unstable_navigator: {
-          component: createPagesNavigator(),
-          minWidth: 350,
-          maxWidth: 350,
-        },
+      resolve: {
+        locations,
       },
       previewUrl: {
         origin: presentationOriginUrl ?? "http://localhost:3000",
