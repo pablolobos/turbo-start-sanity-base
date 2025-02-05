@@ -1,7 +1,7 @@
 import { assist } from "@sanity/assist";
 import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
-import { presentationTool } from "sanity/presentation";
+import { defineLocations, presentationTool } from "sanity/presentation";
 import { structureTool } from "sanity/structure";
 import {
   unsplashAssetSource,
@@ -29,6 +29,62 @@ export default defineConfig({
   dataset: dataset ?? "production",
   plugins: [
     presentationTool({
+      resolve: {
+        locations: {
+          blog: defineLocations({
+            select: {
+              title: "title",
+              slug: "slug.current",
+            },
+            resolve: (doc) => {
+              return {
+                locations: [
+                  {
+                    title: doc?.title || "Untitled",
+                    href: `${doc?.slug}`,
+                  },
+                  {
+                    title: "Blog",
+                    href: "/blog",
+                  },
+                ],
+              };
+            },
+          }),
+          home: defineLocations({
+            select: {
+              title: "title",
+              slug: "slug.current",
+            },
+            resolve: () => {
+              return {
+                locations: [
+                  {
+                    title: "Home",
+                    href: "/",
+                  },
+                ],
+              };
+            },
+          }),
+          page: defineLocations({
+            select: {
+              title: "title",
+              slug: "slug.current",
+            },
+            resolve: (doc) => {
+              return {
+                locations: [
+                  {
+                    title: doc?.title || "Untitled",
+                    href: `${doc?.slug}`,
+                  },
+                ],
+              };
+            },
+          }),
+        },
+      },
       previewUrl: {
         origin: presentationOriginUrl ?? "http://localhost:3000",
         previewMode: {
