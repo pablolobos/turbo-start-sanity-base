@@ -128,7 +128,7 @@ export function Navbar({ navbarData }: { navbarData: QueryNavbarDataResult }) {
 
   return (
     <section className="py-4 h-[75px] md:border-b">
-      <div className="container max-w-7xl mx-auto px-4 md:px-6">
+      <div className="container mx-auto px-4 md:px-6">
         <nav className="hidden justify-between lg:flex">
           <Logo src={logo} alt={siteTitle} priority />
 
