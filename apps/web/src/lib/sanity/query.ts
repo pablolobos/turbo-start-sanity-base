@@ -118,7 +118,16 @@ const faqFragment = /* groq */ `
 const faqAccordionBlock = /* groq */ `
   _type == "faqAccordion" => {
     ...,
-    ${faqFragment}
+    ${faqFragment},
+    link{
+      ...,
+      "openInNewTab": url.openInNewTab,
+      "href": select(
+        url.type == "internal" => url.internal->slug.current,
+        url.type == "external" => url.external,
+        url.href
+      )
+    }
   }
 `;
 
