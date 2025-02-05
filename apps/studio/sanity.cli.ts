@@ -13,5 +13,5 @@ export default defineCliConfig({
     host && host !== "main"
       ? `${host}-turbo-start-sanity`
       : "turbo-start-sanity",
-  autoUpdates: true,
+  autoUpdates: false,
 });
