@@ -49,15 +49,15 @@ export function SubscribeNewsletter({
 }: SubscribeNewsletterProps) {
   return (
     <section id="subscribe" className="px-4 py-8 sm:py-12 md:py-16">
-      <div className="relative container mx-auto px-4 py-8 sm:py-16 md:py-24 lg:py-32 bg-gray-50 rounded-3xl overflow-hidden">
+      <div className="relative container mx-auto px-4 md:px-8 py-8 sm:py-16 md:py-24 lg:py-32 bg-gray-50 rounded-3xl overflow-hidden">
         <div className="relative z-10 mx-auto text-center">
-          <h2 className="mb-4 text-xl font-semibold text-gray-900 sm:text-3xl md:text-5xl">
+          <h2 className="mb-4 text-xl font-semibold text-gray-900 sm:text-3xl md:text-5xl text-balance">
             {title}
           </h2>
           {subTitle && (
             <RichText
               richText={subTitle}
-              className="mb-6 text-sm text-gray-600 sm:mb-8 sm:text-base"
+              className="mb-6 text-sm text-gray-600 sm:mb-8 text-balance sm:text-base"
             />
           )}
           <Form

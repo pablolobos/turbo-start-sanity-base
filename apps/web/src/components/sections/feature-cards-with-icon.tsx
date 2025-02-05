@@ -14,7 +14,7 @@ type FeatureCardProps = {
 function FeatureCard({ card }: FeatureCardProps) {
   const { icon, title, richText } = card ?? {};
   return (
-    <div className="flex flex-col justify-between rounded-3xl bg-accent p-8 md:min-h-[300px] md:p-8">
+    <div className="rounded-3xl bg-accent p-8 md:min-h-[300px] md:p-8">
       <span className="mb-9 flex w-fit p-3 items-center justify-center rounded-full bg-background drop-shadow-xl">
         <SanityIcon icon={icon} />
       </span>
