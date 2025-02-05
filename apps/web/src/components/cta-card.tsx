@@ -12,7 +12,6 @@ export type CTACardProps = {
 
 export function CTACard({ card, className }: CTACardProps) {
   const { image, description, title, href } = card ?? {};
-  console.log("🚀 ~ CTACard ~ card:", card);
   return (
     <Link
       href={href ?? "#"}
