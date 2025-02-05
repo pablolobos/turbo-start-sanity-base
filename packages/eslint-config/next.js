@@ -1,11 +1,11 @@
-import js from "@eslint/js"
-import pluginNext from "@next/eslint-plugin-next"
-import eslintConfigPrettier from "eslint-config-prettier"
-import pluginReact from "eslint-plugin-react"
-import eslintPluginPrettier from "eslint-plugin-prettier";
-import eslintPluginSimpleImportSort from "eslint-plugin-simple-import-sort";
+import js from "@eslint/js";
+import pluginNext from "@next/eslint-plugin-next";
+import eslintConfigPrettier from "eslint-config-prettier";
 import eslintPluginImport from "eslint-plugin-import";
+import eslintPluginPrettier from "eslint-plugin-prettier";
+import pluginReact from "eslint-plugin-react";
 import pluginReactHooks from "eslint-plugin-react-hooks";
+import eslintPluginSimpleImportSort from "eslint-plugin-simple-import-sort";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
@@ -34,8 +34,8 @@ export const nextJsConfig = [
     plugins: {
       "@next/next": pluginNext,
       prettier: eslintPluginPrettier,
-      "simple-import-sort": eslintPluginSimpleImportSort,
       import: eslintPluginImport,
+      "simple-import-sort": eslintPluginSimpleImportSort,
       "@typescript-eslint": tseslint.plugin,
     },
     ignores: ["node_modules", ".next"],

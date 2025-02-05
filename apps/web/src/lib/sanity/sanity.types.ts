@@ -109,6 +109,68 @@ export type SubscribeNewsletter = {
   }>;
 };
 
+export type ImageLinkCards = {
+  _type: "imageLinkCards";
+  eyebrow?: string;
+  title?: string;
+  richText?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6" | "inline";
+        listItem?: "number" | "bullet";
+        markDefs?: Array<{
+          customLink?: CustomUrl;
+          _type: "customLink";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }
+    | {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        caption?: string;
+        _type: "image";
+        _key: string;
+      }
+  >;
+  buttons?: Array<
+    {
+      _key: string;
+    } & Button
+  >;
+  cards?: Array<{
+    title?: string;
+    description?: string;
+    image?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    url?: CustomUrl;
+    _type: "imageLinkCard";
+    _key: string;
+  }>;
+};
+
 export type FaqAccordion = {
   _type: "faqAccordion";
   eyebrow?: string;
@@ -301,6 +363,9 @@ export type PageBuilder = Array<
   | ({
       _key: string;
     } & FaqAccordion)
+  | ({
+      _key: string;
+    } & ImageLinkCards)
   | ({
       _key: string;
     } & SubscribeNewsletter)
@@ -862,6 +927,7 @@ export type AllSanitySchemaTypes =
   | SanityFileAsset
   | Geopoint
   | SubscribeNewsletter
+  | ImageLinkCards
   | FaqAccordion
   | FeatureCardsIcon
   | Cta
@@ -1160,6 +1226,68 @@ export type QueryHomePageDataResult = {
           openInNewTab: boolean | null;
           href: string | null;
         }> | null;
+      }
+    | {
+        _key: string;
+        _type: "imageLinkCards";
+        eyebrow?: string;
+        title?: string;
+        richText?: Array<
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "h3" | "h4" | "h5" | "h6" | "inline" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs?: Array<{
+                customLink?: CustomUrl;
+                _type: "customLink";
+                _key: string;
+              }>;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              caption?: string;
+              _type: "image";
+              _key: string;
+            }
+        >;
+        buttons?: Array<
+          {
+            _key: string;
+          } & Button
+        >;
+        cards?: Array<{
+          title?: string;
+          description?: string;
+          image?: {
+            asset?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+            };
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          };
+          url?: CustomUrl;
+          _type: "imageLinkCard";
+          _key: string;
+        }>;
       }
     | {
         _key: string;
@@ -1496,6 +1624,68 @@ export type QuerySlugPageDataResult = {
           openInNewTab: boolean | null;
           href: string | null;
         }> | null;
+      }
+    | {
+        _key: string;
+        _type: "imageLinkCards";
+        eyebrow?: string;
+        title?: string;
+        richText?: Array<
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "h3" | "h4" | "h5" | "h6" | "inline" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs?: Array<{
+                customLink?: CustomUrl;
+                _type: "customLink";
+                _key: string;
+              }>;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              caption?: string;
+              _type: "image";
+              _key: string;
+            }
+        >;
+        buttons?: Array<
+          {
+            _key: string;
+          } & Button
+        >;
+        cards?: Array<{
+          title?: string;
+          description?: string;
+          image?: {
+            asset?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+            };
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          };
+          url?: CustomUrl;
+          _type: "imageLinkCard";
+          _key: string;
+        }>;
       }
     | {
         _key: string;
@@ -1837,6 +2027,68 @@ export type QueryBlogIndexPageDataResult = {
           openInNewTab: boolean | null;
           href: string | null;
         }> | null;
+      }
+    | {
+        _key: string;
+        _type: "imageLinkCards";
+        eyebrow?: string;
+        title?: string;
+        richText?: Array<
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "h3" | "h4" | "h5" | "h6" | "inline" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs?: Array<{
+                customLink?: CustomUrl;
+                _type: "customLink";
+                _key: string;
+              }>;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              caption?: string;
+              _type: "image";
+              _key: string;
+            }
+        >;
+        buttons?: Array<
+          {
+            _key: string;
+          } & Button
+        >;
+        cards?: Array<{
+          title?: string;
+          description?: string;
+          image?: {
+            asset?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+            };
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          };
+          url?: CustomUrl;
+          _type: "imageLinkCard";
+          _key: string;
+        }>;
       }
     | {
         _key: string;

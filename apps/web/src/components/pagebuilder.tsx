@@ -1,6 +1,6 @@
 "use client";
 import { useOptimistic } from "@sanity/visual-editing/react";
-import { createDataAttribute, type SanityDocument } from "next-sanity";
+import { type SanityDocument, createDataAttribute } from "next-sanity";
 import type { ComponentType } from "react";
 
 import { dataset, projectId, studioUrl } from "@/lib/sanity/api";
@@ -27,6 +27,7 @@ type PageData = {
   _id: string;
   _type: string;
   pageBuilder?: PageBlock[];
+  x;
 };
 
 const BLOCK_COMPONENTS = {
@@ -74,8 +75,11 @@ export function PageBuilder({
 
         if (!Component) {
           return (
-            <div key={`${block._type}-${block._key}`}>
-              Component not found for block type: {block._type}
+            <div
+              key={`${block._type}-${block._key}`}
+              className="flex items-center justify-center p-8 text-center text-muted-foreground bg-muted rounded-lg"
+            >
+              Component not found for block type: <code>{block._type}</code>
             </div>
           );
         }
