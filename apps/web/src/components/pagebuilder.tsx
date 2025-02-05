@@ -1,6 +1,6 @@
 "use client";
 import { useOptimistic } from "@sanity/visual-editing/react";
-import { type SanityDocument, createDataAttribute } from "next-sanity";
+import { createDataAttribute, type SanityDocument } from "next-sanity";
 import type { ComponentType } from "react";
 
 import { dataset, projectId, studioUrl } from "@/lib/sanity/api";
@@ -11,6 +11,7 @@ import { CTABlock } from "./sections/cta";
 import { FaqAccordion } from "./sections/faq-accordion";
 import { FeatureCardsWithIcon } from "./sections/feature-cards-with-icon";
 import { HeroBlock } from "./sections/hero";
+import { ImageLinkCards } from "./sections/image-link-cards";
 import { SubscribeNewsletter } from "./sections/subscribe-newsletter";
 
 type PageBlock = NonNullable<
@@ -27,15 +28,15 @@ type PageData = {
   _id: string;
   _type: string;
   pageBuilder?: PageBlock[];
-  x;
 };
 
 const BLOCK_COMPONENTS = {
   cta: CTABlock,
   faqAccordion: FaqAccordion,
-  featureCardsIcon: FeatureCardsWithIcon,
   hero: HeroBlock,
+  featureCardsIcon: FeatureCardsWithIcon,
   subscribeNewsletter: SubscribeNewsletter,
+  imageLinkCards: ImageLinkCards,
 } as const;
 
 type BlockType = keyof typeof BLOCK_COMPONENTS;

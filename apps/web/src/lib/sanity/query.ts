@@ -84,6 +84,18 @@ const ctaBlock = /* groq */ `
   }
 `;
 
+const imageLinkCardsBlock = /* groq */ `
+  _type == "imageLinkCards" => {
+    ...,
+    ${richTextFragment},
+    ${buttonsFragment},
+    "cards": array::compact(cards[]{
+      ...,
+      ${imageFragment},
+    })
+  }
+`;
+
 const heroBlock = /* groq */ `
   _type == "hero" => {
     ...,
@@ -130,7 +142,8 @@ const pageBuilderFragment = /* groq */ `
     ${ctaBlock},
     ${heroBlock},
     ${faqAccordionBlock},
-    ${subscribeNewsletterBlock}
+    ${subscribeNewsletterBlock},
+    ${imageLinkCardsBlock}
   }
 `;
 

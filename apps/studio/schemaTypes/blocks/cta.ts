@@ -64,13 +64,13 @@ export const cta = defineType({
     }),
     richTextField,
     buttonsField,
-    defineField({
-      name: "ctaCards",
-      title: "CTA Cards",
-      type: "array",
-      description: "Add multiple CTA cards with logos, titles, and links",
-      of: [ctaCard],
-    }),
+    // defineField({
+    //   name: "ctaCards",
+    //   title: "CTA Cards",
+    //   type: "array",
+    //   description: "Add multiple CTA cards with logos, titles, and links",
+    //   of: [ctaCard],
+    // }),
   ],
   preview: {
     select: {

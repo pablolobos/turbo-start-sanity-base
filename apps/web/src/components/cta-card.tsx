@@ -6,7 +6,7 @@ import type { PagebuilderType } from "@/types";
 import { SanityImage } from "./sanity-image";
 
 export type CTACardProps = {
-  card: NonNullable<PagebuilderType<"cta">["ctaCards"]>[number];
+  card: NonNullable<PagebuilderType<"imageLinkCards">["cards"]>[number];
   className?: string;
 };
 
