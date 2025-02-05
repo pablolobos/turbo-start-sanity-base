@@ -3,7 +3,7 @@ import { cn } from "@workspace/ui/lib/utils";
 
 import type { PagebuilderType } from "@/types";
 
-import { CTACard } from "../cta-card";
+import { CTACard } from "../image-link-card";
 import { RichText } from "../richtext";
 
 export type ImageLinkCardsProps = PagebuilderType<"imageLinkCards">;
@@ -23,7 +23,7 @@ export function ImageLinkCards({
             <h2 className="text-3xl font-semibold md:text-5xl text-balance">
               {title}
             </h2>
-            <RichText richText={richText} />
+            <RichText richText={richText} className="text-balance" />
           </div>
 
           {/* Social Media Grid */}

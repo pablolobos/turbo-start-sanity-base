@@ -19,11 +19,11 @@ function FeatureCard({ card }: FeatureCardProps) {
         <SanityIcon icon={icon} />
       </span>
 
-      <div className="">
+      <div>
         <h3 className="text-lg font-medium md:text-2xl mb-2">{title}</h3>
         <RichText
           richText={richText}
-          className="font-normal text-sm md:text-[16px] text-black/90 leading-7"
+          className="font-normal text-sm md:text-[16px] text-black/90 leading-7 text-balance"
         />
       </div>
     </div>
