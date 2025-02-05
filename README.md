@@ -83,8 +83,16 @@ The schemas for all document types are defined in the `studio/schemaTypes/docume
 
 Your Next.js frontend (`/web`) and Sanity Studio (`/studio`) are still only running on your local computer. It's time to deploy and get it into the hands of other content editors.
 
-Back in your Studio directory (`/studio`), run the following command to deploy your Sanity Studio.
+The template includes a GitHub Actions workflow [`deploy-sanity.yml`](https://raw.githubusercontent.com/robotostudio/turbo-start-sanity/main/.github/workflows/deploy-sanity.yml) that automatically deploys your Sanity Studio whenever changes are pushed to the `studio` directory.
 
+> **Note**: To use the GitHub Actions workflow, make sure to configure the following secrets in your repository settings:
+> - `SANITY_DEPLOY_TOKEN`
+> - `SANITY_STUDIO_PROJECT_ID` 
+> - `SANITY_STUDIO_DATASET`
+> - `SANITY_STUDIO_TITLE`
+> - `SANITY_STUDIO_PRESENTATION_URL`
+
+Alternatively, you can manually deploy from your Studio directory (`/studio`) using:
 ```shell
 npx sanity deploy
 ```
