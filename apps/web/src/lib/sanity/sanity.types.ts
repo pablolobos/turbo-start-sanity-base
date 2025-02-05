@@ -176,6 +176,11 @@ export type FaqAccordion = {
   eyebrow?: string;
   title?: string;
   subtitle?: string;
+  link?: {
+    title?: string;
+    description?: string;
+    url?: CustomUrl;
+  };
   faqs?: Array<{
     _ref: string;
     _type: "reference";
@@ -1020,6 +1025,11 @@ export type QueryHomePageDataResult = {
         eyebrow?: string;
         title?: string;
         subtitle?: string;
+        link?: {
+          title?: string;
+          description?: string;
+          url?: CustomUrl;
+        };
         faqs: Array<{
           title: string | null;
           _id: string;
@@ -1415,6 +1425,11 @@ export type QuerySlugPageDataResult = {
         eyebrow?: string;
         title?: string;
         subtitle?: string;
+        link?: {
+          title?: string;
+          description?: string;
+          url?: CustomUrl;
+        };
         faqs: Array<{
           title: string | null;
           _id: string;
@@ -1815,6 +1830,11 @@ export type QueryBlogIndexPageDataResult = {
         eyebrow?: string;
         title?: string;
         subtitle?: string;
+        link?: {
+          title?: string;
+          description?: string;
+          url?: CustomUrl;
+        };
         faqs: Array<{
           title: string | null;
           _id: string;

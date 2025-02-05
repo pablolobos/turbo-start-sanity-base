@@ -19,6 +19,7 @@ export function FaqAccordion({
   title,
   subtitle,
   faqs,
+  link,
 }: FaqAccordionProps) {
   return (
     <section id="faq" className="my-8">
@@ -57,17 +58,24 @@ export function FaqAccordion({
               </AccordionItem>
             ))}
           </Accordion>
-          <div className="w-full py-6">
-            <p className="mb-1 text-xs">More questions? </p>
-            <Link href="/contact" className="flex items-center gap-2">
-              <p className="text-[15px] font-[500] leading-6">
-                Get in touch with sales
-              </p>
-              <span className="rounded-full border p-1">
-                <ArrowUpRight size={16} className="text-[#374151]" />
-              </span>
-            </Link>
-          </div>
+
+          {link && link?.url && (
+            <div className="w-full py-6">
+              <p className="mb-1 text-xs">{link?.title}</p>
+              <Link
+                href={link.url.href ?? "#"}
+                target={link.url.openInNewTab ? "_blank" : "_self"}
+                className="flex items-center gap-2"
+              >
+                <p className="text-[15px] font-[500] leading-6">
+                  {link?.description}
+                </p>
+                <span className="rounded-full border p-1">
+                  <ArrowUpRight size={16} className="text-[#374151]" />
+                </span>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </section>
