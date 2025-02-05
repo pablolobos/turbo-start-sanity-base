@@ -20,7 +20,9 @@ export function CTABlock({
         <div className="flex w-full flex-col items-center">
           <div className="flex flex-col items-center space-y-4 text-center sm:space-y-6 md:text-center">
             <Badge variant="secondary">{eyebrow}</Badge>
-            <h2 className="text-3xl font-semibold md:text-5xl">{title}</h2>
+            <h2 className="text-3xl font-semibold md:text-5xl text-balance">
+              {title}
+            </h2>
             <RichText richText={richText} />
           </div>
 
@@ -32,7 +34,7 @@ export function CTABlock({
                   key={card._key}
                   card={card}
                   className={cn(
-                    "hover:bg-muted-foreground/20 duration-300 transition-colors",
+                    "bg-muted-foreground/10",
                     idx === 0 && "lg:rounded-l-3xl lg:rounded-r-none",
                     idx === ctaCards.length - 1 &&
                       "lg:rounded-r-3xl lg:rounded-l-none",
