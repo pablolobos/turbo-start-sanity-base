@@ -59,12 +59,12 @@ export function FaqAccordion({
             ))}
           </Accordion>
 
-          {link && link?.url && (
+          {link?.href && (
             <div className="w-full py-6">
               <p className="mb-1 text-xs">{link?.title}</p>
               <Link
-                href={link.url.href ?? "#"}
-                target={link.url.openInNewTab ? "_blank" : "_self"}
+                href={link.href ?? "#"}
+                target={link.openInNewTab ? "_blank" : "_self"}
                 className="flex items-center gap-2"
               >
                 <p className="text-[15px] font-[500] leading-6">
