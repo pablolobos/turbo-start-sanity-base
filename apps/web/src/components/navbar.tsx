@@ -28,6 +28,7 @@ import { queryNavbarData } from "@/lib/sanity/query";
 import type { QueryNavbarDataResult } from "@/lib/sanity/sanity.types";
 
 import { Logo } from "./logo";
+import { MobileNavbar } from "./mobile-navbar";
 import { SanityButtons } from "./sanity-buttons";
 import { SanityIcon } from "./sanity-icon";
 
@@ -121,100 +122,6 @@ function NavbarColumn({
   );
 }
 
-function MobileNavbarAccordionColumn({
-  column,
-}: {
-  column: NonNullable<NonNullable<QueryNavbarDataResult>["columns"]>[number];
-}) {
-  if (column.type !== "column") return null;
-  return (
-    <AccordionItem value={column.title ?? column._key} className="border-b-0">
-      <AccordionTrigger className="mb-4 py-0 font-semibold hover:no-underline hover:bg-accent hover:text-accent-foreground pr-2 rounded-md">
-        <div
-          className={cn(buttonVariants({ variant: "ghost" }), "justify-start")}
-        >
-          {column.title}
-        </div>
-      </AccordionTrigger>
-      <AccordionContent className="mt-2">
-        {column.links?.map((item) => (
-          <MenuItemLink
-            key={item._key}
-            item={{
-              description: item.description ?? "",
-              href: item.href ?? "",
-              icon: <SanityIcon icon={item.icon} className="size-5 shrink-0" />,
-              title: item.name ?? "",
-            }}
-          />
-        ))}
-      </AccordionContent>
-    </AccordionItem>
-  );
-}
-
-function MobileNavbar({ navbarData }: { navbarData: QueryNavbarDataResult }) {
-  const { logo, siteTitle, columns, buttons } = navbarData ?? {};
-  return (
-    <div className="block lg:hidden h-[75px]">
-      <div className="flex items-center justify-between">
-        <Logo src={logo} alt={siteTitle} priority />
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button variant="outline" size="icon">
-              <Menu className="size-4" />
-              <span className="sr-only">Open menu</span>
-            </Button>
-          </SheetTrigger>
-          <SheetContent className="overflow-y-auto">
-            <SheetHeader>
-              <SheetTitle>
-                <Logo src={logo} alt={siteTitle} priority />
-              </SheetTitle>
-            </SheetHeader>
-
-            <div className="mb-8 mt-8 flex flex-col gap-4">
-              {columns?.map((column) => {
-                if (column.type === "link") {
-                  return (
-                    <Link
-                      key={`column-link-${column.name}-${column._key}`}
-                      href={column.href ?? ""}
-                      className={cn(
-                        buttonVariants({ variant: "ghost" }),
-                        "justify-start",
-                      )}
-                    >
-                      {column.name}
-                    </Link>
-                  );
-                }
-                return (
-                  <Accordion
-                    type="single"
-                    collapsible
-                    className="w-full"
-                    key={column._key}
-                  >
-                    <MobileNavbarAccordionColumn column={column} />
-                  </Accordion>
-                );
-              })}
-            </div>
-
-            <div className="border-t pt-4">
-              <SanityButtons
-                buttons={buttons ?? []}
-                buttonClassName="w-full"
-                className="flex mt-2 flex-col gap-3"
-              />
-            </div>
-          </SheetContent>
-        </Sheet>
-      </div>
-    </div>
-  );
-}
 
 export function Navbar({ navbarData }: { navbarData: QueryNavbarDataResult }) {
   const { logo, siteTitle, columns, buttons } = navbarData ?? {};
