@@ -1,7 +1,8 @@
 import {
   EditIcon,
-  EyeOpenIcon,
   FolderIcon,
+  LinkIcon,
+  CopyIcon,
   WarningOutlineIcon,
 } from "@sanity/icons";
 import {
@@ -15,7 +16,7 @@ import {
   TextInput,
 } from "@sanity/ui";
 import type { FocusEvent, FormEvent, MouseEvent } from "react";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import {
   type ObjectFieldProps,
   set,
@@ -24,10 +25,6 @@ import {
   useFormValue,
   useValidationStatus,
 } from "sanity";
-import {
-  usePresentationNavigate,
-  usePresentationParams,
-} from "sanity/presentation";
 import slugify from "slugify";
 import { styled } from "styled-components";
 
@@ -35,7 +32,17 @@ import { getDocumentPath, stringToPathname } from "../utils/helper";
 import type { DocumentWithLocale } from "../utils/types";
 
 const UnlockButton = styled(Button)`
-  position: static !important;
+  cursor: pointer;
+  > span:nth-of-type(2) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+  }
+`;
+const CopyButton = styled(Button)`
+  margin-left: auto;
   cursor: pointer;
   > span:nth-of-type(2) {
     position: absolute;
@@ -54,10 +61,6 @@ const FolderText = styled(Text)`
   }
 `;
 
-interface PreviewButtonProps {
-  localizedPathname: string;
-}
-
 export function PathnameFieldComponent(props: ObjectFieldProps<SlugValue>) {
   const document = useFormValue([]) as DocumentWithLocale;
   const validation = useValidationStatus(
@@ -70,10 +73,8 @@ export function PathnameFieldComponent(props: ObjectFieldProps<SlugValue>) {
     description,
   } = props;
 
-  const segments = value?.current?.split("/").slice(0);
-  const folder = segments?.slice(0, -1).join("/");
-  const slug = segments?.slice(-1)[0] || "";
-  const [folderLocked, setFolderLocked] = useState(!!folder);
+  const segments = value?.current?.split("/").filter(Boolean) || [];
+  const [folderLocked, setFolderLocked] = useState(segments.length > 1);
 
   const fullPathInputRef = useRef<HTMLInputElement>(null);
   const pathSegmentInputRef = useRef<HTMLInputElement>(null);
@@ -95,35 +96,16 @@ export function PathnameFieldComponent(props: ObjectFieldProps<SlugValue>) {
     [onChange],
   );
 
-  // useEffect(() => {
-  //   console.log("🚀 ~ PathnameFieldComponent ~ document:", {
-  //     title: document.title,
-  //     slug: document?.slug?.current,
-  //   });
-
-  //   // if (!document.title) return;
-
-  //   const finalValue = document?.title
-  //     ? stringToPathname(document?.title, {
-  //         allowTrailingSlash: true,
-  //       })
-  //     : undefined;
-
-  //   handleChange(finalValue);
-  // }, [document.title, handleChange, document?.slug]);
-
-  const updateFinalSegment = useCallback(
-    (e: FormEvent<HTMLInputElement>) => {
-      const segment = slugify(e.currentTarget.value, {
+  const updateSegment = useCallback(
+    (index: number, newValue: string) => {
+      const newSegments = [...segments];
+      newSegments[index] = slugify(newValue, {
         lower: true,
         remove: /[^a-zA-Z0-9 ]/g,
       });
-      const finalValue = [folder, segment]
-        .filter((part): part is string => typeof part === "string")
-        .join("/");
-      handleChange(finalValue);
+      handleChange(newSegments.join("/"));
     },
-    [folder, handleChange],
+    [segments, handleChange],
   );
 
   const updateFullPath = useCallback(
@@ -143,9 +125,9 @@ export function PathnameFieldComponent(props: ObjectFieldProps<SlugValue>) {
 
   const handleBlur = useCallback(
     (e: FocusEvent<HTMLInputElement>) => {
-      setFolderLocked(!!folder);
+      setFolderLocked(segments.length > 1);
     },
-    [folder],
+    [segments],
   );
 
   const localizedPathname = getDocumentPath({
@@ -154,52 +136,61 @@ export function PathnameFieldComponent(props: ObjectFieldProps<SlugValue>) {
   });
 
   const pathInput = useMemo(() => {
-    if (folderLocked && folder) {
+    if (folderLocked && segments.length > 1) {
       return (
         <Stack space={2}>
-          <Flex gap={1} align="center">
-            <Card
-              paddingLeft={2}
-              paddingRight={1}
-              paddingY={1}
-              border
-              radius={1}
-              tone="transparent"
-              style={{ position: "relative" }}
-            >
-              <Flex gap={2} align="center">
-                <Text muted>
-                  <FolderIcon />
-                </Text>
-                <FolderText muted>{folder}</FolderText>
-                <UnlockButton
-                  icon={EditIcon}
-                  onClick={unlockFolder}
-                  title="Edit path's folder"
-                  mode="bleed"
-                  tone="primary"
-                  padding={2}
-                  fontSize={1}
-                  disabled={readOnly}
+          <Flex gap={2}>
+            {segments.slice(0, -1).map((segment, index) => (
+              <Flex key={segment} gap={1} align="center">
+                <Card
+                  paddingX={2}
+                  paddingY={2}
+                  border
+                  radius={1}
+                  tone="transparent"
+                  style={{
+                    position: "relative",
+                  }}
                 >
-                  <span />
-                </UnlockButton>
+                  <Flex gap={2} align="center">
+                    <Text muted>
+                      <FolderIcon />
+                    </Text>
+                    <FolderText muted>{segment}</FolderText>
+                  </Flex>
+                </Card>
+                <Text muted size={2}>
+                  /
+                </Text>
               </Flex>
-            </Card>
-            <Text muted size={2}>
-              /
-            </Text>
-            <Box flex={1}>
-              <TextInput
-                value={slug}
-                onChange={updateFinalSegment}
-                ref={pathSegmentInputRef}
-                onBlur={handleBlur}
-                disabled={readOnly}
-              />
-            </Box>
+            ))}
+            <Flex gap={1} flex={1} align="center">
+              <Box flex={1}>
+                <TextInput
+                  width="100%"
+                  value={segments[segments.length - 1] || ""}
+                  onChange={(e) =>
+                    updateSegment(segments.length - 1, e.currentTarget.value)
+                  }
+                  ref={pathSegmentInputRef}
+                  onBlur={handleBlur}
+                  disabled={readOnly}
+                />
+              </Box>
+            </Flex>
+            <UnlockButton
+              icon={EditIcon}
+              onClick={unlockFolder}
+              title="Edit full path"
+              mode="bleed"
+              tone="primary"
+              padding={2}
+              fontSize={1}
+              disabled={readOnly}
+            >
+              <span />
+            </UnlockButton>
           </Flex>
-          <PreviewButton localizedPathname={localizedPathname || ""} />
         </Stack>
       );
     }
@@ -216,20 +207,17 @@ export function PathnameFieldComponent(props: ObjectFieldProps<SlugValue>) {
             style={{ width: "100%" }}
           />
         </Box>
-        <PreviewButton localizedPathname={localizedPathname || ""} />
       </Stack>
     );
   }, [
     folderLocked,
-    folder,
+    segments,
     value,
     updateFullPath,
     handleBlur,
     readOnly,
-    localizedPathname,
     unlockFolder,
-    slug,
-    updateFinalSegment,
+    updateSegment,
   ]);
 
   return (
@@ -242,10 +230,36 @@ export function PathnameFieldComponent(props: ObjectFieldProps<SlugValue>) {
       </Stack>
 
       {typeof value?.current === "string" && (
-        <Text muted>
-          {window.location.origin}
-          {localizedPathname}
-        </Text>
+        <Flex direction="column" gap={2}>
+          <Flex align="center">
+            <p
+              style={{
+                textOverflow: "ellipsis",
+                margin: 0,
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+                color: "var(--card-muted-fg-color)",
+              }}
+            >
+              {window.location.origin}
+              {localizedPathname}
+            </p>
+            <CopyButton
+              icon={CopyIcon}
+              onClick={() =>
+                navigator.clipboard.writeText(
+                  `${window.location.origin}${localizedPathname}`,
+                )
+              }
+              title="Copy link"
+              mode="bleed"
+              tone="primary"
+              fontSize={1}
+            >
+              <span />
+            </CopyButton>
+          </Flex>
+        </Flex>
       )}
 
       {pathInput}
@@ -267,56 +281,4 @@ export function PathnameFieldComponent(props: ObjectFieldProps<SlugValue>) {
       ) : null}
     </Stack>
   );
-}
-
-function PreviewButton({ localizedPathname }: PreviewButtonProps) {
-  const navigate = useSafeNavigate();
-  const preview = useSafePreview();
-
-  const isDisabled =
-    !navigate ||
-    typeof localizedPathname !== "string" ||
-    preview === localizedPathname;
-
-  const handleClick = useCallback(() => {
-    if (navigate) {
-      navigate(localizedPathname);
-    }
-  }, [navigate, localizedPathname]);
-
-  if (isDisabled) {
-    return null;
-  }
-
-  return (
-    <Button
-      text="Preview"
-      fontSize={1}
-      height="100%"
-      mode="default"
-      tone="default"
-      icon={EyeOpenIcon}
-      disabled={isDisabled}
-      title="Preview page"
-      onClick={isDisabled ? undefined : handleClick}
-    />
-  );
-}
-
-function useSafeNavigate() {
-  try {
-    return usePresentationNavigate();
-  } catch {
-    return null;
-  }
-}
-
-function useSafePreview() {
-  try {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const { preview } = usePresentationParams();
-    return preview;
-  } catch {
-    return null;
-  }
 }
