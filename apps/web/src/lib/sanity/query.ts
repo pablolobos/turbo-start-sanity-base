@@ -77,13 +77,8 @@ const ctaBlock = /* groq */ `
     ...,
     ${richTextFragment},
     ${buttonsFragment},
-    "ctaCards": array::compact(ctaCards[]{
-      ...,
-      ${imageFragment},
-    })
   }
 `;
-
 const imageLinkCardsBlock = /* groq */ `
   _type == "imageLinkCards" => {
     ...,
@@ -91,6 +86,12 @@ const imageLinkCardsBlock = /* groq */ `
     ${buttonsFragment},
     "cards": array::compact(cards[]{
       ...,
+      "openInNewTab": url.openInNewTab,
+      "href": select(
+        url.type == "internal" => url.internal->slug.current,
+        url.type == "external" => url.external,
+        url.href
+      ),
       ${imageFragment},
     })
   }

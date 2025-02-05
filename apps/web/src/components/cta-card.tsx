@@ -11,10 +11,11 @@ export type CTACardProps = {
 };
 
 export function CTACard({ card, className }: CTACardProps) {
-  const { image, description, title, url } = card ?? {};
+  const { image, description, title, href } = card ?? {};
+  console.log("🚀 ~ CTACard ~ card:", card);
   return (
     <Link
-      href={url ?? "#"}
+      href={href ?? "#"}
       className={cn(
         "rounded-3xl p-4 md:p-8 transition-colors relative overflow-hidden group flex flex-col justify-end lg:h-[400px]",
         className,
