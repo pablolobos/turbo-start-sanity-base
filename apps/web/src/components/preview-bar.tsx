@@ -5,7 +5,6 @@ import type { FC } from "react";
 
 export const PreviewBar: FC = () => {
   const path = usePathname();
-  console.log("🚀 ~ path:", { path });
   return (
     <div className="fixed bottom-2 left-0 right-0 z-10 px-2 md:bottom-4 md:px-4 ">
       <div className="mx-auto max-w-2xl rounded-md border border-white border-opacity-5 bg-[#12061F33] p-4 backdrop-blur-[10px]">
