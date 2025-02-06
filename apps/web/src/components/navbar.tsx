@@ -21,148 +21,29 @@ import {
 } from "@workspace/ui/components/sheet";
 import { cn } from "@workspace/ui/lib/utils";
 import { Menu } from "lucide-react";
-import dynamic from "next/dynamic";
-import Link from "next/link";
 
 import { sanityFetch } from "@/lib/sanity/live";
 import { queryNavbarData } from "@/lib/sanity/query";
 import type { QueryNavbarDataResult } from "@/lib/sanity/sanity.types";
 
 import { Logo } from "./logo";
-import { SanityButtons } from "./sanity-buttons";
-import { SanityIcon } from "./sanity-icon";
-
-const MobileNavbar = dynamic(() =>
-  import("./mobile-navbar").then((mod) => mod.MobileNavbar),
-);
-
-interface MenuItem {
-  title: string;
-  description: string;
-  icon: JSX.Element;
-  href?: string;
-}
-
-function MenuItemLink({ item }: { item: MenuItem }) {
-  return (
-    <Link
-      className={cn(
-        "flex select-none gap-4 rounded-md p-3 leading-none outline-none transition-colors hover:bg-accent hover:text-accent-foreground items-center focus:bg-accent focus:text-accent-foreground",
-      )}
-      aria-label={`Link to ${item.title ?? item.href}`}
-      href={item.href ?? "/"}
-    >
-      {item.icon}
-      <div className="">
-        <div className="text-sm font-semibold">{item.title}</div>
-        <p className="text-sm leading-snug text-muted-foreground line-clamp-2">
-          {item.description}
-        </p>
-      </div>
-    </Link>
-  );
-}
+import { NavbarClient } from "./navbar-client";
 
 export async function NavbarServer() {
   const navbarData = await sanityFetch({ query: queryNavbarData });
   return <Navbar navbarData={navbarData.data} />;
 }
 
-function NavbarColumnLink({
-  column,
-}: {
-  column: NonNullable<NonNullable<QueryNavbarDataResult>["columns"]>[number];
-}) {
-  if (column.type !== "link") return null;
-  return (
-    <Link
-      className={cn(
-        buttonVariants({
-          variant: "ghost",
-        }),
-        "text-muted-foreground",
-      )}
-      aria-label={`Link to ${column.name ?? column.href}`}
-      href={column.href ?? ""}
-    >
-      {column.name}
-    </Link>
-  );
-}
-
-function NavbarColumn({
-  column,
-}: {
-  column: NonNullable<NonNullable<QueryNavbarDataResult>["columns"]>[number];
-}) {
-  if (column.type !== "column") return null;
-  return (
-    <NavigationMenuList>
-      <NavigationMenuItem className="text-muted-foreground">
-        <NavigationMenuTrigger>{column.title}</NavigationMenuTrigger>
-        <NavigationMenuContent>
-          <ul className="w-80 p-3">
-            {column.links?.map((item) => (
-              <li key={item._key}>
-                <MenuItemLink
-                  item={{
-                    description: item.description ?? "",
-                    href: item.href ?? "",
-                    icon: (
-                      <SanityIcon
-                        icon={item.icon}
-                        className="size-5 shrink-0"
-                      />
-                    ),
-                    title: item.name ?? "",
-                  }}
-                />
-              </li>
-            ))}
-          </ul>
-        </NavigationMenuContent>
-      </NavigationMenuItem>
-    </NavigationMenuList>
-  );
-}
-
 export function Navbar({ navbarData }: { navbarData: QueryNavbarDataResult }) {
-  const { logo, siteTitle, columns, buttons } = navbarData ?? {};
+  const { logo, siteTitle } = navbarData ?? {};
 
   return (
     <section className="py-4 h-[75px] md:border-b">
       <div className="container mx-auto px-4 md:px-6">
-        <nav className="hidden justify-between lg:flex">
+        <nav className="flex items-center justify-between">
           <Logo src={logo} alt={siteTitle} priority />
-
-          <div className="flex items-center gap-6 justify-center flex-grow">
-            <div className="flex items-center">
-              <NavigationMenu>
-                {columns?.map((column) =>
-                  column.type === "column" ? (
-                    <NavbarColumn
-                      key={`column-${column._key}`}
-                      column={column}
-                    />
-                  ) : (
-                    <NavbarColumnLink
-                      key={`column-link-${column.name}-${column._key}`}
-                      column={column}
-                    />
-                  ),
-                )}
-              </NavigationMenu>
-            </div>
-          </div>
-
-          <SanityButtons
-            buttons={buttons ?? []}
-            className="flex gap-2"
-            buttonClassName="rounded-[10px]"
-          />
+          <NavbarClient navbarData={navbarData} />
         </nav>
-
-        <MobileNavbar navbarData={navbarData} />
       </div>
     </section>
   );
