@@ -56,7 +56,7 @@ export default async function BlogSlugPage({
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_300px]">
         <main>
           <header className="mb-8">
-            <h1 className="mt-2 text-4xl font-bold tracking-tight">{title}</h1>
+            <h1 className="mt-2 text-4xl font-bold">{title}</h1>
             <p className="mt-4 text-lg text-muted-foreground">{description}</p>
           </header>
           {image && (

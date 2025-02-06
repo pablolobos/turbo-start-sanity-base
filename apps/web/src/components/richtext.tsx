@@ -18,7 +18,7 @@ const components: Partial<PortableTextReactComponents> = {
       return (
         <h2
           id={slug}
-          className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0"
+          className="scroll-m-20 border-b pb-2 text-3xl font-semibold first:mt-0"
         >
           {children}
         </h2>
@@ -27,10 +27,7 @@ const components: Partial<PortableTextReactComponents> = {
     h3: ({ children, value }) => {
       const slug = parseChildrenToSlug(value.children);
       return (
-        <h3
-          id={slug}
-          className="scroll-m-20 text-2xl font-semibold tracking-tight"
-        >
+        <h3 id={slug} className="scroll-m-20 text-2xl font-semibold">
           {children}
         </h3>
       );
@@ -38,10 +35,7 @@ const components: Partial<PortableTextReactComponents> = {
     h4: ({ children, value }) => {
       const slug = parseChildrenToSlug(value.children);
       return (
-        <h4
-          id={slug}
-          className="scroll-m-20 text-xl font-semibold tracking-tight"
-        >
+        <h4 id={slug} className="scroll-m-20 text-xl font-semibold">
           {children}
         </h4>
       );
@@ -49,10 +43,7 @@ const components: Partial<PortableTextReactComponents> = {
     h5: ({ children, value }) => {
       const slug = parseChildrenToSlug(value.children);
       return (
-        <h5
-          id={slug}
-          className="scroll-m-20 text-lg font-semibold tracking-tight"
-        >
+        <h5 id={slug} className="scroll-m-20 text-lg font-semibold">
           {children}
         </h5>
       );
@@ -60,10 +51,7 @@ const components: Partial<PortableTextReactComponents> = {
     h6: ({ children, value }) => {
       const slug = parseChildrenToSlug(value.children);
       return (
-        <h6
-          id={slug}
-          className="scroll-m-20 text-base font-semibold tracking-tight"
-        >
+        <h6 id={slug} className="scroll-m-20 text-base font-semibold">
           {children}
         </h6>
       );
@@ -131,7 +119,7 @@ export function RichText<T>({
   return (
     <div
       className={cn(
-        "prose prose-slate prose-headings:scroll-m-24 prose-headings:font-bold prose-headings:text-opacity-90 prose-p:text-opacity-80 prose-a:underline prose-a:decoration-dotted prose-ol:list-decimal prose-ol:text-opacity-80 prose-ul:list-disc prose-ul:text-opacity-80 prose-h2:border-b prose-h2:pb-2 prose-h2:text-3xl prose-h2:font-semibold prose-h2:tracking-tight prose-h2:first:mt-0 max-w-none",
+        "prose prose-slate prose-headings:scroll-m-24 prose-headings:font-bold prose-headings:text-opacity-90 prose-p:text-opacity-80 prose-a:underline prose-a:decoration-dotted prose-ol:list-decimal prose-ol:text-opacity-80 prose-ul:list-disc prose-ul:text-opacity-80 prose-h2:border-b prose-h2:pb-2 prose-h2:text-3xl prose-h2:font-semibold prose-h2:prose-h2:first:mt-0 max-w-none",
         className,
       )}
     >
