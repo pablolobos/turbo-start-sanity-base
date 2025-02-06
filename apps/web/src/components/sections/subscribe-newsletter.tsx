@@ -1,8 +1,6 @@
 "use client";
 import { Button } from "@workspace/ui/components/button";
-import { cn } from "@workspace/ui/lib/utils";
 import { ChevronRight, LoaderCircle } from "lucide-react";
-import dynamic from "next/dynamic";
 import Form from "next/form";
 import { useFormStatus } from "react-dom";
 
@@ -10,15 +8,15 @@ import type { PagebuilderType } from "@/types";
 
 import { RichText } from "../richtext";
 
-const InteractiveGridPattern = dynamic(
-  () =>
-    import("@workspace/ui/components/interactive-grid-pattern").then(
-      (mod) => mod.InteractiveGridPattern,
-    ),
-  {
-    ssr: false,
-  },
-);
+// const InteractiveGridPattern = dynamic(
+//   () =>
+//     import("@workspace/ui/components/interactive-grid-pattern").then(
+//       (mod) => mod.InteractiveGridPattern,
+//     ),
+//   {
+//     ssr: false,
+//   },
+// );
 
 type SubscribeNewsletterProps = PagebuilderType<"subscribeNewsletter">;
 export default function SubscribeNewsletterButton() {
@@ -109,12 +107,12 @@ export function SubscribeNewsletter({
             />
           )}
         </div>
-        <InteractiveGridPattern
+        {/* <InteractiveGridPattern
           className={cn(
             "absolute scale-125 inset-0 -z-0 w-full opacity-50",
             "[mask-image:radial-gradient(1000px_circle_at_center,transparent,white)]",
           )}
-        />
+        /> */}
       </div>
     </section>
   );
