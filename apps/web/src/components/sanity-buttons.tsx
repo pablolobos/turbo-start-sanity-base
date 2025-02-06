@@ -32,7 +32,8 @@ function SanityButton({
       title={`Click to visit ${text}`}
     >
       <Button
-        variant={variant === "default" ? "default" : "outline"}
+        variant={variant}
+        // variant={variant === "default" ? "default" : "outline"}
         {...props}
         className={cn("rounded-[10px]", className)}
       >
