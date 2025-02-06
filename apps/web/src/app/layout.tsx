@@ -10,6 +10,7 @@ import { FooterServer, FooterSkeleton } from "@/components/footer";
 import { NavbarServer, NavbarSkeleton } from "@/components/navbar";
 import { PreviewBar } from "@/components/preview-bar";
 import { SanityLive } from "@/lib/sanity/live";
+import { preconnect, prefetchDNS } from "react-dom";
 
 const fontGeist = Geist({
   subsets: ["latin"],
@@ -30,6 +31,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  preconnect("https://cdn.sanity.io");
+  prefetchDNS("https://cdn.sanity.io");
   return (
     <html lang="en" suppressHydrationWarning>
       <body
