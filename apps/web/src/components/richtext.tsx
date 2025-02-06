@@ -59,6 +59,11 @@ const components: Partial<PortableTextReactComponents> = {
     inline: ({ children }) => <span>{children}</span>,
   },
   marks: {
+    code: ({ children }) => (
+      <code className="rounded-md border-[1px] border-white border-opacity-10  bg-opacity-5 p-1 text-sm  lg:whitespace-nowrap">
+        {children}
+      </code>
+    ),
     customLink: ({ children, value }) => {
       if (!value.href || value.href === "#") {
         console.warn("🚀 link is not set", value);

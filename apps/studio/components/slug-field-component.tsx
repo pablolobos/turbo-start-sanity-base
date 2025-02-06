@@ -1,8 +1,7 @@
 import {
+  CopyIcon,
   EditIcon,
   FolderIcon,
-  LinkIcon,
-  CopyIcon,
   WarningOutlineIcon,
 } from "@sanity/icons";
 import {
@@ -30,6 +29,8 @@ import { styled } from "styled-components";
 
 import { getDocumentPath, stringToPathname } from "../utils/helper";
 import type { DocumentWithLocale } from "../utils/types";
+
+const presentationOriginUrl = process.env.SANITY_STUDIO_PRESENTATION_URL;
 
 const UnlockButton = styled(Button)`
   cursor: pointer;
@@ -241,14 +242,13 @@ export function PathnameFieldComponent(props: ObjectFieldProps<SlugValue>) {
                 color: "var(--card-muted-fg-color)",
               }}
             >
-              {window.location.origin}
-              {localizedPathname}
+              {`${presentationOriginUrl ?? ""}${localizedPathname}`}
             </p>
             <CopyButton
               icon={CopyIcon}
               onClick={() =>
                 navigator.clipboard.writeText(
-                  `${window.location.origin}${localizedPathname}`,
+                  `${presentationOriginUrl ?? ""}${localizedPathname}`,
                 )
               }
               title="Copy link"
