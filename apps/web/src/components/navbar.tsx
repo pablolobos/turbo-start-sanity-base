@@ -35,7 +35,7 @@ export function NavbarSkeleton() {
       <div className="container mx-auto px-4 md:px-6">
         <nav className="flex items-center">
           <div className="flex-grow">
-            <div className="h-[40px] w-[80px] bg-muted rounded animate-pulse" />
+            <div className="h-[40px] w-[170px] bg-muted rounded animate-pulse" />
           </div>
           <div className="flex-grow">
             <NavbarSkeletonResponsive />

@@ -291,10 +291,10 @@ function SkeletonDesktopNavbar() {
 
 export function NavbarSkeletonResponsive() {
   return (
-    <div className="w-full">
+    <>
       <SkeletonMobileNavbar />
       <SkeletonDesktopNavbar />
-    </div>
+    </>
   );
 }
 
