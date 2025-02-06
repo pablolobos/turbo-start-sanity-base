@@ -21,6 +21,7 @@ import {
 } from "@workspace/ui/components/sheet";
 import { cn } from "@workspace/ui/lib/utils";
 import { Menu } from "lucide-react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 
 import { sanityFetch } from "@/lib/sanity/live";
@@ -28,9 +29,12 @@ import { queryNavbarData } from "@/lib/sanity/query";
 import type { QueryNavbarDataResult } from "@/lib/sanity/sanity.types";
 
 import { Logo } from "./logo";
-import { MobileNavbar } from "./mobile-navbar";
 import { SanityButtons } from "./sanity-buttons";
 import { SanityIcon } from "./sanity-icon";
+
+const MobileNavbar = dynamic(() =>
+  import("./mobile-navbar").then((mod) => mod.MobileNavbar),
+);
 
 interface MenuItem {
   title: string;
@@ -121,7 +125,6 @@ function NavbarColumn({
     </NavigationMenuList>
   );
 }
-
 
 export function Navbar({ navbarData }: { navbarData: QueryNavbarDataResult }) {
   const { logo, siteTitle, columns, buttons } = navbarData ?? {};
