@@ -1,8 +1,8 @@
 "use client";
 import { Button } from "@workspace/ui/components/button";
-import { InteractiveGridPattern } from "@workspace/ui/components/interactive-grid-pattern";
 import { cn } from "@workspace/ui/lib/utils";
 import { ChevronRight, LoaderCircle } from "lucide-react";
+import dynamic from "next/dynamic";
 import Form from "next/form";
 import { useFormStatus } from "react-dom";
 
@@ -10,8 +10,17 @@ import type { PagebuilderType } from "@/types";
 
 import { RichText } from "../richtext";
 
-type SubscribeNewsletterProps = PagebuilderType<"subscribeNewsletter">;
+const InteractiveGridPattern = dynamic(
+  () =>
+    import("@workspace/ui/components/interactive-grid-pattern").then(
+      (mod) => mod.InteractiveGridPattern,
+    ),
+  {
+    ssr: false,
+  },
+);
 
+type SubscribeNewsletterProps = PagebuilderType<"subscribeNewsletter">;
 export default function SubscribeNewsletterButton() {
   const { pending } = useFormStatus();
   return (
@@ -20,6 +29,7 @@ export default function SubscribeNewsletterButton() {
       type="submit"
       disabled={pending}
       className="size-8 aspect-square bg-zinc-200 hover:bg-zinc-300"
+      aria-label={pending ? "Subscribing..." : "Subscribe to newsletter"}
     >
       <span className="flex items-center justify-center gap-2">
         {pending ? (
