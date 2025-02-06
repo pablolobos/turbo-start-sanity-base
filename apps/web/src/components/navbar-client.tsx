@@ -22,6 +22,7 @@ import {
 import { Sheet, SheetTrigger } from "@workspace/ui/components/sheet";
 import { cn } from "@workspace/ui/lib/utils";
 import { Menu } from "lucide-react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -256,6 +257,24 @@ export function DesktopNavbar({
   );
 }
 
+const ClientSideNavbar = ({
+  navbarData,
+}: {
+  navbarData: QueryNavbarDataResult;
+}) => {
+  const isMobile = useIsMobile();
+
+  if (isMobile === undefined) {
+    return null; // Return null on initial render to avoid hydration mismatch
+  }
+
+  return isMobile ? (
+    <MobileNavbar navbarData={navbarData} />
+  ) : (
+    <DesktopNavbar navbarData={navbarData} />
+  );
+};
+
 function SkeletonMobileNavbar() {
   return (
     <div className="md:hidden">
@@ -298,23 +317,8 @@ export function NavbarSkeletonResponsive() {
   );
 }
 
-
-export function NavbarClient({
-  navbarData,
-}: {
-  navbarData: QueryNavbarDataResult;
-}) {
-  const isMobile = useIsMobile();
-
-  if (isMobile === undefined) return <NavbarSkeletonResponsive />;
-
-  return (
-    <>
-      {isMobile ? (
-        <MobileNavbar navbarData={navbarData} />
-      ) : (
-        <DesktopNavbar navbarData={navbarData} />
-      )}
-    </>
-  );
-}
+// Dynamically import the navbar with no SSR to avoid hydration issues
+export const NavbarClient = dynamic(() => Promise.resolve(ClientSideNavbar), {
+  ssr: false,
+  loading: () => <NavbarSkeletonResponsive />,
+});
