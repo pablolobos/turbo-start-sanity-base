@@ -14,13 +14,13 @@ interface MediaQueryResult {
   removeListener?: (listener: (event: MediaQueryListEvent) => void) => void;
 }
 
-export function useIsMobile(mobileScreenSize = 768): boolean {
-  const [isMobile, setIsMobile] = React.useState<boolean>(() => {
+export function useIsMobile(mobileScreenSize = 768) {
+  const [isMobile, setIsMobile] = React.useState(() => {
     if (
       typeof window === "undefined" ||
       typeof window.matchMedia !== "function"
     ) {
-      return false;
+      return undefined;
     }
     return window.matchMedia(`(max-width: ${mobileScreenSize}px)`).matches;
   });

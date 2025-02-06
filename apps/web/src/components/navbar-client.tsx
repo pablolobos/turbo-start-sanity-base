@@ -105,64 +105,64 @@ function MobileNavbar({ navbarData }: { navbarData: QueryNavbarDataResult }) {
   const { logo, siteTitle, columns, buttons } = navbarData ?? {};
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <>
-      <Sheet open={isOpen} onOpenChange={setIsOpen}>
+    <Sheet open={isOpen} onOpenChange={setIsOpen}>
+      <div className="flex justify-end">
         <SheetTrigger asChild>
           <Button variant="outline" size="icon">
             <Menu className="size-4" />
             <span className="sr-only">Open menu</span>
           </Button>
         </SheetTrigger>
-        <SheetContent className="overflow-y-auto">
-          <SheetHeader>
-            <SheetTitle>
-              <Logo src={logo} alt={siteTitle} priority />
-            </SheetTitle>
-          </SheetHeader>
+      </div>
+      <SheetContent className="overflow-y-auto">
+        <SheetHeader>
+          <SheetTitle>
+            <Logo src={logo} alt={siteTitle} priority />
+          </SheetTitle>
+        </SheetHeader>
 
-          <div className="mb-8 mt-8 flex flex-col gap-4">
-            {columns?.map((column) => {
-              if (column.type === "link") {
-                return (
-                  <Link
-                    key={`column-link-${column.name}-${column._key}`}
-                    href={column.href ?? ""}
-                    onClick={() => setIsOpen(false)}
-                    className={cn(
-                      buttonVariants({ variant: "ghost" }),
-                      "justify-start",
-                    )}
-                  >
-                    {column.name}
-                  </Link>
-                );
-              }
+        <div className="mb-8 mt-8 flex flex-col gap-4">
+          {columns?.map((column) => {
+            if (column.type === "link") {
               return (
-                <Accordion
-                  type="single"
-                  collapsible
-                  className="w-full"
-                  key={column._key}
+                <Link
+                  key={`column-link-${column.name}-${column._key}`}
+                  href={column.href ?? ""}
+                  onClick={() => setIsOpen(false)}
+                  className={cn(
+                    buttonVariants({ variant: "ghost" }),
+                    "justify-start",
+                  )}
                 >
-                  <MobileNavbarAccordionColumn
-                    column={column}
-                    setIsOpen={setIsOpen}
-                  />
-                </Accordion>
+                  {column.name}
+                </Link>
               );
-            })}
-          </div>
+            }
+            return (
+              <Accordion
+                type="single"
+                collapsible
+                className="w-full"
+                key={column._key}
+              >
+                <MobileNavbarAccordionColumn
+                  column={column}
+                  setIsOpen={setIsOpen}
+                />
+              </Accordion>
+            );
+          })}
+        </div>
 
-          <div className="border-t pt-4">
-            <SanityButtons
-              buttons={buttons ?? []}
-              buttonClassName="w-full"
-              className="flex mt-2 flex-col gap-3"
-            />
-          </div>
-        </SheetContent>
-      </Sheet>
-    </>
+        <div className="border-t pt-4">
+          <SanityButtons
+            buttons={buttons ?? []}
+            buttonClassName="w-full"
+            className="flex mt-2 flex-col gap-3"
+          />
+        </div>
+      </SheetContent>
+    </Sheet>
   );
 }
 
@@ -232,31 +232,72 @@ export function DesktopNavbar({
   const { columns, buttons } = navbarData ?? {};
 
   return (
-    <>
-      <div className="flex items-center gap-6 justify-center flex-grow">
-        <div className="flex items-center">
-          <NavigationMenu>
-            {columns?.map((column) =>
-              column.type === "column" ? (
-                <NavbarColumn key={`column-${column._key}`} column={column} />
-              ) : (
-                <NavbarColumnLink
-                  key={`column-link-${column.name}-${column._key}`}
-                  column={column}
-                />
-              ),
-            )}
-          </NavigationMenu>
-        </div>
+    <div className="flex items-start justify-between w-full">
+      <div className="flex items-center">
+        <NavigationMenu>
+          {columns?.map((column) =>
+            column.type === "column" ? (
+              <NavbarColumn key={`column-${column._key}`} column={column} />
+            ) : (
+              <NavbarColumnLink
+                key={`column-link-${column.name}-${column._key}`}
+                column={column}
+              />
+            ),
+          )}
+        </NavigationMenu>
       </div>
       <SanityButtons
         buttons={buttons ?? []}
-        className="flex gap-2"
+        className="flex gap-2 ml-auto"
         buttonClassName="rounded-[10px]"
       />
-    </>
+    </div>
   );
 }
+
+function SkeletonMobileNavbar() {
+  return (
+    <div className="md:hidden">
+      <div className="flex justify-end">
+        <div className="h-12 w-12 rounded-md bg-muted animate-pulse" />
+      </div>
+    </div>
+  );
+}
+
+function SkeletonDesktopNavbar() {
+  return (
+    <div className="hidden md:flex items-center justify-between w-full">
+      <div className="flex items-center gap-6">
+        {Array.from({ length: 3 }).map((_, i) => (
+          <div
+            key={`skeleton-desktop-navbar-${i.toString()}`}
+            className="h-8 w-24 bg-muted rounded animate-pulse"
+          />
+        ))}
+      </div>
+      <div className="flex gap-2">
+        {Array.from({ length: 2 }).map((_, i) => (
+          <div
+            key={`skeleton-desktop-navbar-${i.toString()}`}
+            className="h-12 w-32 bg-muted rounded animate-pulse"
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function NavbarSkeletonResponsive() {
+  return (
+    <div className="w-full">
+      <SkeletonMobileNavbar />
+      <SkeletonDesktopNavbar />
+    </div>
+  );
+}
+
 
 export function NavbarClient({
   navbarData,
@@ -264,9 +305,16 @@ export function NavbarClient({
   navbarData: QueryNavbarDataResult;
 }) {
   const isMobile = useIsMobile();
-  return isMobile ? (
-    <MobileNavbar navbarData={navbarData} />
-  ) : (
-    <DesktopNavbar navbarData={navbarData} />
+
+  if (isMobile === undefined) return <NavbarSkeletonResponsive />;
+
+  return (
+    <>
+      {isMobile ? (
+        <MobileNavbar navbarData={navbarData} />
+      ) : (
+        <DesktopNavbar navbarData={navbarData} />
+      )}
+    </>
   );
 }
