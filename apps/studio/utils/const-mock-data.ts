@@ -452,18 +452,6 @@ export function generateNavbarColumns({ links }: { links: Link[] }) {
     },
     {
       _key: faker.string.uuid(),
-      _type: "navbarLink",
-      name: "Pricing",
-      url: {
-        _type: "customUrl",
-        external: "https://example.com",
-        href: "#",
-        openInNewTab: false,
-        type: "external",
-      },
-    },
-    {
-      _key: faker.string.uuid(),
       _type: "navbarColumn",
       links: buildLinks(firstPart),
       title: "Resources",
