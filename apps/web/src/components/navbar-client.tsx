@@ -24,7 +24,8 @@ import { cn } from "@workspace/ui/lib/utils";
 import { Menu } from "lucide-react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 import { useIsMobile } from "@/hooks/use-is-mobile";
 import type { QueryNavbarDataResult } from "@/lib/sanity/sanity.types";
@@ -105,6 +106,13 @@ function MobileNavbarAccordionColumn({
 function MobileNavbar({ navbarData }: { navbarData: QueryNavbarDataResult }) {
   const { logo, siteTitle, columns, buttons } = navbarData ?? {};
   const [isOpen, setIsOpen] = useState(false);
+
+  const path = usePathname();
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: This is intentional
+  useEffect(() => {
+    setIsOpen(false);
+  }, [path]);
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <div className="flex justify-end">
