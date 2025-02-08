@@ -39,7 +39,7 @@ const DEFAULT_IMAGE_CONFIG = {
 } as const;
 
 const LOGO_URL =
-  "https://cdn.sanity.io/images/s6kuy1ts/production/68c438f68264717e93c7ba1e85f1d0c4b58b33c2-1200x621.svg";
+  "https://cdn.sanity.io/images/rqdz6bx6/production/56ec9a9bbac2260f825a5ad471dd9581a3f92868-167x32.svg";
 
 async function generateImage(
   client: SanityClient,
