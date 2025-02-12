@@ -159,6 +159,7 @@ const pageBuilderFragment = /* groq */ `
 
 export const queryHomePageData =
   defineQuery(/* groq */ `*[_type == "homePage" && _id == "homePage"][0]{
+    ...,
     _id,
     _type,
     title,
@@ -180,6 +181,7 @@ export const querySlugPagePaths = defineQuery(/* groq */ `
 
 export const queryBlogIndexPageData = defineQuery(/* groq */ `
   *[_type == "blogIndex"][0]{
+    ...,
     _id,
     _type,
     title,
