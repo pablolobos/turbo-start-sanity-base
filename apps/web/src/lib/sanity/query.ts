@@ -162,6 +162,7 @@ export const queryHomePageData =
     ...,
     _id,
     _type,
+    "slug": slug.current,
     title,
     description,
     ${pageBuilderFragment}
