@@ -37,6 +37,7 @@ export const page = defineType({
         source: "title",
         slugify: createSlug,
       },
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "image",

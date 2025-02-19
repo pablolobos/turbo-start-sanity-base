@@ -42,6 +42,7 @@ export const homePage = defineType({
         source: "title",
         slugify: createSlug,
       },
+      validation: (Rule) => Rule.required(),
     }),
     pageBuilderField,
     ...seoFields.filter(
