@@ -243,7 +243,7 @@ export function DesktopNavbar({
   const { columns, buttons } = navbarData ?? {};
 
   return (
-    <div className="flex items-start justify-between w-full">
+    <div className="flex items-center justify-between w-full">
       <div className="flex items-center">
         <NavigationMenu>
           {columns?.map((column) =>
