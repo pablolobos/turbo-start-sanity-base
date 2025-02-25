@@ -14,7 +14,7 @@ export function Navbar({ navbarData }: { navbarData: QueryNavbarDataResult }) {
   const { logo, siteTitle } = navbarData ?? {};
 
   return (
-    <section className="py-4 h-[75px] md:border-b">
+    <section className="py-3 md:border-b">
       <div className="container mx-auto px-4 md:px-6">
         <nav className="flex items-center">
           <div className="flex-grow">
