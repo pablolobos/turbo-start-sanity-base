@@ -41,7 +41,6 @@ export default async function BlogIndexPage() {
           </div>
         </div>
       </div>
-
       <PageBuilder pageBuilder={pageBuilder ?? []} id={_id} type={_type} />
     </main>
   );
