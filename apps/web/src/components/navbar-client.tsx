@@ -11,8 +11,10 @@ import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
+  NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
 } from "@workspace/ui/components/navigation-menu";
 import {
   SheetContent,
@@ -183,16 +185,16 @@ function NavbarColumnLink({
   if (column.type !== "link") return null;
   return (
     <Link
-      className={cn(
-        buttonVariants({
-          variant: "ghost",
-        }),
-        "text-muted-foreground",
-      )}
       aria-label={`Link to ${column.name ?? column.href}`}
       href={column.href ?? ""}
+      legacyBehavior
+      passHref
     >
-      {column.name}
+      <NavigationMenuLink
+        className={cn(navigationMenuTriggerStyle(), "text-muted-foreground")}
+      >
+        {column.name}
+      </NavigationMenuLink>
     </Link>
   );
 }
@@ -251,7 +253,7 @@ export function DesktopNavbar({
           ),
         )}
       </NavigationMenu>
-
+     
       <div className="justify-self-end">
         <SanityButtons
           buttons={buttons ?? []}
