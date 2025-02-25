@@ -70,6 +70,9 @@ export function getMetaData(data: MetaDataInput): Metadata {
       title: meta.title,
       description: meta.description,
     },
+    alternates: {
+      canonical: pageUrl,
+    },
     openGraph: {
       type: "website",
       countryName: "UK",

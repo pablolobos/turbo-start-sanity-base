@@ -26,7 +26,7 @@ export function Logo({
   priority = true,
 }: LogoProps) {
   return (
-    <Link href="/" className="flex items-center gap-2 w-fit">
+    <Link href="/" className="">
       {image ? (
         <SanityImage
           asset={image}
