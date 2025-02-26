@@ -20,7 +20,7 @@ interface ImageAsset {
   type: ImageType;
 }
 
-type ImageType = "heroBlock" | "slugPage" | "author" | "blog" | "logo";
+type ImageType = "heroBlock" | "slugPage" | "author" | "blog" | "logo" | "og";
 
 interface ImageOptions {
   width?: number;
@@ -94,6 +94,10 @@ const IMAGE_ASSETS_CONFIG = [
   { type: "blog" as const, width: 2560, height: 1440 },
   { type: "blog" as const, width: 2560, height: 1440 },
   { type: "logo" as const, url: LOGO_URL },
+  {
+    type: "og" as const,
+    url: "https://raw.githubusercontent.com/robotostudio/turbo-start-sanity/refs/heads/main/turbo-start-sanity-og.png",
+  },
 ] as const;
 
 // Main export for image generation
@@ -256,6 +260,7 @@ export function getMockHomePageData({
   imagesStore,
   faqs,
 }: HomePageGenerationOptions) {
+  const seoImage = imagesStore.find((image) => image.type === "og");
   const blocks = [
     generateHeroBlock(imagesStore, {
       title: "Welcome to our website",
@@ -274,6 +279,17 @@ export function getMockHomePageData({
       type: "slug" as const,
       current: "/",
     },
+    ...(seoImage
+      ? {
+          seoImage: {
+            _type: "image",
+            asset: {
+              _ref: seoImage.id,
+              _type: "reference",
+            },
+          },
+        }
+      : {}),
     pageBuilder: blocks,
   };
 }
