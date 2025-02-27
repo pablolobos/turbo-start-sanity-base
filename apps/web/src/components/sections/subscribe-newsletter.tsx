@@ -26,7 +26,7 @@ export default function SubscribeNewsletterButton() {
       size="icon"
       type="submit"
       disabled={pending}
-      className="size-8 aspect-square bg-zinc-200 hover:bg-zinc-300"
+      className="size-8 aspect-square bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-800 dark:hover:bg-zinc-700"
       aria-label={pending ? "Subscribing..." : "Subscribe to newsletter"}
     >
       <span className="flex items-center justify-center gap-2">
@@ -39,7 +39,7 @@ export default function SubscribeNewsletterButton() {
           />
         ) : (
           <ChevronRight
-            className="text-black"
+            className="text-black dark:text-neutral-300"
             size={16}
             strokeWidth={2}
             aria-hidden="true"
@@ -57,15 +57,15 @@ export function SubscribeNewsletter({
 }: SubscribeNewsletterProps) {
   return (
     <section id="subscribe" className="px-4 py-8 sm:py-12 md:py-16">
-      <div className="relative container mx-auto px-4 md:px-8 py-8 sm:py-16 md:py-24 lg:py-32 bg-gray-50 rounded-3xl overflow-hidden">
+      <div className="relative container mx-auto px-4 md:px-8 py-8 sm:py-16 md:py-24 lg:py-32 bg-gray-50 dark:bg-zinc-900 rounded-3xl overflow-hidden">
         <div className="relative z-10 mx-auto text-center">
-          <h2 className="mb-4 text-xl font-semibold text-gray-900 sm:text-3xl md:text-5xl text-balance">
+          <h2 className="mb-4 text-xl font-semibold text-gray-900 dark:text-neutral-300 sm:text-3xl md:text-5xl text-balance">
             {title}
           </h2>
           {subTitle && (
             <RichText
               richText={subTitle}
-              className="mb-6 text-sm text-gray-600 sm:mb-8 text-balance sm:text-base"
+              className="mb-6 text-sm text-gray-600 sm:mb-8 text-balance sm:text-base dark:text-neutral-300"
             />
           )}
           <Form
@@ -89,13 +89,13 @@ export function SubscribeNewsletter({
               };
             }}
           >
-            <div className="flex bg-white items-center border rounded-xl p-2 drop-shadow-lg md:w-96 justify-between pl-4">
+            <div className="flex bg-white dark:bg-zinc-200 items-center border rounded-xl p-2 drop-shadow-lg md:w-96 justify-between pl-4">
               <input
                 type="email"
                 name="email"
                 required
                 placeholder="Enter your email address"
-                className="rounded-e-none border-e-0 focus-visible:ring-0 outline-none bg-transparent w-full"
+                className="rounded-e-none border-e-0 focus-visible:ring-0 outline-none bg-transparent w-full dark:text-zinc-900 dark:placeholder:text-zinc-900"
               />
               <SubscribeNewsletterButton />
             </div>
@@ -103,7 +103,7 @@ export function SubscribeNewsletter({
           {helperText && (
             <RichText
               richText={helperText}
-              className="mt-3 text-sm text-gray-800 opacity-80 sm:mt-4"
+              className="mt-3 text-sm text-gray-800 opacity-80 sm:mt-4 dark:text-neutral-300"
             />
           )}
         </div>
