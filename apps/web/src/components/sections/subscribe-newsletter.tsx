@@ -4,6 +4,7 @@ import { ChevronRight, LoaderCircle } from "lucide-react";
 import Form from "next/form";
 import { useFormStatus } from "react-dom";
 
+import { newsletterSubmission } from "@/action/newsletter-submission";
 import type { PagebuilderType } from "@/types";
 
 import { RichText } from "../richtext";
@@ -70,20 +71,7 @@ export function SubscribeNewsletter({
           )}
           <Form
             className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-2"
-            action={async (formData) => {
-              const email = formData.get("email");
-              console.log("🚀 ~ action={ ~ email:", email);
-              // TODO: Implement newsletter subscription flow
-              // 1. Validate email format and domain
-              // 2. Check for existing subscription to prevent duplicates
-              // 3. Add rate limiting to prevent spam (max 3 attempts per IP/hour)
-              // 4. Send confirmation email with double opt-in link
-              // 5. Store subscription with status=pending in database
-              // 6. On confirmation, update status=active
-              // 7. Add to email service provider list (e.g. Mailchimp/SendGrid)
-              // 8. Log analytics event for conversion tracking
-              // 9. Handle errors gracefully with user feedback
-            }}
+            action={newsletterSubmission}
           >
             <div className="flex bg-white dark:bg-zinc-200 items-center border rounded-xl p-2 drop-shadow-lg md:w-96 justify-between pl-4">
               <input
