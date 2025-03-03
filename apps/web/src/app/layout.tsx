@@ -11,6 +11,7 @@ import { FooterServer, FooterSkeleton } from "@/components/footer";
 import { NavbarServer, NavbarSkeleton } from "@/components/navbar";
 import { PreviewBar } from "@/components/preview-bar";
 import { SanityLive } from "@/lib/sanity/live";
+
 import { Providers } from "../components/providers";
 
 const fontGeist = Geist({

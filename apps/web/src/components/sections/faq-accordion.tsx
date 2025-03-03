@@ -71,7 +71,10 @@ export function FaqAccordion({
                   {link?.description}
                 </p>
                 <span className="rounded-full border p-1">
-                  <ArrowUpRight size={16} className="text-[#374151] dark:text-neutral-300" />
+                  <ArrowUpRight
+                    size={16}
+                    className="text-[#374151] dark:text-neutral-300"
+                  />
                 </span>
               </Link>
             </div>

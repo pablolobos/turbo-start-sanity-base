@@ -25,10 +25,7 @@ export function CTABlock({ richText, title, eyebrow, buttons }: CTABlockProps) {
               {title}
             </h2>
             <div className="text-lg text-muted-foreground">
-              <RichText
-                richText={richText}
-                className="text-balance"
-              />
+              <RichText richText={richText} className="text-balance" />
             </div>
             <div className="flex justify-center">
               <SanityButtons
