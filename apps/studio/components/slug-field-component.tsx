@@ -17,6 +17,7 @@ import {
 import type { FocusEvent, FormEvent, MouseEvent } from "react";
 import { useCallback, useMemo, useRef, useState } from "react";
 import {
+  getPublishedId,
   type ObjectFieldProps,
   set,
   type SlugValue,
@@ -42,6 +43,7 @@ const UnlockButton = styled(Button)`
     box-sizing: border-box;
   }
 `;
+
 const CopyButton = styled(Button)`
   margin-left: auto;
   cursor: pointer;
@@ -54,6 +56,11 @@ const CopyButton = styled(Button)`
   }
 `;
 
+const GenerateButton = styled(Button)`
+  margin-left: auto;
+  cursor: pointer;
+`;
+
 const FolderText = styled(Text)`
   span {
     white-space: nowrap;
@@ -64,10 +71,8 @@ const FolderText = styled(Text)`
 
 export function PathnameFieldComponent(props: ObjectFieldProps<SlugValue>) {
   const document = useFormValue([]) as DocumentWithLocale;
-  const validation = useValidationStatus(
-    document?._id.replace(/^drafts\./, ""),
-    document?._type,
-  );
+  const publishedId = getPublishedId(document?._id as string);
+  const validation = useValidationStatus(publishedId, document?._type);
 
   const slugValidationError = useMemo(
     () =>
@@ -152,7 +157,7 @@ export function PathnameFieldComponent(props: ObjectFieldProps<SlugValue>) {
   const pathInput = useMemo(() => {
     if (folderLocked && segments.length > 1) {
       return (
-        <Stack space={2}>
+        <Stack space={2} width="100%" style={{ flex: 1 }}>
           <Flex gap={2}>
             {segments.slice(0, -1).map((segment, index) => (
               <Flex key={segment} gap={1} align="center">
@@ -179,7 +184,7 @@ export function PathnameFieldComponent(props: ObjectFieldProps<SlugValue>) {
               </Flex>
             ))}
             <Flex gap={1} flex={1} align="center">
-              <Box flex={1}>
+              <Box flex={1} width="100%">
                 <TextInput
                   width="100%"
                   value={segments[segments.length - 1] || ""}
@@ -210,8 +215,8 @@ export function PathnameFieldComponent(props: ObjectFieldProps<SlugValue>) {
     }
 
     return (
-      <Stack space={2}>
-        <Box>
+      <Stack space={2} style={{ flex: 1, width: "100%" }}>
+        <Box width="100%">
           <TextInput
             value={value?.current || ""}
             onChange={updateFullPath}
@@ -275,7 +280,29 @@ export function PathnameFieldComponent(props: ObjectFieldProps<SlugValue>) {
         </Flex>
       )}
 
-      {pathInput}
+      <Flex gap={2}>
+        {pathInput}
+        <Stack>
+          <GenerateButton
+            text="Generate"
+            aria-label="Generate URL slug from title"
+            title="Generate URL slug from title"
+            type="button"
+            mode="default"
+            tone="primary"
+            fontSize={1}
+            disabled={!document?.title}
+            onClick={() => {
+              const title = document?.title as string | undefined;
+              if (title) {
+                handleChange(
+                  slugify(title, { lower: true, remove: /[^a-zA-Z0-9 ]/g }),
+                );
+              }
+            }}
+          />
+        </Stack>
+      </Flex>
       {slugValidationError ? (
         <Badge
           tone="critical"
