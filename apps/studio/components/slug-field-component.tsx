@@ -17,6 +17,7 @@ import {
 import type { FocusEvent, FormEvent, MouseEvent } from "react";
 import { useCallback, useMemo, useRef, useState } from "react";
 import {
+  getPublishedId,
   type ObjectFieldProps,
   set,
   type SlugValue,
@@ -70,10 +71,8 @@ const FolderText = styled(Text)`
 
 export function PathnameFieldComponent(props: ObjectFieldProps<SlugValue>) {
   const document = useFormValue([]) as DocumentWithLocale;
-  const validation = useValidationStatus(
-    document?._id.replace(/^drafts\./, ""),
-    document?._type,
-  );
+  const publishedId = getPublishedId(document?._id as string);
+  const validation = useValidationStatus(publishedId, document?._type);
 
   const slugValidationError = useMemo(
     () =>
