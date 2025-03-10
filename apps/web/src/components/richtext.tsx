@@ -7,6 +7,7 @@ import {
 } from "next-sanity";
 
 import { parseChildrenToSlug } from "@/utils";
+
 import { SanityImage } from "./sanity-image";
 
 const components: Partial<PortableTextReactComponents> = {
@@ -14,7 +15,10 @@ const components: Partial<PortableTextReactComponents> = {
     h2: ({ children, value }) => {
       const slug = parseChildrenToSlug(value.children);
       return (
-        <h2 id={slug} className="scroll-m-20 border-b pb-2 text-3xl font-semibold first:mt-0">
+        <h2
+          id={slug}
+          className="scroll-m-20 border-b pb-2 text-3xl font-semibold first:mt-0"
+        >
           {children}
         </h2>
       );
@@ -22,25 +26,33 @@ const components: Partial<PortableTextReactComponents> = {
     h3: ({ children, value }) => {
       const slug = parseChildrenToSlug(value.children);
       return (
-        <h3 id={slug} className="scroll-m-20 text-2xl font-semibold">{children}</h3>
+        <h3 id={slug} className="scroll-m-20 text-2xl font-semibold">
+          {children}
+        </h3>
       );
     },
     h4: ({ children, value }) => {
       const slug = parseChildrenToSlug(value.children);
       return (
-        <h4 id={slug} className="scroll-m-20 text-xl font-semibold">{children}</h4>
+        <h4 id={slug} className="scroll-m-20 text-xl font-semibold">
+          {children}
+        </h4>
       );
     },
     h5: ({ children, value }) => {
       const slug = parseChildrenToSlug(value.children);
       return (
-        <h5 id={slug} className="scroll-m-20 text-lg font-semibold">{children}</h5>
+        <h5 id={slug} className="scroll-m-20 text-lg font-semibold">
+          {children}
+        </h5>
       );
     },
     h6: ({ children, value }) => {
       const slug = parseChildrenToSlug(value.children);
       return (
-        <h6 id={slug} className="scroll-m-20 text-base font-semibold">{children}</h6>
+        <h6 id={slug} className="scroll-m-20 text-base font-semibold">
+          {children}
+        </h6>
       );
     },
   },
@@ -53,7 +65,11 @@ const components: Partial<PortableTextReactComponents> = {
     customLink: ({ children, value }) => {
       if (!value.href || value.href === "#") {
         console.warn("🚀 link is not set", value);
-        return <span className="underline decoration-dotted underline-offset-2">Link Broken</span>;
+        return (
+          <span className="underline decoration-dotted underline-offset-2">
+            Link Broken
+          </span>
+        );
       }
       return (
         <Link
@@ -71,14 +87,25 @@ const components: Partial<PortableTextReactComponents> = {
   types: {
     image: ({ value }) => (
       <div className="my-4">
-        <SanityImage asset={value} className="w-full h-auto rounded-lg" width={1600} height={900} />
+        <SanityImage
+          asset={value}
+          className="w-full h-auto rounded-lg"
+          width={1600}
+          height={900}
+        />
       </div>
     ),
   },
   hardBreak: () => <br />,
 };
 
-export function RichText<T>({ richText, className }: { richText?: T | null; className?: string }) {
+export function RichText<T>({
+  richText,
+  className,
+}: {
+  richText?: T | null;
+  className?: string;
+}) {
   if (!richText) return null;
 
   return (
