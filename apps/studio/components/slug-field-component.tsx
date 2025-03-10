@@ -115,6 +115,18 @@ export function PathnameFieldComponent(props: ObjectFieldProps<SlugValue>) {
     [onChange],
   );
 
+  const handleGenerate = useCallback(() => {
+    const title = document?.title as string | undefined;
+    if (title) {
+      const newSegments = [...segments];
+      newSegments[newSegments.length - 1] = slugify(title, {
+        lower: true,
+        remove: /[^a-zA-Z0-9 ]/g,
+      });
+      handleChange(newSegments.join("/"));
+    }
+  }, [document?.title, handleChange, segments]);
+
   const updateSegment = useCallback(
     (index: number, newValue: string) => {
       const newSegments = [...segments];
@@ -292,14 +304,7 @@ export function PathnameFieldComponent(props: ObjectFieldProps<SlugValue>) {
             tone="primary"
             fontSize={1}
             disabled={!document?.title}
-            onClick={() => {
-              const title = document?.title as string | undefined;
-              if (title) {
-                handleChange(
-                  slugify(title, { lower: true, remove: /[^a-zA-Z0-9 ]/g }),
-                );
-              }
-            }}
+            onClick={handleGenerate}
           />
         </Stack>
       </Flex>
