@@ -64,8 +64,10 @@ const GenerateButton = styled(Button)`
 const FolderText = styled(Text)`
   span {
     white-space: nowrap;
-    overflow-x: hidden;
+    max-width: 120px;
+    overflow: hidden;
     text-overflow: ellipsis;
+    display: inline-block;
   }
 `;
 
@@ -119,10 +121,17 @@ export function PathnameFieldComponent(props: ObjectFieldProps<SlugValue>) {
     const title = document?.title as string | undefined;
     if (title) {
       const newSegments = [...segments];
-      newSegments[newSegments.length - 1] = slugify(title, {
-        lower: true,
-        remove: /[^a-zA-Z0-9 ]/g,
-      });
+      if (newSegments.length > 1) {
+        newSegments[newSegments.length - 1] = slugify(title, {
+          lower: true,
+          remove: /[^a-zA-Z0-9 ]/g,
+        });
+      } else {
+        newSegments[0] = slugify(title, {
+          lower: true,
+          remove: /[^a-zA-Z0-9 ]/g,
+        });
+      }
       handleChange(newSegments.join("/"));
     }
   }, [document?.title, handleChange, segments]);
@@ -170,27 +179,18 @@ export function PathnameFieldComponent(props: ObjectFieldProps<SlugValue>) {
     if (folderLocked && segments.length > 1) {
       return (
         <Stack space={2} width="100%" style={{ flex: 1 }}>
-          <Flex gap={2}>
-            {segments.slice(0, -1).map((segment, index) => (
+          <Flex gap={2} wrap="wrap">
+            {segments.slice(0, -1).map((segment) => (
               <Flex key={segment} gap={1} align="center">
-                <Card
-                  paddingX={2}
-                  paddingY={2}
-                  border
-                  radius={1}
-                  tone="transparent"
-                  style={{
-                    position: "relative",
-                  }}
-                >
-                  <Flex gap={2} align="center">
+                <Card paddingX={2} paddingY={2} border tone="transparent">
+                  <Flex gap={2}>
                     <Text muted>
                       <FolderIcon />
                     </Text>
                     <FolderText muted>{segment}</FolderText>
                   </Flex>
                 </Card>
-                <Text muted size={2}>
+                <Text muted size={4}>
                   /
                 </Text>
               </Flex>
