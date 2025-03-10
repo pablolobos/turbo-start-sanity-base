@@ -8,10 +8,11 @@
     "dev": "sanity dev",
     "format": "prettier --write .",
     "start": "sanity start",
-    "lint": "eslint . --fix",
+    "lint": "eslint .",
     "build": "sanity build",
     "deploy": "sanity deploy",
     "type": "sanity schema extract && sanity typegen generate --enforce-required-fields",
+    "check-types": "tsc --noEmit",
     "postinstall": "sanity exec scripts/create-data.ts --with-user-token"
   },
   "keywords": [

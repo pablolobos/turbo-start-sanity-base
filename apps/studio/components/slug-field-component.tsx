@@ -19,6 +19,7 @@ import { useCallback, useMemo, useRef, useState } from "react";
 import {
   getPublishedId,
   type ObjectFieldProps,
+  type SanityDocument,
   set,
   type SlugValue,
   unset,
@@ -29,7 +30,6 @@ import slugify from "slugify";
 import { styled } from "styled-components";
 
 import { getDocumentPath, stringToPathname } from "../utils/helper";
-import type { DocumentWithLocale } from "../utils/types";
 
 const presentationOriginUrl = process.env.SANITY_STUDIO_PRESENTATION_URL;
 
@@ -70,7 +70,7 @@ const FolderText = styled(Text)`
 `;
 
 export function PathnameFieldComponent(props: ObjectFieldProps<SlugValue>) {
-  const document = useFormValue([]) as DocumentWithLocale;
+  const document = useFormValue([]) as SanityDocument;
   const publishedId = getPublishedId(document?._id as string);
   const validation = useValidationStatus(publishedId, document?._type);
 

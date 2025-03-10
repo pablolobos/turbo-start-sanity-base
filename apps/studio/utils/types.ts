@@ -2,7 +2,6 @@ import type {
   ObjectDefinition,
   ObjectOptions,
   ObjectSchemaType,
-  SanityDocument,
   SlugDefinition,
   SlugOptions,
 } from "sanity";
@@ -91,8 +90,6 @@ export type ReducerAction = {
   type: string;
   payload?: unknown;
 };
-
-export interface DocumentWithLocale extends SanityDocument {}
 
 export interface SectionOptions extends ObjectOptions {
   variants?: SectionVariant[];
