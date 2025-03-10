@@ -18,10 +18,8 @@
     "sanity"
   ],
   "dependencies": {
-    "@sanity/asset-utils": "^2.2.1",
     "@sanity/assist": "^3.2.0",
     "@sanity/icons": "^3.7.0",
-    "@sanity/image-url": "^1.1.0",
     "@sanity/ui": "^2.15.4",
     "@sanity/vision": "^3.78.1",
     "lucide-react": "^0.479.0",

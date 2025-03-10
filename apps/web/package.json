@@ -11,11 +11,9 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@portabletext/react": "^3.2.1",
     "@sanity/asset-utils": "^2.2.1",
     "@sanity/client": "^6.28.3",
     "@sanity/image-url": "^1.1.0",
-    "@sanity/preview-url-secret": "^2.1.5",
     "@sanity/visual-editing": "^2.13.7",
     "@workspace/ui": "workspace:*",
     "babel-plugin-react-compiler": "19.0.0-beta-e1e972c-20250221",
