@@ -1,4 +1,7 @@
-import { orderRankField } from "@sanity/orderable-document-list";
+import {
+  orderRankField,
+  orderRankOrdering,
+} from "@sanity/orderable-document-list";
 import { FileTextIcon } from "lucide-react";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
@@ -14,6 +17,7 @@ export const blog = defineType({
   type: "document",
   icon: FileTextIcon,
   groups: GROUPS,
+  orderings: [orderRankOrdering],
   description:
     "A blog post that will be published on the website. Add a title, description, author, and content to create a new article for readers.",
   fields: [

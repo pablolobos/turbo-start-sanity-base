@@ -51,6 +51,7 @@ const blogCardFragment = /* groq */ `
   description,
   "slug":slug.current,
   richText,
+  orderRank,
   ${imageFragment},
   publishedAt,
   ${blogAuthorFragment}
@@ -189,13 +190,7 @@ export const queryBlogIndexPageData = defineQuery(/* groq */ `
     description,
     ${pageBuilderFragment},
     "slug": slug.current,
-    "featuredBlog": featured[0]->{
-      ${blogCardFragment}
-    }
-  }{
-    ...@,
-    "blogs": *[_type == "blog" && (_id != ^.featuredBlog._id) && (seoHideFromLists != true)] | order(orderRank){
-      orderRank,
+    "blogs": *[_type == "blog" && (seoHideFromLists != true)] | order(orderRank asc){
       ${blogCardFragment}
     }
   }
