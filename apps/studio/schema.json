@@ -4007,13 +4007,6 @@
         },
         "optional": true
       },
-      "seoHideFromLists": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "boolean"
-        },
-        "optional": true
-      },
       "ogTitle": {
         "type": "objectAttribute",
         "value": {
@@ -4064,6 +4057,13 @@
         "value": {
           "type": "string"
         }
+      },
+      "orderRank": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
       },
       "title": {
         "type": "objectAttribute",
