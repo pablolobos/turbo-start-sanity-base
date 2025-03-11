@@ -1,4 +1,3 @@
-import { cn } from "@workspace/ui/lib/utils";
 import Link from "next/link";
 
 import type { QueryBlogIndexPageDataResult } from "@/lib/sanity/sanity.types";
