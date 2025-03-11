@@ -194,7 +194,7 @@ export const queryBlogIndexPageData = defineQuery(/* groq */ `
     }
   }{
     ...@,
-    "blogs": *[_type == "blog" && (_id != ^.featuredBlog._id) && (seoHideFromLists != true)]{
+    "blogs": *[_type == "blog" && (_id != ^.featuredBlog._id) && (seoHideFromLists != true)] | order(orderRank asc){
       ${blogCardFragment}
     }
   }

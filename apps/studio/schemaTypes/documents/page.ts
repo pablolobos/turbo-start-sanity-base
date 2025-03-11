@@ -1,3 +1,4 @@
+import { DocumentIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
 
 import { PathnameFieldComponent } from "../../components/slug-field-component";
@@ -11,18 +12,26 @@ export const page = defineType({
   name: "page",
   title: "Page",
   type: "document",
+  icon: DocumentIcon,
+  description:
+    "Create a new page for your website, like an 'About Us' or 'Contact' page. Each page has its own web address and content that you can customize.",
   groups: GROUPS,
   fields: [
     defineField({
       name: "title",
       type: "string",
       title: "Title",
+      description:
+        "The main heading that appears at the top of your page and in browser tabs",
       group: GROUP.MAIN_CONTENT,
+      validation: (Rule) => Rule.required().error("A page title is required"),
     }),
     defineField({
       name: "description",
       type: "text",
       title: "Description",
+      description:
+        "A brief summary of what this page is about. This text helps search engines understand your page and may appear in search results.",
       rows: 3,
       group: GROUP.MAIN_CONTENT,
       validation: (rule) => [
@@ -42,6 +51,8 @@ export const page = defineType({
       name: "slug",
       type: "slug",
       title: "URL",
+      description:
+        "The web address for this page (for example, '/about-us' would create a page at yourdomain.com/about-us)",
       group: GROUP.MAIN_CONTENT,
       components: {
         field: PathnameFieldComponent,
@@ -51,29 +62,43 @@ export const page = defineType({
         slugify: createSlug,
         isUnique,
       },
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.required().error("A URL slug is required for the page"),
     }),
     defineField({
       name: "image",
       type: "image",
       title: "Image",
+      description:
+        "A main picture for this page that can be used when sharing on social media or in search results",
       group: GROUP.MAIN_CONTENT,
+      options: {
+        hotspot: true,
+      },
     }),
     pageBuilderField,
-    ...seoFields,
+    ...seoFields.filter((field) => field.name !== "seoHideFromLists"),
     ...ogFields,
   ],
   preview: {
     select: {
       title: "title",
-      description: "description",
       slug: "slug.current",
       media: "image",
+      isPrivate: "seoNoIndex",
+      hasPageBuilder: "pageBuilder",
     },
-    prepare: ({ title, description, slug, media }) => ({
-      title,
-      subtitle: slug,
-      media,
-    }),
+    prepare: ({ title, slug, media, isPrivate, hasPageBuilder }) => {
+      const statusEmoji = isPrivate ? "🔒" : "🌎";
+      const builderEmoji = hasPageBuilder?.length
+        ? `🧱 ${hasPageBuilder.length}`
+        : "🏗️";
+
+      return {
+        title: `${title || "Untitled Page"}`,
+        subtitle: `${statusEmoji} ${builderEmoji} | 🔗 ${slug || "no-slug"}`,
+        media,
+      };
+    },
   },
 });
