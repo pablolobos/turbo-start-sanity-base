@@ -14,8 +14,8 @@ export const locations = {
             href: `${doc?.slug}`,
           },
           {
-            title: "Blog",
-            href: "/blog",
+            title: "Noticias",
+            href: "/noticias",
           },
         ],
       };

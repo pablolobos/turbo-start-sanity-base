@@ -32,7 +32,7 @@ export const blogIndex = defineType({
       name: "slug",
       type: "slug",
       description:
-        "The web address for your blog page (for example, '/blog' would create a page at yourdomain.com/blog)",
+        "The web address for your blog page (for example, '/noticias' would create a page at yourdomain.com/noticias)",
       group: GROUP.MAIN_CONTENT,
       options: {
         source: "title",
