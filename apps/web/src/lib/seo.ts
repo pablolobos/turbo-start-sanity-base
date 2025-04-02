@@ -52,16 +52,24 @@ export function getMetaData(data: MetaDataInput): Metadata {
     creator: "Roboto Studio Demo",
     authors: [{ name: "Roboto" }],
     icons: {
-      icon: `${baseUrl}/favicon.ico`,
+      icon: [
+        { url: `${baseUrl}/icon?id=16`, sizes: '16x16', type: 'image/png' },
+        { url: `${baseUrl}/icon?id=32`, sizes: '32x32', type: 'image/png' },
+        { url: `${baseUrl}/icon?id=48`, sizes: '48x48', type: 'image/png' },
+        { url: `${baseUrl}/icon?id=180`, sizes: '180x180', type: 'image/png' },
+        { url: `${baseUrl}/icon?id=192`, sizes: '192x192', type: 'image/png' },
+        { url: `${baseUrl}/icon?id=512`, sizes: '512x512', type: 'image/png' }
+      ],
+      apple: { url: `${baseUrl}/icon?id=180`, sizes: '180x180', type: 'image/png' },
+      shortcut: { url: `${baseUrl}/icon?id=32` }
     },
     keywords: [
-      "roboto",
-      "studio",
-      "demo",
-      "sanity",
-      "next",
-      "react",
-      "template",
+      "Volvo",
+      "Volvo Chile",
+      "Volvo Camiones",
+      "Volvo Buses",
+      "Volvo Motores",
+      "Volvo Motores Penta"
     ],
     twitter: {
       card: "summary_large_image",
