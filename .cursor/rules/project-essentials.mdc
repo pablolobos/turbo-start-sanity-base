@@ -1,0 +1,94 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+---
+description: Project conventions and architecture for Volvo Chile monorepo
+globs: **/*.{ts,tsx,js,jsx,json,md}
+alwaysApply: true
+---
+
+## Project Architecture
+- This is a monorepo using Turborepo with two main applications:
+  - `/apps/web`: Next.js frontend application
+  - `/apps/studio`: Sanity Studio CMS
+- Shared packages are located in `/packages`
+- PNPM is the required package manager
+- Node.js version must be >=20
+
+## Technology Standards
+### Frontend (Next.js)
+- ALWAYS use App Router patterns
+- ALWAYS use Server Components by default unless client-side functionality is required
+- ALWAYS use TypeScript for type safety
+- ALWAYS use Shadcn UI components with Tailwind CSS for UI elements
+- CONSIDER SEO optimization with metadata for all pages
+- INCLUDE responsive layouts for all components
+
+### Content Management (Sanity)
+- ALWAYS follow the pre-defined document types:
+  - `Author`
+  - `Blog`
+  - `BlogIndex`
+  - `FAQ`
+  - `Footer`
+  - `HomePage`
+  - `Navbar`
+  - `Page`
+  - `Settings`
+- ALWAYS use Sanity Studio v3 conventions
+- INCLUDE visual editing integration where possible
+- ENSURE all content types have proper schema definitions
+
+## Development Practices
+### TypeScript
+- NEVER use `any` type
+- ALWAYS define proper interfaces and types
+- USE type inference where it makes code more readable
+
+### Code Style
+- ALWAYS use ESLint for code linting
+- ALWAYS use Prettier for code formatting
+- FOLLOW the shared ESLint config in `@workspace/eslint-config`
+- FOLLOW the shared TypeScript config in `@workspace/typescript-config`
+
+### Component Structure
+- ORGANIZE components by feature in the `/components` directory
+- INCLUDE proper TypeScript types for all props
+- SEPARATE business logic from UI components
+- USE Server Components for data fetching
+
+### Deployment
+- CONFIGURE environment variables properly for both Next.js and Sanity
+- FOLLOW the GitHub Actions workflow for Sanity Studio deployment
+- REQUIRED environment variables for Sanity deployment:
+  - `SANITY_DEPLOY_TOKEN`
+  - `SANITY_STUDIO_PROJECT_ID`
+  - `SANITY_STUDIO_DATASET`
+  - `SANITY_STUDIO_TITLE`
+  - `SANITY_STUDIO_PRESENTATION_URL`
+
+### Performance
+- OPTIMIZE images using Next.js Image component
+- MINIMIZE client-side JavaScript
+- USE proper caching strategies
+- LEVERAGE Server Components for data-heavy operations
+
+### Content Management
+- ALWAYS structure content models based on data relationships
+- INCLUDE proper validation rules in Sanity schemas
+- USE appropriate field types for different content needs
+- IMPLEMENT proper content previews where applicable
+
+## Package Management
+- ALWAYS use PNPM for dependency management
+- MAINTAIN workspace dependencies in the root package.json
+- USE workspace: syntax for internal package references
+- KEEP dependencies up to date with regular audits
+
+## Build and Development
+- USE `pnpm dev` for local development
+- USE `pnpm build` for production builds
+- ENSURE all builds pass TypeScript checks
+- FOLLOW Turborepo pipeline configurations in turbo.json
