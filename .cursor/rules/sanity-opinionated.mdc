@@ -17,10 +17,18 @@ You are a principal-level TypeScript and React engineer who writes best-practice
 - Unless explicitly modelling web pages or app views, create content models for what things are, not what they look like in a front-end
 - For example, consider the `status` of an element instead of its `color`
 
+### Schema Organization
+- ALWAYS organize schemas into the following directories under `apps/studio/schemaTypes`:
+  - `documents/`: For document type schemas
+  - `definitions/`: For reusable object type definitions
+  - `blocks/`: For block content and portable text configurations
+- ALWAYS use `index.ts` in the schemaTypes directory to export all schemas
+- ALWAYS use `common.ts` for shared schema fields and configurations
+
 ### Basic schema types
 
 - ALWAYS use the `defineType`, `defineField`, and `defineArrayMember` helper functions
-- ALWAYS write schema types to their own files and export a named `const` that matches the filename
+- ALWAYS write schema types to their own files in the appropriate directory (documents, definitions, or blocks)
 - ONLY use a `name` attribute in fields unless the `title` needs to be something other than a title-case version of the `name`
 - ANY `string` field type with an `options.list` array with fewer than 5 options must use `options.layout: "radio"`
 - ANY `image` field must include `options.hotspot: true`
@@ -32,7 +40,7 @@ You are a principal-level TypeScript and React engineer who writes best-practice
 - CONSIDER the order of fields, from most important and relevant first, to least often used last
 
 ```ts
-// ./apps/studio/schemaTypes/lessonType.ts
+// ./apps/studio/schemaTypes/documents/lesson.ts
 
 import {defineField, defineType} from 'sanity'
 
@@ -55,30 +63,30 @@ export const lessonType = defineType({
 ```
 
 ### Schema type with custom input components
-- If a schema type has input components, they should be colocated with the schema type file. The schema type should have the same named export but stored in a `[typeName]/index.ts` file:
+- If a schema type has input components, they should be colocated in the components directory:
 
 ```ts
-// ./apps/studio/schemaTypes/seoType/index.ts
+// ./apps/studio/components/inputs/SeoInput.tsx
+// ./apps/studio/schemaTypes/definitions/seo.ts
 
 import {defineField, defineType} from 'sanity'
-
-import seoInput from './seoInput'
+import {SeoInput} from '../../components/inputs/SeoInput'
 
 export const seoType = defineType({
   name: 'seo',
   title: 'SEO',
   type: 'object',
-  components: { input: seoInput }
+  components: { input: SeoInput }
   // ...
 })
 ```
 
 ### No anonymous reusable schema types
 
-- ANY schema type that benefits from being reused in multiple document types should be registered as its own custom schema type.
+- ANY schema type that benefits from being reused in multiple document types should be registered in the `definitions` directory.
 
 ```ts
-// ./apps/studio/schemaTypes/blockContentType.ts
+// ./apps/studio/schemaTypes/definitions/blockContent.ts
 
 import {defineField, defineType} from 'sanity'
 
@@ -104,7 +112,7 @@ Every `document` and `object` schema type should:
 When asked to write content:
 
 - ONLY use the existing schema types registered in the Studio configuration
-- ALWAYS write content as an `.ndjson` file at the root of the project
+- ALWAYS write content as an `.ndjson` file in the `apps/studio/scripts` directory
 - NEVER write a script to write the file, just write the file
 - IMPORT `.ndjson` files using the CLI command `npx sanity dataset import <filename.ndjson>`
 - NEVER include a `.` in the `_id` field of a document unless you need it to be private
@@ -123,10 +131,12 @@ When asked to write content:
 - ALWAYS put each segement of a filter, and each attribute on its own line
 - ALWAYS use parameters for variables in a query
 - NEVER insert dynamic values using string interpolation
+- STORE queries in `apps/web/src/lib/sanity/queries` directory
 
 Here is an example of a good query:
 
 ```ts
+// apps/web/src/lib/sanity/queries/post.ts
 import {defineQuery} from 'groq'
 
 export const POST_QUERY = defineQuery(`*[
@@ -151,21 +161,27 @@ export const POST_QUERY = defineQuery(`*[
 
 ### For monorepos with a studio and a front-end
 
-- ALWAYS extract the schema to the web folder with `npx sanity@latest schema extract --path=../<front-end-folder>/lib/sanity/extract.json` 
+- ALWAYS extract the schema to the web folder with `npx sanity@latest schema extract --path=../../apps/web/src/lib/sanity/schema.json` 
 - ALWAYS generate types with `npx sanity@latest typegen generate` after every GROQ query change
-- ALWAYS create a TypeGen configuration file called `sanity-typegen.json` at the root of the front-end code-base
+- ALWAYS create a TypeGen configuration file called `sanity-typegen.json` in the studio directory with the following configuration:
 
 ```json
 {
   "path": "./**/*.{ts,tsx,js,jsx}",
-  "schema": "./<front-end-folder>/sanity/extract.json",
-  "generates": "./web/src/lib/sanity/sanity.types.ts"
+  "schema": "../../apps/web/src/lib/sanity/schema.json",
+  "generates": "../../apps/web/src/lib/sanity/types.ts"
 }
 ```
 
 ### For the front-end
 
 - ONLY write Types for document types and query responses if you cannot generate them with Sanity TypeGen
+- STORE all Sanity-related code in `apps/web/src/lib/sanity`
+- ORGANIZE Sanity integration files as follows:
+  - `config.ts`: Sanity client configuration
+  - `queries/`: GROQ queries
+  - `schema.json`: Extracted schema
+  - `types.ts`: Generated TypeScript types
 
 ## Project settings and data
 
