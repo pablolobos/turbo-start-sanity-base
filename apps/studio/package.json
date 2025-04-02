@@ -12,8 +12,7 @@
     "build": "sanity build",
     "deploy": "sanity deploy",
     "type": "sanity schema extract --enforce-required-fields && sanity typegen generate",
-    "check-types": "tsc --noEmit",
-    "postinstall": "sanity exec scripts/create-data.ts --with-user-token"
+    "check-types": "tsc --noEmit"
   },
   "keywords": [
     "sanity"
