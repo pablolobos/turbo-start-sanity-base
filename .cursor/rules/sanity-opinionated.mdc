@@ -1,7 +1,7 @@
 ---
-description: 
+description: Sanity CMS best practices
 globs: 
-alwaysApply: true
+alwaysApply: false
 ---
 ---
 description: Opinionated guidance for configuring Sanity Studio and authoring content
