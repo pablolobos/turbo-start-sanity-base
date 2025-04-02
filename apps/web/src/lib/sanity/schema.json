@@ -1027,13 +1027,6 @@
                       },
                       "optional": true
                     },
-                    "media": {
-                      "type": "objectAttribute",
-                      "value": {
-                        "type": "unknown"
-                      },
-                      "optional": true
-                    },
                     "hotspot": {
                       "type": "objectAttribute",
                       "value": {
@@ -1157,13 +1150,6 @@
                             }
                           },
                           "dereferencesTo": "sanity.imageAsset"
-                        },
-                        "optional": true
-                      },
-                      "media": {
-                        "type": "objectAttribute",
-                        "value": {
-                          "type": "unknown"
                         },
                         "optional": true
                       },
@@ -2003,13 +1989,6 @@
                       },
                       "optional": true
                     },
-                    "media": {
-                      "type": "objectAttribute",
-                      "value": {
-                        "type": "unknown"
-                      },
-                      "optional": true
-                    },
                     "hotspot": {
                       "type": "objectAttribute",
                       "value": {
@@ -2319,13 +2298,6 @@
                       },
                       "optional": true
                     },
-                    "media": {
-                      "type": "objectAttribute",
-                      "value": {
-                        "type": "unknown"
-                      },
-                      "optional": true
-                    },
                     "hotspot": {
                       "type": "objectAttribute",
                       "value": {
@@ -2406,13 +2378,6 @@
                     }
                   },
                   "dereferencesTo": "sanity.imageAsset"
-                },
-                "optional": true
-              },
-              "media": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "unknown"
                 },
                 "optional": true
               },
@@ -2833,13 +2798,6 @@
                     }
                   },
                   "dereferencesTo": "sanity.imageAsset"
-                },
-                "optional": true
-              },
-              "media": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "unknown"
                 },
                 "optional": true
               },
@@ -3302,13 +3260,6 @@
               },
               "optional": true
             },
-            "media": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "unknown"
-              },
-              "optional": true
-            },
             "hotspot": {
               "type": "objectAttribute",
               "value": {
@@ -3541,13 +3492,6 @@
               },
               "optional": true
             },
-            "media": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "unknown"
-              },
-              "optional": true
-            },
             "hotspot": {
               "type": "objectAttribute",
               "value": {
@@ -3705,13 +3649,6 @@
               },
               "optional": true
             },
-            "media": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "unknown"
-              },
-              "optional": true
-            },
             "hotspot": {
               "type": "objectAttribute",
               "value": {
@@ -3836,13 +3773,6 @@
                   }
                 },
                 "dereferencesTo": "sanity.imageAsset"
-              },
-              "optional": true
-            },
-            "media": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "unknown"
               },
               "optional": true
             },
@@ -4026,13 +3956,6 @@
               },
               "optional": true
             },
-            "media": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "unknown"
-              },
-              "optional": true
-            },
             "hotspot": {
               "type": "objectAttribute",
               "value": {
@@ -4114,13 +4037,6 @@
                   }
                 },
                 "dereferencesTo": "sanity.imageAsset"
-              },
-              "optional": true
-            },
-            "media": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "unknown"
               },
               "optional": true
             },
@@ -4324,13 +4240,6 @@
               },
               "optional": true
             },
-            "media": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "unknown"
-              },
-              "optional": true
-            },
             "hotspot": {
               "type": "objectAttribute",
               "value": {
@@ -4412,13 +4321,6 @@
                   }
                 },
                 "dereferencesTo": "sanity.imageAsset"
-              },
-              "optional": true
-            },
-            "media": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "unknown"
               },
               "optional": true
             },

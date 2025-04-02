@@ -6,7 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@workspace/ui/components/accordion";
-import { Button, buttonVariants } from "@workspace/ui/components/button";
+import { Button } from "@workspace/ui/components/button";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -14,7 +14,6 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
 } from "@workspace/ui/components/navigation-menu";
 import {
   SheetContent,
@@ -30,12 +29,61 @@ import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
 import { useIsMobile } from "@/hooks/use-is-mobile";
-import type { QueryNavbarDataResult } from "@/lib/sanity/sanity.types";
+import type { Navbar } from "@/lib/sanity/sanity.types";
 
 import { Logo } from "./logo";
 import { ModeToggle } from "./mode-toggle";
 import { SanityButtons } from "./sanity-buttons";
 import { SanityIcon } from "./sanity-icon";
+import { IconPicker } from "@/types/icon-picker";
+
+type NavbarColumnLink = {
+  _key: string;
+  name: string | null;
+  icon: IconPicker | null;
+  description: string | null;
+  openInNewTab: boolean | null;
+  href: string | null;
+};
+
+type NavbarLinkGroup = {
+  _key: string;
+  type: "group";
+  title: string;
+  links: Array<NavbarColumnLink>;
+};
+
+type NavbarColumn = {
+  _key: string;
+  type: "column";
+  title: string | null;
+  links: Array<NavbarColumnLink | NavbarLinkGroup>;
+};
+
+type NavbarDirectLink = {
+  _key: string;
+  type: "link";
+  name: string | null;
+  description: string | null;
+  openInNewTab: boolean | null;
+  href: string | null;
+};
+
+type NavbarData = {
+  _id: string;
+  columns: Array<NavbarColumn | NavbarDirectLink> | null;
+  buttons: Array<{
+    text: string | null;
+    variant: "default" | "link" | "outline" | "secondary" | null;
+    _key: string;
+    _type: "button";
+    openInNewTab: boolean | null;
+    href: string | null;
+  }> | null;
+  logo: string | null;
+  siteTitle: string | null;
+};
+
 interface MenuItem {
   title: string;
   description: string;
@@ -61,8 +109,8 @@ function MenuItemLink({
     >
       {item.icon}
       <div className="">
-        <div className="text-sm font-semibold">{item.title}</div>
-        <p className="text-sm leading-snug text-muted-foreground line-clamp-2">
+        <div className="font-semibold text-sm">{item.title}</div>
+        <p className="text-muted-foreground text-sm line-clamp-2 leading-snug">
           {item.description}
         </p>
       </div>
@@ -70,225 +118,253 @@ function MenuItemLink({
   );
 }
 
-function MobileNavbarAccordionColumn({
-  column,
-  setIsOpen,
-}: {
-  column: NonNullable<NonNullable<QueryNavbarDataResult>["columns"]>[number];
-  setIsOpen: (isOpen: boolean) => void;
-}) {
-  if (column.type !== "column") return null;
+function NavbarLink({
+  name,
+  icon,
+  description,
+  openInNewTab,
+  href,
+}: Omit<NavbarColumnLink, "_key">) {
   return (
-    <AccordionItem value={column.title ?? column._key} className="border-b-0">
-      <AccordionTrigger className="mb-4 py-0 font-semibold hover:no-underline hover:bg-accent hover:text-accent-foreground pr-2 rounded-md">
-        <div
-          className={cn(buttonVariants({ variant: "ghost" }), "justify-start")}
-        >
-          {column.title}
+    <Button
+      asChild
+      variant="ghost"
+      className="justify-start px-2 py-1.5 w-full h-auto"
+    >
+      <a
+        href={href || "#"}
+        target={openInNewTab ? "_blank" : undefined}
+        rel={openInNewTab ? "noopener noreferrer" : undefined}
+        className="flex items-start gap-2"
+      >
+        {icon && <SanityIcon icon={icon} className="mt-0.5 w-4 h-4 shrink-0" />}
+        <div>
+          <div className="font-medium text-sm">{name}</div>
+          {description && (
+            <div className="text-muted-foreground text-sm line-clamp-2">
+              {description}
+            </div>
+          )}
         </div>
-      </AccordionTrigger>
-      <AccordionContent className="mt-2">
-        {column.links?.map((item) => (
-          <MenuItemLink
-            key={item._key}
-            setIsOpen={setIsOpen}
-            item={{
-              description: item.description ?? "",
-              href: item.href ?? "",
-              icon: <SanityIcon icon={item.icon} className="size-5 shrink-0" />,
-              title: item.name ?? "",
-            }}
-          />
-        ))}
+      </a>
+    </Button>
+  );
+}
+
+function MobileNavbarAccordionColumn({
+  title,
+  links,
+}: {
+  title: string | null;
+  links: Array<NavbarColumnLink | NavbarLinkGroup>;
+}) {
+  return (
+    <AccordionItem value={title || ""}>
+      <AccordionTrigger className="text-sm">{title}</AccordionTrigger>
+      <AccordionContent>
+        <div className="gap-4 grid">
+          {links.map((link) => {
+            if ('type' in link && link.type === 'group') {
+              return (
+                <div key={link._key} className="space-y-2">
+                  <div className="font-medium text-sm">{link.title}</div>
+                  <div className="gap-1 grid pl-2">
+                    {link.links.map((groupLink) => (
+                      <NavbarLink
+                        key={groupLink._key}
+                        name={groupLink.name}
+                        icon={groupLink.icon}
+                        description={groupLink.description}
+                        openInNewTab={groupLink.openInNewTab}
+                        href={groupLink.href}
+                      />
+                    ))}
+                  </div>
+                </div>
+              );
+            }
+
+            // At this point TypeScript knows it's a NavbarColumnLink
+            return (
+              <NavbarLink
+                key={link._key}
+                name={link.name}
+                icon={link.icon}
+                description={link.description}
+                openInNewTab={link.openInNewTab}
+                href={link.href}
+              />
+            );
+          })}
+        </div>
       </AccordionContent>
     </AccordionItem>
   );
 }
 
-function MobileNavbar({ navbarData }: { navbarData: QueryNavbarDataResult }) {
-  const { logo, siteTitle, columns, buttons } = navbarData ?? {};
+function MobileNavbar({ data }: { data: NavbarData }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const path = usePathname();
-
-  // biome-ignore lint/correctness/useExhaustiveDependencies: This is intentional
-  useEffect(() => {
-    setIsOpen(false);
-  }, [path]);
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
-      <div className="flex justify-end">
-        <SheetTrigger asChild>
-          <Button variant="outline" size="icon">
-            <Menu className="size-4" />
-            <span className="sr-only">Open menu</span>
-          </Button>
-        </SheetTrigger>
-      </div>
-      <SheetContent className="overflow-y-auto">
-        <SheetHeader>
-          <SheetTitle>
-            <Logo src={logo} alt={siteTitle} priority />
-          </SheetTitle>
-        </SheetHeader>
-
-        <div className="mb-8 mt-8 flex flex-col gap-4">
-          {columns?.map((item) => {
-            if (item.type === "link") {
+      <SheetTrigger asChild>
+        <Button variant="ghost" size="icon" className="md:hidden">
+          <Menu className="w-5 h-5" />
+          <span className="sr-only">Toggle menu</span>
+        </Button>
+      </SheetTrigger>
+      <SheetContent side="left" className="w-full sm:w-[540px] sm:max-w-none">
+        <Accordion type="single" collapsible className="w-full">
+          {data?.columns?.map((item) => {
+            if (item.type === "column") {
               return (
-                <Link
-                  key={`column-link-${item.name}-${item._key}`}
-                  href={item.href ?? ""}
-                  onClick={() => setIsOpen(false)}
-                  className={cn(
-                    buttonVariants({ variant: "ghost" }),
-                    "justify-start",
-                  )}
-                >
-                  {item.name}
-                </Link>
+                <MobileNavbarAccordionColumn
+                  key={item._key}
+                  title={item.title}
+                  links={item.links}
+                />
               );
             }
-            return (
-              <Accordion
-                type="single"
-                collapsible
-                className="w-full"
-                key={item._key}
-              >
-                <MobileNavbarAccordionColumn
-                  column={item}
-                  setIsOpen={setIsOpen}
+            if (item.type === "link") {
+              return (
+                <NavbarLink
+                  key={item._key}
+                  name={item.name}
+                  icon={null}
+                  description={item.description}
+                  openInNewTab={item.openInNewTab}
+                  href={item.href}
                 />
-              </Accordion>
-            );
+              );
+            }
+            return null;
           })}
-        </div>
-
-        <div className="border-t pt-4">
-          <SanityButtons
-            buttons={buttons ?? []}
-            buttonClassName="w-full"
-            className="flex mt-2 flex-col gap-3"
-          />
-        </div>
+        </Accordion>
+        {data?.buttons && (
+          <div className="space-y-2 mt-6">
+            <SanityButtons buttons={data.buttons} />
+          </div>
+        )}
       </SheetContent>
     </Sheet>
   );
 }
 
-function NavbarColumnLink({
-  column,
+function DesktopNavbar({ data }: { data: NavbarData }) {
+  return (
+    <NavigationMenu className="hidden md:flex">
+      <NavigationMenuList className="gap-2">
+        {data?.columns?.map((item) => {
+          if (item.type === "column") {
+            return (
+              <NavigationMenuItem key={item._key}>
+                <NavigationMenuTrigger className="px-4 h-10">
+                  {item.title}
+                </NavigationMenuTrigger>
+                <NavbarColumn title={item.title} links={item.links} />
+              </NavigationMenuItem>
+            );
+          }
+          if (item.type === "link") {
+            return (
+              <NavigationMenuItem key={item._key}>
+                <NavigationMenuLink
+                  className="flex items-center px-4 h-10"
+                  href={item.href || "#"}
+                  target={item.openInNewTab ? "_blank" : undefined}
+                  rel={item.openInNewTab ? "noopener noreferrer" : undefined}
+                >
+                  {item.name}
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+            );
+          }
+          return null;
+        })}
+      </NavigationMenuList>
+    </NavigationMenu>
+  );
+}
+
+function NavbarColumn({
+  title,
+  links,
 }: {
-  column: Extract<
-    NonNullable<NonNullable<QueryNavbarDataResult>["columns"]>[number],
-    { type: "link" }
-  >;
+  title: string | null;
+  links: Array<NavbarColumnLink | NavbarLinkGroup>;
 }) {
   return (
-    <Link
-      aria-label={`Link to ${column.name ?? column.href}`}
-      href={column.href ?? ""}
-      legacyBehavior
-      passHref
-    >
-      <NavigationMenuLink
-        className={cn(
-          navigationMenuTriggerStyle(),
-          "text-muted-foreground dark:text-neutral-300",
+    <NavigationMenuContent>
+      <div className="p-4 w-[400px]">
+        {title && (
+          <div className="mb-3 font-medium text-muted-foreground text-sm">{title}</div>
         )}
-      >
-        {column.name}
-      </NavigationMenuLink>
-    </Link>
-  );
-}
-
-function getColumnLayoutClass(itemCount: number) {
-  if (itemCount <= 4) return "w-80";
-  if (itemCount <= 8) return "grid grid-cols-2 gap-2 w-[500px]";
-  return "grid grid-cols-3 gap-2 w-[700px]";
-}
-
-export function NavbarColumn({
-  column,
-}: {
-  column: Extract<
-    NonNullable<NonNullable<QueryNavbarDataResult>["columns"]>[number],
-    { type: "column" }
-  >;
-}) {
-  const layoutClass = useMemo(
-    () => getColumnLayoutClass(column.links?.length ?? 0),
-    [column.links?.length],
-  );
-
-  return (
-    <NavigationMenuList>
-      <NavigationMenuItem className="text-muted-foreground dark:text-neutral-300">
-        <NavigationMenuTrigger>{column.title}</NavigationMenuTrigger>
-        <NavigationMenuContent>
-          <ul className={cn("p-3", layoutClass)}>
-            {column.links?.map((item) => (
-              <li key={item._key}>
-                <MenuItemLink
-                  item={{
-                    title: item.name ?? "",
-                    description: item.description ?? "",
-                    href: item.href ?? "",
-                    icon: (
-                      <SanityIcon
-                        icon={item.icon}
-                        className="size-5 shrink-0"
+        <div className="gap-4 grid">
+          {links.map((link) => {
+            if ('type' in link && link.type === 'group') {
+              return (
+                <div key={link._key} className="space-y-2">
+                  <div className="font-medium text-sm">{link.title}</div>
+                  <div className="gap-1 grid pl-2">
+                    {link.links.map((groupLink) => (
+                      <NavbarLink
+                        key={groupLink._key}
+                        name={groupLink.name}
+                        icon={groupLink.icon}
+                        description={groupLink.description}
+                        openInNewTab={groupLink.openInNewTab}
+                        href={groupLink.href}
                       />
-                    ),
-                  }}
-                />
-              </li>
-            ))}
-          </ul>
-        </NavigationMenuContent>
-      </NavigationMenuItem>
-    </NavigationMenuList>
-  );
-}
+                    ))}
+                  </div>
+                </div>
+              );
+            }
 
-export function DesktopNavbar({
-  navbarData,
-}: {
-  navbarData: QueryNavbarDataResult;
-}) {
-  const { columns, buttons } = navbarData ?? {};
-
-  return (
-    <div className="grid grid-cols-[1fr_auto] items-center gap-8">
-      <NavigationMenu className="">
-        {columns?.map((column) =>
-          column.type === "column" ? (
-            <NavbarColumn key={`nav-${column._key}`} column={column} />
-          ) : (
-            <NavbarColumnLink key={`nav-${column._key}`} column={column} />
-          ),
-        )}
-      </NavigationMenu>
-
-      <div className="justify-self-end flex items-center gap-4">
-        <ModeToggle />
-        <SanityButtons
-          buttons={buttons ?? []}
-          className="flex items-center gap-4"
-          buttonClassName="rounded-[10px]"
-        />
+            // At this point TypeScript knows it's a NavbarColumnLink
+            return (
+              <NavbarLink
+                key={link._key}
+                name={link.name}
+                icon={link.icon}
+                description={link.description}
+                openInNewTab={link.openInNewTab}
+                href={link.href}
+              />
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </NavigationMenuContent>
   );
 }
 
-const ClientSideNavbar = ({
-  navbarData,
-}: {
-  navbarData: QueryNavbarDataResult;
-}) => {
+export function Navbar({ data }: { data: NavbarData }) {
+  return (
+    <header className="top-0 z-50 sticky bg-background/95 supports-[backdrop-filter]:bg-background/60 backdrop-blur border-b w-full">
+      <div className="flex justify-between items-center h-16 container">
+        <div className="flex items-center gap-8">
+          <a href="/" className="flex items-center">
+            {data?.logo && (
+              <img src={data.logo} alt={data?.siteTitle || ""} className="h-8" />
+            )}
+          </a>
+          <DesktopNavbar data={data} />
+        </div>
+        <div className="flex items-center gap-4">
+          <MobileNavbar data={data} />
+          {data?.buttons && (
+            <div className="hidden md:flex">
+              <SanityButtons buttons={data.buttons} />
+            </div>
+          )}
+        </div>
+      </div>
+    </header>
+  );
+}
+
+const ClientSideNavbar = ({ data }: { data: NavbarData }) => {
   const isMobile = useIsMobile();
 
   if (isMobile === undefined) {
@@ -296,9 +372,9 @@ const ClientSideNavbar = ({
   }
 
   return isMobile ? (
-    <MobileNavbar navbarData={navbarData} />
+    <MobileNavbar data={data} />
   ) : (
-    <DesktopNavbar navbarData={navbarData} />
+    <DesktopNavbar data={data} />
   );
 };
 
@@ -306,7 +382,7 @@ function SkeletonMobileNavbar() {
   return (
     <div className="md:hidden">
       <div className="flex justify-end">
-        <div className="h-12 w-12 rounded-md bg-muted animate-pulse" />
+        <div className="bg-muted rounded-md w-12 h-12 animate-pulse" />
       </div>
     </div>
   );
@@ -314,12 +390,12 @@ function SkeletonMobileNavbar() {
 
 function SkeletonDesktopNavbar() {
   return (
-    <div className="hidden md:grid grid-cols-[1fr_auto] items-center gap-8 w-full">
-      <div className="justify-center flex max-w-max flex-1 items-center gap-2">
+    <div className="hidden items-center gap-8 md:grid grid-cols-[1fr_auto] w-full">
+      <div className="flex flex-1 justify-center items-center gap-2 max-w-max">
         {Array.from({ length: 2 }).map((_, index) => (
           <div
             key={`nav-item-skeleton-${index.toString()}`}
-            className="h-12 w-32 rounded bg-muted animate-pulse"
+            className="bg-muted rounded w-32 h-12 animate-pulse"
           />
         ))}
       </div>
@@ -329,7 +405,7 @@ function SkeletonDesktopNavbar() {
           {Array.from({ length: 2 }).map((_, index) => (
             <div
               key={`nav-button-skeleton-${index.toString()}`}
-              className="h-12 w-32 rounded-[10px] bg-muted animate-pulse"
+              className="bg-muted rounded-[10px] w-32 h-12 animate-pulse"
             />
           ))}
         </div>
