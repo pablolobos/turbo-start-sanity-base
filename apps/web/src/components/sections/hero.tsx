@@ -16,30 +16,30 @@ export function HeroBlock({
   richText,
 }: HeroBlockProps) {
   return (
-    <section id="hero" className="mt-4 md:my-16">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="grid items-center gap-8 lg:grid-cols-2">
-          <div className="grid h-full grid-rows-[auto_1fr_auto] gap-4 items-center justify-items-center text-center lg:items-start lg:justify-items-start lg:text-left">
-            <Badge variant="secondary">{badge}</Badge>
-            <div className="grid gap-4">
-              <h1 className="text-4xl lg:text-6xl font-semibold text-balance">
+    <section id="hero" className="bg-volvo-blue md:my-16 mt-4 font-volvo text-volvo-white">
+      <div className="mx-auto px-4 md:px-6 container">
+        <div className="items-center gap-8 grid lg:grid-cols-2">
+          <div className="justify-items-center lg:justify-items-start items-center lg:items-start gap-4 grid grid-rows-[auto_1fr_auto] h-full lg:text-left text-center">
+            <Badge variant="secondary" className="text-detail-1">{badge}</Badge>
+            <div className="gap-4 grid">
+              <h1 className="font-bold text-display-3 md:text-display-2 tracking-tight">
                 {title}
               </h1>
               <RichText
                 richText={richText}
-                className="text-base md:text-lg font-normal"
+                className="text-body-2 md:text-body-1"
               />
             </div>
 
             <SanityButtons
               buttons={buttons}
-              buttonClassName="w-full sm:w-auto"
-              className="w-full sm:w-fit grid gap-2 sm:grid-flow-col lg:justify-start mb-8"
+              buttonClassName="w-full sm:w-auto text-body-2"
+              className="lg:justify-start gap-2 grid sm:grid-flow-col mb-8 w-full sm:w-fit"
             />
           </div>
 
           {image && (
-            <div className="h-96 w-full">
+            <div className="w-full h-96">
               <SanityImage
                 asset={image}
                 loading="eager"
@@ -47,7 +47,7 @@ export function HeroBlock({
                 height={800}
                 priority
                 quality={80}
-                className="max-h-96 w-full rounded-3xl object-cover"
+                className="rounded-volvo-lg w-full max-h-96 object-cover"
               />
             </div>
           )}
