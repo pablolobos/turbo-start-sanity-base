@@ -70,8 +70,8 @@ export const blog = defineType({
         Rule.required().error("A URL slug is required"),
         Rule.custom((value, context) => {
           if (!value?.current) return true;
-          if (!value.current.startsWith("/blog/")) {
-            return 'URL slug must start with "/blog/"';
+          if (!value.current.startsWith("/noticias/")) {
+            return 'URL slug must start with "/noticias/"';
           }
           return true;
         }),

@@ -281,14 +281,14 @@ export function getMockHomePageData({
     },
     ...(seoImage
       ? {
-          seoImage: {
-            _type: "image",
-            asset: {
-              _ref: seoImage.id,
-              _type: "reference",
-            },
+        seoImage: {
+          _type: "image",
+          asset: {
+            _ref: seoImage.id,
+            _type: "reference",
           },
-        }
+        },
+      }
       : {}),
     pageBuilder: blocks,
   };
@@ -403,7 +403,7 @@ export function generateMockBlogPages({
       description: faker.lorem.paragraph(),
       slug: {
         type: "slug",
-        current: `/blog/${slugify(title, {
+        current: `/noticias/${slugify(title, {
           lower: true,
           remove: /[^a-zA-Z0-9 ]/g,
         })}`,
@@ -433,7 +433,7 @@ export function generateBlogIndexPage() {
       "Discover our latest blogs, industry insights, and expert perspectives on technology, development, and digital innovation. Stay informed with in-depth analysis and practical guides.",
     slug: {
       type: "slug",
-      current: "/blog",
+      current: "/noticias",
     },
     displayFeaturedBlogs: "yes",
     featuredBlogsCount: "1",

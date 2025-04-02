@@ -12,7 +12,7 @@ import { getMetaData } from "@/lib/seo";
 async function fetchBlogSlugPageData(slug: string) {
   return await sanityFetch({
     query: queryBlogSlugPageData,
-    params: { slug: `/blog/${slug}` },
+    params: { slug: `/noticias/${slug}` },
   });
 }
 
@@ -58,12 +58,12 @@ export default async function BlogSlugPage({
     | undefined;
 
   return (
-    <div className="container my-16 mx-auto px-4 md:px-6">
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_300px]">
+    <div className="mx-auto my-16 px-4 md:px-6 container">
+      <div className="gap-8 grid grid-cols-1 lg:grid-cols-[1fr_300px]">
         <main>
           <header className="mb-8">
-            <h1 className="mt-2 text-4xl font-bold">{title}</h1>
-            <p className="mt-4 text-lg text-muted-foreground">{description}</p>
+            <h1 className="mt-2 font-bold text-4xl">{title}</h1>
+            <p className="mt-4 text-muted-foreground text-lg">{description}</p>
           </header>
           {image && (
             <div className="mb-12">
@@ -74,7 +74,7 @@ export default async function BlogSlugPage({
                 loading="eager"
                 priority
                 height={900}
-                className="rounded-lg h-auto w-full"
+                className="rounded-lg w-full h-auto"
               />
             </div>
           )}
@@ -82,7 +82,7 @@ export default async function BlogSlugPage({
         </main>
 
         <aside className="hidden lg:block">
-          <div className="sticky top-4 rounded-lg ">
+          <div className="top-4 sticky rounded-lg">
             <TableOfContent richText={typedRichText} />
           </div>
         </aside>
