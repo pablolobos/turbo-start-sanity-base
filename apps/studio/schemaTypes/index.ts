@@ -1,9 +1,11 @@
 import { pageBuilderBlocks } from "./blocks";
 import { definitions } from "./definitions";
 import { documents, singletons } from "./documents";
+import { navbarColumnLink } from "./definitions/navbarColumnLink";
+import { navbarLinkGroup } from "./definitions/navbarLinkGroup";
 
 // Creating a new constant 'schemaTypes' which is a copy of the 'documents' array
-export const schemaTypes = [...documents, ...definitions, ...pageBuilderBlocks];
+export const schemaTypes = [...documents, ...definitions, ...pageBuilderBlocks, navbarColumnLink, navbarLinkGroup];
 
 // Creating a new constant 'schemaNames' which is an array of names extracted from the 'documents' array
 export const schemaNames = [...documents].map((doc) => doc.name);
