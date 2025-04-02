@@ -281,18 +281,35 @@ export const queryFooterData = defineQuery(/* groq */ `
   }
 `);
 
-export const NAVBAR_QUERY = `
-  *[_type == "navbar" && _id == "navbar"][0]{
-    _id,
-    columns[]{
-      _key,
-      _type == "navbarColumn" => {
-        "type": "column",
-        title,
-        links[]{
-          _key,
-          _type == "navbarColumnLink" => {
-            "type": "link",
+export const NAVBAR_QUERY = defineQuery(/* groq */ `*[
+  _type == "navbar" 
+  && _id == "navbar"
+][0]{
+  _id,
+  columns[]{
+    _key,
+    _type == "navbarColumn" => {
+      "type": "column",
+      title,
+      links[]{
+        _key,
+        _type == "navbarColumnLink" => {
+          "type": "link",
+          name,
+          icon,
+          description,
+          "openInNewTab": url.openInNewTab,
+          "href": select(
+            url.type == "internal" => url.internal->slug.current,
+            url.type == "external" => url.external,
+            url.href
+          )
+        },
+        _type == "navbarLinkGroup" => {
+          "type": "group",
+          title,
+          links[]{
+            _key,
             name,
             icon,
             description,
@@ -302,53 +319,37 @@ export const NAVBAR_QUERY = `
               url.type == "external" => url.external,
               url.href
             )
-          },
-          _type == "navbarLinkGroup" => {
-            "type": "group",
-            title,
-            links[]{
-              _key,
-              name,
-              icon,
-              description,
-              "openInNewTab": url.openInNewTab,
-              "href": select(
-                url.type == "internal" => url.internal->slug.current,
-                url.type == "external" => url.external,
-                url.href
-              )
-            }
           }
         }
-      },
-      _type == "navbarLink" => {
-        "type": "link",
-        name,
-        description,
-        "openInNewTab": url.openInNewTab,
-        "href": select(
-          url.type == "internal" => url.internal->slug.current,
-          url.type == "external" => url.external,
-          url.href
-        )
       }
     },
-    buttons[]{
-      text,
-      variant,
-      _key,
-      _type,
+    _type == "navbarLink" => {
+      "type": "link",
+      name,
+      description,
       "openInNewTab": url.openInNewTab,
       "href": select(
         url.type == "internal" => url.internal->slug.current,
         url.type == "external" => url.external,
         url.href
-      ),
-    },
-    "logo": *[_type == "settings"][0].logo.asset->url + "?w=80&h=40&dpr=3&fit=max",
-    "siteTitle": *[_type == "settings"][0].siteTitle,
-  }
-`;
+      )
+    }
+  },
+  buttons[]{
+    text,
+    variant,
+    _key,
+    _type,
+    "openInNewTab": url.openInNewTab,
+    "href": select(
+      url.type == "internal" => url.internal->slug.current,
+      url.type == "external" => url.external,
+      url.href
+    ),
+  },
+  "logo": *[_type == "settings"][0].logo.asset->url + "?w=80&h=40&dpr=3&fit=max",
+  "siteTitle": *[_type == "settings"][0].siteTitle,
+}`)
 
 export const querySitemapData = defineQuery(/* groq */ `{
   "slugPages": *[_type == "page" && defined(slug.current)]{
