@@ -19,9 +19,9 @@ export function HeroBlock({
     <section id="hero" className="bg-background md:my-16 mt-4">
       <div className="mx-auto px-4 md:px-6 container">
         <div className="items-center gap-8 grid lg:grid-cols-2">
-          <div className="justify-items-center lg:justify-items-start items-center lg:items-start gap-4 grid grid-rows-[auto_1fr_auto] h-full lg:text-left text-center">
-            <Badge variant="secondary">{badge}</Badge>
+          <div className="justify-items-start items-center lg:items-start gap-4 grid grid-rows-[auto_auto_auto] h-full lg:text-left text-center">
             <div className="gap-4 grid">
+              <Badge className="w-fit" variant="secondary">{badge}</Badge>
               <h1 className="heading-1">
                 {title}
               </h1>
