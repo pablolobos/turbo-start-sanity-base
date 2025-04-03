@@ -59,7 +59,7 @@ export function PageBuilder({
 
   return (
     <main
-      className="flex flex-col gap-16 my-16 max-w-7xl mx-auto"
+      className="flex flex-col gap-16 mx-auto my-16 max-w-[1600px]"
       data-sanity={createDataAttribute({
         id: id,
         baseUrl: studioUrl,
@@ -78,7 +78,7 @@ export function PageBuilder({
           return (
             <div
               key={`${block._type}-${block._key}`}
-              className="flex items-center justify-center p-8 text-center text-muted-foreground bg-muted rounded-lg"
+              className="flex justify-center items-center bg-muted p-8 rounded-lg text-muted-foreground text-center"
             >
               Component not found for block type: <code>{block._type}</code>
             </div>
