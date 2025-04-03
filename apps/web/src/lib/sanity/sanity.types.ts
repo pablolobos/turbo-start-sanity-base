@@ -378,7 +378,7 @@ export type PageBuilder = Array<
 
 export type Button = {
   _type: "button";
-  variant?: "default" | "secondary" | "outline" | "link";
+  variant?: "default" | "primary" | "secondary" | "outline" | "link";
   text?: string;
   url?: CustomUrl;
 };
@@ -1031,7 +1031,13 @@ export type QueryHomePageDataResult = {
         > | null;
         buttons: Array<{
           text: string | null;
-          variant: "default" | "link" | "outline" | "secondary" | null;
+          variant:
+            | "default"
+            | "link"
+            | "outline"
+            | "primary"
+            | "secondary"
+            | null;
           _key: string;
           _type: "button";
           openInNewTab: boolean | null;
@@ -1212,7 +1218,13 @@ export type QueryHomePageDataResult = {
         } | null;
         buttons: Array<{
           text: string | null;
-          variant: "default" | "link" | "outline" | "secondary" | null;
+          variant:
+            | "default"
+            | "link"
+            | "outline"
+            | "primary"
+            | "secondary"
+            | null;
           _key: string;
           _type: "button";
           openInNewTab: boolean | null;
@@ -1269,7 +1281,13 @@ export type QueryHomePageDataResult = {
         > | null;
         buttons: Array<{
           text: string | null;
-          variant: "default" | "link" | "outline" | "secondary" | null;
+          variant:
+            | "default"
+            | "link"
+            | "outline"
+            | "primary"
+            | "secondary"
+            | null;
           _key: string;
           _type: "button";
           openInNewTab: boolean | null;
@@ -1448,7 +1466,13 @@ export type QuerySlugPageDataResult = {
         > | null;
         buttons: Array<{
           text: string | null;
-          variant: "default" | "link" | "outline" | "secondary" | null;
+          variant:
+            | "default"
+            | "link"
+            | "outline"
+            | "primary"
+            | "secondary"
+            | null;
           _key: string;
           _type: "button";
           openInNewTab: boolean | null;
@@ -1629,7 +1653,13 @@ export type QuerySlugPageDataResult = {
         } | null;
         buttons: Array<{
           text: string | null;
-          variant: "default" | "link" | "outline" | "secondary" | null;
+          variant:
+            | "default"
+            | "link"
+            | "outline"
+            | "primary"
+            | "secondary"
+            | null;
           _key: string;
           _type: "button";
           openInNewTab: boolean | null;
@@ -1686,7 +1716,13 @@ export type QuerySlugPageDataResult = {
         > | null;
         buttons: Array<{
           text: string | null;
-          variant: "default" | "link" | "outline" | "secondary" | null;
+          variant:
+            | "default"
+            | "link"
+            | "outline"
+            | "primary"
+            | "secondary"
+            | null;
           _key: string;
           _type: "button";
           openInNewTab: boolean | null;
@@ -1860,7 +1896,13 @@ export type QueryBlogIndexPageDataResult = {
         > | null;
         buttons: Array<{
           text: string | null;
-          variant: "default" | "link" | "outline" | "secondary" | null;
+          variant:
+            | "default"
+            | "link"
+            | "outline"
+            | "primary"
+            | "secondary"
+            | null;
           _key: string;
           _type: "button";
           openInNewTab: boolean | null;
@@ -2041,7 +2083,13 @@ export type QueryBlogIndexPageDataResult = {
         } | null;
         buttons: Array<{
           text: string | null;
-          variant: "default" | "link" | "outline" | "secondary" | null;
+          variant:
+            | "default"
+            | "link"
+            | "outline"
+            | "primary"
+            | "secondary"
+            | null;
           _key: string;
           _type: "button";
           openInNewTab: boolean | null;
@@ -2098,7 +2146,13 @@ export type QueryBlogIndexPageDataResult = {
         > | null;
         buttons: Array<{
           text: string | null;
-          variant: "default" | "link" | "outline" | "secondary" | null;
+          variant:
+            | "default"
+            | "link"
+            | "outline"
+            | "primary"
+            | "secondary"
+            | null;
           _key: string;
           _type: "button";
           openInNewTab: boolean | null;
@@ -2515,7 +2569,7 @@ export type NAVBAR_QUERYResult = {
   > | null;
   buttons: Array<{
     text: string | null;
-    variant: "default" | "link" | "outline" | "secondary" | null;
+    variant: "default" | "link" | "outline" | "primary" | "secondary" | null;
     _key: string;
     _type: "button";
     openInNewTab: boolean | null;

@@ -2559,6 +2559,10 @@
               },
               {
                 "type": "string",
+                "value": "primary"
+              },
+              {
+                "type": "string",
                 "value": "secondary"
               },
               {
