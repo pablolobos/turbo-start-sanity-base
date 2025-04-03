@@ -95,6 +95,16 @@
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
 
+    --v-font-heading-1-lineheight: calc(.31rem + 2ex);
+    --v-font-heading-1-size-min: 2rem;
+    --v-font-heading-1-size-max: 2.5rem;
+    --v-font-heading-1-size: clamp(var(--v-font-heading-1-size-min), 1vw + 1.7rem, var(--v-font-heading-1-size-max));
+
+    --v-font-heading-2-lineheight: calc(.31rem + 2ex);
+    --v-font-heading-2-size-min: 1.5rem;
+    --v-font-heading-2-size-max: 2rem;
+    --v-font-heading-2-size: clamp(var(--v-font-heading-2-size-min), 1vw + 1.2rem, var(--v-font-heading-2-size-max));
+
     --v-font-heading-3-size-min: 1.5rem;
     --v-font-heading-3-size-max: 2rem;
     --v-font-heading-3-size: clamp(var(--v-font-heading-3-size-min), 1vw + 1.2rem, var(--v-font-heading-3-size-max));
@@ -140,7 +150,22 @@
     @apply bg-background text-foreground;
   }
 
+
   .heading-1 {
+    line-height: var(--v-font-heading-1-lineheight);
+    font-size: var(--v-font-heading-1-size);
+    font-family: var(--font-volvo-novum);
+    font-weight: 700;
+  }
+
+  .heading-2 {
+    line-height: var(--v-font-heading-2-lineheight);
+    font-size: var(--v-font-heading-2-size);
+    font-family: var(--font-volvo-novum);
+    font-weight: 700;
+  }
+
+  .heading-3 {
     line-height: var(--v-font-heading-3-lineheight);
     font-size: var(--v-font-heading-3-size);
     font-family: var(--font-volvo-novum);
