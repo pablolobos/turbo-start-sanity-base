@@ -79,7 +79,7 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${volvoNovum.variable} ${volvoBroad.variable} font-novum antialiased`}
+        className={`${volvoNovum.variable} ${volvoBroad.variable} font-novum antialiased text-foreground`}
       >
         <Providers>
           <Suspense fallback={<NavbarSkeleton />}>
