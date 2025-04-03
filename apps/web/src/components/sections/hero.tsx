@@ -17,7 +17,7 @@ export function HeroBlock({
 }: HeroBlockProps) {
   return (
     <section id="hero" className="bg-background mt-4">
-      <div className="mx-auto px-4 md:px-6 container">
+      <div className="mx-auto">
         <div className="items-center grid lg:grid-cols-2">
           <div className="justify-items-start items-center lg:items-start gap-4 grid grid-rows-[auto_auto] lg:text-left text-center">
             <div className="gap-4 grid">
