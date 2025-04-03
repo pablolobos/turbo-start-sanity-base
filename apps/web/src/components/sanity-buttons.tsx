@@ -31,7 +31,7 @@ function SanityButton({
       variant={variant}
       {...props}
       asChild
-      className={cn("rounded-[10px]", className)}
+      className={cn(className)}
     >
       <Link
         href={href || "#"}
