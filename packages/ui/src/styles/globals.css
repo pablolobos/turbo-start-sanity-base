@@ -17,7 +17,6 @@
     --v-accent-flow: #2d606f;
     --v-main-grey-4: #53565a;
     --v-functional-green-100: #d8efde;
-    --v-grayscale-50: #f7f7f7;
     --v-color: #ffffff;
     --v-functional-green-400: #6cc17a;
     --v-functional-green-600: #338f59;
@@ -37,7 +36,8 @@
     --v-functional-blue-700: #2a609d;
     --v-functional-blue-800: #204d80;
     --v-functional-blue-900: #1a3554;
-    --v-grayscale-100: #E1DFDD;
+    --v-grayscale-50: #f7f7f7;
+    --v-grayscale-100: #d5d5d5;
     --v-grayscale-200: #C8C9C7;
     --v-grayscale-300: #A7A8A9;
     --v-grayscale-400: #888B8D;
@@ -69,23 +69,24 @@
 
 
 
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
+    --background: var(--v-main-white);
+    --foreground: var(--v-main-grey-darkest);
     --card: 0 0% 100%;
     --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
+    --primary: var(--v-main-blue-700);
     --primary-foreground: 0 0% 98%;
     --secondary: 240 4.8% 95.9%;
     --secondary-foreground: 240 5.9% 10%;
     --muted: 240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
     --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
+    --accent-foreground: var(--v-main-blue-700);
+    --destructive: var(--v-functional-red-700);
     --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
+    --border: var(--v-grayscale-100);
+    --divider: var(--v-grayscale-50);
     --input: 240 5.9% 90%;
     --ring: 240 10% 3.9%;
     --chart-1: 12 76% 61%;
@@ -134,20 +135,20 @@
   }
 
   .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
+    --background: var(--v-main-white);
+    --foreground: var(--v-main-grey-darkest);
     --card: 240 10% 3.9%;
     --card-foreground: 0 0% 98%;
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
+    --primary: var(--v-main-blue-700);
     --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: #fafafa;
+    --secondary-foreground: 0 0% 64%;
     --muted: 240 3.7% 15.9%;
     --muted-foreground: 240 5% 64.9%;
     --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
+    --accent-foreground: var(--v-main-blue-700);
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
     --border: 240 3.7% 15.9%;
