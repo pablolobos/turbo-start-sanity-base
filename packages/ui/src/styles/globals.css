@@ -4,6 +4,71 @@
 
 @layer base {
   :root {
+    --v-main-blue-400: #202a44;
+    --v-main-blue-300: #1B365D;
+    --v-main-blue-200: #7089AC;
+    --v-main-blue-100: #CED9E5;
+    --v-main-white: #FFFFFF;
+    --v-main-black: #000000;
+    --v-main-grey-darkest: #141414;
+    --v-main-grey-1: #e1dfdd;
+    --v-main-grey-2: #a7aba9;
+    --v-main-grey-3: #888b8d;
+    --v-accent-flow: #2d606f;
+    --v-main-grey-4: #53565a;
+    --v-functional-green-100: #d8efde;
+    --v-grayscale-50: #f7f7f7;
+    --v-color: #ffffff;
+    --v-functional-green-400: #6cc17a;
+    --v-functional-green-600: #338f59;
+    --v-functional-green-700: #167d4a;
+    --v-functional-green-900: #2c4730;
+    --v-functional-red-100: #f8dddb;
+    --v-functional-red-400: #ff6b54;
+    --v-functional-red-600: #de3333;
+    --v-functional-red-700: #bf2012;
+    --v-functional-red-900: #4c2821;
+    --v-functional-blue-100: #d5e6ff;
+    --v-functional-blue-200: #a7cdfa;
+    --v-functional-blue-300: #7db7fa;
+    --v-functional-blue-400: #5e9feb;
+    --v-functional-blue-500: #4781c4;
+    --v-functional-blue-600: #376fb0;
+    --v-functional-blue-700: #2a609d;
+    --v-functional-blue-800: #204d80;
+    --v-functional-blue-900: #1a3554;
+    --v-grayscale-100: #E1DFDD;
+    --v-grayscale-200: #C8C9C7;
+    --v-grayscale-300: #A7A8A9;
+    --v-grayscale-400: #888B8D;
+    --v-grayscale-500: #53565A;
+    --v-accent-flow-1: #396976;
+    --v-accent-flow-2: #678c96;
+    --v-accent-flow-3: #96b0b6;
+    --v-accent-flow-4: #c3d2d6;
+    --v-accent-teal: #1e6659;
+    --v-accent-teal-1: #b8ded8;
+    --v-accent-teal-2: #8dc9bf;
+    --v-accent-teal-3: #66b3a6;
+    --v-accent-teal-4: #50a294;
+    --v-accent-leaf: #426932;
+    --v-accent-leaf-1: #c8e691;
+    --v-accent-leaf-2: #c8e691;
+    --v-accent-leaf-3: #8fc54e;
+    --v-accent-leaf-4: #78b833;
+    --v-accent-sea: #1b365d;
+    --v-accent-sea-1: #06497a;
+    --v-accent-sea-2: #476896;
+    --v-accent-sea-3: #7b9ab8;
+    --v-accent-sea-4: #d8e1eb;
+    --v-accent-sand: #7d5638;
+    --v-accent-sand-1: #ac8464;
+    --v-accent-sand-2: #c0a790;
+    --v-accent-sand-3: #d8bea4;
+    --v-accent-sand-4: #eee2d2;
+
+
+
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
@@ -29,6 +94,8 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
+
+
   }
 
   .dark {
