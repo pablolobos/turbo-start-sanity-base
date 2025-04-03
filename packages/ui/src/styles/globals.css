@@ -95,7 +95,10 @@
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
 
-
+    --v-font-heading-3-size-min: 1.5rem;
+    --v-font-heading-3-size-max: 2rem;
+    --v-font-heading-3-size: clamp(var(--v-font-heading-3-size-min), 1vw + 1.2rem, var(--v-font-heading-3-size-max));
+    --v-font-heading-3-lineheight: calc(.31rem + 2ex);
   }
 
   .dark {
@@ -136,7 +139,16 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  .heading-1 {
+    line-height: var(--v-font-heading-3-lineheight);
+    font-size: var(--v-font-heading-3-size);
+    font-family: var(--font-volvo-novum);
+    font-weight: 400;
+  }
 }
+
+
 
 .sanity-icon {
   svg {

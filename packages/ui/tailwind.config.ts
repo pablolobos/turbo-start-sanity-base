@@ -11,6 +11,26 @@ const config = {
     "../../packages/ui/src/components/**/*.{ts,tsx}",
   ],
   theme: {
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: "1rem",
+        sm: "2rem",
+        lg: "4rem",
+        xl: "5rem",
+        "2xl": "6rem",
+      },
+    },
+    fontSize: {
+      xs: "12px",
+      sm: "14px",
+      base: "16px",
+      xl: "20px",
+      "2xl": "1.563rem",
+      "3xl": "1.953rem",
+      "4xl": "2.441rem",
+      "5xl": "3.052rem",
+    },
     extend: {
       fontFamily: {
         novum: ["var(--font-volvo-novum)", ...fontFamily.sans],
