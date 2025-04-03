@@ -156,6 +156,7 @@
     font-size: var(--v-font-heading-1-size);
     font-family: var(--font-volvo-novum);
     font-weight: 700;
+    text-wrap: balance;
   }
 
   .heading-2 {
@@ -163,6 +164,7 @@
     font-size: var(--v-font-heading-2-size);
     font-family: var(--font-volvo-novum);
     font-weight: 700;
+    text-wrap: balance;
   }
 
   .heading-3 {
@@ -170,7 +172,9 @@
     font-size: var(--v-font-heading-3-size);
     font-family: var(--font-volvo-novum);
     font-weight: 400;
+    text-wrap: balance;
   }
+
 }
 
 
