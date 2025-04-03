@@ -16,10 +16,10 @@ export function HeroBlock({
   richText,
 }: HeroBlockProps) {
   return (
-    <section id="hero" className="bg-background md:my-16 mt-4">
+    <section id="hero" className="bg-background mt-4">
       <div className="mx-auto px-4 md:px-6 container">
-        <div className="items-center gap-8 grid lg:grid-cols-2">
-          <div className="justify-items-start items-center lg:items-start gap-4 grid grid-rows-[auto_auto_auto] h-full lg:text-left text-center">
+        <div className="items-center grid lg:grid-cols-2">
+          <div className="justify-items-start items-center lg:items-start gap-4 grid grid-rows-[auto_auto] lg:text-left text-center">
             <div className="gap-4 grid">
               <Badge className="w-fit" variant="secondary">{badge}</Badge>
               <h1 className="heading-1">
@@ -40,7 +40,7 @@ export function HeroBlock({
           </div>
 
           {image && (
-            <div className="w-full h-96">
+            <div className="bg-slate-500 w-full h-full aspect-square">
               <SanityImage
                 asset={image}
                 loading="eager"
@@ -48,7 +48,7 @@ export function HeroBlock({
                 height={800}
                 priority
                 quality={80}
-                className="rounded-3xl w-full max-h-96 object-cover"
+                className="w-full h-full object-cover"
               />
             </div>
           )}
