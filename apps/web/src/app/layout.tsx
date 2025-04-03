@@ -57,6 +57,17 @@ export const volvoNovum = localFont({
   variable: '--font-volvo-novum',
 })
 
+export const volvoBroad = localFont({
+  src: [
+    {
+      path: '../../public/fonts/broad/VolvoBroad.ttf',
+      weight: '700',
+      style: 'bold',
+    }
+  ],
+  variable: '--font-volvo-broad',
+})
+
 
 export default async function RootLayout({
   children,
@@ -68,7 +79,7 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${volvoNovum.variable} font-novum antialiased`}
+        className={`${volvoNovum.variable} ${volvoBroad.variable} font-novum antialiased`}
       >
         <Providers>
           <Suspense fallback={<NavbarSkeleton />}>
