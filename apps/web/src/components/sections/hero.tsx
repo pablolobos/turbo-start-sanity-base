@@ -22,7 +22,7 @@ export function HeroBlock({
           <div className="justify-items-center lg:justify-items-start items-center lg:items-start gap-4 grid grid-rows-[auto_1fr_auto] h-full lg:text-left text-center">
             <Badge variant="secondary">{badge}</Badge>
             <div className="gap-4 grid">
-              <h1 className="font-semibold text-4xl lg:text-6xl text-balance">
+              <h1 className="heading-1">
                 {title}
               </h1>
               <RichText
