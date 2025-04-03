@@ -288,11 +288,10 @@ function DesktopNavbar({ data }: { data: NonNullable<NAVBAR_QUERYResult> }) {
       </NavigationMenu>
 
       <div className="flex justify-self-end items-center gap-4">
-        <ModeToggle />
         <SanityButtons
           buttons={data.buttons ?? []}
           className="flex items-center gap-4"
-          buttonClassName="rounded-[10px]"
+          buttonClassName="boton"
         />
       </div>
     </div>

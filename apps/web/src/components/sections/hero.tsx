@@ -16,7 +16,7 @@ export function HeroBlock({
   richText,
 }: HeroBlockProps) {
   return (
-    <section id="hero" className="md:my-16 mt-4">
+    <section id="hero" className="bg-background md:my-16 mt-4">
       <div className="mx-auto px-4 md:px-6 container">
         <div className="items-center gap-8 grid lg:grid-cols-2">
           <div className="justify-items-center lg:justify-items-start items-center lg:items-start gap-4 grid grid-rows-[auto_1fr_auto] h-full lg:text-left text-center">
@@ -34,6 +34,7 @@ export function HeroBlock({
             <SanityButtons
               buttons={buttons}
               buttonClassName="w-full sm:w-auto"
+              size="lg"
               className="lg:justify-start gap-2 grid sm:grid-flow-col mb-8 w-full sm:w-fit"
             />
           </div>

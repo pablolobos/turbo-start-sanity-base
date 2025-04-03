@@ -31,13 +31,6 @@ const config = {
       "4xl": "2.441rem",
       "5xl": "3.052rem",
     },
-    borderRadius: {
-      none: "0",
-      sm: "0.25rem",
-      md: "0.5rem",
-      lg: "1rem",
-      full: "9999px",
-    },
     zIndex: {
       default: "0",
       deep: "-1",
@@ -131,22 +124,22 @@ const config = {
             975: "var(--brand-grayscale-975)",
           },
         },
-        border: "hsl(var(--border))",
-        divider: "hsl(var(--divider))",
+        border: "var(--border)",
+        divider: "var(--divider)",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "var(--background)",
-        foreground: "hsl(var(--foreground))",
+        foreground: "var(--foreground)",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: "var(--primary)",
+          foreground: "var(--primary-foreground)",
         },
         secondary: {
           DEFAULT: "var(--secondary)",
           foreground: "hsl(var(--secondary-foreground))",
         },
         destructive: {
-          DEFAULT: "hsl(var(--destructive))",
+          DEFAULT: "var(--destructive)",
           foreground: "hsl(var(--destructive-foreground))",
         },
         muted: {
@@ -155,7 +148,7 @@ const config = {
         },
         accent: {
           DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
+          foreground: "var(--accent-foreground)",
         },
         popover: {
           DEFAULT: "hsl(var(--popover))",
@@ -167,9 +160,12 @@ const config = {
         },
       },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        none: "0",
+        DEFAULT: "0.5rem",
+        sm: "0.25rem",
+        md: "0.5rem",
+        lg: "1rem",
+        full: "9999px",
       },
       keyframes: {
         "accordion-down": {
