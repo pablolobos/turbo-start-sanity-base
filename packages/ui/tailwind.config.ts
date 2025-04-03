@@ -14,6 +14,7 @@ const config = {
     extend: {
       fontFamily: {
         novum: ["var(--font-volvo-novum)", ...fontFamily.sans],
+        broad: ["var(--font-volvo-broad)", ...fontFamily.sans],
       },
       colors: {
         border: "hsl(var(--border))",
