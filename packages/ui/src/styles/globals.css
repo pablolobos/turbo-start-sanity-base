@@ -4,6 +4,14 @@
 
 @layer base {
   :root {
+    --max-container-width: 1600px;
+
+    --p-x-exterior-lg: 5rem;
+    --p-x-interior-lg: 3rem;
+    --p-x-md: 2rem;
+    --p-x-sm: 1rem;
+
+
     --v-main-blue-400: #202a44;
     --v-main-blue-300: #1B365D;
     --v-main-blue-200: #7089AC;
@@ -171,6 +179,18 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+
+  .max-container {
+    @apply mx-auto max-w-[var(--max-container-width)];
+  }
+
+  .padding-half-left {
+    @apply px-[var(--p-x-sm)] md:px-[var(--p-x-md)] lg:pr-[var(--p-x-interior-lg)] lg:pl-[var(--p-x-exterior-lg)];
+  }
+
+  .padding-center {
+    @apply px-[var(--p-x-sm)] md:px-[var(--p-x-md)] lg:px-[var(--p-x-exterior-lg)];
   }
 
   .heading-1,

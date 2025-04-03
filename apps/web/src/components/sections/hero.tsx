@@ -16,12 +16,12 @@ export function HeroBlock({
   richText,
 }: HeroBlockProps) {
   return (
-    <section id="hero" className="bg-background mt-4">
+    <section id="hero" className="bg-background">
       <div className="mx-auto">
         <div className="items-center grid lg:grid-cols-2">
-          <div className="justify-items-start items-center lg:items-start gap-4 grid grid-rows-[auto_auto] lg:text-left text-center">
+          <div className="padding-half-left justify-items-start items-center lg:items-start gap-4 grid grid-rows-[auto_auto] text-left">
             <div className="gap-4 grid">
-              <Badge className="w-fit" variant="secondary">{badge}</Badge>
+              <Badge className="w-fit">{badge}</Badge>
               <h1 className="heading-1">
                 {title}
               </h1>

@@ -17,7 +17,7 @@ export function Navbar({ navbarData }: { navbarData: NAVBAR_QUERYResult }) {
 
   return (
     <section className="py-3 md:border-b">
-      <div className="mx-auto px-4 md:px-6 container">
+      <div className="max-container padding-center">
         <nav className="items-center gap-4 grid grid-cols-[auto_1fr]">
           <Logo src={logo} alt={siteTitle} priority />
 
