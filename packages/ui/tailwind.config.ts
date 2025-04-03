@@ -31,6 +31,14 @@ const config = {
       "4xl": "2.441rem",
       "5xl": "3.052rem",
     },
+    fontWeight: {
+      bold: "700",
+      semibold: "700",
+      medium: "400",
+      regular: "400",
+      semilight: "350",
+      light: "300",
+    },
     zIndex: {
       default: "0",
       deep: "-1",
