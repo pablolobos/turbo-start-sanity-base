@@ -31,6 +31,20 @@ const config = {
       "4xl": "2.441rem",
       "5xl": "3.052rem",
     },
+    borderRadius: {
+      none: "0",
+      sm: "0.25rem",
+      md: "0.5rem",
+      lg: "1rem",
+      full: "9999px",
+    },
+    zIndex: {
+      default: "0",
+      deep: "-1",
+      nav: "10",
+      overlay: "20",
+      spinner: "30",
+    },
     extend: {
       fontFamily: {
         novum: ["var(--font-volvo-novum)", ...fontFamily.sans],

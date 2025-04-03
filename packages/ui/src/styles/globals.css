@@ -109,6 +109,28 @@
     --v-font-heading-3-size-max: 2rem;
     --v-font-heading-3-size: clamp(var(--v-font-heading-3-size-min), 1vw + 1.2rem, var(--v-font-heading-3-size-max));
     --v-font-heading-3-lineheight: calc(.31rem + 2ex);
+
+    --v-font-statement-signature-lineheight: 1;
+    --v-font-statement-signature-size-min: 2.5rem;
+    --v-font-statement-signature-size-max: 4.5rem;
+    --v-font-statement-signature-size: clamp(var(--v-font-statement-signature-size-min), 4vw + 1.3rem, var(--v-font-statement-signature-size-max));
+
+    --v-font-statement-1-lineheight: calc(.31rem + 2ex);
+    --v-font-statement-1-size-min: 4rem;
+    --v-font-statement-1-size-max: 6rem;
+    --v-font-statement-1-size: clamp(var(--v-font-statement-1-size-min), 4vw + 2.8rem, var(--v-font-statement-1-size-max));
+    --v-font-statement-1: var(--v-font-emphasis-weight) var(--v-font-statement-1-size) / var(--v-font-statement-1-lineheight) var(--v-font-sans-family);
+
+    --v-font-statement-2-lineheight: calc(.31rem + 2ex);
+    --v-font-statement-2-size-min: 3.5rem;
+    --v-font-statement-2-size-max: 4.5rem;
+    --v-font-statement-2-size: clamp(var(--v-font-statement-2-size-min), 2vw + 2.9rem, var(--v-font-statement-2-size-max));
+    --v-font-statement-2: var(--v-font-emphasis-weight) var(--v-font-statement-2-size) / var(--v-font-statement-2-lineheight) var(--v-font-sans-family);
+
+    --v-font-statement-3-lineheight: calc(.31rem + 2ex);
+    --v-font-statement-3-size-min: 3rem;
+    --v-font-statement-3-size-max: 3.5rem;
+    --v-font-statement-3-size: clamp(var(--v-font-statement-3-size-min), 1vw + 2.7rem, var(--v-font-statement-3-size-max));
   }
 
   .dark {
@@ -150,29 +172,58 @@
     @apply bg-background text-foreground;
   }
 
+  .heading-1,
+  .heading-2,
+  .heading-3 {
+    font-family: var(--font-volvo-novum);
+    font-weight: 700;
+    text-wrap: balance;
+  }
+
 
   .heading-1 {
     line-height: var(--v-font-heading-1-lineheight);
     font-size: var(--v-font-heading-1-size);
-    font-family: var(--font-volvo-novum);
-    font-weight: 700;
-    text-wrap: balance;
   }
 
   .heading-2 {
     line-height: var(--v-font-heading-2-lineheight);
     font-size: var(--v-font-heading-2-size);
-    font-family: var(--font-volvo-novum);
-    font-weight: 700;
-    text-wrap: balance;
   }
 
   .heading-3 {
     line-height: var(--v-font-heading-3-lineheight);
     font-size: var(--v-font-heading-3-size);
-    font-family: var(--font-volvo-novum);
-    font-weight: 400;
+  }
+
+  .signature-statement {
+    font-family: var(--font-volvo-broad);
+    font-size: var(--v-font-statement-signature-size);
+    line-height: var(--v-font-statement-signature-lineheight);
     text-wrap: balance;
+  }
+
+  .statement-1,
+  .statement-2,
+  .statement-3 {
+    font-family: var(--font-volvo-novum);
+    text-wrap: balance;
+    font-weight: 700;
+  }
+
+  .statement-1 {
+    font-size: var(--v-font-statement-1-size);
+    line-height: var(--v-font-statement-1-lineheight);
+  }
+
+  .statement-2 {
+    font-size: var(--v-font-statement-2-size);
+    line-height: var(--v-font-statement-2-lineheight);
+  }
+
+  .statement-3 {
+    font-size: var(--v-font-statement-3-size);
+    line-height: var(--v-font-statement-3-lineheight);
   }
 
 }
