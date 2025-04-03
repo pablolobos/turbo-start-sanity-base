@@ -14,19 +14,49 @@ import { SanityLive } from "@/lib/sanity/live";
 
 import { Providers } from "../components/providers";
 
-const fontGeist = Geist({
-  subsets: ["latin"],
-  variable: "--font-geist",
-  weight: ["400", "500", "600", "700"],
-  display: "optional",
-});
+import localFont from 'next/font/local'
 
-const fontMono = Geist_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-  weight: ["400", "700"],
-  display: "optional",
-});
+export const volvoNovum = localFont({
+  src: [
+    {
+      path: '../../public/fonts/novum/VolvoNovum3-Light.woff2',
+      weight: '300',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/novum/VolvoNovum3-LightItalic.woff2',
+      weight: '300',
+      style: 'italic',
+    },
+    {
+      path: '../../public/fonts/novum/VolvoNovum3-SemiLight.woff2',
+      weight: '350',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/novum/VolvoNovum3-Regular.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/novum/VolvoNovum3-Italic.woff2',
+      weight: '400',
+      style: 'italic',
+    },
+    {
+      path: '../../public/fonts/novum/VolvoNovum3-Bold.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/novum/VolvoNovum3-BoldItalic.woff2',
+      weight: '700',
+      style: 'italic',
+    },
+  ],
+  variable: '--font-volvo-novum',
+})
+
 
 export default async function RootLayout({
   children,
@@ -38,7 +68,7 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${fontGeist.variable} ${fontMono.variable} font-geist antialiased`}
+        className={`${volvoNovum.variable} font-novum antialiased`}
       >
         <Providers>
           <Suspense fallback={<NavbarSkeleton />}>

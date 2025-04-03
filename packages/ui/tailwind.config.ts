@@ -13,8 +13,7 @@ const config = {
   theme: {
     extend: {
       fontFamily: {
-        geist: ["var(--font-geist)", ...fontFamily.sans],
-        mono: ["var(--font-mono)", ...fontFamily.mono],
+        novum: ["var(--font-volvo-novum)", ...fontFamily.sans],
       },
       colors: {
         border: "hsl(var(--border))",
