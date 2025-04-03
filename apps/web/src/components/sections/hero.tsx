@@ -34,7 +34,7 @@ export function HeroBlock({
             <SanityButtons
               buttons={buttons}
               buttonClassName="w-full sm:w-auto"
-              size="lg"
+              size="default"
               className="lg:justify-start gap-2 grid sm:grid-flow-col mb-8 w-full sm:w-fit"
             />
           </div>

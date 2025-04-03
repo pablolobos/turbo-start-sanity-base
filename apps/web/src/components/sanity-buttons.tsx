@@ -10,7 +10,7 @@ type SanityButtonsProps = {
   className?: string;
   buttonClassName?: string;
   size?: "sm" | "lg" | "default" | "icon" | null | undefined;
-  variant?: "default" | "outline" | "secondary" | "link" | null | undefined;
+  variant?: "default" | "primary" | "secondary" | "outline" | "link" | null | undefined;
 };
 
 function SanityButton({
@@ -48,10 +48,9 @@ function SanityButton({
 export function SanityButtons({
   buttons,
   className,
-  variant = "default",
   buttonClassName,
   size = "default",
-}: SanityButtonsProps) {
+}: Omit<SanityButtonsProps, 'variant'>) {
   if (!buttons?.length) return null;
 
   return (
@@ -62,7 +61,6 @@ export function SanityButtons({
           size={size}
           {...button}
           className={buttonClassName}
-          variant={variant}
         />
       ))}
     </div>
