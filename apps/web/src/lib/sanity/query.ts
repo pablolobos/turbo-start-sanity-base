@@ -1,7 +1,7 @@
 import { defineQuery } from "next-sanity";
 
 // Base fragments for reusable query parts
-const imageFragment = /* groq */ `
+const imageFragment = `
   image{
     ...,
     "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),
@@ -10,7 +10,7 @@ const imageFragment = /* groq */ `
   }
 `;
 
-const customLinkFragment = /* groq */ `
+const customLinkFragment = `
   ...customLink{
     openInNewTab,
     "href": select(
@@ -21,21 +21,21 @@ const customLinkFragment = /* groq */ `
   }
 `;
 
-const markDefsFragment = /* groq */ `
+const markDefsFragment = `
   markDefs[]{
     ...,
     ${customLinkFragment}
   }
 `;
 
-const richTextFragment = /* groq */ `
+const richTextFragment = `
   richText[]{
     ...,
     ${markDefsFragment}
   }
 `;
 
-const blogAuthorFragment = /* groq */ `
+const blogAuthorFragment = `
   authors[0]->{
     _id,
     name,
@@ -44,7 +44,7 @@ const blogAuthorFragment = /* groq */ `
   }
 `;
 
-const blogCardFragment = /* groq */ `
+const blogCardFragment = `
   _type,
   _id,
   title,
@@ -57,7 +57,7 @@ const blogCardFragment = /* groq */ `
   ${blogAuthorFragment}
 `;
 
-const buttonsFragment = /* groq */ `
+const buttonsFragment = `
   buttons[]{
     text,
     variant,
@@ -73,14 +73,14 @@ const buttonsFragment = /* groq */ `
 `;
 
 // Page builder block fragments
-const ctaBlock = /* groq */ `
+const ctaBlock = `
   _type == "cta" => {
     ...,
     ${richTextFragment},
     ${buttonsFragment},
   }
 `;
-const imageLinkCardsBlock = /* groq */ `
+const imageLinkCardsBlock = `
   _type == "imageLinkCards" => {
     ...,
     ${richTextFragment},
@@ -98,7 +98,7 @@ const imageLinkCardsBlock = /* groq */ `
   }
 `;
 
-const heroBlock = /* groq */ `
+const heroBlock = `
   _type == "hero" => {
     ...,
     ${imageFragment},
@@ -107,7 +107,7 @@ const heroBlock = /* groq */ `
   }
 `;
 
-const faqFragment = /* groq */ `
+const faqFragment = `
   "faqs": array::compact(faqs[]->{
     title,
     _id,
@@ -116,7 +116,7 @@ const faqFragment = /* groq */ `
   })
 `;
 
-const faqAccordionBlock = /* groq */ `
+const faqAccordionBlock = `
   _type == "faqAccordion" => {
     ...,
     ${faqFragment},
@@ -132,7 +132,7 @@ const faqAccordionBlock = /* groq */ `
   }
 `;
 
-const subscribeNewsletterBlock = /* groq */ `
+const subscribeNewsletterBlock = `
   _type == "subscribeNewsletter" => {
     ...,
     "subTitle": subTitle[]{
@@ -146,7 +146,7 @@ const subscribeNewsletterBlock = /* groq */ `
   }
 `;
 
-const pageBuilderFragment = /* groq */ `
+const pageBuilderFragment = `
   pageBuilder[]{
     ...,
     _type,
@@ -213,7 +213,7 @@ export const queryBlogPaths = defineQuery(`
   *[_type == "blog" && defined(slug.current)].slug.current
 `);
 
-const ogFieldsFragment = /* groq */ `
+const ogFieldsFragment = `
   _id,
   _type,
   "title": select(

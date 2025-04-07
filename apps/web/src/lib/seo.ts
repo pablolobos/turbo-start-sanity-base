@@ -63,24 +63,16 @@ export async function getMetaData(data: MetaDataInput = {}): Promise<Metadata> {
     creator: brandName,
     authors: [{ name: brandName }],
     icons: {
-      icon: [
-        { url: `${baseUrl}/icon?id=16`, sizes: '16x16', type: 'image/png' },
-        { url: `${baseUrl}/icon?id=32`, sizes: '32x32', type: 'image/png' },
-        { url: `${baseUrl}/icon?id=48`, sizes: '48x48', type: 'image/png' },
-        { url: `${baseUrl}/icon?id=180`, sizes: '180x180', type: 'image/png' },
-        { url: `${baseUrl}/icon?id=192`, sizes: '192x192', type: 'image/png' },
-        { url: `${baseUrl}/icon?id=512`, sizes: '512x512', type: 'image/png' }
-      ],
-      apple: { url: `${baseUrl}/icon?id=180`, sizes: '180x180', type: 'image/png' },
-      shortcut: { url: `${baseUrl}/icon?id=32` }
+      icon: `${baseUrl}/favicon.ico`,
     },
     keywords: [
-      "Volvo",
-      "Volvo Chile",
-      "Volvo Camiones",
-      "Volvo Buses",
-      "Volvo Motores",
-      "Volvo Motores Penta"
+      "roboto",
+      "studio",
+      "demo",
+      "sanity",
+      "next",
+      "react",
+      "template",
     ],
     twitter: {
       card: "summary_large_image",

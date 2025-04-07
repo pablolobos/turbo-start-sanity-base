@@ -12,7 +12,7 @@ import { getMetaData } from "@/lib/seo";
 async function fetchBlogSlugPageData(slug: string) {
   return await sanityFetch({
     query: queryBlogSlugPageData,
-    params: { slug: `/noticias/${slug}` },
+    params: { slug: `/blog/${slug}` },
   });
 }
 
