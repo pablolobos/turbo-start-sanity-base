@@ -1,7 +1,7 @@
 import { defineQuery } from "next-sanity";
 
 // Base fragments for reusable query parts
-const imageFragment = /* groq */ `
+const imageFragment = `
   image{
     ...,
     "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),
@@ -10,7 +10,7 @@ const imageFragment = /* groq */ `
   }
 `;
 
-const customLinkFragment = /* groq */ `
+const customLinkFragment = `
   ...customLink{
     openInNewTab,
     "href": select(
@@ -21,21 +21,21 @@ const customLinkFragment = /* groq */ `
   }
 `;
 
-const markDefsFragment = /* groq */ `
+const markDefsFragment = `
   markDefs[]{
     ...,
     ${customLinkFragment}
   }
 `;
 
-const richTextFragment = /* groq */ `
+const richTextFragment = `
   richText[]{
     ...,
     ${markDefsFragment}
   }
 `;
 
-const blogAuthorFragment = /* groq */ `
+const blogAuthorFragment = `
   authors[0]->{
     _id,
     name,
@@ -44,7 +44,7 @@ const blogAuthorFragment = /* groq */ `
   }
 `;
 
-const blogCardFragment = /* groq */ `
+const blogCardFragment = `
   _type,
   _id,
   title,
@@ -57,7 +57,7 @@ const blogCardFragment = /* groq */ `
   ${blogAuthorFragment}
 `;
 
-const buttonsFragment = /* groq */ `
+const buttonsFragment = `
   buttons[]{
     text,
     variant,
@@ -73,14 +73,14 @@ const buttonsFragment = /* groq */ `
 `;
 
 // Page builder block fragments
-const ctaBlock = /* groq */ `
+const ctaBlock = `
   _type == "cta" => {
     ...,
     ${richTextFragment},
     ${buttonsFragment},
   }
 `;
-const imageLinkCardsBlock = /* groq */ `
+const imageLinkCardsBlock = `
   _type == "imageLinkCards" => {
     ...,
     ${richTextFragment},
@@ -98,7 +98,7 @@ const imageLinkCardsBlock = /* groq */ `
   }
 `;
 
-const heroBlock = /* groq */ `
+const heroBlock = `
   _type == "hero" => {
     ...,
     ${imageFragment},
@@ -107,7 +107,7 @@ const heroBlock = /* groq */ `
   }
 `;
 
-const faqFragment = /* groq */ `
+const faqFragment = `
   "faqs": array::compact(faqs[]->{
     title,
     _id,
@@ -116,7 +116,7 @@ const faqFragment = /* groq */ `
   })
 `;
 
-const faqAccordionBlock = /* groq */ `
+const faqAccordionBlock = `
   _type == "faqAccordion" => {
     ...,
     ${faqFragment},
@@ -132,7 +132,7 @@ const faqAccordionBlock = /* groq */ `
   }
 `;
 
-const subscribeNewsletterBlock = /* groq */ `
+const subscribeNewsletterBlock = `
   _type == "subscribeNewsletter" => {
     ...,
     "subTitle": subTitle[]{
@@ -146,7 +146,7 @@ const subscribeNewsletterBlock = /* groq */ `
   }
 `;
 
-const pageBuilderFragment = /* groq */ `
+const pageBuilderFragment = `
   pageBuilder[]{
     ...,
     _type,
@@ -159,7 +159,7 @@ const pageBuilderFragment = /* groq */ `
 `;
 
 export const queryHomePageData =
-  defineQuery(/* groq */ `*[_type == "homePage" && _id == "homePage"][0]{
+  defineQuery(`*[_type == "homePage" && _id == "homePage"][0]{
     ...,
     _id,
     _type,
@@ -169,7 +169,7 @@ export const queryHomePageData =
     ${pageBuilderFragment}
   }`);
 
-export const querySlugPageData = defineQuery(/* groq */ `
+export const querySlugPageData = defineQuery(`
   *[_type == "page" && slug.current == $slug][0]{
     ...,
     "slug": slug.current,
@@ -177,11 +177,11 @@ export const querySlugPageData = defineQuery(/* groq */ `
   }
   `);
 
-export const querySlugPagePaths = defineQuery(/* groq */ `
+export const querySlugPagePaths = defineQuery(`
   *[_type == "page" && defined(slug.current)].slug.current
 `);
 
-export const queryBlogIndexPageData = defineQuery(/* groq */ `
+export const queryBlogIndexPageData = defineQuery(`
   *[_type == "blogIndex"][0]{
     ...,
     _id,
@@ -198,7 +198,7 @@ export const queryBlogIndexPageData = defineQuery(/* groq */ `
   }
 `);
 
-export const queryBlogSlugPageData = defineQuery(/* groq */ `
+export const queryBlogSlugPageData = defineQuery(`
   *[_type == "blog" && slug.current == $slug][0]{
     ...,
     "slug": slug.current,
@@ -213,7 +213,7 @@ export const queryBlogPaths = defineQuery(`
   *[_type == "blog" && defined(slug.current)].slug.current
 `);
 
-const ogFieldsFragment = /* groq */ `
+const ogFieldsFragment = `
   _id,
   _type,
   "title": select(
@@ -233,31 +233,31 @@ const ogFieldsFragment = /* groq */ `
   "date": coalesce(date, _createdAt)
 `;
 
-export const queryHomePageOGData = defineQuery(/* groq */ `
+export const queryHomePageOGData = defineQuery(`
   *[_type == "homePage" && _id == $id][0]{
     ${ogFieldsFragment}
   }
   `);
 
-export const querySlugPageOGData = defineQuery(/* groq */ `
+export const querySlugPageOGData = defineQuery(`
   *[_type == "page" && _id == $id][0]{
     ${ogFieldsFragment}
   }
 `);
 
-export const queryBlogPageOGData = defineQuery(/* groq */ `
+export const queryBlogPageOGData = defineQuery(`
   *[_type == "blog" && _id == $id][0]{
     ${ogFieldsFragment}
   }
 `);
 
-export const queryGenericPageOGData = defineQuery(/* groq */ `
+export const queryGenericPageOGData = defineQuery(`
   *[ defined(slug.current) && _id == $id][0]{
     ${ogFieldsFragment}
   }
 `);
 
-export const queryFooterData = defineQuery(/* groq */ `
+export const queryFooterData = defineQuery(`
   *[_type == "footer" && _id == "footer"][0]{
     _id,
     subtitle,
@@ -281,7 +281,7 @@ export const queryFooterData = defineQuery(/* groq */ `
   }
 `);
 
-export const NAVBAR_QUERY = defineQuery(/* groq */ `*[
+export const NAVBAR_QUERY = defineQuery(`*[
   _type == "navbar" 
   && _id == "navbar"
 ][0]{
@@ -351,7 +351,7 @@ export const NAVBAR_QUERY = defineQuery(/* groq */ `*[
   "siteTitle": *[_type == "settings"][0].siteTitle,
 }`)
 
-export const querySitemapData = defineQuery(/* groq */ `{
+export const querySitemapData = defineQuery(`{
   "slugPages": *[_type == "page" && defined(slug.current)]{
     "slug": slug.current,
     "lastModified": _updatedAt
@@ -361,3 +361,19 @@ export const querySitemapData = defineQuery(/* groq */ `{
     "lastModified": _updatedAt
   }
 }`);
+
+export const queryGlobalSeoSettings = defineQuery(`
+  *[_type == "settings"][0]{
+    _id,
+    _type,
+    siteTitle,
+    siteDescription,
+    socialLinks{
+      linkedin,
+      facebook,
+      twitter,
+      instagram,
+      youtube
+    }
+  }
+`);

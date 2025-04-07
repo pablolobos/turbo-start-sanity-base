@@ -13,8 +13,7 @@ async function fetchBlogPosts() {
 
 export async function generateMetadata() {
   const result = await sanityFetch({ query: queryBlogIndexPageData });
-  if (!result?.data) return getMetaData({});
-  return getMetaData(result.data);
+  return await getMetaData(result?.data ?? {});
 }
 
 export default async function BlogIndexPage() {
@@ -38,9 +37,9 @@ export default async function BlogIndexPage() {
 
   if (!blogs.length) {
     return (
-      <main className="container my-16 mx-auto px-4 md:px-6">
+      <main className="mx-auto my-16 px-4 md:px-6 container">
         <BlogHeader title={title} description={description} />
-        <div className="text-center py-12">
+        <div className="py-12 text-center">
           <p className="text-muted-foreground">
             No blog posts available at the moment.
           </p>
@@ -64,11 +63,11 @@ export default async function BlogIndexPage() {
 
   return (
     <main className="bg-background">
-      <div className="container my-16 mx-auto px-4 md:px-6">
+      <div className="mx-auto my-16 px-4 md:px-6 container">
         <BlogHeader title={title} description={description} />
 
         {featuredBlogs.length > 0 && (
-          <div className="mx-auto mt-8 sm:mt-12 md:mt-16 mb-12 lg:mb-20 grid grid-cols-1 gap-8 md:gap-12">
+          <div className="gap-8 md:gap-12 grid grid-cols-1 mx-auto mt-8 sm:mt-12 md:mt-16 mb-12 lg:mb-20">
             {featuredBlogs.map((blog) => (
               <FeaturedBlogCard key={blog._id} blog={blog} />
             ))}
@@ -76,7 +75,7 @@ export default async function BlogIndexPage() {
         )}
 
         {remainingBlogs.length > 0 && (
-          <div className="grid grid-cols-1 gap-8 md:gap-12 lg:grid-cols-2 mt-8">
+          <div className="gap-8 md:gap-12 grid grid-cols-1 lg:grid-cols-2 mt-8">
             {remainingBlogs.map((blog) => (
               <BlogCard key={blog._id} blog={blog} />
             ))}
