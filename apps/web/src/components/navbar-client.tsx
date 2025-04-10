@@ -276,23 +276,24 @@ function NavbarColumn({ column }: { column: NavbarColumnType }) {
 
 function DesktopNavbar({ data }: { data: NonNullable<NAVBAR_QUERYResult> }) {
   return (
-    <div className="items-center gap-8 grid grid-cols-[1fr_auto]">
-      <NavigationMenu>
-        {data.columns?.map((column) =>
-          column.type === "column" ? (
-            <NavbarColumn key={`nav-${column._key}`} column={column as NavbarColumnType} />
-          ) : (
-            <NavbarColumnLink key={`nav-${column._key}`} column={column as NavbarLinkType} />
-          ),
-        )}
-      </NavigationMenu>
-
-      <div className="flex justify-self-end items-center gap-4">
-        <SanityButtons
-          buttons={data.buttons ?? []}
-          className="flex items-center gap-4"
-          buttonClassName="boton"
-        />
+    <div className="bg-v-grayscale-300 w-full padding-center">
+      <div className="items-center gap-8 grid grid-cols-[1fr_auto] w-full max-container padding-center">
+        <NavigationMenu>
+          {data.columns?.map((column) =>
+            column.type === "column" ? (
+              <NavbarColumn key={`nav-${column._key}`} column={column as NavbarColumnType} />
+            ) : (
+              <NavbarColumnLink key={`nav-${column._key}`} column={column as NavbarLinkType} />
+            ),
+          )}
+        </NavigationMenu>
+        <div className="flex justify-self-end items-center gap-4">
+          <SanityButtons
+            buttons={data.buttons ?? []}
+            className="flex items-center gap-4"
+            buttonClassName="boton"
+          />
+        </div>
       </div>
     </div>
   );

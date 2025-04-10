@@ -16,14 +16,15 @@ export function Navbar({ navbarData }: { navbarData: NAVBAR_QUERYResult }) {
   const { logo, siteTitle } = navbarData ?? {};
 
   return (
-    <section className="py-3 md:border-b">
-      <div className="max-container padding-center">
-        <nav className="items-center gap-4 grid grid-cols-[auto_1fr]">
+    <section className="md:border-b">
+      <nav className="flex flex-col items-center gap-4">
+        <div>
           <Logo src={logo} alt={siteTitle} priority />
-
+        </div>
+        <div className="w-full">
           <NavbarClient data={navbarData} />
-        </nav>
-      </div>
+        </div>
+      </nav>
     </section>
   );
 }
