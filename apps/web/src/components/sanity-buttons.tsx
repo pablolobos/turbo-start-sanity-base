@@ -60,7 +60,7 @@ export function SanityButtons({
           key={`button-${button._key}`}
           size={size}
           {...button}
-          className={buttonClassName}
+          className={cn(buttonClassName, "py-0 h-10 min-h-0")}
         />
       ))}
     </div>

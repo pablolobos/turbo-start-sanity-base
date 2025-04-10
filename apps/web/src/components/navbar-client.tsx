@@ -88,7 +88,7 @@ function MenuItemLink({
   return (
     <Link
       className={cn(
-        "flex select-none gap-4 rounded-md p-3 leading-none outline-none transition-colors hover:bg-accent hover:text-accent-foreground items-center focus:bg-accent focus:text-accent-foreground",
+        "flex select-none gap-4 rounded-none p-3 leading-none outline-none transition-colors hover:bg-accent hover:text-accent-foreground items-center focus:bg-accent focus:text-accent-foreground",
       )}
       aria-label={`Link to ${item.title ?? item.href}`}
       onClick={() => setIsOpen?.(false)}
@@ -232,7 +232,7 @@ function NavbarColumn({ column }: { column: NavbarColumnType }) {
 
   return (
     <NavigationMenuList>
-      <NavigationMenuItem className="text-muted-foreground dark:text-neutral-300">
+      <NavigationMenuItem className="text-muted-foreground">
         <NavigationMenuTrigger>{column.title}</NavigationMenuTrigger>
         <NavigationMenuContent>
           <ul className={cn("p-3", layoutClass)}>
@@ -276,7 +276,7 @@ function NavbarColumn({ column }: { column: NavbarColumnType }) {
 
 function DesktopNavbar({ data }: { data: NonNullable<NAVBAR_QUERYResult> }) {
   return (
-    <div className="bg-v-grayscale-300 w-full padding-center">
+    <div className="bg-v-grayscale-200 w-full padding-center">
       <div className="items-center gap-8 grid grid-cols-[1fr_auto] w-full max-container padding-center">
         <NavigationMenu>
           {data.columns?.map((column) =>
@@ -290,6 +290,7 @@ function DesktopNavbar({ data }: { data: NonNullable<NAVBAR_QUERYResult> }) {
         <div className="flex justify-self-end items-center gap-4">
           <SanityButtons
             buttons={data.buttons ?? []}
+            size="sm"
             className="flex items-center gap-4"
             buttonClassName="boton"
           />
