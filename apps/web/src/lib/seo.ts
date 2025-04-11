@@ -62,9 +62,6 @@ export async function getMetaData(data: MetaDataInput = {}): Promise<Metadata> {
     metadataBase: new URL(baseUrl),
     creator: brandName,
     authors: [{ name: brandName }],
-    icons: {
-      icon: `${baseUrl}/favicon.ico`,
-    },
     keywords: [
       "roboto",
       "studio",
