@@ -22,7 +22,7 @@ export function MainHeroBlock({
     backgroundVideo,
 }: MainHeroBlockProps) {
     return (
-        <section id="main-hero" className="relative flex items-center min-h-[80vh] overflow-hidden">
+        <section id="main-hero" className="relative flex items-center h-[600px] overflow-hidden">
             {/* Background Media */}
             <div className="absolute inset-0 w-full h-full">
                 {backgroundType === "video" && backgroundVideo ? (
