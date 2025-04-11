@@ -17,7 +17,7 @@ export function VideoControl({
     ...props
 }: VideoControlProps) {
     return (
-        <div className="right-4 bottom-2 z-[50] absolute bg-red-500">
+        <div className="right-[0] lg:right-4 bottom-[0] lg:bottom-2 z-[50] absolute">
             <button
                 onClick={onToggle}
                 className={cn(
