@@ -19,7 +19,7 @@ import { createPageTemplate } from "./utils/helper";
 
 const projectId = process.env.SANITY_STUDIO_PROJECT_ID ?? "";
 const dataset = process.env.SANITY_STUDIO_DATASET;
-const presentationOriginUrl = process.env.SANITY_STUDIO_PRESENTATION_URL;
+const presentationOriginUrl = process.env.SANITY_STUDIO_PRESENTATION_URL?.replace(/\/$/, '');
 
 export default defineConfig({
   name: "default",
