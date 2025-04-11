@@ -11,6 +11,10 @@
     --p-x-md: 2rem;
     --p-x-sm: 1rem;
 
+    --nav-item-height: 50px;
+    --header-main-height: 128px;
+    --header-main-height-mobile: 59px;
+
 
     --v-main-blue-400: #202a44;
     --v-main-blue-300: #1B365D;

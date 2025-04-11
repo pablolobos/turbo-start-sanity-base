@@ -59,7 +59,7 @@ export function PageBuilder({
 
   return (
     <main
-      className="flex flex-col gap-16 my-16 max-container"
+      className="flex flex-col max-container"
       data-sanity={createDataAttribute({
         id: id,
         baseUrl: studioUrl,

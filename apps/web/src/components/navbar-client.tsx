@@ -98,7 +98,7 @@ function MenuItemLink({
       <div className="">
         <div className="font-semibold text-sm">{item.title}</div>
         {item.description && (
-          <p className="text-muted-foreground text-sm line-clamp-2 leading-snug">
+          <p className="text-foreground text-sm line-clamp-2 leading-snug">
             {item.description}
           </p>
         )}
@@ -151,7 +151,7 @@ function MobileNavbar({ data }: { data: NonNullable<NAVBAR_QUERYResult> }) {
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <div className="flex justify-end">
         <SheetTrigger asChild>
-          <Button variant="outline" size="icon">
+          <Button variant="ghost" size="icon">
             <Menu className="size-4" />
             <span className="sr-only">Open menu</span>
           </Button>
@@ -209,7 +209,7 @@ function NavbarColumnLink({ column }: { column: NavbarLinkType }) {
       <NavigationMenuLink
         className={cn(
           navigationMenuTriggerStyle(),
-          "text-muted-foreground dark:text-neutral-300",
+          "text-foreground hover:bg-white hover:text-foreground md:h-[var(--nav-item-height)]",
         )}
       >
         {column.name}
@@ -233,9 +233,9 @@ function NavbarColumn({ column }: { column: NavbarColumnType }) {
   return (
     <NavigationMenuList>
       <NavigationMenuItem className="text-muted-foreground">
-        <NavigationMenuTrigger>{column.title}</NavigationMenuTrigger>
+        <NavigationMenuTrigger className="hover:bg-white md:h-[var(--nav-item-height)] hover:text-foreground">{column.title}</NavigationMenuTrigger>
         <NavigationMenuContent>
-          <ul className={cn("p-3", layoutClass)}>
+          <ul className={cn("p-3 w-full", layoutClass)}>
             {column.links?.map((item) => (
               <li key={item._key}>
                 {item.type === "group" ? (
@@ -277,7 +277,7 @@ function NavbarColumn({ column }: { column: NavbarColumnType }) {
 function DesktopNavbar({ data }: { data: NonNullable<NAVBAR_QUERYResult> }) {
   return (
     <div className="bg-v-grayscale-200 w-full padding-center">
-      <div className="items-center gap-8 grid grid-cols-[1fr_auto] w-full max-container padding-center">
+      <div className="items-center gap-8 grid grid-cols-[1fr_auto] w-full max-container">
         <NavigationMenu>
           {data.columns?.map((column) =>
             column.type === "column" ? (

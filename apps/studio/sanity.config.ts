@@ -29,6 +29,9 @@ export default defineConfig({
   icon: Logo,
   dataset: dataset ?? "production",
   plugins: [
+    structureTool({
+      structure,
+    }),
     presentationTool({
       resolve: {
         locations,
@@ -41,9 +44,6 @@ export default defineConfig({
       },
     }),
     assist(),
-    structureTool({
-      structure,
-    }),
     visionTool(),
     iconPicker(),
     media(),
