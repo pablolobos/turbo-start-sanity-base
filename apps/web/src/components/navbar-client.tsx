@@ -157,6 +157,7 @@ function MobileNavbar({ data }: { data: NonNullable<NAVBAR_QUERYResult> }) {
           </Button>
         </SheetTrigger>
       </div>
+      {/* @ts-expect-error SheetContent type might be missing children prop */}
       <SheetContent className="overflow-y-auto">
         <SheetHeader>
           <SheetTitle>
