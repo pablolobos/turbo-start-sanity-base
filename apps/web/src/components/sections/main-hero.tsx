@@ -39,11 +39,11 @@ export function MainHeroBlock({
     };
 
     return (
-        <section id="main-hero" className="relative flex items-center overflow-hidden component-height">
+        <section id="main-hero" className="group/hero relative flex items-center overflow-hidden component-height">
             {/* Background Media */}
-            <div className="absolute inset-0 w-full h-full">
+            <div className="absolute inset-0 w-full h-full component-height">
                 {backgroundType === "video" && backgroundVideo ? (
-                    <>
+                    <div className="relative w-full h-full">
                         {/* Optional poster image while video loads */}
                         {image?.asset && (
                             <div className="absolute inset-0 w-full h-full">
@@ -72,7 +72,7 @@ export function MainHeroBlock({
                             isPlaying={isPlaying}
                             onToggle={handleVideoToggle}
                         />
-                    </>
+                    </div>
                 ) : backgroundImage?.asset ? (
                     <SanityImage
                         asset={backgroundImage}
