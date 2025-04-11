@@ -17,13 +17,13 @@ export const hero = defineType({
     defineField({
       name: "title",
       type: "string",
-      title: "Title",
+      title: "Título",
     }),
     richTextField,
     defineField({
       name: "image",
       type: "image",
-      title: "Image",
+      title: "Imagen",
       options: {
         hotspot: true,
       },
@@ -36,7 +36,7 @@ export const hero = defineType({
     },
     prepare: ({ title }) => ({
       title,
-      subtitle: "Hero Block",
+      subtitle: "Bloque Hero",
     }),
   },
 });

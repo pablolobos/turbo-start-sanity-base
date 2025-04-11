@@ -88,6 +88,7 @@
 
     --background: var(--v-main-white);
     --foreground: var(--v-main-grey-darkest);
+    --foreground-inverse: var(--v-main-white);
     --card: 0 0% 100%;
     --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;

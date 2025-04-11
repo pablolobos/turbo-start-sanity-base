@@ -9,7 +9,7 @@ type MainHeroDocument = {
 
 export const mainHero = defineType({
     name: "mainHero",
-    title: "Main Hero",
+    title: "Hero Principal",
     icon: Projector,
     type: "object",
     fields: [
@@ -21,16 +21,16 @@ export const mainHero = defineType({
         defineField({
             name: "title",
             type: "string",
-            title: "Title",
+            title: "Título",
         }),
         richTextField,
         defineField({
             name: "backgroundType",
             type: "string",
-            title: "Background Type",
+            title: "Tipo de Fondo",
             options: {
                 list: [
-                    { title: "Image", value: "image" },
+                    { title: "Imagen", value: "image" },
                     { title: "Video", value: "video" },
                 ],
                 layout: "radio",
@@ -40,7 +40,7 @@ export const mainHero = defineType({
         defineField({
             name: "backgroundImage",
             type: "image",
-            title: "Background Image",
+            title: "Imagen de Fondo",
             options: {
                 hotspot: true,
             },
@@ -49,13 +49,13 @@ export const mainHero = defineType({
         defineField({
             name: "backgroundVideo",
             type: "file",
-            title: "Background Video",
-            description: "Make sure the video is optimized and has a low file size",
+            title: "Video de Fondo",
+            description: "Asegúrate de que el video esté optimizado y tenga un tamaño de archivo bajo",
             hidden: ({ parent }) => parent?.backgroundType !== "video",
             validation: (Rule) =>
                 Rule.custom((value, context: ValidationContext) => {
                     if ((context.parent as { backgroundType?: string })?.backgroundType === "video" && !value) {
-                        return "Video is required when background type is video";
+                        return "El video es obligatorio cuando el tipo de fondo es video";
                     }
                     return true;
                 }),
@@ -63,8 +63,8 @@ export const mainHero = defineType({
         defineField({
             name: "image",
             type: "image",
-            title: "Cover Image",
-            description: "Optional image to show while loading the video",
+            title: "Imagen de Portada",
+            description: "Imagen opcional para mostrar mientras se carga el video",
             options: {
                 hotspot: true,
             },
@@ -78,7 +78,7 @@ export const mainHero = defineType({
         },
         prepare: ({ title, backgroundType }) => ({
             title,
-            subtitle: `Main Hero Block (${backgroundType})`,
+            subtitle: `Bloque Hero Principal (${backgroundType})`,
         }),
     },
-}); 
+});

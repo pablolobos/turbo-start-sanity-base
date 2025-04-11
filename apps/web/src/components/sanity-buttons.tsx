@@ -2,8 +2,14 @@ import { Button } from "@workspace/ui/components/button";
 import { cn } from "@workspace/ui/lib/utils";
 import Link from "next/link";
 import type { ComponentProps } from "react";
+import dynamic from "next/dynamic";
 
 import type { SanityButtonProps } from "@/types";
+
+// Dynamically import icons
+const IconComponents: Record<string, React.ComponentType> = {
+  'volvo-chevron-right': dynamic(() => import("@/components/icons/volvo-chevron-right")),
+};
 
 type SanityButtonsProps = {
   buttons: SanityButtonProps[] | null;
@@ -19,6 +25,7 @@ function SanityButton({
   variant = "default",
   openInNewTab,
   className,
+  icon,
   ...props
 }: SanityButtonProps & ComponentProps<typeof Button>) {
   if (!href) {
@@ -26,20 +33,24 @@ function SanityButton({
     return <Button>Link Broken</Button>;
   }
 
+  const IconComponent = icon ? IconComponents[icon] : null;
+
   return (
     <Button
       variant={variant}
       {...props}
       asChild
-      className={cn(className)}
+      className={cn(className, "font-normal")}
     >
       <Link
         href={href || "#"}
         target={openInNewTab ? "_blank" : "_self"}
         aria-label={`Navigate to ${text}`}
         title={`Click to visit ${text}`}
+        className={cn("flex items-center gap-2", IconComponent && "pr-4")}
       >
         {text}
+        {IconComponent && <IconComponent />}
       </Link>
     </Button>
   );

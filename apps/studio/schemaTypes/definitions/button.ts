@@ -4,15 +4,17 @@ import { defineField, defineType } from "sanity";
 import { capitalize, createRadioListLayout } from "../../utils/helper";
 
 const buttonVariants = ["default", "primary", "secondary", "outline", "link"];
+const iconOptions = ["volvo-chevron-right"];
 
 export const button = defineType({
   name: "button",
-  title: "Button",
+  title: "Botón",
   type: "object",
   icon: Command,
   fields: [
     defineField({
       name: "variant",
+      title: "Variante",
       type: "string",
       initialValue: () => "default",
       options: createRadioListLayout(buttonVariants, {
@@ -21,12 +23,20 @@ export const button = defineType({
     }),
     defineField({
       name: "text",
-      title: "Button Text",
+      title: "Texto del Botón",
       type: "string",
     }),
     defineField({
+      name: "icon",
+      title: "Ícono del Botón",
+      type: "string",
+      options: {
+        list: iconOptions.map(icon => ({ title: capitalize(icon.replace(/-/g, ' ')), value: icon })),
+      },
+    }),
+    defineField({
       name: "url",
-      title: "Url",
+      title: "URL",
       type: "customUrl",
     }),
   ],
@@ -34,6 +44,7 @@ export const button = defineType({
     select: {
       title: "text",
       variant: "variant",
+      icon: "icon",
       externalUrl: "url.external",
       urlType: "url.type",
       internalUrl: "url.internal.slug.current",
@@ -42,6 +53,7 @@ export const button = defineType({
     prepare: ({
       title,
       variant,
+      icon,
       externalUrl,
       urlType,
       internalUrl,
@@ -51,10 +63,11 @@ export const button = defineType({
       const newTabIndicator = openInNewTab ? " ↗" : "";
       const truncatedUrl =
         url?.length > 30 ? `${url.substring(0, 30)}...` : url;
+      const iconIndicator = icon ? ` [${icon}]` : '';
 
       return {
-        title: title || "Untitled Button",
-        subtitle: `${capitalize(variant ?? "default")} • ${truncatedUrl}${newTabIndicator}`,
+        title: title || "Botón sin título",
+        subtitle: `${capitalize(variant ?? "default")}${iconIndicator} • ${truncatedUrl}${newTabIndicator}`,
       };
     },
   },

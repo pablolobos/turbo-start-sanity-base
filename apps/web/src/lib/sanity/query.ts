@@ -61,6 +61,7 @@ const buttonsFragment = `
   buttons[]{
     text,
     variant,
+    icon,
     _key,
     _type,
     "openInNewTab": url.openInNewTab,

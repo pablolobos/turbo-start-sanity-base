@@ -2959,6 +2959,19 @@
           },
           "optional": true
         },
+        "icon": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "volvo-chevron-right"
+              }
+            ]
+          },
+          "optional": true
+        },
         "url": {
           "type": "objectAttribute",
           "value": {

@@ -90,27 +90,24 @@ export function MainHeroBlock({
             {/* Content */}
             <div className="z-10 relative mx-auto px-4 sm:px-6 lg:px-8 w-full max-w-7xl">
                 <div className="items-center gap-8 grid lg:grid-cols-2">
-                    <div className="space-y-6 text-white">
+                    <div className="space-y-6">
                         {badge && (
                             <Badge className="bg-white/10 hover:bg-white/20 text-white">
                                 {badge}
                             </Badge>
                         )}
-                        <h1 className="font-bold text-4xl md:text-5xl lg:text-6xl leading-tight">
+                        <h1 className="font-bold text-foreground-inverse text-4xl md:text-5xl lg:text-6xl leading-tight">
                             {title}
                         </h1>
                         <RichText
                             richText={richText}
-                            className="text-white/90 text-lg md:text-xl"
+                            className="prose-invert text-foreground-inverse/90 text-lg md:text-xl"
                         />
                         <SanityButtons
                             buttons={buttons}
-                            buttonClassName={cn(
-                                "w-full sm:w-auto",
-                                "bg-white text-black hover:bg-white/90"
-                            )}
-                            size="lg"
-                            className="flex sm:flex-row flex-col gap-4 pt-4"
+                            buttonClassName="w-full sm:w-auto"
+                            size="default"
+                            className="lg:justify-start gap-2 grid sm:grid-flow-col mb-8 w-full sm:w-fit"
                         />
                     </div>
                 </div>
