@@ -130,6 +130,7 @@ const config = {
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "var(--background)",
+        "background-alt": "var(--background-alt)",
         foreground: "var(--foreground)",
         "foreground-inverse": "var(--foreground-inverse)",
         primary: {
@@ -150,6 +151,9 @@ const config = {
         },
         accent: {
           DEFAULT: "hsl(var(--accent))",
+          "1": "var(--accent-1)",
+          "2": "var(--accent-2)",
+          brand: "var(--accent-brand)",
           foreground: "var(--accent-foreground)",
         },
         popover: {

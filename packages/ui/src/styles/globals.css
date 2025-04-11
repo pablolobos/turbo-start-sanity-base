@@ -87,6 +87,7 @@
 
 
     --background: var(--v-main-white);
+    --background-alt: var(--v-grayscale-200);
     --foreground: var(--v-main-grey-darkest);
     --foreground-inverse: var(--v-main-white);
     --card: 0 0% 100%;
@@ -100,6 +101,9 @@
     --muted: 240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
     --accent: 240 4.8% 95.9%;
+    --accent-1: var(--v-accent-flow-1);
+    --accent-2: var(--v-accent-teal-4);
+    --accent-brand: var(--v-main-blue-400);
     --accent-foreground: var(--v-main-blue-700);
     --destructive: var(--v-functional-red-700);
     --destructive-foreground: 0 0% 98%;

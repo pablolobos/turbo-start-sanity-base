@@ -102,6 +102,7 @@ const imageLinkCardsBlock = `
 const heroBlock = `
   _type == "hero" => {
     ...,
+    variant,
     ${imageFragment},
     ${buttonsFragment},
     ${richTextFragment}

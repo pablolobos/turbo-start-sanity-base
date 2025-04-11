@@ -1960,6 +1960,39 @@
             "value": "hero"
           }
         },
+        "variant": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "default"
+              },
+              {
+                "type": "string",
+                "value": "alt"
+              },
+              {
+                "type": "string",
+                "value": "accent1"
+              },
+              {
+                "type": "string",
+                "value": "accent2"
+              },
+              {
+                "type": "string",
+                "value": "accent3"
+              },
+              {
+                "type": "string",
+                "value": "brand"
+              }
+            ]
+          },
+          "optional": true
+        },
         "badge": {
           "type": "objectAttribute",
           "value": {

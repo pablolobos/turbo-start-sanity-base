@@ -2,6 +2,7 @@ import { Star } from "lucide-react";
 import { defineField, defineType } from "sanity";
 
 import { buttonsField, richTextField } from "../common";
+import { createRadioListLayout } from "../../utils/helper";
 
 export const hero = defineType({
   name: "hero",
@@ -9,6 +10,17 @@ export const hero = defineType({
   icon: Star,
   type: "object",
   fields: [
+    defineField({
+      name: "variant",
+      title: "Variante",
+      type: "string",
+      initialValue: "default",
+      description: "Selecciona el estilo de fondo para este hero",
+      options: createRadioListLayout(
+        ["default", "alt", "accent1", "accent2", "brand"],
+        { direction: "horizontal" }
+      ),
+    }),
     defineField({
       name: "badge",
       type: "string",
@@ -33,10 +45,11 @@ export const hero = defineType({
   preview: {
     select: {
       title: "title",
+      variant: "variant",
     },
-    prepare: ({ title }) => ({
+    prepare: ({ title, variant }) => ({
       title,
-      subtitle: "Bloque Hero",
+      subtitle: `Bloque Hero - Variante: ${variant || "default"}`,
     }),
   },
 });
