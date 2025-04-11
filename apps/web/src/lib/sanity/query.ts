@@ -107,6 +107,22 @@ const heroBlock = `
   }
 `;
 
+const mainHeroBlock = `
+  _type == "mainHero" => {
+    ...,
+    "backgroundImage": backgroundImage{
+      ...,
+      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),
+      "blurData": asset->metadata.lqip,
+      "dominantColor": asset->metadata.palette.dominant.background,
+    },
+    "backgroundVideo": backgroundVideo.asset->url,
+    ${imageFragment},
+    ${buttonsFragment},
+    ${richTextFragment}
+  }
+`;
+
 const faqFragment = `
   "faqs": array::compact(faqs[]->{
     title,
@@ -151,6 +167,7 @@ const pageBuilderFragment = `
     ...,
     _type,
     ${ctaBlock},
+    ${mainHeroBlock},
     ${heroBlock},
     ${faqAccordionBlock},
     ${subscribeNewsletterBlock},
