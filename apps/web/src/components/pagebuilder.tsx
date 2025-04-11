@@ -98,6 +98,7 @@ export function PageBuilder({
               type: type,
               path: `pageBuilder[_key=="${block._key}"]`,
             }).toString()}
+            className="group/component"
           >
             <Component {...block} />
           </div>
