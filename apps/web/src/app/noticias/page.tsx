@@ -7,6 +7,8 @@ import { queryBlogIndexPageData } from "@/lib/sanity/query";
 import { getMetaData } from "@/lib/seo";
 import { handleErrors } from "@/utils";
 
+type Blog = Parameters<typeof BlogCard>[0]["blog"];
+
 async function fetchBlogPosts() {
   return await handleErrors(sanityFetch({ query: queryBlogIndexPageData }));
 }
@@ -68,7 +70,7 @@ export default async function BlogIndexPage() {
 
         {featuredBlogs.length > 0 && (
           <div className="gap-8 md:gap-12 grid grid-cols-1 mx-auto mt-8 sm:mt-12 md:mt-16 mb-12 lg:mb-20">
-            {featuredBlogs.map((blog) => (
+            {featuredBlogs.map((blog: Blog) => (
               <FeaturedBlogCard key={blog._id} blog={blog} />
             ))}
           </div>
@@ -76,7 +78,7 @@ export default async function BlogIndexPage() {
 
         {remainingBlogs.length > 0 && (
           <div className="gap-8 md:gap-12 grid grid-cols-1 lg:grid-cols-2 mt-8">
-            {remainingBlogs.map((blog) => (
+            {remainingBlogs.map((blog: Blog) => (
               <BlogCard key={blog._id} blog={blog} />
             ))}
           </div>
