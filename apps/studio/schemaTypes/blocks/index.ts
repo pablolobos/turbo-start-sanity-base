@@ -1,4 +1,5 @@
 import { cta } from "./cta";
+import { doubleHero } from "./double-hero";
 import { faqAccordion } from "./faq-accordion";
 import { featureCardsIcon } from "./feature-cards-icon";
 import { hero } from "./hero";
@@ -9,6 +10,7 @@ import { subscribeNewsletter } from "./subscribe-newsletter";
 export const pageBuilderBlocks = [
   mainHero,
   hero,
+  doubleHero,
   cta,
   featureCardsIcon,
   faqAccordion,

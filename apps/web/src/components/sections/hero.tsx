@@ -45,11 +45,11 @@ export function HeroBlock({
           <div className="padding-half-left justify-items-start items-center lg:items-start content-stretch gap-4 grid grid-rows-[auto_auto] col-span-1 lg:group-odd/component:col-start-2 row-span-1 row-start-1 text-left component-height">
             <div className="gap-4 grid">
               {badge && <Badge className="w-fit">{badge}</Badge>}
-              <h1 className={cn("heading-1", {
+              <h2 className={cn("heading-1", {
                 "text-white": variant && !["default", "alt"].includes(variant)
               })}>
                 {title}
-              </h1>
+              </h2>
               <RichText
                 richText={richText}
                 className={cn("font-normal text-base md:text-lg", {

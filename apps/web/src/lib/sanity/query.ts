@@ -109,6 +109,63 @@ const heroBlock = `
   }
 `;
 
+const doubleHeroBlock = `
+  _type == "doubleHero" => {
+    ...,
+    variant,
+    primaryBadge,
+    primaryTitle,
+    "primaryRichText": primaryRichText[]{
+      ...,
+      ${markDefsFragment}
+    },
+    "primaryImage": primaryImage{
+      ...,
+      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),
+      "blurData": asset->metadata.lqip,
+      "dominantColor": asset->metadata.palette.dominant.background,
+    },
+    primaryButtons[]{
+      text,
+      variant,
+      icon,
+      _key,
+      _type,
+      "openInNewTab": url.openInNewTab,
+      "href": select(
+        url.type == "internal" => url.internal->slug.current,
+        url.type == "external" => url.external,
+        url.href
+      )
+    },
+    secondaryBadge,
+    secondaryTitle,
+    "secondaryRichText": secondaryRichText[]{
+      ...,
+      ${markDefsFragment}
+    },
+    "secondaryImage": secondaryImage{
+      ...,
+      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),
+      "blurData": asset->metadata.lqip,
+      "dominantColor": asset->metadata.palette.dominant.background,
+    },
+    secondaryButtons[]{
+      text,
+      variant,
+      icon,
+      _key,
+      _type,
+      "openInNewTab": url.openInNewTab,
+      "href": select(
+        url.type == "internal" => url.internal->slug.current,
+        url.type == "external" => url.external,
+        url.href
+      )
+    }
+  }
+`;
+
 const mainHeroBlock = `
   _type == "mainHero" => {
     ...,
@@ -171,6 +228,7 @@ const pageBuilderFragment = `
     ${ctaBlock},
     ${mainHeroBlock},
     ${heroBlock},
+    ${doubleHeroBlock},
     ${faqAccordionBlock},
     ${subscribeNewsletterBlock},
     ${imageLinkCardsBlock}
