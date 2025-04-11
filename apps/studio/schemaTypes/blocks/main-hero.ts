@@ -50,6 +50,7 @@ export const mainHero = defineType({
             name: "backgroundVideo",
             type: "file",
             title: "Background Video",
+            description: "Make sure the video is optimized and has a low file size",
             hidden: ({ parent }) => parent?.backgroundType !== "video",
             validation: (Rule) =>
                 Rule.custom((value, context: ValidationContext) => {
@@ -62,8 +63,8 @@ export const mainHero = defineType({
         defineField({
             name: "image",
             type: "image",
-            title: "Content Image",
-            description: "Optional image to display alongside the content",
+            title: "Cover Image",
+            description: "Optional image to show while loading the video",
             options: {
                 hotspot: true,
             },

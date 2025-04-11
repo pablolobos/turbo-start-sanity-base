@@ -26,15 +26,31 @@ export function MainHeroBlock({
             {/* Background Media */}
             <div className="absolute inset-0 w-full h-full">
                 {backgroundType === "video" && backgroundVideo ? (
-                    <video
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        className="absolute inset-0 w-full h-full object-cover"
-                    >
-                        <source src={backgroundVideo} type="video/mp4" />
-                    </video>
+                    <>
+                        {/* Optional poster image while video loads */}
+                        {image?.asset && (
+                            <div className="absolute inset-0 w-full h-full">
+                                <SanityImage
+                                    asset={image}
+                                    alt={image.alt ?? "Video poster"}
+                                    fill
+                                    priority
+                                    quality={90}
+                                    className="object-cover"
+                                />
+                            </div>
+                        )}
+                        <video
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                            className="absolute inset-0 w-full h-full object-cover"
+                            poster={image?.asset ? undefined : undefined}
+                        >
+                            <source src={backgroundVideo} type="video/mp4" />
+                        </video>
+                    </>
                 ) : backgroundImage?.asset ? (
                     <SanityImage
                         asset={backgroundImage}
@@ -75,19 +91,6 @@ export function MainHeroBlock({
                             className="flex sm:flex-row flex-col gap-4 pt-4"
                         />
                     </div>
-                    {image?.asset && (
-                        <div className="relative mx-auto w-full lg:max-w-none max-w-lg aspect-square">
-                            <SanityImage
-                                asset={image}
-                                alt={image.alt ?? title ?? "Hero image"}
-                                width={600}
-                                height={600}
-                                priority
-                                quality={90}
-                                className="shadow-2xl rounded-2xl"
-                            />
-                        </div>
-                    )}
                 </div>
             </div>
         </section>
