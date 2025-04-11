@@ -135,6 +135,7 @@ export type ImageLinkCards = {
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
         };
+        media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         caption?: string;
@@ -157,6 +158,7 @@ export type ImageLinkCards = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       _type: "image";
@@ -264,6 +266,7 @@ export type Cta = {
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
         };
+        media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         caption?: string;
@@ -308,6 +311,7 @@ export type Hero = {
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
         };
+        media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         caption?: string;
@@ -322,6 +326,7 @@ export type Hero = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
@@ -363,6 +368,7 @@ export type MainHero = {
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
         };
+        media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         caption?: string;
@@ -378,6 +384,7 @@ export type MainHero = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
@@ -389,6 +396,7 @@ export type MainHero = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
     };
+    media?: unknown;
     _type: "file";
   };
   image?: {
@@ -398,6 +406,7 @@ export type MainHero = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
@@ -467,6 +476,7 @@ export type RichText = Array<
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       caption?: string;
@@ -547,6 +557,7 @@ export type Settings = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
@@ -582,6 +593,7 @@ export type BlogIndex = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
@@ -609,6 +621,7 @@ export type HomePage = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
@@ -632,6 +645,7 @@ export type Author = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
@@ -665,6 +679,7 @@ export type Page = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
@@ -679,6 +694,7 @@ export type Page = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
@@ -735,6 +751,7 @@ export type Blog = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
@@ -749,6 +766,7 @@ export type Blog = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
@@ -1102,6 +1120,7 @@ export type QueryHomePageDataResult = {
                 _weak?: boolean;
                 [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
               };
+              media?: unknown;
               hotspot?: SanityImageHotspot;
               crop?: SanityImageCrop;
               caption?: string;
@@ -1178,6 +1197,7 @@ export type QueryHomePageDataResult = {
                   _weak?: boolean;
                   [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
                 };
+                media?: unknown;
                 hotspot?: SanityImageHotspot;
                 crop?: SanityImageCrop;
                 caption?: string;
@@ -1276,6 +1296,7 @@ export type QueryHomePageDataResult = {
                 _weak?: boolean;
                 [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
               };
+              media?: unknown;
               hotspot?: SanityImageHotspot;
               crop?: SanityImageCrop;
               caption?: string;
@@ -1291,6 +1312,7 @@ export type QueryHomePageDataResult = {
             _weak?: boolean;
             [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
           };
+          media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
           _type: "image";
@@ -1354,6 +1376,7 @@ export type QueryHomePageDataResult = {
                 _weak?: boolean;
                 [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
               };
+              media?: unknown;
               hotspot?: SanityImageHotspot;
               crop?: SanityImageCrop;
               caption?: string;
@@ -1387,6 +1410,7 @@ export type QueryHomePageDataResult = {
               _weak?: boolean;
               [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
             };
+            media?: unknown;
             hotspot?: SanityImageHotspot;
             crop?: SanityImageCrop;
             _type: "image";
@@ -1441,6 +1465,7 @@ export type QueryHomePageDataResult = {
                 _weak?: boolean;
                 [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
               };
+              media?: unknown;
               hotspot?: SanityImageHotspot;
               crop?: SanityImageCrop;
               caption?: string;
@@ -1457,6 +1482,7 @@ export type QueryHomePageDataResult = {
             _weak?: boolean;
             [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
           };
+          media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
           _type: "image";
@@ -1472,6 +1498,7 @@ export type QueryHomePageDataResult = {
             _weak?: boolean;
             [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
           };
+          media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
           _type: "image";
@@ -1564,6 +1591,7 @@ export type QueryHomePageDataResult = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
@@ -1589,6 +1617,7 @@ export type QuerySlugPageDataResult = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
@@ -1634,6 +1663,7 @@ export type QuerySlugPageDataResult = {
                 _weak?: boolean;
                 [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
               };
+              media?: unknown;
               hotspot?: SanityImageHotspot;
               crop?: SanityImageCrop;
               caption?: string;
@@ -1710,6 +1740,7 @@ export type QuerySlugPageDataResult = {
                   _weak?: boolean;
                   [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
                 };
+                media?: unknown;
                 hotspot?: SanityImageHotspot;
                 crop?: SanityImageCrop;
                 caption?: string;
@@ -1808,6 +1839,7 @@ export type QuerySlugPageDataResult = {
                 _weak?: boolean;
                 [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
               };
+              media?: unknown;
               hotspot?: SanityImageHotspot;
               crop?: SanityImageCrop;
               caption?: string;
@@ -1823,6 +1855,7 @@ export type QuerySlugPageDataResult = {
             _weak?: boolean;
             [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
           };
+          media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
           _type: "image";
@@ -1886,6 +1919,7 @@ export type QuerySlugPageDataResult = {
                 _weak?: boolean;
                 [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
               };
+              media?: unknown;
               hotspot?: SanityImageHotspot;
               crop?: SanityImageCrop;
               caption?: string;
@@ -1919,6 +1953,7 @@ export type QuerySlugPageDataResult = {
               _weak?: boolean;
               [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
             };
+            media?: unknown;
             hotspot?: SanityImageHotspot;
             crop?: SanityImageCrop;
             _type: "image";
@@ -1973,6 +2008,7 @@ export type QuerySlugPageDataResult = {
                 _weak?: boolean;
                 [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
               };
+              media?: unknown;
               hotspot?: SanityImageHotspot;
               crop?: SanityImageCrop;
               caption?: string;
@@ -1989,6 +2025,7 @@ export type QuerySlugPageDataResult = {
             _weak?: boolean;
             [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
           };
+          media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
           _type: "image";
@@ -2004,6 +2041,7 @@ export type QuerySlugPageDataResult = {
             _weak?: boolean;
             [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
           };
+          media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
           _type: "image";
@@ -2096,6 +2134,7 @@ export type QuerySlugPageDataResult = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
@@ -2161,6 +2200,7 @@ export type QueryBlogIndexPageDataResult = {
                 _weak?: boolean;
                 [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
               };
+              media?: unknown;
               hotspot?: SanityImageHotspot;
               crop?: SanityImageCrop;
               caption?: string;
@@ -2237,6 +2277,7 @@ export type QueryBlogIndexPageDataResult = {
                   _weak?: boolean;
                   [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
                 };
+                media?: unknown;
                 hotspot?: SanityImageHotspot;
                 crop?: SanityImageCrop;
                 caption?: string;
@@ -2335,6 +2376,7 @@ export type QueryBlogIndexPageDataResult = {
                 _weak?: boolean;
                 [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
               };
+              media?: unknown;
               hotspot?: SanityImageHotspot;
               crop?: SanityImageCrop;
               caption?: string;
@@ -2350,6 +2392,7 @@ export type QueryBlogIndexPageDataResult = {
             _weak?: boolean;
             [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
           };
+          media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
           _type: "image";
@@ -2413,6 +2456,7 @@ export type QueryBlogIndexPageDataResult = {
                 _weak?: boolean;
                 [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
               };
+              media?: unknown;
               hotspot?: SanityImageHotspot;
               crop?: SanityImageCrop;
               caption?: string;
@@ -2446,6 +2490,7 @@ export type QueryBlogIndexPageDataResult = {
               _weak?: boolean;
               [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
             };
+            media?: unknown;
             hotspot?: SanityImageHotspot;
             crop?: SanityImageCrop;
             _type: "image";
@@ -2500,6 +2545,7 @@ export type QueryBlogIndexPageDataResult = {
                 _weak?: boolean;
                 [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
               };
+              media?: unknown;
               hotspot?: SanityImageHotspot;
               crop?: SanityImageCrop;
               caption?: string;
@@ -2516,6 +2562,7 @@ export type QueryBlogIndexPageDataResult = {
             _weak?: boolean;
             [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
           };
+          media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
           _type: "image";
@@ -2531,6 +2578,7 @@ export type QueryBlogIndexPageDataResult = {
             _weak?: boolean;
             [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
           };
+          media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
           _type: "image";
@@ -2623,6 +2671,7 @@ export type QueryBlogIndexPageDataResult = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
@@ -2644,6 +2693,7 @@ export type QueryBlogIndexPageDataResult = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       _type: "image";
@@ -2663,6 +2713,7 @@ export type QueryBlogIndexPageDataResult = {
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
         };
+        media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         _type: "image";
@@ -2696,6 +2747,7 @@ export type QueryBlogSlugPageDataResult = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       _type: "image";
@@ -2712,6 +2764,7 @@ export type QueryBlogSlugPageDataResult = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
@@ -2754,6 +2807,7 @@ export type QueryBlogSlugPageDataResult = {
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
         };
+        media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         caption?: string;
@@ -2771,6 +2825,7 @@ export type QueryBlogSlugPageDataResult = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
@@ -2897,7 +2952,7 @@ export type QueryFooterDataResult = {
   } | null;
 } | null;
 // Variable: NAVBAR_QUERY
-// Query: *[  _type == "navbar"   && _id == "navbar"][0]{  _id,  columns[]{    _key,    _type == "navbarColumn" => {      "type": "column",      title,      links[]{        _key,        _type == "navbarColumnLink" => {          "type": "link",          name,          icon,          description,          "openInNewTab": url.openInNewTab,          "href": select(            url.type == "internal" => url.internal->slug.current,            url.type == "external" => url.external,            url.href          )        },        _type == "navbarLinkGroup" => {          "type": "group",          title,          links[]{            _key,            name,            icon,            description,            "openInNewTab": url.openInNewTab,            "href": select(              url.type == "internal" => url.internal->slug.current,              url.type == "external" => url.external,              url.href            )          }        }      }    },    _type == "navbarLink" => {      "type": "link",      name,      description,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },  buttons[]{    text,    variant,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },  "logo": *[_type == "settings"][0].logo.asset->url + "?w=80&h=40&dpr=3&fit=max",  "siteTitle": *[_type == "settings"][0].siteTitle,}
+// Query: *[  _type == "navbar"   && _id == "navbar"][0]{  _id,  columns[]{    _key,    _type == "navbarColumn" => {      "type": "column",      title,      links[]{        _key,        _type == "navbarColumnLink" => {          "type": "link",          name,          icon,          description,          "openInNewTab": url.openInNewTab,          "href": select(            url.type == "internal" => url.internal->slug.current,            url.type == "external" => url.external,            url.href          )        },        _type == "navbarLinkGroup" => {          "type": "group",          title,          links[]{            _key,            name,            icon,            description,            "openInNewTab": url.openInNewTab,            "href": select(              url.type == "internal" => url.internal->slug.current,              url.type == "external" => url.external,              url.href            )          }        }      }    },    _type == "navbarLink" => {      "type": "link",      name,      description,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },  buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },  "logo": *[_type == "settings"][0].logo.asset->url + "?w=80&h=40&dpr=3&fit=max",  "siteTitle": *[_type == "settings"][0].siteTitle,}
 export type NAVBAR_QUERYResult = {
   _id: string;
   columns: Array<
@@ -2942,6 +2997,7 @@ export type NAVBAR_QUERYResult = {
   buttons: Array<{
     text: string | null;
     variant: "default" | "link" | "outline" | "primary" | "secondary" | null;
+    icon: "volvo-chevron-right" | null;
     _key: string;
     _type: "button";
     openInNewTab: boolean | null;
@@ -2993,7 +3049,7 @@ declare module "@sanity/client" {
     '\n  *[_type == "blog" && _id == $id][0]{\n    \n  _id,\n  _type,\n  "title": select(\n    defined(ogTitle) => ogTitle,\n    defined(seoTitle) => seoTitle,\n    title\n  ),\n  "description": select(\n    defined(ogDescription) => ogDescription,\n    defined(seoDescription) => seoDescription,\n    description\n  ),\n  "image": image.asset->url + "?w=566&h=566&dpr=2&fit=max",\n  "dominantColor": image.asset->metadata.palette.dominant.background,\n  "seoImage": seoImage.asset->url + "?w=1200&h=630&dpr=2&fit=max", \n  "logo": *[_type == "settings"][0].logo.asset->url + "?w=80&h=40&dpr=3&fit=max&q=100",\n  "date": coalesce(date, _createdAt)\n\n  }\n': QueryBlogPageOGDataResult;
     '\n  *[ defined(slug.current) && _id == $id][0]{\n    \n  _id,\n  _type,\n  "title": select(\n    defined(ogTitle) => ogTitle,\n    defined(seoTitle) => seoTitle,\n    title\n  ),\n  "description": select(\n    defined(ogDescription) => ogDescription,\n    defined(seoDescription) => seoDescription,\n    description\n  ),\n  "image": image.asset->url + "?w=566&h=566&dpr=2&fit=max",\n  "dominantColor": image.asset->metadata.palette.dominant.background,\n  "seoImage": seoImage.asset->url + "?w=1200&h=630&dpr=2&fit=max", \n  "logo": *[_type == "settings"][0].logo.asset->url + "?w=80&h=40&dpr=3&fit=max&q=100",\n  "date": coalesce(date, _createdAt)\n\n  }\n': QueryGenericPageOGDataResult;
     '\n  *[_type == "footer" && _id == "footer"][0]{\n    _id,\n    subtitle,\n    columns[]{\n      _key,\n      title,\n      links[]{\n        _key,\n        name,\n        "openInNewTab": url.openInNewTab,\n        "href": select(\n          url.type == "internal" => url.internal->slug.current,\n          url.type == "external" => url.external,\n          url.href\n        ),\n      }\n    },\n    "logo": *[_type == "settings"][0].logo.asset->url + "?w=80&h=40&dpr=3&fit=max",\n    "siteTitle": *[_type == "settings"][0].siteTitle,\n    "socialLinks": *[_type == "settings"][0].socialLinks,\n  }\n': QueryFooterDataResult;
-    '*[\n  _type == "navbar" \n  && _id == "navbar"\n][0]{\n  _id,\n  columns[]{\n    _key,\n    _type == "navbarColumn" => {\n      "type": "column",\n      title,\n      links[]{\n        _key,\n        _type == "navbarColumnLink" => {\n          "type": "link",\n          name,\n          icon,\n          description,\n          "openInNewTab": url.openInNewTab,\n          "href": select(\n            url.type == "internal" => url.internal->slug.current,\n            url.type == "external" => url.external,\n            url.href\n          )\n        },\n        _type == "navbarLinkGroup" => {\n          "type": "group",\n          title,\n          links[]{\n            _key,\n            name,\n            icon,\n            description,\n            "openInNewTab": url.openInNewTab,\n            "href": select(\n              url.type == "internal" => url.internal->slug.current,\n              url.type == "external" => url.external,\n              url.href\n            )\n          }\n        }\n      }\n    },\n    _type == "navbarLink" => {\n      "type": "link",\n      name,\n      description,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  },\n  buttons[]{\n    text,\n    variant,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  },\n  "logo": *[_type == "settings"][0].logo.asset->url + "?w=80&h=40&dpr=3&fit=max",\n  "siteTitle": *[_type == "settings"][0].siteTitle,\n}': NAVBAR_QUERYResult;
+    '*[\n  _type == "navbar" \n  && _id == "navbar"\n][0]{\n  _id,\n  columns[]{\n    _key,\n    _type == "navbarColumn" => {\n      "type": "column",\n      title,\n      links[]{\n        _key,\n        _type == "navbarColumnLink" => {\n          "type": "link",\n          name,\n          icon,\n          description,\n          "openInNewTab": url.openInNewTab,\n          "href": select(\n            url.type == "internal" => url.internal->slug.current,\n            url.type == "external" => url.external,\n            url.href\n          )\n        },\n        _type == "navbarLinkGroup" => {\n          "type": "group",\n          title,\n          links[]{\n            _key,\n            name,\n            icon,\n            description,\n            "openInNewTab": url.openInNewTab,\n            "href": select(\n              url.type == "internal" => url.internal->slug.current,\n              url.type == "external" => url.external,\n              url.href\n            )\n          }\n        }\n      }\n    },\n    _type == "navbarLink" => {\n      "type": "link",\n      name,\n      description,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  },\n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  },\n  "logo": *[_type == "settings"][0].logo.asset->url + "?w=80&h=40&dpr=3&fit=max",\n  "siteTitle": *[_type == "settings"][0].siteTitle,\n}': NAVBAR_QUERYResult;
     '{\n  "slugPages": *[_type == "page" && defined(slug.current)]{\n    "slug": slug.current,\n    "lastModified": _updatedAt\n  },\n  "blogPages": *[_type == "blog" && defined(slug.current)]{\n    "slug": slug.current,\n    "lastModified": _updatedAt\n  }\n}': QuerySitemapDataResult;
     '\n  *[_type == "settings"][0]{\n    _id,\n    _type,\n    siteTitle,\n    siteDescription,\n    socialLinks{\n      linkedin,\n      facebook,\n      twitter,\n      instagram,\n      youtube\n    }\n  }\n': QueryGlobalSeoSettingsResult;
   }

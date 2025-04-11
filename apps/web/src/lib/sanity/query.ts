@@ -356,6 +356,7 @@ export const NAVBAR_QUERY = defineQuery(`*[
   buttons[]{
     text,
     variant,
+    icon,
     _key,
     _type,
     "openInNewTab": url.openInNewTab,
