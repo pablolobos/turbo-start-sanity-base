@@ -10,10 +10,15 @@
     --p-x-interior-lg: 3rem;
     --p-x-md: 2rem;
     --p-x-sm: 1rem;
+    --p-y-md: 12rem;
+    --p-y-sm: 8rem;
+
 
     --nav-item-height: 50px;
     --header-main-height: 128px;
     --header-main-height-mobile: 59px;
+
+    --component-height: 600px;
 
 
     --v-main-blue-400: #202a44;
@@ -189,8 +194,12 @@
     @apply mx-auto max-w-[var(--max-container-width)];
   }
 
+  .component-height {
+    @apply h-[var(--component-height)];
+  }
+
   .padding-half-left {
-    @apply px-[var(--p-x-sm)] md:px-[var(--p-x-md)] lg:pr-[var(--p-x-interior-lg)] lg:pl-[var(--p-x-exterior-lg)];
+    @apply px-[var(--p-x-sm)] md:px-[var(--p-x-md)] py-[var(--p-y-sm)] md:py-[var(--p-y-md)] lg:pr-[var(--p-x-interior-lg)] lg:pl-[var(--p-x-exterior-lg)];
   }
 
   .padding-center {

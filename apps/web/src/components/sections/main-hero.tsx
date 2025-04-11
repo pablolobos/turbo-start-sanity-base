@@ -39,7 +39,7 @@ export function MainHeroBlock({
     };
 
     return (
-        <section id="main-hero" className="relative flex items-center h-[600px] overflow-hidden">
+        <section id="main-hero" className="relative flex items-center overflow-hidden component-height">
             {/* Background Media */}
             <div className="absolute inset-0 w-full h-full">
                 {backgroundType === "video" && backgroundVideo ? (
