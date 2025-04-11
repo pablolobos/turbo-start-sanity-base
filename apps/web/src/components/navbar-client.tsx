@@ -157,43 +157,55 @@ function MobileNavbar({ data }: { data: NonNullable<NAVBAR_QUERYResult> }) {
           </Button>
         </SheetTrigger>
       </div>
-      {/* @ts-expect-error SheetContent type might be missing children prop */}
       <SheetContent className="overflow-y-auto">
-        <SheetHeader>
-          <SheetTitle>
-            <Logo src={data.logo} alt={data.siteTitle} priority />
-          </SheetTitle>
-        </SheetHeader>
+        <>
+          <SheetHeader>
+            <SheetTitle>
+              <Logo src={data.logo} alt={data.siteTitle} priority />
+            </SheetTitle>
+          </SheetHeader>
 
-        <div className="flex flex-col gap-4 mt-8 mb-8">
-          {data.columns?.map((item) => {
-            if (item.type === "link") {
+          <div className="flex flex-col gap-4 mt-8 mb-8">
+            {data.columns?.map((item) => {
+              if (item.type === "link") {
+                return (
+                  <Link
+                    key={`column-link-${item.name}-${item._key}`}
+                    href={item.href ?? ""}
+                    onClick={() => setIsOpen(false)}
+                    className={cn(
+                      buttonVariants({ variant: "ghost" }),
+                      "justify-start",
+                    )}
+                  >
+                    {item.name}
+                  </Link>
+                );
+              }
               return (
-                <Link
-                  key={`column-link-${item.name}-${item._key}`}
-                  href={item.href ?? ""}
-                  onClick={() => setIsOpen(false)}
-                  className={cn(buttonVariants({ variant: "ghost" }), "justify-start")}
+                <Accordion
+                  type="single"
+                  collapsible
+                  className="w-full"
+                  key={item._key}
                 >
-                  {item.name}
-                </Link>
+                  <MobileNavbarAccordionColumn
+                    column={item as NavbarColumnType}
+                    setIsOpen={setIsOpen}
+                  />
+                </Accordion>
               );
-            }
-            return (
-              <Accordion type="single" collapsible className="w-full" key={item._key}>
-                <MobileNavbarAccordionColumn column={item as NavbarColumnType} setIsOpen={setIsOpen} />
-              </Accordion>
-            );
-          })}
-        </div>
+            })}
+          </div>
 
-        <div className="pt-4 border-t">
-          <SanityButtons
-            buttons={data.buttons ?? []}
-            buttonClassName="w-full"
-            className="flex flex-col gap-3 mt-2"
-          />
-        </div>
+          <div className="pt-4 border-t">
+            <SanityButtons
+              buttons={data.buttons ?? []}
+              buttonClassName="w-full"
+              className="flex flex-col gap-3 mt-2"
+            />
+          </div>
+        </>
       </SheetContent>
     </Sheet>
   );
