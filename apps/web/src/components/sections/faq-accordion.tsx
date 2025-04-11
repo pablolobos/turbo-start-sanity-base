@@ -23,17 +23,17 @@ export function FaqAccordion({
 }: FaqAccordionProps) {
   return (
     <section id="faq" className="my-8">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="flex w-full flex-col items-center">
-          <div className="flex flex-col items-center space-y-4 text-center sm:space-y-6 md:text-center">
+      <div className="mx-auto px-4 md:px-6 container">
+        <div className="flex flex-col items-center w-full">
+          <div className="flex flex-col items-center space-y-4 sm:space-y-6 text-center md:text-center">
             <Badge variant="secondary">{eyebrow}</Badge>
-            <h2 className="text-3xl font-semibold md:text-5xl">{title}</h2>
-            <h3 className="text-lg font-normal text-[#374151] text-balance dark:text-zinc-400">
+            <h2 className="font-semibold text-3xl md:text-5xl">{title}</h2>
+            <h3 className="font-normal text-[#374151] text-lg text-balance">
               {subtitle}
             </h3>
           </div>
         </div>
-        <div className="my-16 max-w-xl mx-auto">
+        <div className="mx-auto my-16 max-w-xl">
           <Accordion
             type="single"
             collapsible
@@ -46,7 +46,7 @@ export function FaqAccordion({
                 key={`AccordionItem-${faq?._id}-${index}`}
                 className="py-2"
               >
-                <AccordionTrigger className="py-2 text-[15px] leading-6 hover:no-underline group">
+                <AccordionTrigger className="group py-2 text-[15px] hover:no-underline leading-6">
                   {faq?.title}
                 </AccordionTrigger>
                 <AccordionContent className="pb-2 text-muted-foreground">
@@ -60,20 +60,20 @@ export function FaqAccordion({
           </Accordion>
 
           {link?.href && (
-            <div className="w-full py-6">
+            <div className="py-6 w-full">
               <p className="mb-1 text-xs">{link?.title}</p>
               <Link
                 href={link.href ?? "#"}
                 target={link.openInNewTab ? "_blank" : "_self"}
                 className="flex items-center gap-2"
               >
-                <p className="text-[15px] font-[500] leading-6">
+                <p className="font-[500] text-[15px] leading-6">
                   {link?.description}
                 </p>
-                <span className="rounded-full border p-1">
+                <span className="p-1 border rounded-full">
                   <ArrowUpRight
                     size={16}
-                    className="text-[#374151] dark:text-neutral-300"
+                    className="text-[#374151]"
                   />
                 </span>
               </Link>

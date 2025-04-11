@@ -81,13 +81,13 @@ const AnchorT: FC<{ heading: any }> = ({ heading }) => {
         <Circle
           className={cn(
             "min-w-1.5 min-h-1.5 size-1.5 ",
-            !isChild && "dark:fill-zinc-100 fill-zinc-900",
+            !isChild && " fill-zinc-900",
           )}
           aria-hidden
         />
         <Link
           href={href ?? "#"}
-          className=" hover:text-blue-500 hover:underline line-clamp-1"
+          className="hover:text-blue-500 hover:underline line-clamp-1"
         >
           {text}
         </Link>
@@ -120,12 +120,12 @@ export const TableOfContent: FC<TableProps> = ({ richText }) => {
   if (!showTableOfContent) return <></>;
 
   return (
-    <div className="sticky top-8 flex flex-col w-full max-w-xs p-4 bg-gradient-to-b from-zinc-50 to-zinc-100 dark:from-zinc-800 dark:to-zinc-900 shadow-sm rounded-lg border border-zinc-300 dark:border-zinc-700">
+    <div className="top-8 sticky flex flex-col bg-gradient-to-b from-zinc-50 to-zinc-100 shadow-sm p-4 border border-zinc-300 rounded-lg w-full max-w-xs">
       <details className="group">
-        <summary className="flex cursor-pointer items-center justify-between text-lg font-semibold text-zinc-800 dark:text-zinc-200">
+        <summary className="flex justify-between items-center font-semibold text-zinc-800 text-lg cursor-pointer">
           <span>Table of Contents</span>
           <ChevronDown
-            className="h-5 w-5 transform transition-transform duration-200 group-open:rotate-180"
+            className="w-5 h-5 group-open:rotate-180 transition-transform duration-200 transform"
             aria-hidden="true"
           />
         </summary>

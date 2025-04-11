@@ -152,32 +152,6 @@
     --v-font-statement-3-size: clamp(var(--v-font-statement-3-size-min), 1vw + 2.7rem, var(--v-font-statement-3-size-max));
   }
 
-  .dark {
-    --background: var(--v-main-white);
-    --foreground: var(--v-main-grey-darkest);
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: var(--v-main-blue-700);
-    --primary-foreground: 240 5.9% 10%;
-    --secondary: #fafafa;
-    --secondary-foreground: 0 0% 64%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: var(--v-main-blue-700);
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-  }
 }
 
 @layer base {
