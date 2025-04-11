@@ -40,7 +40,7 @@ function SanityButton({
       variant={variant}
       {...props}
       asChild
-      className={cn(className, "font-normal")}
+      className={cn(className, "font-normal w-fit")}
     >
       <Link
         href={href || "#"}

@@ -71,11 +71,11 @@ export function HeroBlock({
               <SanityImage
                 asset={image}
                 loading="eager"
-                width={800}
-                height={800}
+                width={1200}
+                height={1200}
                 priority
-                quality={80}
-                className="w-full h-full object-cover"
+                quality={90}
+                className="object-cover"
               />
             </div>
           )}
