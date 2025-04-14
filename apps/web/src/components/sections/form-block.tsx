@@ -4,6 +4,8 @@ import { generateID } from "@/lib/utils"
 import { useState, FormEvent, useRef } from 'react'
 import { cn } from "@workspace/ui/lib/utils"
 import * as Form from "@radix-ui/react-form"
+import { Button } from "@workspace/ui/components/button"
+
 
 interface FormField {
     label: string
@@ -91,10 +93,10 @@ export default function FormBlock({ title, description, variant = 'default', for
             required: field.required === 'yes',
             placeholder: field.placeholder,
             className: cn(
-                "w-full rounded-md border border-zinc-800 bg-zinc-900 text-white",
+                "w-full rounded-md border border-border bg-input",
                 "px-4 py-3 text-base",
                 "placeholder:text-zinc-500",
-                "focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/50"
+                "focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-ring"
             )
         }
 
@@ -175,12 +177,12 @@ export default function FormBlock({ title, description, variant = 'default', for
     return (
         <div className={containerClasses}>
             {(title || form.title) && (
-                <h2 className="mb-4 font-bold text-white text-3xl sm:text-4xl tracking-tight">
+                <h2 className="mb-4 font-bold text-3xl sm:text-4xl tracking-tight">
                     {title || form.title}
                 </h2>
             )}
             {(description || form.description) && (
-                <p className="mb-8 text-gray-300 text-lg">
+                <p className="mb-8 text-lg">
                     {description || form.description}
                 </p>
             )}
@@ -197,7 +199,7 @@ export default function FormBlock({ title, description, variant = 'default', for
                         className="gap-2 grid"
                     >
                         <div className="flex justify-between items-baseline">
-                            <Form.Label className="font-medium text-gray-300 text-sm">
+                            <Form.Label className="font-medium text-sm">
                                 {field.label}
                                 {field.required === 'yes' && (
                                     <span className="ml-1 text-red-500">*</span>
@@ -232,18 +234,15 @@ export default function FormBlock({ title, description, variant = 'default', for
                 )}
 
                 <Form.Submit asChild>
-                    <button
+                    <Button
                         disabled={isSubmitting}
                         className={cn(
-                            "w-full rounded-md bg-blue-600 px-4 py-3",
-                            "text-base font-medium text-white",
-                            "transition-colors duration-200",
-                            "hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600/50",
+                            "w-fit  px-4 py-3",
                             "disabled:opacity-50 disabled:cursor-not-allowed"
                         )}
                     >
                         {isSubmitting ? 'Enviando...' : (form.submitButtonText || 'Enviar')}
-                    </button>
+                    </Button>
                 </Form.Submit>
             </Form.Root>
         </div>
