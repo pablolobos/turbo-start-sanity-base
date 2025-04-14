@@ -73,6 +73,18 @@ const buttonsFragment = `
   }
 `;
 
+// Form fragments
+const formFieldsFragment = `
+  fields[]{
+    label,
+    name,
+    type,
+    required,
+    options,
+    placeholder
+  }
+`;
+
 // Page builder block fragments
 const ctaBlock = `
   _type == "cta" => {
@@ -221,6 +233,24 @@ const subscribeNewsletterBlock = `
   }
 `;
 
+const formBlock = `
+  _type == "formBlock" => {
+    ...,
+    title,
+    description,
+    variant,
+    "form": form->{
+      _id,
+      title,
+      description,
+      ${formFieldsFragment},
+      submitButtonText,
+      successMessage,
+      errorMessage
+    }
+  }
+`;
+
 const pageBuilderFragment = `
   pageBuilder[]{
     ...,
@@ -231,7 +261,8 @@ const pageBuilderFragment = `
     ${doubleHeroBlock},
     ${faqAccordionBlock},
     ${subscribeNewsletterBlock},
-    ${imageLinkCardsBlock}
+    ${imageLinkCardsBlock},
+    ${formBlock}
   }
 `;
 
@@ -455,3 +486,24 @@ export const queryGlobalSeoSettings = defineQuery(`
     }
   }
 `);
+
+// Form queries
+export const queryAllForms = defineQuery(`*[_type == "formularios"]{
+  _id,
+  title,
+  "slug": slug.current,
+  description
+}`);
+
+export const queryFormBySlug = defineQuery(`*[
+  _type == "formularios" 
+  && slug.current == $slug
+][0]{
+  _id,
+  title,
+  description,
+  ${formFieldsFragment},
+  submitButtonText,
+  successMessage,
+  errorMessage
+}`);

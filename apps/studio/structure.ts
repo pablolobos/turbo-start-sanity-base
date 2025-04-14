@@ -11,6 +11,7 @@ import {
   PanelTopDashedIcon,
   Settings2,
   User,
+  NotepadText,
 } from "lucide-react";
 import type {
   StructureBuilder,
@@ -121,6 +122,8 @@ export const structure = (
         title: "FAQs",
         icon: MessageCircleQuestion,
       }),
+      createList({ S, type: "formularios", title: "Formularios", icon: NotepadText },
+      ),
       createList({ S, type: "author", title: "Authors", icon: User }),
       S.divider(),
       S.listItem()
