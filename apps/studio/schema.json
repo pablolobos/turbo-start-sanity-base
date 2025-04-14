@@ -329,31 +329,3366 @@
                       "type": "union",
                       "of": [
                         {
-                          "type": "unknown"
+                          "type": "object",
+                          "attributes": {
+                            "badge": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              },
+                              "optional": true
+                            },
+                            "title": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              },
+                              "optional": true
+                            },
+                            "richText": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "array",
+                                "of": {
+                                  "type": "union",
+                                  "of": [
+                                    {
+                                      "type": "object",
+                                      "attributes": {
+                                        "children": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "array",
+                                            "of": {
+                                              "type": "object",
+                                              "attributes": {
+                                                "marks": {
+                                                  "type": "objectAttribute",
+                                                  "value": {
+                                                    "type": "array",
+                                                    "of": {
+                                                      "type": "string"
+                                                    }
+                                                  },
+                                                  "optional": true
+                                                },
+                                                "text": {
+                                                  "type": "objectAttribute",
+                                                  "value": {
+                                                    "type": "string"
+                                                  },
+                                                  "optional": true
+                                                },
+                                                "_type": {
+                                                  "type": "objectAttribute",
+                                                  "value": {
+                                                    "type": "string",
+                                                    "value": "span"
+                                                  }
+                                                }
+                                              },
+                                              "rest": {
+                                                "type": "object",
+                                                "attributes": {
+                                                  "_key": {
+                                                    "type": "objectAttribute",
+                                                    "value": {
+                                                      "type": "string"
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "optional": true
+                                        },
+                                        "style": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "union",
+                                            "of": [
+                                              {
+                                                "type": "string",
+                                                "value": "normal"
+                                              },
+                                              {
+                                                "type": "string",
+                                                "value": "h2"
+                                              },
+                                              {
+                                                "type": "string",
+                                                "value": "h3"
+                                              },
+                                              {
+                                                "type": "string",
+                                                "value": "h4"
+                                              },
+                                              {
+                                                "type": "string",
+                                                "value": "h5"
+                                              },
+                                              {
+                                                "type": "string",
+                                                "value": "h6"
+                                              },
+                                              {
+                                                "type": "string",
+                                                "value": "inline"
+                                              }
+                                            ]
+                                          },
+                                          "optional": true
+                                        },
+                                        "listItem": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "union",
+                                            "of": [
+                                              {
+                                                "type": "string",
+                                                "value": "number"
+                                              },
+                                              {
+                                                "type": "string",
+                                                "value": "bullet"
+                                              }
+                                            ]
+                                          },
+                                          "optional": true
+                                        },
+                                        "markDefs": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "array",
+                                            "of": {
+                                              "type": "object",
+                                              "attributes": {
+                                                "customLink": {
+                                                  "type": "objectAttribute",
+                                                  "value": {
+                                                    "type": "inline",
+                                                    "name": "customUrl"
+                                                  },
+                                                  "optional": true
+                                                },
+                                                "_type": {
+                                                  "type": "objectAttribute",
+                                                  "value": {
+                                                    "type": "string",
+                                                    "value": "customLink"
+                                                  }
+                                                }
+                                              },
+                                              "rest": {
+                                                "type": "object",
+                                                "attributes": {
+                                                  "_key": {
+                                                    "type": "objectAttribute",
+                                                    "value": {
+                                                      "type": "string"
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "optional": true
+                                        },
+                                        "level": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "number"
+                                          },
+                                          "optional": true
+                                        },
+                                        "_type": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "string",
+                                            "value": "block"
+                                          }
+                                        }
+                                      },
+                                      "rest": {
+                                        "type": "object",
+                                        "attributes": {
+                                          "_key": {
+                                            "type": "objectAttribute",
+                                            "value": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "type": "object",
+                                      "attributes": {
+                                        "asset": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "object",
+                                            "attributes": {
+                                              "_ref": {
+                                                "type": "objectAttribute",
+                                                "value": {
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "_type": {
+                                                "type": "objectAttribute",
+                                                "value": {
+                                                  "type": "string",
+                                                  "value": "reference"
+                                                }
+                                              },
+                                              "_weak": {
+                                                "type": "objectAttribute",
+                                                "value": {
+                                                  "type": "boolean"
+                                                },
+                                                "optional": true
+                                              }
+                                            },
+                                            "dereferencesTo": "sanity.imageAsset"
+                                          },
+                                          "optional": true
+                                        },
+                                        "media": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "unknown"
+                                          },
+                                          "optional": true
+                                        },
+                                        "hotspot": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "inline",
+                                            "name": "sanity.imageHotspot"
+                                          },
+                                          "optional": true
+                                        },
+                                        "crop": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "inline",
+                                            "name": "sanity.imageCrop"
+                                          },
+                                          "optional": true
+                                        },
+                                        "caption": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "string"
+                                          },
+                                          "optional": true
+                                        },
+                                        "_type": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "string",
+                                            "value": "image"
+                                          }
+                                        }
+                                      },
+                                      "rest": {
+                                        "type": "object",
+                                        "attributes": {
+                                          "_key": {
+                                            "type": "objectAttribute",
+                                            "value": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              "optional": true
+                            },
+                            "backgroundType": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "union",
+                                "of": [
+                                  {
+                                    "type": "string",
+                                    "value": "image"
+                                  },
+                                  {
+                                    "type": "string",
+                                    "value": "video"
+                                  }
+                                ]
+                              },
+                              "optional": true
+                            },
+                            "backgroundImage": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "object",
+                                "attributes": {
+                                  "asset": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "object",
+                                      "attributes": {
+                                        "_ref": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "_type": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "string",
+                                            "value": "reference"
+                                          }
+                                        },
+                                        "_weak": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "boolean"
+                                          },
+                                          "optional": true
+                                        }
+                                      },
+                                      "dereferencesTo": "sanity.imageAsset"
+                                    },
+                                    "optional": true
+                                  },
+                                  "media": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "unknown"
+                                    },
+                                    "optional": true
+                                  },
+                                  "hotspot": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "inline",
+                                      "name": "sanity.imageHotspot"
+                                    },
+                                    "optional": true
+                                  },
+                                  "crop": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "inline",
+                                      "name": "sanity.imageCrop"
+                                    },
+                                    "optional": true
+                                  },
+                                  "_type": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "string",
+                                      "value": "image"
+                                    }
+                                  }
+                                }
+                              },
+                              "optional": true
+                            },
+                            "backgroundVideo": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "object",
+                                "attributes": {
+                                  "asset": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "object",
+                                      "attributes": {
+                                        "_ref": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "_type": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "string",
+                                            "value": "reference"
+                                          }
+                                        },
+                                        "_weak": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "boolean"
+                                          },
+                                          "optional": true
+                                        }
+                                      },
+                                      "dereferencesTo": "sanity.fileAsset"
+                                    },
+                                    "optional": true
+                                  },
+                                  "media": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "unknown"
+                                    },
+                                    "optional": true
+                                  },
+                                  "_type": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "string",
+                                      "value": "file"
+                                    }
+                                  }
+                                }
+                              },
+                              "optional": true
+                            },
+                            "image": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "object",
+                                "attributes": {
+                                  "asset": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "object",
+                                      "attributes": {
+                                        "_ref": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "_type": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "string",
+                                            "value": "reference"
+                                          }
+                                        },
+                                        "_weak": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "boolean"
+                                          },
+                                          "optional": true
+                                        }
+                                      },
+                                      "dereferencesTo": "sanity.imageAsset"
+                                    },
+                                    "optional": true
+                                  },
+                                  "media": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "unknown"
+                                    },
+                                    "optional": true
+                                  },
+                                  "hotspot": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "inline",
+                                      "name": "sanity.imageHotspot"
+                                    },
+                                    "optional": true
+                                  },
+                                  "crop": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "inline",
+                                      "name": "sanity.imageCrop"
+                                    },
+                                    "optional": true
+                                  },
+                                  "_type": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "string",
+                                      "value": "image"
+                                    }
+                                  }
+                                }
+                              },
+                              "optional": true
+                            },
+                            "buttons": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "array",
+                                "of": {
+                                  "type": "object",
+                                  "attributes": {
+                                    "_key": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
+                                  "rest": {
+                                    "type": "inline",
+                                    "name": "button"
+                                  }
+                                }
+                              },
+                              "optional": true
+                            },
+                            "_type": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string",
+                                "value": "mainHero"
+                              }
+                            }
+                          },
+                          "rest": {
+                            "type": "object",
+                            "attributes": {
+                              "_key": {
+                                "type": "objectAttribute",
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
                         },
                         {
-                          "type": "unknown"
+                          "type": "object",
+                          "attributes": {
+                            "variant": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "union",
+                                "of": [
+                                  {
+                                    "type": "string",
+                                    "value": "default"
+                                  },
+                                  {
+                                    "type": "string",
+                                    "value": "alt"
+                                  },
+                                  {
+                                    "type": "string",
+                                    "value": "accent1"
+                                  },
+                                  {
+                                    "type": "string",
+                                    "value": "accent2"
+                                  },
+                                  {
+                                    "type": "string",
+                                    "value": "brand"
+                                  }
+                                ]
+                              },
+                              "optional": true
+                            },
+                            "badge": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              },
+                              "optional": true
+                            },
+                            "title": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              },
+                              "optional": true
+                            },
+                            "richText": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "array",
+                                "of": {
+                                  "type": "union",
+                                  "of": [
+                                    {
+                                      "type": "object",
+                                      "attributes": {
+                                        "children": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "array",
+                                            "of": {
+                                              "type": "object",
+                                              "attributes": {
+                                                "marks": {
+                                                  "type": "objectAttribute",
+                                                  "value": {
+                                                    "type": "array",
+                                                    "of": {
+                                                      "type": "string"
+                                                    }
+                                                  },
+                                                  "optional": true
+                                                },
+                                                "text": {
+                                                  "type": "objectAttribute",
+                                                  "value": {
+                                                    "type": "string"
+                                                  },
+                                                  "optional": true
+                                                },
+                                                "_type": {
+                                                  "type": "objectAttribute",
+                                                  "value": {
+                                                    "type": "string",
+                                                    "value": "span"
+                                                  }
+                                                }
+                                              },
+                                              "rest": {
+                                                "type": "object",
+                                                "attributes": {
+                                                  "_key": {
+                                                    "type": "objectAttribute",
+                                                    "value": {
+                                                      "type": "string"
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "optional": true
+                                        },
+                                        "style": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "union",
+                                            "of": [
+                                              {
+                                                "type": "string",
+                                                "value": "normal"
+                                              },
+                                              {
+                                                "type": "string",
+                                                "value": "h2"
+                                              },
+                                              {
+                                                "type": "string",
+                                                "value": "h3"
+                                              },
+                                              {
+                                                "type": "string",
+                                                "value": "h4"
+                                              },
+                                              {
+                                                "type": "string",
+                                                "value": "h5"
+                                              },
+                                              {
+                                                "type": "string",
+                                                "value": "h6"
+                                              },
+                                              {
+                                                "type": "string",
+                                                "value": "inline"
+                                              }
+                                            ]
+                                          },
+                                          "optional": true
+                                        },
+                                        "listItem": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "union",
+                                            "of": [
+                                              {
+                                                "type": "string",
+                                                "value": "number"
+                                              },
+                                              {
+                                                "type": "string",
+                                                "value": "bullet"
+                                              }
+                                            ]
+                                          },
+                                          "optional": true
+                                        },
+                                        "markDefs": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "array",
+                                            "of": {
+                                              "type": "object",
+                                              "attributes": {
+                                                "customLink": {
+                                                  "type": "objectAttribute",
+                                                  "value": {
+                                                    "type": "inline",
+                                                    "name": "customUrl"
+                                                  },
+                                                  "optional": true
+                                                },
+                                                "_type": {
+                                                  "type": "objectAttribute",
+                                                  "value": {
+                                                    "type": "string",
+                                                    "value": "customLink"
+                                                  }
+                                                }
+                                              },
+                                              "rest": {
+                                                "type": "object",
+                                                "attributes": {
+                                                  "_key": {
+                                                    "type": "objectAttribute",
+                                                    "value": {
+                                                      "type": "string"
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "optional": true
+                                        },
+                                        "level": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "number"
+                                          },
+                                          "optional": true
+                                        },
+                                        "_type": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "string",
+                                            "value": "block"
+                                          }
+                                        }
+                                      },
+                                      "rest": {
+                                        "type": "object",
+                                        "attributes": {
+                                          "_key": {
+                                            "type": "objectAttribute",
+                                            "value": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "type": "object",
+                                      "attributes": {
+                                        "asset": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "object",
+                                            "attributes": {
+                                              "_ref": {
+                                                "type": "objectAttribute",
+                                                "value": {
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "_type": {
+                                                "type": "objectAttribute",
+                                                "value": {
+                                                  "type": "string",
+                                                  "value": "reference"
+                                                }
+                                              },
+                                              "_weak": {
+                                                "type": "objectAttribute",
+                                                "value": {
+                                                  "type": "boolean"
+                                                },
+                                                "optional": true
+                                              }
+                                            },
+                                            "dereferencesTo": "sanity.imageAsset"
+                                          },
+                                          "optional": true
+                                        },
+                                        "media": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "unknown"
+                                          },
+                                          "optional": true
+                                        },
+                                        "hotspot": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "inline",
+                                            "name": "sanity.imageHotspot"
+                                          },
+                                          "optional": true
+                                        },
+                                        "crop": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "inline",
+                                            "name": "sanity.imageCrop"
+                                          },
+                                          "optional": true
+                                        },
+                                        "caption": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "string"
+                                          },
+                                          "optional": true
+                                        },
+                                        "_type": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "string",
+                                            "value": "image"
+                                          }
+                                        }
+                                      },
+                                      "rest": {
+                                        "type": "object",
+                                        "attributes": {
+                                          "_key": {
+                                            "type": "objectAttribute",
+                                            "value": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              "optional": true
+                            },
+                            "image": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "object",
+                                "attributes": {
+                                  "asset": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "object",
+                                      "attributes": {
+                                        "_ref": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "_type": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "string",
+                                            "value": "reference"
+                                          }
+                                        },
+                                        "_weak": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "boolean"
+                                          },
+                                          "optional": true
+                                        }
+                                      },
+                                      "dereferencesTo": "sanity.imageAsset"
+                                    },
+                                    "optional": true
+                                  },
+                                  "media": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "unknown"
+                                    },
+                                    "optional": true
+                                  },
+                                  "hotspot": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "inline",
+                                      "name": "sanity.imageHotspot"
+                                    },
+                                    "optional": true
+                                  },
+                                  "crop": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "inline",
+                                      "name": "sanity.imageCrop"
+                                    },
+                                    "optional": true
+                                  },
+                                  "_type": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "string",
+                                      "value": "image"
+                                    }
+                                  }
+                                }
+                              },
+                              "optional": true
+                            },
+                            "buttons": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "array",
+                                "of": {
+                                  "type": "object",
+                                  "attributes": {
+                                    "_key": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
+                                  "rest": {
+                                    "type": "inline",
+                                    "name": "button"
+                                  }
+                                }
+                              },
+                              "optional": true
+                            },
+                            "_type": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string",
+                                "value": "hero"
+                              }
+                            }
+                          },
+                          "rest": {
+                            "type": "object",
+                            "attributes": {
+                              "_key": {
+                                "type": "objectAttribute",
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
                         },
                         {
-                          "type": "unknown"
+                          "type": "object",
+                          "attributes": {
+                            "variant": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "union",
+                                "of": [
+                                  {
+                                    "type": "string",
+                                    "value": "default"
+                                  },
+                                  {
+                                    "type": "string",
+                                    "value": "alt"
+                                  },
+                                  {
+                                    "type": "string",
+                                    "value": "accent1"
+                                  },
+                                  {
+                                    "type": "string",
+                                    "value": "accent2"
+                                  },
+                                  {
+                                    "type": "string",
+                                    "value": "brand"
+                                  }
+                                ]
+                              },
+                              "optional": true
+                            },
+                            "primaryBadge": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              },
+                              "optional": true
+                            },
+                            "primaryTitle": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              },
+                              "optional": true
+                            },
+                            "primaryRichText": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "array",
+                                "of": {
+                                  "type": "object",
+                                  "attributes": {
+                                    "children": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "array",
+                                        "of": {
+                                          "type": "object",
+                                          "attributes": {
+                                            "marks": {
+                                              "type": "objectAttribute",
+                                              "value": {
+                                                "type": "array",
+                                                "of": {
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "optional": true
+                                            },
+                                            "text": {
+                                              "type": "objectAttribute",
+                                              "value": {
+                                                "type": "string"
+                                              },
+                                              "optional": true
+                                            },
+                                            "_type": {
+                                              "type": "objectAttribute",
+                                              "value": {
+                                                "type": "string",
+                                                "value": "span"
+                                              }
+                                            }
+                                          },
+                                          "rest": {
+                                            "type": "object",
+                                            "attributes": {
+                                              "_key": {
+                                                "type": "objectAttribute",
+                                                "value": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "optional": true
+                                    },
+                                    "style": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "union",
+                                        "of": [
+                                          {
+                                            "type": "string",
+                                            "value": "normal"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "h1"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "h2"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "h3"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "h4"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "h5"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "h6"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "blockquote"
+                                          }
+                                        ]
+                                      },
+                                      "optional": true
+                                    },
+                                    "listItem": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "union",
+                                        "of": [
+                                          {
+                                            "type": "string",
+                                            "value": "bullet"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "number"
+                                          }
+                                        ]
+                                      },
+                                      "optional": true
+                                    },
+                                    "markDefs": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "array",
+                                        "of": {
+                                          "type": "object",
+                                          "attributes": {
+                                            "href": {
+                                              "type": "objectAttribute",
+                                              "value": {
+                                                "type": "string"
+                                              },
+                                              "optional": true
+                                            },
+                                            "_type": {
+                                              "type": "objectAttribute",
+                                              "value": {
+                                                "type": "string",
+                                                "value": "link"
+                                              }
+                                            }
+                                          },
+                                          "rest": {
+                                            "type": "object",
+                                            "attributes": {
+                                              "_key": {
+                                                "type": "objectAttribute",
+                                                "value": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "optional": true
+                                    },
+                                    "level": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "number"
+                                      },
+                                      "optional": true
+                                    },
+                                    "_type": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "string",
+                                        "value": "block"
+                                      }
+                                    }
+                                  },
+                                  "rest": {
+                                    "type": "object",
+                                    "attributes": {
+                                      "_key": {
+                                        "type": "objectAttribute",
+                                        "value": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "optional": true
+                            },
+                            "primaryImage": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "object",
+                                "attributes": {
+                                  "asset": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "object",
+                                      "attributes": {
+                                        "_ref": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "_type": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "string",
+                                            "value": "reference"
+                                          }
+                                        },
+                                        "_weak": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "boolean"
+                                          },
+                                          "optional": true
+                                        }
+                                      },
+                                      "dereferencesTo": "sanity.imageAsset"
+                                    },
+                                    "optional": true
+                                  },
+                                  "media": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "unknown"
+                                    },
+                                    "optional": true
+                                  },
+                                  "hotspot": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "inline",
+                                      "name": "sanity.imageHotspot"
+                                    },
+                                    "optional": true
+                                  },
+                                  "crop": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "inline",
+                                      "name": "sanity.imageCrop"
+                                    },
+                                    "optional": true
+                                  },
+                                  "_type": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "string",
+                                      "value": "image"
+                                    }
+                                  }
+                                }
+                              },
+                              "optional": true
+                            },
+                            "primaryButtons": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "array",
+                                "of": {
+                                  "type": "object",
+                                  "attributes": {
+                                    "_key": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
+                                  "rest": {
+                                    "type": "inline",
+                                    "name": "button"
+                                  }
+                                }
+                              },
+                              "optional": true
+                            },
+                            "secondaryBadge": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              },
+                              "optional": true
+                            },
+                            "secondaryTitle": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              },
+                              "optional": true
+                            },
+                            "secondaryRichText": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "array",
+                                "of": {
+                                  "type": "object",
+                                  "attributes": {
+                                    "children": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "array",
+                                        "of": {
+                                          "type": "object",
+                                          "attributes": {
+                                            "marks": {
+                                              "type": "objectAttribute",
+                                              "value": {
+                                                "type": "array",
+                                                "of": {
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "optional": true
+                                            },
+                                            "text": {
+                                              "type": "objectAttribute",
+                                              "value": {
+                                                "type": "string"
+                                              },
+                                              "optional": true
+                                            },
+                                            "_type": {
+                                              "type": "objectAttribute",
+                                              "value": {
+                                                "type": "string",
+                                                "value": "span"
+                                              }
+                                            }
+                                          },
+                                          "rest": {
+                                            "type": "object",
+                                            "attributes": {
+                                              "_key": {
+                                                "type": "objectAttribute",
+                                                "value": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "optional": true
+                                    },
+                                    "style": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "union",
+                                        "of": [
+                                          {
+                                            "type": "string",
+                                            "value": "normal"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "h1"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "h2"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "h3"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "h4"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "h5"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "h6"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "blockquote"
+                                          }
+                                        ]
+                                      },
+                                      "optional": true
+                                    },
+                                    "listItem": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "union",
+                                        "of": [
+                                          {
+                                            "type": "string",
+                                            "value": "bullet"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "number"
+                                          }
+                                        ]
+                                      },
+                                      "optional": true
+                                    },
+                                    "markDefs": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "array",
+                                        "of": {
+                                          "type": "object",
+                                          "attributes": {
+                                            "href": {
+                                              "type": "objectAttribute",
+                                              "value": {
+                                                "type": "string"
+                                              },
+                                              "optional": true
+                                            },
+                                            "_type": {
+                                              "type": "objectAttribute",
+                                              "value": {
+                                                "type": "string",
+                                                "value": "link"
+                                              }
+                                            }
+                                          },
+                                          "rest": {
+                                            "type": "object",
+                                            "attributes": {
+                                              "_key": {
+                                                "type": "objectAttribute",
+                                                "value": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "optional": true
+                                    },
+                                    "level": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "number"
+                                      },
+                                      "optional": true
+                                    },
+                                    "_type": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "string",
+                                        "value": "block"
+                                      }
+                                    }
+                                  },
+                                  "rest": {
+                                    "type": "object",
+                                    "attributes": {
+                                      "_key": {
+                                        "type": "objectAttribute",
+                                        "value": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "optional": true
+                            },
+                            "secondaryImage": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "object",
+                                "attributes": {
+                                  "asset": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "object",
+                                      "attributes": {
+                                        "_ref": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "_type": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "string",
+                                            "value": "reference"
+                                          }
+                                        },
+                                        "_weak": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "boolean"
+                                          },
+                                          "optional": true
+                                        }
+                                      },
+                                      "dereferencesTo": "sanity.imageAsset"
+                                    },
+                                    "optional": true
+                                  },
+                                  "media": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "unknown"
+                                    },
+                                    "optional": true
+                                  },
+                                  "hotspot": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "inline",
+                                      "name": "sanity.imageHotspot"
+                                    },
+                                    "optional": true
+                                  },
+                                  "crop": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "inline",
+                                      "name": "sanity.imageCrop"
+                                    },
+                                    "optional": true
+                                  },
+                                  "_type": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "string",
+                                      "value": "image"
+                                    }
+                                  }
+                                }
+                              },
+                              "optional": true
+                            },
+                            "secondaryButtons": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "array",
+                                "of": {
+                                  "type": "object",
+                                  "attributes": {
+                                    "_key": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
+                                  "rest": {
+                                    "type": "inline",
+                                    "name": "button"
+                                  }
+                                }
+                              },
+                              "optional": true
+                            },
+                            "_type": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string",
+                                "value": "doubleHero"
+                              }
+                            }
+                          },
+                          "rest": {
+                            "type": "object",
+                            "attributes": {
+                              "_key": {
+                                "type": "objectAttribute",
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
                         },
                         {
-                          "type": "unknown"
+                          "type": "object",
+                          "attributes": {
+                            "eyebrow": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              },
+                              "optional": true
+                            },
+                            "title": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              },
+                              "optional": true
+                            },
+                            "richText": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "array",
+                                "of": {
+                                  "type": "union",
+                                  "of": [
+                                    {
+                                      "type": "object",
+                                      "attributes": {
+                                        "children": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "array",
+                                            "of": {
+                                              "type": "object",
+                                              "attributes": {
+                                                "marks": {
+                                                  "type": "objectAttribute",
+                                                  "value": {
+                                                    "type": "array",
+                                                    "of": {
+                                                      "type": "string"
+                                                    }
+                                                  },
+                                                  "optional": true
+                                                },
+                                                "text": {
+                                                  "type": "objectAttribute",
+                                                  "value": {
+                                                    "type": "string"
+                                                  },
+                                                  "optional": true
+                                                },
+                                                "_type": {
+                                                  "type": "objectAttribute",
+                                                  "value": {
+                                                    "type": "string",
+                                                    "value": "span"
+                                                  }
+                                                }
+                                              },
+                                              "rest": {
+                                                "type": "object",
+                                                "attributes": {
+                                                  "_key": {
+                                                    "type": "objectAttribute",
+                                                    "value": {
+                                                      "type": "string"
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "optional": true
+                                        },
+                                        "style": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "union",
+                                            "of": [
+                                              {
+                                                "type": "string",
+                                                "value": "normal"
+                                              },
+                                              {
+                                                "type": "string",
+                                                "value": "h2"
+                                              },
+                                              {
+                                                "type": "string",
+                                                "value": "h3"
+                                              },
+                                              {
+                                                "type": "string",
+                                                "value": "h4"
+                                              },
+                                              {
+                                                "type": "string",
+                                                "value": "h5"
+                                              },
+                                              {
+                                                "type": "string",
+                                                "value": "h6"
+                                              },
+                                              {
+                                                "type": "string",
+                                                "value": "inline"
+                                              }
+                                            ]
+                                          },
+                                          "optional": true
+                                        },
+                                        "listItem": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "union",
+                                            "of": [
+                                              {
+                                                "type": "string",
+                                                "value": "number"
+                                              },
+                                              {
+                                                "type": "string",
+                                                "value": "bullet"
+                                              }
+                                            ]
+                                          },
+                                          "optional": true
+                                        },
+                                        "markDefs": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "array",
+                                            "of": {
+                                              "type": "object",
+                                              "attributes": {
+                                                "customLink": {
+                                                  "type": "objectAttribute",
+                                                  "value": {
+                                                    "type": "inline",
+                                                    "name": "customUrl"
+                                                  },
+                                                  "optional": true
+                                                },
+                                                "_type": {
+                                                  "type": "objectAttribute",
+                                                  "value": {
+                                                    "type": "string",
+                                                    "value": "customLink"
+                                                  }
+                                                }
+                                              },
+                                              "rest": {
+                                                "type": "object",
+                                                "attributes": {
+                                                  "_key": {
+                                                    "type": "objectAttribute",
+                                                    "value": {
+                                                      "type": "string"
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "optional": true
+                                        },
+                                        "level": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "number"
+                                          },
+                                          "optional": true
+                                        },
+                                        "_type": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "string",
+                                            "value": "block"
+                                          }
+                                        }
+                                      },
+                                      "rest": {
+                                        "type": "object",
+                                        "attributes": {
+                                          "_key": {
+                                            "type": "objectAttribute",
+                                            "value": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "type": "object",
+                                      "attributes": {
+                                        "asset": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "object",
+                                            "attributes": {
+                                              "_ref": {
+                                                "type": "objectAttribute",
+                                                "value": {
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "_type": {
+                                                "type": "objectAttribute",
+                                                "value": {
+                                                  "type": "string",
+                                                  "value": "reference"
+                                                }
+                                              },
+                                              "_weak": {
+                                                "type": "objectAttribute",
+                                                "value": {
+                                                  "type": "boolean"
+                                                },
+                                                "optional": true
+                                              }
+                                            },
+                                            "dereferencesTo": "sanity.imageAsset"
+                                          },
+                                          "optional": true
+                                        },
+                                        "media": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "unknown"
+                                          },
+                                          "optional": true
+                                        },
+                                        "hotspot": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "inline",
+                                            "name": "sanity.imageHotspot"
+                                          },
+                                          "optional": true
+                                        },
+                                        "crop": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "inline",
+                                            "name": "sanity.imageCrop"
+                                          },
+                                          "optional": true
+                                        },
+                                        "caption": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "string"
+                                          },
+                                          "optional": true
+                                        },
+                                        "_type": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "string",
+                                            "value": "image"
+                                          }
+                                        }
+                                      },
+                                      "rest": {
+                                        "type": "object",
+                                        "attributes": {
+                                          "_key": {
+                                            "type": "objectAttribute",
+                                            "value": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              "optional": true
+                            },
+                            "buttons": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "array",
+                                "of": {
+                                  "type": "object",
+                                  "attributes": {
+                                    "_key": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
+                                  "rest": {
+                                    "type": "inline",
+                                    "name": "button"
+                                  }
+                                }
+                              },
+                              "optional": true
+                            },
+                            "_type": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string",
+                                "value": "cta"
+                              }
+                            }
+                          },
+                          "rest": {
+                            "type": "object",
+                            "attributes": {
+                              "_key": {
+                                "type": "objectAttribute",
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
                         },
                         {
-                          "type": "unknown"
+                          "type": "object",
+                          "attributes": {
+                            "eyebrow": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              },
+                              "optional": true
+                            },
+                            "title": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              },
+                              "optional": true
+                            },
+                            "richText": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "array",
+                                "of": {
+                                  "type": "object",
+                                  "attributes": {
+                                    "children": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "array",
+                                        "of": {
+                                          "type": "object",
+                                          "attributes": {
+                                            "marks": {
+                                              "type": "objectAttribute",
+                                              "value": {
+                                                "type": "array",
+                                                "of": {
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "optional": true
+                                            },
+                                            "text": {
+                                              "type": "objectAttribute",
+                                              "value": {
+                                                "type": "string"
+                                              },
+                                              "optional": true
+                                            },
+                                            "_type": {
+                                              "type": "objectAttribute",
+                                              "value": {
+                                                "type": "string",
+                                                "value": "span"
+                                              }
+                                            }
+                                          },
+                                          "rest": {
+                                            "type": "object",
+                                            "attributes": {
+                                              "_key": {
+                                                "type": "objectAttribute",
+                                                "value": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "optional": true
+                                    },
+                                    "style": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "union",
+                                        "of": [
+                                          {
+                                            "type": "string",
+                                            "value": "normal"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "h2"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "h3"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "h4"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "h5"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "h6"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "inline"
+                                          }
+                                        ]
+                                      },
+                                      "optional": true
+                                    },
+                                    "listItem": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "union",
+                                        "of": [
+                                          {
+                                            "type": "string",
+                                            "value": "number"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "bullet"
+                                          }
+                                        ]
+                                      },
+                                      "optional": true
+                                    },
+                                    "markDefs": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "array",
+                                        "of": {
+                                          "type": "object",
+                                          "attributes": {
+                                            "customLink": {
+                                              "type": "objectAttribute",
+                                              "value": {
+                                                "type": "inline",
+                                                "name": "customUrl"
+                                              },
+                                              "optional": true
+                                            },
+                                            "_type": {
+                                              "type": "objectAttribute",
+                                              "value": {
+                                                "type": "string",
+                                                "value": "customLink"
+                                              }
+                                            }
+                                          },
+                                          "rest": {
+                                            "type": "object",
+                                            "attributes": {
+                                              "_key": {
+                                                "type": "objectAttribute",
+                                                "value": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "optional": true
+                                    },
+                                    "level": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "number"
+                                      },
+                                      "optional": true
+                                    },
+                                    "_type": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "string",
+                                        "value": "block"
+                                      }
+                                    }
+                                  },
+                                  "rest": {
+                                    "type": "object",
+                                    "attributes": {
+                                      "_key": {
+                                        "type": "objectAttribute",
+                                        "value": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "optional": true
+                            },
+                            "cards": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "array",
+                                "of": {
+                                  "type": "object",
+                                  "attributes": {
+                                    "icon": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "inline",
+                                        "name": "iconPicker"
+                                      },
+                                      "optional": true
+                                    },
+                                    "title": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "string"
+                                      },
+                                      "optional": true
+                                    },
+                                    "richText": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "array",
+                                        "of": {
+                                          "type": "object",
+                                          "attributes": {
+                                            "children": {
+                                              "type": "objectAttribute",
+                                              "value": {
+                                                "type": "array",
+                                                "of": {
+                                                  "type": "object",
+                                                  "attributes": {
+                                                    "marks": {
+                                                      "type": "objectAttribute",
+                                                      "value": {
+                                                        "type": "array",
+                                                        "of": {
+                                                          "type": "string"
+                                                        }
+                                                      },
+                                                      "optional": true
+                                                    },
+                                                    "text": {
+                                                      "type": "objectAttribute",
+                                                      "value": {
+                                                        "type": "string"
+                                                      },
+                                                      "optional": true
+                                                    },
+                                                    "_type": {
+                                                      "type": "objectAttribute",
+                                                      "value": {
+                                                        "type": "string",
+                                                        "value": "span"
+                                                      }
+                                                    }
+                                                  },
+                                                  "rest": {
+                                                    "type": "object",
+                                                    "attributes": {
+                                                      "_key": {
+                                                        "type": "objectAttribute",
+                                                        "value": {
+                                                          "type": "string"
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              },
+                                              "optional": true
+                                            },
+                                            "style": {
+                                              "type": "objectAttribute",
+                                              "value": {
+                                                "type": "union",
+                                                "of": [
+                                                  {
+                                                    "type": "string",
+                                                    "value": "normal"
+                                                  },
+                                                  {
+                                                    "type": "string",
+                                                    "value": "h2"
+                                                  },
+                                                  {
+                                                    "type": "string",
+                                                    "value": "h3"
+                                                  },
+                                                  {
+                                                    "type": "string",
+                                                    "value": "h4"
+                                                  },
+                                                  {
+                                                    "type": "string",
+                                                    "value": "h5"
+                                                  },
+                                                  {
+                                                    "type": "string",
+                                                    "value": "h6"
+                                                  },
+                                                  {
+                                                    "type": "string",
+                                                    "value": "inline"
+                                                  }
+                                                ]
+                                              },
+                                              "optional": true
+                                            },
+                                            "listItem": {
+                                              "type": "objectAttribute",
+                                              "value": {
+                                                "type": "union",
+                                                "of": [
+                                                  {
+                                                    "type": "string",
+                                                    "value": "number"
+                                                  },
+                                                  {
+                                                    "type": "string",
+                                                    "value": "bullet"
+                                                  }
+                                                ]
+                                              },
+                                              "optional": true
+                                            },
+                                            "markDefs": {
+                                              "type": "objectAttribute",
+                                              "value": {
+                                                "type": "array",
+                                                "of": {
+                                                  "type": "object",
+                                                  "attributes": {
+                                                    "customLink": {
+                                                      "type": "objectAttribute",
+                                                      "value": {
+                                                        "type": "inline",
+                                                        "name": "customUrl"
+                                                      },
+                                                      "optional": true
+                                                    },
+                                                    "_type": {
+                                                      "type": "objectAttribute",
+                                                      "value": {
+                                                        "type": "string",
+                                                        "value": "customLink"
+                                                      }
+                                                    }
+                                                  },
+                                                  "rest": {
+                                                    "type": "object",
+                                                    "attributes": {
+                                                      "_key": {
+                                                        "type": "objectAttribute",
+                                                        "value": {
+                                                          "type": "string"
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              },
+                                              "optional": true
+                                            },
+                                            "level": {
+                                              "type": "objectAttribute",
+                                              "value": {
+                                                "type": "number"
+                                              },
+                                              "optional": true
+                                            },
+                                            "_type": {
+                                              "type": "objectAttribute",
+                                              "value": {
+                                                "type": "string",
+                                                "value": "block"
+                                              }
+                                            }
+                                          },
+                                          "rest": {
+                                            "type": "object",
+                                            "attributes": {
+                                              "_key": {
+                                                "type": "objectAttribute",
+                                                "value": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "optional": true
+                                    },
+                                    "_type": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "string",
+                                        "value": "featureCardIcon"
+                                      }
+                                    }
+                                  },
+                                  "rest": {
+                                    "type": "object",
+                                    "attributes": {
+                                      "_key": {
+                                        "type": "objectAttribute",
+                                        "value": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "optional": true
+                            },
+                            "_type": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string",
+                                "value": "featureCardsIcon"
+                              }
+                            }
+                          },
+                          "rest": {
+                            "type": "object",
+                            "attributes": {
+                              "_key": {
+                                "type": "objectAttribute",
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
                         },
                         {
-                          "type": "unknown"
+                          "type": "object",
+                          "attributes": {
+                            "eyebrow": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              },
+                              "optional": true
+                            },
+                            "title": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              },
+                              "optional": true
+                            },
+                            "subtitle": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              },
+                              "optional": true
+                            },
+                            "link": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "object",
+                                "attributes": {
+                                  "title": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "string"
+                                    },
+                                    "optional": true
+                                  },
+                                  "description": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "string"
+                                    },
+                                    "optional": true
+                                  },
+                                  "url": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "inline",
+                                      "name": "customUrl"
+                                    },
+                                    "optional": true
+                                  }
+                                }
+                              },
+                              "optional": true
+                            },
+                            "faqs": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "array",
+                                "of": {
+                                  "type": "object",
+                                  "attributes": {
+                                    "_ref": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "_type": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "string",
+                                        "value": "reference"
+                                      }
+                                    },
+                                    "_weak": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "boolean"
+                                      },
+                                      "optional": true
+                                    }
+                                  },
+                                  "dereferencesTo": "faq",
+                                  "rest": {
+                                    "type": "object",
+                                    "attributes": {
+                                      "_key": {
+                                        "type": "objectAttribute",
+                                        "value": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "optional": true
+                            },
+                            "_type": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string",
+                                "value": "faqAccordion"
+                              }
+                            }
+                          },
+                          "rest": {
+                            "type": "object",
+                            "attributes": {
+                              "_key": {
+                                "type": "objectAttribute",
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
                         },
                         {
-                          "type": "unknown"
+                          "type": "object",
+                          "attributes": {
+                            "eyebrow": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              },
+                              "optional": true
+                            },
+                            "title": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              },
+                              "optional": true
+                            },
+                            "richText": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "array",
+                                "of": {
+                                  "type": "union",
+                                  "of": [
+                                    {
+                                      "type": "object",
+                                      "attributes": {
+                                        "children": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "array",
+                                            "of": {
+                                              "type": "object",
+                                              "attributes": {
+                                                "marks": {
+                                                  "type": "objectAttribute",
+                                                  "value": {
+                                                    "type": "array",
+                                                    "of": {
+                                                      "type": "string"
+                                                    }
+                                                  },
+                                                  "optional": true
+                                                },
+                                                "text": {
+                                                  "type": "objectAttribute",
+                                                  "value": {
+                                                    "type": "string"
+                                                  },
+                                                  "optional": true
+                                                },
+                                                "_type": {
+                                                  "type": "objectAttribute",
+                                                  "value": {
+                                                    "type": "string",
+                                                    "value": "span"
+                                                  }
+                                                }
+                                              },
+                                              "rest": {
+                                                "type": "object",
+                                                "attributes": {
+                                                  "_key": {
+                                                    "type": "objectAttribute",
+                                                    "value": {
+                                                      "type": "string"
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "optional": true
+                                        },
+                                        "style": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "union",
+                                            "of": [
+                                              {
+                                                "type": "string",
+                                                "value": "normal"
+                                              },
+                                              {
+                                                "type": "string",
+                                                "value": "h2"
+                                              },
+                                              {
+                                                "type": "string",
+                                                "value": "h3"
+                                              },
+                                              {
+                                                "type": "string",
+                                                "value": "h4"
+                                              },
+                                              {
+                                                "type": "string",
+                                                "value": "h5"
+                                              },
+                                              {
+                                                "type": "string",
+                                                "value": "h6"
+                                              },
+                                              {
+                                                "type": "string",
+                                                "value": "inline"
+                                              }
+                                            ]
+                                          },
+                                          "optional": true
+                                        },
+                                        "listItem": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "union",
+                                            "of": [
+                                              {
+                                                "type": "string",
+                                                "value": "number"
+                                              },
+                                              {
+                                                "type": "string",
+                                                "value": "bullet"
+                                              }
+                                            ]
+                                          },
+                                          "optional": true
+                                        },
+                                        "markDefs": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "array",
+                                            "of": {
+                                              "type": "object",
+                                              "attributes": {
+                                                "customLink": {
+                                                  "type": "objectAttribute",
+                                                  "value": {
+                                                    "type": "inline",
+                                                    "name": "customUrl"
+                                                  },
+                                                  "optional": true
+                                                },
+                                                "_type": {
+                                                  "type": "objectAttribute",
+                                                  "value": {
+                                                    "type": "string",
+                                                    "value": "customLink"
+                                                  }
+                                                }
+                                              },
+                                              "rest": {
+                                                "type": "object",
+                                                "attributes": {
+                                                  "_key": {
+                                                    "type": "objectAttribute",
+                                                    "value": {
+                                                      "type": "string"
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "optional": true
+                                        },
+                                        "level": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "number"
+                                          },
+                                          "optional": true
+                                        },
+                                        "_type": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "string",
+                                            "value": "block"
+                                          }
+                                        }
+                                      },
+                                      "rest": {
+                                        "type": "object",
+                                        "attributes": {
+                                          "_key": {
+                                            "type": "objectAttribute",
+                                            "value": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "type": "object",
+                                      "attributes": {
+                                        "asset": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "object",
+                                            "attributes": {
+                                              "_ref": {
+                                                "type": "objectAttribute",
+                                                "value": {
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "_type": {
+                                                "type": "objectAttribute",
+                                                "value": {
+                                                  "type": "string",
+                                                  "value": "reference"
+                                                }
+                                              },
+                                              "_weak": {
+                                                "type": "objectAttribute",
+                                                "value": {
+                                                  "type": "boolean"
+                                                },
+                                                "optional": true
+                                              }
+                                            },
+                                            "dereferencesTo": "sanity.imageAsset"
+                                          },
+                                          "optional": true
+                                        },
+                                        "media": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "unknown"
+                                          },
+                                          "optional": true
+                                        },
+                                        "hotspot": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "inline",
+                                            "name": "sanity.imageHotspot"
+                                          },
+                                          "optional": true
+                                        },
+                                        "crop": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "inline",
+                                            "name": "sanity.imageCrop"
+                                          },
+                                          "optional": true
+                                        },
+                                        "caption": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "string"
+                                          },
+                                          "optional": true
+                                        },
+                                        "_type": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "string",
+                                            "value": "image"
+                                          }
+                                        }
+                                      },
+                                      "rest": {
+                                        "type": "object",
+                                        "attributes": {
+                                          "_key": {
+                                            "type": "objectAttribute",
+                                            "value": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              "optional": true
+                            },
+                            "buttons": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "array",
+                                "of": {
+                                  "type": "object",
+                                  "attributes": {
+                                    "_key": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
+                                  "rest": {
+                                    "type": "inline",
+                                    "name": "button"
+                                  }
+                                }
+                              },
+                              "optional": true
+                            },
+                            "cards": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "array",
+                                "of": {
+                                  "type": "object",
+                                  "attributes": {
+                                    "title": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "string"
+                                      },
+                                      "optional": true
+                                    },
+                                    "description": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "string"
+                                      },
+                                      "optional": true
+                                    },
+                                    "image": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "object",
+                                        "attributes": {
+                                          "asset": {
+                                            "type": "objectAttribute",
+                                            "value": {
+                                              "type": "object",
+                                              "attributes": {
+                                                "_ref": {
+                                                  "type": "objectAttribute",
+                                                  "value": {
+                                                    "type": "string"
+                                                  }
+                                                },
+                                                "_type": {
+                                                  "type": "objectAttribute",
+                                                  "value": {
+                                                    "type": "string",
+                                                    "value": "reference"
+                                                  }
+                                                },
+                                                "_weak": {
+                                                  "type": "objectAttribute",
+                                                  "value": {
+                                                    "type": "boolean"
+                                                  },
+                                                  "optional": true
+                                                }
+                                              },
+                                              "dereferencesTo": "sanity.imageAsset"
+                                            },
+                                            "optional": true
+                                          },
+                                          "media": {
+                                            "type": "objectAttribute",
+                                            "value": {
+                                              "type": "unknown"
+                                            },
+                                            "optional": true
+                                          },
+                                          "hotspot": {
+                                            "type": "objectAttribute",
+                                            "value": {
+                                              "type": "inline",
+                                              "name": "sanity.imageHotspot"
+                                            },
+                                            "optional": true
+                                          },
+                                          "crop": {
+                                            "type": "objectAttribute",
+                                            "value": {
+                                              "type": "inline",
+                                              "name": "sanity.imageCrop"
+                                            },
+                                            "optional": true
+                                          },
+                                          "_type": {
+                                            "type": "objectAttribute",
+                                            "value": {
+                                              "type": "string",
+                                              "value": "image"
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "optional": true
+                                    },
+                                    "url": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "inline",
+                                        "name": "customUrl"
+                                      },
+                                      "optional": true
+                                    },
+                                    "_type": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "string",
+                                        "value": "imageLinkCard"
+                                      }
+                                    }
+                                  },
+                                  "rest": {
+                                    "type": "object",
+                                    "attributes": {
+                                      "_key": {
+                                        "type": "objectAttribute",
+                                        "value": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "optional": true
+                            },
+                            "_type": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string",
+                                "value": "imageLinkCards"
+                              }
+                            }
+                          },
+                          "rest": {
+                            "type": "object",
+                            "attributes": {
+                              "_key": {
+                                "type": "objectAttribute",
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
                         },
                         {
-                          "type": "unknown"
+                          "type": "object",
+                          "attributes": {
+                            "title": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              },
+                              "optional": true
+                            },
+                            "subTitle": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "array",
+                                "of": {
+                                  "type": "object",
+                                  "attributes": {
+                                    "children": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "array",
+                                        "of": {
+                                          "type": "object",
+                                          "attributes": {
+                                            "marks": {
+                                              "type": "objectAttribute",
+                                              "value": {
+                                                "type": "array",
+                                                "of": {
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "optional": true
+                                            },
+                                            "text": {
+                                              "type": "objectAttribute",
+                                              "value": {
+                                                "type": "string"
+                                              },
+                                              "optional": true
+                                            },
+                                            "_type": {
+                                              "type": "objectAttribute",
+                                              "value": {
+                                                "type": "string",
+                                                "value": "span"
+                                              }
+                                            }
+                                          },
+                                          "rest": {
+                                            "type": "object",
+                                            "attributes": {
+                                              "_key": {
+                                                "type": "objectAttribute",
+                                                "value": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "optional": true
+                                    },
+                                    "style": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "union",
+                                        "of": [
+                                          {
+                                            "type": "string",
+                                            "value": "normal"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "h2"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "h3"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "h4"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "h5"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "h6"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "inline"
+                                          }
+                                        ]
+                                      },
+                                      "optional": true
+                                    },
+                                    "listItem": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "union",
+                                        "of": [
+                                          {
+                                            "type": "string",
+                                            "value": "number"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "bullet"
+                                          }
+                                        ]
+                                      },
+                                      "optional": true
+                                    },
+                                    "markDefs": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "array",
+                                        "of": {
+                                          "type": "object",
+                                          "attributes": {
+                                            "customLink": {
+                                              "type": "objectAttribute",
+                                              "value": {
+                                                "type": "inline",
+                                                "name": "customUrl"
+                                              },
+                                              "optional": true
+                                            },
+                                            "_type": {
+                                              "type": "objectAttribute",
+                                              "value": {
+                                                "type": "string",
+                                                "value": "customLink"
+                                              }
+                                            }
+                                          },
+                                          "rest": {
+                                            "type": "object",
+                                            "attributes": {
+                                              "_key": {
+                                                "type": "objectAttribute",
+                                                "value": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "optional": true
+                                    },
+                                    "level": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "number"
+                                      },
+                                      "optional": true
+                                    },
+                                    "_type": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "string",
+                                        "value": "block"
+                                      }
+                                    }
+                                  },
+                                  "rest": {
+                                    "type": "object",
+                                    "attributes": {
+                                      "_key": {
+                                        "type": "objectAttribute",
+                                        "value": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "optional": true
+                            },
+                            "helperText": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "array",
+                                "of": {
+                                  "type": "object",
+                                  "attributes": {
+                                    "children": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "array",
+                                        "of": {
+                                          "type": "object",
+                                          "attributes": {
+                                            "marks": {
+                                              "type": "objectAttribute",
+                                              "value": {
+                                                "type": "array",
+                                                "of": {
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "optional": true
+                                            },
+                                            "text": {
+                                              "type": "objectAttribute",
+                                              "value": {
+                                                "type": "string"
+                                              },
+                                              "optional": true
+                                            },
+                                            "_type": {
+                                              "type": "objectAttribute",
+                                              "value": {
+                                                "type": "string",
+                                                "value": "span"
+                                              }
+                                            }
+                                          },
+                                          "rest": {
+                                            "type": "object",
+                                            "attributes": {
+                                              "_key": {
+                                                "type": "objectAttribute",
+                                                "value": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "optional": true
+                                    },
+                                    "style": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "union",
+                                        "of": [
+                                          {
+                                            "type": "string",
+                                            "value": "normal"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "h2"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "h3"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "h4"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "h5"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "h6"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "inline"
+                                          }
+                                        ]
+                                      },
+                                      "optional": true
+                                    },
+                                    "listItem": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "union",
+                                        "of": [
+                                          {
+                                            "type": "string",
+                                            "value": "number"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "bullet"
+                                          }
+                                        ]
+                                      },
+                                      "optional": true
+                                    },
+                                    "markDefs": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "array",
+                                        "of": {
+                                          "type": "object",
+                                          "attributes": {
+                                            "customLink": {
+                                              "type": "objectAttribute",
+                                              "value": {
+                                                "type": "inline",
+                                                "name": "customUrl"
+                                              },
+                                              "optional": true
+                                            },
+                                            "_type": {
+                                              "type": "objectAttribute",
+                                              "value": {
+                                                "type": "string",
+                                                "value": "customLink"
+                                              }
+                                            }
+                                          },
+                                          "rest": {
+                                            "type": "object",
+                                            "attributes": {
+                                              "_key": {
+                                                "type": "objectAttribute",
+                                                "value": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "optional": true
+                                    },
+                                    "level": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "number"
+                                      },
+                                      "optional": true
+                                    },
+                                    "_type": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "string",
+                                        "value": "block"
+                                      }
+                                    }
+                                  },
+                                  "rest": {
+                                    "type": "object",
+                                    "attributes": {
+                                      "_key": {
+                                        "type": "objectAttribute",
+                                        "value": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "optional": true
+                            },
+                            "_type": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string",
+                                "value": "subscribeNewsletter"
+                              }
+                            }
+                          },
+                          "rest": {
+                            "type": "object",
+                            "attributes": {
+                              "_key": {
+                                "type": "objectAttribute",
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
                         },
                         {
-                          "type": "unknown"
+                          "type": "object",
+                          "attributes": {
+                            "title": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              },
+                              "optional": true
+                            },
+                            "description": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              },
+                              "optional": true
+                            },
+                            "form": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "object",
+                                "attributes": {
+                                  "_ref": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "_type": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "string",
+                                      "value": "reference"
+                                    }
+                                  },
+                                  "_weak": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "boolean"
+                                    },
+                                    "optional": true
+                                  }
+                                },
+                                "dereferencesTo": "formularios"
+                              },
+                              "optional": true
+                            },
+                            "variant": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "union",
+                                "of": [
+                                  {
+                                    "type": "string",
+                                    "value": "default"
+                                  },
+                                  {
+                                    "type": "string",
+                                    "value": "withBackground"
+                                  },
+                                  {
+                                    "type": "string",
+                                    "value": "centered"
+                                  }
+                                ]
+                              },
+                              "optional": true
+                            },
+                            "_type": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string",
+                                "value": "formBlock"
+                              }
+                            }
+                          },
+                          "rest": {
+                            "type": "object",
+                            "attributes": {
+                              "_key": {
+                                "type": "objectAttribute",
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
                         }
                       ]
                     }
@@ -5050,216 +8385,6 @@
     }
   },
   {
-    "name": "formularios",
-    "type": "document",
-    "attributes": {
-      "_id": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_type": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string",
-          "value": "formularios"
-        }
-      },
-      "_createdAt": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_updatedAt": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_rev": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "title": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "slug": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "slug"
-        },
-        "optional": true
-      },
-      "description": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "fields": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "array",
-          "of": {
-            "type": "object",
-            "attributes": {
-              "label": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "string"
-                },
-                "optional": true
-              },
-              "name": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "string"
-                },
-                "optional": true
-              },
-              "type": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "union",
-                  "of": [
-                    {
-                      "type": "string",
-                      "value": "text"
-                    },
-                    {
-                      "type": "string",
-                      "value": "textarea"
-                    },
-                    {
-                      "type": "string",
-                      "value": "email"
-                    },
-                    {
-                      "type": "string",
-                      "value": "tel"
-                    },
-                    {
-                      "type": "string",
-                      "value": "number"
-                    },
-                    {
-                      "type": "string",
-                      "value": "rut"
-                    },
-                    {
-                      "type": "string",
-                      "value": "select"
-                    },
-                    {
-                      "type": "string",
-                      "value": "radio"
-                    },
-                    {
-                      "type": "string",
-                      "value": "checkbox"
-                    }
-                  ]
-                },
-                "optional": true
-              },
-              "required": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "union",
-                  "of": [
-                    {
-                      "type": "string",
-                      "value": "yes"
-                    },
-                    {
-                      "type": "string",
-                      "value": "no"
-                    }
-                  ]
-                },
-                "optional": true
-              },
-              "options": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "array",
-                  "of": {
-                    "type": "string"
-                  }
-                },
-                "optional": true
-              },
-              "placeholder": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "string"
-                },
-                "optional": true
-              },
-              "_type": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "string",
-                  "value": "field"
-                }
-              }
-            },
-            "rest": {
-              "type": "object",
-              "attributes": {
-                "_key": {
-                  "type": "objectAttribute",
-                  "value": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "optional": true
-      },
-      "submitButtonText": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "successMessage": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "errorMessage": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "emailRecipients": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      }
-    }
-  },
-  {
     "name": "author",
     "type": "document",
     "attributes": {
@@ -5670,6 +8795,216 @@
         "optional": true
       },
       "ogDescription": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      }
+    }
+  },
+  {
+    "name": "formularios",
+    "type": "document",
+    "attributes": {
+      "_id": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_type": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string",
+          "value": "formularios"
+        }
+      },
+      "_createdAt": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_updatedAt": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_rev": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "title": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "slug": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "slug"
+        },
+        "optional": true
+      },
+      "description": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "fields": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "object",
+            "attributes": {
+              "label": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                },
+                "optional": true
+              },
+              "name": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                },
+                "optional": true
+              },
+              "type": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "union",
+                  "of": [
+                    {
+                      "type": "string",
+                      "value": "text"
+                    },
+                    {
+                      "type": "string",
+                      "value": "textarea"
+                    },
+                    {
+                      "type": "string",
+                      "value": "email"
+                    },
+                    {
+                      "type": "string",
+                      "value": "tel"
+                    },
+                    {
+                      "type": "string",
+                      "value": "number"
+                    },
+                    {
+                      "type": "string",
+                      "value": "rut"
+                    },
+                    {
+                      "type": "string",
+                      "value": "select"
+                    },
+                    {
+                      "type": "string",
+                      "value": "radio"
+                    },
+                    {
+                      "type": "string",
+                      "value": "checkbox"
+                    }
+                  ]
+                },
+                "optional": true
+              },
+              "required": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "union",
+                  "of": [
+                    {
+                      "type": "string",
+                      "value": "yes"
+                    },
+                    {
+                      "type": "string",
+                      "value": "no"
+                    }
+                  ]
+                },
+                "optional": true
+              },
+              "options": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "array",
+                  "of": {
+                    "type": "string"
+                  }
+                },
+                "optional": true
+              },
+              "placeholder": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                },
+                "optional": true
+              },
+              "_type": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string",
+                  "value": "field"
+                }
+              }
+            },
+            "rest": {
+              "type": "object",
+              "attributes": {
+                "_key": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "optional": true
+      },
+      "submitButtonText": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "successMessage": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "errorMessage": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "emailRecipients": {
         "type": "objectAttribute",
         "value": {
           "type": "string"

@@ -16,6 +16,7 @@ import { MainHeroBlock } from "./sections/main-hero";
 import { DoubleHeroBlock } from "./sections/double-hero";
 import { SubscribeNewsletter } from "./sections/subscribe-newsletter";
 import FormBlock from "./sections/form-block";
+import { TabsBlock } from "./sections/tabs";
 
 type PageBlock = NonNullable<
   NonNullable<QueryHomePageDataResult>["pageBuilder"]
@@ -43,6 +44,7 @@ const BLOCK_COMPONENTS = {
   subscribeNewsletter: SubscribeNewsletter,
   imageLinkCards: ImageLinkCards,
   formBlock: FormBlock,
+  tabs: TabsBlock,
 } as const;
 
 type BlockType = keyof typeof BLOCK_COMPONENTS;

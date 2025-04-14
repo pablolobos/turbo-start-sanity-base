@@ -274,7 +274,21 @@ const tabsBlock = `
         ${faqAccordionBlock},
         ${subscribeNewsletterBlock},
         ${imageLinkCardsBlock},
-        ${formBlock}
+        ${formBlock},
+        _type == "tabs" => {
+          ...,
+          title,
+          description,
+          tabs[]{
+            _key,
+            label,
+            content[]{ 
+              ...,
+              _type,
+              _key
+            }
+          }
+        }
       }
     }
   }
