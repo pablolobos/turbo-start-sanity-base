@@ -5033,6 +5033,10 @@
                     },
                     {
                       "type": "string",
+                      "value": "rut"
+                    },
+                    {
+                      "type": "string",
                       "value": "select"
                     },
                     {

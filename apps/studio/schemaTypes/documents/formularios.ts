@@ -90,6 +90,7 @@ export const formulariosType = defineType({
                                     { title: 'Email', value: 'email' },
                                     { title: 'Teléfono', value: 'tel' },
                                     { title: 'Número', value: 'number' },
+                                    { title: 'RUT', value: 'rut' },
                                     { title: 'Selección', value: 'select' },
                                     { title: 'Radio', value: 'radio' },
                                     { title: 'Checkbox', value: 'checkbox' },

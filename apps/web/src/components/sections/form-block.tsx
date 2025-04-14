@@ -6,6 +6,40 @@ import { cn } from "@workspace/ui/lib/utils"
 import * as Form from "@radix-ui/react-form"
 import { Button } from "@workspace/ui/components/button"
 
+// Add RUT cleaning and validation functions
+const cleanRut = (rut: string | undefined): string => {
+    // Remove all non-alphanumeric characters
+    return (rut || '').replace(/[^0-9kK]/g, '').toUpperCase();
+}
+
+const validateRut = (rut: string | undefined): boolean => {
+    if (!rut || rut.length < 2) return false;
+
+    const cleanValue = cleanRut(rut);
+
+    // Check basic format
+    if (!/^[0-9]{7,8}[0-9K]$/i.test(cleanValue)) return false;
+
+    // Separate digits and verifier
+    const rutDigits = cleanValue.slice(0, -1);
+    const verifier = cleanValue.slice(-1).toUpperCase();
+
+    // Calculate verification digit
+    let sum = 0;
+    let multiplier = 2;
+
+    // Iterate from right to left
+    for (let i = rutDigits.length - 1; i >= 0; i--) {
+        const digit = rutDigits[i] || '0';
+        sum += parseInt(digit, 10) * multiplier;
+        multiplier = multiplier === 7 ? 2 : multiplier + 1;
+    }
+
+    const expectedVerifier = 11 - (sum % 11);
+    const calculatedVerifier = expectedVerifier === 11 ? '0' : expectedVerifier === 10 ? 'K' : expectedVerifier.toString();
+
+    return calculatedVerifier === verifier;
+}
 
 interface FormField {
     label: string
@@ -45,11 +79,20 @@ export default function FormBlock({ title, description, variant = 'default', for
         setSubmitStatus('idle')
 
         const formData = new FormData(event.currentTarget)
-        const fields = form.fields.map(field => ({
-            _key: generateID(),
-            name: field.name,
-            value: formData.get(field.name)?.toString() || ''
-        }))
+        const fields = form.fields.map(field => {
+            let value = formData.get(field.name)?.toString() || ''
+
+            // Clean RUT value if field type is rut
+            if (field.type === 'rut') {
+                value = cleanRut(value)
+            }
+
+            return {
+                _key: generateID(),
+                name: field.name,
+                value
+            }
+        })
 
         const mutations = [{
             create: {
@@ -101,6 +144,26 @@ export default function FormBlock({ title, description, variant = 'default', for
         }
 
         switch (field.type) {
+            case 'rut':
+                return (
+                    <Form.Control asChild>
+                        <input
+                            type="text"
+                            {...commonProps}
+                            pattern="[0-9Kk\.-]*"
+                            maxLength={12}
+                            placeholder={field.placeholder || "12.345.678-9"}
+                            onBlur={(e) => {
+                                const isValid = validateRut(e.target.value);
+                                e.target.setCustomValidity(isValid ? '' : 'RUT inválido');
+                            }}
+                            onChange={(e) => {
+                                // Reset validation state when user starts typing again
+                                e.target.setCustomValidity('');
+                            }}
+                        />
+                    </Form.Control>
+                )
             case 'textarea':
                 return (
                     <Form.Control asChild>
@@ -218,6 +281,16 @@ export default function FormBlock({ title, description, variant = 'default', for
                                         match="typeMismatch"
                                     >
                                         Email inválido
+                                    </Form.Message>
+                                )}
+                                {field.type === 'rut' && (
+                                    <Form.Message
+                                        className="text-red-500 text-sm"
+                                        match={(value: string) => {
+                                            return !validateRut(value);
+                                        }}
+                                    >
+                                        RUT inválido
                                     </Form.Message>
                                 )}
                             </div>
