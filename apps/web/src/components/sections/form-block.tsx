@@ -1,45 +1,11 @@
 "use client"
 
 import { generateID } from "@/lib/utils"
+import { cleanRut, validateRut } from "@/lib/rut"
 import { useState, FormEvent, useRef } from 'react'
 import { cn } from "@workspace/ui/lib/utils"
 import * as Form from "@radix-ui/react-form"
 import { Button } from "@workspace/ui/components/button"
-
-// Add RUT cleaning and validation functions
-const cleanRut = (rut: string | undefined): string => {
-    // Remove all non-alphanumeric characters
-    return (rut || '').replace(/[^0-9kK]/g, '').toUpperCase();
-}
-
-const validateRut = (rut: string | undefined): boolean => {
-    if (!rut || rut.length < 2) return false;
-
-    const cleanValue = cleanRut(rut);
-
-    // Check basic format
-    if (!/^[0-9]{7,8}[0-9K]$/i.test(cleanValue)) return false;
-
-    // Separate digits and verifier
-    const rutDigits = cleanValue.slice(0, -1);
-    const verifier = cleanValue.slice(-1).toUpperCase();
-
-    // Calculate verification digit
-    let sum = 0;
-    let multiplier = 2;
-
-    // Iterate from right to left
-    for (let i = rutDigits.length - 1; i >= 0; i--) {
-        const digit = rutDigits[i] || '0';
-        sum += parseInt(digit, 10) * multiplier;
-        multiplier = multiplier === 7 ? 2 : multiplier + 1;
-    }
-
-    const expectedVerifier = 11 - (sum % 11);
-    const calculatedVerifier = expectedVerifier === 11 ? '0' : expectedVerifier === 10 ? 'K' : expectedVerifier.toString();
-
-    return calculatedVerifier === verifier;
-}
 
 interface FormField {
     label: string
