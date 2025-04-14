@@ -109,8 +109,8 @@
     --destructive-foreground: 0 0% 98%;
     --border: var(--v-grayscale-100);
     --divider: var(--v-grayscale-50);
-    --input: 240 5.9% 90%;
-    --ring: 240 10% 3.9%;
+    --input: var(--v-main-white);
+    --ring: var(--v-main-grey-darkest);
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;

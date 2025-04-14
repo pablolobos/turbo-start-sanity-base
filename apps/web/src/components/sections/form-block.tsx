@@ -93,10 +93,10 @@ export default function FormBlock({ title, description, variant = 'default', for
             required: field.required === 'yes',
             placeholder: field.placeholder,
             className: cn(
-                "w-full rounded-md border border-border bg-input",
+                "w-full rounded-sm border border-border bg-input",
                 "px-4 py-3 text-base",
                 "placeholder:text-zinc-500",
-                "focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-ring"
+                "focus:border-black focus:outline-none focus:ring-2 focus:ring-ring"
             )
         }
 
