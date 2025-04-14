@@ -255,6 +255,31 @@ const formBlock = `
   }
 `;
 
+const tabsBlock = `
+  _type == "tabs" => {
+    ...,
+    title,
+    description,
+    tabs[]{
+      _key,
+      label,
+      content[]{
+        ...,
+        _type,
+        _key,
+        ${ctaBlock},
+        ${mainHeroBlock},
+        ${heroBlock},
+        ${doubleHeroBlock},
+        ${faqAccordionBlock},
+        ${subscribeNewsletterBlock},
+        ${imageLinkCardsBlock},
+        ${formBlock}
+      }
+    }
+  }
+`;
+
 const pageBuilderFragment = `
   pageBuilder[]{
     ...,
@@ -266,7 +291,8 @@ const pageBuilderFragment = `
     ${faqAccordionBlock},
     ${subscribeNewsletterBlock},
     ${imageLinkCardsBlock},
-    ${formBlock}
+    ${formBlock},
+    ${tabsBlock}
   }
 `;
 
