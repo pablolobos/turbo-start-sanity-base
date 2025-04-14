@@ -1,8 +1,9 @@
 "use client"
 
 import { generateID } from "@/lib/utils"
-import { useState, FormEvent, ChangeEvent } from 'react'
-import { cn } from "@workspace/ui/lib/utils";
+import { useState, FormEvent, useRef } from 'react'
+import { cn } from "@workspace/ui/lib/utils"
+import * as Form from "@radix-ui/react-form"
 
 interface FormField {
     label: string
@@ -31,19 +32,21 @@ interface FormBlockProps {
 }
 
 export default function FormBlock({ title, description, variant = 'default', form }: FormBlockProps) {
-    const [formData, setFormData] = useState<Record<string, string>>({})
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+    const formRef = useRef<HTMLFormElement>(null)
 
-    const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        const { name, value } = e.target
-        setFormData(prev => ({ ...prev, [name]: value }))
-    }
-
-    async function handleSubmit(e: FormEvent<HTMLFormElement>) {
-        e.preventDefault()
+    async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault()
         setIsSubmitting(true)
         setSubmitStatus('idle')
+
+        const formData = new FormData(event.currentTarget)
+        const fields = form.fields.map(field => ({
+            _key: generateID(),
+            name: field.name,
+            value: formData.get(field.name)?.toString() || ''
+        }))
 
         const mutations = [{
             create: {
@@ -51,14 +54,10 @@ export default function FormBlock({ title, description, variant = 'default', for
                 _type: 'message',
                 read: false,
                 starred: false,
-                name: formData['name'] || 'No name provided',
-                email: formData['email'] || 'No email provided',
+                name: formData.get('name')?.toString() || 'No name provided',
+                email: formData.get('email')?.toString() || 'No email provided',
                 subject: form.title,
-                fields: Object.entries(formData).map(([name, value]) => ({
-                    _key: generateID(),
-                    name,
-                    value
-                }))
+                fields
             }
         }]
 
@@ -71,7 +70,7 @@ export default function FormBlock({ title, description, variant = 'default', for
 
             if (response.ok) {
                 setSubmitStatus('success')
-                setFormData({})
+                formRef.current?.reset()
             } else {
                 setSubmitStatus('error')
             }
@@ -85,73 +84,78 @@ export default function FormBlock({ title, description, variant = 'default', for
 
     const renderField = (field: FormField) => {
         const commonProps = {
-            id: field.name,
-            name: field.name,
-            placeholder: field.placeholder,
-            value: formData[field.name] || '',
-            onChange: handleInputChange,
             required: field.required === 'yes',
-            className: "bg-zinc-900 p-4 border border-zinc-800 rounded-md w-full text-white",
+            placeholder: field.placeholder,
+            className: cn(
+                "w-full rounded-md border border-zinc-800 bg-zinc-900 text-white",
+                "px-4 py-3 text-base",
+                "placeholder:text-zinc-500",
+                "focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/50"
+            )
         }
 
         switch (field.type) {
             case 'textarea':
                 return (
-                    <textarea
-                        {...commonProps}
-                        rows={5}
-                    />
+                    <Form.Control asChild>
+                        <textarea
+                            {...commonProps}
+                            rows={5}
+                        />
+                    </Form.Control>
                 )
             case 'select':
                 return (
-                    <select {...commonProps}>
-                        <option value="">Selecciona una opción</option>
-                        {field.options?.map(option => (
-                            <option key={option} value={option}>
-                                {option}
-                            </option>
-                        ))}
-                    </select>
+                    <Form.Control asChild>
+                        <select {...commonProps}>
+                            <option value="">Selecciona una opción</option>
+                            {field.options?.map(option => (
+                                <option key={option} value={option}>
+                                    {option}
+                                </option>
+                            ))}
+                        </select>
+                    </Form.Control>
                 )
             case 'radio':
                 return (
-                    <div className="flex gap-4">
+                    <div className="flex flex-wrap gap-4">
                         {field.options?.map(option => (
-                            <label key={option} className="flex items-center gap-2">
-                                <input
-                                    type="radio"
-                                    name={field.name}
-                                    value={option}
-                                    checked={formData[field.name] === option}
-                                    onChange={handleInputChange}
-                                    required={field.required === 'yes'}
-                                />
-                                {option}
-                            </label>
+                            <div key={option} className="flex items-center gap-2">
+                                <Form.Control asChild>
+                                    <input
+                                        type="radio"
+                                        required={field.required === 'yes'}
+                                        value={option}
+                                        className="bg-zinc-900 border-zinc-800 focus:ring-blue-600/50 text-blue-600"
+                                    />
+                                </Form.Control>
+                                <span className="text-white">{option}</span>
+                            </div>
                         ))}
                     </div>
                 )
             case 'checkbox':
                 return (
-                    <label className="flex items-center gap-2">
-                        <input
-                            type="checkbox"
-                            {...commonProps}
-                            checked={formData[field.name] === 'true'}
-                            onChange={e => handleInputChange({
-                                ...e,
-                                target: { ...e.target, value: e.target.checked ? 'true' : 'false' }
-                            } as ChangeEvent<HTMLInputElement>)}
-                        />
-                        {field.label}
-                    </label>
+                    <div className="flex items-center gap-2">
+                        <Form.Control asChild>
+                            <input
+                                type="checkbox"
+                                required={field.required === 'yes'}
+                                className="bg-zinc-900 border-zinc-800 rounded focus:ring-blue-600/50 text-blue-600"
+                            />
+                        </Form.Control>
+                        <span className="text-white">{field.label}</span>
+                    </div>
                 )
             default:
                 return (
-                    <input
-                        type={field.type}
-                        {...commonProps}
-                    />
+                    <Form.Control asChild>
+                        <input
+                            type={field.type}
+                            {...commonProps}
+                        />
+                    </Form.Control>
                 )
         }
     }
@@ -161,13 +165,6 @@ export default function FormBlock({ title, description, variant = 'default', for
         {
             'bg-zinc-900 px-4 sm:px-6 lg:px-8 rounded-lg': variant === 'withBackground',
             'text-center': variant === 'centered',
-        }
-    )
-
-    const formClasses = cn(
-        'flex flex-col gap-6',
-        {
-            'items-center': variant === 'centered'
         }
     )
 
@@ -184,37 +181,67 @@ export default function FormBlock({ title, description, variant = 'default', for
                 </p>
             )}
 
-            <form onSubmit={handleSubmit} className={formClasses}>
+            <Form.Root
+                ref={formRef}
+                onSubmit={handleSubmit}
+                className="space-y-6"
+            >
                 {form.fields.map((field) => (
-                    <div key={field.name} className="w-full">
-                        <label htmlFor={field.name} className="block mb-2 font-medium text-gray-300 text-sm">
-                            {field.label} {field.required === 'yes' && <span className="text-red-500">*</span>}
-                        </label>
+                    <Form.Field
+                        key={field.name}
+                        name={field.name}
+                        className="gap-2 grid"
+                    >
+                        <div className="flex justify-between items-baseline">
+                            <Form.Label className="font-medium text-gray-300 text-sm">
+                                {field.label}
+                                {field.required === 'yes' && (
+                                    <span className="ml-1 text-red-500">*</span>
+                                )}
+                            </Form.Label>
+                            <div className="flex gap-2">
+                                <Form.Message
+                                    className="text-red-500 text-sm"
+                                    match="valueMissing"
+                                >
+                                    Campo requerido
+                                </Form.Message>
+                                {field.type === 'email' && (
+                                    <Form.Message
+                                        className="text-red-500 text-sm"
+                                        match="typeMismatch"
+                                    >
+                                        Email inválido
+                                    </Form.Message>
+                                )}
+                            </div>
+                        </div>
                         {renderField(field)}
-                    </div>
+                    </Form.Field>
                 ))}
 
                 {submitStatus === 'success' && (
-                    <p className="text-green-500">{form.successMessage}</p>
+                    <p className="text-green-500 text-sm">{form.successMessage}</p>
                 )}
                 {submitStatus === 'error' && (
-                    <p className="text-red-500">{form.errorMessage}</p>
+                    <p className="text-red-500 text-sm">{form.errorMessage}</p>
                 )}
 
-                <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className={cn(
-                        "bg-blue-700 px-6 py-3 rounded-md text-white font-medium transition-colors",
-                        {
-                            "opacity-50 cursor-not-allowed": isSubmitting,
-                            "hover:bg-blue-600": !isSubmitting,
-                        }
-                    )}
-                >
-                    {isSubmitting ? 'Enviando...' : (form.submitButtonText || 'Enviar')}
-                </button>
-            </form>
+                <Form.Submit asChild>
+                    <button
+                        disabled={isSubmitting}
+                        className={cn(
+                            "w-full rounded-md bg-blue-600 px-4 py-3",
+                            "text-base font-medium text-white",
+                            "transition-colors duration-200",
+                            "hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600/50",
+                            "disabled:opacity-50 disabled:cursor-not-allowed"
+                        )}
+                    >
+                        {isSubmitting ? 'Enviando...' : (form.submitButtonText || 'Enviar')}
+                    </button>
+                </Form.Submit>
+            </Form.Root>
         </div>
     )
 } 
