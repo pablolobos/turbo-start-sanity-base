@@ -16,10 +16,13 @@ import { presentationUrl } from "./plugins/presentation-url";
 import { schemaTypes } from "./schemaTypes";
 import { structure } from "./structure";
 import { createPageTemplate } from "./utils/helper";
+import { inboxPlugin } from './plugins/inbox/plugin';
 
 const projectId = process.env.SANITY_STUDIO_PROJECT_ID ?? "";
 const dataset = process.env.SANITY_STUDIO_DATASET;
-const presentationOriginUrl = process.env.SANITY_STUDIO_PRESENTATION_URL?.replace(/\/$/, '');
+const presentationOriginUrl = process.env.
+
+  SANITY_STUDIO_PRESENTATION_URL?.replace(/\/$/, '');
 
 export default defineConfig({
   name: "default",
@@ -48,6 +51,7 @@ export default defineConfig({
     media(),
     presentationUrl(),
     unsplashImageAsset(),
+    inboxPlugin()
   ],
 
   form: {
