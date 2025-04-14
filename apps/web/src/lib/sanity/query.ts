@@ -82,7 +82,11 @@ const formFieldsFragment = `
     required,
     options,
     placeholder
-  }
+  },
+  emailRecipients,
+  submitButtonText,
+  successMessage,
+  errorMessage
 `;
 
 // Page builder block fragments

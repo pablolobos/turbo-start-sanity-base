@@ -12,6 +12,7 @@ interface FormData {
   email: string
   subject: string
   fields: FormField[]
+  emailRecipients: string
 }
 
 const resend = new Resend(process.env.RESEND_API_KEY)
@@ -29,6 +30,7 @@ export async function POST(req: NextRequest) {
 
   try {
     const { mutations } = await req.json()
+    console.log('Received mutations:', JSON.stringify(mutations, null, 2))
 
     if (!mutations?.[0]?.create) {
       return NextResponse.json(
@@ -80,10 +82,19 @@ export async function POST(req: NextRequest) {
       ?.map((field: FormField) => `<p><strong>${field.name}:</strong> ${field.value}</p>`)
       .join('') || ''
 
+    // Parse email recipients
+    console.log('Email recipients from form:', formData.emailRecipients)
+
+    const recipients = formData.emailRecipients
+      ? formData.emailRecipients.split(',').map(email => email.trim()).filter(Boolean)
+      : ['pablo.lobos@fenomena.cl'] // Fallback to default
+
+    console.log('Parsed recipients:', recipients)
+
     try {
-      await resend.emails.send({
+      const emailResponse = await resend.emails.send({
         from: 'Volvo Chile <formulario@send.volvochile.cl>',
-        to: ['pablo.lobos@fenomena.cl'],
+        to: recipients,
         subject: `Nuevo formulario: ${formData.subject}`,
         html: `
           <h2>Nuevo envío de formulario</h2>
@@ -93,6 +104,8 @@ export async function POST(req: NextRequest) {
           ${fieldsHtml}
         `,
       })
+
+      console.log('Email sent successfully:', emailResponse)
     } catch (emailError) {
       console.error('Error sending email:', emailError)
       // Continue execution even if email fails

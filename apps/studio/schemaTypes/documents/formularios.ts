@@ -153,6 +153,15 @@ export const formulariosType = defineType({
             initialValue: 'Ha ocurrido un error. Por favor, intenta nuevamente.',
             group: 'settings',
         }),
+        defineField({
+            name: 'emailRecipients',
+            title: 'Destinatarios de Email',
+            type: 'string',
+            description: 'Direcciones de correo electrónico que recibirán las notificaciones (separadas por comas)',
+            initialValue: 'pablo.lobos@fenomena.cl',
+            validation: Rule => Rule.required().error('Debe especificar al menos un destinatario'),
+            group: 'settings',
+        }),
     ],
     preview: {
         select: {

@@ -5124,6 +5124,13 @@
           "type": "string"
         },
         "optional": true
+      },
+      "emailRecipients": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
       }
     }
   },

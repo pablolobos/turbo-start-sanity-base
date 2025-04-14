@@ -22,6 +22,7 @@ interface FormData {
     submitButtonText: string
     successMessage: string
     errorMessage: string
+    emailRecipients: string
 }
 
 interface FormBlockProps {
@@ -57,7 +58,8 @@ export default function FormBlock({ title, description, variant = 'default', for
                 name: formData.get('name')?.toString() || 'No name provided',
                 email: formData.get('email')?.toString() || 'No email provided',
                 subject: form.title,
-                fields
+                fields,
+                emailRecipients: form.emailRecipients
             }
         }]
 
@@ -72,6 +74,8 @@ export default function FormBlock({ title, description, variant = 'default', for
                 setSubmitStatus('success')
                 formRef.current?.reset()
             } else {
+                const errorData = await response.json()
+                console.error('Form submission error:', errorData)
                 setSubmitStatus('error')
             }
         } catch (error) {
