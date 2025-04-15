@@ -2,7 +2,7 @@ import { PageBuilder } from "@/components/pagebuilder";
 import { sanityFetch } from "@/lib/sanity/live";
 import { queryHomePageData } from "@/lib/sanity/query";
 import { getMetaData } from "@/lib/seo";
-import Form from "@/components/form";
+
 async function fetchHomePageData() {
   return await sanityFetch({
     query: queryHomePageData,

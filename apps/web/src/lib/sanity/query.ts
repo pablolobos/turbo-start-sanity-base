@@ -323,6 +323,26 @@ const pageBuilderFragment = `
   }
 `;
 
+// Add this new fragment for category hierarchy
+const categoryBreadcrumbFragment = `
+  "categoryData": category->{
+    _id,
+    "label": prefLabel,
+    "slug": coalesce(slug.current, ""), // Assuming a slug field exists on skosConcept
+    "parent": broader->{
+      _id,
+      "label": prefLabel,
+      "slug": coalesce(slug.current, ""),
+      "parent": broader->{ // Level 2 Parent
+        _id,
+        "label": prefLabel,
+        "slug": coalesce(slug.current, ""),
+        // Fetch more levels if needed by adding more "parent": broader->{...}
+      }
+    }
+  }
+`;
+
 export const queryHomePageData =
   defineQuery(`*[_type == "homePage" && _id == "homePage"][0]{
     ...,
@@ -331,7 +351,8 @@ export const queryHomePageData =
     "slug": slug.current,
     title,
     description,
-    ${pageBuilderFragment}
+    ${pageBuilderFragment},
+    ${categoryBreadcrumbFragment}
   }`);
 
 export const querySlugPageData = defineQuery(`
@@ -370,7 +391,8 @@ export const queryBlogSlugPageData = defineQuery(`
     ${blogAuthorFragment},
     ${imageFragment},
     ${richTextFragment},
-    ${pageBuilderFragment}
+    ${pageBuilderFragment},
+    ${categoryBreadcrumbFragment}
   }
 `);
 
@@ -576,8 +598,8 @@ export const queryCamionesData = defineQuery(`*[_type == "camiones"]{
   ${richTextFragment}
 }`);
 
-export const queryCamionBySlug = defineQuery(`*[
-  _type == "camiones" 
+export const queryCamionOrPageBySlug = defineQuery(`*[
+  (_type == "camiones" || _type == "page")
   && slug.current == $slug
 ][0]{
   _id,
@@ -585,9 +607,14 @@ export const queryCamionBySlug = defineQuery(`*[
   title,
   description,
   "slug": slug.current,
-  ${imageFragment},
-  ${richTextFragment},
-  ${pageBuilderFragment}
+  // Conditional fields based on type
+  _type == "camiones" => { 
+    ${imageFragment},
+    ${richTextFragment}, 
+    ${categoryBreadcrumbFragment}
+  },
+  // Always include pageBuilder for both
+  ${pageBuilderFragment} 
 }`);
 
 export const queryCamionesPaths = defineQuery(`
