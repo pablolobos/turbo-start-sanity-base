@@ -213,21 +213,18 @@ function MobileNavbar({ data }: { data: NonNullable<NAVBAR_QUERYResult> }) {
 
 function NavbarColumnLink({ column }: { column: NavbarLinkType }) {
   return (
-    <Link
-      aria-label={`Link to ${column.name ?? column.href}`}
-      href={column.href ?? ""}
-      legacyBehavior
-      passHref
-    >
-      <NavigationMenuLink
+    <NavigationMenuLink asChild>
+      <Link
+        aria-label={`Link to ${column.name ?? column.href}`}
+        href={column.href ?? ""}
         className={cn(
           navigationMenuTriggerStyle(),
           "text-foreground hover:bg-white hover:text-foreground md:h-[var(--nav-item-height)]",
         )}
       >
         {column.name}
-      </NavigationMenuLink>
-    </Link>
+      </Link>
+    </NavigationMenuLink>
   );
 }
 
