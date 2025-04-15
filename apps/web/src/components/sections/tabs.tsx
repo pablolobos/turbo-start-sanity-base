@@ -48,7 +48,7 @@ const blockComponents = {
 export function TabsBlock({ title, description, tabs }: TabsBlockProps) {
     return (
         <div className="mx-auto py-12">
-            <div className="padding-center">
+            <div className="padding-center max-container">
                 {title && (
                     <h2 className="mb-4 font-bold text-3xl sm:text-4xl tracking-tight">
                         {title}
