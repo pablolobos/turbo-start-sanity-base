@@ -20,7 +20,8 @@ function generateBreadcrumbs(
     docType: string,
 ): BreadcrumbItem[] {
     const breadcrumbs: BreadcrumbItem[] = [];
-    const categoryBase = "/camiones/categoria";
+    // Use the base path for the main trucks page as the category parent
+    const categoryBase = "/camiones";
 
     const staticCrumbs: BreadcrumbItem[] = [
         { label: "Camiones", href: "/camiones" },
@@ -32,9 +33,20 @@ function generateBreadcrumbs(
         const ancestors: BreadcrumbItem[] = [];
         while (current) {
             if (current.label) {
+                let href = "#"; // Default to no link
+                if (current.iri) {
+                    try {
+                        // Parse the IRI and get the pathname
+                        const url = new URL(current.iri);
+                        href = url.pathname; // Use the path part, e.g., /camiones/larga-distancia
+                    } catch (e) {
+                        console.error("Error parsing IRI for breadcrumb:", current.iri, e);
+                        // Keep href as "#" if IRI is invalid
+                    }
+                }
                 ancestors.push({
                     label: current.label,
-                    href: current.slug ? `${categoryBase}/${current.slug}` : "#",
+                    href: href,
                 });
             }
             current = current.parent;

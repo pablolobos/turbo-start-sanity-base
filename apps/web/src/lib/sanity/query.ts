@@ -328,16 +328,15 @@ const categoryBreadcrumbFragment = `
   "categoryData": category->{
     _id,
     "label": prefLabel,
-    "slug": coalesce(slug.current, ""), // Assuming a slug field exists on skosConcept
+    "iri": baseIri,
     "parent": broader->{
       _id,
       "label": prefLabel,
-      "slug": coalesce(slug.current, ""),
-      "parent": broader->{ // Level 2 Parent
+      "iri": baseIri,
+      "parent": broader->{
         _id,
         "label": prefLabel,
-        "slug": coalesce(slug.current, ""),
-        // Fetch more levels if needed by adding more "parent": broader->{...}
+        "iri": baseIri,
       }
     }
   }
