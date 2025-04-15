@@ -12,6 +12,7 @@ import {
   Settings2,
   User,
   NotepadText,
+  Truck,
 } from "lucide-react";
 import type {
   StructureBuilder,
@@ -116,14 +117,14 @@ export const structure = (
         list: { type: "blog", title: "Blogs", icon: FileText },
         context,
       }),
+      createList({ S, type: "camiones", title: "Camiones", icon: Truck }),
       createList({
         S,
         type: "faq",
         title: "FAQs",
         icon: MessageCircleQuestion,
       }),
-      createList({ S, type: "formularios", title: "Formularios", icon: NotepadText },
-      ),
+      createList({ S, type: "formularios", title: "Formularios", icon: NotepadText }),
       createList({ S, type: "author", title: "Authors", icon: User }),
       S.divider(),
       S.listItem()

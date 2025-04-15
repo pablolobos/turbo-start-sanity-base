@@ -9,6 +9,7 @@ import {
 } from "sanity-plugin-asset-source-unsplash";
 import { iconPicker } from "sanity-plugin-icon-picker";
 import { media, mediaAssetSource } from "sanity-plugin-media";
+import { taxonomyManager } from 'sanity-plugin-taxonomy-manager'
 
 import { Logo } from "./components/logo";
 import { locations } from "./location";
@@ -51,7 +52,10 @@ export default defineConfig({
     media(),
     presentationUrl(),
     unsplashImageAsset(),
-    inboxPlugin()
+    inboxPlugin(),
+    taxonomyManager({
+      baseUri: "https://volvochile.cl/"
+    }),
   ],
 
   form: {

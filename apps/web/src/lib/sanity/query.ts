@@ -551,3 +551,31 @@ export const queryFormBySlug = defineQuery(`*[
   successMessage,
   errorMessage
 }`);
+
+// Camiones queries
+export const queryCamionesData = defineQuery(`*[_type == "camiones"]{
+  _id,
+  _type,
+  title,
+  description,
+  "slug": slug.current,
+  ${imageFragment},
+  ${richTextFragment}
+}`);
+
+export const queryCamionBySlug = defineQuery(`*[
+  _type == "camiones" 
+  && slug.current == $slug
+][0]{
+  _id,
+  _type,
+  title,
+  description,
+  "slug": slug.current,
+  ${imageFragment},
+  ${richTextFragment}
+}`);
+
+export const queryCamionesPaths = defineQuery(`
+  *[_type == "camiones" && defined(slug.current)].slug.current
+`);

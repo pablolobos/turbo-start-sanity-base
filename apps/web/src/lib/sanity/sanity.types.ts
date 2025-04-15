@@ -1214,6 +1214,48 @@ export type HomePage = {
   ogDescription?: string;
 };
 
+export type Camiones = {
+  _id: string;
+  _type: "camiones";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  description?: string;
+  slug?: Slug;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  richText?: RichText;
+  seoTitle?: string;
+  seoDescription?: string;
+  seoImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  seoNoIndex?: boolean;
+  seoHideFromLists?: boolean;
+  ogTitle?: string;
+  ogDescription?: string;
+};
+
 export type Author = {
   _id: string;
   _type: "author";
@@ -1479,6 +1521,66 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
+export type SkosConceptScheme = {
+  _id: string;
+  _type: "skosConceptScheme";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  description?: string;
+  controls?: boolean;
+  baseIri?: string;
+  schemeId?: string;
+  topConcepts?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "skosConcept";
+  }>;
+  concepts?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "skosConcept";
+  }>;
+};
+
+export type SkosConcept = {
+  _id: string;
+  _type: "skosConcept";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  prefLabel?: string;
+  definition?: string;
+  example?: string;
+  scopeNote?: string;
+  altLabel?: Array<string>;
+  hiddenLabel?: Array<string>;
+  baseIri?: string;
+  conceptId?: string;
+  broader?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "skosConcept";
+  }>;
+  related?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "skosConcept";
+  }>;
+  historyNote?: string;
+  editorialNote?: string;
+  changeNote?: string;
+};
+
 export type Message = {
   _id: string;
   _type: "message";
@@ -1680,6 +1782,7 @@ export type AllSanitySchemaTypes =
   | Settings
   | BlogIndex
   | HomePage
+  | Camiones
   | Author
   | Faq
   | Page
@@ -1692,6 +1795,8 @@ export type AllSanitySchemaTypes =
   | SanityImageAsset
   | SanityAssetSourceData
   | SanityImageMetadata
+  | SkosConceptScheme
+  | SkosConcept
   | Message
   | MediaTag
   | Slug
@@ -6271,6 +6376,17 @@ export type QueryGenericPageOGDataResult =
     }
   | {
       _id: string;
+      _type: "camiones";
+      title: string | null;
+      description: string | null;
+      image: string | null;
+      dominantColor: string | null;
+      seoImage: string | null;
+      logo: string | null;
+      date: string;
+    }
+  | {
+      _id: string;
       _type: "formularios";
       title: string | null;
       description: string | null;
@@ -6447,6 +6563,145 @@ export type QueryFormBySlugResult = {
   successMessage: string | null;
   errorMessage: string | null;
 } | null;
+// Variable: queryCamionesData
+// Query: *[_type == "camiones"]{  _id,  _type,  title,  description,  "slug": slug.current,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }}
+export type QueryCamionesDataResult = Array<{
+  _id: string;
+  _type: "camiones";
+  title: string | null;
+  description: string | null;
+  slug: string | null;
+  image: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    alt: string | "Image-Broken";
+    blurData: string | null;
+    dominantColor: string | null;
+  } | null;
+  richText: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "inline" | "normal";
+        listItem?: "bullet" | "number";
+        markDefs: Array<
+          | {
+              customLink?: CustomUrl;
+              _type: "customLink";
+              _key: string;
+              openInNewTab: boolean | null;
+              href: string | "#" | null;
+            }
+          | {
+              customLink?: CustomUrl;
+              _type: "customLink";
+              _key: string;
+            }
+        > | null;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }
+    | {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        caption?: string;
+        _type: "image";
+        _key: string;
+        markDefs: null;
+      }
+  > | null;
+}>;
+// Variable: queryCamionBySlug
+// Query: *[  _type == "camiones"   && slug.current == $slug][0]{  _id,  _type,  title,  description,  "slug": slug.current,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }}
+export type QueryCamionBySlugResult = {
+  _id: string;
+  _type: "camiones";
+  title: string | null;
+  description: string | null;
+  slug: string | null;
+  image: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    alt: string | "Image-Broken";
+    blurData: string | null;
+    dominantColor: string | null;
+  } | null;
+  richText: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "inline" | "normal";
+        listItem?: "bullet" | "number";
+        markDefs: Array<
+          | {
+              customLink?: CustomUrl;
+              _type: "customLink";
+              _key: string;
+              openInNewTab: boolean | null;
+              href: string | "#" | null;
+            }
+          | {
+              customLink?: CustomUrl;
+              _type: "customLink";
+              _key: string;
+            }
+        > | null;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }
+    | {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        caption?: string;
+        _type: "image";
+        _key: string;
+        markDefs: null;
+      }
+  > | null;
+} | null;
+// Variable: queryCamionesPaths
+// Query: *[_type == "camiones" && defined(slug.current)].slug.current
+export type QueryCamionesPathsResult = Array<string | null>;
 
 // Query TypeMap
 import "@sanity/client";
@@ -6468,5 +6723,8 @@ declare module "@sanity/client" {
     '\n  *[_type == "settings"][0]{\n    _id,\n    _type,\n    siteTitle,\n    siteDescription,\n    socialLinks{\n      linkedin,\n      facebook,\n      twitter,\n      instagram,\n      youtube\n    }\n  }\n': QueryGlobalSeoSettingsResult;
     '*[_type == "formularios"]{\n  _id,\n  title,\n  "slug": slug.current,\n  description\n}': QueryAllFormsResult;
     '*[\n  _type == "formularios" \n  && slug.current == $slug\n][0]{\n  _id,\n  title,\n  description,\n  \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n  submitButtonText,\n  successMessage,\n  errorMessage\n}': QueryFormBySlugResult;
+    '*[_type == "camiones"]{\n  _id,\n  _type,\n  title,\n  description,\n  "slug": slug.current,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n}': QueryCamionesDataResult;
+    '*[\n  _type == "camiones" \n  && slug.current == $slug\n][0]{\n  _id,\n  _type,\n  title,\n  description,\n  "slug": slug.current,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n}': QueryCamionBySlugResult;
+    '\n  *[_type == "camiones" && defined(slug.current)].slug.current\n': QueryCamionesPathsResult;
   }
 }
