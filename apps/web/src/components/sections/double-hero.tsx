@@ -45,7 +45,9 @@ const HeroSection = ({
     variant?: string | null;
 }) => {
     return (
-        <div className="relative">
+        <div className={cn(
+            "relative"
+        )}>
             {/* Background Image with Overlay */}
             {image?.asset && (
                 <div className="absolute inset-0 w-full h-full">
@@ -63,7 +65,7 @@ const HeroSection = ({
 
             {/* Content */}
             <div className={cn(
-                "relative z-10 flex items-center padding-center py-4 lg:py-12",
+                "relative z-10 flex items-center padding-center py-0 lg:py-12",
                 {
                     "relative h-full z-10 flex items-stretch": variant !== "inset",
                     "h-full items-stretch": variant === "inset"
@@ -131,7 +133,12 @@ export function DoubleHeroBlock({
     return (
         <section className={cn("relative overflow-hidden", backgroundClasses)}>
             <div className="mx-auto">
-                <div className="grid lg:grid-cols-2">
+                <div className={cn(
+                    "grid lg:grid-cols-2",
+                    {
+                        "py-8 gap-8 lg:gap-0 lg:py-0": variant === "inset"
+                    }
+                )}>
                     <HeroSection
                         title={primaryTitle}
                         badge={primaryBadge}
