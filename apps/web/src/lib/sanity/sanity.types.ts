@@ -210,7 +210,13 @@ export type Tabs = {
           _key: string;
         }
       | {
-          variant?: "default" | "alt" | "accent1" | "accent2" | "brand";
+          variant?:
+            | "default"
+            | "alt"
+            | "accent1"
+            | "accent2"
+            | "brand"
+            | "inset";
           primaryBadge?: string;
           primaryTitle?: string;
           primaryRichText?: Array<{
@@ -772,7 +778,7 @@ export type Cta = {
 
 export type DoubleHero = {
   _type: "doubleHero";
-  variant?: "default" | "alt" | "accent1" | "accent2" | "brand";
+  variant?: "default" | "alt" | "accent1" | "accent2" | "brand" | "inset";
   primaryBadge?: string;
   primaryTitle?: string;
   primaryRichText?: Array<{
@@ -1784,7 +1790,14 @@ export type QueryHomePageDataResult = {
     | {
         _key: string;
         _type: "doubleHero";
-        variant: "accent1" | "accent2" | "alt" | "brand" | "default" | null;
+        variant:
+          | "accent1"
+          | "accent2"
+          | "alt"
+          | "brand"
+          | "default"
+          | "inset"
+          | null;
         primaryBadge: string | null;
         primaryTitle: string | null;
         primaryRichText: Array<{
@@ -2461,6 +2474,7 @@ export type QueryHomePageDataResult = {
                   | "alt"
                   | "brand"
                   | "default"
+                  | "inset"
                   | null;
                 primaryBadge: string | null;
                 primaryTitle: string | null;
@@ -3227,7 +3241,14 @@ export type QuerySlugPageDataResult = {
     | {
         _key: string;
         _type: "doubleHero";
-        variant: "accent1" | "accent2" | "alt" | "brand" | "default" | null;
+        variant:
+          | "accent1"
+          | "accent2"
+          | "alt"
+          | "brand"
+          | "default"
+          | "inset"
+          | null;
         primaryBadge: string | null;
         primaryTitle: string | null;
         primaryRichText: Array<{
@@ -3904,6 +3925,7 @@ export type QuerySlugPageDataResult = {
                   | "alt"
                   | "brand"
                   | "default"
+                  | "inset"
                   | null;
                 primaryBadge: string | null;
                 primaryTitle: string | null;
@@ -4664,7 +4686,14 @@ export type QueryBlogIndexPageDataResult = {
     | {
         _key: string;
         _type: "doubleHero";
-        variant: "accent1" | "accent2" | "alt" | "brand" | "default" | null;
+        variant:
+          | "accent1"
+          | "accent2"
+          | "alt"
+          | "brand"
+          | "default"
+          | "inset"
+          | null;
         primaryBadge: string | null;
         primaryTitle: string | null;
         primaryRichText: Array<{
@@ -5341,6 +5370,7 @@ export type QueryBlogIndexPageDataResult = {
                   | "alt"
                   | "brand"
                   | "default"
+                  | "inset"
                   | null;
                 primaryBadge: string | null;
                 primaryTitle: string | null;

@@ -41,8 +41,8 @@ export function HeroBlock({
   return (
     <section id="hero" className={cn(backgroundClasses)}>
       <div className="mx-auto">
-        <div className="items-center content-stretch lg:grid lg:grid-cols-2">
-          <div className="padding-half-left justify-items-start items-center lg:items-start content-stretch gap-4 grid grid-rows-[auto_auto] col-span-1 lg:group-odd/component:col-start-2 row-span-1 row-start-1 text-left component-height">
+        <div className="items-center content-center lg:grid lg:grid-cols-2">
+          <div className="padding-half-left justify-items-start items-center lg:items-start content-stretch gap-4 grid grid-rows-[auto_auto] col-span-1 lg:group-odd/component:col-start-2 row-span-1 row-start-1 text-left">
             <div className="gap-4 grid">
               {badge && <Badge className="w-fit">{badge}</Badge>}
               <h2 className={cn("heading-1", {
@@ -67,15 +67,15 @@ export function HeroBlock({
           </div>
 
           {image && (
-            <div className="col-span-1 lg:group-odd/component:col-start-1 row-span-1 row-start-1 w-full component-height">
+            <div className="col-span-1 lg:group-odd/component:col-start-1 row-span-1 row-start-1 w-full h-full">
               <SanityImage
                 asset={image}
                 loading="eager"
                 width={1200}
-                height={1200}
+                height={800}
                 priority
                 quality={90}
-                className="object-cover"
+                className="w-full h-full object-cover"
               />
             </div>
           )}

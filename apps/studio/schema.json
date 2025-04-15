@@ -1307,6 +1307,10 @@
                                   {
                                     "type": "string",
                                     "value": "brand"
+                                  },
+                                  {
+                                    "type": "string",
+                                    "value": "inset"
                                   }
                                 ]
                               },
@@ -5506,6 +5510,10 @@
               {
                 "type": "string",
                 "value": "brand"
+              },
+              {
+                "type": "string",
+                "value": "inset"
               }
             ]
           },

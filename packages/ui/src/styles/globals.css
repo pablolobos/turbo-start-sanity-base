@@ -174,7 +174,7 @@
   }
 
   .component-height {
-    @apply h-auto lg:h-[var(--component-height)] min-h-[50svh];
+    @apply h-auto lg:h-[var(--component-height)] min-h-[50svh] lg:min-h-0;
   }
 
   .padding-half-left {

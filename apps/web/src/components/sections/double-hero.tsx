@@ -20,6 +20,8 @@ const getVariantClasses = (variant?: string | null): string => {
             return "bg-accent-2";
         case "brand":
             return "bg-accent-brand";
+        case "inset":
+            return "bg-transparent";
         default:
             return "bg-background";
     }
@@ -41,57 +43,75 @@ const HeroSection = ({
     buttons?: any[] | null;
     isInverted?: boolean;
     variant?: string | null;
-}) => (
-    <div className="relative h-full min-h-[50vh] lg:min-h-full">
-        {/* Background Image with Overlay */}
-        {image?.asset && (
-            <div className="absolute inset-0 w-full h-full">
-                <SanityImage
-                    asset={image}
-                    alt={image.alt ?? "Background"}
-                    fill
-                    priority
-                    quality={90}
-                    className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/30" />
-            </div>
-        )}
+}) => {
+    return (
+        <div className="relative">
+            {/* Background Image with Overlay */}
+            {image?.asset && (
+                <div className="absolute inset-0 w-full h-full">
+                    <SanityImage
+                        asset={image}
+                        alt={image.alt ?? "Background"}
+                        fill
+                        priority
+                        quality={90}
+                        className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/30" />
+                </div>
+            )}
 
-        {/* Content */}
-        <div className={cn(
-            "relative h-full z-10 flex items-center",
-        )}>
-            <div className="w-full">
-                <div className="padding-half-left justify-items-start items-center lg:items-start content-stretch gap-4 grid grid-rows-[auto_auto] col-span-1 lg:group-odd/component:col-start-2 row-span-1 row-start-1 text-left component-height">
-                    <div className="gap-4 grid">
-                        {badge && <Badge className="w-fit">{badge}</Badge>}
-                        <h2 className={cn("heading-1", {
-                            "text-white": variant && !["default", "alt"].includes(variant)
-                        })}>
-                            {title}
-                        </h2>
-                        <RichText
-                            richText={richText}
-                            className={cn("font-normal text-base md:text-lg", {
-                                "text-white": variant && !["default", "alt"].includes(variant)
-                            })}
-                        />
+            {/* Content */}
+            <div className={cn(
+                "relative z-10 flex items-center padding-center py-4 lg:py-12",
+                {
+                    "relative h-full z-10 flex items-stretch": variant !== "inset",
+                    "h-full items-stretch": variant === "inset"
+                }
+            )} >
+                <div className={cn(
+                    "w-full",
+                    {
+                        "bg-background-alt w-half py-12": variant === "inset"
+                    }
+                )}>
+                    <div className={cn(
+                        "padding-half-left justify-items-start items-center lg:items-start content-stretch gap-4 grid grid-rows-[auto_auto] col-span-1 lg:group-odd/component:col-start-2 row-span-1 row-start-1 text-left",
+                        {
+                            "py-0": variant === "inset",
+                        }
+                    )}>
+                        <div className="gap-4 grid">
+                            {badge && <Badge className="w-fit">{badge}</Badge>}
+                            <h2 className={cn("heading-1", {
+                                "text-white": variant && !["default", "alt"].includes(variant),
+                                "text-foreground heading-2": variant === "inset"
+                            })}>
+                                {title}
+                            </h2>
+                            <RichText
+                                richText={richText}
+                                className={cn("font-normal text-base md:text-lg", {
+                                    "text-white": variant && !["default", "alt"].includes(variant),
+                                    "text-foreground": variant === "inset"
+                                })}
+                            />
+                        </div>
+
+                        {buttons && buttons.length > 0 && (
+                            <SanityButtons
+                                buttons={buttons}
+                                buttonClassName="w-full sm:w-auto"
+                                size="default"
+                                className="lg:justify-start gap-2 grid sm:grid-flow-col mb-8 w-full sm:w-fit"
+                            />
+                        )}
                     </div>
-
-                    {buttons && buttons.length > 0 && (
-                        <SanityButtons
-                            buttons={buttons}
-                            buttonClassName="w-full sm:w-auto"
-                            size="default"
-                            className="lg:justify-start gap-2 grid sm:grid-flow-col mb-8 w-full sm:w-fit"
-                        />
-                    )}
                 </div>
             </div>
         </div>
-    </div>
-);
+    );
+};
 
 export function DoubleHeroBlock({
     variant,
@@ -111,7 +131,7 @@ export function DoubleHeroBlock({
     return (
         <section className={cn("relative overflow-hidden", backgroundClasses)}>
             <div className="mx-auto">
-                <div className="grid lg:grid-cols-2 component-height">
+                <div className="grid lg:grid-cols-2">
                     <HeroSection
                         title={primaryTitle}
                         badge={primaryBadge}
@@ -127,7 +147,6 @@ export function DoubleHeroBlock({
                         image={secondaryImage}
                         buttons={secondaryButtons}
                         variant={variant}
-                        isInverted
                     />
                 </div>
             </div>

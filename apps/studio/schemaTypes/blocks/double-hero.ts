@@ -23,7 +23,7 @@ export const doubleHero = defineType({
             initialValue: "default",
             description: "Selecciona el estilo de fondo para este hero",
             options: createRadioListLayout(
-                ["default", "alt", "accent1", "accent2", "brand"],
+                ["default", "alt", "accent1", "accent2", "brand", "inset"],
                 { direction: "horizontal" }
             ),
         }),
