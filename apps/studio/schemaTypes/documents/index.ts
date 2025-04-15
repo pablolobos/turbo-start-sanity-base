@@ -6,6 +6,7 @@ import { camiones } from "./camiones";
 import { faq } from "./faq";
 import { footer } from "./footer";
 import { homePage } from "./home-page";
+import { motoresPenta } from "./motores-penta";
 import { navbar } from "./navbar";
 import { page } from "./page";
 import { settings } from "./settings";
@@ -13,4 +14,4 @@ import { formulariosType } from "./formularios";
 
 export const singletons = [homePage, blogIndex, settings, footer, navbar];
 
-export const documents = [blog, page, faq, author, formulariosType, camiones, buses, ...singletons];
+export const documents = [blog, page, faq, author, formulariosType, camiones, buses, motoresPenta, ...singletons];

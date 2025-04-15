@@ -640,3 +640,35 @@ export const queryBusOrPageBySlug = defineQuery(`*[
 export const queryBusesPaths = defineQuery(`
   *[_type == "buses" && defined(slug.current)].slug.current
 `);
+
+// Motores Penta queries
+export const queryMotoresPentaData = defineQuery(`*[_type == "motoresPenta"]{
+  _id,
+  _type,
+  title,
+  description,
+  "slug": slug.current,
+  ${imageFragment},
+  ${richTextFragment}
+}`);
+
+export const queryMotorPentaOrPageBySlug = defineQuery(`*[
+  (_type == "motoresPenta" || _type == "page")
+  && slug.current == $slug 
+][0]{
+  _id,
+  _type,
+  title,
+  description,
+  "slug": slug.current,
+  _type == "motoresPenta" => { 
+    ${imageFragment},
+    ${richTextFragment}, 
+    ${categoryBreadcrumbFragment}
+  },
+  ${pageBuilderFragment} 
+}`);
+
+export const queryMotoresPentaPaths = defineQuery(`
+  *[_type == "motoresPenta" && defined(slug.current)].slug.current
+`);
