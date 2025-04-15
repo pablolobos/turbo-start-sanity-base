@@ -8679,30 +8679,37 @@
       "category": {
         "type": "objectAttribute",
         "value": {
-          "type": "object",
-          "attributes": {
-            "_ref": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "string"
-              }
+          "type": "union",
+          "of": [
+            {
+              "type": "string",
+              "value": "larga-distancia"
             },
-            "_type": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "string",
-                "value": "reference"
-              }
+            {
+              "type": "string",
+              "value": "construccion-y-mineria"
             },
-            "_weak": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "boolean"
-              },
-              "optional": true
+            {
+              "type": "string",
+              "value": "forestal"
+            },
+            {
+              "type": "string",
+              "value": "distribucion-urbana-y-regional"
+            },
+            {
+              "type": "string",
+              "value": "volvo-electric"
+            },
+            {
+              "type": "string",
+              "value": "usados"
+            },
+            {
+              "type": "string",
+              "value": "financiamiento"
             }
-          },
-          "dereferencesTo": "skosConcept"
+          ]
         },
         "optional": true
       },

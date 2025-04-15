@@ -325,20 +325,11 @@ const pageBuilderFragment = `
 
 // Add this new fragment for category hierarchy
 const categoryBreadcrumbFragment = `
-  "categoryData": category->{
-    _id,
-    "label": prefLabel,
-    "iri": baseIri,
-    "parent": broader->{
-      _id,
-      "label": prefLabel,
-      "iri": baseIri,
-      "parent": broader->{
-        _id,
-        "label": prefLabel,
-        "iri": baseIri,
-      }
-    }
+  "categoryData": {
+    "label": category,
+    "slug": category,
+    "iri": "/camiones/" + category,
+    "parent": null
   }
 `;
 

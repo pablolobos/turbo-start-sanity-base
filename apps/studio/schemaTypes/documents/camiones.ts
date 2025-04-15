@@ -1,6 +1,5 @@
 import { TruckIcon } from "lucide-react";
 import { defineField, defineType } from "sanity";
-import { schemeFilter } from 'sanity-plugin-taxonomy-manager';
 
 import { PathnameFieldComponent } from "../../components/slug-field-component";
 import { GROUP, GROUPS } from "../../utils/constant";
@@ -30,13 +29,20 @@ export const camiones = defineType({
         defineField({
             name: "category",
             title: "Categoría",
-            type: "reference",
+            type: "string",
             description: "Selecciona la categoría del camión",
-            to: [{ type: "skosConcept" }],
             group: GROUP.MAIN_CONTENT,
             options: {
-                filter: schemeFilter({ schemeId: 'a14588' }),
-                disableNew: true,
+                list: [
+                    { title: "Larga distancia", value: "larga-distancia" },
+                    { title: "Construcción y minería", value: "construccion-y-mineria" },
+                    { title: "Forestal", value: "forestal" },
+                    { title: "Distribución Urbana y Regional", value: "distribucion-urbana-y-regional" },
+                    { title: "Volvo Electric", value: "volvo-electric" },
+                    { title: "Usados", value: "usados" },
+                    { title: "Financiamiento", value: "financiamiento" }
+                ],
+                layout: "dropdown"
             },
             validation: (Rule) => Rule.required().error("La categoría es obligatoria"),
         }),
@@ -113,7 +119,7 @@ export const camiones = defineType({
             title: "title",
             media: "image",
             slug: "slug.current",
-            category: "category.prefLabel",
+            category: "category",
         },
         prepare: ({ title, media, slug, category }) => {
             return {

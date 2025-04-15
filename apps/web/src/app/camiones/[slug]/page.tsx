@@ -40,29 +40,13 @@ function generateBreadcrumbs(
 
     // Only add category path for actual 'camiones' type
     if (docType === "camiones" && categoryData) {
-        let current = categoryData;
-        const ancestors: BreadcrumbItem[] = [];
-        while (current) {
-            if (current.label) {
-                let href = "#"; // Default to no link
-                if (current.iri) {
-                    try {
-                        // Parse the IRI and get the pathname
-                        const url = new URL(current.iri);
-                        href = url.pathname; // Use the path part, e.g., /camiones/larga-distancia
-                    } catch (e) {
-                        console.error("Error parsing IRI for breadcrumb:", current.iri, e);
-                        // Keep href as "#" if IRI is invalid
-                    }
-                }
-                ancestors.push({
-                    label: current.label,
-                    href: href,
-                });
-            }
-            current = current.parent;
+        // Add the category if it exists
+        if (categoryData.label) {
+            breadcrumbs.push({
+                label: getCategoryDisplayName(categoryData.label),
+                href: categoryData.iri || `${categoryBase}/${categoryData.slug}`
+            });
         }
-        breadcrumbs.push(...ancestors.reverse());
     }
 
     const finalBreadcrumbs = [
@@ -72,6 +56,21 @@ function generateBreadcrumbs(
     ];
 
     return finalBreadcrumbs.filter((crumb) => crumb.label);
+}
+
+// Helper function to get display name for category slug
+function getCategoryDisplayName(categorySlug: string): string {
+    const categoryMap: Record<string, string> = {
+        "larga-distancia": "Larga distancia",
+        "construccion-y-mineria": "Construcción y minería",
+        "forestal": "Forestal",
+        "distribucion-urbana-y-regional": "Distribución Urbana y Regional",
+        "volvo-electric": "Volvo Electric",
+        "usados": "Usados",
+        "financiamiento": "Financiamiento"
+    };
+
+    return categoryMap[categorySlug] || categorySlug;
 }
 
 async function fetchCamionOrPageData(slug: string): Promise<{ data: any }> {
