@@ -15,17 +15,19 @@ interface FormData {
   emailRecipients: string
 }
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+// Get the API key from environment variable
+const RESEND_API_KEY = process.env.RESEND_API_KEY
+
+// Initialize Resend only if API key is available
+const resend = RESEND_API_KEY ? new Resend(RESEND_API_KEY) : null
 
 export const runtime = 'edge'
 export const dynamic = 'force-dynamic'
 
 export async function POST(req: NextRequest) {
-  if (!process.env.RESEND_API_KEY) {
-    return NextResponse.json(
-      { error: 'Missing Resend API key' },
-      { status: 500 }
-    )
+  if (!RESEND_API_KEY || !resend) {
+    console.error('Missing Resend API key')
+    // Continue without email functionality
   }
 
   try {
@@ -77,38 +79,43 @@ export async function POST(req: NextRequest) {
 
     const sanityData = await sanityResponse.json()
 
-    // Send email notification
-    const fieldsHtml = formData.fields
-      ?.map((field: FormField) => `<p><strong>${field.name}:</strong> ${field.value}</p>`)
-      .join('') || ''
+    // Only attempt to send email if Resend is initialized
+    if (resend) {
+      // Send email notification
+      const fieldsHtml = formData.fields
+        ?.map((field: FormField) => `<p><strong>${field.name}:</strong> ${field.value}</p>`)
+        .join('') || ''
 
-    // Parse email recipients
-    console.log('Email recipients from form:', formData.emailRecipients)
+      // Parse email recipients
+      console.log('Email recipients from form:', formData.emailRecipients)
 
-    const recipients = formData.emailRecipients
-      ? formData.emailRecipients.split(',').map(email => email.trim()).filter(Boolean)
-      : ['pablo.lobos@fenomena.cl'] // Fallback to default
+      const recipients = formData.emailRecipients
+        ? formData.emailRecipients.split(',').map(email => email.trim()).filter(Boolean)
+        : ['pablo.lobos@fenomena.cl'] // Fallback to default
 
-    console.log('Parsed recipients:', recipients)
+      console.log('Parsed recipients:', recipients)
 
-    try {
-      const emailResponse = await resend.emails.send({
-        from: 'Volvo Chile <formulario@send.volvochile.cl>',
-        to: recipients,
-        subject: `Nuevo formulario: ${formData.subject}`,
-        html: `
-          <h2>Nuevo envío de formulario</h2>
-          <p><strong>Nombre:</strong> ${formData.name}</p>
-          <p><strong>Email:</strong> ${formData.email}</p>
-          <p><strong>Asunto:</strong> ${formData.subject}</p>
-          ${fieldsHtml}
-        `,
-      })
+      try {
+        const emailResponse = await resend.emails.send({
+          from: 'Volvo Chile <formulario@send.volvochile.cl>',
+          to: recipients,
+          subject: `Nuevo formulario: ${formData.subject}`,
+          html: `
+            <h2>Nuevo envío de formulario</h2>
+            <p><strong>Nombre:</strong> ${formData.name}</p>
+            <p><strong>Email:</strong> ${formData.email}</p>
+            <p><strong>Asunto:</strong> ${formData.subject}</p>
+            ${fieldsHtml}
+          `,
+        })
 
-      console.log('Email sent successfully:', emailResponse)
-    } catch (emailError) {
-      console.error('Error sending email:', emailError)
-      // Continue execution even if email fails
+        console.log('Email sent successfully:', emailResponse)
+      } catch (emailError) {
+        console.error('Error sending email:', emailError)
+        // Continue execution even if email fails
+      }
+    } else {
+      console.log('Skipping email sending - Resend not configured')
     }
 
     return NextResponse.json({ success: true, data: sanityData })
