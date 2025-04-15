@@ -1,4 +1,4 @@
-import { TruckIcon } from "lucide-react";
+import { BusIcon } from "lucide-react";
 import { defineField, defineType } from "sanity";
 
 import { PathnameFieldComponent } from "../../components/slug-field-component";
@@ -9,20 +9,20 @@ import { createSlug, isUnique } from "../../utils/slug";
 import { richTextField } from "../common";
 import { pageBuilderField } from "../common";
 
-export const camiones = defineType({
-    name: "camiones",
-    title: "Camiones",
+export const buses = defineType({
+    name: "buses",
+    title: "Buses",
     type: "document",
-    icon: TruckIcon,
+    icon: BusIcon,
     description:
-        "Catálogo de camiones Volvo. Cada entrada representa un modelo específico con sus características y detalles.",
+        "Catálogo de buses Volvo. Cada entrada representa un modelo específico con sus características y detalles.",
     groups: GROUPS,
     fields: [
         defineField({
             name: "title",
             type: "string",
             title: "Título",
-            description: "Nombre o modelo del camión",
+            description: "Nombre o modelo del bus",
             group: GROUP.MAIN_CONTENT,
             validation: (Rule) => Rule.required().error("El título es obligatorio"),
         }),
@@ -30,16 +30,12 @@ export const camiones = defineType({
             name: "category",
             title: "Categoría",
             type: "string",
-            description: "Selecciona la categoría del camión",
+            description: "Selecciona la categoría del bus",
             group: GROUP.MAIN_CONTENT,
             options: {
                 list: [
-                    { title: "Larga distancia", value: "larga-distancia" },
-                    { title: "Construcción y minería", value: "construccion-y-mineria" },
-                    { title: "Forestal", value: "forestal" },
-                    { title: "Distribución Urbana y Regional", value: "distribucion-urbana-y-regional" },
-                    { title: "Volvo Electric", value: "volvo-electric" },
-                    { title: "Usados", value: "usados" }
+                    { title: "Urbano", value: "urbano" },
+                    { title: "Interurbano", value: "interurbano" }
                 ],
                 layout: "dropdown"
             },
@@ -50,7 +46,7 @@ export const camiones = defineType({
             type: "text",
             title: "Descripción",
             description:
-                "Breve descripción del camión que aparecerá en los resultados de búsqueda y vistas previas",
+                "Breve descripción del bus que aparecerá en los resultados de búsqueda y vistas previas",
             rows: 3,
             group: GROUP.MAIN_CONTENT,
             validation: (rule) => [
@@ -71,7 +67,7 @@ export const camiones = defineType({
             type: "slug",
             title: "URL",
             description:
-                "La dirección web para este camión (por ejemplo, '/camiones/volvo-fh16' creará una página en tudominio.com/camiones/volvo-fh16)",
+                "La dirección web para este bus (por ejemplo, '/buses/volvo-9800' creará una página en tudominio.com/buses/volvo-9800)",
             group: GROUP.MAIN_CONTENT,
             components: {
                 field: PathnameFieldComponent,
@@ -85,8 +81,8 @@ export const camiones = defineType({
                 Rule.required().error("La URL es obligatoria"),
                 Rule.custom((value, context) => {
                     if (!value?.current) return true;
-                    if (!value.current.startsWith("/camiones/")) {
-                        return 'La URL debe comenzar con "/camiones/"';
+                    if (!value.current.startsWith("/buses/")) {
+                        return 'La URL debe comenzar con "/buses/"';
                     }
                     return true;
                 }),
@@ -97,7 +93,7 @@ export const camiones = defineType({
             type: "image",
             title: "Imagen Principal",
             description:
-                "Imagen principal del camión que se usará en listados y redes sociales",
+                "Imagen principal del bus que se usará en listados y redes sociales",
             group: GROUP.MAIN_CONTENT,
             options: {
                 hotspot: true,
@@ -106,7 +102,7 @@ export const camiones = defineType({
         }),
         defineField({
             ...richTextField,
-            description: "Contenido detallado sobre el camión y sus características",
+            description: "Contenido detallado sobre el bus y sus características",
             group: GROUP.MAIN_CONTENT,
         }),
         pageBuilderField,
@@ -122,8 +118,8 @@ export const camiones = defineType({
         },
         prepare: ({ title, media, slug, category }) => {
             return {
-                title: title || "Camión sin título",
-                subtitle: `🚛 ${category ? `${category} • ` : ""}${slug || "sin-url"}`,
+                title: title || "Bus sin título",
+                subtitle: `🚌 ${category ? `${category} • ` : ""}${slug || "sin-url"}`,
                 media,
             };
         },

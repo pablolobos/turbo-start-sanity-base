@@ -13,6 +13,7 @@ import {
   User,
   NotepadText,
   Truck,
+  Bus,
 } from "lucide-react";
 import type {
   StructureBuilder,
@@ -118,6 +119,7 @@ export const structure = (
         context,
       }),
       createList({ S, type: "camiones", title: "Camiones", icon: Truck }),
+      createList({ S, type: "buses", title: "Buses", icon: Bus }),
       createList({ S, type: "formularios", title: "Formularios", icon: NotepadText }),
       createList({
         S,

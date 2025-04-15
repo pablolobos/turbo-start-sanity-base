@@ -608,3 +608,35 @@ export const queryCamionOrPageBySlug = defineQuery(`*[
 export const queryCamionesPaths = defineQuery(`
   *[_type == "camiones" && defined(slug.current)].slug.current
 `);
+
+// Buses queries
+export const queryBusesData = defineQuery(`*[_type == "buses"]{
+  _id,
+  _type,
+  title,
+  description,
+  "slug": slug.current,
+  ${imageFragment},
+  ${richTextFragment}
+}`);
+
+export const queryBusOrPageBySlug = defineQuery(`*[
+  (_type == "buses" || _type == "page")
+  && slug.current == $slug 
+][0]{
+  _id,
+  _type,
+  title,
+  description,
+  "slug": slug.current,
+  _type == "buses" => { 
+    ${imageFragment},
+    ${richTextFragment}, 
+    ${categoryBreadcrumbFragment}
+  },
+  ${pageBuilderFragment} 
+}`);
+
+export const queryBusesPaths = defineQuery(`
+  *[_type == "buses" && defined(slug.current)].slug.current
+`);
