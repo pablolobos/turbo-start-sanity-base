@@ -1,7 +1,6 @@
 "use client";
 
 import { Badge } from "@workspace/ui/components/badge";
-import { cn } from "@workspace/ui/lib/utils";
 import { useRef, useState } from "react";
 
 import type { PagebuilderType } from "@/types";

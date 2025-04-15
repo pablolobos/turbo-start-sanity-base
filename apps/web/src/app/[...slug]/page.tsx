@@ -58,9 +58,9 @@ export default async function SlugPage({
   const { title, pageBuilder, _id, _type } = pageData ?? {};
 
   return !Array.isArray(pageBuilder) || pageBuilder?.length === 0 ? (
-    <div className="flex flex-col items-center justify-center min-h-[50vh] text-center p-4">
-      <h1 className="text-2xl font-semibold mb-4 capitalize">{title}</h1>
-      <p className="text-muted-foreground mb-6">
+    <div className="flex flex-col justify-center items-center p-4 min-h-[50vh] text-center">
+      <h1 className="mb-4 font-semibold text-2xl capitalize">{title}</h1>
+      <p className="mb-6 text-muted-foreground">
         This page has no content blocks yet.
       </p>
     </div>

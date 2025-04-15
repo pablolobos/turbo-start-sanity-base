@@ -294,6 +294,18 @@ const tabsBlock = `
   }
 `;
 
+const infoSectionBlock = `
+  _type == "infoSection" => {
+    ...,
+    title,
+    headingLevel,
+    content[]{
+      ...,
+      ${markDefsFragment}
+    }
+  }
+`;
+
 const pageBuilderFragment = `
   pageBuilder[]{
     ...,
@@ -306,7 +318,8 @@ const pageBuilderFragment = `
     ${subscribeNewsletterBlock},
     ${imageLinkCardsBlock},
     ${formBlock},
-    ${tabsBlock}
+    ${tabsBlock},
+    ${infoSectionBlock}
   }
 `;
 
@@ -573,7 +586,8 @@ export const queryCamionBySlug = defineQuery(`*[
   description,
   "slug": slug.current,
   ${imageFragment},
-  ${richTextFragment}
+  ${richTextFragment},
+  ${pageBuilderFragment}
 }`);
 
 export const queryCamionesPaths = defineQuery(`
