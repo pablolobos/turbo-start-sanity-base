@@ -48,14 +48,16 @@ const blockComponents = {
 export function TabsBlock({ title, description, tabs }: TabsBlockProps) {
     return (
         <div className="mx-auto py-12">
-            {title && (
-                <h2 className="mb-4 font-bold text-3xl sm:text-4xl tracking-tight">
-                    {title}
-                </h2>
-            )}
-            {description && (
-                <p className="mb-8 text-muted-foreground text-lg">{description}</p>
-            )}
+            <div className="padding-center">
+                {title && (
+                    <h2 className="mb-4 font-bold text-3xl sm:text-4xl tracking-tight">
+                        {title}
+                    </h2>
+                )}
+                {description && (
+                    <p className="mb-8 text-muted-foreground text-lg">{description}</p>
+                )}
+            </div>
 
             <UITabs defaultValue={tabs[0]?._key} className="w-full">
                 <TabsList className="justify-center bg-transparent mb-8 px-[var(--p-x-sm)] md:px-[var(--p-x-md)] lg:px-[var(--p-x-exterior-lg)] border-b rounded-none w-full">

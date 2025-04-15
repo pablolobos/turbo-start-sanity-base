@@ -8,6 +8,7 @@ import type { SanityImageProps } from "@/types";
 type ImageProps = {
   asset: SanityImageProps;
   alt?: string;
+  priority?: boolean;
 } & Omit<NextImageProps, "alt" | "src">;
 
 function getBlurDataURL(asset: SanityImageProps) {
@@ -20,27 +21,45 @@ function getBlurDataURL(asset: SanityImageProps) {
   return {};
 }
 
+// Helper to calculate optimal image dimensions
+function getOptimalDimensions(originalWidth: number, originalHeight: number, maxWidth = 2048) {
+  if (originalWidth <= maxWidth) {
+    return { width: originalWidth, height: originalHeight };
+  }
+  const aspectRatio = originalWidth / originalHeight;
+  const newWidth = maxWidth;
+  const newHeight = Math.round(maxWidth / aspectRatio);
+  return { width: newWidth, height: newHeight };
+}
+
 export function SanityImage({
   asset,
   alt,
   width,
   height,
   className,
-  quality = 75,
+  quality = 85,
   fill,
+  priority = false,
   ...props
 }: ImageProps) {
   if (!asset?.asset) return null;
   const dimensions = getImageDimensions(asset.asset);
 
+  // Calculate optimal dimensions
+  const optimalDimensions = getOptimalDimensions(dimensions.width, dimensions.height);
+
+  // Calculate dynamic quality based on image size
+  const dynamicQuality = dimensions.width > 1200 ? 75 : quality;
+
   const url = urlFor({ ...asset, _id: asset?.asset?._ref })
     .size(
-      Number(width ?? dimensions.width),
-      Number(height ?? dimensions.height),
+      Number(width ?? optimalDimensions.width),
+      Number(height ?? optimalDimensions.height),
     )
     .dpr(2)
     .auto("format")
-    .quality(Number(quality))
+    .quality(Number(dynamicQuality))
     .url();
 
   // Base image props
@@ -49,16 +68,11 @@ export function SanityImage({
     "aria-label": alt ?? asset.alt ?? "Image",
     src: url,
     className: cn(className),
-    // Optimize image sizes for performance and LCP
-    // Use smaller percentages to reduce initial load size while maintaining quality
-    // Order from smallest to largest breakpoint for better browser parsing
-    // Define responsive image sizes for optimal loading:
-    // - Mobile (<640px): Image takes up 80% of viewport width
-    // - Tablet (<768px): Image takes up 50% of viewport width
-    // - Small desktop (<1200px): Image takes up 33% of viewport width
-    // - Large desktop (>1200px): Image takes up 25% of viewport width
-    sizes:
-      "(max-width: 640px) 75vw, (max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw",
+    priority,
+    // Optimize sizes attribute based on image dimensions and layout
+    sizes: fill
+      ? "(min-width: 1200px) 100vw, (min-width: 768px) 90vw, 100vw"
+      : "(min-width: 1200px) 50vw, (min-width: 768px) 70vw, 90vw",
     ...getBlurDataURL(asset),
     ...props,
   };
@@ -68,8 +82,8 @@ export function SanityImage({
     return (
       <Image
         {...imageProps}
-        width={width ?? dimensions.width}
-        height={height ?? dimensions.height}
+        width={width ?? optimalDimensions.width}
+        height={height ?? optimalDimensions.height}
       />
     );
   }
