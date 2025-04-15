@@ -1,5 +1,6 @@
 import { defineField, defineType, defineArrayMember } from 'sanity'
 import { DocumentTextIcon } from '@sanity/icons'
+import { RegionComunaInput } from '../../components/inputs/RegionComunaInput'
 
 export const formulariosType = defineType({
     name: 'formularios',
@@ -51,6 +52,33 @@ export const formulariosType = defineType({
             group: 'general',
         }),
         defineField({
+            name: 'direccion',
+            title: 'Dirección',
+            type: 'object',
+            group: 'fields',
+            components: {
+                input: RegionComunaInput
+            },
+            fields: [
+                defineField({
+                    name: 'calle',
+                    title: 'Calle',
+                    type: 'string',
+                    description: 'Nombre de la calle y número',
+                }),
+                defineField({
+                    name: 'region',
+                    title: 'Región',
+                    type: 'string',
+                }),
+                defineField({
+                    name: 'comuna',
+                    title: 'Comuna',
+                    type: 'string',
+                }),
+            ],
+        }),
+        defineField({
             name: 'fields',
             title: 'Campos del Formulario',
             type: 'array',
@@ -94,6 +122,7 @@ export const formulariosType = defineType({
                                     { title: 'Selección', value: 'select' },
                                     { title: 'Radio', value: 'radio' },
                                     { title: 'Checkbox', value: 'checkbox' },
+                                    { title: 'Dirección', value: 'direccion' },
                                 ],
                                 layout: 'radio',
                             },

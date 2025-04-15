@@ -1241,6 +1241,50 @@ export type HomePage = {
   ogDescription?: string;
 };
 
+export type MotoresPenta = {
+  _id: string;
+  _type: "motoresPenta";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  category?: "motores-industriales" | "motores-marinos" | "accesorios";
+  description?: string;
+  slug?: Slug;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  richText?: RichText;
+  pageBuilder?: PageBuilder;
+  seoTitle?: string;
+  seoDescription?: string;
+  seoImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  seoNoIndex?: boolean;
+  seoHideFromLists?: boolean;
+  ogTitle?: string;
+  ogDescription?: string;
+};
+
 export type Buses = {
   _id: string;
   _type: "buses";
@@ -1248,13 +1292,7 @@ export type Buses = {
   _updatedAt: string;
   _rev: string;
   title?: string;
-  category?:
-    | "urbano"
-    | "interurbano"
-    | "turismo"
-    | "volvo-electric"
-    | "usados"
-    | "financiamiento";
+  category?: "urbano" | "interurbano";
   description?: string;
   slug?: Slug;
   image?: {
@@ -1304,8 +1342,7 @@ export type Camiones = {
     | "forestal"
     | "distribucion-urbana-y-regional"
     | "volvo-electric"
-    | "usados"
-    | "financiamiento";
+    | "usados";
   description?: string;
   slug?: Slug;
   image?: {
@@ -1425,6 +1462,11 @@ export type Formularios = {
   title?: string;
   slug?: Slug;
   description?: string;
+  direccion?: {
+    calle?: string;
+    region?: string;
+    comuna?: string;
+  };
   fields?: Array<{
     label?: string;
     name?: string;
@@ -1437,7 +1479,8 @@ export type Formularios = {
       | "rut"
       | "select"
       | "radio"
-      | "checkbox";
+      | "checkbox"
+      | "direccion";
     required?: "yes" | "no";
     options?: Array<string>;
     placeholder?: string;
@@ -1809,6 +1852,7 @@ export type AllSanitySchemaTypes =
   | Settings
   | BlogIndex
   | HomePage
+  | MotoresPenta
   | Buses
   | Camiones
   | Author
@@ -2171,6 +2215,7 @@ export type QueryHomePageDataResult = {
             name: string | null;
             type:
               | "checkbox"
+              | "direccion"
               | "email"
               | "number"
               | "radio"
@@ -2902,6 +2947,7 @@ export type QueryHomePageDataResult = {
                     name: string | null;
                     type:
                       | "checkbox"
+                      | "direccion"
                       | "email"
                       | "number"
                       | "radio"
@@ -3660,6 +3706,7 @@ export type QuerySlugPageDataResult = {
             name: string | null;
             type:
               | "checkbox"
+              | "direccion"
               | "email"
               | "number"
               | "radio"
@@ -4391,6 +4438,7 @@ export type QuerySlugPageDataResult = {
                     name: string | null;
                     type:
                       | "checkbox"
+                      | "direccion"
                       | "email"
                       | "number"
                       | "radio"
@@ -5137,6 +5185,7 @@ export type QueryBlogIndexPageDataResult = {
             name: string | null;
             type:
               | "checkbox"
+              | "direccion"
               | "email"
               | "number"
               | "radio"
@@ -5868,6 +5917,7 @@ export type QueryBlogIndexPageDataResult = {
                     name: string | null;
                     type:
                       | "checkbox"
+                      | "direccion"
                       | "email"
                       | "number"
                       | "radio"
@@ -6554,6 +6604,17 @@ export type QueryGenericPageOGDataResult =
     }
   | {
       _id: string;
+      _type: "motoresPenta";
+      title: string | null;
+      description: string | null;
+      image: string | null;
+      dominantColor: string | null;
+      seoImage: string | null;
+      logo: string | null;
+      date: string;
+    }
+  | {
+      _id: string;
       _type: "page";
       title: string | null;
       description: string | null;
@@ -6690,6 +6751,7 @@ export type QueryFormBySlugResult = {
     name: string | null;
     type:
       | "checkbox"
+      | "direccion"
       | "email"
       | "number"
       | "radio"
@@ -6848,7 +6910,6 @@ export type QueryCamionOrPageBySlugResult =
         label:
           | "construccion-y-mineria"
           | "distribucion-urbana-y-regional"
-          | "financiamiento"
           | "forestal"
           | "larga-distancia"
           | "usados"
@@ -6857,7 +6918,6 @@ export type QueryCamionOrPageBySlugResult =
         slug:
           | "construccion-y-mineria"
           | "distribucion-urbana-y-regional"
-          | "financiamiento"
           | "forestal"
           | "larga-distancia"
           | "usados"
@@ -6866,7 +6926,6 @@ export type QueryCamionOrPageBySlugResult =
         iri:
           | "/camiones/construccion-y-mineria"
           | "/camiones/distribucion-urbana-y-regional"
-          | "/camiones/financiamiento"
           | "/camiones/forestal"
           | "/camiones/larga-distancia"
           | "/camiones/usados"
@@ -7207,6 +7266,7 @@ export type QueryCamionOrPageBySlugResult =
                 name: string | null;
                 type:
                   | "checkbox"
+                  | "direccion"
                   | "email"
                   | "number"
                   | "radio"
@@ -7959,6 +8019,7 @@ export type QueryCamionOrPageBySlugResult =
                         name: string | null;
                         type:
                           | "checkbox"
+                          | "direccion"
                           | "email"
                           | "number"
                           | "radio"
@@ -8692,6 +8753,7 @@ export type QueryCamionOrPageBySlugResult =
                 name: string | null;
                 type:
                   | "checkbox"
+                  | "direccion"
                   | "email"
                   | "number"
                   | "radio"
@@ -9444,6 +9506,7 @@ export type QueryCamionOrPageBySlugResult =
                         name: string | null;
                         type:
                           | "checkbox"
+                          | "direccion"
                           | "email"
                           | "number"
                           | "radio"
@@ -9979,30 +10042,9 @@ export type QueryBusOrPageBySlugResult =
           }
       > | null;
       categoryData: {
-        label:
-          | "financiamiento"
-          | "interurbano"
-          | "turismo"
-          | "urbano"
-          | "usados"
-          | "volvo-electric"
-          | null;
-        slug:
-          | "financiamiento"
-          | "interurbano"
-          | "turismo"
-          | "urbano"
-          | "usados"
-          | "volvo-electric"
-          | null;
-        iri:
-          | "/camiones/financiamiento"
-          | "/camiones/interurbano"
-          | "/camiones/turismo"
-          | "/camiones/urbano"
-          | "/camiones/usados"
-          | "/camiones/volvo-electric"
-          | null;
+        label: "interurbano" | "urbano" | null;
+        slug: "interurbano" | "urbano" | null;
+        iri: "/camiones/interurbano" | "/camiones/urbano" | null;
         parent: null;
       };
       pageBuilder: Array<
@@ -10338,6 +10380,7 @@ export type QueryBusOrPageBySlugResult =
                 name: string | null;
                 type:
                   | "checkbox"
+                  | "direccion"
                   | "email"
                   | "number"
                   | "radio"
@@ -11090,6 +11133,7 @@ export type QueryBusOrPageBySlugResult =
                         name: string | null;
                         type:
                           | "checkbox"
+                          | "direccion"
                           | "email"
                           | "number"
                           | "radio"
@@ -11823,6 +11867,7 @@ export type QueryBusOrPageBySlugResult =
                 name: string | null;
                 type:
                   | "checkbox"
+                  | "direccion"
                   | "email"
                   | "number"
                   | "radio"
@@ -12575,6 +12620,7 @@ export type QueryBusOrPageBySlugResult =
                         name: string | null;
                         type:
                           | "checkbox"
+                          | "direccion"
                           | "email"
                           | "number"
                           | "radio"
@@ -12973,6 +13019,3124 @@ export type QueryBusOrPageBySlugResult =
 // Variable: queryBusesPaths
 // Query: *[_type == "buses" && defined(slug.current)].slug.current
 export type QueryBusesPathsResult = Array<string | null>;
+// Variable: queryMotoresPentaData
+// Query: *[_type == "motoresPenta"]{  _id,  _type,  title,  description,  "slug": slug.current,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }}
+export type QueryMotoresPentaDataResult = Array<{
+  _id: string;
+  _type: "motoresPenta";
+  title: string | null;
+  description: string | null;
+  slug: string | null;
+  image: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    alt: string | "Image-Broken";
+    blurData: string | null;
+    dominantColor: string | null;
+  } | null;
+  richText: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "h2" | "h3" | "h4" | "h5" | "h6" | "inline" | "normal";
+        listItem?: "bullet" | "number";
+        markDefs: Array<
+          | {
+              customLink?: CustomUrl;
+              _type: "customLink";
+              _key: string;
+              openInNewTab: boolean | null;
+              href: string | "#" | null;
+            }
+          | {
+              customLink?: CustomUrl;
+              _type: "customLink";
+              _key: string;
+            }
+        > | null;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }
+    | {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        caption?: string;
+        _type: "image";
+        _key: string;
+        markDefs: null;
+      }
+  > | null;
+}>;
+// Variable: queryMotorPentaOrPageBySlug
+// Query: *[  (_type == "motoresPenta" || _type == "page")  && slug.current == $slug ][0]{  _id,  _type,  title,  description,  "slug": slug.current,  _type == "motoresPenta" => {       image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },       "categoryData": {    "label": category,    "slug": category,    "iri": "/camiones/" + category,    "parent": null  }  },    pageBuilder[]{    ...,    _type,      _type == "cta" => {    ...,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },  },      _type == "mainHero" => {    ...,    "backgroundImage": backgroundImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    "backgroundVideo": backgroundVideo.asset->url,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  },      _type == "hero" => {    ...,    variant,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  },      _type == "doubleHero" => {    ...,    variant,    primaryBadge,    primaryTitle,    "primaryRichText": primaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "primaryImage": primaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    primaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    secondaryBadge,    secondaryTitle,    "secondaryRichText": secondaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "secondaryImage": secondaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    secondaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },      _type == "faqAccordion" => {    ...,      "faqs": array::compact(faqs[]->{    title,    _id,    _type,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  }),    link{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },      _type == "subscribeNewsletter" => {    ...,    "subTitle": subTitle[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "helperText": helperText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      _type == "imageLinkCards" => {    ...,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },    "cards": array::compact(cards[]{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      ),        image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    })  },      _type == "formBlock" => {    ...,    title,    description,    variant,    "form": form->{      _id,      title,      description,        fields[]{    label,    name,    type,    required,    options,    placeholder  },  emailRecipients,  submitButtonText,  successMessage,  errorMessage,      submitButtonText,      successMessage,      errorMessage    }  },      _type == "tabs" => {    ...,    title,    description,    tabs[]{      _key,      label,      content[]{        ...,        _type,        _key,          _type == "cta" => {    ...,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },  },          _type == "mainHero" => {    ...,    "backgroundImage": backgroundImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    "backgroundVideo": backgroundVideo.asset->url,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  },          _type == "hero" => {    ...,    variant,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  },          _type == "doubleHero" => {    ...,    variant,    primaryBadge,    primaryTitle,    "primaryRichText": primaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "primaryImage": primaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    primaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    secondaryBadge,    secondaryTitle,    "secondaryRichText": secondaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "secondaryImage": secondaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    secondaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },          _type == "faqAccordion" => {    ...,      "faqs": array::compact(faqs[]->{    title,    _id,    _type,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  }),    link{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },          _type == "subscribeNewsletter" => {    ...,    "subTitle": subTitle[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "helperText": helperText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },          _type == "imageLinkCards" => {    ...,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },    "cards": array::compact(cards[]{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      ),        image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    })  },          _type == "formBlock" => {    ...,    title,    description,    variant,    "form": form->{      _id,      title,      description,        fields[]{    label,    name,    type,    required,    options,    placeholder  },  emailRecipients,  submitButtonText,  successMessage,  errorMessage,      submitButtonText,      successMessage,      errorMessage    }  },        _type == "tabs" => {          ...,          title,          description,          tabs[]{            _key,            label,            content[]{               ...,              _type,              _key            }          }        }      }    }  },      _type == "infoSection" => {    ...,    title,    headingLevel,    content[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  } }
+export type QueryMotorPentaOrPageBySlugResult =
+  | {
+      _id: string;
+      _type: "motoresPenta";
+      title: string | null;
+      description: string | null;
+      slug: string | null;
+      image: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+        alt: string | "Image-Broken";
+        blurData: string | null;
+        dominantColor: string | null;
+      } | null;
+      richText: Array<
+        | {
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "h2" | "h3" | "h4" | "h5" | "h6" | "inline" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs: Array<
+              | {
+                  customLink?: CustomUrl;
+                  _type: "customLink";
+                  _key: string;
+                  openInNewTab: boolean | null;
+                  href: string | "#" | null;
+                }
+              | {
+                  customLink?: CustomUrl;
+                  _type: "customLink";
+                  _key: string;
+                }
+            > | null;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }
+        | {
+            asset?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+            };
+            media?: unknown;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            caption?: string;
+            _type: "image";
+            _key: string;
+            markDefs: null;
+          }
+      > | null;
+      categoryData: {
+        label: "accesorios" | "motores-industriales" | "motores-marinos" | null;
+        slug: "accesorios" | "motores-industriales" | "motores-marinos" | null;
+        iri:
+          | "/camiones/accesorios"
+          | "/camiones/motores-industriales"
+          | "/camiones/motores-marinos"
+          | null;
+        parent: null;
+      };
+      pageBuilder: Array<
+        | {
+            _key: string;
+            _type: "cta";
+            eyebrow?: string;
+            title?: string;
+            richText: Array<
+              | {
+                  children?: Array<{
+                    marks?: Array<string>;
+                    text?: string;
+                    _type: "span";
+                    _key: string;
+                  }>;
+                  style?:
+                    | "h2"
+                    | "h3"
+                    | "h4"
+                    | "h5"
+                    | "h6"
+                    | "inline"
+                    | "normal";
+                  listItem?: "bullet" | "number";
+                  markDefs: Array<
+                    | {
+                        customLink?: CustomUrl;
+                        _type: "customLink";
+                        _key: string;
+                        openInNewTab: boolean | null;
+                        href: string | "#" | null;
+                      }
+                    | {
+                        customLink?: CustomUrl;
+                        _type: "customLink";
+                        _key: string;
+                      }
+                  > | null;
+                  level?: number;
+                  _type: "block";
+                  _key: string;
+                }
+              | {
+                  asset?: {
+                    _ref: string;
+                    _type: "reference";
+                    _weak?: boolean;
+                    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                  };
+                  media?: unknown;
+                  hotspot?: SanityImageHotspot;
+                  crop?: SanityImageCrop;
+                  caption?: string;
+                  _type: "image";
+                  _key: string;
+                  markDefs: null;
+                }
+            > | null;
+            buttons: Array<{
+              text: string | null;
+              variant:
+                | "default"
+                | "link"
+                | "outline"
+                | "primary"
+                | "secondary"
+                | null;
+              icon: "volvo-chevron-right" | null;
+              _key: string;
+              _type: "button";
+              openInNewTab: boolean | null;
+              href: string | null;
+            }> | null;
+          }
+        | {
+            _key: string;
+            _type: "doubleHero";
+            variant:
+              | "accent1"
+              | "accent2"
+              | "alt"
+              | "brand"
+              | "default"
+              | "inset"
+              | null;
+            primaryBadge: string | null;
+            primaryTitle: string | null;
+            primaryRichText: Array<{
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?:
+                | "blockquote"
+                | "h1"
+                | "h2"
+                | "h3"
+                | "h4"
+                | "h5"
+                | "h6"
+                | "normal";
+              listItem?: "bullet" | "number";
+              markDefs: Array<{
+                href?: string;
+                _type: "link";
+                _key: string;
+              }> | null;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }> | null;
+            primaryImage: {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              media?: unknown;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              alt: string | "Primary Image";
+              blurData: string | null;
+              dominantColor: string | null;
+            } | null;
+            primaryButtons: Array<{
+              text: string | null;
+              variant:
+                | "default"
+                | "link"
+                | "outline"
+                | "primary"
+                | "secondary"
+                | null;
+              icon: "volvo-chevron-right" | null;
+              _key: string;
+              _type: "button";
+              openInNewTab: boolean | null;
+              href: string | null;
+            }> | null;
+            secondaryBadge: string | null;
+            secondaryTitle: string | null;
+            secondaryRichText: Array<{
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?:
+                | "blockquote"
+                | "h1"
+                | "h2"
+                | "h3"
+                | "h4"
+                | "h5"
+                | "h6"
+                | "normal";
+              listItem?: "bullet" | "number";
+              markDefs: Array<{
+                href?: string;
+                _type: "link";
+                _key: string;
+              }> | null;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }> | null;
+            secondaryImage: {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              media?: unknown;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              alt: string | "Secondary Image";
+              blurData: string | null;
+              dominantColor: string | null;
+            } | null;
+            secondaryButtons: Array<{
+              text: string | null;
+              variant:
+                | "default"
+                | "link"
+                | "outline"
+                | "primary"
+                | "secondary"
+                | null;
+              icon: "volvo-chevron-right" | null;
+              _key: string;
+              _type: "button";
+              openInNewTab: boolean | null;
+              href: string | null;
+            }> | null;
+          }
+        | {
+            _key: string;
+            _type: "faqAccordion";
+            eyebrow?: string;
+            title?: string;
+            subtitle?: string;
+            link: {
+              title?: string;
+              description?: string;
+              url?: CustomUrl;
+              openInNewTab: boolean | null;
+              href: string | null;
+            } | null;
+            faqs: Array<{
+              title: string | null;
+              _id: string;
+              _type: "faq";
+              richText: Array<
+                | {
+                    children?: Array<{
+                      marks?: Array<string>;
+                      text?: string;
+                      _type: "span";
+                      _key: string;
+                    }>;
+                    style?:
+                      | "h2"
+                      | "h3"
+                      | "h4"
+                      | "h5"
+                      | "h6"
+                      | "inline"
+                      | "normal";
+                    listItem?: "bullet" | "number";
+                    markDefs: Array<
+                      | {
+                          customLink?: CustomUrl;
+                          _type: "customLink";
+                          _key: string;
+                          openInNewTab: boolean | null;
+                          href: string | "#" | null;
+                        }
+                      | {
+                          customLink?: CustomUrl;
+                          _type: "customLink";
+                          _key: string;
+                        }
+                    > | null;
+                    level?: number;
+                    _type: "block";
+                    _key: string;
+                  }
+                | {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    media?: unknown;
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    caption?: string;
+                    _type: "image";
+                    _key: string;
+                    markDefs: null;
+                  }
+              > | null;
+            }> | null;
+          }
+        | {
+            _key: string;
+            _type: "featureCardsIcon";
+            eyebrow?: string;
+            title?: string;
+            richText?: Array<{
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "h3" | "h4" | "h5" | "h6" | "inline" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs?: Array<{
+                customLink?: CustomUrl;
+                _type: "customLink";
+                _key: string;
+              }>;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }>;
+            cards?: Array<{
+              icon?: IconPicker;
+              title?: string;
+              richText?: Array<{
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h2" | "h3" | "h4" | "h5" | "h6" | "inline" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<{
+                  customLink?: CustomUrl;
+                  _type: "customLink";
+                  _key: string;
+                }>;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }>;
+              _type: "featureCardIcon";
+              _key: string;
+            }>;
+          }
+        | {
+            _key: string;
+            _type: "formBlock";
+            title: string | null;
+            description: string | null;
+            form: {
+              _id: string;
+              title: string | null;
+              description: string | null;
+              fields: Array<{
+                label: string | null;
+                name: string | null;
+                type:
+                  | "checkbox"
+                  | "direccion"
+                  | "email"
+                  | "number"
+                  | "radio"
+                  | "rut"
+                  | "select"
+                  | "tel"
+                  | "text"
+                  | "textarea"
+                  | null;
+                required: "no" | "yes" | null;
+                options: Array<string> | null;
+                placeholder: string | null;
+              }> | null;
+              emailRecipients: string | null;
+              submitButtonText: string | null;
+              successMessage: string | null;
+              errorMessage: string | null;
+            } | null;
+            variant: "centered" | "default" | "withBackground" | null;
+          }
+        | {
+            _key: string;
+            _type: "hero";
+            variant: "accent1" | "accent2" | "alt" | "brand" | "default" | null;
+            badge?: string;
+            title?: string;
+            richText: Array<
+              | {
+                  children?: Array<{
+                    marks?: Array<string>;
+                    text?: string;
+                    _type: "span";
+                    _key: string;
+                  }>;
+                  style?:
+                    | "h2"
+                    | "h3"
+                    | "h4"
+                    | "h5"
+                    | "h6"
+                    | "inline"
+                    | "normal";
+                  listItem?: "bullet" | "number";
+                  markDefs: Array<
+                    | {
+                        customLink?: CustomUrl;
+                        _type: "customLink";
+                        _key: string;
+                        openInNewTab: boolean | null;
+                        href: string | "#" | null;
+                      }
+                    | {
+                        customLink?: CustomUrl;
+                        _type: "customLink";
+                        _key: string;
+                      }
+                  > | null;
+                  level?: number;
+                  _type: "block";
+                  _key: string;
+                }
+              | {
+                  asset?: {
+                    _ref: string;
+                    _type: "reference";
+                    _weak?: boolean;
+                    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                  };
+                  media?: unknown;
+                  hotspot?: SanityImageHotspot;
+                  crop?: SanityImageCrop;
+                  caption?: string;
+                  _type: "image";
+                  _key: string;
+                  markDefs: null;
+                }
+            > | null;
+            image: {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              media?: unknown;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              alt: string | "Image-Broken";
+              blurData: string | null;
+              dominantColor: string | null;
+            } | null;
+            buttons: Array<{
+              text: string | null;
+              variant:
+                | "default"
+                | "link"
+                | "outline"
+                | "primary"
+                | "secondary"
+                | null;
+              icon: "volvo-chevron-right" | null;
+              _key: string;
+              _type: "button";
+              openInNewTab: boolean | null;
+              href: string | null;
+            }> | null;
+          }
+        | {
+            _key: string;
+            _type: "imageLinkCards";
+            eyebrow?: string;
+            title?: string;
+            richText: Array<
+              | {
+                  children?: Array<{
+                    marks?: Array<string>;
+                    text?: string;
+                    _type: "span";
+                    _key: string;
+                  }>;
+                  style?:
+                    | "h2"
+                    | "h3"
+                    | "h4"
+                    | "h5"
+                    | "h6"
+                    | "inline"
+                    | "normal";
+                  listItem?: "bullet" | "number";
+                  markDefs: Array<
+                    | {
+                        customLink?: CustomUrl;
+                        _type: "customLink";
+                        _key: string;
+                        openInNewTab: boolean | null;
+                        href: string | "#" | null;
+                      }
+                    | {
+                        customLink?: CustomUrl;
+                        _type: "customLink";
+                        _key: string;
+                      }
+                  > | null;
+                  level?: number;
+                  _type: "block";
+                  _key: string;
+                }
+              | {
+                  asset?: {
+                    _ref: string;
+                    _type: "reference";
+                    _weak?: boolean;
+                    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                  };
+                  media?: unknown;
+                  hotspot?: SanityImageHotspot;
+                  crop?: SanityImageCrop;
+                  caption?: string;
+                  _type: "image";
+                  _key: string;
+                  markDefs: null;
+                }
+            > | null;
+            buttons: Array<{
+              text: string | null;
+              variant:
+                | "default"
+                | "link"
+                | "outline"
+                | "primary"
+                | "secondary"
+                | null;
+              icon: "volvo-chevron-right" | null;
+              _key: string;
+              _type: "button";
+              openInNewTab: boolean | null;
+              href: string | null;
+            }> | null;
+            cards: Array<{
+              title?: string;
+              description?: string;
+              image: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                alt: string | "Image-Broken";
+                blurData: string | null;
+                dominantColor: string | null;
+              } | null;
+              url?: CustomUrl;
+              _type: "imageLinkCard";
+              _key: string;
+              openInNewTab: boolean | null;
+              href: string | null;
+            }> | null;
+          }
+        | {
+            _key: string;
+            _type: "infoSection";
+            title: string | null;
+            headingLevel: "h1" | "h2" | "h3" | "h4" | null;
+            content: Array<{
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?:
+                | "blockquote"
+                | "h1"
+                | "h2"
+                | "h3"
+                | "h4"
+                | "h5"
+                | "h6"
+                | "normal";
+              listItem?: "bullet" | "number";
+              markDefs: Array<{
+                href?: string;
+                _type: "link";
+                _key: string;
+              }> | null;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }> | null;
+          }
+        | {
+            _key: string;
+            _type: "mainHero";
+            badge?: string;
+            title?: string;
+            richText: Array<
+              | {
+                  children?: Array<{
+                    marks?: Array<string>;
+                    text?: string;
+                    _type: "span";
+                    _key: string;
+                  }>;
+                  style?:
+                    | "h2"
+                    | "h3"
+                    | "h4"
+                    | "h5"
+                    | "h6"
+                    | "inline"
+                    | "normal";
+                  listItem?: "bullet" | "number";
+                  markDefs: Array<
+                    | {
+                        customLink?: CustomUrl;
+                        _type: "customLink";
+                        _key: string;
+                        openInNewTab: boolean | null;
+                        href: string | "#" | null;
+                      }
+                    | {
+                        customLink?: CustomUrl;
+                        _type: "customLink";
+                        _key: string;
+                      }
+                  > | null;
+                  level?: number;
+                  _type: "block";
+                  _key: string;
+                }
+              | {
+                  asset?: {
+                    _ref: string;
+                    _type: "reference";
+                    _weak?: boolean;
+                    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                  };
+                  media?: unknown;
+                  hotspot?: SanityImageHotspot;
+                  crop?: SanityImageCrop;
+                  caption?: string;
+                  _type: "image";
+                  _key: string;
+                  markDefs: null;
+                }
+            > | null;
+            backgroundType?: "image" | "video";
+            backgroundImage: {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              media?: unknown;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              alt: string | "Background Image";
+              blurData: string | null;
+              dominantColor: string | null;
+            } | null;
+            backgroundVideo: string | null;
+            image: {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              media?: unknown;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              alt: string | "Image-Broken";
+              blurData: string | null;
+              dominantColor: string | null;
+            } | null;
+            buttons: Array<{
+              text: string | null;
+              variant:
+                | "default"
+                | "link"
+                | "outline"
+                | "primary"
+                | "secondary"
+                | null;
+              icon: "volvo-chevron-right" | null;
+              _key: string;
+              _type: "button";
+              openInNewTab: boolean | null;
+              href: string | null;
+            }> | null;
+          }
+        | {
+            _key: string;
+            _type: "subscribeNewsletter";
+            title?: string;
+            subTitle: Array<{
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "h3" | "h4" | "h5" | "h6" | "inline" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs: Array<
+                | {
+                    customLink?: CustomUrl;
+                    _type: "customLink";
+                    _key: string;
+                    openInNewTab: boolean | null;
+                    href: string | "#" | null;
+                  }
+                | {
+                    customLink?: CustomUrl;
+                    _type: "customLink";
+                    _key: string;
+                  }
+              > | null;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }> | null;
+            helperText: Array<{
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "h3" | "h4" | "h5" | "h6" | "inline" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs: Array<
+                | {
+                    customLink?: CustomUrl;
+                    _type: "customLink";
+                    _key: string;
+                    openInNewTab: boolean | null;
+                    href: string | "#" | null;
+                  }
+                | {
+                    customLink?: CustomUrl;
+                    _type: "customLink";
+                    _key: string;
+                  }
+              > | null;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }> | null;
+          }
+        | {
+            _key: string;
+            _type: "tabs";
+            title: string | null;
+            description: string | null;
+            tabs: Array<{
+              _key: string;
+              label: string | null;
+              content: Array<
+                | {
+                    eyebrow?: string;
+                    title?: string;
+                    richText: Array<
+                      | {
+                          children?: Array<{
+                            marks?: Array<string>;
+                            text?: string;
+                            _type: "span";
+                            _key: string;
+                          }>;
+                          style?:
+                            | "h2"
+                            | "h3"
+                            | "h4"
+                            | "h5"
+                            | "h6"
+                            | "inline"
+                            | "normal";
+                          listItem?: "bullet" | "number";
+                          markDefs: Array<
+                            | {
+                                customLink?: CustomUrl;
+                                _type: "customLink";
+                                _key: string;
+                                openInNewTab: boolean | null;
+                                href: string | "#" | null;
+                              }
+                            | {
+                                customLink?: CustomUrl;
+                                _type: "customLink";
+                                _key: string;
+                              }
+                          > | null;
+                          level?: number;
+                          _type: "block";
+                          _key: string;
+                        }
+                      | {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          media?: unknown;
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          caption?: string;
+                          _type: "image";
+                          _key: string;
+                          markDefs: null;
+                        }
+                    > | null;
+                    buttons: Array<{
+                      text: string | null;
+                      variant:
+                        | "default"
+                        | "link"
+                        | "outline"
+                        | "primary"
+                        | "secondary"
+                        | null;
+                      icon: "volvo-chevron-right" | null;
+                      _key: string;
+                      _type: "button";
+                      openInNewTab: boolean | null;
+                      href: string | null;
+                    }> | null;
+                    _type: "cta";
+                    _key: string;
+                  }
+                | {
+                    variant:
+                      | "accent1"
+                      | "accent2"
+                      | "alt"
+                      | "brand"
+                      | "default"
+                      | "inset"
+                      | null;
+                    primaryBadge: string | null;
+                    primaryTitle: string | null;
+                    primaryRichText: Array<{
+                      children?: Array<{
+                        marks?: Array<string>;
+                        text?: string;
+                        _type: "span";
+                        _key: string;
+                      }>;
+                      style?:
+                        | "blockquote"
+                        | "h1"
+                        | "h2"
+                        | "h3"
+                        | "h4"
+                        | "h5"
+                        | "h6"
+                        | "normal";
+                      listItem?: "bullet" | "number";
+                      markDefs: Array<{
+                        href?: string;
+                        _type: "link";
+                        _key: string;
+                      }> | null;
+                      level?: number;
+                      _type: "block";
+                      _key: string;
+                    }> | null;
+                    primaryImage: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      media?: unknown;
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                      alt: string | "Primary Image";
+                      blurData: string | null;
+                      dominantColor: string | null;
+                    } | null;
+                    primaryButtons: Array<{
+                      text: string | null;
+                      variant:
+                        | "default"
+                        | "link"
+                        | "outline"
+                        | "primary"
+                        | "secondary"
+                        | null;
+                      icon: "volvo-chevron-right" | null;
+                      _key: string;
+                      _type: "button";
+                      openInNewTab: boolean | null;
+                      href: string | null;
+                    }> | null;
+                    secondaryBadge: string | null;
+                    secondaryTitle: string | null;
+                    secondaryRichText: Array<{
+                      children?: Array<{
+                        marks?: Array<string>;
+                        text?: string;
+                        _type: "span";
+                        _key: string;
+                      }>;
+                      style?:
+                        | "blockquote"
+                        | "h1"
+                        | "h2"
+                        | "h3"
+                        | "h4"
+                        | "h5"
+                        | "h6"
+                        | "normal";
+                      listItem?: "bullet" | "number";
+                      markDefs: Array<{
+                        href?: string;
+                        _type: "link";
+                        _key: string;
+                      }> | null;
+                      level?: number;
+                      _type: "block";
+                      _key: string;
+                    }> | null;
+                    secondaryImage: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      media?: unknown;
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                      alt: string | "Secondary Image";
+                      blurData: string | null;
+                      dominantColor: string | null;
+                    } | null;
+                    secondaryButtons: Array<{
+                      text: string | null;
+                      variant:
+                        | "default"
+                        | "link"
+                        | "outline"
+                        | "primary"
+                        | "secondary"
+                        | null;
+                      icon: "volvo-chevron-right" | null;
+                      _key: string;
+                      _type: "button";
+                      openInNewTab: boolean | null;
+                      href: string | null;
+                    }> | null;
+                    _type: "doubleHero";
+                    _key: string;
+                  }
+                | {
+                    eyebrow?: string;
+                    title?: string;
+                    subtitle?: string;
+                    link: {
+                      title?: string;
+                      description?: string;
+                      url?: CustomUrl;
+                      openInNewTab: boolean | null;
+                      href: string | null;
+                    } | null;
+                    faqs: Array<{
+                      title: string | null;
+                      _id: string;
+                      _type: "faq";
+                      richText: Array<
+                        | {
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?:
+                              | "h2"
+                              | "h3"
+                              | "h4"
+                              | "h5"
+                              | "h6"
+                              | "inline"
+                              | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs: Array<
+                              | {
+                                  customLink?: CustomUrl;
+                                  _type: "customLink";
+                                  _key: string;
+                                  openInNewTab: boolean | null;
+                                  href: string | "#" | null;
+                                }
+                              | {
+                                  customLink?: CustomUrl;
+                                  _type: "customLink";
+                                  _key: string;
+                                }
+                            > | null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }
+                        | {
+                            asset?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                            };
+                            media?: unknown;
+                            hotspot?: SanityImageHotspot;
+                            crop?: SanityImageCrop;
+                            caption?: string;
+                            _type: "image";
+                            _key: string;
+                            markDefs: null;
+                          }
+                      > | null;
+                    }> | null;
+                    _type: "faqAccordion";
+                    _key: string;
+                  }
+                | {
+                    eyebrow?: string;
+                    title?: string;
+                    richText?: Array<{
+                      children?: Array<{
+                        marks?: Array<string>;
+                        text?: string;
+                        _type: "span";
+                        _key: string;
+                      }>;
+                      style?:
+                        | "h2"
+                        | "h3"
+                        | "h4"
+                        | "h5"
+                        | "h6"
+                        | "inline"
+                        | "normal";
+                      listItem?: "bullet" | "number";
+                      markDefs?: Array<{
+                        customLink?: CustomUrl;
+                        _type: "customLink";
+                        _key: string;
+                      }>;
+                      level?: number;
+                      _type: "block";
+                      _key: string;
+                    }>;
+                    cards?: Array<{
+                      icon?: IconPicker;
+                      title?: string;
+                      richText?: Array<{
+                        children?: Array<{
+                          marks?: Array<string>;
+                          text?: string;
+                          _type: "span";
+                          _key: string;
+                        }>;
+                        style?:
+                          | "h2"
+                          | "h3"
+                          | "h4"
+                          | "h5"
+                          | "h6"
+                          | "inline"
+                          | "normal";
+                        listItem?: "bullet" | "number";
+                        markDefs?: Array<{
+                          customLink?: CustomUrl;
+                          _type: "customLink";
+                          _key: string;
+                        }>;
+                        level?: number;
+                        _type: "block";
+                        _key: string;
+                      }>;
+                      _type: "featureCardIcon";
+                      _key: string;
+                    }>;
+                    _type: "featureCardsIcon";
+                    _key: string;
+                  }
+                | {
+                    title: string | null;
+                    description: string | null;
+                    form: {
+                      _id: string;
+                      title: string | null;
+                      description: string | null;
+                      fields: Array<{
+                        label: string | null;
+                        name: string | null;
+                        type:
+                          | "checkbox"
+                          | "direccion"
+                          | "email"
+                          | "number"
+                          | "radio"
+                          | "rut"
+                          | "select"
+                          | "tel"
+                          | "text"
+                          | "textarea"
+                          | null;
+                        required: "no" | "yes" | null;
+                        options: Array<string> | null;
+                        placeholder: string | null;
+                      }> | null;
+                      emailRecipients: string | null;
+                      submitButtonText: string | null;
+                      successMessage: string | null;
+                      errorMessage: string | null;
+                    } | null;
+                    variant: "centered" | "default" | "withBackground" | null;
+                    _type: "formBlock";
+                    _key: string;
+                  }
+                | {
+                    variant:
+                      | "accent1"
+                      | "accent2"
+                      | "alt"
+                      | "brand"
+                      | "default"
+                      | null;
+                    badge?: string;
+                    title?: string;
+                    richText: Array<
+                      | {
+                          children?: Array<{
+                            marks?: Array<string>;
+                            text?: string;
+                            _type: "span";
+                            _key: string;
+                          }>;
+                          style?:
+                            | "h2"
+                            | "h3"
+                            | "h4"
+                            | "h5"
+                            | "h6"
+                            | "inline"
+                            | "normal";
+                          listItem?: "bullet" | "number";
+                          markDefs: Array<
+                            | {
+                                customLink?: CustomUrl;
+                                _type: "customLink";
+                                _key: string;
+                                openInNewTab: boolean | null;
+                                href: string | "#" | null;
+                              }
+                            | {
+                                customLink?: CustomUrl;
+                                _type: "customLink";
+                                _key: string;
+                              }
+                          > | null;
+                          level?: number;
+                          _type: "block";
+                          _key: string;
+                        }
+                      | {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          media?: unknown;
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          caption?: string;
+                          _type: "image";
+                          _key: string;
+                          markDefs: null;
+                        }
+                    > | null;
+                    image: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      media?: unknown;
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                      alt: string | "Image-Broken";
+                      blurData: string | null;
+                      dominantColor: string | null;
+                    } | null;
+                    buttons: Array<{
+                      text: string | null;
+                      variant:
+                        | "default"
+                        | "link"
+                        | "outline"
+                        | "primary"
+                        | "secondary"
+                        | null;
+                      icon: "volvo-chevron-right" | null;
+                      _key: string;
+                      _type: "button";
+                      openInNewTab: boolean | null;
+                      href: string | null;
+                    }> | null;
+                    _type: "hero";
+                    _key: string;
+                  }
+                | {
+                    eyebrow?: string;
+                    title?: string;
+                    richText: Array<
+                      | {
+                          children?: Array<{
+                            marks?: Array<string>;
+                            text?: string;
+                            _type: "span";
+                            _key: string;
+                          }>;
+                          style?:
+                            | "h2"
+                            | "h3"
+                            | "h4"
+                            | "h5"
+                            | "h6"
+                            | "inline"
+                            | "normal";
+                          listItem?: "bullet" | "number";
+                          markDefs: Array<
+                            | {
+                                customLink?: CustomUrl;
+                                _type: "customLink";
+                                _key: string;
+                                openInNewTab: boolean | null;
+                                href: string | "#" | null;
+                              }
+                            | {
+                                customLink?: CustomUrl;
+                                _type: "customLink";
+                                _key: string;
+                              }
+                          > | null;
+                          level?: number;
+                          _type: "block";
+                          _key: string;
+                        }
+                      | {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          media?: unknown;
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          caption?: string;
+                          _type: "image";
+                          _key: string;
+                          markDefs: null;
+                        }
+                    > | null;
+                    buttons: Array<{
+                      text: string | null;
+                      variant:
+                        | "default"
+                        | "link"
+                        | "outline"
+                        | "primary"
+                        | "secondary"
+                        | null;
+                      icon: "volvo-chevron-right" | null;
+                      _key: string;
+                      _type: "button";
+                      openInNewTab: boolean | null;
+                      href: string | null;
+                    }> | null;
+                    cards: Array<{
+                      title?: string;
+                      description?: string;
+                      image: {
+                        asset?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                        };
+                        media?: unknown;
+                        hotspot?: SanityImageHotspot;
+                        crop?: SanityImageCrop;
+                        _type: "image";
+                        alt: string | "Image-Broken";
+                        blurData: string | null;
+                        dominantColor: string | null;
+                      } | null;
+                      url?: CustomUrl;
+                      _type: "imageLinkCard";
+                      _key: string;
+                      openInNewTab: boolean | null;
+                      href: string | null;
+                    }> | null;
+                    _type: "imageLinkCards";
+                    _key: string;
+                  }
+                | {
+                    badge?: string;
+                    title?: string;
+                    richText: Array<
+                      | {
+                          children?: Array<{
+                            marks?: Array<string>;
+                            text?: string;
+                            _type: "span";
+                            _key: string;
+                          }>;
+                          style?:
+                            | "h2"
+                            | "h3"
+                            | "h4"
+                            | "h5"
+                            | "h6"
+                            | "inline"
+                            | "normal";
+                          listItem?: "bullet" | "number";
+                          markDefs: Array<
+                            | {
+                                customLink?: CustomUrl;
+                                _type: "customLink";
+                                _key: string;
+                                openInNewTab: boolean | null;
+                                href: string | "#" | null;
+                              }
+                            | {
+                                customLink?: CustomUrl;
+                                _type: "customLink";
+                                _key: string;
+                              }
+                          > | null;
+                          level?: number;
+                          _type: "block";
+                          _key: string;
+                        }
+                      | {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          media?: unknown;
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          caption?: string;
+                          _type: "image";
+                          _key: string;
+                          markDefs: null;
+                        }
+                    > | null;
+                    backgroundType?: "image" | "video";
+                    backgroundImage: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      media?: unknown;
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                      alt: string | "Background Image";
+                      blurData: string | null;
+                      dominantColor: string | null;
+                    } | null;
+                    backgroundVideo: string | null;
+                    image: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      media?: unknown;
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                      alt: string | "Image-Broken";
+                      blurData: string | null;
+                      dominantColor: string | null;
+                    } | null;
+                    buttons: Array<{
+                      text: string | null;
+                      variant:
+                        | "default"
+                        | "link"
+                        | "outline"
+                        | "primary"
+                        | "secondary"
+                        | null;
+                      icon: "volvo-chevron-right" | null;
+                      _key: string;
+                      _type: "button";
+                      openInNewTab: boolean | null;
+                      href: string | null;
+                    }> | null;
+                    _type: "mainHero";
+                    _key: string;
+                  }
+                | {
+                    title?: string;
+                    subTitle: Array<{
+                      children?: Array<{
+                        marks?: Array<string>;
+                        text?: string;
+                        _type: "span";
+                        _key: string;
+                      }>;
+                      style?:
+                        | "h2"
+                        | "h3"
+                        | "h4"
+                        | "h5"
+                        | "h6"
+                        | "inline"
+                        | "normal";
+                      listItem?: "bullet" | "number";
+                      markDefs: Array<
+                        | {
+                            customLink?: CustomUrl;
+                            _type: "customLink";
+                            _key: string;
+                            openInNewTab: boolean | null;
+                            href: string | "#" | null;
+                          }
+                        | {
+                            customLink?: CustomUrl;
+                            _type: "customLink";
+                            _key: string;
+                          }
+                      > | null;
+                      level?: number;
+                      _type: "block";
+                      _key: string;
+                    }> | null;
+                    helperText: Array<{
+                      children?: Array<{
+                        marks?: Array<string>;
+                        text?: string;
+                        _type: "span";
+                        _key: string;
+                      }>;
+                      style?:
+                        | "h2"
+                        | "h3"
+                        | "h4"
+                        | "h5"
+                        | "h6"
+                        | "inline"
+                        | "normal";
+                      listItem?: "bullet" | "number";
+                      markDefs: Array<
+                        | {
+                            customLink?: CustomUrl;
+                            _type: "customLink";
+                            _key: string;
+                            openInNewTab: boolean | null;
+                            href: string | "#" | null;
+                          }
+                        | {
+                            customLink?: CustomUrl;
+                            _type: "customLink";
+                            _key: string;
+                          }
+                      > | null;
+                      level?: number;
+                      _type: "block";
+                      _key: string;
+                    }> | null;
+                    _type: "subscribeNewsletter";
+                    _key: string;
+                  }
+              > | null;
+            }> | null;
+          }
+      > | null;
+    }
+  | {
+      _id: string;
+      _type: "page";
+      title: string | null;
+      description: string | null;
+      slug: string | null;
+      pageBuilder: Array<
+        | {
+            _key: string;
+            _type: "cta";
+            eyebrow?: string;
+            title?: string;
+            richText: Array<
+              | {
+                  children?: Array<{
+                    marks?: Array<string>;
+                    text?: string;
+                    _type: "span";
+                    _key: string;
+                  }>;
+                  style?:
+                    | "h2"
+                    | "h3"
+                    | "h4"
+                    | "h5"
+                    | "h6"
+                    | "inline"
+                    | "normal";
+                  listItem?: "bullet" | "number";
+                  markDefs: Array<
+                    | {
+                        customLink?: CustomUrl;
+                        _type: "customLink";
+                        _key: string;
+                        openInNewTab: boolean | null;
+                        href: string | "#" | null;
+                      }
+                    | {
+                        customLink?: CustomUrl;
+                        _type: "customLink";
+                        _key: string;
+                      }
+                  > | null;
+                  level?: number;
+                  _type: "block";
+                  _key: string;
+                }
+              | {
+                  asset?: {
+                    _ref: string;
+                    _type: "reference";
+                    _weak?: boolean;
+                    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                  };
+                  media?: unknown;
+                  hotspot?: SanityImageHotspot;
+                  crop?: SanityImageCrop;
+                  caption?: string;
+                  _type: "image";
+                  _key: string;
+                  markDefs: null;
+                }
+            > | null;
+            buttons: Array<{
+              text: string | null;
+              variant:
+                | "default"
+                | "link"
+                | "outline"
+                | "primary"
+                | "secondary"
+                | null;
+              icon: "volvo-chevron-right" | null;
+              _key: string;
+              _type: "button";
+              openInNewTab: boolean | null;
+              href: string | null;
+            }> | null;
+          }
+        | {
+            _key: string;
+            _type: "doubleHero";
+            variant:
+              | "accent1"
+              | "accent2"
+              | "alt"
+              | "brand"
+              | "default"
+              | "inset"
+              | null;
+            primaryBadge: string | null;
+            primaryTitle: string | null;
+            primaryRichText: Array<{
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?:
+                | "blockquote"
+                | "h1"
+                | "h2"
+                | "h3"
+                | "h4"
+                | "h5"
+                | "h6"
+                | "normal";
+              listItem?: "bullet" | "number";
+              markDefs: Array<{
+                href?: string;
+                _type: "link";
+                _key: string;
+              }> | null;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }> | null;
+            primaryImage: {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              media?: unknown;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              alt: string | "Primary Image";
+              blurData: string | null;
+              dominantColor: string | null;
+            } | null;
+            primaryButtons: Array<{
+              text: string | null;
+              variant:
+                | "default"
+                | "link"
+                | "outline"
+                | "primary"
+                | "secondary"
+                | null;
+              icon: "volvo-chevron-right" | null;
+              _key: string;
+              _type: "button";
+              openInNewTab: boolean | null;
+              href: string | null;
+            }> | null;
+            secondaryBadge: string | null;
+            secondaryTitle: string | null;
+            secondaryRichText: Array<{
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?:
+                | "blockquote"
+                | "h1"
+                | "h2"
+                | "h3"
+                | "h4"
+                | "h5"
+                | "h6"
+                | "normal";
+              listItem?: "bullet" | "number";
+              markDefs: Array<{
+                href?: string;
+                _type: "link";
+                _key: string;
+              }> | null;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }> | null;
+            secondaryImage: {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              media?: unknown;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              alt: string | "Secondary Image";
+              blurData: string | null;
+              dominantColor: string | null;
+            } | null;
+            secondaryButtons: Array<{
+              text: string | null;
+              variant:
+                | "default"
+                | "link"
+                | "outline"
+                | "primary"
+                | "secondary"
+                | null;
+              icon: "volvo-chevron-right" | null;
+              _key: string;
+              _type: "button";
+              openInNewTab: boolean | null;
+              href: string | null;
+            }> | null;
+          }
+        | {
+            _key: string;
+            _type: "faqAccordion";
+            eyebrow?: string;
+            title?: string;
+            subtitle?: string;
+            link: {
+              title?: string;
+              description?: string;
+              url?: CustomUrl;
+              openInNewTab: boolean | null;
+              href: string | null;
+            } | null;
+            faqs: Array<{
+              title: string | null;
+              _id: string;
+              _type: "faq";
+              richText: Array<
+                | {
+                    children?: Array<{
+                      marks?: Array<string>;
+                      text?: string;
+                      _type: "span";
+                      _key: string;
+                    }>;
+                    style?:
+                      | "h2"
+                      | "h3"
+                      | "h4"
+                      | "h5"
+                      | "h6"
+                      | "inline"
+                      | "normal";
+                    listItem?: "bullet" | "number";
+                    markDefs: Array<
+                      | {
+                          customLink?: CustomUrl;
+                          _type: "customLink";
+                          _key: string;
+                          openInNewTab: boolean | null;
+                          href: string | "#" | null;
+                        }
+                      | {
+                          customLink?: CustomUrl;
+                          _type: "customLink";
+                          _key: string;
+                        }
+                    > | null;
+                    level?: number;
+                    _type: "block";
+                    _key: string;
+                  }
+                | {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    media?: unknown;
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    caption?: string;
+                    _type: "image";
+                    _key: string;
+                    markDefs: null;
+                  }
+              > | null;
+            }> | null;
+          }
+        | {
+            _key: string;
+            _type: "featureCardsIcon";
+            eyebrow?: string;
+            title?: string;
+            richText?: Array<{
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "h3" | "h4" | "h5" | "h6" | "inline" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs?: Array<{
+                customLink?: CustomUrl;
+                _type: "customLink";
+                _key: string;
+              }>;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }>;
+            cards?: Array<{
+              icon?: IconPicker;
+              title?: string;
+              richText?: Array<{
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h2" | "h3" | "h4" | "h5" | "h6" | "inline" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<{
+                  customLink?: CustomUrl;
+                  _type: "customLink";
+                  _key: string;
+                }>;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }>;
+              _type: "featureCardIcon";
+              _key: string;
+            }>;
+          }
+        | {
+            _key: string;
+            _type: "formBlock";
+            title: string | null;
+            description: string | null;
+            form: {
+              _id: string;
+              title: string | null;
+              description: string | null;
+              fields: Array<{
+                label: string | null;
+                name: string | null;
+                type:
+                  | "checkbox"
+                  | "direccion"
+                  | "email"
+                  | "number"
+                  | "radio"
+                  | "rut"
+                  | "select"
+                  | "tel"
+                  | "text"
+                  | "textarea"
+                  | null;
+                required: "no" | "yes" | null;
+                options: Array<string> | null;
+                placeholder: string | null;
+              }> | null;
+              emailRecipients: string | null;
+              submitButtonText: string | null;
+              successMessage: string | null;
+              errorMessage: string | null;
+            } | null;
+            variant: "centered" | "default" | "withBackground" | null;
+          }
+        | {
+            _key: string;
+            _type: "hero";
+            variant: "accent1" | "accent2" | "alt" | "brand" | "default" | null;
+            badge?: string;
+            title?: string;
+            richText: Array<
+              | {
+                  children?: Array<{
+                    marks?: Array<string>;
+                    text?: string;
+                    _type: "span";
+                    _key: string;
+                  }>;
+                  style?:
+                    | "h2"
+                    | "h3"
+                    | "h4"
+                    | "h5"
+                    | "h6"
+                    | "inline"
+                    | "normal";
+                  listItem?: "bullet" | "number";
+                  markDefs: Array<
+                    | {
+                        customLink?: CustomUrl;
+                        _type: "customLink";
+                        _key: string;
+                        openInNewTab: boolean | null;
+                        href: string | "#" | null;
+                      }
+                    | {
+                        customLink?: CustomUrl;
+                        _type: "customLink";
+                        _key: string;
+                      }
+                  > | null;
+                  level?: number;
+                  _type: "block";
+                  _key: string;
+                }
+              | {
+                  asset?: {
+                    _ref: string;
+                    _type: "reference";
+                    _weak?: boolean;
+                    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                  };
+                  media?: unknown;
+                  hotspot?: SanityImageHotspot;
+                  crop?: SanityImageCrop;
+                  caption?: string;
+                  _type: "image";
+                  _key: string;
+                  markDefs: null;
+                }
+            > | null;
+            image: {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              media?: unknown;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              alt: string | "Image-Broken";
+              blurData: string | null;
+              dominantColor: string | null;
+            } | null;
+            buttons: Array<{
+              text: string | null;
+              variant:
+                | "default"
+                | "link"
+                | "outline"
+                | "primary"
+                | "secondary"
+                | null;
+              icon: "volvo-chevron-right" | null;
+              _key: string;
+              _type: "button";
+              openInNewTab: boolean | null;
+              href: string | null;
+            }> | null;
+          }
+        | {
+            _key: string;
+            _type: "imageLinkCards";
+            eyebrow?: string;
+            title?: string;
+            richText: Array<
+              | {
+                  children?: Array<{
+                    marks?: Array<string>;
+                    text?: string;
+                    _type: "span";
+                    _key: string;
+                  }>;
+                  style?:
+                    | "h2"
+                    | "h3"
+                    | "h4"
+                    | "h5"
+                    | "h6"
+                    | "inline"
+                    | "normal";
+                  listItem?: "bullet" | "number";
+                  markDefs: Array<
+                    | {
+                        customLink?: CustomUrl;
+                        _type: "customLink";
+                        _key: string;
+                        openInNewTab: boolean | null;
+                        href: string | "#" | null;
+                      }
+                    | {
+                        customLink?: CustomUrl;
+                        _type: "customLink";
+                        _key: string;
+                      }
+                  > | null;
+                  level?: number;
+                  _type: "block";
+                  _key: string;
+                }
+              | {
+                  asset?: {
+                    _ref: string;
+                    _type: "reference";
+                    _weak?: boolean;
+                    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                  };
+                  media?: unknown;
+                  hotspot?: SanityImageHotspot;
+                  crop?: SanityImageCrop;
+                  caption?: string;
+                  _type: "image";
+                  _key: string;
+                  markDefs: null;
+                }
+            > | null;
+            buttons: Array<{
+              text: string | null;
+              variant:
+                | "default"
+                | "link"
+                | "outline"
+                | "primary"
+                | "secondary"
+                | null;
+              icon: "volvo-chevron-right" | null;
+              _key: string;
+              _type: "button";
+              openInNewTab: boolean | null;
+              href: string | null;
+            }> | null;
+            cards: Array<{
+              title?: string;
+              description?: string;
+              image: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                alt: string | "Image-Broken";
+                blurData: string | null;
+                dominantColor: string | null;
+              } | null;
+              url?: CustomUrl;
+              _type: "imageLinkCard";
+              _key: string;
+              openInNewTab: boolean | null;
+              href: string | null;
+            }> | null;
+          }
+        | {
+            _key: string;
+            _type: "infoSection";
+            title: string | null;
+            headingLevel: "h1" | "h2" | "h3" | "h4" | null;
+            content: Array<{
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?:
+                | "blockquote"
+                | "h1"
+                | "h2"
+                | "h3"
+                | "h4"
+                | "h5"
+                | "h6"
+                | "normal";
+              listItem?: "bullet" | "number";
+              markDefs: Array<{
+                href?: string;
+                _type: "link";
+                _key: string;
+              }> | null;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }> | null;
+          }
+        | {
+            _key: string;
+            _type: "mainHero";
+            badge?: string;
+            title?: string;
+            richText: Array<
+              | {
+                  children?: Array<{
+                    marks?: Array<string>;
+                    text?: string;
+                    _type: "span";
+                    _key: string;
+                  }>;
+                  style?:
+                    | "h2"
+                    | "h3"
+                    | "h4"
+                    | "h5"
+                    | "h6"
+                    | "inline"
+                    | "normal";
+                  listItem?: "bullet" | "number";
+                  markDefs: Array<
+                    | {
+                        customLink?: CustomUrl;
+                        _type: "customLink";
+                        _key: string;
+                        openInNewTab: boolean | null;
+                        href: string | "#" | null;
+                      }
+                    | {
+                        customLink?: CustomUrl;
+                        _type: "customLink";
+                        _key: string;
+                      }
+                  > | null;
+                  level?: number;
+                  _type: "block";
+                  _key: string;
+                }
+              | {
+                  asset?: {
+                    _ref: string;
+                    _type: "reference";
+                    _weak?: boolean;
+                    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                  };
+                  media?: unknown;
+                  hotspot?: SanityImageHotspot;
+                  crop?: SanityImageCrop;
+                  caption?: string;
+                  _type: "image";
+                  _key: string;
+                  markDefs: null;
+                }
+            > | null;
+            backgroundType?: "image" | "video";
+            backgroundImage: {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              media?: unknown;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              alt: string | "Background Image";
+              blurData: string | null;
+              dominantColor: string | null;
+            } | null;
+            backgroundVideo: string | null;
+            image: {
+              asset?: {
+                _ref: string;
+                _type: "reference";
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+              };
+              media?: unknown;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+              alt: string | "Image-Broken";
+              blurData: string | null;
+              dominantColor: string | null;
+            } | null;
+            buttons: Array<{
+              text: string | null;
+              variant:
+                | "default"
+                | "link"
+                | "outline"
+                | "primary"
+                | "secondary"
+                | null;
+              icon: "volvo-chevron-right" | null;
+              _key: string;
+              _type: "button";
+              openInNewTab: boolean | null;
+              href: string | null;
+            }> | null;
+          }
+        | {
+            _key: string;
+            _type: "subscribeNewsletter";
+            title?: string;
+            subTitle: Array<{
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "h3" | "h4" | "h5" | "h6" | "inline" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs: Array<
+                | {
+                    customLink?: CustomUrl;
+                    _type: "customLink";
+                    _key: string;
+                    openInNewTab: boolean | null;
+                    href: string | "#" | null;
+                  }
+                | {
+                    customLink?: CustomUrl;
+                    _type: "customLink";
+                    _key: string;
+                  }
+              > | null;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }> | null;
+            helperText: Array<{
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "h3" | "h4" | "h5" | "h6" | "inline" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs: Array<
+                | {
+                    customLink?: CustomUrl;
+                    _type: "customLink";
+                    _key: string;
+                    openInNewTab: boolean | null;
+                    href: string | "#" | null;
+                  }
+                | {
+                    customLink?: CustomUrl;
+                    _type: "customLink";
+                    _key: string;
+                  }
+              > | null;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }> | null;
+          }
+        | {
+            _key: string;
+            _type: "tabs";
+            title: string | null;
+            description: string | null;
+            tabs: Array<{
+              _key: string;
+              label: string | null;
+              content: Array<
+                | {
+                    eyebrow?: string;
+                    title?: string;
+                    richText: Array<
+                      | {
+                          children?: Array<{
+                            marks?: Array<string>;
+                            text?: string;
+                            _type: "span";
+                            _key: string;
+                          }>;
+                          style?:
+                            | "h2"
+                            | "h3"
+                            | "h4"
+                            | "h5"
+                            | "h6"
+                            | "inline"
+                            | "normal";
+                          listItem?: "bullet" | "number";
+                          markDefs: Array<
+                            | {
+                                customLink?: CustomUrl;
+                                _type: "customLink";
+                                _key: string;
+                                openInNewTab: boolean | null;
+                                href: string | "#" | null;
+                              }
+                            | {
+                                customLink?: CustomUrl;
+                                _type: "customLink";
+                                _key: string;
+                              }
+                          > | null;
+                          level?: number;
+                          _type: "block";
+                          _key: string;
+                        }
+                      | {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          media?: unknown;
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          caption?: string;
+                          _type: "image";
+                          _key: string;
+                          markDefs: null;
+                        }
+                    > | null;
+                    buttons: Array<{
+                      text: string | null;
+                      variant:
+                        | "default"
+                        | "link"
+                        | "outline"
+                        | "primary"
+                        | "secondary"
+                        | null;
+                      icon: "volvo-chevron-right" | null;
+                      _key: string;
+                      _type: "button";
+                      openInNewTab: boolean | null;
+                      href: string | null;
+                    }> | null;
+                    _type: "cta";
+                    _key: string;
+                  }
+                | {
+                    variant:
+                      | "accent1"
+                      | "accent2"
+                      | "alt"
+                      | "brand"
+                      | "default"
+                      | "inset"
+                      | null;
+                    primaryBadge: string | null;
+                    primaryTitle: string | null;
+                    primaryRichText: Array<{
+                      children?: Array<{
+                        marks?: Array<string>;
+                        text?: string;
+                        _type: "span";
+                        _key: string;
+                      }>;
+                      style?:
+                        | "blockquote"
+                        | "h1"
+                        | "h2"
+                        | "h3"
+                        | "h4"
+                        | "h5"
+                        | "h6"
+                        | "normal";
+                      listItem?: "bullet" | "number";
+                      markDefs: Array<{
+                        href?: string;
+                        _type: "link";
+                        _key: string;
+                      }> | null;
+                      level?: number;
+                      _type: "block";
+                      _key: string;
+                    }> | null;
+                    primaryImage: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      media?: unknown;
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                      alt: string | "Primary Image";
+                      blurData: string | null;
+                      dominantColor: string | null;
+                    } | null;
+                    primaryButtons: Array<{
+                      text: string | null;
+                      variant:
+                        | "default"
+                        | "link"
+                        | "outline"
+                        | "primary"
+                        | "secondary"
+                        | null;
+                      icon: "volvo-chevron-right" | null;
+                      _key: string;
+                      _type: "button";
+                      openInNewTab: boolean | null;
+                      href: string | null;
+                    }> | null;
+                    secondaryBadge: string | null;
+                    secondaryTitle: string | null;
+                    secondaryRichText: Array<{
+                      children?: Array<{
+                        marks?: Array<string>;
+                        text?: string;
+                        _type: "span";
+                        _key: string;
+                      }>;
+                      style?:
+                        | "blockquote"
+                        | "h1"
+                        | "h2"
+                        | "h3"
+                        | "h4"
+                        | "h5"
+                        | "h6"
+                        | "normal";
+                      listItem?: "bullet" | "number";
+                      markDefs: Array<{
+                        href?: string;
+                        _type: "link";
+                        _key: string;
+                      }> | null;
+                      level?: number;
+                      _type: "block";
+                      _key: string;
+                    }> | null;
+                    secondaryImage: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      media?: unknown;
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                      alt: string | "Secondary Image";
+                      blurData: string | null;
+                      dominantColor: string | null;
+                    } | null;
+                    secondaryButtons: Array<{
+                      text: string | null;
+                      variant:
+                        | "default"
+                        | "link"
+                        | "outline"
+                        | "primary"
+                        | "secondary"
+                        | null;
+                      icon: "volvo-chevron-right" | null;
+                      _key: string;
+                      _type: "button";
+                      openInNewTab: boolean | null;
+                      href: string | null;
+                    }> | null;
+                    _type: "doubleHero";
+                    _key: string;
+                  }
+                | {
+                    eyebrow?: string;
+                    title?: string;
+                    subtitle?: string;
+                    link: {
+                      title?: string;
+                      description?: string;
+                      url?: CustomUrl;
+                      openInNewTab: boolean | null;
+                      href: string | null;
+                    } | null;
+                    faqs: Array<{
+                      title: string | null;
+                      _id: string;
+                      _type: "faq";
+                      richText: Array<
+                        | {
+                            children?: Array<{
+                              marks?: Array<string>;
+                              text?: string;
+                              _type: "span";
+                              _key: string;
+                            }>;
+                            style?:
+                              | "h2"
+                              | "h3"
+                              | "h4"
+                              | "h5"
+                              | "h6"
+                              | "inline"
+                              | "normal";
+                            listItem?: "bullet" | "number";
+                            markDefs: Array<
+                              | {
+                                  customLink?: CustomUrl;
+                                  _type: "customLink";
+                                  _key: string;
+                                  openInNewTab: boolean | null;
+                                  href: string | "#" | null;
+                                }
+                              | {
+                                  customLink?: CustomUrl;
+                                  _type: "customLink";
+                                  _key: string;
+                                }
+                            > | null;
+                            level?: number;
+                            _type: "block";
+                            _key: string;
+                          }
+                        | {
+                            asset?: {
+                              _ref: string;
+                              _type: "reference";
+                              _weak?: boolean;
+                              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                            };
+                            media?: unknown;
+                            hotspot?: SanityImageHotspot;
+                            crop?: SanityImageCrop;
+                            caption?: string;
+                            _type: "image";
+                            _key: string;
+                            markDefs: null;
+                          }
+                      > | null;
+                    }> | null;
+                    _type: "faqAccordion";
+                    _key: string;
+                  }
+                | {
+                    eyebrow?: string;
+                    title?: string;
+                    richText?: Array<{
+                      children?: Array<{
+                        marks?: Array<string>;
+                        text?: string;
+                        _type: "span";
+                        _key: string;
+                      }>;
+                      style?:
+                        | "h2"
+                        | "h3"
+                        | "h4"
+                        | "h5"
+                        | "h6"
+                        | "inline"
+                        | "normal";
+                      listItem?: "bullet" | "number";
+                      markDefs?: Array<{
+                        customLink?: CustomUrl;
+                        _type: "customLink";
+                        _key: string;
+                      }>;
+                      level?: number;
+                      _type: "block";
+                      _key: string;
+                    }>;
+                    cards?: Array<{
+                      icon?: IconPicker;
+                      title?: string;
+                      richText?: Array<{
+                        children?: Array<{
+                          marks?: Array<string>;
+                          text?: string;
+                          _type: "span";
+                          _key: string;
+                        }>;
+                        style?:
+                          | "h2"
+                          | "h3"
+                          | "h4"
+                          | "h5"
+                          | "h6"
+                          | "inline"
+                          | "normal";
+                        listItem?: "bullet" | "number";
+                        markDefs?: Array<{
+                          customLink?: CustomUrl;
+                          _type: "customLink";
+                          _key: string;
+                        }>;
+                        level?: number;
+                        _type: "block";
+                        _key: string;
+                      }>;
+                      _type: "featureCardIcon";
+                      _key: string;
+                    }>;
+                    _type: "featureCardsIcon";
+                    _key: string;
+                  }
+                | {
+                    title: string | null;
+                    description: string | null;
+                    form: {
+                      _id: string;
+                      title: string | null;
+                      description: string | null;
+                      fields: Array<{
+                        label: string | null;
+                        name: string | null;
+                        type:
+                          | "checkbox"
+                          | "direccion"
+                          | "email"
+                          | "number"
+                          | "radio"
+                          | "rut"
+                          | "select"
+                          | "tel"
+                          | "text"
+                          | "textarea"
+                          | null;
+                        required: "no" | "yes" | null;
+                        options: Array<string> | null;
+                        placeholder: string | null;
+                      }> | null;
+                      emailRecipients: string | null;
+                      submitButtonText: string | null;
+                      successMessage: string | null;
+                      errorMessage: string | null;
+                    } | null;
+                    variant: "centered" | "default" | "withBackground" | null;
+                    _type: "formBlock";
+                    _key: string;
+                  }
+                | {
+                    variant:
+                      | "accent1"
+                      | "accent2"
+                      | "alt"
+                      | "brand"
+                      | "default"
+                      | null;
+                    badge?: string;
+                    title?: string;
+                    richText: Array<
+                      | {
+                          children?: Array<{
+                            marks?: Array<string>;
+                            text?: string;
+                            _type: "span";
+                            _key: string;
+                          }>;
+                          style?:
+                            | "h2"
+                            | "h3"
+                            | "h4"
+                            | "h5"
+                            | "h6"
+                            | "inline"
+                            | "normal";
+                          listItem?: "bullet" | "number";
+                          markDefs: Array<
+                            | {
+                                customLink?: CustomUrl;
+                                _type: "customLink";
+                                _key: string;
+                                openInNewTab: boolean | null;
+                                href: string | "#" | null;
+                              }
+                            | {
+                                customLink?: CustomUrl;
+                                _type: "customLink";
+                                _key: string;
+                              }
+                          > | null;
+                          level?: number;
+                          _type: "block";
+                          _key: string;
+                        }
+                      | {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          media?: unknown;
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          caption?: string;
+                          _type: "image";
+                          _key: string;
+                          markDefs: null;
+                        }
+                    > | null;
+                    image: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      media?: unknown;
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                      alt: string | "Image-Broken";
+                      blurData: string | null;
+                      dominantColor: string | null;
+                    } | null;
+                    buttons: Array<{
+                      text: string | null;
+                      variant:
+                        | "default"
+                        | "link"
+                        | "outline"
+                        | "primary"
+                        | "secondary"
+                        | null;
+                      icon: "volvo-chevron-right" | null;
+                      _key: string;
+                      _type: "button";
+                      openInNewTab: boolean | null;
+                      href: string | null;
+                    }> | null;
+                    _type: "hero";
+                    _key: string;
+                  }
+                | {
+                    eyebrow?: string;
+                    title?: string;
+                    richText: Array<
+                      | {
+                          children?: Array<{
+                            marks?: Array<string>;
+                            text?: string;
+                            _type: "span";
+                            _key: string;
+                          }>;
+                          style?:
+                            | "h2"
+                            | "h3"
+                            | "h4"
+                            | "h5"
+                            | "h6"
+                            | "inline"
+                            | "normal";
+                          listItem?: "bullet" | "number";
+                          markDefs: Array<
+                            | {
+                                customLink?: CustomUrl;
+                                _type: "customLink";
+                                _key: string;
+                                openInNewTab: boolean | null;
+                                href: string | "#" | null;
+                              }
+                            | {
+                                customLink?: CustomUrl;
+                                _type: "customLink";
+                                _key: string;
+                              }
+                          > | null;
+                          level?: number;
+                          _type: "block";
+                          _key: string;
+                        }
+                      | {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          media?: unknown;
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          caption?: string;
+                          _type: "image";
+                          _key: string;
+                          markDefs: null;
+                        }
+                    > | null;
+                    buttons: Array<{
+                      text: string | null;
+                      variant:
+                        | "default"
+                        | "link"
+                        | "outline"
+                        | "primary"
+                        | "secondary"
+                        | null;
+                      icon: "volvo-chevron-right" | null;
+                      _key: string;
+                      _type: "button";
+                      openInNewTab: boolean | null;
+                      href: string | null;
+                    }> | null;
+                    cards: Array<{
+                      title?: string;
+                      description?: string;
+                      image: {
+                        asset?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                        };
+                        media?: unknown;
+                        hotspot?: SanityImageHotspot;
+                        crop?: SanityImageCrop;
+                        _type: "image";
+                        alt: string | "Image-Broken";
+                        blurData: string | null;
+                        dominantColor: string | null;
+                      } | null;
+                      url?: CustomUrl;
+                      _type: "imageLinkCard";
+                      _key: string;
+                      openInNewTab: boolean | null;
+                      href: string | null;
+                    }> | null;
+                    _type: "imageLinkCards";
+                    _key: string;
+                  }
+                | {
+                    badge?: string;
+                    title?: string;
+                    richText: Array<
+                      | {
+                          children?: Array<{
+                            marks?: Array<string>;
+                            text?: string;
+                            _type: "span";
+                            _key: string;
+                          }>;
+                          style?:
+                            | "h2"
+                            | "h3"
+                            | "h4"
+                            | "h5"
+                            | "h6"
+                            | "inline"
+                            | "normal";
+                          listItem?: "bullet" | "number";
+                          markDefs: Array<
+                            | {
+                                customLink?: CustomUrl;
+                                _type: "customLink";
+                                _key: string;
+                                openInNewTab: boolean | null;
+                                href: string | "#" | null;
+                              }
+                            | {
+                                customLink?: CustomUrl;
+                                _type: "customLink";
+                                _key: string;
+                              }
+                          > | null;
+                          level?: number;
+                          _type: "block";
+                          _key: string;
+                        }
+                      | {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          media?: unknown;
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          caption?: string;
+                          _type: "image";
+                          _key: string;
+                          markDefs: null;
+                        }
+                    > | null;
+                    backgroundType?: "image" | "video";
+                    backgroundImage: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      media?: unknown;
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                      alt: string | "Background Image";
+                      blurData: string | null;
+                      dominantColor: string | null;
+                    } | null;
+                    backgroundVideo: string | null;
+                    image: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      media?: unknown;
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                      alt: string | "Image-Broken";
+                      blurData: string | null;
+                      dominantColor: string | null;
+                    } | null;
+                    buttons: Array<{
+                      text: string | null;
+                      variant:
+                        | "default"
+                        | "link"
+                        | "outline"
+                        | "primary"
+                        | "secondary"
+                        | null;
+                      icon: "volvo-chevron-right" | null;
+                      _key: string;
+                      _type: "button";
+                      openInNewTab: boolean | null;
+                      href: string | null;
+                    }> | null;
+                    _type: "mainHero";
+                    _key: string;
+                  }
+                | {
+                    title?: string;
+                    subTitle: Array<{
+                      children?: Array<{
+                        marks?: Array<string>;
+                        text?: string;
+                        _type: "span";
+                        _key: string;
+                      }>;
+                      style?:
+                        | "h2"
+                        | "h3"
+                        | "h4"
+                        | "h5"
+                        | "h6"
+                        | "inline"
+                        | "normal";
+                      listItem?: "bullet" | "number";
+                      markDefs: Array<
+                        | {
+                            customLink?: CustomUrl;
+                            _type: "customLink";
+                            _key: string;
+                            openInNewTab: boolean | null;
+                            href: string | "#" | null;
+                          }
+                        | {
+                            customLink?: CustomUrl;
+                            _type: "customLink";
+                            _key: string;
+                          }
+                      > | null;
+                      level?: number;
+                      _type: "block";
+                      _key: string;
+                    }> | null;
+                    helperText: Array<{
+                      children?: Array<{
+                        marks?: Array<string>;
+                        text?: string;
+                        _type: "span";
+                        _key: string;
+                      }>;
+                      style?:
+                        | "h2"
+                        | "h3"
+                        | "h4"
+                        | "h5"
+                        | "h6"
+                        | "inline"
+                        | "normal";
+                      listItem?: "bullet" | "number";
+                      markDefs: Array<
+                        | {
+                            customLink?: CustomUrl;
+                            _type: "customLink";
+                            _key: string;
+                            openInNewTab: boolean | null;
+                            href: string | "#" | null;
+                          }
+                        | {
+                            customLink?: CustomUrl;
+                            _type: "customLink";
+                            _key: string;
+                          }
+                      > | null;
+                      level?: number;
+                      _type: "block";
+                      _key: string;
+                    }> | null;
+                    _type: "subscribeNewsletter";
+                    _key: string;
+                  }
+              > | null;
+            }> | null;
+          }
+      > | null;
+    }
+  | null;
+// Variable: queryMotoresPentaPaths
+// Query: *[_type == "motoresPenta" && defined(slug.current)].slug.current
+export type QueryMotoresPentaPathsResult = Array<string | null>;
 
 // Query TypeMap
 import "@sanity/client";
@@ -13000,5 +16164,8 @@ declare module "@sanity/client" {
     '*[_type == "buses"]{\n  _id,\n  _type,\n  title,\n  description,\n  "slug": slug.current,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n}': QueryBusesDataResult;
     '*[\n  (_type == "buses" || _type == "page")\n  && slug.current == $slug \n][0]{\n  _id,\n  _type,\n  title,\n  description,\n  "slug": slug.current,\n  _type == "buses" => { \n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n, \n    \n  "categoryData": {\n    "label": category,\n    "slug": category,\n    "iri": "/camiones/" + category,\n    "parent": null\n  }\n\n  },\n  \n  pageBuilder[]{\n    ...,\n    _type,\n    \n  _type == "cta" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n,\n    \n  _type == "mainHero" => {\n    ...,\n    "backgroundImage": backgroundImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    "backgroundVideo": backgroundVideo.asset->url,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n    \n  _type == "hero" => {\n    ...,\n    variant,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n    \n  _type == "doubleHero" => {\n    ...,\n    variant,\n    primaryBadge,\n    primaryTitle,\n    "primaryRichText": primaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "primaryImage": primaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    secondaryBadge,\n    secondaryTitle,\n    "secondaryRichText": secondaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "secondaryImage": secondaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n    \n  _type == "faqAccordion" => {\n    ...,\n    \n  "faqs": array::compact(faqs[]->{\n    title,\n    _id,\n    _type,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  })\n,\n    link{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n    \n  _type == "subscribeNewsletter" => {\n    ...,\n    "subTitle": subTitle[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "helperText": helperText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  _type == "imageLinkCards" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    "cards": array::compact(cards[]{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      ),\n      \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    })\n  }\n,\n    \n  _type == "formBlock" => {\n    ...,\n    title,\n    description,\n    variant,\n    "form": form->{\n      _id,\n      title,\n      description,\n      \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n      submitButtonText,\n      successMessage,\n      errorMessage\n    }\n  }\n,\n    \n  _type == "tabs" => {\n    ...,\n    title,\n    description,\n    tabs[]{\n      _key,\n      label,\n      content[]{\n        ...,\n        _type,\n        _key,\n        \n  _type == "cta" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n,\n        \n  _type == "mainHero" => {\n    ...,\n    "backgroundImage": backgroundImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    "backgroundVideo": backgroundVideo.asset->url,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n        \n  _type == "hero" => {\n    ...,\n    variant,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n        \n  _type == "doubleHero" => {\n    ...,\n    variant,\n    primaryBadge,\n    primaryTitle,\n    "primaryRichText": primaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "primaryImage": primaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    secondaryBadge,\n    secondaryTitle,\n    "secondaryRichText": secondaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "secondaryImage": secondaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n        \n  _type == "faqAccordion" => {\n    ...,\n    \n  "faqs": array::compact(faqs[]->{\n    title,\n    _id,\n    _type,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  })\n,\n    link{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n        \n  _type == "subscribeNewsletter" => {\n    ...,\n    "subTitle": subTitle[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "helperText": helperText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n        \n  _type == "imageLinkCards" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    "cards": array::compact(cards[]{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      ),\n      \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    })\n  }\n,\n        \n  _type == "formBlock" => {\n    ...,\n    title,\n    description,\n    variant,\n    "form": form->{\n      _id,\n      title,\n      description,\n      \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n      submitButtonText,\n      successMessage,\n      errorMessage\n    }\n  }\n,\n        _type == "tabs" => {\n          ...,\n          title,\n          description,\n          tabs[]{\n            _key,\n            label,\n            content[]{ \n              ...,\n              _type,\n              _key\n            }\n          }\n        }\n      }\n    }\n  }\n,\n    \n  _type == "infoSection" => {\n    ...,\n    title,\n    headingLevel,\n    content[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n \n}': QueryBusOrPageBySlugResult;
     '\n  *[_type == "buses" && defined(slug.current)].slug.current\n': QueryBusesPathsResult;
+    '*[_type == "motoresPenta"]{\n  _id,\n  _type,\n  title,\n  description,\n  "slug": slug.current,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n}': QueryMotoresPentaDataResult;
+    '*[\n  (_type == "motoresPenta" || _type == "page")\n  && slug.current == $slug \n][0]{\n  _id,\n  _type,\n  title,\n  description,\n  "slug": slug.current,\n  _type == "motoresPenta" => { \n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n, \n    \n  "categoryData": {\n    "label": category,\n    "slug": category,\n    "iri": "/camiones/" + category,\n    "parent": null\n  }\n\n  },\n  \n  pageBuilder[]{\n    ...,\n    _type,\n    \n  _type == "cta" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n,\n    \n  _type == "mainHero" => {\n    ...,\n    "backgroundImage": backgroundImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    "backgroundVideo": backgroundVideo.asset->url,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n    \n  _type == "hero" => {\n    ...,\n    variant,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n    \n  _type == "doubleHero" => {\n    ...,\n    variant,\n    primaryBadge,\n    primaryTitle,\n    "primaryRichText": primaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "primaryImage": primaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    secondaryBadge,\n    secondaryTitle,\n    "secondaryRichText": secondaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "secondaryImage": secondaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n    \n  _type == "faqAccordion" => {\n    ...,\n    \n  "faqs": array::compact(faqs[]->{\n    title,\n    _id,\n    _type,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  })\n,\n    link{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n    \n  _type == "subscribeNewsletter" => {\n    ...,\n    "subTitle": subTitle[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "helperText": helperText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  _type == "imageLinkCards" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    "cards": array::compact(cards[]{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      ),\n      \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    })\n  }\n,\n    \n  _type == "formBlock" => {\n    ...,\n    title,\n    description,\n    variant,\n    "form": form->{\n      _id,\n      title,\n      description,\n      \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n      submitButtonText,\n      successMessage,\n      errorMessage\n    }\n  }\n,\n    \n  _type == "tabs" => {\n    ...,\n    title,\n    description,\n    tabs[]{\n      _key,\n      label,\n      content[]{\n        ...,\n        _type,\n        _key,\n        \n  _type == "cta" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n,\n        \n  _type == "mainHero" => {\n    ...,\n    "backgroundImage": backgroundImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    "backgroundVideo": backgroundVideo.asset->url,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n        \n  _type == "hero" => {\n    ...,\n    variant,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n        \n  _type == "doubleHero" => {\n    ...,\n    variant,\n    primaryBadge,\n    primaryTitle,\n    "primaryRichText": primaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "primaryImage": primaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    secondaryBadge,\n    secondaryTitle,\n    "secondaryRichText": secondaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "secondaryImage": secondaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n        \n  _type == "faqAccordion" => {\n    ...,\n    \n  "faqs": array::compact(faqs[]->{\n    title,\n    _id,\n    _type,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  })\n,\n    link{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n        \n  _type == "subscribeNewsletter" => {\n    ...,\n    "subTitle": subTitle[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "helperText": helperText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n        \n  _type == "imageLinkCards" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    "cards": array::compact(cards[]{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      ),\n      \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    })\n  }\n,\n        \n  _type == "formBlock" => {\n    ...,\n    title,\n    description,\n    variant,\n    "form": form->{\n      _id,\n      title,\n      description,\n      \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n      submitButtonText,\n      successMessage,\n      errorMessage\n    }\n  }\n,\n        _type == "tabs" => {\n          ...,\n          title,\n          description,\n          tabs[]{\n            _key,\n            label,\n            content[]{ \n              ...,\n              _type,\n              _key\n            }\n          }\n        }\n      }\n    }\n  }\n,\n    \n  _type == "infoSection" => {\n    ...,\n    title,\n    headingLevel,\n    content[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n \n}': QueryMotorPentaOrPageBySlugResult;
+    '\n  *[_type == "motoresPenta" && defined(slug.current)].slug.current\n': QueryMotoresPentaPathsResult;
   }
 }
