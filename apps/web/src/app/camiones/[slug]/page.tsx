@@ -1,4 +1,15 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+
+type PageParams = {
+    slug: string;
+};
+
+type Props = {
+    params: Promise<PageParams>;
+    searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { PageBuilder } from "@/components/pagebuilder";
 
@@ -101,25 +112,26 @@ async function fetchCamionAndPagePaths(): Promise<{ slug: string }[]> {
 export async function generateMetadata({
     params,
 }: {
-    params: { slug: string };
-}) {
-    const { data } = await fetchCamionOrPageData(params.slug);
+    params: Promise<PageParams>;
+}): Promise<Metadata> {
+    const resolvedParams = await params;
+    const { data } = await fetchCamionOrPageData(resolvedParams.slug);
     if (!data) {
         return getMetaData({});
     }
     return getMetaData(data);
 }
 
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<PageParams[]> {
     return await fetchCamionAndPagePaths();
 }
 
 export default async function CamionPage({
     params,
-}: {
-    params: { slug: string };
-}) {
-    const { data } = await fetchCamionOrPageData(params.slug);
+    searchParams,
+}: Props) {
+    const resolvedParams = await params;
+    const { data } = await fetchCamionOrPageData(resolvedParams.slug);
 
     if (!data) {
         return notFound();

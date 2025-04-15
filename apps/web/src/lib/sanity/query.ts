@@ -599,20 +599,18 @@ export const queryCamionesData = defineQuery(`*[_type == "camiones"]{
 
 export const queryCamionOrPageBySlug = defineQuery(`*[
   (_type == "camiones" || _type == "page")
-  && slug.current == $slug
+  && slug.current == $slug 
 ][0]{
   _id,
   _type,
   title,
   description,
   "slug": slug.current,
-  // Conditional fields based on type
   _type == "camiones" => { 
     ${imageFragment},
     ${richTextFragment}, 
     ${categoryBreadcrumbFragment}
   },
-  // Always include pageBuilder for both
   ${pageBuilderFragment} 
 }`);
 
