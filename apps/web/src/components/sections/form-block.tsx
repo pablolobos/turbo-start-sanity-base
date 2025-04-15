@@ -2,7 +2,7 @@
 
 import { generateID } from "@/lib/utils"
 import { cleanRut, validateRut } from "@/lib/rut"
-import { useState, FormEvent, useRef } from 'react'
+import { useState, FormEvent, useRef, useEffect } from 'react'
 import { cn } from "@workspace/ui/lib/utils"
 import * as Form from "@radix-ui/react-form"
 import { Button } from "@workspace/ui/components/button"
@@ -34,6 +34,186 @@ interface FormBlockProps {
     form: FormData
 }
 
+// Data for regions and comunas
+const regionesData = {
+    "regiones": [
+        {
+            "region": "Arica y Parinacota",
+            "comunas": ["Arica", "Camarones", "Putre", "General Lagos"]
+        },
+        {
+            "region": "Tarapacá",
+            "comunas": ["Iquique", "Alto Hospicio", "Pozo Almonte", "Camiña", "Colchane", "Huara", "Pica"]
+        },
+        {
+            "region": "Antofagasta",
+            "comunas": ["Antofagasta", "Mejillones", "Sierra Gorda", "Taltal", "Calama", "Ollagüe", "San Pedro de Atacama", "Tocopilla", "María Elena"]
+        },
+        {
+            "region": "Atacama",
+            "comunas": ["Copiapó", "Caldera", "Tierra Amarilla", "Chañaral", "Diego de Almagro", "Vallenar", "Alto del Carmen", "Freirina", "Huasco"]
+        },
+        {
+            "region": "Coquimbo",
+            "comunas": ["La Serena", "Coquimbo", "Andacollo", "La Higuera", "Paiguano", "Vicuña", "Illapel", "Canela", "Los Vilos", "Salamanca", "Ovalle", "Combarbalá", "Monte Patria", "Punitaqui", "Río Hurtado"]
+        },
+        {
+            "region": "Valparaíso",
+            "comunas": ["Valparaíso", "Casablanca", "Concón", "Juan Fernández", "Puchuncaví", "Quintero", "Viña del Mar", "Isla de Pascua", "Los Andes", "Calle Larga", "Rinconada", "San Esteban", "La Ligua", "Cabildo", "Papudo", "Petorca", "Zapallar", "Quillota", "Calera", "Hijuelas", "La Cruz", "Nogales", "San Antonio", "Algarrobo", "Cartagena", "El Quisco", "El Tabo", "Santo Domingo", "San Felipe", "Catemu", "Llaillay", "Panquehue", "Putaendo", "Santa María", "Quilpué", "Limache", "Olmué", "Villa Alemana"]
+        },
+        {
+            "region": "Región de O'Higgins",
+            "comunas": ["Rancagua", "Codegua", "Coinco", "Coltauco", "Doñihue", "Graneros", "Las Cabras", "Machalí", "Malloa", "Mostazal", "Olivar", "Peumo", "Pichidegua", "Quinta de Tilcoco", "Rengo", "Requínoa", "San Vicente", "Pichilemu", "La Estrella", "Litueche", "Marchihue", "Navidad", "Paredones", "San Fernando", "Chépica", "Chimbarongo", "Lolol", "Nancagua", "Palmilla", "Peralillo", "Placilla", "Pumanque", "Santa Cruz"]
+        },
+        {
+            "region": "Región del Maule",
+            "comunas": ["Talca", "Constitución", "Curepto", "Empedrado", "Maule", "Pelarco", "Pencahue", "Río Claro", "San Clemente", "San Rafael", "Cauquenes", "Chanco", "Pelluhue", "Curicó", "Hualañé", "Licantén", "Molina", "Rauco", "Romeral", "Sagrada Familia", "Teno", "Vichuquén", "Linares", "Colbún", "Longaví", "Parral", "Retiro", "San Javier", "Villa Alegre", "Yerbas Buenas"]
+        },
+        {
+            "region": "Región de Ñuble",
+            "comunas": ["Cobquecura", "Coelemu", "Ninhue", "Portezuelo", "Quirihue", "Ránquil", "Treguaco", "Bulnes", "Chillán Viejo", "Chillán", "El Carmen", "Pemuco", "Pinto", "Quillón", "San Ignacio", "Yungay", "Coihueco", "Ñiquén", "San Carlos", "San Fabián", "San Nicolás"]
+        },
+        {
+            "region": "Región del Biobío",
+            "comunas": ["Concepción", "Coronel", "Chiguayante", "Florida", "Hualqui", "Lota", "Penco", "San Pedro de la Paz", "Santa Juana", "Talcahuano", "Tomé", "Hualpén", "Lebu", "Arauco", "Cañete", "Contulmo", "Curanilahue", "Los Álamos", "Tirúa", "Los Ángeles", "Antuco", "Cabrero", "Laja", "Mulchén", "Nacimiento", "Negrete", "Quilaco", "Quilleco", "San Rosendo", "Santa Bárbara", "Tucapel", "Yumbel", "Alto Biobío"]
+        },
+        {
+            "region": "Región de la Araucanía",
+            "comunas": ["Temuco", "Carahue", "Cunco", "Curarrehue", "Freire", "Galvarino", "Gorbea", "Lautaro", "Loncoche", "Melipeuco", "Nueva Imperial", "Padre las Casas", "Perquenco", "Pitrufquén", "Pucón", "Saavedra", "Teodoro Schmidt", "Toltén", "Vilcún", "Villarrica", "Cholchol", "Angol", "Collipulli", "Curacautín", "Ercilla", "Lonquimay", "Los Sauces", "Lumaco", "Purén", "Renaico", "Traiguén", "Victoria"]
+        },
+        {
+            "region": "Región de Los Ríos",
+            "comunas": ["Valdivia", "Corral", "Lanco", "Los Lagos", "Máfil", "Mariquina", "Paillaco", "Panguipulli", "La Unión", "Futrono", "Lago Ranco", "Río Bueno"]
+        },
+        {
+            "region": "Región de Los Lagos",
+            "comunas": ["Puerto Montt", "Calbuco", "Cochamó", "Fresia", "Frutillar", "Los Muermos", "Llanquihue", "Maullín", "Puerto Varas", "Castro", "Ancud", "Chonchi", "Curaco de Vélez", "Dalcahue", "Puqueldón", "Queilén", "Quellón", "Quemchi", "Quinchao", "Osorno", "Puerto Octay", "Purranque", "Puyehue", "Río Negro", "San Juan de la Costa", "San Pablo", "Chaitén", "Futaleufú", "Hualaihué", "Palena"]
+        },
+        {
+            "region": "Región de Aisén",
+            "comunas": ["Coyhaique", "Lago Verde", "Aisén", "Cisnes", "Guaitecas", "Cochrane", "O'Higgins", "Tortel", "Chile Chico", "Río Ibáñez"]
+        },
+        {
+            "region": "Región de Magallanes ",
+            "comunas": ["Punta Arenas", "Laguna Blanca", "Río Verde", "San Gregorio", "Cabo de Hornos (Ex Navarino)", "Antártica", "Porvenir", "Primavera", "Timaukel", "Natales", "Torres del Paine"]
+        },
+        {
+            "region": "Región Metropolitana",
+            "comunas": ["Cerrillos", "Cerro Navia", "Conchalí", "El Bosque", "Estación Central", "Huechuraba", "Independencia", "La Cisterna", "La Florida", "La Granja", "La Pintana", "La Reina", "Las Condes", "Lo Barnechea", "Lo Espejo", "Lo Prado", "Macul", "Maipú", "Ñuñoa", "Pedro Aguirre Cerda", "Peñalolén", "Providencia", "Pudahuel", "Quilicura", "Quinta Normal", "Recoleta", "Renca", "Santiago", "San Joaquín", "San Miguel", "San Ramón", "Vitacura", "Puente Alto", "Pirque", "San José de Maipo", "Colina", "Lampa", "Tiltil", "San Bernardo", "Buin", "Calera de Tango", "Paine", "Melipilla", "Alhué", "Curacaví", "María Pinto", "San Pedro", "Talagante", "El Monte", "Isla de Maipo", "Padre Hurtado", "Peñaflor"]
+        }
+    ]
+}
+
+// RegionComunaSelector component
+function RegionComunaSelector({ fieldName, required }: { fieldName: string, required: boolean }) {
+    const regionSelectRef = useRef<HTMLSelectElement>(null);
+    const comunaSelectRef = useRef<HTMLSelectElement>(null);
+
+    // Initial setup after component mounts
+    useEffect(() => {
+        // Initialize event listeners
+        if (regionSelectRef.current) {
+            regionSelectRef.current.addEventListener('change', function () {
+                const selectedRegion = this.value;
+
+                // Clear and disable comuna select if no region is selected
+                if (!selectedRegion && comunaSelectRef.current) {
+                    while (comunaSelectRef.current.options.length > 1) {
+                        comunaSelectRef.current.remove(1);
+                    }
+                    comunaSelectRef.current.disabled = true;
+                    return;
+                }
+
+                // Find the selected region data
+                const regionData = regionesData.regiones.find(r => r.region === selectedRegion);
+
+                // Update comuna options if region data exists
+                if (regionData && comunaSelectRef.current) {
+                    // Enable the comuna select
+                    comunaSelectRef.current.disabled = false;
+
+                    // Clear existing options (except the first one)
+                    while (comunaSelectRef.current.options.length > 1) {
+                        comunaSelectRef.current.remove(1);
+                    }
+
+                    // Add new options
+                    regionData.comunas.forEach(comuna => {
+                        const option = document.createElement('option');
+                        option.value = comuna;
+                        option.text = comuna;
+                        comunaSelectRef.current?.add(option);
+                    });
+                }
+            });
+        }
+    }, []);
+
+    const commonProps = {
+        required: required,
+        className: cn(
+            "w-full rounded-sm border border-border bg-input",
+            "px-4 py-3 text-base",
+            "placeholder:text-zinc-500",
+            "focus:border-black focus:outline-none focus:ring-2 focus:ring-ring"
+        )
+    };
+
+    return (
+        <div className="space-y-4">
+            {/* Calle */}
+            <div>
+                <label className="block mb-1 font-medium text-sm">Calle</label>
+                <Form.Control asChild>
+                    <input
+                        type="text"
+                        name={`${fieldName}_calle`}
+                        {...commonProps}
+                        placeholder="Nombre de la calle y número"
+                    />
+                </Form.Control>
+            </div>
+
+            {/* Región */}
+            <div>
+                <label className="block mb-1 font-medium text-sm">Región</label>
+                <Form.Control asChild>
+                    <select
+                        ref={regionSelectRef}
+                        name={`${fieldName}_region`}
+                        id={`${fieldName}_region`}
+                        {...commonProps}
+                    >
+                        <option value="">Seleccione una región</option>
+                        {regionesData.regiones.map((regionData) => (
+                            <option key={regionData.region} value={regionData.region}>
+                                {regionData.region}
+                            </option>
+                        ))}
+                    </select>
+                </Form.Control>
+            </div>
+
+            {/* Comuna */}
+            <div>
+                <label className="block mb-1 font-medium text-sm">Comuna</label>
+                <Form.Control asChild>
+                    <select
+                        ref={comunaSelectRef}
+                        name={`${fieldName}_comuna`}
+                        id={`${fieldName}_comuna`}
+                        {...commonProps}
+                        disabled={true}
+                    >
+                        <option value="">Seleccione una comuna</option>
+                    </select>
+                </Form.Control>
+            </div>
+        </div>
+    );
+}
+
 export default function FormBlock({ title, description, variant = 'default', form }: FormBlockProps) {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
@@ -53,12 +233,45 @@ export default function FormBlock({ title, description, variant = 'default', for
                 value = cleanRut(value)
             }
 
+            // Handle direccion field type
+            if (field.type === 'direccion') {
+                // Get values from the three direccion fields
+                const calle = formData.get(`${field.name}_calle`)?.toString() || ''
+                const region = formData.get(`${field.name}_region`)?.toString() || ''
+                const comuna = formData.get(`${field.name}_comuna`)?.toString() || ''
+
+                // Format the value as a combined address string
+                value = `${calle}, ${comuna}, ${region}`.trim()
+
+                // Return separate fields for each component
+                return [
+                    {
+                        _key: generateID(),
+                        name: `${field.name}_calle`,
+                        value: calle
+                    },
+                    {
+                        _key: generateID(),
+                        name: `${field.name}_region`,
+                        value: region
+                    },
+                    {
+                        _key: generateID(),
+                        name: `${field.name}_comuna`,
+                        value: comuna
+                    }
+                ]
+            }
+
             return {
                 _key: generateID(),
                 name: field.name,
                 value
             }
         })
+
+        // Flatten the fields array since direccion fields return multiple entries
+        const flattenedFields = fields.flat()
 
         const mutations = [{
             create: {
@@ -69,7 +282,7 @@ export default function FormBlock({ title, description, variant = 'default', for
                 name: formData.get('name')?.toString() || 'No name provided',
                 email: formData.get('email')?.toString() || 'No email provided',
                 subject: form.title,
-                fields,
+                fields: flattenedFields,
                 emailRecipients: form.emailRecipients
             }
         }]
@@ -110,6 +323,8 @@ export default function FormBlock({ title, description, variant = 'default', for
         }
 
         switch (field.type) {
+            case 'direccion':
+                return <RegionComunaSelector fieldName={field.name} required={field.required === 'yes'} />
             case 'rut':
                 return (
                     <Form.Control asChild>
@@ -276,7 +491,7 @@ export default function FormBlock({ title, description, variant = 'default', for
                     <Button
                         disabled={isSubmitting}
                         className={cn(
-                            "w-fit  px-4 py-3",
+                            "w-fit px-4 py-3",
                             "disabled:opacity-50 disabled:cursor-not-allowed"
                         )}
                     >
