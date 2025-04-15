@@ -1221,6 +1221,12 @@ export type Camiones = {
   _updatedAt: string;
   _rev: string;
   title?: string;
+  category?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "skosConcept";
+  };
   description?: string;
   slug?: Slug;
   image?: {
@@ -1236,6 +1242,7 @@ export type Camiones = {
     _type: "image";
   };
   richText?: RichText;
+  pageBuilder?: PageBuilder;
   seoTitle?: string;
   seoDescription?: string;
   seoImage?: {

@@ -110,34 +110,34 @@ export const structure = (
     .items([
       createSingleTon({ S, type: "homePage", icon: HomeIcon }),
       S.divider(),
-      createList({ S, type: "page", title: "Pages" }),
+      createList({ S, type: "page", title: "Páginas" }),
       createIndexListWithOrderableItems({
         S,
         index: { type: "blogIndex", icon: BookMarked },
-        list: { type: "blog", title: "Blogs", icon: FileText },
+        list: { type: "blog", title: "Artículos", icon: FileText },
         context,
       }),
       createList({ S, type: "camiones", title: "Camiones", icon: Truck }),
+      createList({ S, type: "formularios", title: "Formularios", icon: NotepadText }),
       createList({
         S,
         type: "faq",
         title: "FAQs",
         icon: MessageCircleQuestion,
       }),
-      createList({ S, type: "formularios", title: "Formularios", icon: NotepadText }),
-      createList({ S, type: "author", title: "Authors", icon: User }),
+      createList({ S, type: "author", title: "Autores", icon: User }),
       S.divider(),
       S.listItem()
-        .title("Site Configuration")
+        .title("Configuración del sitio")
         .icon(Settings2)
         .child(
           S.list()
-            .title("Site Configuration")
+            .title("Configuración del sitio")
             .items([
               createSingleTon({
                 S,
                 type: "navbar",
-                title: "Navigation",
+                title: "Navegación",
                 icon: PanelTopDashedIcon,
               }),
               createSingleTon({
@@ -149,7 +149,7 @@ export const structure = (
               createSingleTon({
                 S,
                 type: "settings",
-                title: "Global Settings",
+                title: "Configuración global",
                 icon: CogIcon,
               }),
             ]),
