@@ -122,13 +122,13 @@ export function Search() {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button variant="ghost" size="icon" className="relative" aria-label="Search">
+                <Button variant="ghost" size="icon" className="right-10 relative" aria-label="Search">
                     <SearchIcon className="w-5 h-5" />
                 </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[550px] max-h-[80vh]">
+            <DialogContent className="z-[101] pt-10 sm:max-w-[550px] h-screen lg:max-h-[80vh]">
                 <DialogTitle className="sr-only">Búsqueda</DialogTitle>
-                <div className="flex items-center mb-4 border rounded-md overflow-hidden">
+                <div className="flex items-center mb-4 border rounded-md h- h-[50px] overflow-hidden">
                     <SearchIcon className="ml-2 w-5 h-5 text-muted-foreground" />
                     <Input
                         ref={searchInputRef}
