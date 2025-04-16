@@ -82,7 +82,7 @@ export function CotizadorButton({
                         initial={{ opacity: 0, scale: 0.9, y: -10 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.9, y: 10 }}
-                        whileHover={{ scale: 1.05, delay: 0 }}
+                        whileHover={{ scale: 1.05 }}
                         transition={{
                             duration: 0.2,
                             ease: "easeInOut",
