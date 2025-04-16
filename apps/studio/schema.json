@@ -3506,6 +3506,10 @@
                                   {
                                     "type": "string",
                                     "value": "masonry"
+                                  },
+                                  {
+                                    "type": "string",
+                                    "value": "bento"
                                   }
                                 ]
                               },
@@ -3527,6 +3531,35 @@
                                   {
                                     "type": "string",
                                     "value": "4"
+                                  }
+                                ]
+                              },
+                              "optional": true
+                            },
+                            "slidesPerRow": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "union",
+                                "of": [
+                                  {
+                                    "type": "number",
+                                    "value": 1
+                                  },
+                                  {
+                                    "type": "number",
+                                    "value": 2
+                                  },
+                                  {
+                                    "type": "number",
+                                    "value": 3
+                                  },
+                                  {
+                                    "type": "number",
+                                    "value": 4
+                                  },
+                                  {
+                                    "type": "number",
+                                    "value": 5
                                   }
                                 ]
                               },
@@ -4574,6 +4607,10 @@
               {
                 "type": "string",
                 "value": "masonry"
+              },
+              {
+                "type": "string",
+                "value": "bento"
               }
             ]
           },
@@ -4595,6 +4632,35 @@
               {
                 "type": "string",
                 "value": "4"
+              }
+            ]
+          },
+          "optional": true
+        },
+        "slidesPerRow": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "number",
+                "value": 1
+              },
+              {
+                "type": "number",
+                "value": 2
+              },
+              {
+                "type": "number",
+                "value": 3
+              },
+              {
+                "type": "number",
+                "value": 4
+              },
+              {
+                "type": "number",
+                "value": 5
               }
             ]
           },

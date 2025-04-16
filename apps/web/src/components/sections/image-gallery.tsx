@@ -168,7 +168,7 @@ interface GalleryImage {
 interface ImageGalleryProps {
     title?: string;
     description?: string;
-    layout: 'grid' | 'carousel' | 'masonry';
+    layout: 'grid' | 'carousel' | 'masonry' | 'bento';
     columns?: '2' | '3' | '4';
     images: GalleryImage[];
     slidesPerRow?: 1 | 2 | 3 | 4 | 5;
@@ -196,6 +196,8 @@ export function ImageGallery({
 
     // Set isMounted to true when component mounts
     useEffect(() => {
+        console.log("Gallery layout:", layout);
+        console.log("Images:", images);
         setIsMounted(true);
 
         // Clean up on unmount
@@ -203,7 +205,7 @@ export function ImageGallery({
             setActiveImage(null);
             setIsOpen(false);
         };
-    }, []);
+    }, [layout, images]);
 
     const handleImageClick = (image: GalleryImage) => {
         setActiveImage(image);
@@ -238,7 +240,7 @@ export function ImageGallery({
     return (
         <section className="px-4 sm:px-6 lg:px-8 py-12">
             <style jsx global>{swiperStyles}</style>
-            {title && (
+            {title && layout !== 'bento' && (
                 <h2 className="mb-4 font-bold text-gray-900 text-3xl tracking-tight">{title}</h2>
             )}
             {description && (
@@ -309,6 +311,111 @@ export function ImageGallery({
                             )}
                         </div>
                     ))}
+                </div>
+            ) : layout === 'bento' ? (
+                <div className="bg-gray-100 shadow-sm p-6 md:p-8 rounded w-full">
+                    {/* Title for the gallery section if needed */}
+                    {title && (
+                        <h3 className="mb-6 font-medium text-gray-800 text-xl">{title}</h3>
+                    )}
+
+                    <div className="space-y-4 md:space-y-6">
+                        {/* Top row - two images side by side */}
+                        <div className="gap-4 md:gap-6 grid grid-cols-1 md:grid-cols-2">
+                            {/* First image (left) */}
+                            {images[0] && (
+                                <div
+                                    className="relative bg-gray-200 rounded-none aspect-[4/3] overflow-hidden cursor-pointer"
+                                    onClick={() => images[0] && handleImageClick(images[0])}
+                                >
+                                    <SanityImage
+                                        asset={images[0].image}
+                                        alt={images[0].image.alt}
+                                        fill
+                                        sizes="(max-width: 768px) 100vw, 50vw"
+                                        className="object-cover"
+                                    />
+                                    {images[0].caption && (
+                                        <div className="right-0 bottom-0 left-0 absolute bg-black/60 p-2 text-white">
+                                            <p className="text-sm">{images[0].caption}</p>
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+
+                            {/* Second image (right) */}
+                            {images[1] ? (
+                                <div
+                                    className="relative bg-gray-200 rounded-none aspect-[4/3] overflow-hidden cursor-pointer"
+                                    onClick={() => images[1] && handleImageClick(images[1])}
+                                >
+                                    <SanityImage
+                                        asset={images[1].image}
+                                        alt={images[1].image.alt}
+                                        fill
+                                        sizes="(max-width: 768px) 100vw, 50vw"
+                                        className="object-cover"
+                                    />
+                                    {images[1].caption && (
+                                        <div className="right-0 bottom-0 left-0 absolute bg-black/60 p-2 text-white">
+                                            <p className="text-sm">{images[1].caption}</p>
+                                        </div>
+                                    )}
+                                </div>
+                            ) : (
+                                <div className="relative bg-gray-200 rounded-none aspect-[4/3]"></div>
+                            )}
+                        </div>
+
+                        {/* Bottom row - one larger image */}
+                        {images.length > 2 && images[2] ? (
+                            <div
+                                className="relative bg-gray-200 rounded-none aspect-[21/9] overflow-hidden cursor-pointer"
+                                onClick={() => images[2] && handleImageClick(images[2])}
+                            >
+                                <SanityImage
+                                    asset={images[2].image}
+                                    alt={images[2].image.alt}
+                                    fill
+                                    sizes="100vw"
+                                    className="object-cover"
+                                />
+                                {images[2].caption && (
+                                    <div className="right-0 bottom-0 left-0 absolute bg-black/60 p-2 text-white">
+                                        <p className="text-sm">{images[2].caption}</p>
+                                    </div>
+                                )}
+                            </div>
+                        ) : (
+                            <div className="relative bg-gray-200 rounded-none aspect-[21/9]"></div>
+                        )}
+
+                        {/* Any additional images shown in a grid */}
+                        {images.length > 3 && (
+                            <div className={cn('grid gap-4 md:gap-6', getColumnClass())}>
+                                {images.slice(3).map((image) => (
+                                    <div
+                                        key={image._key}
+                                        className="relative bg-gray-200 rounded-none w-full aspect-[4/3] overflow-hidden cursor-pointer"
+                                        onClick={() => handleImageClick(image)}
+                                    >
+                                        <SanityImage
+                                            asset={image.image}
+                                            alt={image.image.alt}
+                                            fill
+                                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                            className="object-cover"
+                                        />
+                                        {image.caption && (
+                                            <div className="right-0 bottom-0 left-0 absolute bg-black/60 p-2 text-white">
+                                                <p className="text-sm">{image.caption}</p>
+                                            </div>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
                 </div>
             ) : (
                 <div className={cn('grid gap-4', getColumnClass())}>

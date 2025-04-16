@@ -262,6 +262,7 @@ const imageGalleryBlock = `
     description,
     layout,
     columns,
+    slidesPerRow,
     "images": images[]{
       ...,
       "image": image{
