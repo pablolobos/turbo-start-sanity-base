@@ -149,7 +149,7 @@ function MobileNavbar({ data }: { data: NonNullable<NAVBAR_QUERYResult> }) {
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
-      <div className="flex justify-end">
+      <div className="top-1 right-2 absolute flex justify-end">
         <SheetTrigger asChild>
           <Button variant="ghost" size="icon">
             <Menu className="size-4" />
