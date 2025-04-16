@@ -1,4 +1,5 @@
 import { defineQuery } from "next-sanity";
+import type { SanityImageCrop, SanityImageHotspot } from "./sanity.types";
 
 // Base fragments for reusable query parts
 const imageFragment = `
@@ -750,3 +751,58 @@ export const COTIZADOR_FORM_BY_ID_QUERY = defineQuery(`*[
   description,
   ${formFieldsFragment}
 }`);
+
+// Search Query
+export const SEARCH_QUERY = defineQuery(`{
+  "results": *[
+    _type in ["page", "blog", "camiones", "buses", "motoresPenta"]
+    && (
+      title match $searchTerm || 
+      description match $searchTerm
+    )
+  ] | order(_createdAt desc) [0...20] {
+    _id,
+    _type,
+    title,
+    description,
+    "slug": slug.current,
+    "image": image{
+      "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),
+      "blurData": asset->metadata.lqip,
+      "dominantColor": asset->metadata.palette.dominant.background
+    },
+    "category": select(
+      _type == "camiones" => category,
+      _type == "buses" => category,
+      _type == "motoresPenta" => category,
+      null
+    ),
+    _createdAt
+  }
+}`);
+
+export type SEARCH_QUERYResult = {
+  results: Array<{
+    _id: string;
+    _type: "page" | "blog" | "camiones" | "buses" | "motoresPenta";
+    title: string | null;
+    description: string | null;
+    slug: string | null;
+    image: {
+      alt: string | "Image-Broken";
+      blurData: string | null;
+      dominantColor: string | null;
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    category: string | null;
+    _createdAt: string;
+  }>;
+};

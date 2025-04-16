@@ -1,0 +1,41 @@
+// Copy and paste this query to Sanity Vision to test search functionality
+
+// Test simple page existence
+*[_type == "page"][0...5] {
+  _id,
+  _type,
+  title
+}
+
+// Test simple match with a specific search term
+// Replace "test" with a known word in your content
+*[
+  _type in ["page", "blog", "camiones", "buses", "motoresPenta"]
+  && title match "*test*"
+][0...10] {
+  _id,
+  _type,
+  title,
+  description
+}
+
+// Test full search query
+// Replace "test" with a known word in your content
+{
+  "results": [
+    ...*[
+      _type in ["page", "blog", "camiones", "buses", "motoresPenta"]
+      && (
+        title match "*test*" || 
+        description match "*test*" ||
+        richText[].children[].text match "*test*"
+      )
+    ] | order(_createdAt desc) [0...20] {
+      _id,
+      _type,
+      title,
+      description,
+      "slug": slug.current
+    }
+  ]
+} 

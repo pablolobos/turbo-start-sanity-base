@@ -5,7 +5,7 @@ import { IconPicker } from "@/types/icon-picker";
 
 import { Logo } from "./logo";
 import { NavbarClientDynamic as NavbarClient, NavbarSkeletonResponsive } from "./navbar-client";
-
+import { Search } from "./search";
 
 export async function NavbarServer() {
   const navbarData = await sanityFetch({ query: NAVBAR_QUERY });
@@ -21,6 +21,8 @@ export function Navbar({ navbarData }: { navbarData: NAVBAR_QUERYResult }) {
         <nav className="relative flex flex-col items-center gap-4">
           <div className="flex justify-start items-center w-full h-[var(--header-main-height-mobile)] md:h-[var(--header-main-height)] max-container padding-center">
             <Logo src={logo} alt={siteTitle} priority />
+            <div className="flex-1"></div>
+            <Search />
           </div>
           <div className="top-[5px] md:top-auto right-[10px] md:right-auto absolute md:relative md:w-full">
           </div>
