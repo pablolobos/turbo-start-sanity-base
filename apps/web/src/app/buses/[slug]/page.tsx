@@ -12,6 +12,7 @@ type Props = {
 
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { PageBuilder } from "@/components/pagebuilder";
+import { CotizadorButton } from "@/components/cotizador-button";
 
 import { client } from "@/lib/sanity/client";
 import { sanityFetch } from "@/lib/sanity/live";
@@ -159,13 +160,21 @@ export default async function BusPage({
                             : "Este bus aún no tiene bloques de contenido."
                         }
                     </p>
+                    <div className="mt-6">
+                        <CotizadorButton buttonVariant="default" pageTitle={title} />
+                    </div>
                 </div>
             ) : _type === "buses" ? (
                 // Specific layout for 'buses' type
                 <>
                     <div className="flex flex-col gap-8 lg:grid lg:grid-cols-2 py-12 lg:py-20 container-padding padding-center max-container">
-                        <h1 className="mb-4 font-semibold text-4xl capitalize">{title}</h1>
-                        {description && <p className="text-base">{description}</p>}
+                        <div>
+                            <h1 className="mb-4 font-semibold text-4xl capitalize">{title}</h1>
+                            {description && <p className="text-base">{description}</p>}
+                            <div className="mt-6">
+                                <CotizadorButton buttonVariant="default" pageTitle={title} />
+                            </div>
+                        </div>
                         {/* TODO: Add image display here if needed for bus layout */}
                     </div>
                     {/* Render page builder content for buses */}
@@ -175,8 +184,14 @@ export default async function BusPage({
                 </>
             ) : (
                 // Default rendering for 'page' type using PageBuilder
-                pageBuilder && pageBuilder.length > 0 &&
-                <PageBuilder pageBuilder={pageBuilder} id={_id} type={_type} />
+                <>
+                    <div className="flex justify-end mx-auto mb-8 px-4 max-w-screen-xl">
+                        <CotizadorButton buttonVariant="default" pageTitle={title} />
+                    </div>
+                    {pageBuilder && pageBuilder.length > 0 &&
+                        <PageBuilder pageBuilder={pageBuilder} id={_id} type={_type} />
+                    }
+                </>
             )}
         </>
     );

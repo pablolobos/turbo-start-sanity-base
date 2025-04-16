@@ -374,6 +374,20 @@ const categoryBreadcrumbFragment = `
   }
 `;
 
+// Add cotizador settings fragment
+const cotizadorSettingsFragment = `
+  cotizadorFormTitle,
+  cotizadorFormDescription,
+  "cotizadorForm": coalesce(cotizadorForm->{
+    _id,
+    _type,
+    title,
+    description,
+    "slug": slug.current,
+    ${formFieldsFragment}
+  }, null)
+`;
+
 export const queryHomePageData =
   defineQuery(`*[_type == "homePage" && _id == "homePage"][0]{
     ...,
@@ -593,7 +607,8 @@ export const queryGlobalSeoSettings = defineQuery(`
       twitter,
       instagram,
       youtube
-    }
+    },
+    ${cotizadorSettingsFragment}
   }
 `);
 
@@ -713,3 +728,22 @@ export const queryMotorPentaOrPageBySlug = defineQuery(`*[
 export const queryMotoresPentaPaths = defineQuery(`
   *[_type == "motoresPenta" && defined(slug.current)].slug.current
 `);
+
+// New query for cotizador settings
+export const COTIZADOR_SETTINGS_QUERY = defineQuery(`*[
+  _type == "settings"
+][0]{
+  _id,
+  ${cotizadorSettingsFragment}
+}`);
+
+// New query for a specific cotizador form by ID
+export const COTIZADOR_FORM_BY_ID_QUERY = defineQuery(`*[
+  _type == "formularios" 
+  && _id == $formId
+][0]{
+  _id,
+  title,
+  description,
+  ${formFieldsFragment}
+}`);

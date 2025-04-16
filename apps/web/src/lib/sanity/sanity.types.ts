@@ -1280,6 +1280,14 @@ export type Settings = {
     instagram?: string;
     youtube?: string;
   };
+  cotizadorFormTitle?: string;
+  cotizadorFormDescription?: string;
+  cotizadorForm?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "formularios";
+  };
 };
 
 export type BlogIndex = {
@@ -1766,6 +1774,14 @@ export type Message = {
   }>;
   read?: boolean;
   starred?: boolean;
+  utmParams?: {
+    utm_source?: string;
+    utm_medium?: string;
+    utm_campaign?: string;
+    utm_term?: string;
+    utm_content?: string;
+  };
+  emailRecipients?: string;
 };
 
 export type MediaTag = {
@@ -7148,7 +7164,7 @@ export type QuerySitemapDataResult = {
   }>;
 };
 // Variable: queryGlobalSeoSettings
-// Query: *[_type == "settings"][0]{    _id,    _type,    siteTitle,    siteDescription,    socialLinks{      linkedin,      facebook,      twitter,      instagram,      youtube    }  }
+// Query: *[_type == "settings"][0]{    _id,    _type,    siteTitle,    siteDescription,    socialLinks{      linkedin,      facebook,      twitter,      instagram,      youtube    },      cotizadorFormTitle,  cotizadorFormDescription,  "cotizadorForm": cotizadorForm-> {    _id,    title,    description,    "slug": slug.current,      fields[]{    label,    name,    type,    required,    options,    placeholder  },  emailRecipients,  submitButtonText,  successMessage,  errorMessage  }  }
 export type QueryGlobalSeoSettingsResult = {
   _id: string;
   _type: "settings";
@@ -7160,6 +7176,37 @@ export type QueryGlobalSeoSettingsResult = {
     twitter: string | null;
     instagram: string | null;
     youtube: string | null;
+  } | null;
+  cotizadorFormTitle: string | null;
+  cotizadorFormDescription: string | null;
+  cotizadorForm: {
+    _id: string;
+    title: string | null;
+    description: string | null;
+    slug: string | null;
+    fields: Array<{
+      label: string | null;
+      name: string | null;
+      type:
+        | "checkbox"
+        | "direccion"
+        | "email"
+        | "number"
+        | "radio"
+        | "rut"
+        | "select"
+        | "tel"
+        | "text"
+        | "textarea"
+        | null;
+      required: "no" | "yes" | null;
+      options: Array<string> | null;
+      placeholder: string | null;
+    }> | null;
+    emailRecipients: string | null;
+    submitButtonText: string | null;
+    successMessage: string | null;
+    errorMessage: string | null;
   } | null;
 } | null;
 // Variable: queryAllForms
@@ -17221,6 +17268,72 @@ export type QueryMotorPentaOrPageBySlugResult =
 // Variable: queryMotoresPentaPaths
 // Query: *[_type == "motoresPenta" && defined(slug.current)].slug.current
 export type QueryMotoresPentaPathsResult = Array<string | null>;
+// Variable: COTIZADOR_SETTINGS_QUERY
+// Query: *[  _type == "settings"][0]{  _id,    cotizadorFormTitle,  cotizadorFormDescription,  "cotizadorForm": cotizadorForm-> {    _id,    title,    description,    "slug": slug.current,      fields[]{    label,    name,    type,    required,    options,    placeholder  },  emailRecipients,  submitButtonText,  successMessage,  errorMessage  }}
+export type COTIZADOR_SETTINGS_QUERYResult = {
+  _id: string;
+  cotizadorFormTitle: string | null;
+  cotizadorFormDescription: string | null;
+  cotizadorForm: {
+    _id: string;
+    title: string | null;
+    description: string | null;
+    slug: string | null;
+    fields: Array<{
+      label: string | null;
+      name: string | null;
+      type:
+        | "checkbox"
+        | "direccion"
+        | "email"
+        | "number"
+        | "radio"
+        | "rut"
+        | "select"
+        | "tel"
+        | "text"
+        | "textarea"
+        | null;
+      required: "no" | "yes" | null;
+      options: Array<string> | null;
+      placeholder: string | null;
+    }> | null;
+    emailRecipients: string | null;
+    submitButtonText: string | null;
+    successMessage: string | null;
+    errorMessage: string | null;
+  } | null;
+} | null;
+// Variable: COTIZADOR_FORM_BY_ID_QUERY
+// Query: *[  _type == "formularios"   && _id == $formId][0]{  _id,  title,  description,    fields[]{    label,    name,    type,    required,    options,    placeholder  },  emailRecipients,  submitButtonText,  successMessage,  errorMessage}
+export type COTIZADOR_FORM_BY_ID_QUERYResult = {
+  _id: string;
+  title: string | null;
+  description: string | null;
+  fields: Array<{
+    label: string | null;
+    name: string | null;
+    type:
+      | "checkbox"
+      | "direccion"
+      | "email"
+      | "number"
+      | "radio"
+      | "rut"
+      | "select"
+      | "tel"
+      | "text"
+      | "textarea"
+      | null;
+    required: "no" | "yes" | null;
+    options: Array<string> | null;
+    placeholder: string | null;
+  }> | null;
+  emailRecipients: string | null;
+  submitButtonText: string | null;
+  successMessage: string | null;
+  errorMessage: string | null;
+} | null;
 
 // Query TypeMap
 import "@sanity/client";
@@ -17239,7 +17352,7 @@ declare module "@sanity/client" {
     '\n  *[_type == "footer" && _id == "footer"][0]{\n    _id,\n    subtitle,\n    columns[]{\n      _key,\n      title,\n      links[]{\n        _key,\n        name,\n        "openInNewTab": url.openInNewTab,\n        "href": select(\n          url.type == "internal" => url.internal->slug.current,\n          url.type == "external" => url.external,\n          url.href\n        ),\n      }\n    },\n    "logo": *[_type == "settings"][0].logo.asset->url + "?w=80&h=40&dpr=3&fit=max",\n    "siteTitle": *[_type == "settings"][0].siteTitle,\n    "socialLinks": *[_type == "settings"][0].socialLinks,\n  }\n': QueryFooterDataResult;
     '*[\n  _type == "navbar" \n  && _id == "navbar"\n][0]{\n  _id,\n  columns[]{\n    _key,\n    _type == "navbarColumn" => {\n      "type": "column",\n      title,\n      links[]{\n        _key,\n        _type == "navbarColumnLink" => {\n          "type": "link",\n          name,\n          icon,\n          description,\n          "openInNewTab": url.openInNewTab,\n          "href": select(\n            url.type == "internal" => url.internal->slug.current,\n            url.type == "external" => url.external,\n            url.href\n          )\n        },\n        _type == "navbarLinkGroup" => {\n          "type": "group",\n          title,\n          links[]{\n            _key,\n            name,\n            icon,\n            description,\n            "openInNewTab": url.openInNewTab,\n            "href": select(\n              url.type == "internal" => url.internal->slug.current,\n              url.type == "external" => url.external,\n              url.href\n            )\n          }\n        }\n      }\n    },\n    _type == "navbarLink" => {\n      "type": "link",\n      name,\n      description,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  },\n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  },\n  "logo": *[_type == "settings"][0].logo.asset->url + "?w=80&h=40&dpr=3&fit=max",\n  "siteTitle": *[_type == "settings"][0].siteTitle,\n}': NAVBAR_QUERYResult;
     '{\n  "slugPages": *[_type == "page" && defined(slug.current)]{\n    "slug": slug.current,\n    "lastModified": _updatedAt\n  },\n  "blogPages": *[_type == "blog" && defined(slug.current)]{\n    "slug": slug.current,\n    "lastModified": _updatedAt\n  }\n}': QuerySitemapDataResult;
-    '\n  *[_type == "settings"][0]{\n    _id,\n    _type,\n    siteTitle,\n    siteDescription,\n    socialLinks{\n      linkedin,\n      facebook,\n      twitter,\n      instagram,\n      youtube\n    }\n  }\n': QueryGlobalSeoSettingsResult;
+    '\n  *[_type == "settings"][0]{\n    _id,\n    _type,\n    siteTitle,\n    siteDescription,\n    socialLinks{\n      linkedin,\n      facebook,\n      twitter,\n      instagram,\n      youtube\n    },\n    \n  cotizadorFormTitle,\n  cotizadorFormDescription,\n  "cotizadorForm": cotizadorForm-> {\n    _id,\n    title,\n    description,\n    "slug": slug.current,\n    \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n\n  }\n\n  }\n': QueryGlobalSeoSettingsResult;
     '*[_type == "formularios"]{\n  _id,\n  title,\n  "slug": slug.current,\n  description\n}': QueryAllFormsResult;
     '*[\n  _type == "formularios" \n  && slug.current == $slug\n][0]{\n  _id,\n  title,\n  description,\n  \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n  submitButtonText,\n  successMessage,\n  errorMessage\n}': QueryFormBySlugResult;
     '*[_type == "camiones"]{\n  _id,\n  _type,\n  title,\n  description,\n  "slug": slug.current,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n}': QueryCamionesDataResult;
@@ -17251,5 +17364,7 @@ declare module "@sanity/client" {
     '*[_type == "motoresPenta"]{\n  _id,\n  _type,\n  title,\n  description,\n  "slug": slug.current,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n}': QueryMotoresPentaDataResult;
     '*[\n  (_type == "motoresPenta" || _type == "page")\n  && slug.current == $slug \n][0]{\n  _id,\n  _type,\n  title,\n  description,\n  "slug": slug.current,\n  _type == "motoresPenta" => { \n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n, \n    \n  "categoryData": {\n    "label": category,\n    "slug": category,\n    "iri": "/camiones/" + category,\n    "parent": null\n  }\n\n  },\n  \n  pageBuilder[]{\n    ...,\n    _type,\n    \n  _type == "cta" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n,\n    \n  _type == "mainHero" => {\n    ...,\n    "backgroundImage": backgroundImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    "backgroundVideo": backgroundVideo.asset->url,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n    \n  _type == "hero" => {\n    ...,\n    variant,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n    \n  _type == "doubleHero" => {\n    ...,\n    variant,\n    primaryBadge,\n    primaryTitle,\n    "primaryRichText": primaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "primaryImage": primaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    secondaryBadge,\n    secondaryTitle,\n    "secondaryRichText": secondaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "secondaryImage": secondaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n    \n  _type == "faqAccordion" => {\n    ...,\n    \n  "faqs": array::compact(faqs[]->{\n    title,\n    _id,\n    _type,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  })\n,\n    link{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n    \n  _type == "subscribeNewsletter" => {\n    ...,\n    "subTitle": subTitle[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "helperText": helperText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  _type == "imageLinkCards" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    "cards": array::compact(cards[]{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      ),\n      \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    })\n  }\n,\n    \n  _type == "formBlock" => {\n    ...,\n    title,\n    description,\n    variant,\n    "form": form->{\n      _id,\n      title,\n      description,\n      \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n      submitButtonText,\n      successMessage,\n      errorMessage\n    }\n  }\n,\n    \n  _type == "tabs" => {\n    ...,\n    title,\n    description,\n    tabs[]{\n      _key,\n      label,\n      content[]{\n        ...,\n        _type,\n        _key,\n        \n  _type == "cta" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n,\n        \n  _type == "mainHero" => {\n    ...,\n    "backgroundImage": backgroundImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    "backgroundVideo": backgroundVideo.asset->url,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n        \n  _type == "hero" => {\n    ...,\n    variant,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n        \n  _type == "doubleHero" => {\n    ...,\n    variant,\n    primaryBadge,\n    primaryTitle,\n    "primaryRichText": primaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "primaryImage": primaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    secondaryBadge,\n    secondaryTitle,\n    "secondaryRichText": secondaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "secondaryImage": secondaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n        \n  _type == "faqAccordion" => {\n    ...,\n    \n  "faqs": array::compact(faqs[]->{\n    title,\n    _id,\n    _type,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  })\n,\n    link{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n        \n  _type == "subscribeNewsletter" => {\n    ...,\n    "subTitle": subTitle[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "helperText": helperText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n        \n  _type == "imageLinkCards" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    "cards": array::compact(cards[]{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      ),\n      \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    })\n  }\n,\n        \n  _type == "formBlock" => {\n    ...,\n    title,\n    description,\n    variant,\n    "form": form->{\n      _id,\n      title,\n      description,\n      \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n      submitButtonText,\n      successMessage,\n      errorMessage\n    }\n  }\n,\n        \n  _type == "imageGallery" => {\n    ...,\n    title,\n    description,\n    layout,\n    columns,\n    slidesPerRow,\n    "images": images[]{\n      ...,\n      "image": image{\n        ...,\n        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background,\n      },\n      caption\n    }\n  }\n,\n        _type == "tabs" => {\n          ...,\n          title,\n          description,\n          tabs[]{\n            _key,\n            label,\n            content[]{ \n              ...,\n              _type,\n              _key\n            }\n          }\n        }\n      }\n    }\n  }\n,\n    \n  _type == "infoSection" => {\n    ...,\n    title,\n    headingLevel,\n    content[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  _type == "imageGallery" => {\n    ...,\n    title,\n    description,\n    layout,\n    columns,\n    slidesPerRow,\n    "images": images[]{\n      ...,\n      "image": image{\n        ...,\n        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background,\n      },\n      caption\n    }\n  }\n,\n    \n  _type == "specificationsTable" => {\n    ...,\n    title,\n    description,\n    variant,\n    "specifications": specifications[]{\n      _key,\n      label,\n      "content": content[]{\n        ...,\n        \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n      }\n    }\n  }\n\n  }\n \n}': QueryMotorPentaOrPageBySlugResult;
     '\n  *[_type == "motoresPenta" && defined(slug.current)].slug.current\n': QueryMotoresPentaPathsResult;
+    '*[\n  _type == "settings"\n][0]{\n  _id,\n  \n  cotizadorFormTitle,\n  cotizadorFormDescription,\n  "cotizadorForm": cotizadorForm-> {\n    _id,\n    title,\n    description,\n    "slug": slug.current,\n    \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n\n  }\n\n}': COTIZADOR_SETTINGS_QUERYResult;
+    '*[\n  _type == "formularios" \n  && _id == $formId\n][0]{\n  _id,\n  title,\n  description,\n  \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n\n}': COTIZADOR_FORM_BY_ID_QUERYResult;
   }
 }
