@@ -16,6 +16,7 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import { type SEARCH_QUERYResult } from "@/lib/sanity/query";
+import { Loader } from "@/components/ui/loader";
 
 export function Search() {
     const [open, setOpen] = useState(false);
@@ -126,7 +127,7 @@ export function Search() {
                     <SearchIcon className="w-5 h-5" />
                 </Button>
             </DialogTrigger>
-            <DialogContent className="z-[101] pt-10 sm:max-w-[550px] h-screen lg:max-h-[80vh]">
+            <DialogContent className="z-[101] flex flex-col pt-20 sm:max-w-[550px] h-screen lg:max-h-[80vh]">
                 <DialogTitle className="sr-only">Búsqueda</DialogTitle>
                 <div className="flex items-center mb-4 border rounded-md h- h-[50px] overflow-hidden">
                     <SearchIcon className="ml-2 w-5 h-5 text-muted-foreground" />
@@ -151,58 +152,62 @@ export function Search() {
                 </div>
 
                 <div className="max-h-[60vh] overflow-y-auto">
-                    {isLoading ? (
-                        <div className="py-8 text-center">Buscando...</div>
-                    ) : results && results.length > 0 ? (
-                        <ul className="space-y-4">
-                            {results.map((result) => (
-                                <li key={result._id} className="pb-4 border-b">
-                                    <Link
-                                        href={getContentTypeUrl(result)}
-                                        onClick={() => setOpen(false)}
-                                        className="flex gap-4 hover:bg-muted p-2 rounded-md transition-colors"
-                                    >
-                                        {result.image?.asset && (
-                                            <div className="relative flex-shrink-0 w-16 h-16">
-                                                <Image
-                                                    src={`${result.image.blurData || ''}`}
-                                                    alt={result.image.alt || "Search result image"}
-                                                    fill
-                                                    className="rounded-md object-cover"
-                                                />
-                                            </div>
-                                        )}
-                                        <div className="flex-1">
-                                            <div className="flex items-center gap-2">
-                                                <span className="bg-secondary px-2 py-0.5 rounded-full text-xs">
-                                                    {result._type === 'page' ? 'Página' :
-                                                        result._type === 'blog' ? 'Blog' :
-                                                            result._type === 'camiones' ? 'Camión' :
-                                                                result._type === 'buses' ? 'Bus' :
-                                                                    result._type === 'motoresPenta' ? 'Motor Penta' : ''}
-                                                </span>
-                                                {result.category && (
-                                                    <span className="bg-muted px-2 py-0.5 rounded-full text-xs">
-                                                        {result.category}
+                    <div className="h-full">
+                        {isLoading ? (
+                            <div className="flex flex-col justify-center items-center py-16">
+                                <Loader size="lg" color="primary" className="mb-3" />
+                            </div>
+                        ) : results && results.length > 0 ? (
+                            <ul className="space-y-4">
+                                {results.map((result) => (
+                                    <li key={result._id} className="pb-4 border-b">
+                                        <Link
+                                            href={getContentTypeUrl(result)}
+                                            onClick={() => setOpen(false)}
+                                            className="flex gap-4 hover:bg-muted p-2 rounded-md transition-colors"
+                                        >
+                                            {result.image?.asset && (
+                                                <div className="relative flex-shrink-0 w-16 h-16">
+                                                    <Image
+                                                        src={`${result.image.blurData || ''}`}
+                                                        alt={result.image.alt || "Search result image"}
+                                                        fill
+                                                        className="rounded-md object-cover"
+                                                    />
+                                                </div>
+                                            )}
+                                            <div className="flex-1">
+                                                <div className="flex items-center gap-2">
+                                                    <span className="bg-secondary px-2 py-0.5 rounded-full text-xs">
+                                                        {result._type === 'page' ? 'Página' :
+                                                            result._type === 'blog' ? 'Blog' :
+                                                                result._type === 'camiones' ? 'Camión' :
+                                                                    result._type === 'buses' ? 'Bus' :
+                                                                        result._type === 'motoresPenta' ? 'Motor Penta' : ''}
                                                     </span>
+                                                    {result.category && (
+                                                        <span className="bg-muted px-2 py-0.5 rounded-full text-xs">
+                                                            {result.category}
+                                                        </span>
+                                                    )}
+                                                </div>
+                                                <h3 className="mt-1 font-semibold">{result.title || ''}</h3>
+                                                {result.description && (
+                                                    <p className="text-muted-foreground text-sm line-clamp-2">
+                                                        {result.description}
+                                                    </p>
                                                 )}
                                             </div>
-                                            <h3 className="mt-1 font-semibold">{result.title || ''}</h3>
-                                            {result.description && (
-                                                <p className="text-muted-foreground text-sm line-clamp-2">
-                                                    {result.description}
-                                                </p>
-                                            )}
-                                        </div>
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    ) : searchTerm ? (
-                        <div className="py-8 text-center">
-                            No se encontraron resultados para &quot;{searchTerm}&quot;
-                        </div>
-                    ) : null}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        ) : searchTerm ? (
+                            <div className="py-8 text-center">
+                                No se encontraron resultados para &quot;{searchTerm}&quot;
+                            </div>
+                        ) : null}
+                    </div>
                 </div>
             </DialogContent>
         </Dialog>
