@@ -401,6 +401,238 @@ function FormContent({ form, onSubmit, submitStatus, isSubmitting, formRef, vari
     )
 }
 
+// Separate component for Modal variant to avoid hydration issues
+function ModalFormBlock({
+    title,
+    description,
+    variant = 'default',
+    form,
+    triggerText,
+    buttonPosition = 'default'
+}: Omit<FormBlockProps, 'displayMode'>) {
+    const [isSubmitting, setIsSubmitting] = useState(false)
+    const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+    const formRef = useRef<HTMLFormElement>(null)
+    const [utmParams, setUtmParams] = useState<Record<string, string>>({})
+    const [isDialogOpen, setIsDialogOpen] = useState(false)
+
+    // Capture UTM parameters on component mount
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const url = new URL(window.location.href)
+            const params = url.searchParams
+
+            const utmData: Record<string, string> = {}
+            const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content']
+
+            utmKeys.forEach(key => {
+                const value = params.get(key)
+                if (value) {
+                    utmData[key] = value
+                }
+            })
+
+            setUtmParams(utmData)
+        }
+    }, [])
+
+    async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault()
+        setIsSubmitting(true)
+        setSubmitStatus('idle')
+
+        const formData = new FormData(event.currentTarget)
+        const fields = form.fields.map(field => {
+            let value = formData.get(field.name)?.toString() || ''
+
+            // Clean RUT value if field type is rut
+            if (field.type === 'rut') {
+                value = cleanRut(value)
+            }
+
+            // Handle direccion field type
+            if (field.type === 'direccion') {
+                // Get values from the three direccion fields
+                const calle = formData.get(`${field.name}_calle`)?.toString() || ''
+                const region = formData.get(`${field.name}_region`)?.toString() || ''
+                const comuna = formData.get(`${field.name}_comuna`)?.toString() || ''
+
+                // Format the value as a combined address string
+                value = `${calle}, ${comuna}, ${region}`.trim()
+
+                // Return separate fields for each component
+                return [
+                    {
+                        _key: generateID(),
+                        name: `${field.name}_calle`,
+                        value: calle
+                    },
+                    {
+                        _key: generateID(),
+                        name: `${field.name}_region`,
+                        value: region
+                    },
+                    {
+                        _key: generateID(),
+                        name: `${field.name}_comuna`,
+                        value: comuna
+                    }
+                ]
+            }
+
+            return {
+                _key: generateID(),
+                name: field.name,
+                value
+            }
+        })
+
+        // Flatten the fields array since direccion fields return multiple entries
+        const flattenedFields = fields.flat()
+
+        // Add UTM parameters as additional fields
+        const utmFields = Object.entries(utmParams).map(([key, value]) => ({
+            _key: generateID(),
+            name: key,
+            value
+        }))
+
+        // Combine regular fields with UTM fields
+        const allFields = [...flattenedFields, ...utmFields]
+
+        const mutations = [{
+            create: {
+                _id: 'message.',
+                _type: 'message',
+                read: false,
+                starred: false,
+                name: formData.get('name')?.toString() || 'No name provided',
+                email: formData.get('email')?.toString() || 'No email provided',
+                subject: form.title,
+                fields: allFields,
+                emailRecipients: form.emailRecipients,
+                utmParams: utmParams
+            }
+        }]
+
+        try {
+            const response = await fetch("/api/submit-message", {
+                method: "POST",
+                body: JSON.stringify({ mutations }),
+                headers: { "Content-Type": "application/json" },
+            })
+
+            if (response.ok) {
+                setSubmitStatus('success')
+                formRef.current?.reset()
+
+                // If in modal mode, close the dialog after successful submission
+                setTimeout(() => {
+                    setIsDialogOpen(false)
+                }, 2000) // Close after 2 seconds to allow user to see success message
+            } else {
+                const errorData = await response.json()
+                console.error('Form submission error:', errorData)
+                setSubmitStatus('error')
+            }
+        } catch (error) {
+            console.error('Error submitting form:', error)
+            setSubmitStatus('error')
+        } finally {
+            setIsSubmitting(false)
+        }
+    }
+
+    // Determine if button should be fixed position or inline
+    const isFixedPosition = buttonPosition === 'fixed'
+
+    const buttonWrapper = (
+        <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            whileHover={{ scale: 1.05 }}
+            transition={{
+                duration: 0.2,
+                ease: "easeInOut"
+            }}
+        >
+            <Button
+                onClick={() => setIsDialogOpen(true)}
+                className={cn(
+                    "px-6 py-3",
+                    "transition-colors duration-200",
+                    "focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                )}
+            >
+                {triggerText || 'Abrir formulario'}
+            </Button>
+        </motion.div>
+    )
+
+    // Render the button in different positions based on the buttonPosition property
+    return (
+        <>
+            {isFixedPosition ? (
+                <AnimatePresence>
+                    {!isDialogOpen && (
+                        <motion.div
+                            initial={{ opacity: 0, y: 50 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 50 }}
+                            className="right-8 bottom-4 z-[100] fixed"
+                        >
+                            {buttonWrapper}
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            ) : (
+                <div className="flex justify-center py-8 lg:py-12">
+                    <AnimatePresence>
+                        {buttonWrapper}
+                    </AnimatePresence>
+                </div>
+            )}
+
+            <Dialog.Root open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                <Dialog.Portal>
+                    <Dialog.Overlay className="z-[101] fixed inset-0 bg-black/50 backdrop-blur-sm data-[state=closed]:animate-out data-[state=open]:animate-in data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
+                    <Dialog.Content className="top-[50%] data-[state=closed]:slide-out-to-top-[48%] left-[50%] data-[state=closed]:slide-out-to-left-1/2 z-[102] fixed gap-4 grid bg-background data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] shadow-lg p-6 border sm:rounded-lg w-full max-w-3xl max-h-screen lg:max-h-[90vh] overflow-y-auto translate-x-[-50%] translate-y-[-50%] data-[state=closed]:animate-out data-[state=open]:animate-in duration-200 data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
+                        <Dialog.Title className="font-bold text-xl leading-none tracking-tight">
+                            {title || form.title}
+                        </Dialog.Title>
+                        {(description || form.description) && (
+                            <Dialog.Description className="text-muted-foreground text-sm">
+                                {description || form.description}
+                            </Dialog.Description>
+                        )}
+
+                        <div className="py-4">
+                            <FormContent
+                                form={form}
+                                onSubmit={handleSubmit}
+                                submitStatus={submitStatus}
+                                isSubmitting={isSubmitting}
+                                formRef={formRef}
+                                variant={variant}
+                            />
+                        </div>
+
+                        <Dialog.Close asChild>
+                            <button
+                                className="top-4 right-4 absolute data-[state=open]:bg-accent opacity-70 hover:opacity-100 rounded-sm focus:outline-none focus:ring-2 focus:ring-ring ring-offset-background focus:ring-offset-2 data-[state=open]:text-muted-foreground transition-opacity disabled:pointer-events-none"
+                                aria-label="Cerrar"
+                            >
+                                <X className="w-4 h-4" />
+                                <span className="sr-only">Cerrar</span>
+                            </button>
+                        </Dialog.Close>
+                    </Dialog.Content>
+                </Dialog.Portal>
+            </Dialog.Root>
+        </>
+    )
+}
+
 export default function FormBlock({
     title,
     description,
@@ -545,95 +777,17 @@ export default function FormBlock({
         }
     }
 
-    // If display mode is modal, render a button that opens a dialog with the form
+    // If display mode is modal, use the separate ModalFormBlock component
     if (displayMode === 'modal') {
-        // Determine if button should be fixed position or inline
-        const isFixedPosition = buttonPosition === 'fixed'
-
-        const buttonWrapper = (
-            <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                whileHover={{ scale: 1.05 }}
-                transition={{
-                    duration: 0.2,
-                    ease: "easeInOut"
-                }}
-            >
-                <Button
-                    onClick={() => setIsDialogOpen(true)}
-                    className={cn(
-                        "px-6 py-3",
-                        "transition-colors duration-200",
-                        "focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-                    )}
-                >
-                    {triggerText || 'Abrir formulario'}
-                </Button>
-            </motion.div>
-        )
-
-        // Render the button in different positions based on the buttonPosition property
         return (
-            <>
-                {isFixedPosition ? (
-                    <AnimatePresence>
-                        {!isDialogOpen && (
-                            <motion.div
-                                initial={{ opacity: 0, y: 50 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: 50 }}
-                                className="right-8 bottom-4 z-[100] fixed"
-                            >
-                                {buttonWrapper}
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
-                ) : (
-                    <div className="flex justify-center py-8 lg:py-12">
-                        <AnimatePresence>
-                            {buttonWrapper}
-                        </AnimatePresence>
-                    </div>
-                )}
-
-                <Dialog.Root open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                    <Dialog.Portal>
-                        <Dialog.Overlay className="z-[101] fixed inset-0 bg-black/50 backdrop-blur-sm data-[state=closed]:animate-out data-[state=open]:animate-in data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
-                        <Dialog.Content className="top-[50%] data-[state=closed]:slide-out-to-top-[48%] left-[50%] data-[state=closed]:slide-out-to-left-1/2 z-[102] fixed gap-4 grid bg-background data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] shadow-lg p-6 border sm:rounded-lg w-full max-w-3xl max-h-screen lg:max-h-[90vh] overflow-y-auto translate-x-[-50%] translate-y-[-50%] data-[state=closed]:animate-out data-[state=open]:animate-in duration-200 data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
-                            <Dialog.Title className="font-bold text-xl leading-none tracking-tight">
-                                {title || form.title}
-                            </Dialog.Title>
-                            {(description || form.description) && (
-                                <Dialog.Description className="text-muted-foreground text-sm">
-                                    {description || form.description}
-                                </Dialog.Description>
-                            )}
-
-                            <div className="py-4">
-                                <FormContent
-                                    form={form}
-                                    onSubmit={handleSubmit}
-                                    submitStatus={submitStatus}
-                                    isSubmitting={isSubmitting}
-                                    formRef={formRef}
-                                    variant={variant}
-                                />
-                            </div>
-
-                            <Dialog.Close asChild>
-                                <button
-                                    className="top-4 right-4 absolute data-[state=open]:bg-accent opacity-70 hover:opacity-100 rounded-sm focus:outline-none focus:ring-2 focus:ring-ring ring-offset-background focus:ring-offset-2 data-[state=open]:text-muted-foreground transition-opacity disabled:pointer-events-none"
-                                    aria-label="Cerrar"
-                                >
-                                    <X className="w-4 h-4" />
-                                    <span className="sr-only">Cerrar</span>
-                                </button>
-                            </Dialog.Close>
-                        </Dialog.Content>
-                    </Dialog.Portal>
-                </Dialog.Root>
-            </>
+            <ModalFormBlock
+                title={title}
+                description={description}
+                variant={variant}
+                form={form}
+                triggerText={triggerText}
+                buttonPosition={buttonPosition}
+            />
         )
     }
 

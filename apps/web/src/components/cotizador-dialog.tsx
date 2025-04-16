@@ -9,7 +9,12 @@ import { Button } from "@workspace/ui/components/button";
 import dynamic from "next/dynamic";
 
 // Dynamically import the form component to avoid server/client hydration issues
-const FormBlock = dynamic(() => import("./sections/form-block"), { ssr: false });
+const FormBlock = dynamic(() => import("./sections/form-block"), {
+    ssr: false,
+    loading: () => <div className="flex justify-center items-center w-full h-32">
+        <div className="border-4 border-primary border-t-transparent rounded-full w-8 h-8 animate-spin"></div>
+    </div>
+});
 
 // FormData interface required by FormBlock component
 interface FormData {
@@ -115,4 +120,7 @@ export function CotizadorDialog({
             </Dialog.Portal>
         </Dialog.Root>
     );
-} 
+}
+
+// Add default export for dynamic import compatibility
+export default CotizadorDialog; 

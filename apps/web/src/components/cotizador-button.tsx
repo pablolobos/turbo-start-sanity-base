@@ -1,10 +1,16 @@
 "use client";
 
-import { CotizadorDialog } from "./cotizador-dialog";
 import { useEffect, useState } from "react";
 import { Button } from "@workspace/ui/components/button";
 import { cn } from "@workspace/ui/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
+import dynamic from "next/dynamic";
+
+// Dynamically import the dialog component to avoid hydration issues
+const CotizadorDialog = dynamic(() => import("./cotizador-dialog"), {
+    ssr: false,
+    loading: () => null
+});
 
 interface CotizadorButtonProps {
     buttonLabel?: string;
