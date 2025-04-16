@@ -15,12 +15,12 @@ interface MediaQueryResult {
 }
 
 export function useIsMobile(mobileScreenSize = 768) {
-  const [isMobile, setIsMobile] = React.useState(() => {
+  const [isMobile, setIsMobile] = React.useState<boolean>(() => {
     if (
       typeof window === "undefined" ||
       typeof window.matchMedia !== "function"
     ) {
-      return undefined;
+      return false;
     }
     return window.matchMedia(`(max-width: ${mobileScreenSize}px)`).matches;
   });
@@ -36,6 +36,8 @@ export function useIsMobile(mobileScreenSize = 768) {
     ) {
       return;
     }
+
+    setIsMobile(window.matchMedia(`(max-width: ${mobileScreenSize}px)`).matches);
 
     const mediaListener: MediaQueryResult = window.matchMedia(
       `(max-width: ${mobileScreenSize}px)`,

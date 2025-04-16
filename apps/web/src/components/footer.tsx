@@ -12,6 +12,7 @@ import {
   XIcon,
   YoutubeIcon,
 } from "./social-icons";
+import { CookieConsentButton } from "./cookie-consent-button";
 
 interface SocialLinksProps {
   data: NonNullable<QueryFooterDataResult>["socialLinks"];
@@ -184,6 +185,9 @@ function Footer({ data }: FooterProps) {
                 </li>
                 <li className="hover:text-primary">
                   <Link href="/privacy">Políticas de privacidad</Link>
+                </li>
+                <li className="hover:text-primary">
+                  <CookieConsentButton />
                 </li>
               </ul>
             </div>

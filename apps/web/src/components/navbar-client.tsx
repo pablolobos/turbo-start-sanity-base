@@ -347,10 +347,13 @@ function DesktopNavbar({ data }: { data: NonNullable<NAVBAR_QUERYResult> }) {
 function NavbarClient({ data }: { data: NAVBAR_QUERYResult }) {
   const isMobile = useIsMobile();
 
-  if (isMobile === undefined || !data) {
-    return null; // Return null on initial render to avoid hydration mismatch or if data is null
+  // Instead of returning null, use the appropriate component based on current state
+  // This prevents the UI from getting stuck in a loading state
+  if (!data) {
+    return <NavbarSkeletonResponsive />;
   }
 
+  // Always render something - even during initial hydration
   return isMobile ? <MobileNavbar data={data} /> : <DesktopNavbar data={data} />;
 }
 

@@ -6,7 +6,7 @@ import type { Maybe, SanityImageProps } from "@/types";
 import { SanityImage } from "./sanity-image";
 
 const LOGO_URL =
-  "https://cdn.sanity.io/images/s6kuy1ts/production/68c438f68264717e93c7ba1e85f1d0c4b58b33c2-1200x621.svg";
+  "/volvo-chile.svg";
 
 interface LogoProps {
   src?: Maybe<string>;
@@ -21,8 +21,8 @@ export function Logo({
   src,
   alt = "logo",
   image,
-  width = 170,
-  height = 40,
+  width = 200,
+  height = 70,
   priority = true,
 }: LogoProps) {
   return (
@@ -32,7 +32,7 @@ export function Logo({
           asset={image}
           alt={alt ?? "logo"}
           width={width}
-          className="w-[170px] h-[40px]"
+          className="w-[200px] h-[70px]"
           height={height}
           priority={priority}
           loading="eager"
@@ -44,7 +44,7 @@ export function Logo({
           src={src ?? LOGO_URL}
           alt={alt ?? "logo"}
           width={width}
-          className="w-[170px] h-[40px]"
+          className="w-[200px] h-[70px]"
           height={height}
           loading="eager"
           priority={priority}

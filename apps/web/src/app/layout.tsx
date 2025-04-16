@@ -67,6 +67,20 @@ export const volvoBroad = localFont({
   variable: '--font-volvo-broad',
 })
 
+// Separate the main layout content to avoid rendering issues
+function MainContent({ children }: { children: React.ReactNode }) {
+  return (
+    <>
+      <Suspense fallback={<NavbarSkeleton />}>
+        <NavbarServer />
+      </Suspense>
+      {children}
+      <Suspense fallback={<FooterSkeleton />}>
+        <FooterServer />
+      </Suspense>
+    </>
+  );
+}
 
 export default async function RootLayout({
   children,
@@ -75,18 +89,20 @@ export default async function RootLayout({
 }>) {
   preconnect("https://cdn.sanity.io");
   prefetchDNS("https://cdn.sanity.io");
+
+  const isDraftMode = await draftMode();
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body
         className={`${volvoNovum.variable} ${volvoBroad.variable} font-novum antialiased text-foreground`}
       >
         <Providers>
-          <Suspense fallback={<NavbarSkeleton />}>
-            <NavbarServer />
-          </Suspense>
-          {(await draftMode()).isEnabled ? (
+          {isDraftMode.isEnabled ? (
             <>
-              {children}
+              <MainContent>
+                {children}
+              </MainContent>
               <VisualEditing
                 refresh={async (payload) => {
                   "use server";
@@ -107,11 +123,10 @@ export default async function RootLayout({
               <PreviewBar />
             </>
           ) : (
-            children
+            <MainContent>
+              {children}
+            </MainContent>
           )}
-          <Suspense fallback={<FooterSkeleton />}>
-            <FooterServer />
-          </Suspense>
           <SanityLive />
         </Providers>
       </body>

@@ -1,5 +1,6 @@
 "use client";
 import { useOptimistic } from "@sanity/visual-editing/react";
+import { useState, useEffect } from "react";
 import { createDataAttribute, type SanityDocument } from "next-sanity";
 import type { ComponentType } from "react";
 
@@ -59,25 +60,81 @@ const BLOCK_COMPONENTS = {
 
 type BlockType = keyof typeof BLOCK_COMPONENTS;
 
+// Render a component based on its type
+function renderBlock(block: PageBlock, id: string, type: string) {
+  // Safety check for block type
+  if (!block._type || !(block._type in BLOCK_COMPONENTS)) {
+    return (
+      <div
+        key={block._key || 'unknown'}
+        className="flex justify-center items-center bg-muted p-8 rounded-lg text-muted-foreground text-center"
+      >
+        Component not found for block type: <code>{block._type}</code>
+      </div>
+    );
+  }
+
+  const blockType = block._type as BlockType;
+  const Component = BLOCK_COMPONENTS[blockType];
+
+  return (
+    <div
+      key={block._key}
+      data-sanity={createDataAttribute({
+        id: id,
+        baseUrl: studioUrl,
+        projectId: projectId,
+        dataset: dataset,
+        type: type,
+        path: `pageBuilder[_key=="${block._key}"]`,
+      }).toString()}
+      className="group/component"
+    >
+      {/* @ts-ignore - The typing is complex due to the dynamic nature */}
+      <Component {...block} />
+    </div>
+  );
+}
+
 export function PageBuilder({
   pageBuilder: initialPageBuilder = [],
   id,
   type,
 }: PageBuilderProps) {
-  const pageBuilder = useOptimistic<PageBlock[], SanityDocument<PageData>>(
+  // Store the pageBuilder blocks in state for non-optimistic fallback
+  const [blocks, setBlocks] = useState<PageBlock[]>(initialPageBuilder);
+  const [mounted, setMounted] = useState(false);
+
+  // Always call useOptimistic regardless of mounted state to maintain hook order
+  // This fixes the React Hook order error
+  const [optimisticBlocks] = useOptimistic<PageBlock[], SanityDocument<PageData>>(
     initialPageBuilder,
     (currentPageBuilder, action) => {
       if (action.id === id && action.document.pageBuilder) {
         return action.document.pageBuilder;
       }
-
       return currentPageBuilder;
-    },
+    }
   );
+
+  // Set mounted state after initial render
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Update blocks when initialPageBuilder changes
+  useEffect(() => {
+    setBlocks(initialPageBuilder);
+  }, [initialPageBuilder]);
+
+  // Choose which blocks to render based on mounted state
+  const blocksToRender = mounted && Array.isArray(optimisticBlocks)
+    ? optimisticBlocks
+    : blocks;
 
   return (
     <main
-      className="flex flex-col max-container"
+      className="flex flex-col"
       data-sanity={createDataAttribute({
         id: id,
         baseUrl: studioUrl,
@@ -87,39 +144,7 @@ export function PageBuilder({
         path: "pageBuilder",
       }).toString()}
     >
-      {pageBuilder.map((block) => {
-        const Component = BLOCK_COMPONENTS[block._type] as ComponentType<
-          PagebuilderType<BlockType>
-        >;
-
-        if (!Component) {
-          return (
-            <div
-              key={`${block._type}-${block._key}`}
-              className="flex justify-center items-center bg-muted p-8 rounded-lg text-muted-foreground text-center"
-            >
-              Component not found for block type: <code>{block._type}</code>
-            </div>
-          );
-        }
-
-        return (
-          <div
-            key={`${block._type}-${block._key}`}
-            data-sanity={createDataAttribute({
-              id: id,
-              baseUrl: studioUrl,
-              projectId: projectId,
-              dataset: dataset,
-              type: type,
-              path: `pageBuilder[_key=="${block._key}"]`,
-            }).toString()}
-            className="group/component"
-          >
-            <Component {...block} />
-          </div>
-        );
-      })}
+      {blocksToRender.map(block => renderBlock(block, id, type))}
     </main>
   );
 }
