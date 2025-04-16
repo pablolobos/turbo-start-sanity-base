@@ -99,7 +99,6 @@ export const blog = defineType({
         }),
       ],
       validation: (Rule) => [
-        Rule.required(),
         Rule.max(1),
         Rule.min(1),
         Rule.unique(),

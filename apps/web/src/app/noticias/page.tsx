@@ -6,7 +6,7 @@ import { sanityFetch } from "@/lib/sanity/live";
 import { queryBlogIndexPageData } from "@/lib/sanity/query";
 import { getMetaData } from "@/lib/seo";
 import { handleErrors } from "@/utils";
-
+import { TitleDescriptionBlock } from "@/components/title-description-block";
 type Blog = Parameters<typeof BlogCard>[0]["blog"];
 
 async function fetchBlogPosts() {
@@ -65,8 +65,17 @@ export default async function BlogIndexPage() {
 
   return (
     <main className="bg-background">
-      <div className="mx-auto my-16 px-4 md:px-6 container">
-        <BlogHeader title={title} description={description} />
+      <div className="mx-auto my-16 padding-center max-container">
+        {(title || description) && (
+          <div className="mb-8">
+            <TitleDescriptionBlock
+              title={title || ""}
+              description={description || ""}
+              variant="center"
+              headingLevel="h1"
+            />
+          </div>
+        )}
 
         {featuredBlogs.length > 0 && (
           <div className="gap-8 md:gap-12 grid grid-cols-1 mx-auto mt-8 sm:mt-12 md:mt-16 mb-12 lg:mb-20">

@@ -22,7 +22,7 @@ function BlogImage({ image, title }: BlogImageProps) {
       width={800}
       height={400}
       alt={title ?? "Blog post image"}
-      className="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]"
+      className="bg-gray-100 rounded-none w-full object-cover aspect-[16/9] sm:aspect-[2/1] lg:aspect-[3/2]"
     />
   );
 }
@@ -40,7 +40,7 @@ function AuthorImage({ author }: AuthorImageProps) {
       width={40}
       height={40}
       alt={author.name ?? "Author image"}
-      className="size-8 flex-none rounded-full bg-gray-50"
+      className="flex-none bg-gray-50 rounded-full size-8"
     />
   );
 }
@@ -53,7 +53,7 @@ export function BlogAuthor({ author }: BlogAuthorProps) {
   if (!author) return null;
 
   return (
-    <div className="flex items-center gap-x-2.5 text-sm/6 font-semibold text-gray-900">
+    <div className="flex items-center gap-x-2.5 font-semibold text-gray-900 text-sm/6">
       <AuthorImage author={author} />
       {author.name}
     </div>
@@ -66,14 +66,14 @@ interface BlogCardProps {
 
 function BlogMeta({ publishedAt }: { publishedAt: string | null }) {
   return (
-    <div className="flex items-center gap-x-4 text-xs my-4">
+    <div className="flex items-center gap-x-4 my-4 text-xs">
       <time dateTime={publishedAt ?? ""} className="text-muted-foreground">
         {publishedAt
-          ? new Date(publishedAt).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "short",
-              day: "numeric",
-            })
+          ? new Date(publishedAt).toLocaleDateString("es-ES", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          })
           : ""}
       </time>
     </div>
@@ -93,8 +93,8 @@ function BlogContent({
 }) {
   const HeadingTag = isFeatured ? "h2" : "h3";
   const headingClasses = isFeatured
-    ? "mt-3 text-3xl font-semibold leading-tight"
-    : "mt-3 text-lg font-semibold leading-6";
+    ? "mt-3 heading-1"
+    : "mt-3 heading-2";
 
   return (
     <div className="group relative">
@@ -104,7 +104,7 @@ function BlogContent({
           {title}
         </Link>
       </HeadingTag>
-      <p className="mt-5 text-sm leading-6 text-muted-foreground">
+      <p className="mt-5 text-muted-foreground text-sm leading-6">
         {description}
       </p>
     </div>
@@ -115,7 +115,7 @@ function AuthorSection({ authors }: { authors: Blog["authors"] }) {
   if (!authors) return null;
 
   return (
-    <div className="mt-6 flex border-t border-gray-900/5 pt-6">
+    <div className="flex mt-6 pt-6 border-gray-900/5 border-t">
       <div className="relative flex items-center gap-x-4">
         <AuthorImage author={authors} />
         <div className="text-sm leading-6">
@@ -132,7 +132,7 @@ export function FeaturedBlogCard({ blog }: BlogCardProps) {
   const { title, publishedAt, slug, authors, description, image } = blog ?? {};
 
   return (
-    <article className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full">
+    <article className="gap-8 grid grid-cols-1 lg:grid-cols-2 w-full">
       <BlogImage image={image} title={title} />
       <div className="space-y-6">
         <BlogMeta publishedAt={publishedAt} />
@@ -151,12 +151,12 @@ export function FeaturedBlogCard({ blog }: BlogCardProps) {
 export function BlogCard({ blog }: BlogCardProps) {
   if (!blog) {
     return (
-      <article className="grid grid-cols-1 gap-4 w-full">
-        <div className="h-48 bg-muted rounded-2xl animate-pulse" />
+      <article className="gap-4 grid grid-cols-1 w-full">
+        <div className="bg-muted rounded-none h-48 animate-pulse" />
         <div className="space-y-2">
-          <div className="h-4 w-24 bg-muted rounded animate-pulse" />
-          <div className="h-6 w-full bg-muted rounded animate-pulse" />
-          <div className="h-4 w-3/4 bg-muted rounded animate-pulse" />
+          <div className="bg-muted rounded w-24 h-4 animate-pulse" />
+          <div className="bg-muted rounded w-full h-6 animate-pulse" />
+          <div className="bg-muted rounded w-3/4 h-4 animate-pulse" />
         </div>
       </article>
     );
@@ -165,12 +165,12 @@ export function BlogCard({ blog }: BlogCardProps) {
   const { title, publishedAt, slug, authors, description, image } = blog;
 
   return (
-    <article className="grid grid-cols-1 gap-4 w-full">
-      <div className="relative w-full h-auto aspect-[16/9] overflow-hidden rounded-2xl">
+    <article className="gap-4 grid grid-cols-1 w-full">
+      <div className="relative rounded-none w-full h-auto aspect-[16/9] overflow-hidden">
         <BlogImage image={image} title={title} />
-        <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
+        <div className="absolute inset-0 rounded-2xl ring-1 ring-gray-900/10 ring-inset" />
       </div>
-      <div className="w-full space-y-4">
+      <div className="space-y-4 w-full">
         <BlogMeta publishedAt={publishedAt} />
         <BlogContent title={title} slug={slug} description={description} />
         <AuthorSection authors={authors} />
@@ -187,10 +187,10 @@ export function BlogHeader({
   description: string | null;
 }) {
   return (
-    <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <div className="mx-auto px-6 lg:px-8 max-w-7xl">
       <div className="mx-auto max-w-2xl text-center">
-        <h1 className="text-3xl font-bold sm:text-4xl">{title}</h1>
-        <p className="mt-4 text-lg leading-8 text-muted-foreground">
+        <h1 className="font-bold text-3xl sm:text-4xl">{title}</h1>
+        <p className="mt-4 text-muted-foreground text-lg leading-8">
           {description}
         </p>
       </div>

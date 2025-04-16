@@ -6,7 +6,7 @@ interface TitleDescriptionBlockProps {
     description?: string | React.ReactNode;
     className?: string;
     headingLevel?: 'h1' | 'h2';
-    variant?: 'default' | 'compact';
+    variant?: 'default' | 'compact' | 'center';
 }
 
 export function TitleDescriptionBlock({
@@ -20,11 +20,12 @@ export function TitleDescriptionBlock({
 
     return (
         <div className={cn(
-            "flex flex-col gap-8 lg:grid lg:grid-cols-2 py-12 lg:py-20  padding-center max-container",
+            "flex flex-col gap-8  py-12 lg:py-20  padding-center max-container",
             variant === 'compact' ? 'lg:py-2 px-4' : 'container-padding gap-8',
+            variant === 'center' ? 'text-center lg:flex-col lg:items-center' : 'lg:grid lg:grid-cols-2',
             className
         )}>
-            <Heading className="mb-4 font-semibold text-4xl capitalize">{title}</Heading>
+            <Heading className={cn("mb-4 ", headingLevel === 'h1' ? 'heading-1' : 'heading-2')}>{title}</Heading>
             {description && <p className="text-base">{description}</p>}
         </div>
     );
