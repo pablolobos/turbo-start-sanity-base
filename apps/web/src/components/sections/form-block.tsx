@@ -6,6 +6,9 @@ import { useState, FormEvent, useRef, useEffect } from 'react'
 import { cn } from "@workspace/ui/lib/utils"
 import * as Form from "@radix-ui/react-form"
 import { Button } from "@workspace/ui/components/button"
+import * as Dialog from "@radix-ui/react-dialog"
+import { X } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
 
 interface FormField {
     label: string
@@ -32,6 +35,9 @@ interface FormBlockProps {
     description?: string
     variant?: 'default' | 'withBackground' | 'centered'
     form: FormData
+    displayMode?: 'inline' | 'modal'
+    triggerText?: string
+    buttonPosition?: 'default' | 'fixed'
 }
 
 // Data for regions and comunas
@@ -214,11 +220,201 @@ function RegionComunaSelector({ fieldName, required }: { fieldName: string, requ
     );
 }
 
-export default function FormBlock({ title, description, variant = 'default', form }: FormBlockProps) {
+// FormContent component to avoid duplication
+function FormContent({ form, onSubmit, submitStatus, isSubmitting, formRef, variant }: {
+    form: FormData
+    onSubmit: (event: FormEvent<HTMLFormElement>) => Promise<void>
+    submitStatus: 'idle' | 'success' | 'error'
+    isSubmitting: boolean
+    formRef: React.MutableRefObject<HTMLFormElement | null>
+    variant?: 'default' | 'withBackground' | 'centered'
+}) {
+    const renderField = (field: FormField) => {
+        const commonProps = {
+            required: field.required === 'yes',
+            placeholder: field.placeholder,
+            className: cn(
+                "w-full rounded-sm border border-border bg-input",
+                "px-4 py-3 text-base",
+                "placeholder:text-zinc-500",
+                "focus:border-black focus:outline-none focus:ring-2 focus:ring-ring"
+            )
+        }
+
+        switch (field.type) {
+            case 'direccion':
+                return <RegionComunaSelector fieldName={field.name} required={field.required === 'yes'} />
+            case 'rut':
+                return (
+                    <Form.Control asChild>
+                        <input
+                            type="text"
+                            {...commonProps}
+                            pattern="[0-9Kk\.-]*"
+                            maxLength={12}
+                            placeholder={field.placeholder || "12.345.678-9"}
+                            onBlur={(e) => {
+                                const isValid = validateRut(e.target.value);
+                                e.target.setCustomValidity(isValid ? '' : 'RUT inválido');
+                            }}
+                            onChange={(e) => {
+                                // Reset validation state when user starts typing again
+                                e.target.setCustomValidity('');
+                            }}
+                        />
+                    </Form.Control>
+                )
+            case 'textarea':
+                return (
+                    <Form.Control asChild>
+                        <textarea
+                            {...commonProps}
+                            rows={5}
+                        />
+                    </Form.Control>
+                )
+            case 'select':
+                return (
+                    <Form.Control asChild>
+                        <select {...commonProps}>
+                            <option value="">Selecciona una opción</option>
+                            {field.options?.map(option => (
+                                <option key={option} value={option}>
+                                    {option}
+                                </option>
+                            ))}
+                        </select>
+                    </Form.Control>
+                )
+            case 'radio':
+                return (
+                    <div className="flex flex-wrap gap-4">
+                        {field.options?.map(option => (
+                            <div key={option} className="flex items-center gap-2">
+                                <Form.Control asChild>
+                                    <input
+                                        type="radio"
+                                        required={field.required === 'yes'}
+                                        value={option}
+                                        className="bg-zinc-900 border-zinc-800 focus:ring-blue-600/50 text-blue-600"
+                                    />
+                                </Form.Control>
+                                <span className="text-white">{option}</span>
+                            </div>
+                        ))}
+                    </div>
+                )
+            case 'checkbox':
+                return (
+                    <div className="flex items-center gap-2">
+                        <Form.Control asChild>
+                            <input
+                                type="checkbox"
+                                required={field.required === 'yes'}
+                                className="bg-zinc-900 border-zinc-800 rounded focus:ring-blue-600/50 text-blue-600"
+                            />
+                        </Form.Control>
+                        <span className="text-white">{field.label}</span>
+                    </div>
+                )
+            default:
+                return (
+                    <Form.Control asChild>
+                        <input
+                            type={field.type}
+                            {...commonProps}
+                        />
+                    </Form.Control>
+                )
+        }
+    }
+
+    return (
+        <Form.Root
+            ref={formRef}
+            onSubmit={onSubmit}
+            className="space-y-6"
+        >
+            {form.fields.map((field) => (
+                <Form.Field
+                    key={field.name}
+                    name={field.name}
+                    className="gap-2 grid"
+                >
+                    <div className="flex justify-between items-baseline">
+                        <Form.Label className="font-medium text-sm">
+                            {field.label}
+                            {field.required === 'yes' && (
+                                <span className="ml-1 text-red-500">*</span>
+                            )}
+                        </Form.Label>
+                        <div className="flex gap-2">
+                            <Form.Message
+                                className="text-red-500 text-sm"
+                                match="valueMissing"
+                            >
+                                Campo requerido
+                            </Form.Message>
+                            {field.type === 'email' && (
+                                <Form.Message
+                                    className="text-red-500 text-sm"
+                                    match="typeMismatch"
+                                >
+                                    Email inválido
+                                </Form.Message>
+                            )}
+                            {field.type === 'rut' && (
+                                <Form.Message
+                                    className="text-red-500 text-sm"
+                                    match={(value: string) => {
+                                        return !validateRut(value);
+                                    }}
+                                >
+                                    RUT inválido
+                                </Form.Message>
+                            )}
+                        </div>
+                    </div>
+                    {renderField(field)}
+                </Form.Field>
+            ))}
+
+            {submitStatus === 'success' && (
+                <p className="text-green-500 text-sm">{form.successMessage}</p>
+            )}
+            {submitStatus === 'error' && (
+                <p className="text-red-500 text-sm">{form.errorMessage}</p>
+            )}
+
+            <Form.Submit asChild>
+                <Button
+                    disabled={isSubmitting}
+                    className={cn(
+                        "w-fit px-4 py-3",
+                        "disabled:opacity-50 disabled:cursor-not-allowed"
+                    )}
+                >
+                    {isSubmitting ? 'Enviando...' : (form.submitButtonText || 'Enviar')}
+                </Button>
+            </Form.Submit>
+        </Form.Root>
+    )
+}
+
+export default function FormBlock({
+    title,
+    description,
+    variant = 'default',
+    form,
+    displayMode = 'inline',
+    triggerText,
+    buttonPosition = 'default'
+}: FormBlockProps) {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
     const formRef = useRef<HTMLFormElement>(null)
     const [utmParams, setUtmParams] = useState<Record<string, string>>({})
+    const [isDialogOpen, setIsDialogOpen] = useState(false)
 
     // Capture UTM parameters on component mount
     useEffect(() => {
@@ -329,6 +525,13 @@ export default function FormBlock({ title, description, variant = 'default', for
             if (response.ok) {
                 setSubmitStatus('success')
                 formRef.current?.reset()
+
+                // If in modal mode, close the dialog after successful submission
+                if (displayMode === 'modal') {
+                    setTimeout(() => {
+                        setIsDialogOpen(false)
+                    }, 2000) // Close after 2 seconds to allow user to see success message
+                }
             } else {
                 const errorData = await response.json()
                 console.error('Form submission error:', errorData)
@@ -342,106 +545,99 @@ export default function FormBlock({ title, description, variant = 'default', for
         }
     }
 
-    const renderField = (field: FormField) => {
-        const commonProps = {
-            required: field.required === 'yes',
-            placeholder: field.placeholder,
-            className: cn(
-                "w-full rounded-sm border border-border bg-input",
-                "px-4 py-3 text-base",
-                "placeholder:text-zinc-500",
-                "focus:border-black focus:outline-none focus:ring-2 focus:ring-ring"
-            )
-        }
+    // If display mode is modal, render a button that opens a dialog with the form
+    if (displayMode === 'modal') {
+        // Determine if button should be fixed position or inline
+        const isFixedPosition = buttonPosition === 'fixed'
 
-        switch (field.type) {
-            case 'direccion':
-                return <RegionComunaSelector fieldName={field.name} required={field.required === 'yes'} />
-            case 'rut':
-                return (
-                    <Form.Control asChild>
-                        <input
-                            type="text"
-                            {...commonProps}
-                            pattern="[0-9Kk\.-]*"
-                            maxLength={12}
-                            placeholder={field.placeholder || "12.345.678-9"}
-                            onBlur={(e) => {
-                                const isValid = validateRut(e.target.value);
-                                e.target.setCustomValidity(isValid ? '' : 'RUT inválido');
-                            }}
-                            onChange={(e) => {
-                                // Reset validation state when user starts typing again
-                                e.target.setCustomValidity('');
-                            }}
-                        />
-                    </Form.Control>
-                )
-            case 'textarea':
-                return (
-                    <Form.Control asChild>
-                        <textarea
-                            {...commonProps}
-                            rows={5}
-                        />
-                    </Form.Control>
-                )
-            case 'select':
-                return (
-                    <Form.Control asChild>
-                        <select {...commonProps}>
-                            <option value="">Selecciona una opción</option>
-                            {field.options?.map(option => (
-                                <option key={option} value={option}>
-                                    {option}
-                                </option>
-                            ))}
-                        </select>
-                    </Form.Control>
-                )
-            case 'radio':
-                return (
-                    <div className="flex flex-wrap gap-4">
-                        {field.options?.map(option => (
-                            <div key={option} className="flex items-center gap-2">
-                                <Form.Control asChild>
-                                    <input
-                                        type="radio"
-                                        required={field.required === 'yes'}
-                                        value={option}
-                                        className="bg-zinc-900 border-zinc-800 focus:ring-blue-600/50 text-blue-600"
-                                    />
-                                </Form.Control>
-                                <span className="text-white">{option}</span>
+        const buttonWrapper = (
+            <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                whileHover={{ scale: 1.05 }}
+                transition={{
+                    duration: 0.2,
+                    ease: "easeInOut"
+                }}
+            >
+                <Button
+                    onClick={() => setIsDialogOpen(true)}
+                    className={cn(
+                        "px-6 py-3",
+                        "transition-colors duration-200",
+                        "focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                    )}
+                >
+                    {triggerText || 'Abrir formulario'}
+                </Button>
+            </motion.div>
+        )
+
+        // Render the button in different positions based on the buttonPosition property
+        return (
+            <>
+                {isFixedPosition ? (
+                    <AnimatePresence>
+                        {!isDialogOpen && (
+                            <motion.div
+                                initial={{ opacity: 0, y: 50 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: 50 }}
+                                className="right-8 bottom-4 z-[100] fixed"
+                            >
+                                {buttonWrapper}
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                ) : (
+                    <div className="flex justify-center py-8 lg:py-12">
+                        <AnimatePresence>
+                            {buttonWrapper}
+                        </AnimatePresence>
+                    </div>
+                )}
+
+                <Dialog.Root open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                    <Dialog.Portal>
+                        <Dialog.Overlay className="z-[101] fixed inset-0 bg-black/50 backdrop-blur-sm data-[state=closed]:animate-out data-[state=open]:animate-in data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
+                        <Dialog.Content className="top-[50%] data-[state=closed]:slide-out-to-top-[48%] left-[50%] data-[state=closed]:slide-out-to-left-1/2 z-[102] fixed gap-4 grid bg-background data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] shadow-lg p-6 border sm:rounded-lg w-full max-w-3xl max-h-screen lg:max-h-[90vh] overflow-y-auto translate-x-[-50%] translate-y-[-50%] data-[state=closed]:animate-out data-[state=open]:animate-in duration-200 data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
+                            <Dialog.Title className="font-bold text-xl leading-none tracking-tight">
+                                {title || form.title}
+                            </Dialog.Title>
+                            {(description || form.description) && (
+                                <Dialog.Description className="text-muted-foreground text-sm">
+                                    {description || form.description}
+                                </Dialog.Description>
+                            )}
+
+                            <div className="py-4">
+                                <FormContent
+                                    form={form}
+                                    onSubmit={handleSubmit}
+                                    submitStatus={submitStatus}
+                                    isSubmitting={isSubmitting}
+                                    formRef={formRef}
+                                    variant={variant}
+                                />
                             </div>
-                        ))}
-                    </div>
-                )
-            case 'checkbox':
-                return (
-                    <div className="flex items-center gap-2">
-                        <Form.Control asChild>
-                            <input
-                                type="checkbox"
-                                required={field.required === 'yes'}
-                                className="bg-zinc-900 border-zinc-800 rounded focus:ring-blue-600/50 text-blue-600"
-                            />
-                        </Form.Control>
-                        <span className="text-white">{field.label}</span>
-                    </div>
-                )
-            default:
-                return (
-                    <Form.Control asChild>
-                        <input
-                            type={field.type}
-                            {...commonProps}
-                        />
-                    </Form.Control>
-                )
-        }
+
+                            <Dialog.Close asChild>
+                                <button
+                                    className="top-4 right-4 absolute data-[state=open]:bg-accent opacity-70 hover:opacity-100 rounded-sm focus:outline-none focus:ring-2 focus:ring-ring ring-offset-background focus:ring-offset-2 data-[state=open]:text-muted-foreground transition-opacity disabled:pointer-events-none"
+                                    aria-label="Cerrar"
+                                >
+                                    <X className="w-4 h-4" />
+                                    <span className="sr-only">Cerrar</span>
+                                </button>
+                            </Dialog.Close>
+                        </Dialog.Content>
+                    </Dialog.Portal>
+                </Dialog.Root>
+            </>
+        )
     }
 
+    // Default inline display mode
     const containerClasses = cn(
         'mx-auto max-w-2xl py-12',
         {
@@ -463,74 +659,14 @@ export default function FormBlock({ title, description, variant = 'default', for
                 </p>
             )}
 
-            <Form.Root
-                ref={formRef}
+            <FormContent
+                form={form}
                 onSubmit={handleSubmit}
-                className="space-y-6"
-            >
-                {form.fields.map((field) => (
-                    <Form.Field
-                        key={field.name}
-                        name={field.name}
-                        className="gap-2 grid"
-                    >
-                        <div className="flex justify-between items-baseline">
-                            <Form.Label className="font-medium text-sm">
-                                {field.label}
-                                {field.required === 'yes' && (
-                                    <span className="ml-1 text-red-500">*</span>
-                                )}
-                            </Form.Label>
-                            <div className="flex gap-2">
-                                <Form.Message
-                                    className="text-red-500 text-sm"
-                                    match="valueMissing"
-                                >
-                                    Campo requerido
-                                </Form.Message>
-                                {field.type === 'email' && (
-                                    <Form.Message
-                                        className="text-red-500 text-sm"
-                                        match="typeMismatch"
-                                    >
-                                        Email inválido
-                                    </Form.Message>
-                                )}
-                                {field.type === 'rut' && (
-                                    <Form.Message
-                                        className="text-red-500 text-sm"
-                                        match={(value: string) => {
-                                            return !validateRut(value);
-                                        }}
-                                    >
-                                        RUT inválido
-                                    </Form.Message>
-                                )}
-                            </div>
-                        </div>
-                        {renderField(field)}
-                    </Form.Field>
-                ))}
-
-                {submitStatus === 'success' && (
-                    <p className="text-green-500 text-sm">{form.successMessage}</p>
-                )}
-                {submitStatus === 'error' && (
-                    <p className="text-red-500 text-sm">{form.errorMessage}</p>
-                )}
-
-                <Form.Submit asChild>
-                    <Button
-                        disabled={isSubmitting}
-                        className={cn(
-                            "w-fit px-4 py-3",
-                            "disabled:opacity-50 disabled:cursor-not-allowed"
-                        )}
-                    >
-                        {isSubmitting ? 'Enviando...' : (form.submitButtonText || 'Enviar')}
-                    </Button>
-                </Form.Submit>
-            </Form.Root>
+                submitStatus={submitStatus}
+                isSubmitting={isSubmitting}
+                formRef={formRef}
+                variant={variant}
+            />
         </div>
     )
 } 

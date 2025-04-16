@@ -46,7 +46,10 @@ const HeroSection = ({
 }) => {
     return (
         <div className={cn(
-            "relative"
+            "relative",
+            {
+                "first-of-type:lg:pr-6 last-of-type:lg:pl-6 padding-center": variant === "inset",
+            }
         )}>
             {/* Background Image with Overlay */}
             {image?.asset && (
@@ -65,16 +68,16 @@ const HeroSection = ({
 
             {/* Content */}
             <div className={cn(
-                "relative z-10 flex items-center padding-center py-0 lg:py-12",
+                "relative z-10 flex items-center  py-0 lg:py-12",
                 {
-                    "relative h-full z-10 flex items-stretch": variant !== "inset",
-                    "h-full items-stretch": variant === "inset"
+                    "relative h-full z-10 flex items-stretch padding-center": variant !== "inset",
+                    "h-full items-stretch ": variant === "inset"
                 }
             )} >
                 <div className={cn(
                     "w-full",
                     {
-                        "bg-background-alt w-half py-12": variant === "inset"
+                        "bg-background-alt w-half py-12 ": variant === "inset"
                     }
                 )}>
                     <div className={cn(

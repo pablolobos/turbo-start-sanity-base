@@ -243,6 +243,9 @@ const formBlock = `
     title,
     description,
     variant,
+    displayMode,
+    triggerText,
+    buttonPosition,
     "form": form->{
       _id,
       title,

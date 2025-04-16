@@ -4014,6 +4014,47 @@
                               },
                               "optional": true
                             },
+                            "displayMode": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "union",
+                                "of": [
+                                  {
+                                    "type": "string",
+                                    "value": "inline"
+                                  },
+                                  {
+                                    "type": "string",
+                                    "value": "modal"
+                                  }
+                                ]
+                              },
+                              "optional": true
+                            },
+                            "triggerText": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              },
+                              "optional": true
+                            },
+                            "buttonPosition": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "union",
+                                "of": [
+                                  {
+                                    "type": "string",
+                                    "value": "default"
+                                  },
+                                  {
+                                    "type": "string",
+                                    "value": "fixed"
+                                  }
+                                ]
+                              },
+                              "optional": true
+                            },
                             "variant": {
                               "type": "objectAttribute",
                               "value": {
@@ -4301,6 +4342,47 @@
               }
             },
             "dereferencesTo": "formularios"
+          },
+          "optional": true
+        },
+        "displayMode": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "inline"
+              },
+              {
+                "type": "string",
+                "value": "modal"
+              }
+            ]
+          },
+          "optional": true
+        },
+        "triggerText": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "buttonPosition": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "default"
+              },
+              {
+                "type": "string",
+                "value": "fixed"
+              }
+            ]
           },
           "optional": true
         },
