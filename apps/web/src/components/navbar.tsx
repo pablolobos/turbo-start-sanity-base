@@ -16,16 +16,18 @@ export function Navbar({ navbarData }: { navbarData: NAVBAR_QUERYResult }) {
   const { logo, siteTitle } = navbarData ?? {};
 
   return (
-    <section>
-      <nav className="relative flex flex-col items-center gap-4">
-        <div className="flex justify-start items-center w-full h-[var(--header-main-height-mobile)] md:h-[var(--header-main-height)] max-container padding-center">
-          <Logo src={logo} alt={siteTitle} priority />
-        </div>
-        <div className="top-[5px] md:top-auto right-[10px] md:right-auto absolute md:relative md:w-full">
-          <NavbarClient data={navbarData} />
-        </div>
-      </nav>
-    </section>
+    <>
+      <section className="relative flex flex-col gap-4">
+        <nav className="relative flex flex-col items-center gap-4">
+          <div className="flex justify-start items-center w-full h-[var(--header-main-height-mobile)] md:h-[var(--header-main-height)] max-container padding-center">
+            <Logo src={logo} alt={siteTitle} priority />
+          </div>
+          <div className="top-[5px] md:top-auto right-[10px] md:right-auto absolute md:relative md:w-full">
+          </div>
+        </nav>
+      </section>
+      <NavbarClient data={navbarData} />
+    </>
   );
 }
 

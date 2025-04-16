@@ -66,7 +66,7 @@ interface BlogCardProps {
 
 function BlogMeta({ publishedAt }: { publishedAt: string | null }) {
   return (
-    <div className="flex items-center gap-x-4 my-4 text-xs">
+    <div className="flex items-center gap-x-4 my-4 text-sm">
       <time dateTime={publishedAt ?? ""} className="text-muted-foreground">
         {publishedAt
           ? new Date(publishedAt).toLocaleDateString("es-ES", {
@@ -104,7 +104,7 @@ function BlogContent({
           {title}
         </Link>
       </HeadingTag>
-      <p className="mt-5 text-muted-foreground text-sm leading-6">
+      <p className="mt-5 text-muted-foreground text-base leading-6">
         {description}
       </p>
     </div>

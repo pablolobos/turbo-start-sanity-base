@@ -286,7 +286,7 @@ function NavbarColumn({ column }: { column: NavbarColumnType }) {
 
 function DesktopNavbar({ data }: { data: NonNullable<NAVBAR_QUERYResult> }) {
   return (
-    <div className="bg-v-grayscale-200 w-full padding-center">
+    <div className="top-0 z-[100] lg:sticky bg-v-grayscale-200 w-full padding-center">
       <div className="items-center gap-8 grid grid-cols-[1fr_auto] w-full max-container">
         <NavigationMenu>
           {data.columns?.map((column) =>
