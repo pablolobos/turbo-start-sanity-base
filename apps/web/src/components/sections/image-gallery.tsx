@@ -1,24 +1,58 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { cn } from "@workspace/ui/lib/utils";
-import dynamic from 'next/dynamic';
 import { SanityImage } from '../sanity-image';
 
-// Dynamically import Swiper components to avoid SSR issues
-const Swiper = dynamic(() => import('swiper/react').then(mod => mod.Swiper), { ssr: false });
-const SwiperSlide = dynamic(() => import('swiper/react').then(mod => mod.SwiperSlide), { ssr: false });
+// Import Swiper properly
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, A11y } from 'swiper/modules';
 
-// Import Swiper styles in client component
+// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-// Import Swiper modules
-import { Navigation, Pagination, A11y } from 'swiper/modules';
-
 import type { PagebuilderType, SanityImageProps } from "@/types";
+
+// Add this CSS at the beginning of the file after imports
+const swiperStyles = `
+  .mySwiper {
+    width: 100%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 40px;
+  }
+
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    color: #000;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .swiper-button-next:after,
+  .swiper-button-prev:after {
+    font-size: 20px !important;
+  }
+
+  .swiper-pagination-bullet {
+    background: #000;
+  }
+`;
 
 interface GalleryImage {
     _key: string;
@@ -32,6 +66,7 @@ interface ImageGalleryProps {
     layout: 'grid' | 'carousel' | 'masonry';
     columns?: '2' | '3' | '4';
     images: GalleryImage[];
+    slidesPerRow?: 1 | 2 | 3 | 4 | 5;
 }
 
 export type ImageGalleryBlockProps = PagebuilderType<"imageGallery">;
@@ -42,8 +77,15 @@ export function ImageGallery({
     layout = 'grid',
     columns = '3',
     images,
+    slidesPerRow = 2,
 }: ImageGalleryProps) {
     const [activeImage, setActiveImage] = useState<GalleryImage | null>(null);
+    const [isMounted, setIsMounted] = useState(false);
+
+    // Set isMounted to true when component mounts
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
 
     const handleImageClick = (image: GalleryImage) => {
         setActiveImage(image);
@@ -72,6 +114,7 @@ export function ImageGallery({
 
     return (
         <section className="px-4 sm:px-6 lg:px-8 py-12">
+            <style jsx global>{swiperStyles}</style>
             {title && (
                 <h2 className="mb-4 font-bold text-gray-900 text-3xl tracking-tight">{title}</h2>
             )}
@@ -81,40 +124,42 @@ export function ImageGallery({
 
             {layout === 'carousel' ? (
                 <div className="w-full">
-                    <Swiper
-                        modules={[Navigation, Pagination, A11y]}
-                        spaceBetween={20}
-                        slidesPerView={1}
-                        navigation
-                        pagination={{ clickable: true }}
-                        breakpoints={{
-                            640: { slidesPerView: 2 },
-                            1024: { slidesPerView: 3 },
-                        }}
-                        className="h-full"
-                    >
-                        {images.map((image) => (
-                            <SwiperSlide key={image._key} className="h-full">
-                                <div
-                                    className="relative bg-gray-100 rounded-none w-full aspect-[4/3] overflow-hidden cursor-pointer"
-                                    onClick={() => handleImageClick(image)}
-                                >
-                                    <SanityImage
-                                        asset={image.image}
-                                        alt={image.image.alt}
-                                        fill
-                                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                                        className="object-cover"
-                                    />
-                                    {image.caption && (
-                                        <div className="right-0 bottom-0 left-0 absolute bg-black bg-opacity-60 p-2 text-white">
-                                            <p className="text-sm">{image.caption}</p>
-                                        </div>
-                                    )}
-                                </div>
-                            </SwiperSlide>
-                        ))}
-                    </Swiper>
+                    {isMounted && (
+                        <Swiper
+                            modules={[Navigation, Pagination, A11y]}
+                            navigation={true}
+                            pagination={{ clickable: true }}
+                            spaceBetween={slidesPerRow > 2 ? 10 : 20}
+                            slidesPerView={1}
+                            breakpoints={{
+                                640: { slidesPerView: Math.min(2, slidesPerRow) },
+                                1024: { slidesPerView: slidesPerRow },
+                            }}
+                            className="mySwiper"
+                        >
+                            {images.map((image) => (
+                                <SwiperSlide key={image._key}>
+                                    <div
+                                        className="relative bg-gray-100 rounded-none w-full aspect-[4/3] overflow-hidden cursor-pointer"
+                                        onClick={() => handleImageClick(image)}
+                                    >
+                                        <SanityImage
+                                            asset={image.image}
+                                            alt={image.image.alt}
+                                            fill
+                                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                            className="object-cover"
+                                        />
+                                        {image.caption && (
+                                            <div className="right-0 bottom-0 left-0 absolute bg-black/60 p-2 text-white">
+                                                <p className="text-sm">{image.caption}</p>
+                                            </div>
+                                        )}
+                                    </div>
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
+                    )}
                 </div>
             ) : layout === 'masonry' ? (
                 <div className={cn('grid gap-4', getColumnClass())}>
@@ -135,7 +180,7 @@ export function ImageGallery({
                                 className="object-cover"
                             />
                             {image.caption && (
-                                <div className="right-0 bottom-0 left-0 absolute bg-black bg-opacity-60 p-2 text-white">
+                                <div className="right-0 bottom-0 left-0 absolute bg-black/60 p-2 text-white">
                                     <p className="text-sm">{image.caption}</p>
                                 </div>
                             )}
@@ -158,7 +203,7 @@ export function ImageGallery({
                                 className="object-cover"
                             />
                             {image.caption && (
-                                <div className="right-0 bottom-0 left-0 absolute bg-black bg-opacity-60 p-2 text-white">
+                                <div className="right-0 bottom-0 left-0 absolute bg-black/60 p-2 text-white">
                                     <p className="text-sm">{image.caption}</p>
                                 </div>
                             )}
