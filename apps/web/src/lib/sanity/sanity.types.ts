@@ -17396,6 +17396,93 @@ export type COTIZADOR_FORM_BY_ID_QUERYResult = {
   successMessage: string | null;
   errorMessage: string | null;
 } | null;
+// Variable: SEARCH_QUERY
+// Query: {  "results": *[    _type in ["page", "blog", "camiones", "buses", "motoresPenta"]    && (      title match $searchTerm ||       description match $searchTerm    )  ] | order(_createdAt desc) [0...20] {    _id,    _type,    title,    description,    "slug": slug.current,    "image": image{      "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background    },    "category": select(      _type == "camiones" => category,      _type == "buses" => category,      _type == "motoresPenta" => category,      null    ),    _createdAt  }}
+export type SEARCH_QUERYResult = {
+  results: Array<
+    | {
+        _id: string;
+        _type: "blog";
+        title: string | null;
+        description: string | null;
+        slug: string | null;
+        image: {
+          alt: string | "Image-Broken";
+          blurData: string | null;
+          dominantColor: string | null;
+        } | null;
+        category: null;
+        _createdAt: string;
+      }
+    | {
+        _id: string;
+        _type: "buses";
+        title: string | null;
+        description: string | null;
+        slug: string | null;
+        image: {
+          alt: string | "Image-Broken";
+          blurData: string | null;
+          dominantColor: string | null;
+        } | null;
+        category: "interurbano" | "urbano" | null;
+        _createdAt: string;
+      }
+    | {
+        _id: string;
+        _type: "camiones";
+        title: string | null;
+        description: string | null;
+        slug: string | null;
+        image: {
+          alt: string | "Image-Broken";
+          blurData: string | null;
+          dominantColor: string | null;
+        } | null;
+        category:
+          | "construccion-y-mineria"
+          | "distribucion-urbana-y-regional"
+          | "forestal"
+          | "larga-distancia"
+          | "usados"
+          | "volvo-electric"
+          | null;
+        _createdAt: string;
+      }
+    | {
+        _id: string;
+        _type: "motoresPenta";
+        title: string | null;
+        description: string | null;
+        slug: string | null;
+        image: {
+          alt: string | "Image-Broken";
+          blurData: string | null;
+          dominantColor: string | null;
+        } | null;
+        category:
+          | "accesorios"
+          | "motores-industriales"
+          | "motores-marinos"
+          | null;
+        _createdAt: string;
+      }
+    | {
+        _id: string;
+        _type: "page";
+        title: string | null;
+        description: string | null;
+        slug: string | null;
+        image: {
+          alt: string | "Image-Broken";
+          blurData: string | null;
+          dominantColor: string | null;
+        } | null;
+        category: null;
+        _createdAt: string;
+      }
+  >;
+};
 
 // Query TypeMap
 import "@sanity/client";
@@ -17428,5 +17515,6 @@ declare module "@sanity/client" {
     '\n  *[_type == "motoresPenta" && defined(slug.current)].slug.current\n': QueryMotoresPentaPathsResult;
     '*[\n  _type == "settings"\n][0]{\n  _id,\n  \n  cotizadorFormTitle,\n  cotizadorFormDescription,\n  "cotizadorForm": coalesce(cotizadorForm->{\n    _id,\n    _type,\n    title,\n    description,\n    "slug": slug.current,\n    \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n\n  }, null)\n\n}': COTIZADOR_SETTINGS_QUERYResult;
     '*[\n  _type == "formularios" \n  && _id == $formId\n][0]{\n  _id,\n  title,\n  description,\n  \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n\n}': COTIZADOR_FORM_BY_ID_QUERYResult;
+    '{\n  "results": *[\n    _type in ["page", "blog", "camiones", "buses", "motoresPenta"]\n    && (\n      title match $searchTerm || \n      description match $searchTerm\n    )\n  ] | order(_createdAt desc) [0...20] {\n    _id,\n    _type,\n    title,\n    description,\n    "slug": slug.current,\n    "image": image{\n      "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background\n    },\n    "category": select(\n      _type == "camiones" => category,\n      _type == "buses" => category,\n      _type == "motoresPenta" => category,\n      null\n    ),\n    _createdAt\n  }\n}': SEARCH_QUERYResult;
   }
 }
