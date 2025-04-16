@@ -373,6 +373,39 @@ const infoSectionBlock = `
   }
 `;
 
+// Define a specific fragment for aspect images
+const aspectImageFragment = `
+  image{
+    ...,
+    "alt": coalesce(asset->altText, asset->originalFilename, "Aspect Image"),
+    "blurData": asset->metadata.lqip,
+    "dominantColor": asset->metadata.palette.dominant.background,
+  }
+`;
+
+// Add a new fragment for the highlighted aspects block
+const highlightedAspectsBlock = `
+  _type == "highlightedAspects" => {
+    title,
+    description,
+    columns,
+    aspects[]{
+      _key,
+      title,
+      image{
+        ...,
+        "alt": coalesce(asset->altText, asset->originalFilename, "Aspect Image"),
+        "blurData": asset->metadata.lqip,
+        "dominantColor": asset->metadata.palette.dominant.background
+      },
+      content[]{
+        ...,
+        ${markDefsFragment}
+      }
+    }
+  }
+`;
+
 const pageBuilderFragment = `
   pageBuilder[]{
     ...,
@@ -389,7 +422,8 @@ const pageBuilderFragment = `
     ${infoSectionBlock},
     ${imageGalleryBlock},
     ${specificationsTableBlock},
-    ${featuredBlogsBlock}
+    ${featuredBlogsBlock},
+    ${highlightedAspectsBlock}
   }
 `;
 

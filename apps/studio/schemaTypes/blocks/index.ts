@@ -13,4 +13,5 @@ export const pageBuilderBlocks: ObjectDefinition[] = [
   featuredBlogs,
 ];
 
+// Include all block components
 export const blocks = [...pageBuilderBlocks];

@@ -5,6 +5,7 @@ import { faqAccordion } from "./faq-accordion"
 import { featureCardsIcon } from "./feature-cards-icon"
 import { formBlock } from "./form-block"
 import { hero } from "./hero"
+import { highlightedAspects } from "./highlighted-aspects"
 import { imageGallery } from "./image-gallery"
 import { imageLinkCards } from "./image-link-cards"
 import { mainHero } from "./main-hero"
@@ -24,4 +25,5 @@ export const baseBlocks: ObjectDefinition[] = [
     subscribeNewsletter,
     formBlock,
     specificationsTable,
+    highlightedAspects,
 ]; 
