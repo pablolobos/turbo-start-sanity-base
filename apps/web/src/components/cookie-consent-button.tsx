@@ -2,7 +2,7 @@
 
 import { Button } from "@workspace/ui/components/button";
 import { useCookieConsent } from "@/context/cookie-consent-provider";
-
+import Link from "next/link";
 interface CookieConsentButtonProps {
     variant?: "link" | "default" | "outline";
     className?: string;
@@ -22,13 +22,15 @@ export function CookieConsentButton({
     if (!isInitialized) return null;
 
     return (
-        <Button
-            variant={variant}
-            onClick={openConsentModal}
+        <Link
+            href="#"
+            onClick={(e) => {
+                e.preventDefault();
+                openConsentModal();
+            }}
             className={className}
-            type="button"
         >
             Preferencias de cookies
-        </Button>
+        </Link>
     );
-} 
+}
