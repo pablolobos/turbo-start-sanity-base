@@ -133,8 +133,8 @@
     --v-font-heading-3-size: clamp(var(--v-font-heading-3-size-min), 1vw + 1.2rem, var(--v-font-heading-3-size-max));
     --v-font-heading-3-lineheight: calc(.31rem + 2ex);
 
-    --v-font-heading-4-size-min: 1.3rem;
-    --v-font-heading-4-size-max: 1.8rem;
+    --v-font-heading-4-size-min: 1rem;
+    --v-font-heading-4-size-max: 1.4rem;
     --v-font-heading-4-size: clamp(var(--v-font-heading-4-size-min), 1vw + 1.2rem, var(--v-font-heading-4-size-max));
     --v-font-heading-4-lineheight: calc(.31rem + 2ex);
 
