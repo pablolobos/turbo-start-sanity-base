@@ -161,7 +161,7 @@ export default async function BusPage({
                         }
                     </p>
                     <div className="mt-6">
-                        <CotizadorButton buttonVariant="default" pageTitle={title} />
+                        <CotizadorButton pageTitle={title} />
                     </div>
                 </div>
             ) : _type === "buses" ? (

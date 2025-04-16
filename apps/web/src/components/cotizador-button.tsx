@@ -3,7 +3,7 @@
 import { CotizadorDialog } from "./cotizador-dialog";
 import { useEffect, useState } from "react";
 import { Button } from "@workspace/ui/components/button";
-
+import { cn } from "@workspace/ui/lib/utils";
 interface CotizadorButtonProps {
     buttonLabel?: string;
     buttonVariant?: "default" | "secondary" | "outline" | "ghost" | "link";
@@ -75,9 +75,16 @@ export function CotizadorButton({
     return (
         <>
             <Button
-                variant={buttonVariant}
-                size={buttonSize}
-                className={className}
+                variant="default"
+                size="lg"
+                className={cn(
+                    "transition-colors duration-200",
+                    "border-white/30 border",
+                    "hover:opacity-90",
+                    "focus:ring-2 focus:ring-offset-2 focus:ring-primary",
+                    "fixed bottom-4 right-8 z-[100]",
+                    className
+                )}
                 onClick={handleButtonClick}
                 disabled={isLoading}
             >

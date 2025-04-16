@@ -176,7 +176,7 @@ export default async function CamionPage({
                                 description={description}
                             />
                             <div className="flex justify-end mx-auto mt-6 px-4 max-w-screen-xl">
-                                <CotizadorButton buttonVariant="default" pageTitle={title} />
+                                <CotizadorButton pageTitle={title} />
                             </div>
                         </div>
                     )}
