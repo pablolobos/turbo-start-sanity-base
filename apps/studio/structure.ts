@@ -119,17 +119,18 @@ export const structure = (
         list: { type: "blog", title: "Artículos", icon: FileText },
         context,
       }),
-      createList({ S, type: "camiones", title: "Camiones", icon: Truck }),
-      createList({ S, type: "buses", title: "Buses", icon: Bus }),
-      createList({ S, type: "motoresPenta", title: "Motores Penta", icon: Box }),
-      createList({ S, type: "formularios", title: "Formularios", icon: NotepadText }),
-      createList({
-        S,
-        type: "faq",
-        title: "FAQs",
-        icon: MessageCircleQuestion,
-      }),
-      createList({ S, type: "author", title: "Autores", icon: User }),
+      S.listItem()
+        .title("Nuestros productos")
+        .icon(Truck)
+        .child(
+          S.list()
+            .title("Nuestros productos")
+            .items([
+              createList({ S, type: "camiones", title: "Camiones", icon: Truck }),
+              createList({ S, type: "buses", title: "Buses", icon: Bus }),
+              createList({ S, type: "motoresPenta", title: "Motores Penta", icon: Box }),
+            ])
+        ),
       S.divider(),
       S.listItem()
         .title("Configuración del sitio")
@@ -156,6 +157,8 @@ export const structure = (
                 title: "Configuración global",
                 icon: CogIcon,
               }),
+              createList({ S, type: "formularios", title: "Formularios", icon: NotepadText }),
+              createList({ S, type: "author", title: "Autores", icon: User }),
             ]),
         ),
     ]);
