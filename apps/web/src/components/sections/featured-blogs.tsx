@@ -53,7 +53,7 @@ export function FeaturedBlogs(props: FeaturedBlogsProps) {
 
     return (
         <section className="bg-background py-16 md:py-24">
-            <div className="mx-auto padding-center max-container">
+            <div className="flex flex-col gap-8 mx-auto padding-center max-container">
                 {/* Title and subtitle area */}
                 {(title || subtitle) && (
                     <div className="mb-12">
@@ -78,7 +78,7 @@ export function FeaturedBlogs(props: FeaturedBlogsProps) {
                     // Two blogs side by side on larger screens
                     <div className="gap-6 grid grid-cols-1 md:grid-cols-2 mb-8">
                         {limitedBlogs.map((blog) => blog && (
-                            <FeaturedBlogCard key={blog._id} blog={blog} />
+                            <BlogCard key={blog._id} blog={blog} variant="heading4" />
                         ))}
                     </div>
                 )}
@@ -87,7 +87,7 @@ export function FeaturedBlogs(props: FeaturedBlogsProps) {
                     // Three blogs in a grid layout
                     <div className="gap-8 grid grid-cols-1 md:grid-cols-3 mb-8">
                         {limitedBlogs.slice(0, 3).map((blog) => blog && (
-                            <BlogCard key={blog._id} blog={blog} />
+                            <BlogCard key={blog._id} blog={blog} variant="heading4" />
                         ))}
                     </div>
                 )}

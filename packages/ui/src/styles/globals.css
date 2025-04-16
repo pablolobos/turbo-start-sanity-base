@@ -133,6 +133,11 @@
     --v-font-heading-3-size: clamp(var(--v-font-heading-3-size-min), 1vw + 1.2rem, var(--v-font-heading-3-size-max));
     --v-font-heading-3-lineheight: calc(.31rem + 2ex);
 
+    --v-font-heading-4-size-min: 1.3rem;
+    --v-font-heading-4-size-max: 1.8rem;
+    --v-font-heading-4-size: clamp(var(--v-font-heading-4-size-min), 1vw + 1.2rem, var(--v-font-heading-4-size-max));
+    --v-font-heading-4-lineheight: calc(.31rem + 2ex);
+
     --v-font-statement-signature-lineheight: 1;
     --v-font-statement-signature-size-min: 2.5rem;
     --v-font-statement-signature-size-max: 4.5rem;
@@ -187,7 +192,8 @@
 
   .heading-1,
   .heading-2,
-  .heading-3 {
+  .heading-3,
+  .heading-4 {
     font-family: var(--font-volvo-novum);
     font-weight: 700;
     text-wrap: balance;
@@ -207,6 +213,11 @@
   .heading-3 {
     line-height: var(--v-font-heading-3-lineheight);
     font-size: var(--v-font-heading-3-size);
+  }
+
+  .heading-4 {
+    line-height: var(--v-font-heading-4-lineheight);
+    font-size: var(--v-font-heading-4-size);
   }
 
   .signature-statement {

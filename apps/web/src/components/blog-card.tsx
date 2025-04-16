@@ -62,11 +62,12 @@ export function BlogAuthor({ author }: BlogAuthorProps) {
 
 interface BlogCardProps {
   blog: Blog;
+  variant?: 'default' | 'heading4';
 }
 
 function BlogMeta({ publishedAt }: { publishedAt: string | null }) {
   return (
-    <div className="flex items-center gap-x-4 my-4 text-sm">
+    <div className="flex items-center gap-x-4 my-1 text-sm">
       <time dateTime={publishedAt ?? ""} className="text-muted-foreground">
         {publishedAt
           ? new Date(publishedAt).toLocaleDateString("es-ES", {
@@ -85,26 +86,30 @@ function BlogContent({
   slug,
   description,
   isFeatured,
+  headingClass,
 }: {
   title: string | null;
   slug: string | null;
   description: string | null;
   isFeatured?: boolean;
+  headingClass?: string;
 }) {
   const HeadingTag = isFeatured ? "h2" : "h3";
-  const headingClasses = isFeatured
-    ? "mt-3 heading-1"
-    : "mt-3 heading-2";
+  const headingClasses = headingClass
+    ? ` ${headingClass}`
+    : isFeatured
+      ? "heading-1"
+      : "heading-2";
 
   return (
-    <div className="group relative">
+    <div className="group relative grid grid-rows-subgrid row-span-2">
       <HeadingTag className={headingClasses}>
         <Link href={slug ?? "#"}>
           <span className="absolute inset-0" />
           {title}
         </Link>
       </HeadingTag>
-      <p className="mt-5 text-muted-foreground text-base leading-6">
+      <p className="text-muted-foreground text-base leading-6">
         {description}
       </p>
     </div>
@@ -177,7 +182,7 @@ export function FeaturedBlogCard({ blog }: BlogCardProps) {
   );
 }
 
-export function BlogCard({ blog }: BlogCardProps) {
+export function BlogCard({ blog, variant = 'default' }: BlogCardProps) {
   if (!blog) {
     return (
       <article className="gap-4 grid grid-cols-1 w-full">
@@ -192,16 +197,22 @@ export function BlogCard({ blog }: BlogCardProps) {
   }
 
   const { title, publishedAt, slug, authors, description, image } = blog;
+  const headingClass = variant === 'heading4' ? 'heading-4' : undefined;
 
   return (
-    <article className="gap-4 grid grid-cols-1 w-full">
+    <article className="content-start gap-2 grid grid-cols-1 grid-rows-[auto_auto_1fr_1fr] w-full">
       <div className="relative rounded-none w-full h-auto aspect-[16/9] overflow-hidden">
         <BlogImage image={image} title={title} />
         <div className="absolute inset-0 rounded-2xl ring-1 ring-gray-900/10 ring-inset" />
       </div>
-      <div className="space-y-4 w-full">
+      <div className="content-start grid grid-rows-subgrid row-span-3 w-full">
         <BlogMeta publishedAt={publishedAt} />
-        <BlogContent title={title} slug={slug} description={description} />
+        <BlogContent
+          title={title}
+          slug={slug}
+          description={description}
+          headingClass={headingClass}
+        />
         <AuthorSection authors={authors} />
       </div>
     </article>
