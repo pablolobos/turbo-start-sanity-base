@@ -21,8 +21,8 @@ function BlogImage({ image, title }: BlogImageProps) {
       asset={image}
       width={800}
       height={400}
-      alt={title ?? "Blog post image"}
-      className="bg-gray-100 rounded-none w-full object-cover aspect-[16/9] sm:aspect-[2/1] lg:aspect-[3/2]"
+      alt={title ?? "Imagen de artículo"}
+      className="bg-gray-100 rounded-none w-full h-full object-cover"
     />
   );
 }
@@ -138,13 +138,13 @@ export function FeaturedBlogCard({ blog }: BlogCardProps) {
   const { title, publishedAt, slug, authors, description, image } = blog ?? {};
 
   return (
-    <article className="relative shadow-lg rounded-none w-full overflow-hidden component-height">
-      <div className="relative h-full">
-        <div className="z-10 absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-        <div className="w-full">
+    <article className="relative lg:shadow-lg rounded-none w-full overflow-hidden">
+      <div className="relative">
+        <div className="hidden lg:block z-10 absolute inset-0 lg:bg-gradient-to-t from-black/60 to-transparent"></div>
+        <div className="w-full lg:h-full">
           <BlogImage image={image} title={title} />
         </div>
-        <div className="z-20 absolute inset-0 flex flex-col justify-end p-6 md:p-8">
+        <div className="z-20 lg:absolute lg:inset-0 flex flex-col justify-end lg:bg-transparent p-6 md:p-8 bg-accent-brand">
           {publishedAt && (
             <div className="mb-2">
               <span className="inline-flex items-center bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full font-semibold text-white text-xs">
@@ -159,7 +159,7 @@ export function FeaturedBlogCard({ blog }: BlogCardProps) {
 
           <h2 className="font-bold text-white text-2xl md:text-3xl">
             <Link href={slug ?? "#"}>
-              <span className="z-10 absolute inset-0" />
+              <span className="z-10 lg:absolute lg:inset-0" />
               {title}
             </Link>
           </h2>
@@ -203,7 +203,7 @@ export function BlogCard({ blog, variant = 'default' }: BlogCardProps) {
     <article className="content-start gap-2 grid grid-cols-1 grid-rows-[auto_auto_1fr_1fr] w-full">
       <div className="relative rounded-none w-full h-auto aspect-[16/9] overflow-hidden">
         <BlogImage image={image} title={title} />
-        <div className="absolute inset-0 rounded-2xl ring-1 ring-gray-900/10 ring-inset" />
+        <div className="absolute inset-0 ring-1 ring-gray-900/10 ring-inset" />
       </div>
       <div className="content-start grid grid-rows-subgrid row-span-3 w-full">
         <BlogMeta publishedAt={publishedAt} />

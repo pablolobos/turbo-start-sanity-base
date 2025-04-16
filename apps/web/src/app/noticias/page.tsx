@@ -78,7 +78,7 @@ export default async function BlogIndexPage() {
         )}
 
         {featuredBlogs.length > 0 && (
-          <div className={`gap-6 grid ${featuredBlogs.length > 1 ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'} mx-auto mt-8 sm:mt-12 md:mt-16 mb-12 lg:mb-20`}>
+          <div className={`grid-gap grid ${featuredBlogs.length > 1 ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'} mx-auto mt-8 sm:mt-12 md:mt-16 mb-8 lg:mb-12`}>
             {featuredBlogs.map((blog: Blog) => (
               <FeaturedBlogCard key={blog._id} blog={blog} />
             ))}
@@ -86,7 +86,7 @@ export default async function BlogIndexPage() {
         )}
 
         {remainingBlogs.length > 0 && (
-          <div className="gap-8 md:gap-12 grid grid-cols-1 lg:grid-cols-2 mt-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 grid-gap mt-8">
             {remainingBlogs.map((blog: Blog) => (
               <BlogCard key={blog._id} blog={blog} />
             ))}

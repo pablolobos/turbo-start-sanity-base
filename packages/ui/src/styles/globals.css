@@ -190,6 +190,10 @@
     @apply px-[var(--p-x-sm)] md:px-[var(--p-x-md)] lg:px-[var(--p-x-exterior-lg)];
   }
 
+  .grid-gap {
+    @apply gap-8 lg:gap-12;
+  }
+
   .heading-1,
   .heading-2,
   .heading-3,

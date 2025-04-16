@@ -44,7 +44,7 @@ export function HighlightedAspects({
                 )}
 
                 {/* Grid of aspect cards */}
-                <div className={`gap-8 grid grid-cols-1 ${gridClass} mb-8`}>
+                <div className={`grid-gap grid grid-cols-1 ${gridClass} mb-8`}>
                     {aspects.map((aspect) => (
                         <AspectCard
                             key={aspect._key}

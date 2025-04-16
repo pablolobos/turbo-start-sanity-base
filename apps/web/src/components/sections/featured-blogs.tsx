@@ -76,7 +76,7 @@ export function FeaturedBlogs(props: FeaturedBlogsProps) {
 
                 {limitedBlogs.length === 2 && (
                     // Two blogs side by side on larger screens
-                    <div className="gap-6 grid grid-cols-1 md:grid-cols-2 mb-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 grid-gap mb-8">
                         {limitedBlogs.map((blog) => blog && (
                             <BlogCard key={blog._id} blog={blog} variant="heading4" />
                         ))}
@@ -85,7 +85,7 @@ export function FeaturedBlogs(props: FeaturedBlogsProps) {
 
                 {limitedBlogs.length >= 3 && (
                     // Three blogs in a grid layout
-                    <div className="gap-8 grid grid-cols-1 md:grid-cols-3 mb-8">
+                    <div className="grid grid-cols-1 md:grid-cols-3 grid-gap mb-8">
                         {limitedBlogs.slice(0, 3).map((blog) => blog && (
                             <BlogCard key={blog._id} blog={blog} variant="heading4" />
                         ))}
