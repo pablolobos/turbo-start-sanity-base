@@ -30,7 +30,7 @@ const SpecificationItem = ({ label, content, isHeader = false, isOdd = false, cl
                 isHeader ? "bg-gray-300 text-gray-800 font-medium" : "",
                 className
             )}>
-                {content && <RichText richText={content} className="prose-p:first:mt-0" />}
+                {content && <RichText richText={content} className="prose-p:first:mt-0 prose-p:last-of-type:mb-0" />}
             </div>
         </>
     );
