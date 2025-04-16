@@ -128,21 +128,50 @@ function AuthorSection({ authors }: { authors: Blog["authors"] }) {
     </div>
   );
 }
+
 export function FeaturedBlogCard({ blog }: BlogCardProps) {
   const { title, publishedAt, slug, authors, description, image } = blog ?? {};
 
   return (
-    <article className="gap-8 grid grid-cols-1 lg:grid-cols-2 w-full">
-      <BlogImage image={image} title={title} />
-      <div className="space-y-6">
-        <BlogMeta publishedAt={publishedAt} />
-        <BlogContent
-          title={title}
-          slug={slug}
-          description={description}
-          isFeatured
-        />
-        <AuthorSection authors={authors} />
+    <article className="relative shadow-lg rounded-none w-full overflow-hidden component-height">
+      <div className="relative h-full">
+        <div className="z-10 absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+        <div className="w-full">
+          <BlogImage image={image} title={title} />
+        </div>
+        <div className="z-20 absolute inset-0 flex flex-col justify-end p-6 md:p-8">
+          {publishedAt && (
+            <div className="mb-2">
+              <span className="inline-flex items-center bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full font-semibold text-white text-xs">
+                {new Date(publishedAt).toLocaleDateString("es-ES", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
+              </span>
+            </div>
+          )}
+
+          <h2 className="font-bold text-white text-2xl md:text-3xl">
+            <Link href={slug ?? "#"}>
+              <span className="z-10 absolute inset-0" />
+              {title}
+            </Link>
+          </h2>
+
+          <p className="mt-2 text-white/80 text-base line-clamp-2">
+            {description}
+          </p>
+
+          {authors && (
+            <div className="flex items-center gap-x-2 mt-4">
+              <AuthorImage author={authors} />
+              <span className="font-medium text-white text-sm">
+                {authors.name}
+              </span>
+            </div>
+          )}
+        </div>
       </div>
     </article>
   );

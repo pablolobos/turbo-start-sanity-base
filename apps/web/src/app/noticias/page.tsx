@@ -78,7 +78,7 @@ export default async function BlogIndexPage() {
         )}
 
         {featuredBlogs.length > 0 && (
-          <div className="gap-8 md:gap-12 grid grid-cols-1 mx-auto mt-8 sm:mt-12 md:mt-16 mb-12 lg:mb-20">
+          <div className={`gap-6 grid ${featuredBlogs.length > 1 ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'} mx-auto mt-8 sm:mt-12 md:mt-16 mb-12 lg:mb-20`}>
             {featuredBlogs.map((blog: Blog) => (
               <FeaturedBlogCard key={blog._id} blog={blog} />
             ))}
