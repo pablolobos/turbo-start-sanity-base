@@ -20,6 +20,7 @@ import FormBlock from "./sections/form-block";
 import { TabsBlock } from "./sections/tabs";
 import { InfoSection } from "./sections/info-section";
 import { SpecificationsTable } from "./sections/specifications-table";
+import { FeaturedBlogs } from "./sections/featured-blogs";
 
 type PageBlock = NonNullable<
   NonNullable<QueryHomePageDataResult>["pageBuilder"]
@@ -51,6 +52,7 @@ const BLOCK_COMPONENTS = {
   tabs: TabsBlock,
   infoSection: InfoSection,
   specificationsTable: SpecificationsTable,
+  featuredBlogs: FeaturedBlogs,
 } as const;
 
 type BlockType = keyof typeof BLOCK_COMPONENTS;
