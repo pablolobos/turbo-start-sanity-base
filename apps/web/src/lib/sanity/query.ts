@@ -297,6 +297,29 @@ const specificationsTableBlock = `
   }
 `;
 
+const featuredBlogsBlock = `
+  _type == "featuredBlogs" => {
+    ...,
+    title,
+    subtitle,
+    displayMode,
+    blogCount,
+    buttonText,
+    "showViewAllButton": showViewAllButton == "yes",
+    "blogs": select(
+      displayMode == "curated" => blogs[]-> {
+        ${blogCardFragment}
+      },
+      displayMode == "latest" => *[
+        _type == "blog" 
+        && (seoHideFromLists != true)
+      ] | order(publishedAt desc, _createdAt desc)[0...3] {
+        ${blogCardFragment}
+      }
+    )
+  }
+`;
+
 const tabsBlock = `
   _type == "tabs" => {
     ...,
@@ -318,6 +341,7 @@ const tabsBlock = `
         ${imageLinkCardsBlock},
         ${formBlock},
         ${imageGalleryBlock},
+        ${featuredBlogsBlock},
         _type == "tabs" => {
           ...,
           title,
@@ -364,7 +388,8 @@ const pageBuilderFragment = `
     ${tabsBlock},
     ${infoSectionBlock},
     ${imageGalleryBlock},
-    ${specificationsTableBlock}
+    ${specificationsTableBlock},
+    ${featuredBlogsBlock}
   }
 `;
 
