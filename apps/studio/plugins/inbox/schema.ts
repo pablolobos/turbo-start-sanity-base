@@ -53,5 +53,42 @@ export const message = {
       name: 'starred',
       title: 'Starred',
     },
+    {
+      type: 'object',
+      name: 'utmParams',
+      title: 'UTM Parameters',
+      fields: [
+        {
+          type: 'string',
+          name: 'utm_source',
+          title: 'UTM Source',
+        },
+        {
+          type: 'string',
+          name: 'utm_medium',
+          title: 'UTM Medium',
+        },
+        {
+          type: 'string',
+          name: 'utm_campaign',
+          title: 'UTM Campaign',
+        },
+        {
+          type: 'string',
+          name: 'utm_term',
+          title: 'UTM Term',
+        },
+        {
+          type: 'string',
+          name: 'utm_content',
+          title: 'UTM Content',
+        }
+      ]
+    },
+    {
+      type: 'string',
+      name: 'emailRecipients',
+      title: 'Email Recipients',
+    }
   ]
 }

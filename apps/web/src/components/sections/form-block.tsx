@@ -218,6 +218,27 @@ export default function FormBlock({ title, description, variant = 'default', for
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
     const formRef = useRef<HTMLFormElement>(null)
+    const [utmParams, setUtmParams] = useState<Record<string, string>>({})
+
+    // Capture UTM parameters on component mount
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const url = new URL(window.location.href)
+            const params = url.searchParams
+
+            const utmData: Record<string, string> = {}
+            const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content']
+
+            utmKeys.forEach(key => {
+                const value = params.get(key)
+                if (value) {
+                    utmData[key] = value
+                }
+            })
+
+            setUtmParams(utmData)
+        }
+    }, [])
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
@@ -273,6 +294,16 @@ export default function FormBlock({ title, description, variant = 'default', for
         // Flatten the fields array since direccion fields return multiple entries
         const flattenedFields = fields.flat()
 
+        // Add UTM parameters as additional fields
+        const utmFields = Object.entries(utmParams).map(([key, value]) => ({
+            _key: generateID(),
+            name: key,
+            value
+        }))
+
+        // Combine regular fields with UTM fields
+        const allFields = [...flattenedFields, ...utmFields]
+
         const mutations = [{
             create: {
                 _id: 'message.',
@@ -282,8 +313,9 @@ export default function FormBlock({ title, description, variant = 'default', for
                 name: formData.get('name')?.toString() || 'No name provided',
                 email: formData.get('email')?.toString() || 'No email provided',
                 subject: form.title,
-                fields: flattenedFields,
-                emailRecipients: form.emailRecipients
+                fields: allFields,
+                emailRecipients: form.emailRecipients,
+                utmParams: utmParams
             }
         }]
 

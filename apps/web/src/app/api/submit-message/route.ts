@@ -13,6 +13,7 @@ interface FormData {
   subject: string
   fields: FormField[]
   emailRecipients: string
+  utmParams?: Record<string, string>
 }
 
 // Get the API key from environment variable
@@ -86,6 +87,16 @@ export async function POST(req: NextRequest) {
         ?.map((field: FormField) => `<p><strong>${field.name}:</strong> ${field.value}</p>`)
         .join('') || ''
 
+      // Generate HTML for UTM parameters if they exist
+      const utmParamsHtml = formData.utmParams && Object.keys(formData.utmParams).length > 0
+        ? `
+          <h3>UTM Parameters</h3>
+          ${Object.entries(formData.utmParams)
+          .map(([key, value]) => `<p><strong>${key}:</strong> ${value}</p>`)
+          .join('')}
+        `
+        : ''
+
       // Parse email recipients
       console.log('Email recipients from form:', formData.emailRecipients)
 
@@ -106,6 +117,7 @@ export async function POST(req: NextRequest) {
             <p><strong>Email:</strong> ${formData.email}</p>
             <p><strong>Asunto:</strong> ${formData.subject}</p>
             ${fieldsHtml}
+            ${utmParamsHtml}
           `,
         })
 
