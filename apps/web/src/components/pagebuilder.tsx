@@ -11,6 +11,7 @@ import { CTABlock } from "./sections/cta";
 import { FaqAccordion } from "./sections/faq-accordion";
 import { FeatureCardsWithIcon } from "./sections/feature-cards-with-icon";
 import { HeroBlock } from "./sections/hero";
+import { ImageGallery } from "./sections/image-gallery";
 import { ImageLinkCards } from "./sections/image-link-cards";
 import { MainHeroBlock } from "./sections/main-hero";
 import { DoubleHeroBlock } from "./sections/double-hero";
@@ -44,6 +45,7 @@ const BLOCK_COMPONENTS = {
   featureCardsIcon: FeatureCardsWithIcon,
   subscribeNewsletter: SubscribeNewsletter,
   imageLinkCards: ImageLinkCards,
+  imageGallery: ImageGallery,
   formBlock: FormBlock,
   tabs: TabsBlock,
   infoSection: InfoSection,

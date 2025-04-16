@@ -5,6 +5,7 @@ import { faqAccordion } from "./faq-accordion"
 import { featureCardsIcon } from "./feature-cards-icon"
 import { formBlock } from "./form-block"
 import { hero } from "./hero"
+import { imageGallery } from "./image-gallery"
 import { imageLinkCards } from "./image-link-cards"
 import { mainHero } from "./main-hero"
 import { subscribeNewsletter } from "./subscribe-newsletter"
@@ -18,6 +19,7 @@ export const baseBlocks: ObjectDefinition[] = [
     featureCardsIcon,
     faqAccordion,
     imageLinkCards,
+    imageGallery,
     subscribeNewsletter,
     formBlock,
 ]; 

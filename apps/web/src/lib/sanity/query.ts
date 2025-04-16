@@ -255,6 +255,26 @@ const formBlock = `
   }
 `;
 
+const imageGalleryBlock = `
+  _type == "imageGallery" => {
+    ...,
+    title,
+    description,
+    layout,
+    columns,
+    "images": images[]{
+      ...,
+      "image": image{
+        ...,
+        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),
+        "blurData": asset->metadata.lqip,
+        "dominantColor": asset->metadata.palette.dominant.background,
+      },
+      caption
+    }
+  }
+`;
+
 const tabsBlock = `
   _type == "tabs" => {
     ...,
@@ -275,6 +295,7 @@ const tabsBlock = `
         ${subscribeNewsletterBlock},
         ${imageLinkCardsBlock},
         ${formBlock},
+        ${imageGalleryBlock},
         _type == "tabs" => {
           ...,
           title,
@@ -319,7 +340,8 @@ const pageBuilderFragment = `
     ${imageLinkCardsBlock},
     ${formBlock},
     ${tabsBlock},
-    ${infoSectionBlock}
+    ${infoSectionBlock},
+    ${imageGalleryBlock}
   }
 `;
 
