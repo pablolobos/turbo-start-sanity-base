@@ -87,7 +87,7 @@
 
 
     --background: var(--v-main-white);
-    --background-alt: var(--v-grayscale-200);
+    --background-alt: var(--v-grayscale-100);
     --foreground: var(--v-main-grey-darkest);
     --foreground-inverse: var(--v-main-white);
     --card: 0 0% 100%;
