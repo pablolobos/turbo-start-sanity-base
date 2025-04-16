@@ -78,6 +78,12 @@ interface NavbarLinkType {
   href: string | null;
 }
 
+// Helper function to check if a link is active
+function isLinkActive(path: string, href: string | null | undefined): boolean {
+  if (!href) return false;
+  return path === href || (href !== '/' && path.startsWith(href));
+}
+
 function MenuItemLink({
   item,
   setIsOpen,
@@ -85,10 +91,14 @@ function MenuItemLink({
   item: MenuItem;
   setIsOpen?: (isOpen: boolean) => void;
 }) {
+  const path = usePathname();
+  const isActive = isLinkActive(path, item.href);
+
   return (
     <Link
       className={cn(
         "flex select-none gap-4 rounded-none p-3 leading-none outline-none transition-colors hover:bg-accent hover:text-accent-foreground items-center focus:bg-accent focus:text-accent-foreground",
+        isActive && "bg-accent text-accent-foreground font-light"
       )}
       aria-label={`Link to ${item.title ?? item.href}`}
       onClick={() => setIsOpen?.(false)}
@@ -168,6 +178,7 @@ function MobileNavbar({ data }: { data: NonNullable<NAVBAR_QUERYResult> }) {
           <div className="flex flex-col gap-4 mt-8 mb-8">
             {data.columns?.map((item) => {
               if (item.type === "link") {
+                const isActive = isLinkActive(path, item.href);
                 return (
                   <Link
                     key={`column-link-${item.name}-${item._key}`}
@@ -176,6 +187,7 @@ function MobileNavbar({ data }: { data: NonNullable<NAVBAR_QUERYResult> }) {
                     className={cn(
                       buttonVariants({ variant: "ghost" }),
                       "justify-start",
+                      isActive && "bg-accent text-accent-foreground font-bold"
                     )}
                   >
                     {item.name}
@@ -212,6 +224,9 @@ function MobileNavbar({ data }: { data: NonNullable<NAVBAR_QUERYResult> }) {
 }
 
 function NavbarColumnLink({ column }: { column: NavbarLinkType }) {
+  const path = usePathname();
+  const isActive = isLinkActive(path, column.href);
+
   return (
     <NavigationMenuLink asChild>
       <Link
@@ -220,6 +235,7 @@ function NavbarColumnLink({ column }: { column: NavbarLinkType }) {
         className={cn(
           navigationMenuTriggerStyle(),
           "text-foreground hover:bg-white hover:text-foreground md:h-[var(--nav-item-height)]",
+          isActive && "bg-accent text-accent-foreground font-bold"
         )}
       >
         {column.name}
@@ -239,11 +255,29 @@ function NavbarColumn({ column }: { column: NavbarColumnType }) {
     () => getColumnLayoutClass(column.links?.length ?? 0),
     [column.links?.length],
   );
+  const path = usePathname();
+
+  // Check if any links in this column are active
+  const hasActiveLink = useMemo(() => {
+    return column.links?.some(link => {
+      if (link.type === "group") {
+        return link.links?.some(groupLink => isLinkActive(path, groupLink.href));
+      }
+      return isLinkActive(path, link.href);
+    });
+  }, [column.links, path]);
 
   return (
     <NavigationMenuList>
       <NavigationMenuItem className="text-muted-foreground">
-        <NavigationMenuTrigger className="hover:bg-white md:h-[var(--nav-item-height)] hover:text-foreground">{column.title}</NavigationMenuTrigger>
+        <NavigationMenuTrigger
+          className={cn(
+            "hover:bg-white md:h-[var(--nav-item-height)] hover:text-foreground",
+            hasActiveLink && "bg-accent/20 text-foreground font-bold"
+          )}
+        >
+          {column.title}
+        </NavigationMenuTrigger>
         <NavigationMenuContent>
           <ul className={cn("p-3 w-full", layoutClass)}>
             {column.links?.map((item) => (
