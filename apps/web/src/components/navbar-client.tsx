@@ -234,7 +234,7 @@ function NavbarColumnLink({ column }: { column: NavbarLinkType }) {
         href={column.href ?? ""}
         className={cn(
           navigationMenuTriggerStyle(),
-          "text-foreground hover:bg-white hover:text-foreground md:h-[var(--nav-item-height)]",
+          "text-foreground hover:bg-white hover:text-foreground ",
           isActive && "bg-accent text-accent-foreground font-bold"
         )}
       >
@@ -272,7 +272,7 @@ function NavbarColumn({ column }: { column: NavbarColumnType }) {
       <NavigationMenuItem className="text-muted-foreground">
         <NavigationMenuTrigger
           className={cn(
-            "hover:bg-white md:h-[var(--nav-item-height)] hover:text-foreground",
+            "hover:bg-white  hover:text-foreground",
             hasActiveLink && "bg-accent/20 text-foreground font-bold"
           )}
         >
@@ -320,9 +320,9 @@ function NavbarColumn({ column }: { column: NavbarColumnType }) {
 
 function DesktopNavbar({ data }: { data: NonNullable<NAVBAR_QUERYResult> }) {
   return (
-    <div className="top-0 z-[100] lg:sticky bg-v-grayscale-200 w-full padding-center">
-      <div className="items-center gap-8 grid grid-cols-[1fr_auto] w-full max-container">
-        <NavigationMenu>
+    <div className="top-0 z-[100] lg:sticky w-full">
+      <div className="items-center gap-8 grid grid-cols-[1fr_auto] bg-v-grayscale-200 w-full max-container">
+        <NavigationMenu className="padding-center">
           {data.columns?.map((column) =>
             column.type === "column" ? (
               <NavbarColumn key={`nav-${column._key}`} column={column as NavbarColumnType} />
