@@ -135,7 +135,7 @@ function Footer({ data }: FooterProps) {
   const year = new Date().getFullYear();
 
   return (
-    <section className="bg-background-alt mt-20 pt-12 pb-8">
+    <section className="bg-background-alt mt-20 pt-12 pb-24">
       <div className="mx-auto container">
         <footer className="h-[500px] lg:h-auto">
           <div className="flex flex-col justify-between items-center gap-10 mx-auto px-4 md:px-6 max-w-7xl lg:text-left text-center">
