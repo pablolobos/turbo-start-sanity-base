@@ -57,34 +57,34 @@ export default async function BlogSlugPage({
     | undefined;
 
   return (
-    <div className="mx-auto my-16 px-4 md:px-6 container">
-      <div className="gap-8 grid grid-cols-1 lg:grid-cols-[1fr_300px]">
-        <main>
-          <header className="mb-8">
-            <h1 className="mt-2 font-bold text-4xl">{title}</h1>
-            <p className="mt-4 text-muted-foreground text-lg">{description}</p>
+    <div className="mx-auto padding-center max-container">
+      <div className="gap-8 grid grid-cols-1">
+        <main className="flex flex-col gap-8 py-8 lg:py-16">
+          <header className="flex flex-col gap-4 mb-8">
+            <h1 className="heading-1">{title}</h1>
+            <p className="mt-4 text-muted-foreground text-xl">{description}</p>
           </header>
           {image && (
-            <div className="mb-12">
+            <div className="mb-12 w-full h-[300px] lg:h-[500px] bg-accent-brand">
               <SanityImage
                 asset={image}
                 alt={title}
-                width={1600}
                 loading="eager"
                 priority
-                height={900}
-                className="rounded-lg w-full h-auto"
+                className="rounded-none w-full h-full object-cover"
               />
             </div>
           )}
-          <RichText richText={richText ?? []} />
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] grid-gap">
+            <RichText richText={richText ?? []} />
+            <aside className="hidden lg:block">
+              <div className="top-[100px] sticky rounded-lg">
+                <TableOfContent richText={typedRichText} />
+              </div>
+            </aside>
+          </div>
         </main>
 
-        <aside className="hidden lg:block">
-          <div className="top-4 sticky rounded-lg">
-            <TableOfContent richText={typedRichText} />
-          </div>
-        </aside>
       </div>
     </div>
   );

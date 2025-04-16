@@ -120,10 +120,10 @@ export const TableOfContent: FC<TableProps> = ({ richText }) => {
   if (!showTableOfContent) return <></>;
 
   return (
-    <div className="top-8 sticky flex flex-col bg-gradient-to-b from-zinc-50 to-zinc-100 shadow-sm p-4 border border-zinc-300 rounded-lg w-full max-w-xs">
+    <div className="top-8 sticky flex flex-col bg-white p-4 border border-zinc-300 rounded-none w-full max-w-xs">
       <details className="group">
         <summary className="flex justify-between items-center font-semibold text-zinc-800 text-lg cursor-pointer">
-          <span>Table of Contents</span>
+          <span>Tabla de contenidos</span>
           <ChevronDown
             className="w-5 h-5 group-open:rotate-180 transition-transform duration-200 transform"
             aria-hidden="true"

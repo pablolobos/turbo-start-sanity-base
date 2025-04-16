@@ -86,10 +86,10 @@ const components: Partial<PortableTextReactComponents> = {
   },
   types: {
     image: ({ value }) => (
-      <div className="my-4">
+      <div className="my-12">
         <SanityImage
           asset={value}
-          className="rounded-lg w-full h-auto"
+          className="rounded-none w-full h-auto"
           width={1600}
           height={900}
         />
