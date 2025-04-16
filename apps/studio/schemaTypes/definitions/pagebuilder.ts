@@ -15,7 +15,10 @@ export const pageBuilder = defineType({
       views: [
         {
           name: "grid",
-          previewImageUrl: (schemaType) => `/block-previews/${schemaType}.png`,
+          previewImageUrl: (schemaType) => {
+            const baseUrl = process.env.SANITY_STUDIO_PRESENTATION_URL || 'http://localhost:3000';
+            return `${baseUrl}/block-previews/${schemaType}.png`;
+          },
         },
       ],
     },
