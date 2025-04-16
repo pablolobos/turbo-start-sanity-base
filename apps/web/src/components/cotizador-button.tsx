@@ -4,6 +4,8 @@ import { CotizadorDialog } from "./cotizador-dialog";
 import { useEffect, useState } from "react";
 import { Button } from "@workspace/ui/components/button";
 import { cn } from "@workspace/ui/lib/utils";
+import { motion, AnimatePresence } from "framer-motion";
+
 interface CotizadorButtonProps {
     buttonLabel?: string;
     buttonVariant?: "default" | "secondary" | "outline" | "ghost" | "link";
@@ -74,22 +76,39 @@ export function CotizadorButton({
 
     return (
         <>
-            <Button
-                variant="default"
-                size="lg"
-                className={cn(
-                    "transition-colors duration-200",
-                    "border-white/30 border",
-                    "hover:opacity-90",
-                    "focus:ring-2 focus:ring-offset-2 focus:ring-primary",
-                    "fixed bottom-4 right-8 z-[100]",
-                    className
+            <AnimatePresence>
+                {!isDialogOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9, y: -10 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.9, y: 10 }}
+                        whileHover={{ scale: 1.05, delay: 0 }}
+                        transition={{
+                            duration: 0.2,
+                            ease: "easeInOut",
+                            delay: 0.2
+                        }}
+                        className="right-8 bottom-4 z-[100] fixed"
+                    >
+                        <Button
+                            variant="default"
+                            size="lg"
+                            className={cn(
+                                "transition-colors duration-200",
+                                "border-white/30 border",
+                                "hover:opacity-90",
+                                "focus:ring-2 focus:ring-offset-2 focus:ring-primary",
+                                "uppercase",
+                                className
+                            )}
+                            onClick={handleButtonClick}
+                            disabled={isLoading}
+                        >
+                            {buttonLabel}
+                        </Button>
+                    </motion.div>
                 )}
-                onClick={handleButtonClick}
-                disabled={isLoading}
-            >
-                {buttonLabel}
-            </Button>
+            </AnimatePresence>
 
             {!isLoading && cotizadorData?.cotizadorForm && (
                 <CotizadorDialog
