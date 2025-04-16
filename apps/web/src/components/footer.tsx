@@ -134,26 +134,13 @@ function Footer({ data }: FooterProps) {
   const year = new Date().getFullYear();
 
   return (
-    <section className="mt-20 pb-8">
+    <section className="bg-background-alt mt-20 pt-12 pb-8">
       <div className="mx-auto container">
         <footer className="h-[500px] lg:h-auto">
-          <div className="flex lg:flex-row flex-col justify-between items-center gap-10 mx-auto px-4 md:px-6 max-w-7xl lg:text-left text-center">
-            <div className="flex flex-col justify-between items-center lg:items-start gap-6 md:gap-8 w-full max-w-96 shrink">
-              <div>
-                <span className="flex justify-center lg:justify-start items-center gap-4">
-                  <Logo src={logo} alt={siteTitle} priority />
-                </span>
-                {subtitle && (
-                  <p className="mt-6 text-muted-foreground text-sm">
-                    {subtitle}
-                  </p>
-                )}
-              </div>
-              {socialLinks && <SocialLinks data={socialLinks} />}
-            </div>
-            {Array.isArray(columns) && columns?.length > 0 && (
-              <div className="gap-6 lg:gap-28 grid grid-cols-3 lg:mr-20">
-                {columns.map((column, index) => (
+          <div className="flex flex-col justify-between items-center gap-10 mx-auto px-4 md:px-6 max-w-7xl lg:text-left text-center">
+            <div className="gap-6 lg:gap-28 grid grid-cols-3 lg:mr-20 w-full">
+              {Array.isArray(columns) && columns?.length > 0 &&
+                columns.map((column, index) => (
                   <div key={`column-${column?._key}-${index}`}>
                     <h3 className="mb-6 font-semibold">{column?.title}</h3>
                     {column?.links && column?.links?.length > 0 && (
@@ -179,21 +166,24 @@ function Footer({ data }: FooterProps) {
                       </ul>
                     )}
                   </div>
-                ))}
+                ))
+              }
+              <div className="flex flex-col justify-between items-center lg:items-start gap-6 md:gap-8 w-full max-w-96 shrink">
+                {socialLinks && <SocialLinks data={socialLinks} />}
               </div>
-            )}
+            </div>
           </div>
           <div className="mt-20 pt-8 border-t">
             <div className="flex lg:flex-row flex-col justify-between lg:items-center gap-4 mx-auto px-4 md:px-6 max-w-7xl font-normal text-muted-foreground text-sm lg:text-left text-center">
               <p>
-                © {year} {siteTitle}. All rights reserved.
+                © {year} Todos los derechos reservados Volvo Chile SPA.
               </p>
               <ul className="flex justify-center lg:justify-start gap-4">
                 <li className="hover:text-primary">
                   <Link href="/terms">Terms and Conditions</Link>
                 </li>
                 <li className="hover:text-primary">
-                  <Link href="/privacy">Privacy Policy</Link>
+                  <Link href="/privacy">Políticas de privacidad</Link>
                 </li>
               </ul>
             </div>
