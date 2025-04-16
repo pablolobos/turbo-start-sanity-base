@@ -75,13 +75,15 @@ export default async function BlogSlugPage({
               />
             </div>
           )}
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] grid-gap">
-            <RichText richText={richText ?? []} />
-            <aside className="hidden lg:block">
-              <div className="top-[100px] sticky rounded-lg">
-                <TableOfContent richText={typedRichText} />
-              </div>
-            </aside>
+          <div className={`grid grid-cols-1 ${typedRichText?.some(block => block.style?.startsWith('h')) ? 'lg:grid-cols-[1fr_300px]' : 'justify-center'} grid-gap `}>
+            <RichText className={` ${typedRichText?.some(block => block.style?.startsWith('h')) ? '' : 'place-self-center max-w-5xl'} w-full `} richText={richText ?? []} />
+            {typedRichText?.some(block => block.style?.startsWith('h')) && (
+              <aside className="hidden lg:block">
+                <div className="top-[100px] sticky rounded-lg">
+                  <TableOfContent richText={typedRichText} />
+                </div>
+              </aside>
+            )}
           </div>
         </main>
 
