@@ -12,6 +12,7 @@ type Props = {
 
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { PageBuilder } from "@/components/pagebuilder";
+import { TitleDescriptionBlock } from "@/components/title-description-block";
 
 import { client } from "@/lib/sanity/client";
 import { sanityFetch } from "@/lib/sanity/live";
@@ -164,11 +165,14 @@ export default async function CamionPage({
             ) : _type === "camiones" ? (
                 // Specific layout for 'camiones' type
                 <>
-                    <div className="flex flex-col gap-8 lg:grid lg:grid-cols-2 py-12 lg:py-20 container-padding padding-center max-container">
-                        <h1 className="mb-4 font-semibold text-4xl capitalize">{title}</h1>
-                        {description && <p className="text-base">{description}</p>}
-                        {/* TODO: Add image display here if needed for truck layout */}
-                    </div>
+                    {(title || description) && (
+                        <div className="mb-8">
+                            <TitleDescriptionBlock
+                                title={title}
+                                description={description}
+                            />
+                        </div>
+                    )}
                     {/* Render page builder content for trucks */}
                     {pageBuilder && pageBuilder.length > 0 &&
                         <PageBuilder pageBuilder={pageBuilder} id={_id} type={_type} />

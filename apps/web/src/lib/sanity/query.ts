@@ -276,6 +276,23 @@ const imageGalleryBlock = `
   }
 `;
 
+const specificationsTableBlock = `
+  _type == "specificationsTable" => {
+    ...,
+    title,
+    description,
+    variant,
+    "specifications": specifications[]{
+      _key,
+      label,
+      "content": content[]{
+        ...,
+        ${markDefsFragment}
+      }
+    }
+  }
+`;
+
 const tabsBlock = `
   _type == "tabs" => {
     ...,
@@ -342,7 +359,8 @@ const pageBuilderFragment = `
     ${formBlock},
     ${tabsBlock},
     ${infoSectionBlock},
-    ${imageGalleryBlock}
+    ${imageGalleryBlock},
+    ${specificationsTableBlock}
   }
 `;
 
