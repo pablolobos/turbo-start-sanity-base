@@ -284,8 +284,8 @@ function NavbarColumn({ column }: { column: NavbarColumnType }) {
               <li key={item._key}>
                 {item.type === "group" ? (
                   <div className="space-y-2">
-                    <h4 className="mb-2 font-medium text-muted-foreground text-sm">{item.title}</h4>
-                    <div className="gap-2 grid pl-4">
+                    <h4 className="mb-2 px-2 font-medium text-muted-foreground text-sm">{item.title}</h4>
+                    <div className="gap-2 grid">
                       {item.links?.map((groupLink) => (
                         <MenuItemLink
                           key={groupLink._key}
@@ -320,9 +320,9 @@ function NavbarColumn({ column }: { column: NavbarColumnType }) {
 
 function DesktopNavbar({ data }: { data: NonNullable<NAVBAR_QUERYResult> }) {
   return (
-    <div className="top-0 z-[100] lg:sticky w-full">
-      <div className="items-center gap-8 grid grid-cols-[1fr_auto] bg-v-grayscale-200 w-full max-container">
-        <NavigationMenu className="padding-center">
+    <div className="top-0 z-[100] lg:sticky bg-black w-full">
+      <div className="items-center grid grid-cols-[1fr_auto] bg-v-grayscale-200 w-full max-container">
+        <NavigationMenu className="w-full padding-center">
           {data.columns?.map((column) =>
             column.type === "column" ? (
               <NavbarColumn key={`nav-${column._key}`} column={column as NavbarColumnType} />
