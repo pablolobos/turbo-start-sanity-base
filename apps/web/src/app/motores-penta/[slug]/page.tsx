@@ -132,21 +132,31 @@ export default async function MotorPentaPage({
         // Fetch the taxonomy details
         const taxonomyRef = data.taxonomias._ref;
         if (taxonomyRef) {
-            const taxonomyDoc = await client.fetch(
-                `*[_type == "skosConcept" && _id == $id][0]{
-                    "label": prefLabel,
-                    "slug": lower(prefLabel),
-                    "iri": "/motores-penta/" + lower(prefLabel)
-                }`,
-                { id: taxonomyRef }
-            );
+            try {
+                const taxonomyDoc = await client.fetch(
+                    `*[_type == "skosConcept" && _id == $id][0]{
+                        "label": prefLabel,
+                        "slug": lower(prefLabel),
+                        "iri": "/motores-penta/" + lower(prefLabel)
+                    }`,
+                    { id: taxonomyRef }
+                );
 
-            // Format the slug and IRI in JavaScript
-            if (taxonomyDoc) {
+                // Format the slug and IRI in JavaScript
+                if (taxonomyDoc) {
+                    taxonomyData = {
+                        ...taxonomyDoc,
+                        slug: taxonomyDoc.slug?.replace(/\s+/g, '-'),
+                        iri: taxonomyDoc.iri?.replace(/\s+/g, '-')
+                    };
+                }
+            } catch (error) {
+                console.error("Error fetching taxonomy data:", error);
+                // Fallback to default taxonomy data
                 taxonomyData = {
-                    ...taxonomyDoc,
-                    slug: taxonomyDoc.slug?.replace(/\s+/g, '-'),
-                    iri: taxonomyDoc.iri?.replace(/\s+/g, '-')
+                    label: "Motores",
+                    slug: "motores",
+                    iri: "/motores-penta/lista"
                 };
             }
         }

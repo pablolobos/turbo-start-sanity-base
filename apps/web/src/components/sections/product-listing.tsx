@@ -51,21 +51,8 @@ export function ProductListing(props: ProductListingProps) {
             }
 
             try {
-                // 1. Get the taxonomy document using clientFetch instead of sanityFetch
-                const taxonomyQuery = `*[_type == "skosConcept" && _id == $id][0]{
-                    _id,
-                    prefLabel,
-                    conceptId
-                }`;
-
-                const taxonomyResult = await clientFetch(taxonomyQuery, { id: props.taxonomyFilter._ref });
-                const taxonomyDoc = taxonomyResult?.data || null;
-
-                if (!taxonomyDoc) {
-                    throw new Error("Taxonomy document not found");
-                }
-
-                // 2. Get products that reference this taxonomy - using clientFetch
+                // Simplified approach: fetch the products directly, don't depend on taxonomy first
+                // This makes it more robust when taxonomies might not be found
                 const productsQuery = `*[
                     _type == $productType && 
                     taxonomias._ref == $taxonomyId
@@ -78,50 +65,58 @@ export function ProductListing(props: ProductListingProps) {
                         "asset": asset->,
                         "_type": "image"
                     },
-                    "taxonomy": taxonomias->{
-                        prefLabel,
-                        conceptId
-                    }
+                    "taxonomyDetails": coalesce(
+                        taxonomias->{
+                            "_id": _id,
+                            "prefLabel": prefLabel,
+                            "conceptId": conceptId
+                        }, 
+                        {"_id": $taxonomyId, "prefLabel": "Products", "conceptId": ""}
+                    )
                 }`;
 
                 const productsResult = await clientFetch(productsQuery, {
                     productType: props.productType,
                     taxonomyId: props.taxonomyFilter._ref
                 });
+
                 const products = productsResult?.data || [];
 
-                // Organize products - since you only have one taxonomy
-                // we'll use a single category
-                const categoryProducts = products?.filter((p: any) =>
-                    p._id && p.title && p.slug && p.description
-                );
+                if (products && products.length > 0) {
+                    // Extract taxonomy details from the first product
+                    const taxonomyData = products[0].taxonomyDetails || {
+                        _id: props.taxonomyFilter._ref,
+                        prefLabel: "Products",
+                        conceptId: ""
+                    };
 
-                const categories: ProcessedCategory[] = [];
-
-                if (categoryProducts && categoryProducts.length > 0) {
-                    categories.push({
-                        _id: taxonomyDoc._id,
-                        prefLabel: taxonomyDoc.prefLabel || "Products",
-                        conceptId: taxonomyDoc.conceptId || "",
-                        products: categoryProducts.map((p: any) => ({
+                    // Create a category for the products
+                    const category: ProcessedCategory = {
+                        _id: taxonomyData._id,
+                        prefLabel: taxonomyData.prefLabel || "Products",
+                        conceptId: taxonomyData.conceptId || "",
+                        products: products.map((p: any) => ({
                             _id: p._id,
                             title: p.title,
                             slug: p.slug,
                             description: p.description,
                             image: p.image,
-                            taxonomy: p.taxonomy || {
-                                prefLabel: taxonomyDoc.prefLabel,
-                                conceptId: taxonomyDoc.conceptId
+                            taxonomy: {
+                                prefLabel: taxonomyData.prefLabel,
+                                conceptId: taxonomyData.conceptId
                             }
                         }))
-                    });
-                }
+                    };
 
-                // 3. If no products found directly referencing the taxonomy,
-                // we'll try a broader search
-                if (categories.length === 0) {
-                    // Try a more general query using a simplified approach
-                    const broaderProductsQuery = `*[
+                    setComponentData({
+                        title: props.title,
+                        productType: props.productType,
+                        taxonomyId: props.taxonomyFilter._ref,
+                        categories: [category]
+                    });
+                } else {
+                    // If no products found, fetch all products of the type as a fallback
+                    const allProductsQuery = `*[
                         _type == $productType
                     ][0...10]{
                         _id,
@@ -131,55 +126,50 @@ export function ProductListing(props: ProductListingProps) {
                         "image": image {
                             "asset": asset->,
                             "_type": "image"
-                        },
-                        "taxonomy": taxonomias->{
-                            prefLabel,
-                            conceptId
                         }
                     }`;
 
-                    try {
-                        const broaderProductsResult = await clientFetch(broaderProductsQuery, {
-                            productType: props.productType
-                        });
-                        const broaderProducts = broaderProductsResult?.data || [];
+                    const allProductsResult = await clientFetch(allProductsQuery, {
+                        productType: props.productType
+                    });
 
-                        if (broaderProducts && broaderProducts.length > 0) {
-                            // Filter to only include products with valid data
-                            const validProducts = broaderProducts.filter((p: any) =>
-                                p._id && p.title && p.slug && p.description
-                            ).map((p: any) => ({
+                    const allProducts = allProductsResult?.data || [];
+
+                    if (allProducts && allProducts.length > 0) {
+                        // Create a generic category for all products
+                        const category: ProcessedCategory = {
+                            _id: 'all',
+                            prefLabel: "All Products",
+                            conceptId: "",
+                            products: allProducts.map((p: any) => ({
                                 _id: p._id,
                                 title: p.title,
                                 slug: p.slug,
                                 description: p.description,
                                 image: p.image,
-                                taxonomy: p.taxonomy || {
-                                    prefLabel: taxonomyDoc.prefLabel,
-                                    conceptId: taxonomyDoc.conceptId
+                                taxonomy: {
+                                    prefLabel: "All Products",
+                                    conceptId: ""
                                 }
-                            }));
+                            }))
+                        };
 
-                            if (validProducts.length > 0) {
-                                categories.push({
-                                    _id: taxonomyDoc._id,
-                                    prefLabel: taxonomyDoc.prefLabel || "Products",
-                                    conceptId: taxonomyDoc.conceptId || "",
-                                    products: validProducts
-                                });
-                            }
-                        }
-                    } catch (broadErr) {
-                        console.warn("Error fetching broader products:", broadErr);
+                        setComponentData({
+                            title: props.title,
+                            productType: props.productType,
+                            taxonomyId: props.taxonomyFilter._ref,
+                            categories: [category]
+                        });
+                    } else {
+                        // No products found at all
+                        setComponentData({
+                            title: props.title,
+                            productType: props.productType,
+                            taxonomyId: props.taxonomyFilter._ref,
+                            categories: []
+                        });
                     }
                 }
-
-                setComponentData({
-                    title: props.title,
-                    productType: props.productType,
-                    taxonomyId: props.taxonomyFilter._ref,
-                    categories: categories
-                });
             } catch (err) {
                 const errorMessage = err instanceof Error ? err.message : String(err);
                 console.error("Error fetching product data:", errorMessage);
