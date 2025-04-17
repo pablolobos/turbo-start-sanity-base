@@ -150,7 +150,7 @@ export function PageBuilder({
 
   return (
     <main
-      className="flex flex-col gap-8 lg:gap-20"
+      className="flex flex-col"
       data-sanity={createDataAttribute({
         id: id,
         baseUrl: studioUrl,
