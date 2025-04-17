@@ -17,6 +17,7 @@ import { schemaTypes } from "./schemaTypes";
 import { structure } from "./structure";
 import { createPageTemplate } from "./utils/helper";
 import { inboxPlugin } from './plugins/inbox/plugin';
+import { taxonomyManager } from 'sanity-plugin-taxonomy-manager'
 
 const projectId = process.env.SANITY_STUDIO_PROJECT_ID ?? "";
 const dataset = process.env.SANITY_STUDIO_DATASET;
@@ -52,6 +53,20 @@ export default defineConfig({
     presentationUrl(),
     unsplashImageAsset(),
     inboxPlugin(),
+    taxonomyManager({
+      // Optional: Set a Base URI to use for new concepts & concept schemes
+      baseUri: 'https://volvochile.cl/',
+      // Optional: Use `customConceptFields` and `customSchemeFields` keys to add custom fields to Concept or Concept Scheme document types
+      customConceptFields: [
+        {
+          name: 'sameAs',
+          title: 'Same As',
+          type: 'url',
+          description:
+            'Specify a fully qualified IRI that identifies the same concept in another vocabulary',
+        },
+      ],
+    }),
   ],
 
   form: {

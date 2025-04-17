@@ -8,6 +8,8 @@ import { seoFields } from "../../utils/seo-fields";
 import { createSlug, isUnique } from "../../utils/slug";
 import { richTextField } from "../common";
 import { pageBuilderField } from "../common";
+import { branchFilter } from 'sanity-plugin-taxonomy-manager'
+import { ReferenceHierarchyInput } from 'sanity-plugin-taxonomy-manager'
 
 export const camiones = defineType({
     name: "camiones",
@@ -25,6 +27,18 @@ export const camiones = defineType({
             description: "Nombre o modelo del camión",
             group: GROUP.MAIN_CONTENT,
             validation: (Rule) => Rule.required().error("El título es obligatorio"),
+        }),
+        defineField({
+            name: 'taxonomias',
+            title: 'Taxonomias',
+            group: GROUP.MAIN_CONTENT,
+            type: 'reference',
+            to: { type: 'skosConcept' },
+            options: {
+                filter: branchFilter({ schemeId: '4bb257', branchId: 'b8d268' }),
+                disableNew: true,
+            },
+            components: { field: ReferenceHierarchyInput },
         }),
         defineField({
             name: "category",
