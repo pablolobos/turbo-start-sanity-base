@@ -60,38 +60,54 @@ const BLOCK_COMPONENTS = {
 
 type BlockType = keyof typeof BLOCK_COMPONENTS;
 
+// Sanitize function to clean data of invalid characters
+function sanitizeBlockData(block: PageBlock): PageBlock {
+  return JSON.parse(
+    JSON.stringify(block, (key, value) => {
+      if (typeof value === 'string') {
+        // Remove zero-width spaces and other invisible characters
+        return value.replace(/[\u200B-\u200D\uFEFF]/g, '');
+      }
+      return value;
+    })
+  );
+}
+
 // Render a component based on its type
 function renderBlock(block: PageBlock, id: string, type: string) {
+  // Sanitize the block data
+  const sanitizedBlock = sanitizeBlockData(block);
+
   // Safety check for block type
-  if (!block._type || !(block._type in BLOCK_COMPONENTS)) {
+  if (!sanitizedBlock._type || !(sanitizedBlock._type in BLOCK_COMPONENTS)) {
     return (
       <div
-        key={block._key || 'unknown'}
+        key={sanitizedBlock._key || 'unknown'}
         className="flex justify-center items-center bg-muted p-8 rounded-lg text-muted-foreground text-center"
       >
-        Component not found for block type: <code>{block._type}</code>
+        Component not found for block type: <code>{sanitizedBlock._type}</code>
       </div>
     );
   }
 
-  const blockType = block._type as BlockType;
+  const blockType = sanitizedBlock._type as BlockType;
   const Component = BLOCK_COMPONENTS[blockType];
 
   return (
     <div
-      key={block._key}
+      key={sanitizedBlock._key}
       data-sanity={createDataAttribute({
         id: id,
         baseUrl: studioUrl,
         projectId: projectId,
         dataset: dataset,
         type: type,
-        path: `pageBuilder[_key=="${block._key}"]`,
+        path: `pageBuilder[_key=="${sanitizedBlock._key}"]`,
       }).toString()}
       className="group/component"
     >
       {/* @ts-ignore - The typing is complex due to the dynamic nature */}
-      <Component {...block} />
+      <Component {...sanitizedBlock} />
     </div>
   );
 }
@@ -134,7 +150,7 @@ export function PageBuilder({
 
   return (
     <main
-      className="flex flex-col"
+      className="flex flex-col gap-8 lg:gap-20"
       data-sanity={createDataAttribute({
         id: id,
         baseUrl: studioUrl,

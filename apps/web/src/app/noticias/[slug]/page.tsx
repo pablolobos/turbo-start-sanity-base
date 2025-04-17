@@ -65,11 +65,12 @@ export default async function BlogSlugPage({
             <p className="mt-4 text-muted-foreground text-xl">{description}</p>
           </header>
           {image && (
-            <div className="mb-12 w-full h-[300px] lg:h-[500px] bg-accent-brand">
+            <div className="mb-12 w-full h-[300px] lg:h-[600px] bg-accent-brand">
               <SanityImage
                 asset={image}
                 alt={title}
                 loading="eager"
+                width={1600}
                 priority
                 className="rounded-none w-full h-full object-cover"
               />

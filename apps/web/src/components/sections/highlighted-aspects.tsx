@@ -29,22 +29,22 @@ export function HighlightedAspects({
     const gridClass = getGridClass(columns);
 
     return (
-        <section className="bg-background py-16 md:py-24">
-            <div className="flex flex-col gap-8 mx-auto padding-center max-container">
+        <section className="bg-background py-16 md:py-24 max-container">
+            <div className="flex flex-col gap-8">
                 {/* Title and description area */}
                 {(title || description) && (
-                    <div className="mb-12">
+                    <div className="mb-8">
                         <TitleDescriptionBlock
                             title={title || ""}
                             description={description || ""}
-                            variant="center"
+                            variant="default"
                             headingLevel="h2"
                         />
                     </div>
                 )}
 
                 {/* Grid of aspect cards */}
-                <div className={`grid-gap grid grid-cols-1 ${gridClass} mb-8`}>
+                <div className={`grid-gap grid grid-cols-1 ${gridClass} mb-8 padding-center`}>
                     {aspects.map((aspect) => (
                         <AspectCard
                             key={aspect._key}

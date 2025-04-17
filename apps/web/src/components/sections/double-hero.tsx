@@ -134,7 +134,7 @@ export function DoubleHeroBlock({
     const backgroundClasses = getVariantClasses(variant);
 
     return (
-        <section className={cn("relative overflow-hidden", backgroundClasses)}>
+        <section className={cn("relative overflow-hidden", backgroundClasses, "max-container")}>
             <div className="mx-auto">
                 <div className={cn(
                     "grid lg:grid-cols-2",

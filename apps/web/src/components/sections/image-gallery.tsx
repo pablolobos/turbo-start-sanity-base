@@ -238,7 +238,7 @@ export function ImageGallery({
     }
 
     return (
-        <section className="px-4 sm:px-6 lg:px-8 py-12">
+        <section className="max-container padding-center">
             <style jsx global>{swiperStyles}</style>
             {title && layout !== 'bento' && (
                 <h2 className="mb-4 font-bold text-gray-900 text-3xl tracking-tight">{title}</h2>

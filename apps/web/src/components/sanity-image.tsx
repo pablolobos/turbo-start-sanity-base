@@ -50,7 +50,7 @@ export function SanityImage({
   const optimalDimensions = getOptimalDimensions(dimensions.width, dimensions.height);
 
   // Calculate dynamic quality based on image size
-  const dynamicQuality = dimensions.width > 1200 ? 75 : quality;
+  const dynamicQuality = dimensions.width > 1200 ? 80 : quality;
 
   const url = urlFor({ ...asset, _id: asset?.asset?._ref })
     .size(
