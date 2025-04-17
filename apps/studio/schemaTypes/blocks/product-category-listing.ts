@@ -1,14 +1,25 @@
 import { ListFilterIcon } from "lucide-react";
-import { defineArrayMember, defineField, defineType } from "sanity";
-import type { ComponentType } from "react";
-import type { StringFieldProps, StringSchemaType, TitledListValue } from "sanity";
+import { defineField, defineType } from "sanity";
+import type { StringFieldProps, StringSchemaType } from "sanity";
 
-const busCategories: TitledListValue<string>[] = [
+interface CategoryFieldProps extends StringFieldProps {
+    parent?: {
+        productType?: 'buses' | 'camiones' | 'motoresPenta';
+    };
+}
+
+interface ParentContext {
+    parent?: {
+        productType?: 'buses' | 'camiones' | 'motoresPenta';
+    };
+}
+
+const busCategories = [
     { title: "Urbano", value: "urbano" },
     { title: "Interurbano", value: "interurbano" },
 ];
 
-const camionesCategories: TitledListValue<string>[] = [
+const camionesCategories = [
     { title: "Larga distancia", value: "larga-distancia" },
     { title: "Construcción y minería", value: "construccion-y-mineria" },
     { title: "Forestal", value: "forestal" },
@@ -17,30 +28,11 @@ const camionesCategories: TitledListValue<string>[] = [
     { title: "Usados", value: "usados" },
 ];
 
-const motoresPentaCategories: TitledListValue<string>[] = [
+const motoresPentaCategories = [
     { title: "Motores industriales", value: "motores-industriales" },
     { title: "Motores marinos", value: "motores-marinos" },
     { title: "Accesorios", value: "accesorios" },
 ];
-
-const CategoryField: ComponentType<StringFieldProps> = (props) => {
-    const productType = (props as any).parent?.productType;
-    const categories = productType === "buses"
-        ? busCategories
-        : productType === "camiones"
-            ? camionesCategories
-            : productType === "motoresPenta"
-                ? motoresPentaCategories
-                : [];
-
-    return props.renderDefault({
-        ...props,
-        schemaType: {
-            ...props.schemaType,
-            options: { ...props.schemaType.options, list: categories },
-        },
-    });
-};
 
 export const productCategoryListing = defineType({
     name: "productCategoryListing",
@@ -82,14 +74,30 @@ export const productCategoryListing = defineType({
             type: "string",
             title: "Category",
             description: "Select the category to filter products",
-            options: {
-                list: [],
-            },
             hidden: ({ parent }) => !parent?.productType,
-            validation: (Rule) => Rule.required().error("Category is required"),
-            components: {
-                field: CategoryField,
+            options: {
+                list: [
+                    ...busCategories,
+                    ...camionesCategories,
+                    ...motoresPentaCategories
+                ]
             },
+            validation: (Rule) =>
+                Rule.required()
+                    .error("Category is required")
+                    .custom((category, context) => {
+                        const { parent } = context as unknown as ParentContext;
+                        if (!parent?.productType) return true;
+
+                        const validCategories =
+                            parent.productType === "buses" ? busCategories :
+                                parent.productType === "camiones" ? camionesCategories :
+                                    parent.productType === "motoresPenta" ? motoresPentaCategories :
+                                        [];
+
+                        return validCategories.some(c => c.value === category) ||
+                            "Please select a valid category for the selected product type";
+                    }),
         }),
         defineField({
             name: "displayMode",
