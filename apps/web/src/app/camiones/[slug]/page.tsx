@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
 type PageParams = {
     slug: string;
@@ -11,14 +12,18 @@ type Props = {
 };
 
 import { Breadcrumbs } from "@/components/breadcrumbs";
-import { PageBuilder } from "@/components/pagebuilder";
 import { TitleDescriptionBlock } from "@/components/title-description-block";
 import { CotizadorButton } from "@/components/cotizador-button";
+import { PageBuilderWrapper } from "@/components/pagebuilder-wrapper";
 
 import { client } from "@/lib/sanity/client";
 import { sanityFetch } from "@/lib/sanity/live";
 import { queryCamionOrPageBySlug, queryCamionesPaths } from "@/lib/sanity/query";
 import { getMetaData } from "@/lib/seo";
+
+// Create a server component that renders a client component
+// Remove the dynamic import with {ssr: false}
+// Instead, we'll create a wrapper component
 
 // Define the structure for a breadcrumb item
 interface BreadcrumbItem {
@@ -193,7 +198,7 @@ export default async function CamionPage({
                     )}
                     {/* Render page builder content for trucks */}
                     {pageBuilder && pageBuilder.length > 0 &&
-                        <PageBuilder pageBuilder={pageBuilder} id={_id} type={_type} />
+                        <PageBuilderWrapper pageBuilder={pageBuilder} id={_id} type={_type} />
                     }
                 </>
             ) : (
@@ -203,7 +208,7 @@ export default async function CamionPage({
                         <CotizadorButton buttonVariant="default" pageTitle={title} />
                     </div>
                     {pageBuilder && pageBuilder.length > 0 &&
-                        <PageBuilder pageBuilder={pageBuilder} id={_id} type={_type} />
+                        <PageBuilderWrapper pageBuilder={pageBuilder} id={_id} type={_type} />
                     }
                 </>
             )}

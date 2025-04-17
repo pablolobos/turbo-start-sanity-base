@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
 type PageParams = {
     slug: string;
@@ -11,8 +12,8 @@ type Props = {
 };
 
 import { Breadcrumbs } from "@/components/breadcrumbs";
-import { PageBuilder } from "@/components/pagebuilder";
 import { CotizadorButton } from "@/components/cotizador-button";
+import { PageBuilderWrapper } from "@/components/pagebuilder-wrapper";
 
 import { client } from "@/lib/sanity/client";
 import { sanityFetch } from "@/lib/sanity/live";
@@ -191,7 +192,7 @@ export default async function BusPage({
                     </div>
                     {/* Render page builder content for buses */}
                     {pageBuilder && pageBuilder.length > 0 &&
-                        <PageBuilder pageBuilder={pageBuilder} id={_id} type={_type} />
+                        <PageBuilderWrapper pageBuilder={pageBuilder} id={_id} type={_type} />
                     }
                 </>
             ) : (
@@ -201,7 +202,7 @@ export default async function BusPage({
                         <CotizadorButton buttonVariant="default" pageTitle={title} />
                     </div>
                     {pageBuilder && pageBuilder.length > 0 &&
-                        <PageBuilder pageBuilder={pageBuilder} id={_id} type={_type} />
+                        <PageBuilderWrapper pageBuilder={pageBuilder} id={_id} type={_type} />
                     }
                 </>
             )}

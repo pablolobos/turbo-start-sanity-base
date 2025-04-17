@@ -23,3 +23,13 @@ const imageBuilder = createImageUrlBuilder({
 
 export const urlFor = (source: SanityImageSource) =>
   imageBuilder.image(source).auto("format").fit("max");
+
+export async function clientFetch(query: string, params = {}) {
+  try {
+    const result = await client.fetch(query, params);
+    return { data: result };
+  } catch (err) {
+    console.error("Error fetching from Sanity:", err);
+    return { data: null, error: err };
+  }
+}
