@@ -1,4 +1,5 @@
 import { SanityImage } from "@/components/sanity-image";
+import Image from "next/image";
 import Link from "next/link";
 
 interface ProductCardProps {
@@ -7,7 +8,7 @@ interface ProductCardProps {
         title: string;
         slug: string;
         description: string;
-        image: any; // Update this to match your Sanity image type
+        image: any; // Sanity image can come in different formats
         taxonomy: {
             prefLabel: string;
             conceptId: string;
@@ -38,9 +39,24 @@ export function ProductCard({ product, productType }: ProductCardProps) {
         motoresPenta: '/motores-penta'
     };
 
-    return (
-        <article className="content-start gap-2 grid grid-cols-1 grid-rows-[auto_auto_1fr] w-full">
-            <div className="relative rounded-none w-full h-auto aspect-[16/9] overflow-hidden">
+    // Handle different image formats from Sanity
+    const renderImage = () => {
+        // If image is a direct URL string (from the simplified query)
+        if (typeof image === 'string') {
+            return (
+                <Image
+                    src={image}
+                    width={800}
+                    height={400}
+                    alt={title}
+                    className="bg-gray-100 rounded-none w-full h-full object-cover"
+                />
+            );
+        }
+
+        // If image has asset property (from standard Sanity image object)
+        if (image && image.asset) {
+            return (
                 <SanityImage
                     asset={image}
                     width={800}
@@ -48,6 +64,21 @@ export function ProductCard({ product, productType }: ProductCardProps) {
                     alt={title}
                     className="bg-gray-100 rounded-none w-full h-full object-cover"
                 />
+            );
+        }
+
+        // Fallback for missing image
+        return (
+            <div className="flex justify-center items-center bg-gray-100 rounded-none w-full h-full">
+                <span className="text-gray-400">No image</span>
+            </div>
+        );
+    };
+
+    return (
+        <article className="content-start gap-2 grid grid-cols-1 grid-rows-[auto_auto_1fr] w-full">
+            <div className="relative rounded-none w-full h-auto aspect-[16/9] overflow-hidden">
+                {renderImage()}
                 <div className="absolute inset-0 ring-1 ring-gray-900/10 ring-inset" />
             </div>
             <div className="content-start grid grid-rows-subgrid row-span-2 w-full">

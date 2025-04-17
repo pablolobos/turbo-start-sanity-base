@@ -89,7 +89,10 @@ export function ProductListing(props: ProductListingProps) {
                     title,
                     "slug": slug.current,
                     description,
-                    "image": image.asset->url,
+                    "image": image {
+                        "asset": asset->,
+                        "_type": "image"
+                    },
                     category
                 }`;
 
@@ -148,7 +151,10 @@ export function ProductListing(props: ProductListingProps) {
                             title,
                             "slug": slug.current,
                             description,
-                            "image": image.asset->url,
+                            "image": image {
+                                "asset": asset->,
+                                "_type": "image"
+                            },
                             category
                         }`,
                         {
@@ -211,7 +217,7 @@ export function ProductListing(props: ProductListingProps) {
                 <h2 className="mb-4 font-bold text-2xl">Loading Products...</h2>
                 <div className="space-y-8 animate-pulse">
                     <div className="bg-gray-200 rounded w-1/4 h-6"></div>
-                    <div className="gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+                    <div className="gap-6 grid grid-cols-1 sm:grid-cols-2">
                         {[1, 2, 3].map((i) => (
                             <div key={i} className="bg-gray-200 rounded h-64"></div>
                         ))}
@@ -279,7 +285,7 @@ export function ProductListing(props: ProductListingProps) {
                     {componentData.categories.map((category) => (
                         <div key={category._id} className="mb-12 last:mb-0">
                             <h3 className="mb-6 font-semibold text-2xl">{category.prefLabel}</h3>
-                            <div className="gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+                            <div className="gap-6 grid grid-cols-1 sm:grid-cols-2">
                                 {category.products?.map((product) => (
                                     <ProductCard
                                         key={product._id}
