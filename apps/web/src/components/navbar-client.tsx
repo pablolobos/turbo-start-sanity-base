@@ -126,23 +126,47 @@ function MobileNavbarAccordionColumn({
 }) {
   return (
     <AccordionItem value={column.title ?? column._key} className="border-b-0">
-      <AccordionTrigger className="hover:bg-accent mb-4 py-0 pr-2 rounded-md font-semibold hover:no-underline hover:text-accent-foreground">
+      <AccordionTrigger className={cn(
+        "hover:bg-accent mb-4 py-0 pr-2 rounded-none font-semibold hover:no-underline hover:text-accent-foreground",
+        "data-[state=open]:bg-accent"
+      )}>
         <div className={cn(buttonVariants({ variant: "ghost" }), "justify-start")}>
           {column.title}
         </div>
       </AccordionTrigger>
       <AccordionContent className="mt-2">
         {column.links?.map((item) => (
-          <MenuItemLink
-            key={item._key}
-            setIsOpen={setIsOpen}
-            item={{
-              title: item.name ?? "",
-              description: item.description,
-              href: item.href ?? "",
-              icon: item.icon,
-            }}
-          />
+          <div key={item._key}>
+            {item.type === "group" ? (
+              <div className="space-y-2 mb-4">
+                <h4 className="mb-2 px-2 font-medium text-muted-foreground text-sm">{item.title}</h4>
+                <div className="gap-2 grid">
+                  {item.links?.map((groupLink) => (
+                    <MenuItemLink
+                      key={groupLink._key}
+                      setIsOpen={setIsOpen}
+                      item={{
+                        title: groupLink.name ?? "",
+                        description: groupLink.description,
+                        href: groupLink.href ?? "",
+                        icon: groupLink.icon,
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <MenuItemLink
+                setIsOpen={setIsOpen}
+                item={{
+                  title: item.name ?? "",
+                  description: item.description,
+                  href: item.href ?? "",
+                  icon: item.icon,
+                }}
+              />
+            )}
+          </div>
         ))}
       </AccordionContent>
     </AccordionItem>
