@@ -11,7 +11,7 @@ interface InboxToolConfig {
 
 const inboxTool = (): InboxToolConfig => {
   return {
-    title: 'Inbox',
+    title: 'Leads',
     name: 'inbox-tool',
     component: () => (
       InboxTool()

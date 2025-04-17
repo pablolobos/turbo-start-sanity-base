@@ -117,7 +117,6 @@ export async function POST(req: NextRequest) {
             <p><strong>Email:</strong> ${formData.email}</p>
             <p><strong>Asunto:</strong> ${formData.subject}</p>
             ${fieldsHtml}
-            ${utmParamsHtml}
           `,
         })
 
