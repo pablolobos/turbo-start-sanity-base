@@ -35,7 +35,7 @@ export const camiones = defineType({
             type: 'reference',
             to: { type: 'skosConcept' },
             options: {
-                filter: branchFilter({ schemeId: '4bb257', branchId: 'b8d268' }),
+                filter: branchFilter({ schemeId: '4bb257', branchId: '278c9c' }),
                 disableNew: true,
             },
             components: { field: ReferenceHierarchyInput },

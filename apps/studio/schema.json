@@ -4676,6 +4676,87 @@
                               }
                             }
                           }
+                        },
+                        {
+                          "type": "object",
+                          "attributes": {
+                            "title": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              },
+                              "optional": true
+                            },
+                            "productType": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "union",
+                                "of": [
+                                  {
+                                    "type": "string",
+                                    "value": "camiones"
+                                  },
+                                  {
+                                    "type": "string",
+                                    "value": "buses"
+                                  },
+                                  {
+                                    "type": "string",
+                                    "value": "motoresPenta"
+                                  }
+                                ]
+                              },
+                              "optional": true
+                            },
+                            "taxonomyFilter": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "object",
+                                "attributes": {
+                                  "_ref": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "_type": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "string",
+                                      "value": "reference"
+                                    }
+                                  },
+                                  "_weak": {
+                                    "type": "objectAttribute",
+                                    "value": {
+                                      "type": "boolean"
+                                    },
+                                    "optional": true
+                                  }
+                                },
+                                "dereferencesTo": "skosConcept"
+                              },
+                              "optional": true
+                            },
+                            "_type": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string",
+                                "value": "productListing"
+                              }
+                            }
+                          },
+                          "rest": {
+                            "type": "object",
+                            "attributes": {
+                              "_key": {
+                                "type": "objectAttribute",
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
                         }
                       ]
                     }
@@ -4702,6 +4783,80 @@
                 }
               }
             }
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
+    "name": "productListing",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "productListing"
+          }
+        },
+        "title": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "productType": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "camiones"
+              },
+              {
+                "type": "string",
+                "value": "buses"
+              },
+              {
+                "type": "string",
+                "value": "motoresPenta"
+              }
+            ]
+          },
+          "optional": true
+        },
+        "taxonomyFilter": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "object",
+            "attributes": {
+              "_ref": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              },
+              "_type": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string",
+                  "value": "reference"
+                }
+              },
+              "_weak": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "boolean"
+                },
+                "optional": true
+              }
+            },
+            "dereferencesTo": "skosConcept"
           },
           "optional": true
         }
@@ -9111,6 +9266,21 @@
             },
             "rest": {
               "type": "inline",
+              "name": "productListing"
+            }
+          },
+          {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
               "name": "tabs"
             }
           },
@@ -10436,24 +10606,33 @@
         },
         "optional": true
       },
-      "category": {
+      "taxonomias": {
         "type": "objectAttribute",
         "value": {
-          "type": "union",
-          "of": [
-            {
-              "type": "string",
-              "value": "motores-industriales"
+          "type": "object",
+          "attributes": {
+            "_ref": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              }
             },
-            {
-              "type": "string",
-              "value": "motores-marinos"
+            "_type": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string",
+                "value": "reference"
+              }
             },
-            {
-              "type": "string",
-              "value": "accesorios"
+            "_weak": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "boolean"
+              },
+              "optional": true
             }
-          ]
+          },
+          "dereferencesTo": "skosConcept"
         },
         "optional": true
       },
@@ -10709,6 +10888,36 @@
         "type": "objectAttribute",
         "value": {
           "type": "string"
+        },
+        "optional": true
+      },
+      "taxonomias": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "object",
+          "attributes": {
+            "_ref": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              }
+            },
+            "_type": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string",
+                "value": "reference"
+              }
+            },
+            "_weak": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "boolean"
+              },
+              "optional": true
+            }
+          },
+          "dereferencesTo": "skosConcept"
         },
         "optional": true
       },
@@ -10981,6 +11190,36 @@
         "type": "objectAttribute",
         "value": {
           "type": "string"
+        },
+        "optional": true
+      },
+      "taxonomias": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "object",
+          "attributes": {
+            "_ref": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              }
+            },
+            "_type": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string",
+                "value": "reference"
+              }
+            },
+            "_weak": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "boolean"
+              },
+              "optional": true
+            }
+          },
+          "dereferencesTo": "skosConcept"
         },
         "optional": true
       },
@@ -12887,6 +13126,381 @@
           },
           "optional": true
         }
+      }
+    }
+  },
+  {
+    "name": "skosConceptScheme",
+    "type": "document",
+    "attributes": {
+      "_id": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_type": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string",
+          "value": "skosConceptScheme"
+        }
+      },
+      "_createdAt": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_updatedAt": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_rev": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "title": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "description": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "controls": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "boolean"
+        },
+        "optional": true
+      },
+      "baseIri": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "schemeId": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "topConcepts": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "object",
+            "attributes": {
+              "_ref": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              },
+              "_type": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string",
+                  "value": "reference"
+                }
+              },
+              "_weak": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "boolean"
+                },
+                "optional": true
+              }
+            },
+            "dereferencesTo": "skosConcept",
+            "rest": {
+              "type": "object",
+              "attributes": {
+                "_key": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "optional": true
+      },
+      "concepts": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "object",
+            "attributes": {
+              "_ref": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              },
+              "_type": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string",
+                  "value": "reference"
+                }
+              },
+              "_weak": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "boolean"
+                },
+                "optional": true
+              }
+            },
+            "dereferencesTo": "skosConcept",
+            "rest": {
+              "type": "object",
+              "attributes": {
+                "_key": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "optional": true
+      }
+    }
+  },
+  {
+    "name": "skosConcept",
+    "type": "document",
+    "attributes": {
+      "_id": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_type": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string",
+          "value": "skosConcept"
+        }
+      },
+      "_createdAt": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_updatedAt": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_rev": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "prefLabel": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "definition": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "example": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "scopeNote": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "altLabel": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "string"
+          }
+        },
+        "optional": true
+      },
+      "hiddenLabel": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "string"
+          }
+        },
+        "optional": true
+      },
+      "baseIri": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "conceptId": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "broader": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "object",
+            "attributes": {
+              "_ref": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              },
+              "_type": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string",
+                  "value": "reference"
+                }
+              },
+              "_weak": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "boolean"
+                },
+                "optional": true
+              }
+            },
+            "dereferencesTo": "skosConcept",
+            "rest": {
+              "type": "object",
+              "attributes": {
+                "_key": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "optional": true
+      },
+      "related": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "object",
+            "attributes": {
+              "_ref": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              },
+              "_type": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string",
+                  "value": "reference"
+                }
+              },
+              "_weak": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "boolean"
+                },
+                "optional": true
+              }
+            },
+            "dereferencesTo": "skosConcept",
+            "rest": {
+              "type": "object",
+              "attributes": {
+                "_key": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "optional": true
+      },
+      "sameAs": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "historyNote": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "editorialNote": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "changeNote": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
       }
     }
   },

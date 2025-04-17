@@ -8,6 +8,8 @@ import { seoFields } from "../../utils/seo-fields";
 import { createSlug, isUnique } from "../../utils/slug";
 import { richTextField } from "../common";
 import { pageBuilderField } from "../common";
+import { branchFilter } from 'sanity-plugin-taxonomy-manager'
+import { ReferenceHierarchyInput } from 'sanity-plugin-taxonomy-manager'
 
 export const motoresPenta = defineType({
     name: "motoresPenta",
@@ -27,20 +29,16 @@ export const motoresPenta = defineType({
             validation: (Rule) => Rule.required().error("El título es obligatorio"),
         }),
         defineField({
-            name: "category",
-            title: "Categoría",
-            type: "string",
-            description: "Selecciona la categoría del motor",
+            name: 'taxonomias',
+            title: 'Taxonomias',
             group: GROUP.MAIN_CONTENT,
+            type: 'reference',
+            to: { type: 'skosConcept' },
             options: {
-                list: [
-                    { title: "Motores industriales", value: "motores-industriales" },
-                    { title: "Motores marinos", value: "motores-marinos" },
-                    { title: "Accesorios", value: "accesorios" }
-                ],
-                layout: "dropdown"
+                filter: branchFilter({ schemeId: '4bb257', branchId: 'cff000' }),
+                disableNew: true,
             },
-            validation: (Rule) => Rule.required().error("La categoría es obligatoria"),
+            components: { field: ReferenceHierarchyInput },
         }),
         defineField({
             name: "description",

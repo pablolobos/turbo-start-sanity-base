@@ -867,3 +867,44 @@ export type SEARCH_QUERYResult = {
     _createdAt: string;
   }>;
 };
+
+export const PRODUCT_LISTING_QUERY = defineQuery(`
+  *[
+    _type == $productType && 
+    references(*[
+      _type == "skosConcept" && 
+      count(broader[_ref in *[_type == "skosConcept" && _id == $taxonomyId]._id]) > 0
+    ]._id)
+  ]{
+    _id,
+    title,
+    "slug": slug.current,
+    description,
+    "image": image.asset->url,
+    "taxonomy": taxonomias->{
+      prefLabel,
+      conceptId
+    }
+  } | order(title asc)
+`)
+
+// Query to get available taxonomies for a product type
+export const PRODUCT_TAXONOMIES_QUERY = defineQuery(`
+  *[_type == "skosConcept" && 
+    count(broader[_ref in *[
+      _type == "skosConcept" && 
+      conceptId == $conceptId
+    ]._id]) > 0
+  ]{
+    prefLabel,
+    conceptId,
+    _id
+  } | order(prefLabel)
+`)
+
+// Helper to get the concept ID for each product type
+export const PRODUCT_TYPE_CONCEPTS = {
+  camiones: "278c9c",
+  buses: "cff000",
+  motoresPenta: "8d61db"
+}

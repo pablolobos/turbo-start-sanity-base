@@ -4,7 +4,6 @@ import { BlogCard, FeaturedBlogCard } from "@/components/blog-card";
 import { TitleDescriptionBlock } from "@/components/title-description-block";
 import { SanityButtons } from "@/components/sanity-buttons";
 import type { SanityButtonProps } from "@/types";
-import { cn } from "@workspace/ui/lib/utils";
 
 export interface FeaturedBlogsProps {
     _type: string;

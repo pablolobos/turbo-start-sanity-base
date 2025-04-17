@@ -653,10 +653,34 @@ export type Tabs = {
           _type: "highlightedAspects";
           _key: string;
         }
+      | {
+          title?: string;
+          productType?: "camiones" | "buses" | "motoresPenta";
+          taxonomyFilter?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "skosConcept";
+          };
+          _type: "productListing";
+          _key: string;
+        }
     >;
     _type: "tab";
     _key: string;
   }>;
+};
+
+export type ProductListing = {
+  _type: "productListing";
+  title?: string;
+  productType?: "camiones" | "buses" | "motoresPenta";
+  taxonomyFilter?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "skosConcept";
+  };
 };
 
 export type HighlightedAspects = {
@@ -1258,6 +1282,9 @@ export type PageBuilder = Array<
     } & HighlightedAspects)
   | ({
       _key: string;
+    } & ProductListing)
+  | ({
+      _key: string;
     } & Tabs)
   | ({
       _key: string;
@@ -1470,7 +1497,12 @@ export type MotoresPenta = {
   _updatedAt: string;
   _rev: string;
   title?: string;
-  category?: "motores-industriales" | "motores-marinos" | "accesorios";
+  taxonomias?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "skosConcept";
+  };
   description?: string;
   slug?: Slug;
   image?: {
@@ -1514,6 +1546,12 @@ export type Buses = {
   _updatedAt: string;
   _rev: string;
   title?: string;
+  taxonomias?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "skosConcept";
+  };
   category?: "urbano" | "interurbano";
   description?: string;
   slug?: Slug;
@@ -1558,6 +1596,12 @@ export type Camiones = {
   _updatedAt: string;
   _rev: string;
   title?: string;
+  taxonomias?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "skosConcept";
+  };
   category?:
     | "larga-distancia"
     | "construccion-y-mineria"
@@ -1890,6 +1934,67 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
+export type SkosConceptScheme = {
+  _id: string;
+  _type: "skosConceptScheme";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  description?: string;
+  controls?: boolean;
+  baseIri?: string;
+  schemeId?: string;
+  topConcepts?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "skosConcept";
+  }>;
+  concepts?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "skosConcept";
+  }>;
+};
+
+export type SkosConcept = {
+  _id: string;
+  _type: "skosConcept";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  prefLabel?: string;
+  definition?: string;
+  example?: string;
+  scopeNote?: string;
+  altLabel?: Array<string>;
+  hiddenLabel?: Array<string>;
+  baseIri?: string;
+  conceptId?: string;
+  broader?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "skosConcept";
+  }>;
+  related?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "skosConcept";
+  }>;
+  sameAs?: string;
+  historyNote?: string;
+  editorialNote?: string;
+  changeNote?: string;
+};
+
 export type Message = {
   _id: string;
   _type: "message";
@@ -2084,6 +2189,7 @@ export type AllSanitySchemaTypes =
   | FeaturedBlogs
   | InfoSection
   | Tabs
+  | ProductListing
   | HighlightedAspects
   | SpecificationsTable
   | FormBlock
@@ -2121,6 +2227,8 @@ export type AllSanitySchemaTypes =
   | SanityImageAsset
   | SanityAssetSourceData
   | SanityImageMetadata
+  | SkosConceptScheme
+  | SkosConcept
   | Message
   | MediaTag
   | Slug
@@ -2931,6 +3039,18 @@ export type QueryHomePageDataResult = {
           openInNewTab: boolean | null;
           href: string | null;
         }> | null;
+      }
+    | {
+        _key: string;
+        _type: "productListing";
+        title?: string;
+        productType?: "buses" | "camiones" | "motoresPenta";
+        taxonomyFilter?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "skosConcept";
+        };
       }
     | {
         _key: string;
@@ -3779,6 +3899,18 @@ export type QueryHomePageDataResult = {
                   href: string | null;
                 }> | null;
                 _type: "mainHero";
+                _key: string;
+              }
+            | {
+                title?: string;
+                productType?: "buses" | "camiones" | "motoresPenta";
+                taxonomyFilter?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "skosConcept";
+                };
+                _type: "productListing";
                 _key: string;
               }
             | {
@@ -4700,6 +4832,18 @@ export type QuerySlugPageDataResult = {
       }
     | {
         _key: string;
+        _type: "productListing";
+        title?: string;
+        productType?: "buses" | "camiones" | "motoresPenta";
+        taxonomyFilter?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "skosConcept";
+        };
+      }
+    | {
+        _key: string;
         _type: "specificationsTable";
         title: string | null;
         description: string | null;
@@ -5545,6 +5689,18 @@ export type QuerySlugPageDataResult = {
                   href: string | null;
                 }> | null;
                 _type: "mainHero";
+                _key: string;
+              }
+            | {
+                title?: string;
+                productType?: "buses" | "camiones" | "motoresPenta";
+                taxonomyFilter?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "skosConcept";
+                };
+                _type: "productListing";
                 _key: string;
               }
             | {
@@ -6454,6 +6610,18 @@ export type QueryBlogIndexPageDataResult = {
       }
     | {
         _key: string;
+        _type: "productListing";
+        title?: string;
+        productType?: "buses" | "camiones" | "motoresPenta";
+        taxonomyFilter?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "skosConcept";
+        };
+      }
+    | {
+        _key: string;
         _type: "specificationsTable";
         title: string | null;
         description: string | null;
@@ -7299,6 +7467,18 @@ export type QueryBlogIndexPageDataResult = {
                   href: string | null;
                 }> | null;
                 _type: "mainHero";
+                _key: string;
+              }
+            | {
+                title?: string;
+                productType?: "buses" | "camiones" | "motoresPenta";
+                taxonomyFilter?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "skosConcept";
+                };
+                _type: "productListing";
                 _key: string;
               }
             | {
@@ -8863,6 +9043,18 @@ export type QueryCamionOrPageBySlugResult =
           }
         | {
             _key: string;
+            _type: "productListing";
+            title?: string;
+            productType?: "buses" | "camiones" | "motoresPenta";
+            taxonomyFilter?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "skosConcept";
+            };
+          }
+        | {
+            _key: string;
             _type: "specificationsTable";
             title: string | null;
             description: string | null;
@@ -9708,6 +9900,18 @@ export type QueryCamionOrPageBySlugResult =
                       href: string | null;
                     }> | null;
                     _type: "mainHero";
+                    _key: string;
+                  }
+                | {
+                    title?: string;
+                    productType?: "buses" | "camiones" | "motoresPenta";
+                    taxonomyFilter?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "skosConcept";
+                    };
+                    _type: "productListing";
                     _key: string;
                   }
                 | {
@@ -10625,6 +10829,18 @@ export type QueryCamionOrPageBySlugResult =
           }
         | {
             _key: string;
+            _type: "productListing";
+            title?: string;
+            productType?: "buses" | "camiones" | "motoresPenta";
+            taxonomyFilter?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "skosConcept";
+            };
+          }
+        | {
+            _key: string;
             _type: "specificationsTable";
             title: string | null;
             description: string | null;
@@ -11470,6 +11686,18 @@ export type QueryCamionOrPageBySlugResult =
                       href: string | null;
                     }> | null;
                     _type: "mainHero";
+                    _key: string;
+                  }
+                | {
+                    title?: string;
+                    productType?: "buses" | "camiones" | "motoresPenta";
+                    taxonomyFilter?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "skosConcept";
+                    };
+                    _type: "productListing";
                     _key: string;
                   }
                 | {
@@ -12527,6 +12755,18 @@ export type QueryBusOrPageBySlugResult =
           }
         | {
             _key: string;
+            _type: "productListing";
+            title?: string;
+            productType?: "buses" | "camiones" | "motoresPenta";
+            taxonomyFilter?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "skosConcept";
+            };
+          }
+        | {
+            _key: string;
             _type: "specificationsTable";
             title: string | null;
             description: string | null;
@@ -13372,6 +13612,18 @@ export type QueryBusOrPageBySlugResult =
                       href: string | null;
                     }> | null;
                     _type: "mainHero";
+                    _key: string;
+                  }
+                | {
+                    title?: string;
+                    productType?: "buses" | "camiones" | "motoresPenta";
+                    taxonomyFilter?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "skosConcept";
+                    };
+                    _type: "productListing";
                     _key: string;
                   }
                 | {
@@ -14289,6 +14541,18 @@ export type QueryBusOrPageBySlugResult =
           }
         | {
             _key: string;
+            _type: "productListing";
+            title?: string;
+            productType?: "buses" | "camiones" | "motoresPenta";
+            taxonomyFilter?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "skosConcept";
+            };
+          }
+        | {
+            _key: string;
             _type: "specificationsTable";
             title: string | null;
             description: string | null;
@@ -15138,6 +15402,18 @@ export type QueryBusOrPageBySlugResult =
                   }
                 | {
                     title?: string;
+                    productType?: "buses" | "camiones" | "motoresPenta";
+                    taxonomyFilter?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "skosConcept";
+                    };
+                    _type: "productListing";
+                    _key: string;
+                  }
+                | {
+                    title?: string;
                     description?: string;
                     specifications?: Array<
                       {
@@ -15367,13 +15643,9 @@ export type QueryMotorPentaOrPageBySlugResult =
           }
       > | null;
       categoryData: {
-        label: "accesorios" | "motores-industriales" | "motores-marinos" | null;
-        slug: "accesorios" | "motores-industriales" | "motores-marinos" | null;
-        iri:
-          | "/camiones/accesorios"
-          | "/camiones/motores-industriales"
-          | "/camiones/motores-marinos"
-          | null;
+        label: null;
+        slug: null;
+        iri: null;
         parent: null;
       };
       pageBuilder: Array<
@@ -16195,6 +16467,18 @@ export type QueryMotorPentaOrPageBySlugResult =
           }
         | {
             _key: string;
+            _type: "productListing";
+            title?: string;
+            productType?: "buses" | "camiones" | "motoresPenta";
+            taxonomyFilter?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "skosConcept";
+            };
+          }
+        | {
+            _key: string;
             _type: "specificationsTable";
             title: string | null;
             description: string | null;
@@ -17040,6 +17324,18 @@ export type QueryMotorPentaOrPageBySlugResult =
                       href: string | null;
                     }> | null;
                     _type: "mainHero";
+                    _key: string;
+                  }
+                | {
+                    title?: string;
+                    productType?: "buses" | "camiones" | "motoresPenta";
+                    taxonomyFilter?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "skosConcept";
+                    };
+                    _type: "productListing";
                     _key: string;
                   }
                 | {
@@ -17957,6 +18253,18 @@ export type QueryMotorPentaOrPageBySlugResult =
           }
         | {
             _key: string;
+            _type: "productListing";
+            title?: string;
+            productType?: "buses" | "camiones" | "motoresPenta";
+            taxonomyFilter?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "skosConcept";
+            };
+          }
+        | {
+            _key: string;
             _type: "specificationsTable";
             title: string | null;
             description: string | null;
@@ -18806,6 +19114,18 @@ export type QueryMotorPentaOrPageBySlugResult =
                   }
                 | {
                     title?: string;
+                    productType?: "buses" | "camiones" | "motoresPenta";
+                    taxonomyFilter?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "skosConcept";
+                    };
+                    _type: "productListing";
+                    _key: string;
+                  }
+                | {
+                    title?: string;
                     description?: string;
                     specifications?: Array<
                       {
@@ -19029,11 +19349,7 @@ export type SEARCH_QUERYResult = {
           blurData: string | null;
           dominantColor: string | null;
         } | null;
-        category:
-          | "accesorios"
-          | "motores-industriales"
-          | "motores-marinos"
-          | null;
+        category: null;
         _createdAt: string;
       }
     | {
@@ -19052,6 +19368,76 @@ export type SEARCH_QUERYResult = {
       }
   >;
 };
+// Variable: PRODUCT_LISTING_QUERY
+// Query: *[    _type == $productType &&     references(*[      _type == "skosConcept" &&       count(broader[_ref in *[_type == "skosConcept" && _id == $taxonomyId]._id]) > 0    ]._id)  ]{    _id,    title,    "slug": slug.current,    description,    "image": image.asset->url,    "taxonomy": taxonomias->{      prefLabel,      conceptId    }  } | order(title asc)
+export type PRODUCT_LISTING_QUERYResult = Array<
+  | {
+      _id: string;
+      title: null;
+      slug: null;
+      description: null;
+      image: null;
+      taxonomy: null;
+    }
+  | {
+      _id: string;
+      title: string | null;
+      slug: null;
+      description: null;
+      image: null;
+      taxonomy: null;
+    }
+  | {
+      _id: string;
+      title: null;
+      slug: null;
+      description: null;
+      image: string | null;
+      taxonomy: null;
+    }
+  | {
+      _id: string;
+      title: string | null;
+      slug: null;
+      description: string | null;
+      image: null;
+      taxonomy: null;
+    }
+  | {
+      _id: string;
+      title: string | null;
+      slug: string | null;
+      description: string | null;
+      image: null;
+      taxonomy: null;
+    }
+  | {
+      _id: string;
+      title: string | null;
+      slug: string | null;
+      description: string | null;
+      image: string | null;
+      taxonomy: null;
+    }
+  | {
+      _id: string;
+      title: string | null;
+      slug: string | null;
+      description: string | null;
+      image: string | null;
+      taxonomy: {
+        prefLabel: string | null;
+        conceptId: string | null;
+      } | null;
+    }
+>;
+// Variable: PRODUCT_TAXONOMIES_QUERY
+// Query: *[_type == "skosConcept" &&     count(broader[_ref in *[      _type == "skosConcept" &&       conceptId == $conceptId    ]._id]) > 0  ]{    prefLabel,    conceptId,    _id  } | order(prefLabel)
+export type PRODUCT_TAXONOMIES_QUERYResult = Array<{
+  prefLabel: string | null;
+  conceptId: string | null;
+  _id: string;
+}>;
 
 // Query TypeMap
 import "@sanity/client";
@@ -19085,5 +19471,7 @@ declare module "@sanity/client" {
     '*[\n  _type == "settings"\n][0]{\n  _id,\n  \n  cotizadorFormTitle,\n  cotizadorFormDescription,\n  "cotizadorForm": coalesce(cotizadorForm->{\n    _id,\n    _type,\n    title,\n    description,\n    "slug": slug.current,\n    \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n\n  }, null)\n\n}': COTIZADOR_SETTINGS_QUERYResult;
     '*[\n  _type == "formularios" \n  && _id == $formId\n][0]{\n  _id,\n  title,\n  description,\n  \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n\n}': COTIZADOR_FORM_BY_ID_QUERYResult;
     '{\n  "results": *[\n    _type in ["page", "blog", "camiones", "buses", "motoresPenta"]\n    && (\n      title match $searchTerm || \n      description match $searchTerm\n    )\n  ] | order(_createdAt desc) [0...20] {\n    _id,\n    _type,\n    title,\n    description,\n    "slug": slug.current,\n    "image": image{\n      "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background\n    },\n    "category": select(\n      _type == "camiones" => category,\n      _type == "buses" => category,\n      _type == "motoresPenta" => category,\n      null\n    ),\n    _createdAt\n  }\n}': SEARCH_QUERYResult;
+    '\n  *[\n    _type == $productType && \n    references(*[\n      _type == "skosConcept" && \n      count(broader[_ref in *[_type == "skosConcept" && _id == $taxonomyId]._id]) > 0\n    ]._id)\n  ]{\n    _id,\n    title,\n    "slug": slug.current,\n    description,\n    "image": image.asset->url,\n    "taxonomy": taxonomias->{\n      prefLabel,\n      conceptId\n    }\n  } | order(title asc)\n': PRODUCT_LISTING_QUERYResult;
+    '\n  *[_type == "skosConcept" && \n    count(broader[_ref in *[\n      _type == "skosConcept" && \n      conceptId == $conceptId\n    ]._id]) > 0\n  ]{\n    prefLabel,\n    conceptId,\n    _id\n  } | order(prefLabel)\n': PRODUCT_TAXONOMIES_QUERYResult;
   }
 }
