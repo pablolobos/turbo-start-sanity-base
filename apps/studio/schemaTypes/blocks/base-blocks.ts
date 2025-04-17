@@ -11,6 +11,9 @@ import { imageLinkCards } from "./image-link-cards"
 import { mainHero } from "./main-hero"
 import { specificationsTable } from "./specifications-table"
 import { subscribeNewsletter } from "./subscribe-newsletter"
+import { productCategoryListing } from './product-category-listing'
+import { featuredBlogs } from './featured-blogs'
+import { infoSection } from './info-section'
 
 // Base blocks without tabs to avoid circular dependency
 export const baseBlocks: ObjectDefinition[] = [
@@ -26,4 +29,7 @@ export const baseBlocks: ObjectDefinition[] = [
     formBlock,
     specificationsTable,
     highlightedAspects,
+    productCategoryListing,
+    featuredBlogs,
+    infoSection,
 ]; 

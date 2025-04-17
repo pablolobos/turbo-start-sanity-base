@@ -408,6 +408,35 @@ const highlightedAspectsBlock = `
   }
 `;
 
+const productCardFragment = `
+  _id,
+  _type,
+  title,
+  description,
+  "slug": slug.current,
+  category,
+  ${imageFragment}
+`;
+
+const productCategoryListingBlock = `
+  _type == "productCategoryListing" => {
+    ...,
+    title,
+    description,
+    productType,
+    category,
+    displayMode,
+    "showViewAllButton": showViewAllButton == "yes",
+    viewAllButtonText,
+    "products": *[
+      _type == ^.productType && 
+      category == ^.category
+    ] | order(title asc) {
+      ${productCardFragment}
+    }
+  }
+`;
+
 const pageBuilderFragment = `
   pageBuilder[]{
     ...,
@@ -425,7 +454,8 @@ const pageBuilderFragment = `
     ${imageGalleryBlock},
     ${specificationsTableBlock},
     ${featuredBlogsBlock},
-    ${highlightedAspectsBlock}
+    ${highlightedAspectsBlock},
+    ${productCategoryListingBlock}
   }
 `;
 
