@@ -185,9 +185,9 @@ export function Search() {
                                                                     result._type === 'buses' ? 'Bus' :
                                                                         result._type === 'motoresPenta' ? 'Motor Penta' : ''}
                                                     </span>
-                                                    {result.category && (
+                                                    {result.taxonomy && (
                                                         <span className="bg-muted px-2 py-0.5 rounded-full text-xs">
-                                                            {result.category}
+                                                            {result.taxonomy.prefLabel}
                                                         </span>
                                                     )}
                                                 </div>

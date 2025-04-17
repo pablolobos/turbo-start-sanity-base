@@ -33,6 +33,9 @@ export function ProductCard({ product, productType }: ProductCardProps) {
 
     const { title, slug, description, image, taxonomy } = product;
 
+    // Ensure taxonomy exists
+    const taxonomyLabel = taxonomy?.prefLabel || "Uncategorized";
+
     const routes = {
         camiones: '/camiones',
         buses: '/buses',
@@ -90,7 +93,7 @@ export function ProductCard({ product, productType }: ProductCardProps) {
                 </h3>
                 <div className="flex items-center gap-x-4 my-1">
                     <span className="inline-flex items-center bg-muted px-2.5 py-0.5 rounded-full font-semibold text-sm">
-                        {taxonomy.prefLabel}
+                        {taxonomyLabel}
                     </span>
                 </div>
                 <p className="text-muted-foreground text-base leading-6">

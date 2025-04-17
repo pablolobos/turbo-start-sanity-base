@@ -26,7 +26,7 @@ interface BreadcrumbItem {
     href: string;
 }
 
-// Helper function to generate breadcrumbs from category data
+// Helper function to generate breadcrumbs from taxonomy data
 function generateBreadcrumbs(
     categoryData: any,
     currentTitle: string,
@@ -45,7 +45,7 @@ function generateBreadcrumbs(
         // Add the category if it exists
         if (categoryData.label) {
             breadcrumbs.push({
-                label: getCategoryDisplayName(categoryData.label),
+                label: categoryData.label, // Use the taxonomy prefLabel directly
                 href: categoryData.iri || `${categoryBase}/${categoryData.slug}`
             });
         }
@@ -58,21 +58,6 @@ function generateBreadcrumbs(
     ];
 
     return finalBreadcrumbs.filter((crumb) => crumb.label);
-}
-
-// Helper function to get display name for category slug
-function getCategoryDisplayName(categorySlug: string): string {
-    const categoryMap: Record<string, string> = {
-        "larga-distancia": "Larga distancia",
-        "construccion-y-mineria": "Construcción y minería",
-        "forestal": "Forestal",
-        "distribucion-urbana-y-regional": "Distribución Urbana y Regional",
-        "volvo-electric": "Volvo Electric",
-        "usados": "Usados",
-        "financiamiento": "Financiamiento"
-    };
-
-    return categoryMap[categorySlug] || categorySlug;
 }
 
 async function fetchCamionOrPageData(slug: string): Promise<{ data: any }> {
@@ -138,11 +123,37 @@ export default async function CamionPage({
         return notFound();
     }
 
-    // TODO: Use generated types and refine destructuring
-    const { title, pageBuilder, _id, _type, description, categoryData, image } = data as any;
+    // Destructure the data
+    const { title, pageBuilder, _id, _type, description, image } = data as any;
+
+    // Get taxonomy data from the document if it exists
+    let taxonomyData = null;
+    if (_type === "camiones" && data.taxonomias) {
+        // Fetch the taxonomy details
+        const taxonomyRef = data.taxonomias._ref;
+        if (taxonomyRef) {
+            const taxonomyDoc = await client.fetch(
+                `*[_type == "skosConcept" && _id == $id][0]{
+                    "label": prefLabel,
+                    "slug": lower(prefLabel),
+                    "iri": "/camiones/" + lower(prefLabel)
+                }`,
+                { id: taxonomyRef }
+            );
+
+            // Format the slug and IRI in JavaScript
+            if (taxonomyDoc) {
+                taxonomyData = {
+                    ...taxonomyDoc,
+                    slug: taxonomyDoc.slug?.replace(/\s+/g, '-'),
+                    iri: taxonomyDoc.iri?.replace(/\s+/g, '-')
+                };
+            }
+        }
+    }
 
     // Generate breadcrumbs, passing the document type
-    const breadcrumbItems = generateBreadcrumbs(categoryData, title, _type);
+    const breadcrumbItems = generateBreadcrumbs(taxonomyData, title, _type);
 
     // Conditional rendering based on type
     return (

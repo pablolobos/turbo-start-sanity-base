@@ -706,7 +706,12 @@ export const queryCamionesData = defineQuery(`*[_type == "camiones"]{
   description,
   "slug": slug.current,
   ${imageFragment},
-  ${richTextFragment}
+  ${richTextFragment},
+  "taxonomy": taxonomias->{
+    prefLabel,
+    conceptId,
+    "slug": lower(prefLabel)
+  }
 }`);
 
 export const queryCamionOrPageBySlug = defineQuery(`*[
@@ -721,7 +726,11 @@ export const queryCamionOrPageBySlug = defineQuery(`*[
   _type == "camiones" => { 
     ${imageFragment},
     ${richTextFragment}, 
-    ${categoryBreadcrumbFragment}
+    taxonomias->{
+      "label": prefLabel,
+      "slug": prefLabel,
+      "iri": "/camiones/" + lower(prefLabel)
+    }
   },
   ${pageBuilderFragment} 
 }`);
@@ -738,7 +747,12 @@ export const queryBusesData = defineQuery(`*[_type == "buses"]{
   description,
   "slug": slug.current,
   ${imageFragment},
-  ${richTextFragment}
+  ${richTextFragment},
+  "taxonomy": taxonomias->{
+    prefLabel,
+    conceptId,
+    "slug": lower(prefLabel)
+  }
 }`);
 
 export const queryBusOrPageBySlug = defineQuery(`*[
@@ -753,7 +767,11 @@ export const queryBusOrPageBySlug = defineQuery(`*[
   _type == "buses" => { 
     ${imageFragment},
     ${richTextFragment}, 
-    ${categoryBreadcrumbFragment}
+    taxonomias->{
+      "label": prefLabel,
+      "slug": prefLabel,
+      "iri": "/buses/" + lower(prefLabel)
+    }
   },
   ${pageBuilderFragment} 
 }`);
@@ -770,7 +788,12 @@ export const queryMotoresPentaData = defineQuery(`*[_type == "motoresPenta"]{
   description,
   "slug": slug.current,
   ${imageFragment},
-  ${richTextFragment}
+  ${richTextFragment},
+  "taxonomy": taxonomias->{
+    prefLabel,
+    conceptId,
+    "slug": lower(prefLabel)
+  }
 }`);
 
 export const queryMotorPentaOrPageBySlug = defineQuery(`*[
@@ -785,7 +808,11 @@ export const queryMotorPentaOrPageBySlug = defineQuery(`*[
   _type == "motoresPenta" => { 
     ${imageFragment},
     ${richTextFragment}, 
-    ${categoryBreadcrumbFragment}
+    taxonomias->{
+      "label": prefLabel,
+      "slug": prefLabel,
+      "iri": "/motores-penta/" + lower(prefLabel)
+    }
   },
   ${pageBuilderFragment} 
 }`);
@@ -832,12 +859,10 @@ export const SEARCH_QUERY = defineQuery(`{
       "blurData": asset->metadata.lqip,
       "dominantColor": asset->metadata.palette.dominant.background
     },
-    "category": select(
-      _type == "camiones" => category,
-      _type == "buses" => category,
-      _type == "motoresPenta" => category,
-      null
-    ),
+    "taxonomy": coalesce(taxonomias->{
+      prefLabel,
+      conceptId
+    }, null),
     _createdAt
   }
 }`);
@@ -863,7 +888,10 @@ export type SEARCH_QUERYResult = {
       crop?: SanityImageCrop;
       _type: "image";
     } | null;
-    category: string | null;
+    taxonomy: {
+      prefLabel: string | null;
+      conceptId: string | null;
+    } | null;
     _createdAt: string;
   }>;
 };
@@ -871,16 +899,16 @@ export type SEARCH_QUERYResult = {
 export const PRODUCT_LISTING_QUERY = defineQuery(`
   *[
     _type == $productType && 
-    references(*[
-      _type == "skosConcept" && 
-      count(broader[_ref in *[_type == "skosConcept" && _id == $taxonomyId]._id]) > 0
-    ]._id)
+    taxonomias._ref == $taxonomyId
   ]{
     _id,
     title,
     "slug": slug.current,
     description,
-    "image": image.asset->url,
+    "image": image {
+        "asset": asset->,
+        "_type": "image"
+    },
     "taxonomy": taxonomias->{
       prefLabel,
       conceptId

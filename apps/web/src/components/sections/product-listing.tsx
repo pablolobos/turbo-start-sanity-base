@@ -23,7 +23,10 @@ interface ProcessedCategory {
         slug: string;
         description: string;
         image: any;
-        category: string;
+        taxonomy: {
+            prefLabel: string;
+            conceptId: string;
+        };
     }>;
 }
 
@@ -75,7 +78,10 @@ export function ProductListing(props: ProductListingProps) {
                         "asset": asset->,
                         "_type": "image"
                     },
-                    category
+                    "taxonomy": taxonomias->{
+                        prefLabel,
+                        conceptId
+                    }
                 }`;
 
                 // Fetch products that match this taxonomy
@@ -106,52 +112,67 @@ export function ProductListing(props: ProductListingProps) {
                             slug: p.slug,
                             description: p.description,
                             image: p.image,
-                            category: p.category
+                            taxonomy: p.taxonomy || {
+                                prefLabel: taxonomyDoc.prefLabel,
+                                conceptId: taxonomyDoc.conceptId
+                            }
                         }))
                     });
                 }
 
                 // 3. If no products found directly referencing the taxonomy,
-                // try using the category field as a fallback
+                // we don't need a fallback to category anymore since we're migrating away from it
                 if (categories.length === 0) {
-                    // Get category slug from taxonomy name
-                    const categorySlug = taxonomyDoc.prefLabel?.toLowerCase().replace(/\s+/g, '-');
+                    // Instead, we can try to find products using a broader taxonomy match
+                    try {
+                        // Get products with taxonomies that are in the same branch/hierarchy
+                        const broaderTaxonomyProducts = await client.fetch(
+                            `*[
+                                _type == $productType && 
+                                references(*[
+                                    _type == "skosConcept" && 
+                                    count(broader[_ref in *[_type == "skosConcept" && _id == $taxonomyId]._id]) > 0
+                                ]._id)
+                            ]{
+                                _id,
+                                title,
+                                "slug": slug.current,
+                                description,
+                                "image": image {
+                                    "asset": asset->,
+                                    "_type": "image"
+                                },
+                                "taxonomy": taxonomias->{
+                                    prefLabel,
+                                    conceptId
+                                }
+                            }`,
+                            {
+                                productType: props.productType,
+                                taxonomyId: props.taxonomyFilter._ref
+                            }
+                        );
 
-                    const productsByCategory = await client.fetch(
-                        `*[
-                            _type == $productType && 
-                            category == $categorySlug
-                        ]{
-                            _id,
-                            title,
-                            "slug": slug.current,
-                            description,
-                            "image": image {
-                                "asset": asset->,
-                                "_type": "image"
-                            },
-                            category
-                        }`,
-                        {
-                            productType: props.productType,
-                            categorySlug: categorySlug
+                        if (broaderTaxonomyProducts && broaderTaxonomyProducts.length > 0) {
+                            categories.push({
+                                _id: taxonomyDoc._id,
+                                prefLabel: taxonomyDoc.prefLabel || "Products",
+                                conceptId: taxonomyDoc.conceptId || "",
+                                products: broaderTaxonomyProducts.map((p: any) => ({
+                                    _id: p._id,
+                                    title: p.title,
+                                    slug: p.slug,
+                                    description: p.description,
+                                    image: p.image,
+                                    taxonomy: p.taxonomy || {
+                                        prefLabel: taxonomyDoc.prefLabel,
+                                        conceptId: taxonomyDoc.conceptId
+                                    }
+                                }))
+                            });
                         }
-                    );
-
-                    if (productsByCategory && productsByCategory.length > 0) {
-                        categories.push({
-                            _id: taxonomyDoc._id,
-                            prefLabel: taxonomyDoc.prefLabel || "Products",
-                            conceptId: taxonomyDoc.conceptId || "",
-                            products: productsByCategory.map((p: any) => ({
-                                _id: p._id,
-                                title: p.title,
-                                slug: p.slug,
-                                description: p.description,
-                                image: p.image,
-                                category: p.category
-                            }))
-                        });
+                    } catch (err) {
+                        console.warn("Error fetching broader taxonomy products:", err);
                     }
                 }
 
