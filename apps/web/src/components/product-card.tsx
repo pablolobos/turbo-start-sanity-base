@@ -86,7 +86,7 @@ export function ProductCard({ product, productType }: ProductCardProps) {
             </div>
             <div className="content-start grid grid-rows-subgrid row-span-2 w-full">
                 <h3 className="group relative heading-4">
-                    <Link href={`${routes[productType]}${slug}`}>
+                    <Link href={`${slug}`}>
                         <span className="absolute inset-0" />
                         {title}
                     </Link>
