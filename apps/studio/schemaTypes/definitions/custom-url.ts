@@ -6,6 +6,9 @@ const allLinkableTypes = [
   { type: "blog" },
   { type: "blogIndex" },
   { type: "page" },
+  { type: "camiones" },
+  { type: "buses" },
+  { type: "motoresPenta" },
 ];
 
 export const customUrl = defineType({
