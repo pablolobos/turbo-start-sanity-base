@@ -1,68 +1,75 @@
 import { defineField, defineType } from 'sanity'
 import { ImagesIcon } from '@sanity/icons'
 
+type LayoutType = 'grid' | 'carousel' | 'masonry' | 'bento'
+
 export const imageGallery = defineType({
     name: 'imageGallery',
-    title: 'Image Gallery',
+    title: 'Galería de Imágenes',
     type: 'object',
     icon: ImagesIcon,
     groups: [
         {
             name: 'content',
-            title: 'Content',
+            title: 'Contenido',
             icon: ImagesIcon,
             default: true,
         },
         {
             name: 'settings',
-            title: 'Settings',
+            title: 'Configuración',
         },
     ],
     fields: [
         defineField({
             name: 'title',
+            title: 'Título',
             type: 'string',
             group: 'content',
-            description: 'Optional title for the gallery',
+            description: 'Título opcional para la galería',
         }),
         defineField({
             name: 'description',
+            title: 'Descripción',
             type: 'text',
             group: 'content',
-            description: 'Optional description for the gallery',
+            description: 'Descripción opcional para la galería',
         }),
         defineField({
             name: 'images',
+            title: 'Imágenes',
             type: 'array',
             group: 'content',
             of: [{ type: 'galleryImage' }],
-            validation: (rule) => rule.required().min(1).error('At least one image is required'),
+            validation: (rule) => rule.required().min(1).error('Se requiere al menos una imagen'),
         }),
         defineField({
             name: 'layout',
+            title: 'Diseño',
             type: 'string',
             group: 'settings',
             options: {
                 list: [
-                    { title: 'Grid', value: 'grid' },
-                    { title: 'Carousel', value: 'carousel' },
-                    { title: 'Masonry', value: 'masonry' },
+                    { title: 'Cuadrícula', value: 'grid' },
+                    { title: 'Carrusel', value: 'carousel' },
+                    { title: 'Mosaico', value: 'masonry' },
                     { title: 'Bento', value: 'bento' },
                 ],
                 layout: 'radio',
             },
             initialValue: 'grid',
-            description: 'Grid: Standard grid layout | Carousel: Slideshow | Masonry: Pinterest-style varying heights | Bento: Two images on top, one wide image below',
+            description: 'Cuadrícula: Diseño estándar | Carrusel: Presentación de diapositivas | Mosaico: Estilo Pinterest | Bento: Dos imágenes arriba, una imagen ancha abajo',
         }),
         defineField({
             name: 'columns',
+            title: 'Columnas',
             type: 'string',
             group: 'settings',
             options: {
                 list: [
-                    { title: '2', value: '2' },
-                    { title: '3', value: '3' },
-                    { title: '4', value: '4' },
+                    { title: '2 columnas', value: '2' },
+                    { title: '3 columnas', value: '3' },
+                    { title: '4 columnas', value: '4' },
                 ],
                 layout: 'radio',
             },
@@ -71,7 +78,7 @@ export const imageGallery = defineType({
         }),
         defineField({
             name: 'slidesPerRow',
-            title: 'Slides Per Row',
+            title: 'Diapositivas por Fila',
             type: 'number',
             group: 'settings',
             options: {
@@ -86,20 +93,26 @@ export const imageGallery = defineType({
             },
             initialValue: 3,
             hidden: ({ parent }) => parent?.layout !== 'carousel',
-            description: 'Number of slides to show in a row on large screens',
+            description: 'Número de diapositivas a mostrar en una fila en pantallas grandes',
         }),
     ],
     preview: {
         select: {
             title: 'title',
             media: 'images.0.image',
-            imagesCount: 'images.length',
             layout: 'layout',
         },
-        prepare({ title, media, imagesCount, layout }) {
+        prepare(selection) {
+            const { title, media, layout = 'grid' } = selection
+            const layoutNames: Record<LayoutType, string> = {
+                grid: 'cuadrícula',
+                carousel: 'carrusel',
+                masonry: 'mosaico',
+                bento: 'bento'
+            }
             return {
-                title: title || 'Image Gallery',
-                subtitle: `${imagesCount || 0} image${imagesCount !== 1 ? 's' : ''} • ${layout || 'grid'} layout`,
+                title: title || 'Galería de Imágenes',
+                subtitle: `Diseño: ${layoutNames[layout as LayoutType]}`,
                 media: media || ImagesIcon,
             }
         },

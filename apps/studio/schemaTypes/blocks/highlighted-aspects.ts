@@ -114,12 +114,13 @@ export const highlightedAspects = defineType({
     preview: {
         select: {
             title: 'title',
-            aspectsCount: 'aspects.length'
+            aspects: 'aspects'
         },
-        prepare({ title, aspectsCount }) {
+        prepare({ title, aspects = [] }) {
+            const aspectsCount = aspects?.length || 0
             return {
                 title: title || 'Aspectos Destacados',
-                subtitle: `${aspectsCount || 0} aspecto${aspectsCount !== 1 ? 's' : ''} destacado${aspectsCount !== 1 ? 's' : ''}`,
+                subtitle: `${aspectsCount} aspecto${aspectsCount !== 1 ? 's' : ''} destacado${aspectsCount !== 1 ? 's' : ''}`,
                 media: Sparkles
             }
         }

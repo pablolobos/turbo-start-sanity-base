@@ -3,67 +3,72 @@ import { DocumentIcon } from '@sanity/icons'
 
 export const specificationsTable = defineType({
     name: 'specificationsTable',
-    title: 'Specifications Table',
+    title: 'Tabla de Especificaciones',
     type: 'object',
     icon: DocumentIcon,
     groups: [
         {
             name: 'content',
-            title: 'Content',
+            title: 'Contenido',
             icon: DocumentIcon,
             default: true,
         },
         {
             name: 'settings',
-            title: 'Settings',
+            title: 'Configuración',
         },
     ],
     fields: [
         defineField({
             name: 'title',
+            title: 'Título',
             type: 'string',
             group: 'content',
-            description: 'Title for the specifications table',
+            description: 'Título para la tabla de especificaciones',
         }),
         defineField({
             name: 'description',
+            title: 'Descripción',
             type: 'text',
             group: 'content',
-            description: 'Optional description for the specifications table',
+            description: 'Descripción opcional para la tabla de especificaciones',
         }),
         defineField({
             name: 'specifications',
+            title: 'Especificaciones',
             type: 'array',
             group: 'content',
             of: [{ type: 'specificationItem' }],
-            validation: (rule) => rule.required().min(1).error('At least one specification is required'),
+            validation: (rule) => rule.required().min(1).error('Se requiere al menos una especificación'),
         }),
         defineField({
             name: 'variant',
+            title: 'Variante',
             type: 'string',
             group: 'settings',
             options: {
                 list: [
-                    { title: 'Default', value: 'default' },
-                    { title: 'Striped', value: 'striped' },
-                    { title: 'Bordered', value: 'bordered' },
-                    { title: 'Compact', value: 'compact' },
+                    { title: 'Por defecto', value: 'default' },
+                    { title: 'Rayada', value: 'striped' },
+                    { title: 'Con bordes', value: 'bordered' },
+                    { title: 'Compacta', value: 'compact' },
                 ],
                 layout: 'radio',
             },
             initialValue: 'default',
-            description: 'Choose the visual style of the specifications table',
+            description: 'Elija el estilo visual de la tabla de especificaciones',
         }),
     ],
     preview: {
         select: {
             title: 'title',
-            specCount: 'specifications.length',
+            specifications: 'specifications',
         },
-        prepare({ title, specCount }) {
+        prepare({ title, specifications = [] }) {
+            const specCount = specifications?.length || 0
             return {
-                title: title || 'Specifications Table',
-                subtitle: `${specCount || 0} specification${specCount !== 1 ? 's' : ''}`,
+                title: title || 'Tabla de Especificaciones',
+                subtitle: `${specCount} especificación${specCount !== 1 ? 'es' : ''}`,
                 media: DocumentIcon,
             }
         },
