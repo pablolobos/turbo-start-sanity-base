@@ -8,7 +8,7 @@ type AspectCardProps = {
 };
 
 export function AspectCard({ aspect, className = "" }: AspectCardProps) {
-    const { title, image, content } = aspect || {};
+    const { title, image, content, variant = "image" } = aspect || {};
 
     if (!aspect) {
         return (
@@ -25,19 +25,25 @@ export function AspectCard({ aspect, className = "" }: AspectCardProps) {
 
     return (
         <article className={`content-start gap-2 lg:gap-6 grid grid-cols-1 grid-rows-[auto_auto_1fr] w-full ${className}`}>
-            <div className="relative rounded-none w-full h-auto aspect-[16/9] overflow-hidden">
-                {image?.asset && (
+            {variant !== 'none' && image?.asset && (
+                <div className={`relative rounded-none w-full h-auto overflow-hidden ${variant === 'icon'
+                    ? 'aspect-square max-w-[120px] mx-auto'
+                    : 'aspect-[16/9]'
+                    }`}>
                     <SanityImage
                         asset={image}
-                        width={800}
-                        height={400}
+                        width={variant === 'icon' ? 120 : 800}
+                        height={variant === 'icon' ? 120 : 400}
                         alt={title || "Aspecto destacado"}
-                        className="bg-gray-100 rounded-none w-full object-cover aspect-[16/9] sm:aspect-[2/1] lg:aspect-[3/2]"
+                        className={`bg-gray-100 rounded-none w-full object-cover ${variant === 'icon'
+                            ? 'aspect-square p-4'
+                            : 'aspect-[16/9] sm:aspect-[2/1] lg:aspect-[3/2]'
+                            }`}
                     />
-                )}
-                <div className="absolute inset-0 ring-1 ring-gray-900/10 ring-inset" />
-            </div>
-            <div className="content-start grid grid-rows-subgrid row-span-2 w-full">
+                    <div className="absolute inset-0 ring-1 ring-gray-900/10 ring-inset" />
+                </div>
+            )}
+            <div className={`content-start grid grid-rows-subgrid ${variant === 'none' ? 'row-span-3' : 'row-span-2'} w-full`}>
                 <h3 className="group relative heading-4">
                     {title}
                 </h3>

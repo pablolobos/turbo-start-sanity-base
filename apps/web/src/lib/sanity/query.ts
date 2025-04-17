@@ -392,6 +392,8 @@ const highlightedAspectsBlock = `
     aspects[]{
       _key,
       title,
+      variant,
+      icon,
       image{
         ...,
         "alt": coalesce(asset->altText, asset->originalFilename, "Aspect Image"),

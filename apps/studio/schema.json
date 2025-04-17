@@ -4347,6 +4347,27 @@
                                       },
                                       "optional": true
                                     },
+                                    "variant": {
+                                      "type": "objectAttribute",
+                                      "value": {
+                                        "type": "union",
+                                        "of": [
+                                          {
+                                            "type": "string",
+                                            "value": "image"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "icon"
+                                          },
+                                          {
+                                            "type": "string",
+                                            "value": "none"
+                                          }
+                                        ]
+                                      },
+                                      "optional": true
+                                    },
                                     "image": {
                                       "type": "objectAttribute",
                                       "value": {
@@ -4725,6 +4746,27 @@
                   "type": "objectAttribute",
                   "value": {
                     "type": "string"
+                  },
+                  "optional": true
+                },
+                "variant": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "union",
+                    "of": [
+                      {
+                        "type": "string",
+                        "value": "image"
+                      },
+                      {
+                        "type": "string",
+                        "value": "icon"
+                      },
+                      {
+                        "type": "string",
+                        "value": "none"
+                      }
+                    ]
                   },
                   "optional": true
                 },

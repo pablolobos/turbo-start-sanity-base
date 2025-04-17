@@ -22,4 +22,4 @@ const imageBuilder = createImageUrlBuilder({
 });
 
 export const urlFor = (source: SanityImageSource) =>
-  imageBuilder.image(source).auto("format").fit("max").format("webp");
+  imageBuilder.image(source).auto("format").fit("max");

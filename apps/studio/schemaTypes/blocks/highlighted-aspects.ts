@@ -1,6 +1,11 @@
 import { defineField, defineType } from 'sanity'
 import { Sparkles } from 'lucide-react'
 import { customRichText } from '../definitions/rich-text'
+import type { ValidationContext } from 'sanity'
+
+type AspectParent = {
+    variant?: 'image' | 'icon' | 'none'
+}
 
 export const highlightedAspects = defineType({
     name: 'highlightedAspects',
@@ -37,13 +42,35 @@ export const highlightedAspects = defineType({
                             validation: rule => rule.required().error('El título es obligatorio')
                         }),
                         defineField({
+                            name: 'variant',
+                            title: 'Variante',
+                            type: 'string',
+                            options: {
+                                list: [
+                                    { title: 'Imagen', value: 'image' },
+                                    { title: 'Ícono', value: 'icon' },
+                                    { title: 'Ninguno', value: 'none' }
+                                ],
+                                layout: 'radio'
+                            },
+                            initialValue: 'image'
+                        }),
+                        defineField({
                             name: 'image',
                             title: 'Imagen',
                             type: 'image',
                             options: {
-                                hotspot: true
+                                hotspot: true,
+                                accept: 'image/svg+xml,image/*'
                             },
-                            validation: rule => rule.required().error('La imagen es obligatoria')
+                            hidden: ({ parent }: { parent: AspectParent }) => parent?.variant === 'none',
+                            validation: rule => rule.custom((value, context: ValidationContext) => {
+                                const parent = context.parent as AspectParent
+                                if ((parent?.variant === 'image' || parent?.variant === 'icon') && !value) {
+                                    return 'La imagen es obligatoria cuando se selecciona la variante Imagen o Ícono'
+                                }
+                                return true
+                            })
                         }),
                         customRichText(['block'], {
                             name: 'content',
@@ -53,12 +80,14 @@ export const highlightedAspects = defineType({
                     preview: {
                         select: {
                             title: 'title',
-                            media: 'image'
+                            media: 'image',
+                            variant: 'variant'
                         },
-                        prepare({ title, media }) {
+                        prepare({ title, media, variant }) {
                             return {
                                 title: title || 'Aspecto sin título',
-                                media
+                                media: variant !== 'none' ? media : undefined,
+                                subtitle: variant === 'icon' ? 'Variante: Ícono' : variant === 'none' ? 'Sin imagen' : undefined
                             }
                         }
                     }
