@@ -64,47 +64,6 @@ export type NavbarColumnLink = {
   url?: CustomUrl;
 };
 
-export type FeaturedBlogs = {
-  _type: "featuredBlogs";
-  title?: string;
-  subtitle?: string;
-  displayMode?: "latest" | "curated";
-  blogCount?: "1" | "2" | "3";
-  blogs?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "blog";
-  }>;
-  showViewAllButton?: "yes" | "no";
-  buttonText?: string;
-};
-
-export type InfoSection = {
-  _type: "infoSection";
-  title?: string;
-  headingLevel?: "h1" | "h2" | "h3" | "h4";
-  content?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
-};
-
 export type Tabs = {
   _type: "tabs";
   title?: string;
@@ -653,10 +612,144 @@ export type Tabs = {
           _type: "highlightedAspects";
           _key: string;
         }
+      | {
+          title?: string;
+          description?: string;
+          productType?: "buses" | "camiones" | "motoresPenta";
+          category?:
+            | "urbano"
+            | "interurbano"
+            | "larga-distancia"
+            | "construccion-y-mineria"
+            | "forestal"
+            | "distribucion-urbana-y-regional"
+            | "volvo-electric"
+            | "usados"
+            | "motores-industriales"
+            | "motores-marinos"
+            | "accesorios";
+          displayMode?: "grid" | "list";
+          showViewAllButton?: "yes" | "no";
+          viewAllButtonText?: string;
+          _type: "productCategoryListing";
+          _key: string;
+        }
+      | {
+          title?: string;
+          subtitle?: string;
+          displayMode?: "latest" | "curated";
+          blogCount?: "1" | "2" | "3";
+          blogs?: Array<{
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            _key: string;
+            [internalGroqTypeReferenceTo]?: "blog";
+          }>;
+          showViewAllButton?: "yes" | "no";
+          buttonText?: string;
+          _type: "featuredBlogs";
+          _key: string;
+        }
+      | {
+          title?: string;
+          headingLevel?: "h1" | "h2" | "h3" | "h4";
+          content?: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?:
+              | "normal"
+              | "h1"
+              | "h2"
+              | "h3"
+              | "h4"
+              | "h5"
+              | "h6"
+              | "blockquote";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<{
+              href?: string;
+              _type: "link";
+              _key: string;
+            }>;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }>;
+          _type: "infoSection";
+          _key: string;
+        }
     >;
     _type: "tab";
     _key: string;
   }>;
+};
+
+export type InfoSection = {
+  _type: "infoSection";
+  title?: string;
+  headingLevel?: "h1" | "h2" | "h3" | "h4";
+  content?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+};
+
+export type FeaturedBlogs = {
+  _type: "featuredBlogs";
+  title?: string;
+  subtitle?: string;
+  displayMode?: "latest" | "curated";
+  blogCount?: "1" | "2" | "3";
+  blogs?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "blog";
+  }>;
+  showViewAllButton?: "yes" | "no";
+  buttonText?: string;
+};
+
+export type ProductCategoryListing = {
+  _type: "productCategoryListing";
+  title?: string;
+  description?: string;
+  productType?: "buses" | "camiones" | "motoresPenta";
+  category?:
+    | "urbano"
+    | "interurbano"
+    | "larga-distancia"
+    | "construccion-y-mineria"
+    | "forestal"
+    | "distribucion-urbana-y-regional"
+    | "volvo-electric"
+    | "usados"
+    | "motores-industriales"
+    | "motores-marinos"
+    | "accesorios";
+  displayMode?: "grid" | "list";
+  showViewAllButton?: "yes" | "no";
+  viewAllButtonText?: string;
 };
 
 export type HighlightedAspects = {
@@ -1258,13 +1351,16 @@ export type PageBuilder = Array<
     } & HighlightedAspects)
   | ({
       _key: string;
-    } & Tabs)
+    } & ProductCategoryListing)
+  | ({
+      _key: string;
+    } & FeaturedBlogs)
   | ({
       _key: string;
     } & InfoSection)
   | ({
       _key: string;
-    } & FeaturedBlogs)
+    } & Tabs)
 >;
 
 export type Button = {
@@ -2081,9 +2177,10 @@ export type AllSanitySchemaTypes =
   | Geopoint
   | NavbarLinkGroup
   | NavbarColumnLink
-  | FeaturedBlogs
-  | InfoSection
   | Tabs
+  | InfoSection
+  | FeaturedBlogs
+  | ProductCategoryListing
   | HighlightedAspects
   | SpecificationsTable
   | FormBlock
@@ -2934,6 +3031,111 @@ export type QueryHomePageDataResult = {
       }
     | {
         _key: string;
+        _type: "productCategoryListing";
+        title: string | null;
+        description: string | null;
+        productType: "buses" | "camiones" | "motoresPenta" | null;
+        category:
+          | "accesorios"
+          | "construccion-y-mineria"
+          | "distribucion-urbana-y-regional"
+          | "forestal"
+          | "interurbano"
+          | "larga-distancia"
+          | "motores-industriales"
+          | "motores-marinos"
+          | "urbano"
+          | "usados"
+          | "volvo-electric"
+          | null;
+        displayMode: "grid" | "list" | null;
+        showViewAllButton: false | true;
+        viewAllButtonText: string | null;
+        products: Array<
+          | {
+              _id: string;
+              _type: "buses";
+              title: string | null;
+              description: string | null;
+              slug: string | null;
+              category: "interurbano" | "urbano" | null;
+              image: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                alt: string | "Image-Broken";
+                blurData: string | null;
+                dominantColor: string | null;
+              } | null;
+            }
+          | {
+              _id: string;
+              _type: "camiones";
+              title: string | null;
+              description: string | null;
+              slug: string | null;
+              category:
+                | "construccion-y-mineria"
+                | "distribucion-urbana-y-regional"
+                | "forestal"
+                | "larga-distancia"
+                | "usados"
+                | "volvo-electric"
+                | null;
+              image: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                alt: string | "Image-Broken";
+                blurData: string | null;
+                dominantColor: string | null;
+              } | null;
+            }
+          | {
+              _id: string;
+              _type: "motoresPenta";
+              title: string | null;
+              description: string | null;
+              slug: string | null;
+              category:
+                | "accesorios"
+                | "motores-industriales"
+                | "motores-marinos"
+                | null;
+              image: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                alt: string | "Image-Broken";
+                blurData: string | null;
+                dominantColor: string | null;
+              } | null;
+            }
+        >;
+      }
+    | {
+        _key: string;
         _type: "specificationsTable";
         title: string | null;
         description: string | null;
@@ -3371,6 +3573,61 @@ export type QueryHomePageDataResult = {
               }
             | {
                 title: string | null;
+                subtitle: string | null;
+                displayMode: "curated" | "latest" | null;
+                blogCount: "1" | "2" | "3" | null;
+                blogs: Array<{
+                  _type: "blog";
+                  _id: string;
+                  title: string | null;
+                  description: string | null;
+                  slug: string | null;
+                  richText: RichText | null;
+                  orderRank: string | null;
+                  image: {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    media?: unknown;
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                    alt: string | "Image-Broken";
+                    blurData: string | null;
+                    dominantColor: string | null;
+                  } | null;
+                  publishedAt: string | null;
+                  authors: {
+                    _id: string;
+                    name: string | null;
+                    position: string | null;
+                    image: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      media?: unknown;
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                      alt: string | "Image-Broken";
+                      blurData: string | null;
+                      dominantColor: string | null;
+                    } | null;
+                  } | null;
+                }> | null;
+                showViewAllButton: false | true;
+                buttonText: string | null;
+                _type: "featuredBlogs";
+                _key: string;
+              }
+            | {
+                title: string | null;
                 description: string | null;
                 form: {
                   _id: string;
@@ -3678,6 +3935,38 @@ export type QueryHomePageDataResult = {
                 _key: string;
               }
             | {
+                title?: string;
+                headingLevel?: "h1" | "h2" | "h3" | "h4";
+                content?: Array<{
+                  children?: Array<{
+                    marks?: Array<string>;
+                    text?: string;
+                    _type: "span";
+                    _key: string;
+                  }>;
+                  style?:
+                    | "blockquote"
+                    | "h1"
+                    | "h2"
+                    | "h3"
+                    | "h4"
+                    | "h5"
+                    | "h6"
+                    | "normal";
+                  listItem?: "bullet" | "number";
+                  markDefs?: Array<{
+                    href?: string;
+                    _type: "link";
+                    _key: string;
+                  }>;
+                  level?: number;
+                  _type: "block";
+                  _key: string;
+                }>;
+                _type: "infoSection";
+                _key: string;
+              }
+            | {
                 badge?: string;
                 title?: string;
                 richText: Array<
@@ -3779,6 +4068,28 @@ export type QueryHomePageDataResult = {
                   href: string | null;
                 }> | null;
                 _type: "mainHero";
+                _key: string;
+              }
+            | {
+                title?: string;
+                description?: string;
+                productType?: "buses" | "camiones" | "motoresPenta";
+                category?:
+                  | "accesorios"
+                  | "construccion-y-mineria"
+                  | "distribucion-urbana-y-regional"
+                  | "forestal"
+                  | "interurbano"
+                  | "larga-distancia"
+                  | "motores-industriales"
+                  | "motores-marinos"
+                  | "urbano"
+                  | "usados"
+                  | "volvo-electric";
+                displayMode?: "grid" | "list";
+                showViewAllButton?: "no" | "yes";
+                viewAllButtonText?: string;
+                _type: "productCategoryListing";
                 _key: string;
               }
             | {
@@ -4700,6 +5011,111 @@ export type QuerySlugPageDataResult = {
       }
     | {
         _key: string;
+        _type: "productCategoryListing";
+        title: string | null;
+        description: string | null;
+        productType: "buses" | "camiones" | "motoresPenta" | null;
+        category:
+          | "accesorios"
+          | "construccion-y-mineria"
+          | "distribucion-urbana-y-regional"
+          | "forestal"
+          | "interurbano"
+          | "larga-distancia"
+          | "motores-industriales"
+          | "motores-marinos"
+          | "urbano"
+          | "usados"
+          | "volvo-electric"
+          | null;
+        displayMode: "grid" | "list" | null;
+        showViewAllButton: false | true;
+        viewAllButtonText: string | null;
+        products: Array<
+          | {
+              _id: string;
+              _type: "buses";
+              title: string | null;
+              description: string | null;
+              slug: string | null;
+              category: "interurbano" | "urbano" | null;
+              image: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                alt: string | "Image-Broken";
+                blurData: string | null;
+                dominantColor: string | null;
+              } | null;
+            }
+          | {
+              _id: string;
+              _type: "camiones";
+              title: string | null;
+              description: string | null;
+              slug: string | null;
+              category:
+                | "construccion-y-mineria"
+                | "distribucion-urbana-y-regional"
+                | "forestal"
+                | "larga-distancia"
+                | "usados"
+                | "volvo-electric"
+                | null;
+              image: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                alt: string | "Image-Broken";
+                blurData: string | null;
+                dominantColor: string | null;
+              } | null;
+            }
+          | {
+              _id: string;
+              _type: "motoresPenta";
+              title: string | null;
+              description: string | null;
+              slug: string | null;
+              category:
+                | "accesorios"
+                | "motores-industriales"
+                | "motores-marinos"
+                | null;
+              image: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                alt: string | "Image-Broken";
+                blurData: string | null;
+                dominantColor: string | null;
+              } | null;
+            }
+        >;
+      }
+    | {
+        _key: string;
         _type: "specificationsTable";
         title: string | null;
         description: string | null;
@@ -5137,6 +5553,61 @@ export type QuerySlugPageDataResult = {
               }
             | {
                 title: string | null;
+                subtitle: string | null;
+                displayMode: "curated" | "latest" | null;
+                blogCount: "1" | "2" | "3" | null;
+                blogs: Array<{
+                  _type: "blog";
+                  _id: string;
+                  title: string | null;
+                  description: string | null;
+                  slug: string | null;
+                  richText: RichText | null;
+                  orderRank: string | null;
+                  image: {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    media?: unknown;
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                    alt: string | "Image-Broken";
+                    blurData: string | null;
+                    dominantColor: string | null;
+                  } | null;
+                  publishedAt: string | null;
+                  authors: {
+                    _id: string;
+                    name: string | null;
+                    position: string | null;
+                    image: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      media?: unknown;
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                      alt: string | "Image-Broken";
+                      blurData: string | null;
+                      dominantColor: string | null;
+                    } | null;
+                  } | null;
+                }> | null;
+                showViewAllButton: false | true;
+                buttonText: string | null;
+                _type: "featuredBlogs";
+                _key: string;
+              }
+            | {
+                title: string | null;
                 description: string | null;
                 form: {
                   _id: string;
@@ -5444,6 +5915,38 @@ export type QuerySlugPageDataResult = {
                 _key: string;
               }
             | {
+                title?: string;
+                headingLevel?: "h1" | "h2" | "h3" | "h4";
+                content?: Array<{
+                  children?: Array<{
+                    marks?: Array<string>;
+                    text?: string;
+                    _type: "span";
+                    _key: string;
+                  }>;
+                  style?:
+                    | "blockquote"
+                    | "h1"
+                    | "h2"
+                    | "h3"
+                    | "h4"
+                    | "h5"
+                    | "h6"
+                    | "normal";
+                  listItem?: "bullet" | "number";
+                  markDefs?: Array<{
+                    href?: string;
+                    _type: "link";
+                    _key: string;
+                  }>;
+                  level?: number;
+                  _type: "block";
+                  _key: string;
+                }>;
+                _type: "infoSection";
+                _key: string;
+              }
+            | {
                 badge?: string;
                 title?: string;
                 richText: Array<
@@ -5545,6 +6048,28 @@ export type QuerySlugPageDataResult = {
                   href: string | null;
                 }> | null;
                 _type: "mainHero";
+                _key: string;
+              }
+            | {
+                title?: string;
+                description?: string;
+                productType?: "buses" | "camiones" | "motoresPenta";
+                category?:
+                  | "accesorios"
+                  | "construccion-y-mineria"
+                  | "distribucion-urbana-y-regional"
+                  | "forestal"
+                  | "interurbano"
+                  | "larga-distancia"
+                  | "motores-industriales"
+                  | "motores-marinos"
+                  | "urbano"
+                  | "usados"
+                  | "volvo-electric";
+                displayMode?: "grid" | "list";
+                showViewAllButton?: "no" | "yes";
+                viewAllButtonText?: string;
+                _type: "productCategoryListing";
                 _key: string;
               }
             | {
@@ -6454,6 +6979,111 @@ export type QueryBlogIndexPageDataResult = {
       }
     | {
         _key: string;
+        _type: "productCategoryListing";
+        title: string | null;
+        description: string | null;
+        productType: "buses" | "camiones" | "motoresPenta" | null;
+        category:
+          | "accesorios"
+          | "construccion-y-mineria"
+          | "distribucion-urbana-y-regional"
+          | "forestal"
+          | "interurbano"
+          | "larga-distancia"
+          | "motores-industriales"
+          | "motores-marinos"
+          | "urbano"
+          | "usados"
+          | "volvo-electric"
+          | null;
+        displayMode: "grid" | "list" | null;
+        showViewAllButton: false | true;
+        viewAllButtonText: string | null;
+        products: Array<
+          | {
+              _id: string;
+              _type: "buses";
+              title: string | null;
+              description: string | null;
+              slug: string | null;
+              category: "interurbano" | "urbano" | null;
+              image: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                alt: string | "Image-Broken";
+                blurData: string | null;
+                dominantColor: string | null;
+              } | null;
+            }
+          | {
+              _id: string;
+              _type: "camiones";
+              title: string | null;
+              description: string | null;
+              slug: string | null;
+              category:
+                | "construccion-y-mineria"
+                | "distribucion-urbana-y-regional"
+                | "forestal"
+                | "larga-distancia"
+                | "usados"
+                | "volvo-electric"
+                | null;
+              image: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                alt: string | "Image-Broken";
+                blurData: string | null;
+                dominantColor: string | null;
+              } | null;
+            }
+          | {
+              _id: string;
+              _type: "motoresPenta";
+              title: string | null;
+              description: string | null;
+              slug: string | null;
+              category:
+                | "accesorios"
+                | "motores-industriales"
+                | "motores-marinos"
+                | null;
+              image: {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                _type: "image";
+                alt: string | "Image-Broken";
+                blurData: string | null;
+                dominantColor: string | null;
+              } | null;
+            }
+        >;
+      }
+    | {
+        _key: string;
         _type: "specificationsTable";
         title: string | null;
         description: string | null;
@@ -6891,6 +7521,61 @@ export type QueryBlogIndexPageDataResult = {
               }
             | {
                 title: string | null;
+                subtitle: string | null;
+                displayMode: "curated" | "latest" | null;
+                blogCount: "1" | "2" | "3" | null;
+                blogs: Array<{
+                  _type: "blog";
+                  _id: string;
+                  title: string | null;
+                  description: string | null;
+                  slug: string | null;
+                  richText: RichText | null;
+                  orderRank: string | null;
+                  image: {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    media?: unknown;
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                    alt: string | "Image-Broken";
+                    blurData: string | null;
+                    dominantColor: string | null;
+                  } | null;
+                  publishedAt: string | null;
+                  authors: {
+                    _id: string;
+                    name: string | null;
+                    position: string | null;
+                    image: {
+                      asset?: {
+                        _ref: string;
+                        _type: "reference";
+                        _weak?: boolean;
+                        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                      };
+                      media?: unknown;
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      _type: "image";
+                      alt: string | "Image-Broken";
+                      blurData: string | null;
+                      dominantColor: string | null;
+                    } | null;
+                  } | null;
+                }> | null;
+                showViewAllButton: false | true;
+                buttonText: string | null;
+                _type: "featuredBlogs";
+                _key: string;
+              }
+            | {
+                title: string | null;
                 description: string | null;
                 form: {
                   _id: string;
@@ -7198,6 +7883,38 @@ export type QueryBlogIndexPageDataResult = {
                 _key: string;
               }
             | {
+                title?: string;
+                headingLevel?: "h1" | "h2" | "h3" | "h4";
+                content?: Array<{
+                  children?: Array<{
+                    marks?: Array<string>;
+                    text?: string;
+                    _type: "span";
+                    _key: string;
+                  }>;
+                  style?:
+                    | "blockquote"
+                    | "h1"
+                    | "h2"
+                    | "h3"
+                    | "h4"
+                    | "h5"
+                    | "h6"
+                    | "normal";
+                  listItem?: "bullet" | "number";
+                  markDefs?: Array<{
+                    href?: string;
+                    _type: "link";
+                    _key: string;
+                  }>;
+                  level?: number;
+                  _type: "block";
+                  _key: string;
+                }>;
+                _type: "infoSection";
+                _key: string;
+              }
+            | {
                 badge?: string;
                 title?: string;
                 richText: Array<
@@ -7299,6 +8016,28 @@ export type QueryBlogIndexPageDataResult = {
                   href: string | null;
                 }> | null;
                 _type: "mainHero";
+                _key: string;
+              }
+            | {
+                title?: string;
+                description?: string;
+                productType?: "buses" | "camiones" | "motoresPenta";
+                category?:
+                  | "accesorios"
+                  | "construccion-y-mineria"
+                  | "distribucion-urbana-y-regional"
+                  | "forestal"
+                  | "interurbano"
+                  | "larga-distancia"
+                  | "motores-industriales"
+                  | "motores-marinos"
+                  | "urbano"
+                  | "usados"
+                  | "volvo-electric";
+                displayMode?: "grid" | "list";
+                showViewAllButton?: "no" | "yes";
+                viewAllButtonText?: string;
+                _type: "productCategoryListing";
                 _key: string;
               }
             | {
@@ -8863,6 +9602,111 @@ export type QueryCamionOrPageBySlugResult =
           }
         | {
             _key: string;
+            _type: "productCategoryListing";
+            title: string | null;
+            description: string | null;
+            productType: "buses" | "camiones" | "motoresPenta" | null;
+            category:
+              | "accesorios"
+              | "construccion-y-mineria"
+              | "distribucion-urbana-y-regional"
+              | "forestal"
+              | "interurbano"
+              | "larga-distancia"
+              | "motores-industriales"
+              | "motores-marinos"
+              | "urbano"
+              | "usados"
+              | "volvo-electric"
+              | null;
+            displayMode: "grid" | "list" | null;
+            showViewAllButton: false | true;
+            viewAllButtonText: string | null;
+            products: Array<
+              | {
+                  _id: string;
+                  _type: "buses";
+                  title: string | null;
+                  description: string | null;
+                  slug: string | null;
+                  category: "interurbano" | "urbano" | null;
+                  image: {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    media?: unknown;
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                    alt: string | "Image-Broken";
+                    blurData: string | null;
+                    dominantColor: string | null;
+                  } | null;
+                }
+              | {
+                  _id: string;
+                  _type: "camiones";
+                  title: string | null;
+                  description: string | null;
+                  slug: string | null;
+                  category:
+                    | "construccion-y-mineria"
+                    | "distribucion-urbana-y-regional"
+                    | "forestal"
+                    | "larga-distancia"
+                    | "usados"
+                    | "volvo-electric"
+                    | null;
+                  image: {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    media?: unknown;
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                    alt: string | "Image-Broken";
+                    blurData: string | null;
+                    dominantColor: string | null;
+                  } | null;
+                }
+              | {
+                  _id: string;
+                  _type: "motoresPenta";
+                  title: string | null;
+                  description: string | null;
+                  slug: string | null;
+                  category:
+                    | "accesorios"
+                    | "motores-industriales"
+                    | "motores-marinos"
+                    | null;
+                  image: {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    media?: unknown;
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                    alt: string | "Image-Broken";
+                    blurData: string | null;
+                    dominantColor: string | null;
+                  } | null;
+                }
+            >;
+          }
+        | {
+            _key: string;
             _type: "specificationsTable";
             title: string | null;
             description: string | null;
@@ -9300,6 +10144,61 @@ export type QueryCamionOrPageBySlugResult =
                   }
                 | {
                     title: string | null;
+                    subtitle: string | null;
+                    displayMode: "curated" | "latest" | null;
+                    blogCount: "1" | "2" | "3" | null;
+                    blogs: Array<{
+                      _type: "blog";
+                      _id: string;
+                      title: string | null;
+                      description: string | null;
+                      slug: string | null;
+                      richText: RichText | null;
+                      orderRank: string | null;
+                      image: {
+                        asset?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                        };
+                        media?: unknown;
+                        hotspot?: SanityImageHotspot;
+                        crop?: SanityImageCrop;
+                        _type: "image";
+                        alt: string | "Image-Broken";
+                        blurData: string | null;
+                        dominantColor: string | null;
+                      } | null;
+                      publishedAt: string | null;
+                      authors: {
+                        _id: string;
+                        name: string | null;
+                        position: string | null;
+                        image: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          media?: unknown;
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                          alt: string | "Image-Broken";
+                          blurData: string | null;
+                          dominantColor: string | null;
+                        } | null;
+                      } | null;
+                    }> | null;
+                    showViewAllButton: false | true;
+                    buttonText: string | null;
+                    _type: "featuredBlogs";
+                    _key: string;
+                  }
+                | {
+                    title: string | null;
                     description: string | null;
                     form: {
                       _id: string;
@@ -9607,6 +10506,38 @@ export type QueryCamionOrPageBySlugResult =
                     _key: string;
                   }
                 | {
+                    title?: string;
+                    headingLevel?: "h1" | "h2" | "h3" | "h4";
+                    content?: Array<{
+                      children?: Array<{
+                        marks?: Array<string>;
+                        text?: string;
+                        _type: "span";
+                        _key: string;
+                      }>;
+                      style?:
+                        | "blockquote"
+                        | "h1"
+                        | "h2"
+                        | "h3"
+                        | "h4"
+                        | "h5"
+                        | "h6"
+                        | "normal";
+                      listItem?: "bullet" | "number";
+                      markDefs?: Array<{
+                        href?: string;
+                        _type: "link";
+                        _key: string;
+                      }>;
+                      level?: number;
+                      _type: "block";
+                      _key: string;
+                    }>;
+                    _type: "infoSection";
+                    _key: string;
+                  }
+                | {
                     badge?: string;
                     title?: string;
                     richText: Array<
@@ -9708,6 +10639,28 @@ export type QueryCamionOrPageBySlugResult =
                       href: string | null;
                     }> | null;
                     _type: "mainHero";
+                    _key: string;
+                  }
+                | {
+                    title?: string;
+                    description?: string;
+                    productType?: "buses" | "camiones" | "motoresPenta";
+                    category?:
+                      | "accesorios"
+                      | "construccion-y-mineria"
+                      | "distribucion-urbana-y-regional"
+                      | "forestal"
+                      | "interurbano"
+                      | "larga-distancia"
+                      | "motores-industriales"
+                      | "motores-marinos"
+                      | "urbano"
+                      | "usados"
+                      | "volvo-electric";
+                    displayMode?: "grid" | "list";
+                    showViewAllButton?: "no" | "yes";
+                    viewAllButtonText?: string;
+                    _type: "productCategoryListing";
                     _key: string;
                   }
                 | {
@@ -10625,6 +11578,111 @@ export type QueryCamionOrPageBySlugResult =
           }
         | {
             _key: string;
+            _type: "productCategoryListing";
+            title: string | null;
+            description: string | null;
+            productType: "buses" | "camiones" | "motoresPenta" | null;
+            category:
+              | "accesorios"
+              | "construccion-y-mineria"
+              | "distribucion-urbana-y-regional"
+              | "forestal"
+              | "interurbano"
+              | "larga-distancia"
+              | "motores-industriales"
+              | "motores-marinos"
+              | "urbano"
+              | "usados"
+              | "volvo-electric"
+              | null;
+            displayMode: "grid" | "list" | null;
+            showViewAllButton: false | true;
+            viewAllButtonText: string | null;
+            products: Array<
+              | {
+                  _id: string;
+                  _type: "buses";
+                  title: string | null;
+                  description: string | null;
+                  slug: string | null;
+                  category: "interurbano" | "urbano" | null;
+                  image: {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    media?: unknown;
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                    alt: string | "Image-Broken";
+                    blurData: string | null;
+                    dominantColor: string | null;
+                  } | null;
+                }
+              | {
+                  _id: string;
+                  _type: "camiones";
+                  title: string | null;
+                  description: string | null;
+                  slug: string | null;
+                  category:
+                    | "construccion-y-mineria"
+                    | "distribucion-urbana-y-regional"
+                    | "forestal"
+                    | "larga-distancia"
+                    | "usados"
+                    | "volvo-electric"
+                    | null;
+                  image: {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    media?: unknown;
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                    alt: string | "Image-Broken";
+                    blurData: string | null;
+                    dominantColor: string | null;
+                  } | null;
+                }
+              | {
+                  _id: string;
+                  _type: "motoresPenta";
+                  title: string | null;
+                  description: string | null;
+                  slug: string | null;
+                  category:
+                    | "accesorios"
+                    | "motores-industriales"
+                    | "motores-marinos"
+                    | null;
+                  image: {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    media?: unknown;
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                    alt: string | "Image-Broken";
+                    blurData: string | null;
+                    dominantColor: string | null;
+                  } | null;
+                }
+            >;
+          }
+        | {
+            _key: string;
             _type: "specificationsTable";
             title: string | null;
             description: string | null;
@@ -11062,6 +12120,61 @@ export type QueryCamionOrPageBySlugResult =
                   }
                 | {
                     title: string | null;
+                    subtitle: string | null;
+                    displayMode: "curated" | "latest" | null;
+                    blogCount: "1" | "2" | "3" | null;
+                    blogs: Array<{
+                      _type: "blog";
+                      _id: string;
+                      title: string | null;
+                      description: string | null;
+                      slug: string | null;
+                      richText: RichText | null;
+                      orderRank: string | null;
+                      image: {
+                        asset?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                        };
+                        media?: unknown;
+                        hotspot?: SanityImageHotspot;
+                        crop?: SanityImageCrop;
+                        _type: "image";
+                        alt: string | "Image-Broken";
+                        blurData: string | null;
+                        dominantColor: string | null;
+                      } | null;
+                      publishedAt: string | null;
+                      authors: {
+                        _id: string;
+                        name: string | null;
+                        position: string | null;
+                        image: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          media?: unknown;
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                          alt: string | "Image-Broken";
+                          blurData: string | null;
+                          dominantColor: string | null;
+                        } | null;
+                      } | null;
+                    }> | null;
+                    showViewAllButton: false | true;
+                    buttonText: string | null;
+                    _type: "featuredBlogs";
+                    _key: string;
+                  }
+                | {
+                    title: string | null;
                     description: string | null;
                     form: {
                       _id: string;
@@ -11369,6 +12482,38 @@ export type QueryCamionOrPageBySlugResult =
                     _key: string;
                   }
                 | {
+                    title?: string;
+                    headingLevel?: "h1" | "h2" | "h3" | "h4";
+                    content?: Array<{
+                      children?: Array<{
+                        marks?: Array<string>;
+                        text?: string;
+                        _type: "span";
+                        _key: string;
+                      }>;
+                      style?:
+                        | "blockquote"
+                        | "h1"
+                        | "h2"
+                        | "h3"
+                        | "h4"
+                        | "h5"
+                        | "h6"
+                        | "normal";
+                      listItem?: "bullet" | "number";
+                      markDefs?: Array<{
+                        href?: string;
+                        _type: "link";
+                        _key: string;
+                      }>;
+                      level?: number;
+                      _type: "block";
+                      _key: string;
+                    }>;
+                    _type: "infoSection";
+                    _key: string;
+                  }
+                | {
                     badge?: string;
                     title?: string;
                     richText: Array<
@@ -11470,6 +12615,28 @@ export type QueryCamionOrPageBySlugResult =
                       href: string | null;
                     }> | null;
                     _type: "mainHero";
+                    _key: string;
+                  }
+                | {
+                    title?: string;
+                    description?: string;
+                    productType?: "buses" | "camiones" | "motoresPenta";
+                    category?:
+                      | "accesorios"
+                      | "construccion-y-mineria"
+                      | "distribucion-urbana-y-regional"
+                      | "forestal"
+                      | "interurbano"
+                      | "larga-distancia"
+                      | "motores-industriales"
+                      | "motores-marinos"
+                      | "urbano"
+                      | "usados"
+                      | "volvo-electric";
+                    displayMode?: "grid" | "list";
+                    showViewAllButton?: "no" | "yes";
+                    viewAllButtonText?: string;
+                    _type: "productCategoryListing";
                     _key: string;
                   }
                 | {
@@ -12527,6 +13694,111 @@ export type QueryBusOrPageBySlugResult =
           }
         | {
             _key: string;
+            _type: "productCategoryListing";
+            title: string | null;
+            description: string | null;
+            productType: "buses" | "camiones" | "motoresPenta" | null;
+            category:
+              | "accesorios"
+              | "construccion-y-mineria"
+              | "distribucion-urbana-y-regional"
+              | "forestal"
+              | "interurbano"
+              | "larga-distancia"
+              | "motores-industriales"
+              | "motores-marinos"
+              | "urbano"
+              | "usados"
+              | "volvo-electric"
+              | null;
+            displayMode: "grid" | "list" | null;
+            showViewAllButton: false | true;
+            viewAllButtonText: string | null;
+            products: Array<
+              | {
+                  _id: string;
+                  _type: "buses";
+                  title: string | null;
+                  description: string | null;
+                  slug: string | null;
+                  category: "interurbano" | "urbano" | null;
+                  image: {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    media?: unknown;
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                    alt: string | "Image-Broken";
+                    blurData: string | null;
+                    dominantColor: string | null;
+                  } | null;
+                }
+              | {
+                  _id: string;
+                  _type: "camiones";
+                  title: string | null;
+                  description: string | null;
+                  slug: string | null;
+                  category:
+                    | "construccion-y-mineria"
+                    | "distribucion-urbana-y-regional"
+                    | "forestal"
+                    | "larga-distancia"
+                    | "usados"
+                    | "volvo-electric"
+                    | null;
+                  image: {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    media?: unknown;
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                    alt: string | "Image-Broken";
+                    blurData: string | null;
+                    dominantColor: string | null;
+                  } | null;
+                }
+              | {
+                  _id: string;
+                  _type: "motoresPenta";
+                  title: string | null;
+                  description: string | null;
+                  slug: string | null;
+                  category:
+                    | "accesorios"
+                    | "motores-industriales"
+                    | "motores-marinos"
+                    | null;
+                  image: {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    media?: unknown;
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                    alt: string | "Image-Broken";
+                    blurData: string | null;
+                    dominantColor: string | null;
+                  } | null;
+                }
+            >;
+          }
+        | {
+            _key: string;
             _type: "specificationsTable";
             title: string | null;
             description: string | null;
@@ -12964,6 +14236,61 @@ export type QueryBusOrPageBySlugResult =
                   }
                 | {
                     title: string | null;
+                    subtitle: string | null;
+                    displayMode: "curated" | "latest" | null;
+                    blogCount: "1" | "2" | "3" | null;
+                    blogs: Array<{
+                      _type: "blog";
+                      _id: string;
+                      title: string | null;
+                      description: string | null;
+                      slug: string | null;
+                      richText: RichText | null;
+                      orderRank: string | null;
+                      image: {
+                        asset?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                        };
+                        media?: unknown;
+                        hotspot?: SanityImageHotspot;
+                        crop?: SanityImageCrop;
+                        _type: "image";
+                        alt: string | "Image-Broken";
+                        blurData: string | null;
+                        dominantColor: string | null;
+                      } | null;
+                      publishedAt: string | null;
+                      authors: {
+                        _id: string;
+                        name: string | null;
+                        position: string | null;
+                        image: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          media?: unknown;
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                          alt: string | "Image-Broken";
+                          blurData: string | null;
+                          dominantColor: string | null;
+                        } | null;
+                      } | null;
+                    }> | null;
+                    showViewAllButton: false | true;
+                    buttonText: string | null;
+                    _type: "featuredBlogs";
+                    _key: string;
+                  }
+                | {
+                    title: string | null;
                     description: string | null;
                     form: {
                       _id: string;
@@ -13271,6 +14598,38 @@ export type QueryBusOrPageBySlugResult =
                     _key: string;
                   }
                 | {
+                    title?: string;
+                    headingLevel?: "h1" | "h2" | "h3" | "h4";
+                    content?: Array<{
+                      children?: Array<{
+                        marks?: Array<string>;
+                        text?: string;
+                        _type: "span";
+                        _key: string;
+                      }>;
+                      style?:
+                        | "blockquote"
+                        | "h1"
+                        | "h2"
+                        | "h3"
+                        | "h4"
+                        | "h5"
+                        | "h6"
+                        | "normal";
+                      listItem?: "bullet" | "number";
+                      markDefs?: Array<{
+                        href?: string;
+                        _type: "link";
+                        _key: string;
+                      }>;
+                      level?: number;
+                      _type: "block";
+                      _key: string;
+                    }>;
+                    _type: "infoSection";
+                    _key: string;
+                  }
+                | {
                     badge?: string;
                     title?: string;
                     richText: Array<
@@ -13372,6 +14731,28 @@ export type QueryBusOrPageBySlugResult =
                       href: string | null;
                     }> | null;
                     _type: "mainHero";
+                    _key: string;
+                  }
+                | {
+                    title?: string;
+                    description?: string;
+                    productType?: "buses" | "camiones" | "motoresPenta";
+                    category?:
+                      | "accesorios"
+                      | "construccion-y-mineria"
+                      | "distribucion-urbana-y-regional"
+                      | "forestal"
+                      | "interurbano"
+                      | "larga-distancia"
+                      | "motores-industriales"
+                      | "motores-marinos"
+                      | "urbano"
+                      | "usados"
+                      | "volvo-electric";
+                    displayMode?: "grid" | "list";
+                    showViewAllButton?: "no" | "yes";
+                    viewAllButtonText?: string;
+                    _type: "productCategoryListing";
                     _key: string;
                   }
                 | {
@@ -14289,6 +15670,111 @@ export type QueryBusOrPageBySlugResult =
           }
         | {
             _key: string;
+            _type: "productCategoryListing";
+            title: string | null;
+            description: string | null;
+            productType: "buses" | "camiones" | "motoresPenta" | null;
+            category:
+              | "accesorios"
+              | "construccion-y-mineria"
+              | "distribucion-urbana-y-regional"
+              | "forestal"
+              | "interurbano"
+              | "larga-distancia"
+              | "motores-industriales"
+              | "motores-marinos"
+              | "urbano"
+              | "usados"
+              | "volvo-electric"
+              | null;
+            displayMode: "grid" | "list" | null;
+            showViewAllButton: false | true;
+            viewAllButtonText: string | null;
+            products: Array<
+              | {
+                  _id: string;
+                  _type: "buses";
+                  title: string | null;
+                  description: string | null;
+                  slug: string | null;
+                  category: "interurbano" | "urbano" | null;
+                  image: {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    media?: unknown;
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                    alt: string | "Image-Broken";
+                    blurData: string | null;
+                    dominantColor: string | null;
+                  } | null;
+                }
+              | {
+                  _id: string;
+                  _type: "camiones";
+                  title: string | null;
+                  description: string | null;
+                  slug: string | null;
+                  category:
+                    | "construccion-y-mineria"
+                    | "distribucion-urbana-y-regional"
+                    | "forestal"
+                    | "larga-distancia"
+                    | "usados"
+                    | "volvo-electric"
+                    | null;
+                  image: {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    media?: unknown;
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                    alt: string | "Image-Broken";
+                    blurData: string | null;
+                    dominantColor: string | null;
+                  } | null;
+                }
+              | {
+                  _id: string;
+                  _type: "motoresPenta";
+                  title: string | null;
+                  description: string | null;
+                  slug: string | null;
+                  category:
+                    | "accesorios"
+                    | "motores-industriales"
+                    | "motores-marinos"
+                    | null;
+                  image: {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    media?: unknown;
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                    alt: string | "Image-Broken";
+                    blurData: string | null;
+                    dominantColor: string | null;
+                  } | null;
+                }
+            >;
+          }
+        | {
+            _key: string;
             _type: "specificationsTable";
             title: string | null;
             description: string | null;
@@ -14726,6 +16212,61 @@ export type QueryBusOrPageBySlugResult =
                   }
                 | {
                     title: string | null;
+                    subtitle: string | null;
+                    displayMode: "curated" | "latest" | null;
+                    blogCount: "1" | "2" | "3" | null;
+                    blogs: Array<{
+                      _type: "blog";
+                      _id: string;
+                      title: string | null;
+                      description: string | null;
+                      slug: string | null;
+                      richText: RichText | null;
+                      orderRank: string | null;
+                      image: {
+                        asset?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                        };
+                        media?: unknown;
+                        hotspot?: SanityImageHotspot;
+                        crop?: SanityImageCrop;
+                        _type: "image";
+                        alt: string | "Image-Broken";
+                        blurData: string | null;
+                        dominantColor: string | null;
+                      } | null;
+                      publishedAt: string | null;
+                      authors: {
+                        _id: string;
+                        name: string | null;
+                        position: string | null;
+                        image: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          media?: unknown;
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                          alt: string | "Image-Broken";
+                          blurData: string | null;
+                          dominantColor: string | null;
+                        } | null;
+                      } | null;
+                    }> | null;
+                    showViewAllButton: false | true;
+                    buttonText: string | null;
+                    _type: "featuredBlogs";
+                    _key: string;
+                  }
+                | {
+                    title: string | null;
                     description: string | null;
                     form: {
                       _id: string;
@@ -15033,6 +16574,38 @@ export type QueryBusOrPageBySlugResult =
                     _key: string;
                   }
                 | {
+                    title?: string;
+                    headingLevel?: "h1" | "h2" | "h3" | "h4";
+                    content?: Array<{
+                      children?: Array<{
+                        marks?: Array<string>;
+                        text?: string;
+                        _type: "span";
+                        _key: string;
+                      }>;
+                      style?:
+                        | "blockquote"
+                        | "h1"
+                        | "h2"
+                        | "h3"
+                        | "h4"
+                        | "h5"
+                        | "h6"
+                        | "normal";
+                      listItem?: "bullet" | "number";
+                      markDefs?: Array<{
+                        href?: string;
+                        _type: "link";
+                        _key: string;
+                      }>;
+                      level?: number;
+                      _type: "block";
+                      _key: string;
+                    }>;
+                    _type: "infoSection";
+                    _key: string;
+                  }
+                | {
                     badge?: string;
                     title?: string;
                     richText: Array<
@@ -15134,6 +16707,28 @@ export type QueryBusOrPageBySlugResult =
                       href: string | null;
                     }> | null;
                     _type: "mainHero";
+                    _key: string;
+                  }
+                | {
+                    title?: string;
+                    description?: string;
+                    productType?: "buses" | "camiones" | "motoresPenta";
+                    category?:
+                      | "accesorios"
+                      | "construccion-y-mineria"
+                      | "distribucion-urbana-y-regional"
+                      | "forestal"
+                      | "interurbano"
+                      | "larga-distancia"
+                      | "motores-industriales"
+                      | "motores-marinos"
+                      | "urbano"
+                      | "usados"
+                      | "volvo-electric";
+                    displayMode?: "grid" | "list";
+                    showViewAllButton?: "no" | "yes";
+                    viewAllButtonText?: string;
+                    _type: "productCategoryListing";
                     _key: string;
                   }
                 | {
@@ -16195,6 +17790,111 @@ export type QueryMotorPentaOrPageBySlugResult =
           }
         | {
             _key: string;
+            _type: "productCategoryListing";
+            title: string | null;
+            description: string | null;
+            productType: "buses" | "camiones" | "motoresPenta" | null;
+            category:
+              | "accesorios"
+              | "construccion-y-mineria"
+              | "distribucion-urbana-y-regional"
+              | "forestal"
+              | "interurbano"
+              | "larga-distancia"
+              | "motores-industriales"
+              | "motores-marinos"
+              | "urbano"
+              | "usados"
+              | "volvo-electric"
+              | null;
+            displayMode: "grid" | "list" | null;
+            showViewAllButton: false | true;
+            viewAllButtonText: string | null;
+            products: Array<
+              | {
+                  _id: string;
+                  _type: "buses";
+                  title: string | null;
+                  description: string | null;
+                  slug: string | null;
+                  category: "interurbano" | "urbano" | null;
+                  image: {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    media?: unknown;
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                    alt: string | "Image-Broken";
+                    blurData: string | null;
+                    dominantColor: string | null;
+                  } | null;
+                }
+              | {
+                  _id: string;
+                  _type: "camiones";
+                  title: string | null;
+                  description: string | null;
+                  slug: string | null;
+                  category:
+                    | "construccion-y-mineria"
+                    | "distribucion-urbana-y-regional"
+                    | "forestal"
+                    | "larga-distancia"
+                    | "usados"
+                    | "volvo-electric"
+                    | null;
+                  image: {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    media?: unknown;
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                    alt: string | "Image-Broken";
+                    blurData: string | null;
+                    dominantColor: string | null;
+                  } | null;
+                }
+              | {
+                  _id: string;
+                  _type: "motoresPenta";
+                  title: string | null;
+                  description: string | null;
+                  slug: string | null;
+                  category:
+                    | "accesorios"
+                    | "motores-industriales"
+                    | "motores-marinos"
+                    | null;
+                  image: {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    media?: unknown;
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                    alt: string | "Image-Broken";
+                    blurData: string | null;
+                    dominantColor: string | null;
+                  } | null;
+                }
+            >;
+          }
+        | {
+            _key: string;
             _type: "specificationsTable";
             title: string | null;
             description: string | null;
@@ -16632,6 +18332,61 @@ export type QueryMotorPentaOrPageBySlugResult =
                   }
                 | {
                     title: string | null;
+                    subtitle: string | null;
+                    displayMode: "curated" | "latest" | null;
+                    blogCount: "1" | "2" | "3" | null;
+                    blogs: Array<{
+                      _type: "blog";
+                      _id: string;
+                      title: string | null;
+                      description: string | null;
+                      slug: string | null;
+                      richText: RichText | null;
+                      orderRank: string | null;
+                      image: {
+                        asset?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                        };
+                        media?: unknown;
+                        hotspot?: SanityImageHotspot;
+                        crop?: SanityImageCrop;
+                        _type: "image";
+                        alt: string | "Image-Broken";
+                        blurData: string | null;
+                        dominantColor: string | null;
+                      } | null;
+                      publishedAt: string | null;
+                      authors: {
+                        _id: string;
+                        name: string | null;
+                        position: string | null;
+                        image: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          media?: unknown;
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                          alt: string | "Image-Broken";
+                          blurData: string | null;
+                          dominantColor: string | null;
+                        } | null;
+                      } | null;
+                    }> | null;
+                    showViewAllButton: false | true;
+                    buttonText: string | null;
+                    _type: "featuredBlogs";
+                    _key: string;
+                  }
+                | {
+                    title: string | null;
                     description: string | null;
                     form: {
                       _id: string;
@@ -16939,6 +18694,38 @@ export type QueryMotorPentaOrPageBySlugResult =
                     _key: string;
                   }
                 | {
+                    title?: string;
+                    headingLevel?: "h1" | "h2" | "h3" | "h4";
+                    content?: Array<{
+                      children?: Array<{
+                        marks?: Array<string>;
+                        text?: string;
+                        _type: "span";
+                        _key: string;
+                      }>;
+                      style?:
+                        | "blockquote"
+                        | "h1"
+                        | "h2"
+                        | "h3"
+                        | "h4"
+                        | "h5"
+                        | "h6"
+                        | "normal";
+                      listItem?: "bullet" | "number";
+                      markDefs?: Array<{
+                        href?: string;
+                        _type: "link";
+                        _key: string;
+                      }>;
+                      level?: number;
+                      _type: "block";
+                      _key: string;
+                    }>;
+                    _type: "infoSection";
+                    _key: string;
+                  }
+                | {
                     badge?: string;
                     title?: string;
                     richText: Array<
@@ -17040,6 +18827,28 @@ export type QueryMotorPentaOrPageBySlugResult =
                       href: string | null;
                     }> | null;
                     _type: "mainHero";
+                    _key: string;
+                  }
+                | {
+                    title?: string;
+                    description?: string;
+                    productType?: "buses" | "camiones" | "motoresPenta";
+                    category?:
+                      | "accesorios"
+                      | "construccion-y-mineria"
+                      | "distribucion-urbana-y-regional"
+                      | "forestal"
+                      | "interurbano"
+                      | "larga-distancia"
+                      | "motores-industriales"
+                      | "motores-marinos"
+                      | "urbano"
+                      | "usados"
+                      | "volvo-electric";
+                    displayMode?: "grid" | "list";
+                    showViewAllButton?: "no" | "yes";
+                    viewAllButtonText?: string;
+                    _type: "productCategoryListing";
                     _key: string;
                   }
                 | {
@@ -17957,6 +19766,111 @@ export type QueryMotorPentaOrPageBySlugResult =
           }
         | {
             _key: string;
+            _type: "productCategoryListing";
+            title: string | null;
+            description: string | null;
+            productType: "buses" | "camiones" | "motoresPenta" | null;
+            category:
+              | "accesorios"
+              | "construccion-y-mineria"
+              | "distribucion-urbana-y-regional"
+              | "forestal"
+              | "interurbano"
+              | "larga-distancia"
+              | "motores-industriales"
+              | "motores-marinos"
+              | "urbano"
+              | "usados"
+              | "volvo-electric"
+              | null;
+            displayMode: "grid" | "list" | null;
+            showViewAllButton: false | true;
+            viewAllButtonText: string | null;
+            products: Array<
+              | {
+                  _id: string;
+                  _type: "buses";
+                  title: string | null;
+                  description: string | null;
+                  slug: string | null;
+                  category: "interurbano" | "urbano" | null;
+                  image: {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    media?: unknown;
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                    alt: string | "Image-Broken";
+                    blurData: string | null;
+                    dominantColor: string | null;
+                  } | null;
+                }
+              | {
+                  _id: string;
+                  _type: "camiones";
+                  title: string | null;
+                  description: string | null;
+                  slug: string | null;
+                  category:
+                    | "construccion-y-mineria"
+                    | "distribucion-urbana-y-regional"
+                    | "forestal"
+                    | "larga-distancia"
+                    | "usados"
+                    | "volvo-electric"
+                    | null;
+                  image: {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    media?: unknown;
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                    alt: string | "Image-Broken";
+                    blurData: string | null;
+                    dominantColor: string | null;
+                  } | null;
+                }
+              | {
+                  _id: string;
+                  _type: "motoresPenta";
+                  title: string | null;
+                  description: string | null;
+                  slug: string | null;
+                  category:
+                    | "accesorios"
+                    | "motores-industriales"
+                    | "motores-marinos"
+                    | null;
+                  image: {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    media?: unknown;
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    _type: "image";
+                    alt: string | "Image-Broken";
+                    blurData: string | null;
+                    dominantColor: string | null;
+                  } | null;
+                }
+            >;
+          }
+        | {
+            _key: string;
             _type: "specificationsTable";
             title: string | null;
             description: string | null;
@@ -18394,6 +20308,61 @@ export type QueryMotorPentaOrPageBySlugResult =
                   }
                 | {
                     title: string | null;
+                    subtitle: string | null;
+                    displayMode: "curated" | "latest" | null;
+                    blogCount: "1" | "2" | "3" | null;
+                    blogs: Array<{
+                      _type: "blog";
+                      _id: string;
+                      title: string | null;
+                      description: string | null;
+                      slug: string | null;
+                      richText: RichText | null;
+                      orderRank: string | null;
+                      image: {
+                        asset?: {
+                          _ref: string;
+                          _type: "reference";
+                          _weak?: boolean;
+                          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                        };
+                        media?: unknown;
+                        hotspot?: SanityImageHotspot;
+                        crop?: SanityImageCrop;
+                        _type: "image";
+                        alt: string | "Image-Broken";
+                        blurData: string | null;
+                        dominantColor: string | null;
+                      } | null;
+                      publishedAt: string | null;
+                      authors: {
+                        _id: string;
+                        name: string | null;
+                        position: string | null;
+                        image: {
+                          asset?: {
+                            _ref: string;
+                            _type: "reference";
+                            _weak?: boolean;
+                            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                          };
+                          media?: unknown;
+                          hotspot?: SanityImageHotspot;
+                          crop?: SanityImageCrop;
+                          _type: "image";
+                          alt: string | "Image-Broken";
+                          blurData: string | null;
+                          dominantColor: string | null;
+                        } | null;
+                      } | null;
+                    }> | null;
+                    showViewAllButton: false | true;
+                    buttonText: string | null;
+                    _type: "featuredBlogs";
+                    _key: string;
+                  }
+                | {
+                    title: string | null;
                     description: string | null;
                     form: {
                       _id: string;
@@ -18701,6 +20670,38 @@ export type QueryMotorPentaOrPageBySlugResult =
                     _key: string;
                   }
                 | {
+                    title?: string;
+                    headingLevel?: "h1" | "h2" | "h3" | "h4";
+                    content?: Array<{
+                      children?: Array<{
+                        marks?: Array<string>;
+                        text?: string;
+                        _type: "span";
+                        _key: string;
+                      }>;
+                      style?:
+                        | "blockquote"
+                        | "h1"
+                        | "h2"
+                        | "h3"
+                        | "h4"
+                        | "h5"
+                        | "h6"
+                        | "normal";
+                      listItem?: "bullet" | "number";
+                      markDefs?: Array<{
+                        href?: string;
+                        _type: "link";
+                        _key: string;
+                      }>;
+                      level?: number;
+                      _type: "block";
+                      _key: string;
+                    }>;
+                    _type: "infoSection";
+                    _key: string;
+                  }
+                | {
                     badge?: string;
                     title?: string;
                     richText: Array<
@@ -18802,6 +20803,28 @@ export type QueryMotorPentaOrPageBySlugResult =
                       href: string | null;
                     }> | null;
                     _type: "mainHero";
+                    _key: string;
+                  }
+                | {
+                    title?: string;
+                    description?: string;
+                    productType?: "buses" | "camiones" | "motoresPenta";
+                    category?:
+                      | "accesorios"
+                      | "construccion-y-mineria"
+                      | "distribucion-urbana-y-regional"
+                      | "forestal"
+                      | "interurbano"
+                      | "larga-distancia"
+                      | "motores-industriales"
+                      | "motores-marinos"
+                      | "urbano"
+                      | "usados"
+                      | "volvo-electric";
+                    displayMode?: "grid" | "list";
+                    showViewAllButton?: "no" | "yes";
+                    viewAllButtonText?: string;
+                    _type: "productCategoryListing";
                     _key: string;
                   }
                 | {
