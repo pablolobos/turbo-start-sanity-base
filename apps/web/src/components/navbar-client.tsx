@@ -268,16 +268,18 @@ function NavbarColumnLink({ column }: { column: NavbarLinkType }) {
   );
 }
 
-function getColumnLayoutClass(itemCount: number) {
+function getColumnLayoutClass(itemCount: number, hasGroups: boolean) {
+  if (hasGroups) return "flex gap-8 w-fit  w-full justify-between flex-wrap min-w-[500px]";
   if (itemCount <= 4) return "w-80";
   if (itemCount <= 8) return "grid grid-cols-2 gap-2 w-[500px]";
   return "grid grid-cols-3 gap-2 w-[700px]";
 }
 
 function NavbarColumn({ column }: { column: NavbarColumnType }) {
+  const hasGroups = column.links?.some(link => link.type === "group") ?? false;
   const layoutClass = useMemo(
-    () => getColumnLayoutClass(column.links?.length ?? 0),
-    [column.links?.length],
+    () => getColumnLayoutClass(column.links?.length ?? 0, hasGroups),
+    [column.links?.length, hasGroups],
   );
   const path = usePathname();
 
