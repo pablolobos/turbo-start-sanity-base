@@ -12,8 +12,8 @@ type Props = {
 };
 
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { PageBuilder } from "@/components/pagebuilder";
 import { CotizadorButton } from "@/components/cotizador-button";
-import { PageBuilderWrapper } from "@/components/pagebuilder-wrapper";
 
 import { client } from "@/lib/sanity/client";
 import { sanityFetch } from "@/lib/sanity/live";
@@ -202,7 +202,7 @@ export default async function MotorPentaPage({
                     </div>
                     {/* Render page builder content for motors */}
                     {pageBuilder && pageBuilder.length > 0 &&
-                        <PageBuilderWrapper pageBuilder={pageBuilder} id={_id} type={_type} />
+                        <PageBuilder pageBuilder={pageBuilder} id={_id} type={_type} />
                     }
                 </>
             ) : (
@@ -212,7 +212,7 @@ export default async function MotorPentaPage({
                         <CotizadorButton buttonVariant="default" pageTitle={title} />
                     </div>
                     {pageBuilder && pageBuilder.length > 0 &&
-                        <PageBuilderWrapper pageBuilder={pageBuilder} id={_id} type={_type} />
+                        <PageBuilder pageBuilder={pageBuilder} id={_id} type={_type} />
                     }
                 </>
             )}

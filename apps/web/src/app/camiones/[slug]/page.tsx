@@ -12,18 +12,15 @@ type Props = {
 };
 
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { PageBuilder } from "@/components/pagebuilder";
 import { TitleDescriptionBlock } from "@/components/title-description-block";
 import { CotizadorButton } from "@/components/cotizador-button";
-import { PageBuilderWrapper } from "@/components/pagebuilder-wrapper";
+import { ProductListing } from "@/components/sections/product-listing";
 
 import { client } from "@/lib/sanity/client";
 import { sanityFetch } from "@/lib/sanity/live";
 import { queryCamionOrPageBySlug, queryCamionesPaths } from "@/lib/sanity/query";
 import { getMetaData } from "@/lib/seo";
-
-// Create a server component that renders a client component
-// Remove the dynamic import with {ssr: false}
-// Instead, we'll create a wrapper component
 
 // Define the structure for a breadcrumb item
 interface BreadcrumbItem {
@@ -133,6 +130,8 @@ export default async function CamionPage({
 
     // Get taxonomy data from the document if it exists
     let taxonomyData = null;
+    let productData = null;
+
     if (_type === "camiones" && data.taxonomias) {
         // Fetch the taxonomy details
         const taxonomyRef = data.taxonomias._ref;
@@ -155,6 +154,9 @@ export default async function CamionPage({
                         iri: taxonomyDoc.iri?.replace(/\s+/g, '-')
                     };
                 }
+
+                // Pre-fetch product data for static generation
+                productData = await fetchCategoryProducts(taxonomyRef, "camiones");
             } catch (error) {
                 console.error("Error fetching taxonomy data:", error);
                 // Fallback to default taxonomy data
@@ -206,10 +208,36 @@ export default async function CamionPage({
                             </div>
                         </div>
                     )}
-                    {/* Render page builder content for trucks */}
-                    {pageBuilder && pageBuilder.length > 0 &&
-                        <PageBuilderWrapper pageBuilder={pageBuilder} id={_id} type={_type} />
-                    }
+
+                    {/* Check if a block in pageBuilder is ProductListing */}
+                    {pageBuilder && pageBuilder.length > 0 ? (
+                        pageBuilder.some((block: any) => block._type === 'productListing') ? (
+                            <PageBuilder pageBuilder={pageBuilder.map((block: any) => {
+                                // If it's a ProductListing, pass the initial data
+                                if (block._type === 'productListing' && productData) {
+                                    return {
+                                        ...block,
+                                        initialData: productData
+                                    };
+                                }
+                                return block;
+                            })} id={_id} type={_type} />
+                        ) : (
+                            <PageBuilder pageBuilder={pageBuilder} id={_id} type={_type} />
+                        )
+                    ) : null}
+
+                    {/* If there's taxonomy data but no ProductListing in pageBuilder, add one */}
+                    {taxonomyData && (!pageBuilder || !pageBuilder.some((block: any) => block._type === 'productListing')) && (
+                        <div className="mt-12">
+                            {productData && <ProductListing
+                                productType="camiones"
+                                taxonomyFilter={{ _ref: data.taxonomias._ref }}
+                                title={`Productos ${taxonomyData.label}`}
+                                initialData={productData}
+                            />}
+                        </div>
+                    )}
                 </>
             ) : (
                 // Default rendering for 'page' type using PageBuilder
@@ -218,10 +246,131 @@ export default async function CamionPage({
                         <CotizadorButton buttonVariant="default" pageTitle={title} />
                     </div>
                     {pageBuilder && pageBuilder.length > 0 &&
-                        <PageBuilderWrapper pageBuilder={pageBuilder} id={_id} type={_type} />
+                        <PageBuilder pageBuilder={pageBuilder} id={_id} type={_type} />
                     }
                 </>
             )}
         </>
     );
+}
+
+// Function to fetch product data for static generation
+async function fetchCategoryProducts(taxonomyId: string, productType: 'camiones' | 'buses' | 'motoresPenta') {
+    const productsQuery = `*[
+        _type == $productType && 
+        taxonomias._ref == $taxonomyId
+    ] | order(title asc) {
+        _id,
+        title,
+        "slug": slug.current,
+        description,
+        "image": image {
+            "asset": asset->,
+            "_type": "image"
+        },
+        "taxonomyDetails": coalesce(
+            taxonomias->{
+                "_id": _id,
+                "prefLabel": prefLabel,
+                "conceptId": conceptId
+            }, 
+            {"_id": $taxonomyId, "prefLabel": "Products", "conceptId": ""}
+        )
+    }`;
+
+    try {
+        const products = await client.fetch(productsQuery, {
+            productType,
+            taxonomyId
+        });
+
+        if (products && products.length > 0) {
+            // Extract taxonomy details from the first product
+            const taxonomyData = products[0].taxonomyDetails || {
+                _id: taxonomyId,
+                prefLabel: "Products",
+                conceptId: ""
+            };
+
+            // Create a category for the products
+            const category = {
+                _id: taxonomyData._id,
+                prefLabel: taxonomyData.prefLabel || "Products",
+                conceptId: taxonomyData.conceptId || "",
+                products: products.map((p: any) => ({
+                    _id: p._id,
+                    title: p.title,
+                    slug: p.slug,
+                    description: p.description,
+                    image: p.image,
+                    taxonomy: {
+                        prefLabel: taxonomyData.prefLabel,
+                        conceptId: taxonomyData.conceptId
+                    }
+                }))
+            };
+
+            return {
+                title: taxonomyData.prefLabel,
+                productType,
+                taxonomyId,
+                categories: [category]
+            };
+        }
+
+        // Fallback if specific taxonomy products not found
+        const allProductsQuery = `*[
+            _type == $productType
+        ] | order(title asc)[0...10]{
+            _id,
+            title,
+            "slug": slug.current,
+            description,
+            "image": image {
+                "asset": asset->,
+                "_type": "image"
+            }
+        }`;
+
+        const allProducts = await client.fetch(allProductsQuery, { productType });
+
+        if (allProducts && allProducts.length > 0) {
+            return {
+                title: "All Products",
+                productType,
+                taxonomyId,
+                categories: [{
+                    _id: 'all',
+                    prefLabel: "All Products",
+                    conceptId: "",
+                    products: allProducts.map((p: any) => ({
+                        _id: p._id,
+                        title: p.title,
+                        slug: p.slug,
+                        description: p.description,
+                        image: p.image,
+                        taxonomy: {
+                            prefLabel: "All Products",
+                            conceptId: ""
+                        }
+                    }))
+                }]
+            };
+        }
+
+        return {
+            title: "",
+            productType,
+            taxonomyId,
+            categories: []
+        };
+    } catch (error) {
+        console.error("Error pre-fetching products:", error);
+        return {
+            title: "",
+            productType,
+            taxonomyId,
+            categories: []
+        };
+    }
 } 

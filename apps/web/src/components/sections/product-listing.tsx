@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { ProductCard } from "@/components/product-card";
 import { client, clientFetch } from "@/lib/sanity/client";
+import { useSearchParams } from 'next/navigation';
 
 interface ProductListingProps {
     title?: string;
@@ -10,6 +11,8 @@ interface ProductListingProps {
     taxonomyFilter?: {
         _ref: string;
     };
+    // New prop for initial/static data
+    initialData?: ComponentData;
 }
 
 // Define a more specific interface for the processed data
@@ -37,12 +40,36 @@ interface ComponentData {
     categories: ProcessedCategory[];
 }
 
+// Cache for product data to prevent redundant fetches
+const dataCache = new Map<string, ComponentData>();
+
 export function ProductListing(props: ProductListingProps) {
-    const [loading, setLoading] = useState(true);
+    // Use initialData if provided
+    const [loading, setLoading] = useState(!props.initialData);
     const [error, setError] = useState<string | null>(null);
-    const [componentData, setComponentData] = useState<ComponentData | undefined>(undefined);
+    const [componentData, setComponentData] = useState<ComponentData | undefined>(props.initialData);
+
+    // Use search params to detect navigation changes
+    const searchParams = useSearchParams();
+
+    // Key used for caching
+    const cacheKey = `${props.productType}-${props.taxonomyFilter?._ref}`;
 
     useEffect(() => {
+        // If we already have initialData, no need to fetch
+        if (props.initialData) {
+            setComponentData(props.initialData);
+            setLoading(false);
+            return;
+        }
+
+        // Check cache first
+        if (dataCache.has(cacheKey)) {
+            setComponentData(dataCache.get(cacheKey));
+            setLoading(false);
+            return;
+        }
+
         const fetchData = async () => {
             if (!props.productType || !props.taxonomyFilter?._ref) {
                 setError("Missing productType or taxonomyFilter");
@@ -51,12 +78,11 @@ export function ProductListing(props: ProductListingProps) {
             }
 
             try {
-                // Simplified approach: fetch the products directly, don't depend on taxonomy first
-                // This makes it more robust when taxonomies might not be found
+                // More efficient query with projections for only what's needed
                 const productsQuery = `*[
                     _type == $productType && 
                     taxonomias._ref == $taxonomyId
-                ]{
+                ] | order(title asc) {
                     _id,
                     title,
                     "slug": slug.current,
@@ -108,17 +134,21 @@ export function ProductListing(props: ProductListingProps) {
                         }))
                     };
 
-                    setComponentData({
+                    const data = {
                         title: props.title,
                         productType: props.productType,
                         taxonomyId: props.taxonomyFilter._ref,
                         categories: [category]
-                    });
+                    };
+
+                    // Store in cache
+                    dataCache.set(cacheKey, data);
+                    setComponentData(data);
                 } else {
-                    // If no products found, fetch all products of the type as a fallback
+                    // More streamlined fallback logic for all products 
                     const allProductsQuery = `*[
                         _type == $productType
-                    ][0...10]{
+                    ] | order(title asc)[0...10]{
                         _id,
                         title,
                         "slug": slug.current,
@@ -136,7 +166,7 @@ export function ProductListing(props: ProductListingProps) {
                     const allProducts = allProductsResult?.data || [];
 
                     if (allProducts && allProducts.length > 0) {
-                        // Create a generic category for all products
+                        // Category for all products
                         const category: ProcessedCategory = {
                             _id: 'all',
                             prefLabel: "All Products",
@@ -154,20 +184,28 @@ export function ProductListing(props: ProductListingProps) {
                             }))
                         };
 
-                        setComponentData({
+                        const data = {
                             title: props.title,
                             productType: props.productType,
                             taxonomyId: props.taxonomyFilter._ref,
                             categories: [category]
-                        });
+                        };
+
+                        // Store in cache
+                        dataCache.set(cacheKey, data);
+                        setComponentData(data);
                     } else {
-                        // No products found at all
-                        setComponentData({
+                        // No products found
+                        const data = {
                             title: props.title,
                             productType: props.productType,
                             taxonomyId: props.taxonomyFilter._ref,
                             categories: []
-                        });
+                        };
+
+                        // Store in cache
+                        dataCache.set(cacheKey, data);
+                        setComponentData(data);
                     }
                 }
             } catch (err) {
@@ -180,9 +218,9 @@ export function ProductListing(props: ProductListingProps) {
         };
 
         fetchData();
-    }, [props.productType, props.taxonomyFilter?._ref, props.title]);
+    }, [props.productType, props.taxonomyFilter?._ref, props.title, cacheKey, props.initialData]);
 
-    // Show loading state
+    // Only render loading state on first load
     if (loading) {
         return (
             <section className="py-12 md:py-16 lg:py-20 container">
