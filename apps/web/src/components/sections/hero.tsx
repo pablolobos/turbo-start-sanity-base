@@ -39,7 +39,7 @@ export function HeroBlock({
   const backgroundClasses = getVariantClasses(variant);
 
   return (
-    <section id="hero" className={cn(backgroundClasses, "max-container")}>
+    <section id="hero" className={cn(backgroundClasses, "max-container mt-12")}>
       <div className="mx-auto">
         <div className="items-center content-center lg:grid lg:grid-cols-2">
           <div className="padding-half-left justify-items-start items-center lg:items-start content-stretch gap-4 grid grid-rows-[auto_auto] col-span-1 lg:group-odd/component:col-start-2 row-span-1 row-start-1 text-left">

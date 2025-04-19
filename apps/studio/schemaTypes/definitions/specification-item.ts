@@ -17,9 +17,8 @@ export const specificationItem = defineType({
         defineField({
             name: 'content',
             title: 'Content',
-            type: 'array',
-            of: [{ type: 'block' }],
-            description: 'The specification content with rich text formatting options',
+            type: 'richText',
+            description: 'The specification content with rich text, links, and images',
             validation: (rule) => rule.required().error('Content is required'),
         }),
     ],

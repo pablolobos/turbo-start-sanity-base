@@ -1205,24 +1205,40 @@ export type MainHero = {
 export type SpecificationItem = {
   _type: "specificationItem";
   label?: string;
-  content?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
+  content?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "normal" | "h2" | "h3" | "h4" | "h5" | "h6" | "inline";
+        listItem?: "number" | "bullet";
+        markDefs?: Array<{
+          customLink?: CustomUrl;
+          _type: "customLink";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }
+    | {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        caption?: string;
+        _type: "image";
+        _key: string;
+      }
+  >;
 };
 
 export type GalleryImage = {
@@ -3055,32 +3071,50 @@ export type QueryHomePageDataResult = {
         specifications: Array<{
           _key: string;
           label: string | null;
-          content: Array<{
-            children?: Array<{
-              marks?: Array<string>;
-              text?: string;
-              _type: "span";
-              _key: string;
-            }>;
-            style?:
-              | "blockquote"
-              | "h1"
-              | "h2"
-              | "h3"
-              | "h4"
-              | "h5"
-              | "h6"
-              | "normal";
-            listItem?: "bullet" | "number";
-            markDefs: Array<{
-              href?: string;
-              _type: "link";
-              _key: string;
-            }> | null;
-            level?: number;
-            _type: "block";
-            _key: string;
-          }> | null;
+          content: Array<
+            | {
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h2" | "h3" | "h4" | "h5" | "h6" | "inline" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs: Array<
+                  | {
+                      customLink?: CustomUrl;
+                      _type: "customLink";
+                      _key: string;
+                      openInNewTab: boolean | null;
+                      href: string | "#" | null;
+                    }
+                  | {
+                      customLink?: CustomUrl;
+                      _type: "customLink";
+                      _key: string;
+                    }
+                > | null;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }
+            | {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                caption?: string;
+                _type: "image";
+                _key: string;
+                markDefs: null;
+              }
+          > | null;
         }> | null;
         variant: "bordered" | "compact" | "default" | "striped" | null;
       }
@@ -4845,32 +4879,50 @@ export type QuerySlugPageDataResult = {
         specifications: Array<{
           _key: string;
           label: string | null;
-          content: Array<{
-            children?: Array<{
-              marks?: Array<string>;
-              text?: string;
-              _type: "span";
-              _key: string;
-            }>;
-            style?:
-              | "blockquote"
-              | "h1"
-              | "h2"
-              | "h3"
-              | "h4"
-              | "h5"
-              | "h6"
-              | "normal";
-            listItem?: "bullet" | "number";
-            markDefs: Array<{
-              href?: string;
-              _type: "link";
-              _key: string;
-            }> | null;
-            level?: number;
-            _type: "block";
-            _key: string;
-          }> | null;
+          content: Array<
+            | {
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h2" | "h3" | "h4" | "h5" | "h6" | "inline" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs: Array<
+                  | {
+                      customLink?: CustomUrl;
+                      _type: "customLink";
+                      _key: string;
+                      openInNewTab: boolean | null;
+                      href: string | "#" | null;
+                    }
+                  | {
+                      customLink?: CustomUrl;
+                      _type: "customLink";
+                      _key: string;
+                    }
+                > | null;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }
+            | {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                caption?: string;
+                _type: "image";
+                _key: string;
+                markDefs: null;
+              }
+          > | null;
         }> | null;
         variant: "bordered" | "compact" | "default" | "striped" | null;
       }
@@ -6623,32 +6675,50 @@ export type QueryBlogIndexPageDataResult = {
         specifications: Array<{
           _key: string;
           label: string | null;
-          content: Array<{
-            children?: Array<{
-              marks?: Array<string>;
-              text?: string;
-              _type: "span";
-              _key: string;
-            }>;
-            style?:
-              | "blockquote"
-              | "h1"
-              | "h2"
-              | "h3"
-              | "h4"
-              | "h5"
-              | "h6"
-              | "normal";
-            listItem?: "bullet" | "number";
-            markDefs: Array<{
-              href?: string;
-              _type: "link";
-              _key: string;
-            }> | null;
-            level?: number;
-            _type: "block";
-            _key: string;
-          }> | null;
+          content: Array<
+            | {
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h2" | "h3" | "h4" | "h5" | "h6" | "inline" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs: Array<
+                  | {
+                      customLink?: CustomUrl;
+                      _type: "customLink";
+                      _key: string;
+                      openInNewTab: boolean | null;
+                      href: string | "#" | null;
+                    }
+                  | {
+                      customLink?: CustomUrl;
+                      _type: "customLink";
+                      _key: string;
+                    }
+                > | null;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }
+            | {
+                asset?: {
+                  _ref: string;
+                  _type: "reference";
+                  _weak?: boolean;
+                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                };
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                caption?: string;
+                _type: "image";
+                _key: string;
+                markDefs: null;
+              }
+          > | null;
         }> | null;
         variant: "bordered" | "compact" | "default" | "striped" | null;
       }
@@ -9041,32 +9111,57 @@ export type QueryCamionOrPageBySlugResult =
             specifications: Array<{
               _key: string;
               label: string | null;
-              content: Array<{
-                children?: Array<{
-                  marks?: Array<string>;
-                  text?: string;
-                  _type: "span";
-                  _key: string;
-                }>;
-                style?:
-                  | "blockquote"
-                  | "h1"
-                  | "h2"
-                  | "h3"
-                  | "h4"
-                  | "h5"
-                  | "h6"
-                  | "normal";
-                listItem?: "bullet" | "number";
-                markDefs: Array<{
-                  href?: string;
-                  _type: "link";
-                  _key: string;
-                }> | null;
-                level?: number;
-                _type: "block";
-                _key: string;
-              }> | null;
+              content: Array<
+                | {
+                    children?: Array<{
+                      marks?: Array<string>;
+                      text?: string;
+                      _type: "span";
+                      _key: string;
+                    }>;
+                    style?:
+                      | "h2"
+                      | "h3"
+                      | "h4"
+                      | "h5"
+                      | "h6"
+                      | "inline"
+                      | "normal";
+                    listItem?: "bullet" | "number";
+                    markDefs: Array<
+                      | {
+                          customLink?: CustomUrl;
+                          _type: "customLink";
+                          _key: string;
+                          openInNewTab: boolean | null;
+                          href: string | "#" | null;
+                        }
+                      | {
+                          customLink?: CustomUrl;
+                          _type: "customLink";
+                          _key: string;
+                        }
+                    > | null;
+                    level?: number;
+                    _type: "block";
+                    _key: string;
+                  }
+                | {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    media?: unknown;
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    caption?: string;
+                    _type: "image";
+                    _key: string;
+                    markDefs: null;
+                  }
+              > | null;
             }> | null;
             variant: "bordered" | "compact" | "default" | "striped" | null;
           }
@@ -10828,32 +10923,57 @@ export type QueryCamionOrPageBySlugResult =
             specifications: Array<{
               _key: string;
               label: string | null;
-              content: Array<{
-                children?: Array<{
-                  marks?: Array<string>;
-                  text?: string;
-                  _type: "span";
-                  _key: string;
-                }>;
-                style?:
-                  | "blockquote"
-                  | "h1"
-                  | "h2"
-                  | "h3"
-                  | "h4"
-                  | "h5"
-                  | "h6"
-                  | "normal";
-                listItem?: "bullet" | "number";
-                markDefs: Array<{
-                  href?: string;
-                  _type: "link";
-                  _key: string;
-                }> | null;
-                level?: number;
-                _type: "block";
-                _key: string;
-              }> | null;
+              content: Array<
+                | {
+                    children?: Array<{
+                      marks?: Array<string>;
+                      text?: string;
+                      _type: "span";
+                      _key: string;
+                    }>;
+                    style?:
+                      | "h2"
+                      | "h3"
+                      | "h4"
+                      | "h5"
+                      | "h6"
+                      | "inline"
+                      | "normal";
+                    listItem?: "bullet" | "number";
+                    markDefs: Array<
+                      | {
+                          customLink?: CustomUrl;
+                          _type: "customLink";
+                          _key: string;
+                          openInNewTab: boolean | null;
+                          href: string | "#" | null;
+                        }
+                      | {
+                          customLink?: CustomUrl;
+                          _type: "customLink";
+                          _key: string;
+                        }
+                    > | null;
+                    level?: number;
+                    _type: "block";
+                    _key: string;
+                  }
+                | {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    media?: unknown;
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    caption?: string;
+                    _type: "image";
+                    _key: string;
+                    markDefs: null;
+                  }
+              > | null;
             }> | null;
             variant: "bordered" | "compact" | "default" | "striped" | null;
           }
@@ -12759,32 +12879,57 @@ export type QueryBusOrPageBySlugResult =
             specifications: Array<{
               _key: string;
               label: string | null;
-              content: Array<{
-                children?: Array<{
-                  marks?: Array<string>;
-                  text?: string;
-                  _type: "span";
-                  _key: string;
-                }>;
-                style?:
-                  | "blockquote"
-                  | "h1"
-                  | "h2"
-                  | "h3"
-                  | "h4"
-                  | "h5"
-                  | "h6"
-                  | "normal";
-                listItem?: "bullet" | "number";
-                markDefs: Array<{
-                  href?: string;
-                  _type: "link";
-                  _key: string;
-                }> | null;
-                level?: number;
-                _type: "block";
-                _key: string;
-              }> | null;
+              content: Array<
+                | {
+                    children?: Array<{
+                      marks?: Array<string>;
+                      text?: string;
+                      _type: "span";
+                      _key: string;
+                    }>;
+                    style?:
+                      | "h2"
+                      | "h3"
+                      | "h4"
+                      | "h5"
+                      | "h6"
+                      | "inline"
+                      | "normal";
+                    listItem?: "bullet" | "number";
+                    markDefs: Array<
+                      | {
+                          customLink?: CustomUrl;
+                          _type: "customLink";
+                          _key: string;
+                          openInNewTab: boolean | null;
+                          href: string | "#" | null;
+                        }
+                      | {
+                          customLink?: CustomUrl;
+                          _type: "customLink";
+                          _key: string;
+                        }
+                    > | null;
+                    level?: number;
+                    _type: "block";
+                    _key: string;
+                  }
+                | {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    media?: unknown;
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    caption?: string;
+                    _type: "image";
+                    _key: string;
+                    markDefs: null;
+                  }
+              > | null;
             }> | null;
             variant: "bordered" | "compact" | "default" | "striped" | null;
           }
@@ -14545,32 +14690,57 @@ export type QueryBusOrPageBySlugResult =
             specifications: Array<{
               _key: string;
               label: string | null;
-              content: Array<{
-                children?: Array<{
-                  marks?: Array<string>;
-                  text?: string;
-                  _type: "span";
-                  _key: string;
-                }>;
-                style?:
-                  | "blockquote"
-                  | "h1"
-                  | "h2"
-                  | "h3"
-                  | "h4"
-                  | "h5"
-                  | "h6"
-                  | "normal";
-                listItem?: "bullet" | "number";
-                markDefs: Array<{
-                  href?: string;
-                  _type: "link";
-                  _key: string;
-                }> | null;
-                level?: number;
-                _type: "block";
-                _key: string;
-              }> | null;
+              content: Array<
+                | {
+                    children?: Array<{
+                      marks?: Array<string>;
+                      text?: string;
+                      _type: "span";
+                      _key: string;
+                    }>;
+                    style?:
+                      | "h2"
+                      | "h3"
+                      | "h4"
+                      | "h5"
+                      | "h6"
+                      | "inline"
+                      | "normal";
+                    listItem?: "bullet" | "number";
+                    markDefs: Array<
+                      | {
+                          customLink?: CustomUrl;
+                          _type: "customLink";
+                          _key: string;
+                          openInNewTab: boolean | null;
+                          href: string | "#" | null;
+                        }
+                      | {
+                          customLink?: CustomUrl;
+                          _type: "customLink";
+                          _key: string;
+                        }
+                    > | null;
+                    level?: number;
+                    _type: "block";
+                    _key: string;
+                  }
+                | {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    media?: unknown;
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    caption?: string;
+                    _type: "image";
+                    _key: string;
+                    markDefs: null;
+                  }
+              > | null;
             }> | null;
             variant: "bordered" | "compact" | "default" | "striped" | null;
           }
@@ -16477,32 +16647,57 @@ export type QueryMotorPentaOrPageBySlugResult =
             specifications: Array<{
               _key: string;
               label: string | null;
-              content: Array<{
-                children?: Array<{
-                  marks?: Array<string>;
-                  text?: string;
-                  _type: "span";
-                  _key: string;
-                }>;
-                style?:
-                  | "blockquote"
-                  | "h1"
-                  | "h2"
-                  | "h3"
-                  | "h4"
-                  | "h5"
-                  | "h6"
-                  | "normal";
-                listItem?: "bullet" | "number";
-                markDefs: Array<{
-                  href?: string;
-                  _type: "link";
-                  _key: string;
-                }> | null;
-                level?: number;
-                _type: "block";
-                _key: string;
-              }> | null;
+              content: Array<
+                | {
+                    children?: Array<{
+                      marks?: Array<string>;
+                      text?: string;
+                      _type: "span";
+                      _key: string;
+                    }>;
+                    style?:
+                      | "h2"
+                      | "h3"
+                      | "h4"
+                      | "h5"
+                      | "h6"
+                      | "inline"
+                      | "normal";
+                    listItem?: "bullet" | "number";
+                    markDefs: Array<
+                      | {
+                          customLink?: CustomUrl;
+                          _type: "customLink";
+                          _key: string;
+                          openInNewTab: boolean | null;
+                          href: string | "#" | null;
+                        }
+                      | {
+                          customLink?: CustomUrl;
+                          _type: "customLink";
+                          _key: string;
+                        }
+                    > | null;
+                    level?: number;
+                    _type: "block";
+                    _key: string;
+                  }
+                | {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    media?: unknown;
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    caption?: string;
+                    _type: "image";
+                    _key: string;
+                    markDefs: null;
+                  }
+              > | null;
             }> | null;
             variant: "bordered" | "compact" | "default" | "striped" | null;
           }
@@ -18264,32 +18459,57 @@ export type QueryMotorPentaOrPageBySlugResult =
             specifications: Array<{
               _key: string;
               label: string | null;
-              content: Array<{
-                children?: Array<{
-                  marks?: Array<string>;
-                  text?: string;
-                  _type: "span";
-                  _key: string;
-                }>;
-                style?:
-                  | "blockquote"
-                  | "h1"
-                  | "h2"
-                  | "h3"
-                  | "h4"
-                  | "h5"
-                  | "h6"
-                  | "normal";
-                listItem?: "bullet" | "number";
-                markDefs: Array<{
-                  href?: string;
-                  _type: "link";
-                  _key: string;
-                }> | null;
-                level?: number;
-                _type: "block";
-                _key: string;
-              }> | null;
+              content: Array<
+                | {
+                    children?: Array<{
+                      marks?: Array<string>;
+                      text?: string;
+                      _type: "span";
+                      _key: string;
+                    }>;
+                    style?:
+                      | "h2"
+                      | "h3"
+                      | "h4"
+                      | "h5"
+                      | "h6"
+                      | "inline"
+                      | "normal";
+                    listItem?: "bullet" | "number";
+                    markDefs: Array<
+                      | {
+                          customLink?: CustomUrl;
+                          _type: "customLink";
+                          _key: string;
+                          openInNewTab: boolean | null;
+                          href: string | "#" | null;
+                        }
+                      | {
+                          customLink?: CustomUrl;
+                          _type: "customLink";
+                          _key: string;
+                        }
+                    > | null;
+                    level?: number;
+                    _type: "block";
+                    _key: string;
+                  }
+                | {
+                    asset?: {
+                      _ref: string;
+                      _type: "reference";
+                      _weak?: boolean;
+                      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+                    };
+                    media?: unknown;
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    caption?: string;
+                    _type: "image";
+                    _key: string;
+                    markDefs: null;
+                  }
+              > | null;
             }> | null;
             variant: "bordered" | "compact" | "default" | "striped" | null;
           }
