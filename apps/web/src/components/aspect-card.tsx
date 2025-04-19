@@ -28,7 +28,7 @@ export function AspectCard({ aspect, className = "" }: AspectCardProps) {
             {variant !== 'none' && image?.asset && (
                 <div className={`relative rounded-none w-full h-auto overflow-hidden ${variant === 'icon'
                     ? 'aspect-square max-w-[120px] mx-auto'
-                    : 'aspect-[16/9]'
+                    : 'aspect-[3/2]'
                     }`}>
                     <SanityImage
                         asset={image}
@@ -37,7 +37,7 @@ export function AspectCard({ aspect, className = "" }: AspectCardProps) {
                         alt={title || "Aspecto destacado"}
                         className={`bg-gray-100 rounded-none w-full object-cover ${variant === 'icon'
                             ? 'aspect-square p-4'
-                            : 'aspect-[16/9] sm:aspect-[2/1] lg:aspect-[3/2]'
+                            : 'object-cover h-full'
                             }`}
                     />
                     <div className="absolute inset-0 ring-1 ring-gray-900/10 ring-inset" />
