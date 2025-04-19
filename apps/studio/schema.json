@@ -10606,6 +10606,20 @@
         },
         "optional": true
       },
+      "subtitle": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "description": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "taxonomias": {
         "type": "objectAttribute",
         "value": {
@@ -10633,13 +10647,6 @@
             }
           },
           "dereferencesTo": "skosConcept"
-        },
-        "optional": true
-      },
-      "description": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
         },
         "optional": true
       },
@@ -10891,6 +10898,20 @@
         },
         "optional": true
       },
+      "subtitle": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "description": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "taxonomias": {
         "type": "objectAttribute",
         "value": {
@@ -10918,30 +10939,6 @@
             }
           },
           "dereferencesTo": "skosConcept"
-        },
-        "optional": true
-      },
-      "category": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "union",
-          "of": [
-            {
-              "type": "string",
-              "value": "urbano"
-            },
-            {
-              "type": "string",
-              "value": "interurbano"
-            }
-          ]
-        },
-        "optional": true
-      },
-      "description": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
         },
         "optional": true
       },
@@ -11193,6 +11190,20 @@
         },
         "optional": true
       },
+      "subtitle": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "description": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "taxonomias": {
         "type": "objectAttribute",
         "value": {
@@ -11220,46 +11231,6 @@
             }
           },
           "dereferencesTo": "skosConcept"
-        },
-        "optional": true
-      },
-      "category": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "union",
-          "of": [
-            {
-              "type": "string",
-              "value": "larga-distancia"
-            },
-            {
-              "type": "string",
-              "value": "construccion-y-mineria"
-            },
-            {
-              "type": "string",
-              "value": "forestal"
-            },
-            {
-              "type": "string",
-              "value": "distribucion-urbana-y-regional"
-            },
-            {
-              "type": "string",
-              "value": "volvo-electric"
-            },
-            {
-              "type": "string",
-              "value": "usados"
-            }
-          ]
-        },
-        "optional": true
-      },
-      "description": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
         },
         "optional": true
       },

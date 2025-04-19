@@ -29,35 +29,11 @@ export const camiones = defineType({
             validation: (Rule) => Rule.required().error("El título es obligatorio"),
         }),
         defineField({
-            name: 'taxonomias',
-            title: 'Taxonomias',
-            group: GROUP.MAIN_CONTENT,
-            type: 'reference',
-            to: { type: 'skosConcept' },
-            options: {
-                filter: branchFilter({ schemeId: '4bb257', branchId: '278c9c' }),
-                disableNew: true,
-            },
-            components: { field: ReferenceHierarchyInput },
-        }),
-        defineField({
-            name: "category",
-            title: "Categoría",
+            name: "subtitle",
             type: "string",
-            description: "Selecciona la categoría del camión",
+            title: "Subtítulo",
+            description: "Subtítulo del camión",
             group: GROUP.MAIN_CONTENT,
-            options: {
-                list: [
-                    { title: "Larga distancia", value: "larga-distancia" },
-                    { title: "Construcción y minería", value: "construccion-y-mineria" },
-                    { title: "Forestal", value: "forestal" },
-                    { title: "Distribución Urbana y Regional", value: "distribucion-urbana-y-regional" },
-                    { title: "Volvo Electric", value: "volvo-electric" },
-                    { title: "Usados", value: "usados" }
-                ],
-                layout: "dropdown"
-            },
-            validation: (Rule) => Rule.required().error("La categoría es obligatoria"),
         }),
         defineField({
             name: "description",
@@ -79,6 +55,18 @@ export const camiones = defineType({
                         "La descripción no debe exceder los 160 caracteres ya que será truncada en los resultados de búsqueda",
                     ),
             ],
+        }),
+        defineField({
+            name: 'taxonomias',
+            title: 'Taxonomias',
+            group: GROUP.MAIN_CONTENT,
+            type: 'reference',
+            to: { type: 'skosConcept' },
+            options: {
+                filter: branchFilter({ schemeId: '4bb257', branchId: '278c9c' }),
+                disableNew: true,
+            },
+            components: { field: ReferenceHierarchyInput },
         }),
         defineField({
             name: "slug",

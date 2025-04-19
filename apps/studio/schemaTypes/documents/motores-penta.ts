@@ -29,16 +29,11 @@ export const motoresPenta = defineType({
             validation: (Rule) => Rule.required().error("El título es obligatorio"),
         }),
         defineField({
-            name: 'taxonomias',
-            title: 'Taxonomias',
+            name: "subtitle",
+            type: "string",
+            title: "Subtítulo",
+            description: "Subtítulo del motor",
             group: GROUP.MAIN_CONTENT,
-            type: 'reference',
-            to: { type: 'skosConcept' },
-            options: {
-                filter: branchFilter({ schemeId: '4bb257', branchId: 'cff000' }),
-                disableNew: true,
-            },
-            components: { field: ReferenceHierarchyInput },
         }),
         defineField({
             name: "description",
@@ -60,6 +55,18 @@ export const motoresPenta = defineType({
                         "La descripción no debe exceder los 160 caracteres ya que será truncada en los resultados de búsqueda",
                     ),
             ],
+        }),
+        defineField({
+            name: 'taxonomias',
+            title: 'Taxonomias',
+            group: GROUP.MAIN_CONTENT,
+            type: 'reference',
+            to: { type: 'skosConcept' },
+            options: {
+                filter: branchFilter({ schemeId: '4bb257', branchId: 'cff000' }),
+                disableNew: true,
+            },
+            components: { field: ReferenceHierarchyInput },
         }),
         defineField({
             name: "slug",

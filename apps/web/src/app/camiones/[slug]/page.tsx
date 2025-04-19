@@ -126,7 +126,7 @@ export default async function CamionPage({
     }
 
     // Destructure the data
-    const { title, pageBuilder, _id, _type, description, image } = data as any;
+    const { title, pageBuilder, _id, _type, description, image, subtitle } = data as any;
 
     // Get taxonomy data from the document if it exists
     let taxonomyData = null;
@@ -201,6 +201,7 @@ export default async function CamionPage({
                         <div className="mb-8">
                             <TitleDescriptionBlock
                                 title={title}
+                                subtitle={subtitle}
                                 description={description}
                             />
                             <div className="flex justify-end mx-auto mt-6 px-4 max-w-screen-xl">

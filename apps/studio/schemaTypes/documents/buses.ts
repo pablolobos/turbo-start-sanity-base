@@ -29,31 +29,11 @@ export const buses = defineType({
             validation: (Rule) => Rule.required().error("El título es obligatorio"),
         }),
         defineField({
-            name: 'taxonomias',
-            title: 'Taxonomias',
-            group: GROUP.MAIN_CONTENT,
-            type: 'reference',
-            to: { type: 'skosConcept' },
-            options: {
-                filter: branchFilter({ schemeId: '4bb257', branchId: 'cff000' }),
-                disableNew: true,
-            },
-            components: { field: ReferenceHierarchyInput },
-        }),
-        defineField({
-            name: "category",
-            title: "Categoría",
+            name: "subtitle",
             type: "string",
-            description: "Selecciona la categoría del bus",
+            title: "Subtítulo",
+            description: "Subtítulo del bus",
             group: GROUP.MAIN_CONTENT,
-            options: {
-                list: [
-                    { title: "Urbano", value: "urbano" },
-                    { title: "Interurbano", value: "interurbano" }
-                ],
-                layout: "dropdown"
-            },
-            validation: (Rule) => Rule.required().error("La categoría es obligatoria"),
         }),
         defineField({
             name: "description",
@@ -75,6 +55,18 @@ export const buses = defineType({
                         "La descripción no debe exceder los 160 caracteres ya que será truncada en los resultados de búsqueda",
                     ),
             ],
+        }),
+        defineField({
+            name: 'taxonomias',
+            title: 'Taxonomias',
+            group: GROUP.MAIN_CONTENT,
+            type: 'reference',
+            to: { type: 'skosConcept' },
+            options: {
+                filter: branchFilter({ schemeId: '4bb257', branchId: 'cff000' }),
+                disableNew: true,
+            },
+            components: { field: ReferenceHierarchyInput },
         }),
         defineField({
             name: "slug",
