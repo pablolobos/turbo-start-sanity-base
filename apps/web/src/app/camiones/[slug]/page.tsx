@@ -121,9 +121,11 @@ async function fetchTaxonomyData(taxonomyRef: string): Promise<TaxonomyData | nu
 export async function generateMetadata({
     params,
 }: {
-    params: PageParams;
+    params: PageParams | Promise<PageParams>;
 }): Promise<Metadata> {
-    const { data } = await fetchCamionData(params.slug);
+    // Make sure params is resolved if it's a Promise
+    const resolvedParams = await Promise.resolve(params);
+    const { data } = await fetchCamionData(resolvedParams.slug);
     return getMetaData(data || {});
 }
 
