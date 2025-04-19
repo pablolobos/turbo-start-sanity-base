@@ -29,7 +29,7 @@ export function HighlightedAspects({
     const gridClass = getGridClass(columns);
 
     return (
-        <section className="bg-background py-16 md:py-24 max-container">
+        <section className="bg-background section-y-padding max-container">
             <div className="flex flex-col gap-8">
                 {/* Title and description area */}
                 {(title || description) && (

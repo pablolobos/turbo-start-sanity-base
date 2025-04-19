@@ -223,7 +223,7 @@ export function ProductListing(props: ProductListingProps) {
     // Only render loading state on first load
     if (loading) {
         return (
-            <section className="py-12 md:py-16 lg:py-20 container">
+            <section className="container section-y-padding">
                 <div className="space-y-8 animate-pulse">
                     <div className="bg-gray-200 rounded w-1/4 h-6"></div>
                     <div className="gap-6 grid grid-cols-1 sm:grid-cols-2">

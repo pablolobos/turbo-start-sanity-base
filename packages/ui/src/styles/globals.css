@@ -10,9 +10,9 @@
     --p-x-interior-lg: 3rem;
     --p-x-md: 2rem;
     --p-x-sm: 1rem;
-    --p-y-md: 12rem;
-    --p-y-sm: 8rem;
-
+    --p-y-sm: 4rem;
+    --p-y-md: 4rem;
+    --p-y-lg: 6rem;
 
     --nav-item-height: 50px;
     --header-main-height: 128px;
@@ -188,6 +188,10 @@
 
   .padding-center {
     @apply px-[var(--p-x-sm)] md:px-[var(--p-x-md)] lg:px-[var(--p-x-exterior-lg)];
+  }
+
+  .section-y-padding {
+    @apply pt-[var(--p-y-sm)] md:pt-[var(--p-y-md)] lg:pt-[var(--p-y-lg)];
   }
 
   .grid-gap {

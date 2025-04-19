@@ -84,7 +84,7 @@ export function SpecificationsTable({
     );
 
     return (
-        <section className="max-container padding-center">
+        <section className="max-container padding-center section-y-padding">
             {(title || description) && (
                 <div className="mb-8">
                     <TitleDescriptionBlock
