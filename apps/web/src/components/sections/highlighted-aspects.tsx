@@ -33,7 +33,7 @@ export function HighlightedAspects({
             <div className="flex flex-col gap-8">
                 {/* Title and description area */}
                 {(title || description) && (
-                    <div className="mb-8">
+                    <div >
                         <TitleDescriptionBlock
                             title={title || ""}
                             description={description || ""}
