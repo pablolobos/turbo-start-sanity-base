@@ -985,3 +985,118 @@ export const PRODUCT_TYPE_CONCEPTS = {
   buses: "cff000",
   motoresPenta: "8d61db"
 }
+
+// Product buttons fragment with proper URL resolution
+const productButtonsFragment = `
+  buttons[]{
+    text,
+    variant,
+    icon,
+    _key,
+    _type,
+    "openInNewTab": url.openInNewTab,
+    "href": select(
+      url.type == "internal" => url.internal->slug.current,
+      url.type == "external" => url.external,
+      url.href
+    )
+  }
+`;
+
+// Fragment for handling all button types in page builder blocks
+const pageBuilderButtonsFragment = `
+  _type == "cta" => {
+    ...,
+    ${buttonsFragment}
+  },
+  _type == "hero" => {
+    ...,
+    ${buttonsFragment}
+  },
+  _type == "mainHero" => {
+    ...,
+    ${buttonsFragment}
+  },
+  _type == "videoHero" => {
+    ...,
+    ${buttonsFragment}
+  },
+  _type == "imageLinkCards" => {
+    ...,
+    ${buttonsFragment}
+  },
+  _type == "doubleHero" => {
+    ...,
+    "primaryButtons": primaryButtons[]{
+      text,
+      variant,
+      icon,
+      _key,
+      _type,
+      "openInNewTab": url.openInNewTab,
+      "href": select(
+        url.type == "internal" => url.internal->slug.current,
+        url.type == "external" => url.external,
+        url.href
+      )
+    },
+    "secondaryButtons": secondaryButtons[]{
+      text,
+      variant,
+      icon,
+      _key,
+      _type,
+      "openInNewTab": url.openInNewTab,
+      "href": select(
+        url.type == "internal" => url.internal->slug.current,
+        url.type == "external" => url.external,
+        url.href
+      )
+    }
+  }
+`;
+
+// Product page queries with proper button handling
+export const PRODUCT_PAGE_BUILDER_FRAGMENT = `
+  "pageBuilder": pageBuilder[]{
+    ...,
+    _type,
+    ${pageBuilderButtonsFragment}
+  }
+`;
+
+export const CAMION_BY_SLUG_QUERY = defineQuery(`*[_type == "camiones" && slug.current == $slug][0]{
+  _id,
+  _type,
+  title,
+  subtitle,
+  description,
+  image,
+  ${PRODUCT_PAGE_BUILDER_FRAGMENT},
+  taxonomias,
+  slug
+}`);
+
+export const BUS_BY_SLUG_QUERY = defineQuery(`*[_type == "buses" && slug.current == $slug][0]{
+  _id,
+  _type,
+  title,
+  subtitle,
+  description,
+  image,
+  ${PRODUCT_PAGE_BUILDER_FRAGMENT},
+  taxonomias,
+  slug
+}`);
+
+export const MOTOR_PENTA_BY_SLUG_QUERY = defineQuery(`*[_type == "motoresPenta" && slug.current == $slug][0]{
+  _id,
+  _type,
+  title,
+  subtitle,
+  description,
+  image,
+  ${PRODUCT_PAGE_BUILDER_FRAGMENT},
+  taxonomias,
+  slug
+}`);

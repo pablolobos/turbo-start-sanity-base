@@ -18,6 +18,7 @@ import { TitleDescriptionBlock } from "@/components/title-description-block";
 import { client } from "@/lib/sanity/client";
 import { sanityFetch } from "@/lib/sanity/live";
 import { getMetaData } from "@/lib/seo";
+import { BUS_BY_SLUG_QUERY } from "@/lib/sanity/query";
 
 // Define the structure for a breadcrumb item
 interface BreadcrumbItem {
@@ -45,131 +46,6 @@ interface TaxonomyData {
     iri: string;
 }
 
-// GROQ query to fetch a bus by slug
-const queryBusBySlug = `*[_type == "buses" && slug.current == $slug][0]{
-  _id,
-  _type,
-  title,
-  subtitle,
-  description,
-  image,
-  "pageBuilder": pageBuilder[]{
-    ...,
-    _type,
-    _type == "cta" => {
-      ...,
-      "buttons": buttons[]{
-        text,
-        variant,
-        icon,
-        _key,
-        _type,
-        "openInNewTab": url.openInNewTab,
-        "href": select(
-          url.type == "internal" => url.internal->slug.current,
-          url.type == "external" => url.external,
-          url.href
-        )
-      }
-    },
-    _type == "hero" => {
-      ...,
-      "buttons": buttons[]{
-        text,
-        variant,
-        icon,
-        _key,
-        _type,
-        "openInNewTab": url.openInNewTab,
-        "href": select(
-          url.type == "internal" => url.internal->slug.current,
-          url.type == "external" => url.external,
-          url.href
-        )
-      }
-    },
-    _type == "mainHero" => {
-      ...,
-      "buttons": buttons[]{
-        text,
-        variant,
-        icon,
-        _key,
-        _type,
-        "openInNewTab": url.openInNewTab,
-        "href": select(
-          url.type == "internal" => url.internal->slug.current,
-          url.type == "external" => url.external,
-          url.href
-        )
-      }
-    },
-    _type == "doubleHero" => {
-      ...,
-      "primaryButtons": primaryButtons[]{
-        text,
-        variant,
-        icon,
-        _key,
-        _type,
-        "openInNewTab": url.openInNewTab,
-        "href": select(
-          url.type == "internal" => url.internal->slug.current,
-          url.type == "external" => url.external,
-          url.href
-        )
-      },
-      "secondaryButtons": secondaryButtons[]{
-        text,
-        variant,
-        icon,
-        _key,
-        _type,
-        "openInNewTab": url.openInNewTab,
-        "href": select(
-          url.type == "internal" => url.internal->slug.current,
-          url.type == "external" => url.external,
-          url.href
-        )
-      }
-    },
-    _type == "videoHero" => {
-      ...,
-      "buttons": buttons[]{
-        text,
-        variant,
-        icon,
-        _key,
-        _type,
-        "openInNewTab": url.openInNewTab,
-        "href": select(
-          url.type == "internal" => url.internal->slug.current,
-          url.type == "external" => url.external,
-          url.href
-        )
-      }
-    },
-    _type == "imageLinkCards" => {
-      ...,
-      "buttons": buttons[]{
-        text,
-        variant,
-        icon,
-        _key,
-        _type,
-        "openInNewTab": url.openInNewTab,
-        "href": select(
-          url.type == "internal" => url.internal->slug.current,
-          url.type == "external" => url.external,
-          url.href
-        )
-      }
-    }
-  },
-  taxonomias,
-  slug
-}`;
-
 // GROQ query to fetch all buses slugs for static generation
 const queryBusesPaths = `*[_type == "buses" && defined(slug.current)].slug.current`;
 
@@ -192,7 +68,7 @@ async function fetchBusData(slug: string): Promise<{ data: BusData | null }> {
     const fullSlug = `/buses/${slug}`;
     try {
         const response = await sanityFetch({
-            query: queryBusBySlug,
+            query: BUS_BY_SLUG_QUERY,
             params: { slug: fullSlug },
         });
         return { data: response.data as BusData };
