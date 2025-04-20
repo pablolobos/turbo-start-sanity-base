@@ -2,11 +2,9 @@
 import { useOptimistic } from "@sanity/visual-editing/react";
 import { useState, useEffect } from "react";
 import { createDataAttribute, type SanityDocument } from "next-sanity";
-import type { ComponentType } from "react";
 
 import { dataset, projectId, studioUrl } from "@/lib/sanity/api";
 import type { QueryHomePageDataResult } from "@/lib/sanity/sanity.types";
-import type { PagebuilderType } from "@/types";
 
 import { CTABlock } from "./sections/cta";
 import { FaqAccordion } from "./sections/faq-accordion";
@@ -24,6 +22,8 @@ import { SpecificationsTable } from "./sections/specifications-table";
 import { FeaturedBlogs } from "./sections/featured-blogs";
 import { HighlightedAspects } from "./sections/highlighted-aspects";
 import { ProductListing } from "./sections/product-listing";
+import { VideoBlock } from "./sections/video-block";
+
 type PageBlock = NonNullable<
   NonNullable<QueryHomePageDataResult>["pageBuilder"]
 >[number];
@@ -57,6 +57,7 @@ const BLOCK_COMPONENTS = {
   featuredBlogs: FeaturedBlogs,
   highlightedAspects: HighlightedAspects,
   productListing: ProductListing,
+  videoBlock: VideoBlock,
 } as const;
 
 type BlockType = keyof typeof BLOCK_COMPONENTS;

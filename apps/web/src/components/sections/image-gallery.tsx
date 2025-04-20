@@ -196,8 +196,6 @@ export function ImageGallery({
 
     // Set isMounted to true when component mounts
     useEffect(() => {
-        console.log("Gallery layout:", layout);
-        console.log("Images:", images);
         setIsMounted(true);
 
         // Clean up on unmount

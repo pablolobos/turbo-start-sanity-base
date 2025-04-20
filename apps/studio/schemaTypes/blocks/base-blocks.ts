@@ -12,6 +12,7 @@ import { mainHero } from "./main-hero"
 import { specificationsTable } from "./specifications-table"
 import { subscribeNewsletter } from "./subscribe-newsletter"
 import { productListing } from "./product-listing"
+import { videoBlock } from "./video-block"
 
 // Base blocks without tabs to avoid circular dependency
 export const baseBlocks: ObjectDefinition[] = [
@@ -28,4 +29,5 @@ export const baseBlocks: ObjectDefinition[] = [
     specificationsTable,
     highlightedAspects,
     productListing,
+    videoBlock,
 ]; 
