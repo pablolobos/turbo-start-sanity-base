@@ -9,6 +9,7 @@ import { Button } from "@workspace/ui/components/button"
 import * as Dialog from "@radix-ui/react-dialog"
 import { X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
+import { toast } from 'sonner'
 
 interface FormField {
     label: string
@@ -221,10 +222,9 @@ function RegionComunaSelector({ fieldName, required }: { fieldName: string, requ
 }
 
 // FormContent component to avoid duplication
-function FormContent({ form, onSubmit, submitStatus, isSubmitting, formRef, variant }: {
+function FormContent({ form, onSubmit, isSubmitting, formRef, variant }: {
     form: FormData
     onSubmit: (event: FormEvent<HTMLFormElement>) => Promise<void>
-    submitStatus: 'idle' | 'success' | 'error'
     isSubmitting: boolean
     formRef: React.MutableRefObject<HTMLFormElement | null>
     variant?: 'default' | 'withBackground' | 'centered'
@@ -379,13 +379,6 @@ function FormContent({ form, onSubmit, submitStatus, isSubmitting, formRef, vari
                 </Form.Field>
             ))}
 
-            {submitStatus === 'success' && (
-                <p className="text-green-500 text-sm">{form.successMessage}</p>
-            )}
-            {submitStatus === 'error' && (
-                <p className="text-red-500 text-sm">{form.errorMessage}</p>
-            )}
-
             <Form.Submit asChild>
                 <Button
                     disabled={isSubmitting}
@@ -411,7 +404,6 @@ function ModalFormBlock({
     buttonPosition = 'default'
 }: Omit<FormBlockProps, 'displayMode'>) {
     const [isSubmitting, setIsSubmitting] = useState(false)
-    const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
     const formRef = useRef<HTMLFormElement>(null)
     const [utmParams, setUtmParams] = useState<Record<string, string>>({})
     const [isDialogOpen, setIsDialogOpen] = useState(false)
@@ -439,7 +431,6 @@ function ModalFormBlock({
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
         setIsSubmitting(true)
-        setSubmitStatus('idle')
 
         const formData = new FormData(event.currentTarget)
         const fields = form.fields.map(field => {
@@ -523,7 +514,7 @@ function ModalFormBlock({
             })
 
             if (response.ok) {
-                setSubmitStatus('success')
+                toast.success(form.successMessage || 'Formulario enviado exitosamente')
                 formRef.current?.reset()
 
                 // If in modal mode, close the dialog after successful submission
@@ -533,11 +524,11 @@ function ModalFormBlock({
             } else {
                 const errorData = await response.json()
                 console.error('Form submission error:', errorData)
-                setSubmitStatus('error')
+                toast.error(form.errorMessage || 'Error al enviar el formulario')
             }
         } catch (error) {
             console.error('Error submitting form:', error)
-            setSubmitStatus('error')
+            toast.error(form.errorMessage || 'Error al enviar el formulario')
         } finally {
             setIsSubmitting(false)
         }
@@ -610,7 +601,6 @@ function ModalFormBlock({
                             <FormContent
                                 form={form}
                                 onSubmit={handleSubmit}
-                                submitStatus={submitStatus}
                                 isSubmitting={isSubmitting}
                                 formRef={formRef}
                                 variant={variant}
@@ -643,7 +633,6 @@ export default function FormBlock({
     buttonPosition = 'default'
 }: FormBlockProps) {
     const [isSubmitting, setIsSubmitting] = useState(false)
-    const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
     const formRef = useRef<HTMLFormElement>(null)
     const [utmParams, setUtmParams] = useState<Record<string, string>>({})
     const [isDialogOpen, setIsDialogOpen] = useState(false)
@@ -671,7 +660,6 @@ export default function FormBlock({
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
         setIsSubmitting(true)
-        setSubmitStatus('idle')
 
         const formData = new FormData(event.currentTarget)
         const fields = form.fields.map(field => {
@@ -755,7 +743,7 @@ export default function FormBlock({
             })
 
             if (response.ok) {
-                setSubmitStatus('success')
+                toast.success(form.successMessage || 'Formulario enviado exitosamente')
                 formRef.current?.reset()
 
                 // If in modal mode, close the dialog after successful submission
@@ -767,11 +755,11 @@ export default function FormBlock({
             } else {
                 const errorData = await response.json()
                 console.error('Form submission error:', errorData)
-                setSubmitStatus('error')
+                toast.error(form.errorMessage || 'Error al enviar el formulario')
             }
         } catch (error) {
             console.error('Error submitting form:', error)
-            setSubmitStatus('error')
+            toast.error(form.errorMessage || 'Error al enviar el formulario')
         } finally {
             setIsSubmitting(false)
         }
@@ -816,7 +804,6 @@ export default function FormBlock({
             <FormContent
                 form={form}
                 onSubmit={handleSubmit}
-                submitStatus={submitStatus}
                 isSubmitting={isSubmitting}
                 formRef={formRef}
                 variant={variant}

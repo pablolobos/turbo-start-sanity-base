@@ -1,4 +1,5 @@
 import "@workspace/ui/globals.css";
+import { Toaster } from 'sonner';
 
 import { revalidatePath, revalidateTag } from "next/cache";
 import { draftMode } from "next/headers";
@@ -78,6 +79,7 @@ function MainContent({ children }: { children: React.ReactNode }) {
       <Suspense fallback={<FooterSkeleton />}>
         <FooterServer />
       </Suspense>
+      <Toaster richColors position="top-right" />
     </>
   );
 }
