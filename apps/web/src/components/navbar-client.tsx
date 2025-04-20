@@ -81,7 +81,8 @@ interface NavbarLinkType {
 // Helper function to check if a link is active
 function isLinkActive(path: string, href: string | null | undefined): boolean {
   if (!href) return false;
-  return path === href || (href !== '/' && path.startsWith(href));
+  if (href === '/') return path === '/';
+  return path === href || path.startsWith(`${href}/`);
 }
 
 function MenuItemLink({
