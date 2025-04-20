@@ -117,7 +117,7 @@ export function SpecificationsTable({
                         isOdd={index % 2 === 0}
                         className={cn(
                             getItemClassName(index),
-                            "border-b border-gray-200"
+                            " border-gray-200"
                         )}
                     />
                 ))}
