@@ -119,8 +119,8 @@
     --radius: 0.5rem;
 
     --v-font-heading-1-lineheight: calc(.31rem + 2ex);
-    --v-font-heading-1-size-min: 2rem;
-    --v-font-heading-1-size-max: 2.5rem;
+    --v-font-heading-1-size-min: 2.5rem;
+    --v-font-heading-1-size-max: 3.5rem;
     --v-font-heading-1-size: clamp(var(--v-font-heading-1-size-min), 1vw + 1.7rem, var(--v-font-heading-1-size-max));
 
     --v-font-heading-2-lineheight: calc(.31rem + 2ex);

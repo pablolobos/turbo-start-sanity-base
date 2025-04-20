@@ -171,7 +171,7 @@ export function MainHeroBlock({
                                 {badge}
                             </Badge>
                         )}
-                        <h1 className={`font-bold text-foreground-inverse text-4xl md:text-5xl lg:text-7xl leading-tight ${titleFont === 'statement' ? 'statement-1' : 'heading-1'}`}>
+                        <h1 className={`font-bold text-foreground-inverse ${titleFont === 'statement' ? 'statement-1' : 'heading-1'}`}>
                             {title}
                         </h1>
                         <RichText
