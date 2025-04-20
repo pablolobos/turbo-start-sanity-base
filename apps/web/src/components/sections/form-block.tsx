@@ -333,7 +333,7 @@ function FormContent({ form, onSubmit, submitStatus, isSubmitting, formRef, vari
         <Form.Root
             ref={formRef}
             onSubmit={onSubmit}
-            className="space-y-6"
+            className="space-y-4"
         >
             {form.fields.map((field) => (
                 <Form.Field
