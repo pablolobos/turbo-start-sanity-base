@@ -70,7 +70,7 @@ function generateBreadcrumbs(
         { label: "Camiones", href: "/camiones" },
         ...(categoryData ? [{
             label: categoryData.prefLabel,
-            href: `/camiones/${categoryData.slug}`
+            href: `/${categoryData.slug}`
         }] : []),
         { label: currentTitle, href: "#" }
     ];
