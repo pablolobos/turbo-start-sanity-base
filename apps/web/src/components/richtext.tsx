@@ -90,7 +90,7 @@ const components: Partial<PortableTextReactComponents> = {
         <SanityImage
           asset={value}
           className="rounded-none w-full h-auto"
-          width={1600}
+          width={1400}
           height={900}
         />
       </div>
