@@ -53,7 +53,119 @@ const queryBusBySlug = `*[_type == "buses" && slug.current == $slug][0]{
   subtitle,
   description,
   image,
-  pageBuilder,
+  "pageBuilder": pageBuilder[]{
+    ...,
+    _type,
+    _type == "cta" => {
+      ...,
+      "buttons": buttons[]{
+        text,
+        variant,
+        icon,
+        _key,
+        _type,
+        "openInNewTab": url.openInNewTab,
+        "href": select(
+          url.type == "internal" => url.internal->slug.current,
+          url.type == "external" => url.external,
+          url.href
+        )
+      }
+    },
+    _type == "hero" => {
+      ...,
+      "buttons": buttons[]{
+        text,
+        variant,
+        icon,
+        _key,
+        _type,
+        "openInNewTab": url.openInNewTab,
+        "href": select(
+          url.type == "internal" => url.internal->slug.current,
+          url.type == "external" => url.external,
+          url.href
+        )
+      }
+    },
+    _type == "mainHero" => {
+      ...,
+      "buttons": buttons[]{
+        text,
+        variant,
+        icon,
+        _key,
+        _type,
+        "openInNewTab": url.openInNewTab,
+        "href": select(
+          url.type == "internal" => url.internal->slug.current,
+          url.type == "external" => url.external,
+          url.href
+        )
+      }
+    },
+    _type == "doubleHero" => {
+      ...,
+      "primaryButtons": primaryButtons[]{
+        text,
+        variant,
+        icon,
+        _key,
+        _type,
+        "openInNewTab": url.openInNewTab,
+        "href": select(
+          url.type == "internal" => url.internal->slug.current,
+          url.type == "external" => url.external,
+          url.href
+        )
+      },
+      "secondaryButtons": secondaryButtons[]{
+        text,
+        variant,
+        icon,
+        _key,
+        _type,
+        "openInNewTab": url.openInNewTab,
+        "href": select(
+          url.type == "internal" => url.internal->slug.current,
+          url.type == "external" => url.external,
+          url.href
+        )
+      }
+    },
+    _type == "videoHero" => {
+      ...,
+      "buttons": buttons[]{
+        text,
+        variant,
+        icon,
+        _key,
+        _type,
+        "openInNewTab": url.openInNewTab,
+        "href": select(
+          url.type == "internal" => url.internal->slug.current,
+          url.type == "external" => url.external,
+          url.href
+        )
+      }
+    },
+    _type == "imageLinkCards" => {
+      ...,
+      "buttons": buttons[]{
+        text,
+        variant,
+        icon,
+        _key,
+        _type,
+        "openInNewTab": url.openInNewTab,
+        "href": select(
+          url.type == "internal" => url.internal->slug.current,
+          url.type == "external" => url.external,
+          url.href
+        )
+      }
+    }
+  },
   taxonomias,
   slug
 }`;
