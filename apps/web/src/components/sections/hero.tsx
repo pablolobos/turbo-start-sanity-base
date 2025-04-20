@@ -31,6 +31,7 @@ export function HeroBlock({
   badge,
   image,
   richText,
+  titleFont,
   ...rest
 }: HeroBlockProps) {
   // Using optional access to get the variant property that might not be recognized by TypeScript yet
@@ -45,9 +46,12 @@ export function HeroBlock({
           <div className="padding-half-left justify-items-start items-center lg:items-start content-stretch gap-4 grid grid-rows-[auto_auto] col-span-1 lg:group-odd/component:col-start-2 row-span-1 row-start-1 text-left">
             <div className="gap-4 grid">
               {badge && <Badge className="w-fit">{badge}</Badge>}
-              <h2 className={cn("heading-1", {
-                "text-white": variant && !["default", "alt"].includes(variant)
-              })}>
+              <h2 className={cn(
+                titleFont === 'statement' ? 'statement-2' : 'heading-2',
+                {
+                  "text-white": variant && !["default", "alt"].includes(variant)
+                }
+              )}>
                 {title}
               </h2>
               <RichText

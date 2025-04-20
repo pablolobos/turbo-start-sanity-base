@@ -238,7 +238,7 @@
   .statement-1,
   .statement-2,
   .statement-3 {
-    font-family: var(--font-volvo-novum);
+    font-family: var(--font-volvo-broad);
     text-wrap: balance;
     font-weight: 700;
   }

@@ -708,6 +708,23 @@
                               },
                               "optional": true
                             },
+                            "titleFont": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "union",
+                                "of": [
+                                  {
+                                    "type": "string",
+                                    "value": "default"
+                                  },
+                                  {
+                                    "type": "string",
+                                    "value": "statement"
+                                  }
+                                ]
+                              },
+                              "optional": true
+                            },
                             "richText": {
                               "type": "objectAttribute",
                               "value": {
@@ -1265,6 +1282,23 @@
                               "type": "objectAttribute",
                               "value": {
                                 "type": "string"
+                              },
+                              "optional": true
+                            },
+                            "titleFont": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "union",
+                                "of": [
+                                  {
+                                    "type": "string",
+                                    "value": "default"
+                                  },
+                                  {
+                                    "type": "string",
+                                    "value": "statement"
+                                  }
+                                ]
                               },
                               "optional": true
                             },
@@ -7883,6 +7917,23 @@
           },
           "optional": true
         },
+        "titleFont": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "default"
+              },
+              {
+                "type": "string",
+                "value": "statement"
+              }
+            ]
+          },
+          "optional": true
+        },
         "richText": {
           "type": "objectAttribute",
           "value": {
@@ -8265,6 +8316,23 @@
           "type": "objectAttribute",
           "value": {
             "type": "string"
+          },
+          "optional": true
+        },
+        "titleFont": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "default"
+              },
+              {
+                "type": "string",
+                "value": "statement"
+              }
+            ]
           },
           "optional": true
         },

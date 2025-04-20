@@ -120,6 +120,7 @@ const heroBlock = `
   _type == "hero" => {
     ...,
     variant,
+    titleFont,
     ${imageFragment},
     ${buttonsFragment},
     ${richTextFragment}
@@ -186,6 +187,7 @@ const doubleHeroBlock = `
 const mainHeroBlock = `
   _type == "mainHero" => {
     ...,
+    titleFont,
     "backgroundImage": backgroundImage{
       ...,
       "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),

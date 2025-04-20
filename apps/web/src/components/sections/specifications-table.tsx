@@ -50,7 +50,7 @@ export function SpecificationsTable({
 
     const getGridClassName = () => {
         // Base styles for all variants
-        const baseGridStyle = "grid grid-cols-1 md:grid-cols-2";
+        const baseGridStyle = "grid grid-cols-1 md:grid-cols-[1fr_2fr]";
 
         if (variant === 'striped') {
             return cn(baseGridStyle, "");

@@ -32,6 +32,7 @@ export function MainHeroBlock({
     backgroundType,
     backgroundImage,
     backgroundVideo,
+    titleFont,
 }: MainHeroBlockProps) {
     const videoRef = useRef<HTMLVideoElement>(null);
     const [isPlaying, setIsPlaying] = useState(true);
@@ -170,7 +171,7 @@ export function MainHeroBlock({
                                 {badge}
                             </Badge>
                         )}
-                        <h1 className="font-bold text-foreground-inverse text-4xl md:text-5xl lg:text-6xl leading-tight">
+                        <h1 className={`font-bold text-foreground-inverse text-4xl md:text-5xl lg:text-7xl leading-tight ${titleFont === 'statement' ? 'statement-1' : 'heading-1'}`}>
                             {title}
                         </h1>
                         <RichText

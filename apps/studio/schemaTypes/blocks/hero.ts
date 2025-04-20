@@ -31,6 +31,20 @@ export const hero = defineType({
       type: "string",
       title: "Título",
     }),
+    defineField({
+      name: "titleFont",
+      type: "string",
+      title: "Fuente del Título",
+      description: "Selecciona el estilo de fuente para el título",
+      options: {
+        list: [
+          { title: "Default", value: "default" },
+          { title: "Statement", value: "statement" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "default",
+    }),
     richTextField,
     defineField({
       name: "image",
@@ -46,10 +60,11 @@ export const hero = defineType({
     select: {
       title: "title",
       variant: "variant",
+      titleFont: "titleFont",
     },
-    prepare: ({ title, variant }) => ({
+    prepare: ({ title, variant, titleFont }) => ({
       title,
-      subtitle: `Bloque Hero - Variante: ${variant || "default"}`,
+      subtitle: `Bloque Hero - Variante: ${variant || "default"} - Fuente: ${titleFont || "default"}`,
     }),
   },
 });
