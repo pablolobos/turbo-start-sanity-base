@@ -27,7 +27,7 @@ export function TitleDescriptionBlock({
             variant === 'center' ? 'text-center lg:flex-col lg:items-center' : 'lg:grid lg:grid-cols-2',
             className
         )}>
-            <Heading className={cn("mb-4 ", headingLevel === 'h1' ? 'heading-1' : 'heading-2')}>{title}. {subtitle && <span>{subtitle}</span>}</Heading>
+            <Heading className={cn("mb-4 ", headingLevel === 'h1' ? 'heading-1' : 'heading-2')}>{title}{subtitle && <span>. {subtitle}</span>}</Heading>
             {description && <p className="text-base">{description}</p>}
         </div>
     );
