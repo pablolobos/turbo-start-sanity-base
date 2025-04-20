@@ -194,6 +194,10 @@
     @apply pt-[var(--p-y-sm)] md:pt-[var(--p-y-md)] lg:pt-[var(--p-y-lg)];
   }
 
+  .section-y-padding-tb {
+    @apply py-[var(--p-y-sm)] md:py-[var(--p-y-md)] lg:py-[var(--p-y-lg)];
+  }
+
   .grid-gap {
     @apply gap-8 lg:gap-12;
   }
