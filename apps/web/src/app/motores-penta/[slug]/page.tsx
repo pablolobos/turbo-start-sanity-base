@@ -121,10 +121,9 @@ async function fetchTaxonomyData(taxonomyRef: string): Promise<TaxonomyData | nu
 export async function generateMetadata({
     params,
 }: {
-    params: PageParams | Promise<PageParams>;
+    params: Promise<PageParams>;
 }): Promise<Metadata> {
-    // Make sure params is resolved if it's a Promise
-    const resolvedParams = await Promise.resolve(params);
+    const resolvedParams = await params;
     const { data } = await fetchMotorPentaData(resolvedParams.slug);
     return getMetaData(data || {});
 }
@@ -146,7 +145,9 @@ export async function generateStaticParams(): Promise<PageParams[]> {
 
 export default async function MotorPentaPage({
     params,
-}: Props) {
+}: {
+    params: Promise<PageParams>
+}) {
     const resolvedParams = await params;
     const { data } = await fetchMotorPentaData(resolvedParams.slug);
 
