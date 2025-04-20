@@ -194,8 +194,16 @@
     @apply pt-[var(--p-y-sm)] md:pt-[var(--p-y-md)] lg:pt-[var(--p-y-lg)];
   }
 
+  .section-y-padding-sm {
+    @apply pt-[calc(var(--p-y-sm)/1.5)] md:pt-[calc(var(--p-y-md)/1.5)] lg:pt-[calc(var(--p-y-lg)/2)];
+  }
+
   .section-y-padding-tb {
     @apply py-[var(--p-y-sm)] md:py-[var(--p-y-md)] lg:py-[var(--p-y-lg)];
+  }
+
+  .section-y-padding-tb-sm {
+    @apply py-[calc(var(--p-y-sm)/1.5)] md:py-[calc(var(--p-y-md)/1.5)] lg:py-[calc(var(--p-y-lg)/2)];
   }
 
   .grid-gap {

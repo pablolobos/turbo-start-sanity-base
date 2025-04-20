@@ -9,9 +9,9 @@ export type CTABlockProps = PagebuilderType<"cta">;
 
 export function CTABlock({ richText, title, eyebrow, buttons }: CTABlockProps) {
   return (
-    <section id="features" className="max-container padding-center section-y-padding-tb">
+    <section id="features" className="max-container padding-center section-y-padding-tb-sm">
       <div className="mx-auto">
-        <div className="bg-muted px-4 py-16">
+        <div className="bg-muted px-4 section-y-padding-tb-sm">
           <div className="space-y-8 mx-auto max-w-3xl text-center">
             {eyebrow && (
               <Badge
