@@ -36,15 +36,15 @@ export function AspectCard({ aspect, className = "" }: AspectCardProps) {
                         height={variant === 'icon' ? 120 : 400}
                         alt={title || "Aspecto destacado"}
                         className={`bg-gray-100 rounded-none w-full object-cover ${variant === 'icon'
-                            ? 'aspect-square p-4'
+                            ? 'aspect-square p-4 bg-transparent'
                             : 'object-cover h-full'
                             }`}
                     />
-                    <div className="absolute inset-0 ring-1 ring-gray-900/10 ring-inset" />
+                    <div className={`absolute inset-0 ring-1 ring-gray-900/10 ring-inset ${variant === 'icon' ? 'hidden' : ''}`} />
                 </div>
             )}
             <div className={`content-start grid grid-rows-subgrid ${variant === 'none' ? 'row-span-3' : 'row-span-2'} w-full`}>
-                <h3 className="group relative heading-4">
+                <h3 className={`group relative heading-4 ${variant === 'icon' ? 'text-center' : ''}`}>
                     {title}
                 </h3>
                 {content && (
