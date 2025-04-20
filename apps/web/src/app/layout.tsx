@@ -95,7 +95,7 @@ export default async function RootLayout({
   const isDraftMode = await draftMode();
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="es" suppressHydrationWarning>
       <body
         className={`${volvoNovum.variable} ${volvoBroad.variable} font-novum antialiased text-foreground`}
       >

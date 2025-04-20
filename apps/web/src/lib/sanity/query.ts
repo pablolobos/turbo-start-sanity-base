@@ -430,6 +430,26 @@ const videoBlock = `
   }
 `;
 
+const videoHeroBlock = `
+  _type == "videoHero" => {
+    ...,
+    variant,
+    titleFont,
+    videoType,
+    "mp4File": coalesce(
+      mp4File.asset->url,
+      mp4File.asset->sources[0].url,
+      null
+    ),
+    youtubeUrl,
+    showControls,
+    autoplay,
+    loop,
+    ${buttonsFragment},
+    ${richTextFragment}
+  }
+`;
+
 const pageBuilderFragment = `
   pageBuilder[]{
     ...,
@@ -448,7 +468,8 @@ const pageBuilderFragment = `
     ${specificationsTableBlock},
     ${featuredBlogsBlock},
     ${highlightedAspectsBlock},
-    ${videoBlock}
+    ${videoBlock},
+    ${videoHeroBlock}
   }
 `;
 

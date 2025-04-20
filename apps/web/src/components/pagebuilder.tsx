@@ -23,6 +23,7 @@ import { FeaturedBlogs } from "./sections/featured-blogs";
 import { HighlightedAspects } from "./sections/highlighted-aspects";
 import { ProductListing } from "./sections/product-listing";
 import { VideoBlock } from "./sections/video-block";
+import { VideoHeroBlock } from "./sections/video-hero";
 
 type PageBlock = NonNullable<
   NonNullable<QueryHomePageDataResult>["pageBuilder"]
@@ -58,6 +59,7 @@ const BLOCK_COMPONENTS = {
   highlightedAspects: HighlightedAspects,
   productListing: ProductListing,
   videoBlock: VideoBlock,
+  videoHero: VideoHeroBlock,
 } as const;
 
 type BlockType = keyof typeof BLOCK_COMPONENTS;
