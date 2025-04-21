@@ -181,9 +181,6 @@ function Footer({ data }: FooterProps) {
               </p>
               <ul className="flex justify-center lg:justify-start gap-4">
                 <li className="hover:text-primary">
-                  <Link href="/terms">Terms and Conditions</Link>
-                </li>
-                <li className="hover:text-primary">
                   <Link href="/politica-de-privacidad">Política de privacidad</Link>
                 </li>
                 <li className="hover:text-primary">

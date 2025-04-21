@@ -13,7 +13,7 @@ import { Button } from "@workspace/ui/components/button";
 import { Plus, X } from "lucide-react";
 import { cn } from "@workspace/ui/lib/utils";
 import { Logo } from "./logo";
-
+import Link from "next/link";
 type CookieType = {
     id: string;
     title: string;
@@ -104,14 +104,7 @@ export function CookieConsentModal() {
                     Cuando visita cualquier sitio web, el mismo podría obtener o guardar información en
                     su navegador, generalmente mediante el uso de cookies. Esta información
                     puede ser acerca de usted, sus preferencias o su dispositivo, y se usa
-                    principalmente para que el sitio funcione según lo esperado. Por lo
-                    general, la información no lo identifica directamente, pero puede
-                    proporcionarle una experiencia web más personalizada. Ya que respetamos
-                    su derecho a la privacidad, usted puede escoger no permitirnos usar
-                    ciertas cookies. Haga clic en los encabezados de cada categoría para
-                    saber más y cambiar nuestras configuraciones predeterminadas. Sin
-                    embargo, el bloqueo de algunos tipos de cookies puede afectar su
-                    experiencia en el sitio y los servicios que podemos ofrecer.
+                    principalmente para que el sitio funcione según lo esperado. Revise nuestra Política de cookies <Link target="_blank" title="Política de cookies" className="text-blue-600 underline-dotted" href="https://cdn.sanity.io/files/nkozdi9b/production/8a66d0bd257bc5f874a3bf0e2023e5c9b053faa6.pdf">aquí</Link>.
                 </DialogDescription>
 
                 <div className="w-full">
