@@ -12,7 +12,7 @@ function ContactInfo({ data }: { data: NonNullable<QueryFooterDataResult> }) {
   if (!data.customerServicePhone && !data.roadEmergencyPhone && !data.roadEmergencyPhone2) return null;
 
   return (
-    <div className="flex justify-end items-center gap-4 py-2 w-full text-sm padding-center">
+    <div className="flex justify-end items-center gap-4 py-2 w-full text-xs padding-center">
 
       {data.customerServicePhone && (
         <a href={`tel:${data.customerServicePhone}`} className="flex items-center gap-2 hover:underline">
@@ -63,10 +63,10 @@ export function Navbar({
     <>
       <section className="relative flex flex-col gap-4">
         <nav className="relative flex flex-col items-center gap-4">
-          <div className="hidden md:flex justify-end items-center py-2 w-full text-sm max-container padding-center">
-            {footerData && <ContactInfo data={footerData} />}
-          </div>
-          <div className="flex justify-start items-center w-full h-[var(--header-main-height-mobile)] md:h-[var(--header-main-height)] max-container padding-center">
+          <div className="flex justify-start items-center lg:pt-10 w-full h-[var(--header-main-height-mobile)] md:h-[var(--header-main-height)] max-container padding-center">
+            <div className="hidden top-0 right-0 absolute md:flex justify-end items-center py-2 w-full text-sm max-container padding-center">
+              {footerData && <ContactInfo data={footerData} />}
+            </div>
             <Logo src={logo} alt={siteTitle} priority />
             <div className="flex-1"></div>
             <Search />
