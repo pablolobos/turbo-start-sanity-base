@@ -1992,6 +1992,30 @@ export type HomePage = {
   ogDescription?: string;
 };
 
+export type Sucursales = {
+  _id: string;
+  _type: "sucursales";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  region?: string;
+  telefono?: string;
+  email?: string;
+  direccion?: string;
+  latitud?: number;
+  longitud?: number;
+  personas?: Array<{
+    nombre?: string;
+    cargo?: string;
+    telefono?: string;
+    email?: string;
+    _type: "persona";
+    _key: string;
+  }>;
+};
+
 export type Author = {
   _id: string;
   _type: "author";
@@ -2742,6 +2766,7 @@ export type AllSanitySchemaTypes =
   | Footer
   | Settings
   | HomePage
+  | Sucursales
   | Author
   | Faq
   | Blog
@@ -12794,6 +12819,17 @@ export type QueryGenericPageOGDataResult =
       logo: string | null;
       date: string;
     }
+  | {
+      _id: string;
+      _type: "sucursales";
+      title: string | null;
+      description: null;
+      image: null;
+      dominantColor: null;
+      seoImage: null;
+      logo: string | null;
+      date: string;
+    }
   | null;
 // Variable: queryFooterData
 // Query: *[_type == "footer" && _id == "footer"][0]{  _id,  subtitle,  columns[]{    _key,    title,    links[]{      _key,      name,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      ),    }  },  "logo": *[_type == "settings"][0].logo.asset->url + "?w=80&h=40&dpr=3&fit=max",  "siteTitle": *[_type == "settings"][0].siteTitle,  "socialLinks": *[_type == "settings"][0].socialLinks,  "customerServicePhone": *[_type == "settings"][0].customerServicePhone,  "roadEmergencyPhone": *[_type == "settings"][0].roadEmergencyPhone,  "roadEmergencyPhone2": *[_type == "settings"][0].roadEmergencyPhone2,  "contactPageUrl": select(    *[_type == "settings"][0].contactPageUrl.type == "internal" => *[_type == "settings"][0].contactPageUrl.internal->slug.current,    *[_type == "settings"][0].contactPageUrl.type == "external" => *[_type == "settings"][0].contactPageUrl.external,    null  )}
@@ -12884,13 +12920,17 @@ export type NAVBAR_QUERYResult = {
   contactPageUrl: string | null;
 } | null;
 // Variable: querySitemapData
-// Query: {  "slugPages": *[_type == "page" && defined(slug.current)]{    "slug": slug.current,    "lastModified": _updatedAt  },  "blogPages": *[_type == "blog" && defined(slug.current)]{    "slug": slug.current,    "lastModified": _updatedAt  }}
+// Query: {  "slugPages": *[_type == "page" && defined(slug.current)]{    "slug": slug.current,    "lastModified": _updatedAt  },  "blogPages": *[_type == "blog" && defined(slug.current)]{    "slug": slug.current,    "lastModified": _updatedAt  },  "sucursalesPages": *[_type == "sucursales" && defined(slug.current)]{    "slug": slug.current,    "lastModified": _updatedAt  }}
 export type QuerySitemapDataResult = {
   slugPages: Array<{
     slug: string | null;
     lastModified: string;
   }>;
   blogPages: Array<{
+    slug: string | null;
+    lastModified: string;
+  }>;
+  sucursalesPages: Array<{
     slug: string | null;
     lastModified: string;
   }>;
@@ -33624,6 +33664,14 @@ export type PRODUCT_LISTING_QUERYResult = Array<
     }
   | {
       _id: string;
+      title: string | null;
+      slug: string | null;
+      description: null;
+      image: null;
+      taxonomy: null;
+    }
+  | {
+      _id: string;
       title: null;
       slug: null;
       description: null;
@@ -39072,6 +39120,166 @@ export type CONTACT_INFO_QUERYResult = {
   roadEmergencyPhone2: string | null;
   contactPageUrl: string | null;
 } | null;
+// Variable: querySucursalesData
+// Query: *[_type == "sucursales"]{  _id,  _type,  title,  region,  telefono,  email,  direccion,  latitud,  longitud,  "slug": slug.current,  "personas": personas[]{    nombre,    cargo,    telefono,    email  }} | order(region asc, title asc)
+export type QuerySucursalesDataResult = Array<{
+  _id: string;
+  _type: "sucursales";
+  title: string | null;
+  region: string | null;
+  telefono: string | null;
+  email: string | null;
+  direccion: string | null;
+  latitud: number | null;
+  longitud: number | null;
+  slug: string | null;
+  personas: Array<{
+    nombre: string | null;
+    cargo: string | null;
+    telefono: string | null;
+    email: string | null;
+  }> | null;
+}>;
+// Variable: querySucursalBySlug
+// Query: *[  _type == "sucursales"   && slug.current == $slug][0]{  _id,  _type,  title,  region,  telefono,  email,  direccion,  latitud,  longitud,  "slug": slug.current,  "personas": personas[]{    nombre,    cargo,    telefono,    email  }}
+export type QuerySucursalBySlugResult = {
+  _id: string;
+  _type: "sucursales";
+  title: string | null;
+  region: string | null;
+  telefono: string | null;
+  email: string | null;
+  direccion: string | null;
+  latitud: number | null;
+  longitud: number | null;
+  slug: string | null;
+  personas: Array<{
+    nombre: string | null;
+    cargo: string | null;
+    telefono: string | null;
+    email: string | null;
+  }> | null;
+} | null;
+// Variable: querySucursalesByRegion
+// Query: *[  _type == "sucursales"   && region == $region]{  _id,  _type,  title,  region,  telefono,  email,  direccion,  latitud,  longitud,  "slug": slug.current,  "personas": personas[]{    nombre,    cargo,    telefono,    email  }} | order(title asc)
+export type QuerySucursalesByRegionResult = Array<{
+  _id: string;
+  _type: "sucursales";
+  title: string | null;
+  region: string | null;
+  telefono: string | null;
+  email: string | null;
+  direccion: string | null;
+  latitud: number | null;
+  longitud: number | null;
+  slug: string | null;
+  personas: Array<{
+    nombre: string | null;
+    cargo: string | null;
+    telefono: string | null;
+    email: string | null;
+  }> | null;
+}>;
+// Variable: querySucursalesPaths
+// Query: *[_type == "sucursales" && defined(slug.current)].slug.current
+export type QuerySucursalesPathsResult = Array<string | null>;
+// Variable: SEARCH_QUERY_WITH_SUCURSALES
+// Query: {  "results": *[    _type in ["page", "blog", "camiones", "buses", "motoresPenta", "sucursales"]    && (      title match $searchTerm ||       description match $searchTerm ||      region match $searchTerm    )  ] | order(_createdAt desc) [0...20] {    _id,    _type,    title,    description,    "slug": slug.current,    "image": image{      "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background    },    "taxonomy": coalesce(taxonomias->{      prefLabel,      conceptId    }, null),    _type == "sucursales" => {      region,      direccion    },    _createdAt  }}
+export type SEARCH_QUERY_WITH_SUCURSALESResult = {
+  results: Array<
+    | {
+        _id: string;
+        _type: "blog";
+        title: string | null;
+        description: string | null;
+        slug: string | null;
+        image: {
+          alt: string | "Image-Broken";
+          blurData: string | null;
+          dominantColor: string | null;
+        } | null;
+        taxonomy: null;
+        _createdAt: string;
+      }
+    | {
+        _id: string;
+        _type: "buses";
+        title: string | null;
+        description: string | null;
+        slug: string | null;
+        image: {
+          alt: string | "Image-Broken";
+          blurData: string | null;
+          dominantColor: string | null;
+        } | null;
+        taxonomy: {
+          prefLabel: string | null;
+          conceptId: string | null;
+        } | null;
+        _createdAt: string;
+      }
+    | {
+        _id: string;
+        _type: "camiones";
+        title: string | null;
+        description: string | null;
+        slug: string | null;
+        image: {
+          alt: string | "Image-Broken";
+          blurData: string | null;
+          dominantColor: string | null;
+        } | null;
+        taxonomy: {
+          prefLabel: string | null;
+          conceptId: string | null;
+        } | null;
+        _createdAt: string;
+      }
+    | {
+        _id: string;
+        _type: "motoresPenta";
+        title: string | null;
+        description: string | null;
+        slug: string | null;
+        image: {
+          alt: string | "Image-Broken";
+          blurData: string | null;
+          dominantColor: string | null;
+        } | null;
+        taxonomy: {
+          prefLabel: string | null;
+          conceptId: string | null;
+        } | null;
+        _createdAt: string;
+      }
+    | {
+        _id: string;
+        _type: "page";
+        title: string | null;
+        description: string | null;
+        slug: string | null;
+        image: {
+          alt: string | "Image-Broken";
+          blurData: string | null;
+          dominantColor: string | null;
+        } | null;
+        taxonomy: null;
+        _createdAt: string;
+      }
+    | {
+        _id: string;
+        _type: "sucursales";
+        title: string | null;
+        description: null;
+        slug: string | null;
+        image: null;
+        taxonomy: null;
+        region: string | null;
+        direccion: string | null;
+        _createdAt: string;
+      }
+  >;
+};
 
 // Query TypeMap
 import "@sanity/client";
@@ -39089,7 +39297,7 @@ declare module "@sanity/client" {
     '\n  *[ defined(slug.current) && _id == $id][0]{\n    \n  _id,\n  _type,\n  "title": select(\n    defined(ogTitle) => ogTitle,\n    defined(seoTitle) => seoTitle,\n    title\n  ),\n  "description": select(\n    defined(ogDescription) => ogDescription,\n    defined(seoDescription) => seoDescription,\n    description\n  ),\n  "image": image.asset->url + "?w=566&h=566&dpr=2&fit=max",\n  "dominantColor": image.asset->metadata.palette.dominant.background,\n  "seoImage": seoImage.asset->url + "?w=1200&h=630&dpr=2&fit=max", \n  "logo": *[_type == "settings"][0].logo.asset->url + "?w=80&h=40&dpr=3&fit=max&q=100",\n  "date": coalesce(date, _createdAt)\n\n  }\n': QueryGenericPageOGDataResult;
     '*[_type == "footer" && _id == "footer"][0]{\n  _id,\n  subtitle,\n  columns[]{\n    _key,\n    title,\n    links[]{\n      _key,\n      name,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      ),\n    }\n  },\n  "logo": *[_type == "settings"][0].logo.asset->url + "?w=80&h=40&dpr=3&fit=max",\n  "siteTitle": *[_type == "settings"][0].siteTitle,\n  "socialLinks": *[_type == "settings"][0].socialLinks,\n  "customerServicePhone": *[_type == "settings"][0].customerServicePhone,\n  "roadEmergencyPhone": *[_type == "settings"][0].roadEmergencyPhone,\n  "roadEmergencyPhone2": *[_type == "settings"][0].roadEmergencyPhone2,\n  "contactPageUrl": select(\n    *[_type == "settings"][0].contactPageUrl.type == "internal" => *[_type == "settings"][0].contactPageUrl.internal->slug.current,\n    *[_type == "settings"][0].contactPageUrl.type == "external" => *[_type == "settings"][0].contactPageUrl.external,\n    null\n  )\n}': QueryFooterDataResult;
     '*[\n  _type == "navbar" \n  && _id == "navbar"\n][0]{\n  _id,\n  columns[]{\n    _key,\n    _type == "navbarColumn" => {\n      "type": "column",\n      title,\n      links[]{\n        _key,\n        _type == "navbarColumnLink" => {\n          "type": "link",\n          name,\n          icon,\n          description,\n          "openInNewTab": url.openInNewTab,\n          "href": select(\n            url.type == "internal" => url.internal->slug.current,\n            url.type == "external" => url.external,\n            url.href\n          )\n        },\n        _type == "navbarLinkGroup" => {\n          "type": "group",\n          title,\n          links[]{\n            _key,\n            name,\n            icon,\n            description,\n            "openInNewTab": url.openInNewTab,\n            "href": select(\n              url.type == "internal" => url.internal->slug.current,\n              url.type == "external" => url.external,\n              url.href\n            )\n          }\n        }\n      }\n    },\n    _type == "navbarLink" => {\n      "type": "link",\n      name,\n      description,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  },\n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  },\n  "logo": *[_type == "settings"][0].logo.asset->url + "?w=80&h=40&dpr=3&fit=max",\n  "siteTitle": *[_type == "settings"][0].siteTitle,\n  "customerServicePhone": *[_type == "settings"][0].customerServicePhone,\n  "roadEmergencyPhone": *[_type == "settings"][0].roadEmergencyPhone,\n  "roadEmergencyPhone2": *[_type == "settings"][0].roadEmergencyPhone2,\n  "contactPageUrl": select(\n    *[_type == "settings"][0].contactPageUrl.type == "internal" => *[_type == "settings"][0].contactPageUrl.internal->slug.current,\n    *[_type == "settings"][0].contactPageUrl.type == "external" => *[_type == "settings"][0].contactPageUrl.external,\n    null\n  )\n}': NAVBAR_QUERYResult;
-    '{\n  "slugPages": *[_type == "page" && defined(slug.current)]{\n    "slug": slug.current,\n    "lastModified": _updatedAt\n  },\n  "blogPages": *[_type == "blog" && defined(slug.current)]{\n    "slug": slug.current,\n    "lastModified": _updatedAt\n  }\n}': QuerySitemapDataResult;
+    '{\n  "slugPages": *[_type == "page" && defined(slug.current)]{\n    "slug": slug.current,\n    "lastModified": _updatedAt\n  },\n  "blogPages": *[_type == "blog" && defined(slug.current)]{\n    "slug": slug.current,\n    "lastModified": _updatedAt\n  },\n  "sucursalesPages": *[_type == "sucursales" && defined(slug.current)]{\n    "slug": slug.current,\n    "lastModified": _updatedAt\n  }\n}': QuerySitemapDataResult;
     '\n  *[_type == "settings"][0]{\n    _id,\n    _type,\n    siteTitle,\n    siteDescription,\n    socialLinks{\n      linkedin,\n      facebook,\n      twitter,\n      instagram,\n      youtube\n    },\n    customerServicePhone,\n    roadEmergencyPhone,\n    roadEmergencyPhone2,\n    "contactPageUrl": select(\n      contactPageUrl.type == "internal" => contactPageUrl.internal->slug.current,\n      contactPageUrl.type == "external" => contactPageUrl.external,\n      null\n    ),\n    \n  cotizadorFormTitle,\n  cotizadorFormDescription,\n  "cotizadorForm": coalesce(cotizadorForm->{\n    _id,\n    _type,\n    title,\n    description,\n    "slug": slug.current,\n    \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n\n  }, null)\n\n  }\n': QueryGlobalSeoSettingsResult;
     '*[_type == "formularios"]{\n  _id,\n  title,\n  "slug": slug.current,\n  description\n}': QueryAllFormsResult;
     '*[\n  _type == "formularios" \n  && slug.current == $slug\n][0]{\n  _id,\n  title,\n  description,\n  \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n  submitButtonText,\n  successMessage,\n  errorMessage\n}': QueryFormBySlugResult;
@@ -39111,5 +39319,10 @@ declare module "@sanity/client" {
     '*[_type == "buses" && slug.current == $slug][0]{\n  _id,\n  _type,\n  title,\n  subtitle,\n  description,\n  image,\n  \n  "pageBuilder": pageBuilder[]{\n    ...,\n    _type,\n    \n  _type == "cta" => {\n    ...,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    \n  "href": select(\n    defined(url.type) => select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.type == "file" => url.file.asset->url,\n      "#"\n    ),\n    defined(url.customUrl.type) => select(\n      url.customUrl.type == "internal" => url.customUrl.internal->slug.current,\n      url.customUrl.type == "external" => url.customUrl.external,\n      url.customUrl.type == "file" => url.customUrl.file.asset->url,\n      "#"\n    ),\n    "#"\n  ),\n  "openInNewTab": coalesce(url.openInNewTab, url.customUrl.openInNewTab, false)\n\n  }\n\n  },\n  _type == "hero" => {\n    ...,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    \n  "href": select(\n    defined(url.type) => select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.type == "file" => url.file.asset->url,\n      "#"\n    ),\n    defined(url.customUrl.type) => select(\n      url.customUrl.type == "internal" => url.customUrl.internal->slug.current,\n      url.customUrl.type == "external" => url.customUrl.external,\n      url.customUrl.type == "file" => url.customUrl.file.asset->url,\n      "#"\n    ),\n    "#"\n  ),\n  "openInNewTab": coalesce(url.openInNewTab, url.customUrl.openInNewTab, false)\n\n  }\n\n  },\n  _type == "mainHero" => {\n    ...,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    \n  "href": select(\n    defined(url.type) => select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.type == "file" => url.file.asset->url,\n      "#"\n    ),\n    defined(url.customUrl.type) => select(\n      url.customUrl.type == "internal" => url.customUrl.internal->slug.current,\n      url.customUrl.type == "external" => url.customUrl.external,\n      url.customUrl.type == "file" => url.customUrl.file.asset->url,\n      "#"\n    ),\n    "#"\n  ),\n  "openInNewTab": coalesce(url.openInNewTab, url.customUrl.openInNewTab, false)\n\n  }\n\n  },\n  _type == "videoHero" => {\n    ...,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    \n  "href": select(\n    defined(url.type) => select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.type == "file" => url.file.asset->url,\n      "#"\n    ),\n    defined(url.customUrl.type) => select(\n      url.customUrl.type == "internal" => url.customUrl.internal->slug.current,\n      url.customUrl.type == "external" => url.customUrl.external,\n      url.customUrl.type == "file" => url.customUrl.file.asset->url,\n      "#"\n    ),\n    "#"\n  ),\n  "openInNewTab": coalesce(url.openInNewTab, url.customUrl.openInNewTab, false)\n\n  }\n\n  },\n  _type == "imageLinkCards" => {\n    ...,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    \n  "href": select(\n    defined(url.type) => select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.type == "file" => url.file.asset->url,\n      "#"\n    ),\n    defined(url.customUrl.type) => select(\n      url.customUrl.type == "internal" => url.customUrl.internal->slug.current,\n      url.customUrl.type == "external" => url.customUrl.external,\n      url.customUrl.type == "file" => url.customUrl.file.asset->url,\n      "#"\n    ),\n    "#"\n  ),\n  "openInNewTab": coalesce(url.openInNewTab, url.customUrl.openInNewTab, false)\n\n  }\n\n  },\n  _type == "doubleHero" => {\n    ...,\n    "primaryButtons": primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    "secondaryButtons": secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n\n  }\n,\n  taxonomias,\n  slug\n}': BUS_BY_SLUG_QUERYResult;
     '*[_type == "motoresPenta" && slug.current == $slug][0]{\n  _id,\n  _type,\n  title,\n  subtitle,\n  description,\n  image,\n  \n  "pageBuilder": pageBuilder[]{\n    ...,\n    _type,\n    \n  _type == "cta" => {\n    ...,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    \n  "href": select(\n    defined(url.type) => select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.type == "file" => url.file.asset->url,\n      "#"\n    ),\n    defined(url.customUrl.type) => select(\n      url.customUrl.type == "internal" => url.customUrl.internal->slug.current,\n      url.customUrl.type == "external" => url.customUrl.external,\n      url.customUrl.type == "file" => url.customUrl.file.asset->url,\n      "#"\n    ),\n    "#"\n  ),\n  "openInNewTab": coalesce(url.openInNewTab, url.customUrl.openInNewTab, false)\n\n  }\n\n  },\n  _type == "hero" => {\n    ...,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    \n  "href": select(\n    defined(url.type) => select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.type == "file" => url.file.asset->url,\n      "#"\n    ),\n    defined(url.customUrl.type) => select(\n      url.customUrl.type == "internal" => url.customUrl.internal->slug.current,\n      url.customUrl.type == "external" => url.customUrl.external,\n      url.customUrl.type == "file" => url.customUrl.file.asset->url,\n      "#"\n    ),\n    "#"\n  ),\n  "openInNewTab": coalesce(url.openInNewTab, url.customUrl.openInNewTab, false)\n\n  }\n\n  },\n  _type == "mainHero" => {\n    ...,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    \n  "href": select(\n    defined(url.type) => select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.type == "file" => url.file.asset->url,\n      "#"\n    ),\n    defined(url.customUrl.type) => select(\n      url.customUrl.type == "internal" => url.customUrl.internal->slug.current,\n      url.customUrl.type == "external" => url.customUrl.external,\n      url.customUrl.type == "file" => url.customUrl.file.asset->url,\n      "#"\n    ),\n    "#"\n  ),\n  "openInNewTab": coalesce(url.openInNewTab, url.customUrl.openInNewTab, false)\n\n  }\n\n  },\n  _type == "videoHero" => {\n    ...,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    \n  "href": select(\n    defined(url.type) => select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.type == "file" => url.file.asset->url,\n      "#"\n    ),\n    defined(url.customUrl.type) => select(\n      url.customUrl.type == "internal" => url.customUrl.internal->slug.current,\n      url.customUrl.type == "external" => url.customUrl.external,\n      url.customUrl.type == "file" => url.customUrl.file.asset->url,\n      "#"\n    ),\n    "#"\n  ),\n  "openInNewTab": coalesce(url.openInNewTab, url.customUrl.openInNewTab, false)\n\n  }\n\n  },\n  _type == "imageLinkCards" => {\n    ...,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    \n  "href": select(\n    defined(url.type) => select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.type == "file" => url.file.asset->url,\n      "#"\n    ),\n    defined(url.customUrl.type) => select(\n      url.customUrl.type == "internal" => url.customUrl.internal->slug.current,\n      url.customUrl.type == "external" => url.customUrl.external,\n      url.customUrl.type == "file" => url.customUrl.file.asset->url,\n      "#"\n    ),\n    "#"\n  ),\n  "openInNewTab": coalesce(url.openInNewTab, url.customUrl.openInNewTab, false)\n\n  }\n\n  },\n  _type == "doubleHero" => {\n    ...,\n    "primaryButtons": primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    "secondaryButtons": secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n\n  }\n,\n  taxonomias,\n  slug\n}': MOTOR_PENTA_BY_SLUG_QUERYResult;
     '*[_type == "settings"][0]{\n  customerServicePhone,\n  roadEmergencyPhone,\n  roadEmergencyPhone2,\n  "contactPageUrl": select(\n    contactPageUrl.type == "internal" => contactPageUrl.internal->slug.current,\n    contactPageUrl.type == "external" => contactPageUrl.external,\n    null\n  )\n}': CONTACT_INFO_QUERYResult;
+    '*[_type == "sucursales"]{\n  _id,\n  _type,\n  title,\n  region,\n  telefono,\n  email,\n  direccion,\n  latitud,\n  longitud,\n  "slug": slug.current,\n  "personas": personas[]{\n    nombre,\n    cargo,\n    telefono,\n    email\n  }\n} | order(region asc, title asc)': QuerySucursalesDataResult;
+    '*[\n  _type == "sucursales" \n  && slug.current == $slug\n][0]{\n  _id,\n  _type,\n  title,\n  region,\n  telefono,\n  email,\n  direccion,\n  latitud,\n  longitud,\n  "slug": slug.current,\n  "personas": personas[]{\n    nombre,\n    cargo,\n    telefono,\n    email\n  }\n}': QuerySucursalBySlugResult;
+    '*[\n  _type == "sucursales" \n  && region == $region\n]{\n  _id,\n  _type,\n  title,\n  region,\n  telefono,\n  email,\n  direccion,\n  latitud,\n  longitud,\n  "slug": slug.current,\n  "personas": personas[]{\n    nombre,\n    cargo,\n    telefono,\n    email\n  }\n} | order(title asc)': QuerySucursalesByRegionResult;
+    '\n  *[_type == "sucursales" && defined(slug.current)].slug.current\n': QuerySucursalesPathsResult;
+    '{\n  "results": *[\n    _type in ["page", "blog", "camiones", "buses", "motoresPenta", "sucursales"]\n    && (\n      title match $searchTerm || \n      description match $searchTerm ||\n      region match $searchTerm\n    )\n  ] | order(_createdAt desc) [0...20] {\n    _id,\n    _type,\n    title,\n    description,\n    "slug": slug.current,\n    "image": image{\n      "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background\n    },\n    "taxonomy": coalesce(taxonomias->{\n      prefLabel,\n      conceptId\n    }, null),\n    _type == "sucursales" => {\n      region,\n      direccion\n    },\n    _createdAt\n  }\n}': SEARCH_QUERY_WITH_SUCURSALESResult;
   }
 }

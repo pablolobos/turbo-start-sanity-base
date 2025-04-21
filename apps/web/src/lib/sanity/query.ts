@@ -791,6 +791,10 @@ export const querySitemapData = defineQuery(`{
   "blogPages": *[_type == "blog" && defined(slug.current)]{
     "slug": slug.current,
     "lastModified": _updatedAt
+  },
+  "sucursalesPages": *[_type == "sucursales" && defined(slug.current)]{
+    "slug": slug.current,
+    "lastModified": _updatedAt
   }
 }`);
 
@@ -1208,4 +1212,108 @@ export const CONTACT_INFO_QUERY = defineQuery(`*[_type == "settings"][0]{
     contactPageUrl.type == "external" => contactPageUrl.external,
     null
   )
+}`);
+
+// Sucursales queries
+export const querySucursalesData = defineQuery(`*[_type == "sucursales"]{
+  _id,
+  _type,
+  title,
+  region,
+  telefono,
+  email,
+  direccion,
+  latitud,
+  longitud,
+  "slug": slug.current,
+  "personas": personas[]{
+    nombre,
+    cargo,
+    telefono,
+    email
+  }
+} | order(region asc, title asc)`);
+
+export const querySucursalBySlug = defineQuery(`*[
+  _type == "sucursales" 
+  && slug.current == $slug
+][0]{
+  _id,
+  _type,
+  title,
+  region,
+  telefono,
+  email,
+  direccion,
+  latitud,
+  longitud,
+  "slug": slug.current,
+  "personas": personas[]{
+    nombre,
+    cargo,
+    telefono,
+    email
+  }
+}`);
+
+export const querySucursalesByRegion = defineQuery(`*[
+  _type == "sucursales" 
+  && region == $region
+]{
+  _id,
+  _type,
+  title,
+  region,
+  telefono,
+  email,
+  direccion,
+  latitud,
+  longitud,
+  "slug": slug.current,
+  "personas": personas[]{
+    nombre,
+    cargo,
+    telefono,
+    email
+  }
+} | order(title asc)`);
+
+export const querySucursalesPaths = defineQuery(`
+  *[_type == "sucursales" && defined(slug.current)].slug.current
+`);
+
+export const queryAllRegiones = defineQuery(`
+  *[_type == "sucursales" && defined(region)].region | order() | unique
+`);
+
+// Add sucursales to search query
+export const SEARCH_QUERY_WITH_SUCURSALES = defineQuery(`{
+  "results": *[
+    _type in ["page", "blog", "camiones", "buses", "motoresPenta", "sucursales"]
+    && (
+      title match $searchTerm || 
+      description match $searchTerm ||
+      region match $searchTerm
+    )
+  ] | order(_createdAt desc) [0...20] {
+    _id,
+    _type,
+    title,
+    description,
+    "slug": slug.current,
+    "image": image{
+      "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),
+      "blurData": asset->metadata.lqip,
+      "dominantColor": asset->metadata.palette.dominant.background
+    },
+    "taxonomy": coalesce(taxonomias->{
+      prefLabel,
+      conceptId
+    }, null),
+    _type == "sucursales" => {
+      region,
+      direccion
+    },
+    _createdAt
+  }
 }`);
