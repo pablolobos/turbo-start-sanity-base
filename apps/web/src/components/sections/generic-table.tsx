@@ -24,7 +24,9 @@ const TableCell = ({ content, isHeader = false, isLastColumn = false, className 
             {isLastColumn && typeof content === 'object' ? (
                 <RichText richText={content} className="prose-p:first:mt-0 prose-p:last-of-type:mb-0" />
             ) : (
-                content
+                <span className="md:block">
+                    {content}
+                </span>
             )}
         </div>
     );
@@ -45,13 +47,12 @@ export function GenericTable({
     }
 
     const getGridClassName = () => {
-        // Create a dynamic grid template based on columnCount
-        const gridCols = `grid-cols-1 md:grid-cols-${columnCount}`;
-        const baseGridStyle = `grid ${gridCols} gap-px grid-flow-row auto-rows-auto`;
+        const gridCols = `md:grid-cols-${columnCount}`;
+        const baseGridStyle = `grid grid-cols-1 ${gridCols} gap-px`;
 
         switch (variant) {
             case 'striped':
-                return cn(baseGridStyle, "bg-gray-200");
+                return cn(baseGridStyle, "bg-gray-200 divide-y divide-gray-200 md:divide-y-0");
             case 'bordered':
                 return cn(baseGridStyle, "divide-y divide-gray-200");
             case 'compact':
@@ -63,9 +64,12 @@ export function GenericTable({
 
     const getRowClassName = (index: number) => {
         if (variant === 'striped') {
-            return index % 2 === 0 ? "bg-gray-50" : "bg-white";
+            return cn(
+                index % 2 === 0 ? "bg-gray-50" : "bg-white",
+                "md:divide-x divide-gray-200"
+            );
         }
-        return "bg-white";
+        return cn("bg-white", "md:divide-x divide-gray-200");
     };
 
     return (
@@ -81,34 +85,39 @@ export function GenericTable({
                 </div>
             )}
 
-            <div className={cn(
-                "grid grid-cols-1 gap-px auto-rows-auto",
-                `md:grid-cols-${columnCount}`
-            )}>
-                {/* Headers */}
+            <div className={getGridClassName()}>
+                {/* Headers - only visible on desktop */}
                 {columnHeaders.map((header, index) => (
                     <TableCell
                         key={`header-${index}`}
                         content={header}
                         isHeader={true}
                         isLastColumn={index === columnHeaders.length - 1}
-                        className="border-gray-300 border-b"
+                        className={cn(
+                            "border-gray-300 border-b",
+                            "hidden md:block" // Hide on mobile
+                        )}
                     />
                 ))}
-
-
+            </div>
+            <div className={getGridClassName()}>
                 {/* Rows */}
-                {rows.flatMap((row, rowIndex) =>
+                {rows.map((row, rowIndex) =>
                     (row.cells || []).map((cell, cellIndex) => (
-                        <TableCell
-                            key={`cell-${rowIndex}-${cellIndex}`}
-                            content={cell.content}
-                            isLastColumn={cell.isLastColumn || false}
-                            className={cn(
-                                getRowClassName(rowIndex),
-                                "border-b border-gray-200"
-                            )}
-                        />
+                        <div key={`cell-${rowIndex}-${cellIndex}`} className="md:block flex md:mb-0">
+                            {/* Mobile header label */}
+                            <div className="md:hidden px-4 w-1/3 font-medium text-gray-800">
+                                {columnHeaders[cellIndex]}
+                            </div>
+                            {/* Cell content */}
+                            <div className="flex-1 md:w-full">
+                                <TableCell
+                                    content={cell.content}
+                                    isLastColumn={cell.isLastColumn || false}
+                                    className={getRowClassName(rowIndex)}
+                                />
+                            </div>
+                        </div>
                     ))
                 )}
             </div>
