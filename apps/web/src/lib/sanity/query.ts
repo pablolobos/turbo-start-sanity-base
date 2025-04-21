@@ -121,6 +121,7 @@ const heroBlock = `
     ...,
     variant,
     titleFont,
+    imageAlignment,
     ${imageFragment},
     ${buttonsFragment},
     ${richTextFragment}

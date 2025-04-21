@@ -1635,6 +1635,23 @@
                               },
                               "optional": true
                             },
+                            "imageAlignment": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "union",
+                                "of": [
+                                  {
+                                    "type": "string",
+                                    "value": "default"
+                                  },
+                                  {
+                                    "type": "string",
+                                    "value": "fit"
+                                  }
+                                ]
+                              },
+                              "optional": true
+                            },
                             "buttons": {
                               "type": "objectAttribute",
                               "value": {
@@ -9594,6 +9611,23 @@
                 }
               }
             }
+          },
+          "optional": true
+        },
+        "imageAlignment": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "default"
+              },
+              {
+                "type": "string",
+                "value": "fit"
+              }
+            ]
           },
           "optional": true
         },

@@ -34,9 +34,11 @@ export function HeroBlock({
   titleFont,
   ...rest
 }: HeroBlockProps) {
-  // Using optional access to get the variant property that might not be recognized by TypeScript yet
-  // @ts-ignore - variant property is added to the schema but not yet in the TypeScript types
+  // Using optional access to get the variant and imageAlignment properties
+  // @ts-ignore - properties are added to the schema but not yet in the TypeScript types
   const variant = rest.variant;
+  // @ts-ignore
+  const imageAlignment = rest.imageAlignment || 'default';
   const backgroundClasses = getVariantClasses(variant);
 
   return (
@@ -79,7 +81,10 @@ export function HeroBlock({
                 height={800}
                 priority
                 quality={90}
-                className="w-full h-full object-cover"
+                className={cn(
+                  "w-full h-full",
+                  imageAlignment === "default" ? "object-cover" : "object-contain p-4 bg-red-400 w-[80%]"
+                )}
               />
             </div>
           )}

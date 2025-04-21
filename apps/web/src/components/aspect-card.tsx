@@ -24,7 +24,7 @@ export function AspectCard({ aspect, className = "" }: AspectCardProps) {
     }
 
     return (
-        <article className={`content-start gap-2 lg:gap-6 grid grid-cols-1 grid-rows-[auto_auto_1fr] w-full ${className}`}>
+        <article className={`content-start gap-2 lg:gap-6 grid grid-cols-1 grid-rows-[auto_auto_1fr] w-full ${variant === 'icon' ? 'pb-4 lg:pb-20' : ''} ${className}`}>
             {variant !== 'none' && image?.asset && (
                 <div className={`relative rounded-none w-full h-auto overflow-hidden ${variant === 'icon'
                     ? 'aspect-square max-w-[120px] mx-auto'

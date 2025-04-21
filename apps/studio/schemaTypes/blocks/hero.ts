@@ -54,6 +54,20 @@ export const hero = defineType({
         hotspot: true,
       },
     }),
+    defineField({
+      name: "imageAlignment",
+      type: "string",
+      title: "Alineación de imagen",
+      description: "Selecciona cómo se alineará la imagen en el hero",
+      options: {
+        list: [
+          { title: "Default", value: "default" },
+          { title: "Fit", value: "fit" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "default",
+    }),
     buttonsField,
   ],
   preview: {
