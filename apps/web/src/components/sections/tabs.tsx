@@ -4,8 +4,7 @@ import { Tabs as UITabs, TabsContent, TabsList, TabsTrigger } from "@workspace/u
 import { cn } from "@workspace/ui/lib/utils"
 
 
-type BlockType = "cta" | "doubleHero" | "faqAccordion" | "featureCardsIcon" | "formBlock" | "hero" | "imageLinkCards" | "mainHero" | "subscribeNewsletter" | "tabs"
-
+type BlockType = "cta" | "doubleHero" | "faqAccordion" | "featureCardsIcon" | "formBlock" | "hero" | "imageLinkCards" | "mainHero" | "subscribeNewsletter" | "tabs" | "genericTable" | "productListing"
 interface TabItem {
     _key: string
     label: string
@@ -31,7 +30,7 @@ import { ImageLinkCards } from "./image-link-cards"
 import { MainHeroBlock } from "./main-hero"
 import { SubscribeNewsletter } from "./subscribe-newsletter"
 import { GenericTable } from "./generic-table"
-
+import { ProductListing } from "./product-listing"
 // Map of block types to their components
 const blockComponents = {
     cta: CTABlock,
@@ -45,6 +44,7 @@ const blockComponents = {
     subscribeNewsletter: SubscribeNewsletter,
     tabs: TabsBlock,
     genericTable: GenericTable,
+    productListing: ProductListing,
 } as const
 
 export function TabsBlock({ title, description, tabs }: TabsBlockProps) {
@@ -61,8 +61,8 @@ export function TabsBlock({ title, description, tabs }: TabsBlockProps) {
                 )}
             </div>
 
-            <UITabs defaultValue={tabs[0]?._key} className="w-full">
-                <TabsList className="justify-center bg-transparent mb-8 px-[var(--p-x-sm)] md:px-[var(--p-x-md)] lg:px-[var(--p-x-exterior-lg)] border-b rounded-none w-full">
+            <UITabs defaultValue={tabs[0]?._key} className="w-full section-y-padding-sm">
+                <TabsList className="justify-start lg:justify-center bg-transparent mb-8 px-[var(--p-x-sm)] md:px-[var(--p-x-md)] lg:px-[var(--p-x-exterior-lg)] border-b rounded-none w-full overflow-x-auto">
                     {tabs.map((tab) => (
                         <TabsTrigger
                             key={tab._key}

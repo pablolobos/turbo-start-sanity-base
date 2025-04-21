@@ -91,11 +91,7 @@ export function ProductCard({ product, productType }: ProductCardProps) {
                         {title}
                     </Link>
                 </h3>
-                <div className="flex items-center gap-x-4 my-1">
-                    <span className="inline-flex items-center bg-muted px-2.5 py-0.5 rounded-full font-semibold text-sm">
-                        {taxonomyLabel}
-                    </span>
-                </div>
+
                 <p className="text-muted-foreground text-base leading-6">
                     {description}
                 </p>

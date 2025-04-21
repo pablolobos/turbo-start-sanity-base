@@ -269,8 +269,7 @@ export function ProductListing(props: ProductListingProps) {
 
                     {componentData.categories.map((category) => (
                         <div key={category._id} className="mb-12 last:mb-0">
-                            <h3 className="mb-6 font-semibold text-2xl">{category.prefLabel}</h3>
-                            <div className="gap-6 grid grid-cols-1 sm:grid-cols-2">
+                            <div className="gap-6 lg:gap-12 grid grid-cols-1 sm:grid-cols-2">
                                 {category.products?.map((product) => (
                                     <ProductCard
                                         key={product._id}
