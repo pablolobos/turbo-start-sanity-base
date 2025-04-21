@@ -983,6 +983,21 @@
                                           }
                                         }
                                       }
+                                    },
+                                    {
+                                      "type": "object",
+                                      "attributes": {
+                                        "_key": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      },
+                                      "rest": {
+                                        "type": "inline",
+                                        "name": "button"
+                                      }
                                     }
                                   ]
                                 }
@@ -1559,6 +1574,21 @@
                                             }
                                           }
                                         }
+                                      }
+                                    },
+                                    {
+                                      "type": "object",
+                                      "attributes": {
+                                        "_key": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      },
+                                      "rest": {
+                                        "type": "inline",
+                                        "name": "button"
                                       }
                                     }
                                   ]
@@ -2593,6 +2623,21 @@
                                           }
                                         }
                                       }
+                                    },
+                                    {
+                                      "type": "object",
+                                      "attributes": {
+                                        "_key": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      },
+                                      "rest": {
+                                        "type": "inline",
+                                        "name": "button"
+                                      }
                                     }
                                   ]
                                 }
@@ -3468,6 +3513,21 @@
                                             }
                                           }
                                         }
+                                      }
+                                    },
+                                    {
+                                      "type": "object",
+                                      "attributes": {
+                                        "_key": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      },
+                                      "rest": {
+                                        "type": "inline",
+                                        "name": "button"
                                       }
                                     }
                                   ]
@@ -4727,6 +4787,21 @@
                                                               }
                                                             }
                                                           }
+                                                        },
+                                                        {
+                                                          "type": "object",
+                                                          "attributes": {
+                                                            "_key": {
+                                                              "type": "objectAttribute",
+                                                              "value": {
+                                                                "type": "string"
+                                                              }
+                                                            }
+                                                          },
+                                                          "rest": {
+                                                            "type": "inline",
+                                                            "name": "button"
+                                                          }
                                                         }
                                                       ]
                                                     }
@@ -5771,6 +5846,21 @@
                                           }
                                         }
                                       }
+                                    },
+                                    {
+                                      "type": "object",
+                                      "attributes": {
+                                        "_key": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      },
+                                      "rest": {
+                                        "type": "inline",
+                                        "name": "button"
+                                      }
                                     }
                                   ]
                                 }
@@ -6308,6 +6398,21 @@
                         }
                       }
                     }
+                  }
+                },
+                {
+                  "type": "object",
+                  "attributes": {
+                    "_key": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "rest": {
+                    "type": "inline",
+                    "name": "button"
                   }
                 }
               ]
@@ -7434,6 +7539,21 @@
                                           }
                                         }
                                       }
+                                    },
+                                    {
+                                      "type": "object",
+                                      "attributes": {
+                                        "_key": {
+                                          "type": "objectAttribute",
+                                          "value": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      },
+                                      "rest": {
+                                        "type": "inline",
+                                        "name": "button"
+                                      }
                                     }
                                   ]
                                 }
@@ -8509,6 +8629,21 @@
                       }
                     }
                   }
+                },
+                {
+                  "type": "object",
+                  "attributes": {
+                    "_key": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "rest": {
+                    "type": "inline",
+                    "name": "button"
+                  }
                 }
               ]
             }
@@ -9484,6 +9619,21 @@
                         }
                       }
                     }
+                  }
+                },
+                {
+                  "type": "object",
+                  "attributes": {
+                    "_key": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "rest": {
+                    "type": "inline",
+                    "name": "button"
                   }
                 }
               ]
@@ -10464,6 +10614,21 @@
                       }
                     }
                   }
+                },
+                {
+                  "type": "object",
+                  "attributes": {
+                    "_key": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "rest": {
+                    "type": "inline",
+                    "name": "button"
+                  }
                 }
               ]
             }
@@ -10882,6 +11047,21 @@
                         }
                       }
                     }
+                  }
+                },
+                {
+                  "type": "object",
+                  "attributes": {
+                    "_key": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "rest": {
+                    "type": "inline",
+                    "name": "button"
                   }
                 }
               ]
@@ -11399,6 +11579,21 @@
                         }
                       }
                     }
+                  }
+                },
+                {
+                  "type": "object",
+                  "attributes": {
+                    "_key": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "rest": {
+                    "type": "inline",
+                    "name": "button"
                   }
                 }
               ]
@@ -12136,6 +12331,21 @@
                   }
                 }
               }
+            }
+          },
+          {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "button"
             }
           }
         ]

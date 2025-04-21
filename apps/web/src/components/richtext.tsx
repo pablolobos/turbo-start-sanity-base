@@ -1,4 +1,5 @@
 import { cn } from "@workspace/ui/lib/utils";
+import { Button } from "@workspace/ui/components/button";
 import Link from "next/link";
 import {
   PortableText,
@@ -95,6 +96,27 @@ const components: Partial<PortableTextReactComponents> = {
         />
       </div>
     ),
+    button: ({ value }) => {
+      if (!value.href) {
+        console.warn("🚀 button link is not set", value);
+        return null;
+      }
+      return (
+        <div className="my-6">
+          <Button
+            variant={value.variant || "default"}
+            asChild
+          >
+            <Link
+              href={value.href}
+              target={value.openInNewTab ? "_blank" : "_self"}
+            >
+              {value.text}
+            </Link>
+          </Button>
+        </div>
+      );
+    },
   },
   hardBreak: () => <br />,
 };

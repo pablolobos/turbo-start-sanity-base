@@ -1,4 +1,5 @@
 import { ImageIcon, LinkIcon } from "@sanity/icons";
+import { Command } from "lucide-react";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
 const richTextMembers = [
@@ -55,6 +56,12 @@ const richTextMembers = [
         title: "Caption Text",
       }),
     ],
+  }),
+  defineArrayMember({
+    name: "button",
+    title: "Button",
+    type: "button",
+    icon: Command,
   }),
 ];
 

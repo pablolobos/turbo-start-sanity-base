@@ -149,6 +149,9 @@ export type Tabs = {
                 _type: "image";
                 _key: string;
               }
+            | ({
+                _key: string;
+              } & Button)
           >;
           backgroundType?: "image" | "video";
           backgroundImage?: {
@@ -231,6 +234,9 @@ export type Tabs = {
                 _type: "image";
                 _key: string;
               }
+            | ({
+                _key: string;
+              } & Button)
           >;
           image?: {
             asset?: {
@@ -390,6 +396,9 @@ export type Tabs = {
                 _type: "image";
                 _key: string;
               }
+            | ({
+                _key: string;
+              } & Button)
           >;
           buttons?: Array<
             {
@@ -502,6 +511,9 @@ export type Tabs = {
                 _type: "image";
                 _key: string;
               }
+            | ({
+                _key: string;
+              } & Button)
           >;
           buttons?: Array<
             {
@@ -667,6 +679,9 @@ export type Tabs = {
                         _type: "image";
                         _key: string;
                       }
+                    | ({
+                        _key: string;
+                      } & Button)
                   >;
                   isLastColumn?: boolean;
                   _type: "richCell";
@@ -794,6 +809,9 @@ export type Tabs = {
                 _type: "image";
                 _key: string;
               }
+            | ({
+                _key: string;
+              } & Button)
           >;
           videoType?: "mp4" | "youtube";
           mp4File?: {
@@ -863,6 +881,9 @@ export type VideoHero = {
         _type: "image";
         _key: string;
       }
+    | ({
+        _key: string;
+      } & Button)
   >;
   videoType?: "mp4" | "youtube";
   mp4File?: {
@@ -1010,6 +1031,9 @@ export type GenericTable = {
                 _type: "image";
                 _key: string;
               }
+            | ({
+                _key: string;
+              } & Button)
           >;
           isLastColumn?: boolean;
           _type: "richCell";
@@ -1142,6 +1166,9 @@ export type ImageLinkCards = {
         _type: "image";
         _key: string;
       }
+    | ({
+        _key: string;
+      } & Button)
   >;
   buttons?: Array<
     {
@@ -1273,6 +1300,9 @@ export type Cta = {
         _type: "image";
         _key: string;
       }
+    | ({
+        _key: string;
+      } & Button)
   >;
   buttons?: Array<
     {
@@ -1399,6 +1429,9 @@ export type Hero = {
         _type: "image";
         _key: string;
       }
+    | ({
+        _key: string;
+      } & Button)
   >;
   image?: {
     asset?: {
@@ -1458,6 +1491,9 @@ export type MainHero = {
         _type: "image";
         _key: string;
       }
+    | ({
+        _key: string;
+      } & Button)
   >;
   backgroundType?: "image" | "video";
   backgroundImage?: {
@@ -1537,6 +1573,9 @@ export type SpecificationItem = {
         _type: "image";
         _key: string;
       }
+    | ({
+        _key: string;
+      } & Button)
   >;
 };
 
@@ -1659,6 +1698,9 @@ export type RichText = Array<
       _type: "image";
       _key: string;
     }
+  | ({
+      _key: string;
+    } & Button)
 >;
 
 export type Navbar = {
@@ -2570,7 +2612,7 @@ export type AllSanitySchemaTypes =
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../web/src/lib/sanity/query.ts
 // Variable: queryHomePageData
-// Query: *[_type == "homePage" && _id == "homePage"][0]{    ...,    _id,    _type,    "slug": slug.current,    title,    description,      pageBuilder[]{    ...,    _type,      _type == "cta" => {    ...,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },  },      _type == "mainHero" => {    ...,    titleFont,    "backgroundImage": backgroundImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    "backgroundVideo": backgroundVideo.asset->url,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  },      _type == "hero" => {    ...,    variant,    titleFont,    imageAlignment,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  },      _type == "doubleHero" => {    ...,    variant,    primaryBadge,    primaryTitle,    "primaryRichText": primaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "primaryImage": primaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    primaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    secondaryBadge,    secondaryTitle,    "secondaryRichText": secondaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "secondaryImage": secondaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    secondaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },      _type == "faqAccordion" => {    ...,      "faqs": array::compact(faqs[]->{    title,    _id,    _type,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  }),    link{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },      _type == "subscribeNewsletter" => {    ...,    "subTitle": subTitle[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "helperText": helperText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      _type == "imageLinkCards" => {    ...,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },    "cards": array::compact(cards[]{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      ),        image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    })  },      _type == "formBlock" => {    ...,    title,    description,    variant,    displayMode,    triggerText,    buttonPosition,    "form": form->{      _id,      title,      description,        fields[]{    label,    name,    type,    required,    options,    placeholder  },  emailRecipients,  submitButtonText,  successMessage,  errorMessage,      submitButtonText,      successMessage,      errorMessage    }  },      _type == "tabs" => {    ...,    title,    description,    tabs[]{      _key,      label,      content[]{        ...,        _type,        _key,          _type == "cta" => {    ...,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },  },          _type == "mainHero" => {    ...,    titleFont,    "backgroundImage": backgroundImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    "backgroundVideo": backgroundVideo.asset->url,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  },          _type == "hero" => {    ...,    variant,    titleFont,    imageAlignment,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  },          _type == "doubleHero" => {    ...,    variant,    primaryBadge,    primaryTitle,    "primaryRichText": primaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "primaryImage": primaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    primaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    secondaryBadge,    secondaryTitle,    "secondaryRichText": secondaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "secondaryImage": secondaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    secondaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },          _type == "faqAccordion" => {    ...,      "faqs": array::compact(faqs[]->{    title,    _id,    _type,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  }),    link{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },          _type == "subscribeNewsletter" => {    ...,    "subTitle": subTitle[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "helperText": helperText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },          _type == "imageLinkCards" => {    ...,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },    "cards": array::compact(cards[]{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      ),        image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    })  },          _type == "formBlock" => {    ...,    title,    description,    variant,    displayMode,    triggerText,    buttonPosition,    "form": form->{      _id,      title,      description,        fields[]{    label,    name,    type,    required,    options,    placeholder  },  emailRecipients,  submitButtonText,  successMessage,  errorMessage,      submitButtonText,      successMessage,      errorMessage    }  },          _type == "imageGallery" => {    ...,    title,    description,    layout,    columns,    slidesPerRow,    "images": images[]{      ...,      "image": image{        ...,        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background,      },      caption    }  },          _type == "featuredBlogs" => {    ...,    title,    subtitle,    displayMode,    blogCount,    buttonText,    "showViewAllButton": showViewAllButton == "yes",    "blogs": select(      displayMode == "curated" => blogs[]-> {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      },      displayMode == "latest" => *[        _type == "blog"         && (seoHideFromLists != true)      ] | order(publishedAt desc, _createdAt desc)[0...3] {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      }    )  },        _type == "tabs" => {          ...,          title,          description,          tabs[]{            _key,            label,            content[]{               ...,              _type,              _key            }          }        }      }    }  },      _type == "infoSection" => {    ...,    title,    headingLevel,    content[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      _type == "imageGallery" => {    ...,    title,    description,    layout,    columns,    slidesPerRow,    "images": images[]{      ...,      "image": image{        ...,        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background,      },      caption    }  },      _type == "specificationsTable" => {    ...,    title,    description,    variant,    "specifications": specifications[]{      _key,      label,      "content": content[]{        ...,          markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }      }    }  },      _type == "genericTable" => {    ...,    title,    description,    columnCount,    columnHeaders,    rows[]{      _key,      cells[]{        _key,        content,        isLastColumn,        _type == "richCell" => {          content[]{            ...,              markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }          }        }      }    },    variant  },      _type == "featuredBlogs" => {    ...,    title,    subtitle,    displayMode,    blogCount,    buttonText,    "showViewAllButton": showViewAllButton == "yes",    "blogs": select(      displayMode == "curated" => blogs[]-> {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      },      displayMode == "latest" => *[        _type == "blog"         && (seoHideFromLists != true)      ] | order(publishedAt desc, _createdAt desc)[0...3] {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      }    )  },      _type == "highlightedAspects" => {    title,    description,    columns,    aspects[]{      _key,      title,      variant,      icon,      image{        ...,        "alt": coalesce(asset->altText, asset->originalFilename, "Aspect Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background      },      content[]{        ...,          markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }      }    }  },      _type == "videoBlock" => {    ...,    _key,    _type,    title,    videoType,    "mp4File": coalesce(      mp4File.asset->url,      mp4File.asset->sources[0].url,      null    ),    youtubeUrl,    showControls,    autoplay,    loop,    allowFullscreen  },      _type == "videoHero" => {    ...,    variant,    titleFont,    videoType,    "mp4File": coalesce(      mp4File.asset->url,      mp4File.asset->sources[0].url,      null    ),    youtubeUrl,    showControls,    autoplay,    loop,      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  }  },      "categoryData": {    "label": category,    "slug": category,    "iri": "/camiones/" + category,    "parent": null  }  }
+// Query: *[_type == "homePage" && _id == "homePage"][0]{    ...,    _id,    _type,    "slug": slug.current,    title,    description,      pageBuilder[]{    ...,    _type,      _type == "cta" => {    ...,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },  },      _type == "mainHero" => {    ...,    titleFont,    "backgroundImage": backgroundImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    "backgroundVideo": backgroundVideo.asset->url,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  },      _type == "hero" => {    ...,    variant,    titleFont,    imageAlignment,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  },      _type == "doubleHero" => {    ...,    variant,    primaryBadge,    primaryTitle,    "primaryRichText": primaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "primaryImage": primaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    primaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    secondaryBadge,    secondaryTitle,    "secondaryRichText": secondaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "secondaryImage": secondaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    secondaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },      _type == "faqAccordion" => {    ...,      "faqs": array::compact(faqs[]->{    title,    _id,    _type,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  }),    link{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },      _type == "subscribeNewsletter" => {    ...,    "subTitle": subTitle[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "helperText": helperText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      _type == "imageLinkCards" => {    ...,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },    "cards": array::compact(cards[]{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      ),        image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    })  },      _type == "formBlock" => {    ...,    title,    description,    variant,    displayMode,    triggerText,    buttonPosition,    "form": form->{      _id,      title,      description,        fields[]{    label,    name,    type,    required,    options,    placeholder  },  emailRecipients,  submitButtonText,  successMessage,  errorMessage,      submitButtonText,      successMessage,      errorMessage    }  },      _type == "tabs" => {    ...,    title,    description,    tabs[]{      _key,      label,      content[]{        ...,        _type,        _key,          _type == "cta" => {    ...,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },  },          _type == "mainHero" => {    ...,    titleFont,    "backgroundImage": backgroundImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    "backgroundVideo": backgroundVideo.asset->url,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  },          _type == "hero" => {    ...,    variant,    titleFont,    imageAlignment,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  },          _type == "doubleHero" => {    ...,    variant,    primaryBadge,    primaryTitle,    "primaryRichText": primaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "primaryImage": primaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    primaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    secondaryBadge,    secondaryTitle,    "secondaryRichText": secondaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "secondaryImage": secondaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    secondaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },          _type == "faqAccordion" => {    ...,      "faqs": array::compact(faqs[]->{    title,    _id,    _type,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  }),    link{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },          _type == "subscribeNewsletter" => {    ...,    "subTitle": subTitle[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "helperText": helperText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },          _type == "imageLinkCards" => {    ...,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },    "cards": array::compact(cards[]{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      ),        image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    })  },          _type == "formBlock" => {    ...,    title,    description,    variant,    displayMode,    triggerText,    buttonPosition,    "form": form->{      _id,      title,      description,        fields[]{    label,    name,    type,    required,    options,    placeholder  },  emailRecipients,  submitButtonText,  successMessage,  errorMessage,      submitButtonText,      successMessage,      errorMessage    }  },          _type == "imageGallery" => {    ...,    title,    description,    layout,    columns,    slidesPerRow,    "images": images[]{      ...,      "image": image{        ...,        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background,      },      caption    }  },          _type == "featuredBlogs" => {    ...,    title,    subtitle,    displayMode,    blogCount,    buttonText,    "showViewAllButton": showViewAllButton == "yes",    "blogs": select(      displayMode == "curated" => blogs[]-> {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      },      displayMode == "latest" => *[        _type == "blog"         && (seoHideFromLists != true)      ] | order(publishedAt desc, _createdAt desc)[0...3] {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      }    )  },        _type == "tabs" => {          ...,          title,          description,          tabs[]{            _key,            label,            content[]{               ...,              _type,              _key            }          }        }      }    }  },      _type == "infoSection" => {    ...,    title,    headingLevel,    content[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      _type == "imageGallery" => {    ...,    title,    description,    layout,    columns,    slidesPerRow,    "images": images[]{      ...,      "image": image{        ...,        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background,      },      caption    }  },      _type == "specificationsTable" => {    ...,    title,    description,    variant,    "specifications": specifications[]{      _key,      label,      "content": content[]{        ...,          markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }      }    }  },      _type == "genericTable" => {    ...,    title,    description,    columnCount,    columnHeaders,    rows[]{      _key,      cells[]{        _key,        content,        isLastColumn,        _type == "richCell" => {          content[]{            ...,              markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }          }        }      }    },    variant  },      _type == "featuredBlogs" => {    ...,    title,    subtitle,    displayMode,    blogCount,    buttonText,    "showViewAllButton": showViewAllButton == "yes",    "blogs": select(      displayMode == "curated" => blogs[]-> {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      },      displayMode == "latest" => *[        _type == "blog"         && (seoHideFromLists != true)      ] | order(publishedAt desc, _createdAt desc)[0...3] {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      }    )  },      _type == "highlightedAspects" => {    title,    description,    columns,    aspects[]{      _key,      title,      variant,      icon,      image{        ...,        "alt": coalesce(asset->altText, asset->originalFilename, "Aspect Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background      },      content[]{        ...,          markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }      }    }  },      _type == "videoBlock" => {    ...,    _key,    _type,    title,    videoType,    "mp4File": coalesce(      mp4File.asset->url,      mp4File.asset->sources[0].url,      null    ),    youtubeUrl,    showControls,    autoplay,    loop,    allowFullscreen  },      _type == "videoHero" => {    ...,    variant,    titleFont,    videoType,    "mp4File": coalesce(      mp4File.asset->url,      mp4File.asset->sources[0].url,      null    ),    youtubeUrl,    showControls,    autoplay,    loop,      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  }  },      "categoryData": {    "label": category,    "slug": category,    "iri": "/camiones/" + category,    "parent": null  }  }
 export type QueryHomePageDataResult = {
   _id: string;
   _type: "homePage";
@@ -2615,6 +2657,22 @@ export type QueryHomePageDataResult = {
               _key: string;
             }
           | {
+              _key: string;
+              _type: "button";
+              variant:
+                | "default"
+                | "link"
+                | "outline"
+                | "primary"
+                | "secondary"
+                | null;
+              text: string | null;
+              icon: "volvo-chevron-right" | null;
+              url?: CustomUrl;
+              openInNewTab: boolean | null;
+              href: string | null;
+            }
+          | {
               asset?: {
                 _ref: string;
                 _type: "reference";
@@ -2627,7 +2685,6 @@ export type QueryHomePageDataResult = {
               caption?: string;
               _type: "image";
               _key: string;
-              markDefs: null;
             }
         > | null;
         buttons: Array<{
@@ -2820,6 +2877,22 @@ export type QueryHomePageDataResult = {
                 _key: string;
               }
             | {
+                _key: string;
+                _type: "button";
+                variant:
+                  | "default"
+                  | "link"
+                  | "outline"
+                  | "primary"
+                  | "secondary"
+                  | null;
+                text: string | null;
+                icon: "volvo-chevron-right" | null;
+                url?: CustomUrl;
+                openInNewTab: boolean | null;
+                href: string | null;
+              }
+            | {
                 asset?: {
                   _ref: string;
                   _type: "reference";
@@ -2832,7 +2905,6 @@ export type QueryHomePageDataResult = {
                 caption?: string;
                 _type: "image";
                 _key: string;
-                markDefs: null;
               }
           > | null;
         }> | null;
@@ -3026,6 +3098,20 @@ export type QueryHomePageDataResult = {
                       _key: string;
                     }
                   | {
+                      _key: string;
+                      _type: "button";
+                      variant?:
+                        | "default"
+                        | "link"
+                        | "outline"
+                        | "primary"
+                        | "secondary";
+                      text?: string;
+                      icon?: "volvo-chevron-right";
+                      url?: CustomUrl;
+                      markDefs: null;
+                    }
+                  | {
                       asset?: {
                         _ref: string;
                         _type: "reference";
@@ -3088,6 +3174,22 @@ export type QueryHomePageDataResult = {
               _key: string;
             }
           | {
+              _key: string;
+              _type: "button";
+              variant:
+                | "default"
+                | "link"
+                | "outline"
+                | "primary"
+                | "secondary"
+                | null;
+              text: string | null;
+              icon: "volvo-chevron-right" | null;
+              url?: CustomUrl;
+              openInNewTab: boolean | null;
+              href: string | null;
+            }
+          | {
               asset?: {
                 _ref: string;
                 _type: "reference";
@@ -3100,7 +3202,6 @@ export type QueryHomePageDataResult = {
               caption?: string;
               _type: "image";
               _key: string;
-              markDefs: null;
             }
         > | null;
         image: {
@@ -3254,6 +3355,22 @@ export type QueryHomePageDataResult = {
               _key: string;
             }
           | {
+              _key: string;
+              _type: "button";
+              variant:
+                | "default"
+                | "link"
+                | "outline"
+                | "primary"
+                | "secondary"
+                | null;
+              text: string | null;
+              icon: "volvo-chevron-right" | null;
+              url?: CustomUrl;
+              openInNewTab: boolean | null;
+              href: string | null;
+            }
+          | {
               asset?: {
                 _ref: string;
                 _type: "reference";
@@ -3266,7 +3383,6 @@ export type QueryHomePageDataResult = {
               caption?: string;
               _type: "image";
               _key: string;
-              markDefs: null;
             }
         > | null;
         buttons: Array<{
@@ -3376,6 +3492,22 @@ export type QueryHomePageDataResult = {
               _key: string;
             }
           | {
+              _key: string;
+              _type: "button";
+              variant:
+                | "default"
+                | "link"
+                | "outline"
+                | "primary"
+                | "secondary"
+                | null;
+              text: string | null;
+              icon: "volvo-chevron-right" | null;
+              url?: CustomUrl;
+              openInNewTab: boolean | null;
+              href: string | null;
+            }
+          | {
               asset?: {
                 _ref: string;
                 _type: "reference";
@@ -3388,7 +3520,6 @@ export type QueryHomePageDataResult = {
               caption?: string;
               _type: "image";
               _key: string;
-              markDefs: null;
             }
         > | null;
         backgroundType?: "image" | "video";
@@ -3486,6 +3617,20 @@ export type QueryHomePageDataResult = {
                 level?: number;
                 _type: "block";
                 _key: string;
+              }
+            | {
+                _key: string;
+                _type: "button";
+                variant?:
+                  | "default"
+                  | "link"
+                  | "outline"
+                  | "primary"
+                  | "secondary";
+                text?: string;
+                icon?: "volvo-chevron-right";
+                url?: CustomUrl;
+                markDefs: null;
               }
             | {
                 asset?: {
@@ -3613,6 +3758,22 @@ export type QueryHomePageDataResult = {
                       _key: string;
                     }
                   | {
+                      _key: string;
+                      _type: "button";
+                      variant:
+                        | "default"
+                        | "link"
+                        | "outline"
+                        | "primary"
+                        | "secondary"
+                        | null;
+                      text: string | null;
+                      icon: "volvo-chevron-right" | null;
+                      url?: CustomUrl;
+                      openInNewTab: boolean | null;
+                      href: string | null;
+                    }
+                  | {
                       asset?: {
                         _ref: string;
                         _type: "reference";
@@ -3625,7 +3786,6 @@ export type QueryHomePageDataResult = {
                       caption?: string;
                       _type: "image";
                       _key: string;
-                      markDefs: null;
                     }
                 > | null;
                 buttons: Array<{
@@ -3825,6 +3985,22 @@ export type QueryHomePageDataResult = {
                         _key: string;
                       }
                     | {
+                        _key: string;
+                        _type: "button";
+                        variant:
+                          | "default"
+                          | "link"
+                          | "outline"
+                          | "primary"
+                          | "secondary"
+                          | null;
+                        text: string | null;
+                        icon: "volvo-chevron-right" | null;
+                        url?: CustomUrl;
+                        openInNewTab: boolean | null;
+                        href: string | null;
+                      }
+                    | {
                         asset?: {
                           _ref: string;
                           _type: "reference";
@@ -3837,7 +4013,6 @@ export type QueryHomePageDataResult = {
                         caption?: string;
                         _type: "image";
                         _key: string;
-                        markDefs: null;
                       }
                   > | null;
                 }> | null;
@@ -3959,6 +4134,9 @@ export type QueryHomePageDataResult = {
                       }
                     | {
                         content?: Array<
+                          | ({
+                              _key: string;
+                            } & Button)
                           | {
                               children?: Array<{
                                 marks?: Array<string>;
@@ -4058,6 +4236,22 @@ export type QueryHomePageDataResult = {
                       _key: string;
                     }
                   | {
+                      _key: string;
+                      _type: "button";
+                      variant:
+                        | "default"
+                        | "link"
+                        | "outline"
+                        | "primary"
+                        | "secondary"
+                        | null;
+                      text: string | null;
+                      icon: "volvo-chevron-right" | null;
+                      url?: CustomUrl;
+                      openInNewTab: boolean | null;
+                      href: string | null;
+                    }
+                  | {
                       asset?: {
                         _ref: string;
                         _type: "reference";
@@ -4070,7 +4264,6 @@ export type QueryHomePageDataResult = {
                       caption?: string;
                       _type: "image";
                       _key: string;
-                      markDefs: null;
                     }
                 > | null;
                 image: {
@@ -4226,6 +4419,22 @@ export type QueryHomePageDataResult = {
                       _key: string;
                     }
                   | {
+                      _key: string;
+                      _type: "button";
+                      variant:
+                        | "default"
+                        | "link"
+                        | "outline"
+                        | "primary"
+                        | "secondary"
+                        | null;
+                      text: string | null;
+                      icon: "volvo-chevron-right" | null;
+                      url?: CustomUrl;
+                      openInNewTab: boolean | null;
+                      href: string | null;
+                    }
+                  | {
                       asset?: {
                         _ref: string;
                         _type: "reference";
@@ -4238,7 +4447,6 @@ export type QueryHomePageDataResult = {
                       caption?: string;
                       _type: "image";
                       _key: string;
-                      markDefs: null;
                     }
                 > | null;
                 buttons: Array<{
@@ -4323,6 +4531,22 @@ export type QueryHomePageDataResult = {
                       _key: string;
                     }
                   | {
+                      _key: string;
+                      _type: "button";
+                      variant:
+                        | "default"
+                        | "link"
+                        | "outline"
+                        | "primary"
+                        | "secondary"
+                        | null;
+                      text: string | null;
+                      icon: "volvo-chevron-right" | null;
+                      url?: CustomUrl;
+                      openInNewTab: boolean | null;
+                      href: string | null;
+                    }
+                  | {
                       asset?: {
                         _ref: string;
                         _type: "reference";
@@ -4335,7 +4559,6 @@ export type QueryHomePageDataResult = {
                       caption?: string;
                       _type: "image";
                       _key: string;
-                      markDefs: null;
                     }
                 > | null;
                 backgroundType?: "image" | "video";
@@ -4512,6 +4735,9 @@ export type QueryHomePageDataResult = {
                 title?: string;
                 titleFont?: "default" | "statement";
                 richText?: Array<
+                  | ({
+                      _key: string;
+                    } & Button)
                   | {
                       children?: Array<{
                         marks?: Array<string>;
@@ -4626,6 +4852,22 @@ export type QueryHomePageDataResult = {
               _key: string;
             }
           | {
+              _key: string;
+              _type: "button";
+              variant:
+                | "default"
+                | "link"
+                | "outline"
+                | "primary"
+                | "secondary"
+                | null;
+              text: string | null;
+              icon: "volvo-chevron-right" | null;
+              url?: CustomUrl;
+              openInNewTab: boolean | null;
+              href: string | null;
+            }
+          | {
               asset?: {
                 _ref: string;
                 _type: "reference";
@@ -4638,7 +4880,6 @@ export type QueryHomePageDataResult = {
               caption?: string;
               _type: "image";
               _key: string;
-              markDefs: null;
             }
         > | null;
         videoType: "mp4" | "youtube" | null;
@@ -4688,7 +4929,7 @@ export type QueryHomePageDataResult = {
   };
 } | null;
 // Variable: querySlugPageData
-// Query: *[_type == "page" && slug.current == $slug][0]{    ...,    "slug": slug.current,      pageBuilder[]{    ...,    _type,      _type == "cta" => {    ...,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },  },      _type == "mainHero" => {    ...,    titleFont,    "backgroundImage": backgroundImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    "backgroundVideo": backgroundVideo.asset->url,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  },      _type == "hero" => {    ...,    variant,    titleFont,    imageAlignment,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  },      _type == "doubleHero" => {    ...,    variant,    primaryBadge,    primaryTitle,    "primaryRichText": primaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "primaryImage": primaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    primaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    secondaryBadge,    secondaryTitle,    "secondaryRichText": secondaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "secondaryImage": secondaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    secondaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },      _type == "faqAccordion" => {    ...,      "faqs": array::compact(faqs[]->{    title,    _id,    _type,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  }),    link{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },      _type == "subscribeNewsletter" => {    ...,    "subTitle": subTitle[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "helperText": helperText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      _type == "imageLinkCards" => {    ...,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },    "cards": array::compact(cards[]{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      ),        image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    })  },      _type == "formBlock" => {    ...,    title,    description,    variant,    displayMode,    triggerText,    buttonPosition,    "form": form->{      _id,      title,      description,        fields[]{    label,    name,    type,    required,    options,    placeholder  },  emailRecipients,  submitButtonText,  successMessage,  errorMessage,      submitButtonText,      successMessage,      errorMessage    }  },      _type == "tabs" => {    ...,    title,    description,    tabs[]{      _key,      label,      content[]{        ...,        _type,        _key,          _type == "cta" => {    ...,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },  },          _type == "mainHero" => {    ...,    titleFont,    "backgroundImage": backgroundImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    "backgroundVideo": backgroundVideo.asset->url,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  },          _type == "hero" => {    ...,    variant,    titleFont,    imageAlignment,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  },          _type == "doubleHero" => {    ...,    variant,    primaryBadge,    primaryTitle,    "primaryRichText": primaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "primaryImage": primaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    primaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    secondaryBadge,    secondaryTitle,    "secondaryRichText": secondaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "secondaryImage": secondaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    secondaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },          _type == "faqAccordion" => {    ...,      "faqs": array::compact(faqs[]->{    title,    _id,    _type,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  }),    link{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },          _type == "subscribeNewsletter" => {    ...,    "subTitle": subTitle[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "helperText": helperText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },          _type == "imageLinkCards" => {    ...,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },    "cards": array::compact(cards[]{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      ),        image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    })  },          _type == "formBlock" => {    ...,    title,    description,    variant,    displayMode,    triggerText,    buttonPosition,    "form": form->{      _id,      title,      description,        fields[]{    label,    name,    type,    required,    options,    placeholder  },  emailRecipients,  submitButtonText,  successMessage,  errorMessage,      submitButtonText,      successMessage,      errorMessage    }  },          _type == "imageGallery" => {    ...,    title,    description,    layout,    columns,    slidesPerRow,    "images": images[]{      ...,      "image": image{        ...,        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background,      },      caption    }  },          _type == "featuredBlogs" => {    ...,    title,    subtitle,    displayMode,    blogCount,    buttonText,    "showViewAllButton": showViewAllButton == "yes",    "blogs": select(      displayMode == "curated" => blogs[]-> {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      },      displayMode == "latest" => *[        _type == "blog"         && (seoHideFromLists != true)      ] | order(publishedAt desc, _createdAt desc)[0...3] {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      }    )  },        _type == "tabs" => {          ...,          title,          description,          tabs[]{            _key,            label,            content[]{               ...,              _type,              _key            }          }        }      }    }  },      _type == "infoSection" => {    ...,    title,    headingLevel,    content[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      _type == "imageGallery" => {    ...,    title,    description,    layout,    columns,    slidesPerRow,    "images": images[]{      ...,      "image": image{        ...,        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background,      },      caption    }  },      _type == "specificationsTable" => {    ...,    title,    description,    variant,    "specifications": specifications[]{      _key,      label,      "content": content[]{        ...,          markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }      }    }  },      _type == "genericTable" => {    ...,    title,    description,    columnCount,    columnHeaders,    rows[]{      _key,      cells[]{        _key,        content,        isLastColumn,        _type == "richCell" => {          content[]{            ...,              markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }          }        }      }    },    variant  },      _type == "featuredBlogs" => {    ...,    title,    subtitle,    displayMode,    blogCount,    buttonText,    "showViewAllButton": showViewAllButton == "yes",    "blogs": select(      displayMode == "curated" => blogs[]-> {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      },      displayMode == "latest" => *[        _type == "blog"         && (seoHideFromLists != true)      ] | order(publishedAt desc, _createdAt desc)[0...3] {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      }    )  },      _type == "highlightedAspects" => {    title,    description,    columns,    aspects[]{      _key,      title,      variant,      icon,      image{        ...,        "alt": coalesce(asset->altText, asset->originalFilename, "Aspect Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background      },      content[]{        ...,          markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }      }    }  },      _type == "videoBlock" => {    ...,    _key,    _type,    title,    videoType,    "mp4File": coalesce(      mp4File.asset->url,      mp4File.asset->sources[0].url,      null    ),    youtubeUrl,    showControls,    autoplay,    loop,    allowFullscreen  },      _type == "videoHero" => {    ...,    variant,    titleFont,    videoType,    "mp4File": coalesce(      mp4File.asset->url,      mp4File.asset->sources[0].url,      null    ),    youtubeUrl,    showControls,    autoplay,    loop,      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  }  }  }
+// Query: *[_type == "page" && slug.current == $slug][0]{    ...,    "slug": slug.current,      pageBuilder[]{    ...,    _type,      _type == "cta" => {    ...,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },  },      _type == "mainHero" => {    ...,    titleFont,    "backgroundImage": backgroundImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    "backgroundVideo": backgroundVideo.asset->url,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  },      _type == "hero" => {    ...,    variant,    titleFont,    imageAlignment,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  },      _type == "doubleHero" => {    ...,    variant,    primaryBadge,    primaryTitle,    "primaryRichText": primaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "primaryImage": primaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    primaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    secondaryBadge,    secondaryTitle,    "secondaryRichText": secondaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "secondaryImage": secondaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    secondaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },      _type == "faqAccordion" => {    ...,      "faqs": array::compact(faqs[]->{    title,    _id,    _type,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  }),    link{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },      _type == "subscribeNewsletter" => {    ...,    "subTitle": subTitle[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "helperText": helperText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      _type == "imageLinkCards" => {    ...,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },    "cards": array::compact(cards[]{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      ),        image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    })  },      _type == "formBlock" => {    ...,    title,    description,    variant,    displayMode,    triggerText,    buttonPosition,    "form": form->{      _id,      title,      description,        fields[]{    label,    name,    type,    required,    options,    placeholder  },  emailRecipients,  submitButtonText,  successMessage,  errorMessage,      submitButtonText,      successMessage,      errorMessage    }  },      _type == "tabs" => {    ...,    title,    description,    tabs[]{      _key,      label,      content[]{        ...,        _type,        _key,          _type == "cta" => {    ...,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },  },          _type == "mainHero" => {    ...,    titleFont,    "backgroundImage": backgroundImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    "backgroundVideo": backgroundVideo.asset->url,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  },          _type == "hero" => {    ...,    variant,    titleFont,    imageAlignment,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  },          _type == "doubleHero" => {    ...,    variant,    primaryBadge,    primaryTitle,    "primaryRichText": primaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "primaryImage": primaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    primaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    secondaryBadge,    secondaryTitle,    "secondaryRichText": secondaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "secondaryImage": secondaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    secondaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },          _type == "faqAccordion" => {    ...,      "faqs": array::compact(faqs[]->{    title,    _id,    _type,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  }),    link{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },          _type == "subscribeNewsletter" => {    ...,    "subTitle": subTitle[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "helperText": helperText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },          _type == "imageLinkCards" => {    ...,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },    "cards": array::compact(cards[]{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      ),        image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    })  },          _type == "formBlock" => {    ...,    title,    description,    variant,    displayMode,    triggerText,    buttonPosition,    "form": form->{      _id,      title,      description,        fields[]{    label,    name,    type,    required,    options,    placeholder  },  emailRecipients,  submitButtonText,  successMessage,  errorMessage,      submitButtonText,      successMessage,      errorMessage    }  },          _type == "imageGallery" => {    ...,    title,    description,    layout,    columns,    slidesPerRow,    "images": images[]{      ...,      "image": image{        ...,        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background,      },      caption    }  },          _type == "featuredBlogs" => {    ...,    title,    subtitle,    displayMode,    blogCount,    buttonText,    "showViewAllButton": showViewAllButton == "yes",    "blogs": select(      displayMode == "curated" => blogs[]-> {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      },      displayMode == "latest" => *[        _type == "blog"         && (seoHideFromLists != true)      ] | order(publishedAt desc, _createdAt desc)[0...3] {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      }    )  },        _type == "tabs" => {          ...,          title,          description,          tabs[]{            _key,            label,            content[]{               ...,              _type,              _key            }          }        }      }    }  },      _type == "infoSection" => {    ...,    title,    headingLevel,    content[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      _type == "imageGallery" => {    ...,    title,    description,    layout,    columns,    slidesPerRow,    "images": images[]{      ...,      "image": image{        ...,        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background,      },      caption    }  },      _type == "specificationsTable" => {    ...,    title,    description,    variant,    "specifications": specifications[]{      _key,      label,      "content": content[]{        ...,          markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }      }    }  },      _type == "genericTable" => {    ...,    title,    description,    columnCount,    columnHeaders,    rows[]{      _key,      cells[]{        _key,        content,        isLastColumn,        _type == "richCell" => {          content[]{            ...,              markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }          }        }      }    },    variant  },      _type == "featuredBlogs" => {    ...,    title,    subtitle,    displayMode,    blogCount,    buttonText,    "showViewAllButton": showViewAllButton == "yes",    "blogs": select(      displayMode == "curated" => blogs[]-> {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      },      displayMode == "latest" => *[        _type == "blog"         && (seoHideFromLists != true)      ] | order(publishedAt desc, _createdAt desc)[0...3] {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      }    )  },      _type == "highlightedAspects" => {    title,    description,    columns,    aspects[]{      _key,      title,      variant,      icon,      image{        ...,        "alt": coalesce(asset->altText, asset->originalFilename, "Aspect Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background      },      content[]{        ...,          markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }      }    }  },      _type == "videoBlock" => {    ...,    _key,    _type,    title,    videoType,    "mp4File": coalesce(      mp4File.asset->url,      mp4File.asset->sources[0].url,      null    ),    youtubeUrl,    showControls,    autoplay,    loop,    allowFullscreen  },      _type == "videoHero" => {    ...,    variant,    titleFont,    videoType,    "mp4File": coalesce(      mp4File.asset->url,      mp4File.asset->sources[0].url,      null    ),    youtubeUrl,    showControls,    autoplay,    loop,      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  }  }  }
 export type QuerySlugPageDataResult = {
   _id: string;
   _type: "page";
@@ -4745,6 +4986,22 @@ export type QuerySlugPageDataResult = {
               _key: string;
             }
           | {
+              _key: string;
+              _type: "button";
+              variant:
+                | "default"
+                | "link"
+                | "outline"
+                | "primary"
+                | "secondary"
+                | null;
+              text: string | null;
+              icon: "volvo-chevron-right" | null;
+              url?: CustomUrl;
+              openInNewTab: boolean | null;
+              href: string | null;
+            }
+          | {
               asset?: {
                 _ref: string;
                 _type: "reference";
@@ -4757,7 +5014,6 @@ export type QuerySlugPageDataResult = {
               caption?: string;
               _type: "image";
               _key: string;
-              markDefs: null;
             }
         > | null;
         buttons: Array<{
@@ -4950,6 +5206,22 @@ export type QuerySlugPageDataResult = {
                 _key: string;
               }
             | {
+                _key: string;
+                _type: "button";
+                variant:
+                  | "default"
+                  | "link"
+                  | "outline"
+                  | "primary"
+                  | "secondary"
+                  | null;
+                text: string | null;
+                icon: "volvo-chevron-right" | null;
+                url?: CustomUrl;
+                openInNewTab: boolean | null;
+                href: string | null;
+              }
+            | {
                 asset?: {
                   _ref: string;
                   _type: "reference";
@@ -4962,7 +5234,6 @@ export type QuerySlugPageDataResult = {
                 caption?: string;
                 _type: "image";
                 _key: string;
-                markDefs: null;
               }
           > | null;
         }> | null;
@@ -5156,6 +5427,20 @@ export type QuerySlugPageDataResult = {
                       _key: string;
                     }
                   | {
+                      _key: string;
+                      _type: "button";
+                      variant?:
+                        | "default"
+                        | "link"
+                        | "outline"
+                        | "primary"
+                        | "secondary";
+                      text?: string;
+                      icon?: "volvo-chevron-right";
+                      url?: CustomUrl;
+                      markDefs: null;
+                    }
+                  | {
                       asset?: {
                         _ref: string;
                         _type: "reference";
@@ -5218,6 +5503,22 @@ export type QuerySlugPageDataResult = {
               _key: string;
             }
           | {
+              _key: string;
+              _type: "button";
+              variant:
+                | "default"
+                | "link"
+                | "outline"
+                | "primary"
+                | "secondary"
+                | null;
+              text: string | null;
+              icon: "volvo-chevron-right" | null;
+              url?: CustomUrl;
+              openInNewTab: boolean | null;
+              href: string | null;
+            }
+          | {
               asset?: {
                 _ref: string;
                 _type: "reference";
@@ -5230,7 +5531,6 @@ export type QuerySlugPageDataResult = {
               caption?: string;
               _type: "image";
               _key: string;
-              markDefs: null;
             }
         > | null;
         image: {
@@ -5384,6 +5684,22 @@ export type QuerySlugPageDataResult = {
               _key: string;
             }
           | {
+              _key: string;
+              _type: "button";
+              variant:
+                | "default"
+                | "link"
+                | "outline"
+                | "primary"
+                | "secondary"
+                | null;
+              text: string | null;
+              icon: "volvo-chevron-right" | null;
+              url?: CustomUrl;
+              openInNewTab: boolean | null;
+              href: string | null;
+            }
+          | {
               asset?: {
                 _ref: string;
                 _type: "reference";
@@ -5396,7 +5712,6 @@ export type QuerySlugPageDataResult = {
               caption?: string;
               _type: "image";
               _key: string;
-              markDefs: null;
             }
         > | null;
         buttons: Array<{
@@ -5506,6 +5821,22 @@ export type QuerySlugPageDataResult = {
               _key: string;
             }
           | {
+              _key: string;
+              _type: "button";
+              variant:
+                | "default"
+                | "link"
+                | "outline"
+                | "primary"
+                | "secondary"
+                | null;
+              text: string | null;
+              icon: "volvo-chevron-right" | null;
+              url?: CustomUrl;
+              openInNewTab: boolean | null;
+              href: string | null;
+            }
+          | {
               asset?: {
                 _ref: string;
                 _type: "reference";
@@ -5518,7 +5849,6 @@ export type QuerySlugPageDataResult = {
               caption?: string;
               _type: "image";
               _key: string;
-              markDefs: null;
             }
         > | null;
         backgroundType?: "image" | "video";
@@ -5616,6 +5946,20 @@ export type QuerySlugPageDataResult = {
                 level?: number;
                 _type: "block";
                 _key: string;
+              }
+            | {
+                _key: string;
+                _type: "button";
+                variant?:
+                  | "default"
+                  | "link"
+                  | "outline"
+                  | "primary"
+                  | "secondary";
+                text?: string;
+                icon?: "volvo-chevron-right";
+                url?: CustomUrl;
+                markDefs: null;
               }
             | {
                 asset?: {
@@ -5743,6 +6087,22 @@ export type QuerySlugPageDataResult = {
                       _key: string;
                     }
                   | {
+                      _key: string;
+                      _type: "button";
+                      variant:
+                        | "default"
+                        | "link"
+                        | "outline"
+                        | "primary"
+                        | "secondary"
+                        | null;
+                      text: string | null;
+                      icon: "volvo-chevron-right" | null;
+                      url?: CustomUrl;
+                      openInNewTab: boolean | null;
+                      href: string | null;
+                    }
+                  | {
                       asset?: {
                         _ref: string;
                         _type: "reference";
@@ -5755,7 +6115,6 @@ export type QuerySlugPageDataResult = {
                       caption?: string;
                       _type: "image";
                       _key: string;
-                      markDefs: null;
                     }
                 > | null;
                 buttons: Array<{
@@ -5955,6 +6314,22 @@ export type QuerySlugPageDataResult = {
                         _key: string;
                       }
                     | {
+                        _key: string;
+                        _type: "button";
+                        variant:
+                          | "default"
+                          | "link"
+                          | "outline"
+                          | "primary"
+                          | "secondary"
+                          | null;
+                        text: string | null;
+                        icon: "volvo-chevron-right" | null;
+                        url?: CustomUrl;
+                        openInNewTab: boolean | null;
+                        href: string | null;
+                      }
+                    | {
                         asset?: {
                           _ref: string;
                           _type: "reference";
@@ -5967,7 +6342,6 @@ export type QuerySlugPageDataResult = {
                         caption?: string;
                         _type: "image";
                         _key: string;
-                        markDefs: null;
                       }
                   > | null;
                 }> | null;
@@ -6089,6 +6463,9 @@ export type QuerySlugPageDataResult = {
                       }
                     | {
                         content?: Array<
+                          | ({
+                              _key: string;
+                            } & Button)
                           | {
                               children?: Array<{
                                 marks?: Array<string>;
@@ -6188,6 +6565,22 @@ export type QuerySlugPageDataResult = {
                       _key: string;
                     }
                   | {
+                      _key: string;
+                      _type: "button";
+                      variant:
+                        | "default"
+                        | "link"
+                        | "outline"
+                        | "primary"
+                        | "secondary"
+                        | null;
+                      text: string | null;
+                      icon: "volvo-chevron-right" | null;
+                      url?: CustomUrl;
+                      openInNewTab: boolean | null;
+                      href: string | null;
+                    }
+                  | {
                       asset?: {
                         _ref: string;
                         _type: "reference";
@@ -6200,7 +6593,6 @@ export type QuerySlugPageDataResult = {
                       caption?: string;
                       _type: "image";
                       _key: string;
-                      markDefs: null;
                     }
                 > | null;
                 image: {
@@ -6356,6 +6748,22 @@ export type QuerySlugPageDataResult = {
                       _key: string;
                     }
                   | {
+                      _key: string;
+                      _type: "button";
+                      variant:
+                        | "default"
+                        | "link"
+                        | "outline"
+                        | "primary"
+                        | "secondary"
+                        | null;
+                      text: string | null;
+                      icon: "volvo-chevron-right" | null;
+                      url?: CustomUrl;
+                      openInNewTab: boolean | null;
+                      href: string | null;
+                    }
+                  | {
                       asset?: {
                         _ref: string;
                         _type: "reference";
@@ -6368,7 +6776,6 @@ export type QuerySlugPageDataResult = {
                       caption?: string;
                       _type: "image";
                       _key: string;
-                      markDefs: null;
                     }
                 > | null;
                 buttons: Array<{
@@ -6453,6 +6860,22 @@ export type QuerySlugPageDataResult = {
                       _key: string;
                     }
                   | {
+                      _key: string;
+                      _type: "button";
+                      variant:
+                        | "default"
+                        | "link"
+                        | "outline"
+                        | "primary"
+                        | "secondary"
+                        | null;
+                      text: string | null;
+                      icon: "volvo-chevron-right" | null;
+                      url?: CustomUrl;
+                      openInNewTab: boolean | null;
+                      href: string | null;
+                    }
+                  | {
                       asset?: {
                         _ref: string;
                         _type: "reference";
@@ -6465,7 +6888,6 @@ export type QuerySlugPageDataResult = {
                       caption?: string;
                       _type: "image";
                       _key: string;
-                      markDefs: null;
                     }
                 > | null;
                 backgroundType?: "image" | "video";
@@ -6642,6 +7064,9 @@ export type QuerySlugPageDataResult = {
                 title?: string;
                 titleFont?: "default" | "statement";
                 richText?: Array<
+                  | ({
+                      _key: string;
+                    } & Button)
                   | {
                       children?: Array<{
                         marks?: Array<string>;
@@ -6756,6 +7181,22 @@ export type QuerySlugPageDataResult = {
               _key: string;
             }
           | {
+              _key: string;
+              _type: "button";
+              variant:
+                | "default"
+                | "link"
+                | "outline"
+                | "primary"
+                | "secondary"
+                | null;
+              text: string | null;
+              icon: "volvo-chevron-right" | null;
+              url?: CustomUrl;
+              openInNewTab: boolean | null;
+              href: string | null;
+            }
+          | {
               asset?: {
                 _ref: string;
                 _type: "reference";
@@ -6768,7 +7209,6 @@ export type QuerySlugPageDataResult = {
               caption?: string;
               _type: "image";
               _key: string;
-              markDefs: null;
             }
         > | null;
         videoType: "mp4" | "youtube" | null;
@@ -6816,7 +7256,7 @@ export type QuerySlugPageDataResult = {
 // Query: *[_type == "page" && defined(slug.current)].slug.current
 export type QuerySlugPagePathsResult = Array<string | null>;
 // Variable: queryBlogIndexPageData
-// Query: *[_type == "blogIndex"][0]{    ...,    _id,    _type,    title,    description,    "displayFeaturedBlogs" : displayFeaturedBlogs == "yes",    "featuredBlogsCount" : featuredBlogsCount,      pageBuilder[]{    ...,    _type,      _type == "cta" => {    ...,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },  },      _type == "mainHero" => {    ...,    titleFont,    "backgroundImage": backgroundImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    "backgroundVideo": backgroundVideo.asset->url,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  },      _type == "hero" => {    ...,    variant,    titleFont,    imageAlignment,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  },      _type == "doubleHero" => {    ...,    variant,    primaryBadge,    primaryTitle,    "primaryRichText": primaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "primaryImage": primaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    primaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    secondaryBadge,    secondaryTitle,    "secondaryRichText": secondaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "secondaryImage": secondaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    secondaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },      _type == "faqAccordion" => {    ...,      "faqs": array::compact(faqs[]->{    title,    _id,    _type,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  }),    link{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },      _type == "subscribeNewsletter" => {    ...,    "subTitle": subTitle[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "helperText": helperText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      _type == "imageLinkCards" => {    ...,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },    "cards": array::compact(cards[]{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      ),        image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    })  },      _type == "formBlock" => {    ...,    title,    description,    variant,    displayMode,    triggerText,    buttonPosition,    "form": form->{      _id,      title,      description,        fields[]{    label,    name,    type,    required,    options,    placeholder  },  emailRecipients,  submitButtonText,  successMessage,  errorMessage,      submitButtonText,      successMessage,      errorMessage    }  },      _type == "tabs" => {    ...,    title,    description,    tabs[]{      _key,      label,      content[]{        ...,        _type,        _key,          _type == "cta" => {    ...,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },  },          _type == "mainHero" => {    ...,    titleFont,    "backgroundImage": backgroundImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    "backgroundVideo": backgroundVideo.asset->url,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  },          _type == "hero" => {    ...,    variant,    titleFont,    imageAlignment,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  },          _type == "doubleHero" => {    ...,    variant,    primaryBadge,    primaryTitle,    "primaryRichText": primaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "primaryImage": primaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    primaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    secondaryBadge,    secondaryTitle,    "secondaryRichText": secondaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "secondaryImage": secondaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    secondaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },          _type == "faqAccordion" => {    ...,      "faqs": array::compact(faqs[]->{    title,    _id,    _type,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  }),    link{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },          _type == "subscribeNewsletter" => {    ...,    "subTitle": subTitle[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "helperText": helperText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },          _type == "imageLinkCards" => {    ...,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },    "cards": array::compact(cards[]{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      ),        image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    })  },          _type == "formBlock" => {    ...,    title,    description,    variant,    displayMode,    triggerText,    buttonPosition,    "form": form->{      _id,      title,      description,        fields[]{    label,    name,    type,    required,    options,    placeholder  },  emailRecipients,  submitButtonText,  successMessage,  errorMessage,      submitButtonText,      successMessage,      errorMessage    }  },          _type == "imageGallery" => {    ...,    title,    description,    layout,    columns,    slidesPerRow,    "images": images[]{      ...,      "image": image{        ...,        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background,      },      caption    }  },          _type == "featuredBlogs" => {    ...,    title,    subtitle,    displayMode,    blogCount,    buttonText,    "showViewAllButton": showViewAllButton == "yes",    "blogs": select(      displayMode == "curated" => blogs[]-> {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      },      displayMode == "latest" => *[        _type == "blog"         && (seoHideFromLists != true)      ] | order(publishedAt desc, _createdAt desc)[0...3] {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      }    )  },        _type == "tabs" => {          ...,          title,          description,          tabs[]{            _key,            label,            content[]{               ...,              _type,              _key            }          }        }      }    }  },      _type == "infoSection" => {    ...,    title,    headingLevel,    content[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      _type == "imageGallery" => {    ...,    title,    description,    layout,    columns,    slidesPerRow,    "images": images[]{      ...,      "image": image{        ...,        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background,      },      caption    }  },      _type == "specificationsTable" => {    ...,    title,    description,    variant,    "specifications": specifications[]{      _key,      label,      "content": content[]{        ...,          markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }      }    }  },      _type == "genericTable" => {    ...,    title,    description,    columnCount,    columnHeaders,    rows[]{      _key,      cells[]{        _key,        content,        isLastColumn,        _type == "richCell" => {          content[]{            ...,              markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }          }        }      }    },    variant  },      _type == "featuredBlogs" => {    ...,    title,    subtitle,    displayMode,    blogCount,    buttonText,    "showViewAllButton": showViewAllButton == "yes",    "blogs": select(      displayMode == "curated" => blogs[]-> {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      },      displayMode == "latest" => *[        _type == "blog"         && (seoHideFromLists != true)      ] | order(publishedAt desc, _createdAt desc)[0...3] {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      }    )  },      _type == "highlightedAspects" => {    title,    description,    columns,    aspects[]{      _key,      title,      variant,      icon,      image{        ...,        "alt": coalesce(asset->altText, asset->originalFilename, "Aspect Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background      },      content[]{        ...,          markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }      }    }  },      _type == "videoBlock" => {    ...,    _key,    _type,    title,    videoType,    "mp4File": coalesce(      mp4File.asset->url,      mp4File.asset->sources[0].url,      null    ),    youtubeUrl,    showControls,    autoplay,    loop,    allowFullscreen  },      _type == "videoHero" => {    ...,    variant,    titleFont,    videoType,    "mp4File": coalesce(      mp4File.asset->url,      mp4File.asset->sources[0].url,      null    ),    youtubeUrl,    showControls,    autoplay,    loop,      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  }  },    "slug": slug.current,    "blogs": *[_type == "blog" && (seoHideFromLists != true)] | order(orderRank asc){        _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }    }  }
+// Query: *[_type == "blogIndex"][0]{    ...,    _id,    _type,    title,    description,    "displayFeaturedBlogs" : displayFeaturedBlogs == "yes",    "featuredBlogsCount" : featuredBlogsCount,      pageBuilder[]{    ...,    _type,      _type == "cta" => {    ...,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },  },      _type == "mainHero" => {    ...,    titleFont,    "backgroundImage": backgroundImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    "backgroundVideo": backgroundVideo.asset->url,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  },      _type == "hero" => {    ...,    variant,    titleFont,    imageAlignment,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  },      _type == "doubleHero" => {    ...,    variant,    primaryBadge,    primaryTitle,    "primaryRichText": primaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "primaryImage": primaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    primaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    secondaryBadge,    secondaryTitle,    "secondaryRichText": secondaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "secondaryImage": secondaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    secondaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },      _type == "faqAccordion" => {    ...,      "faqs": array::compact(faqs[]->{    title,    _id,    _type,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  }),    link{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },      _type == "subscribeNewsletter" => {    ...,    "subTitle": subTitle[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "helperText": helperText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      _type == "imageLinkCards" => {    ...,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },    "cards": array::compact(cards[]{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      ),        image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    })  },      _type == "formBlock" => {    ...,    title,    description,    variant,    displayMode,    triggerText,    buttonPosition,    "form": form->{      _id,      title,      description,        fields[]{    label,    name,    type,    required,    options,    placeholder  },  emailRecipients,  submitButtonText,  successMessage,  errorMessage,      submitButtonText,      successMessage,      errorMessage    }  },      _type == "tabs" => {    ...,    title,    description,    tabs[]{      _key,      label,      content[]{        ...,        _type,        _key,          _type == "cta" => {    ...,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },  },          _type == "mainHero" => {    ...,    titleFont,    "backgroundImage": backgroundImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    "backgroundVideo": backgroundVideo.asset->url,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  },          _type == "hero" => {    ...,    variant,    titleFont,    imageAlignment,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  },          _type == "doubleHero" => {    ...,    variant,    primaryBadge,    primaryTitle,    "primaryRichText": primaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "primaryImage": primaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    primaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    secondaryBadge,    secondaryTitle,    "secondaryRichText": secondaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "secondaryImage": secondaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    secondaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },          _type == "faqAccordion" => {    ...,      "faqs": array::compact(faqs[]->{    title,    _id,    _type,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  }),    link{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },          _type == "subscribeNewsletter" => {    ...,    "subTitle": subTitle[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "helperText": helperText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },          _type == "imageLinkCards" => {    ...,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },    "cards": array::compact(cards[]{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      ),        image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    })  },          _type == "formBlock" => {    ...,    title,    description,    variant,    displayMode,    triggerText,    buttonPosition,    "form": form->{      _id,      title,      description,        fields[]{    label,    name,    type,    required,    options,    placeholder  },  emailRecipients,  submitButtonText,  successMessage,  errorMessage,      submitButtonText,      successMessage,      errorMessage    }  },          _type == "imageGallery" => {    ...,    title,    description,    layout,    columns,    slidesPerRow,    "images": images[]{      ...,      "image": image{        ...,        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background,      },      caption    }  },          _type == "featuredBlogs" => {    ...,    title,    subtitle,    displayMode,    blogCount,    buttonText,    "showViewAllButton": showViewAllButton == "yes",    "blogs": select(      displayMode == "curated" => blogs[]-> {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      },      displayMode == "latest" => *[        _type == "blog"         && (seoHideFromLists != true)      ] | order(publishedAt desc, _createdAt desc)[0...3] {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      }    )  },        _type == "tabs" => {          ...,          title,          description,          tabs[]{            _key,            label,            content[]{               ...,              _type,              _key            }          }        }      }    }  },      _type == "infoSection" => {    ...,    title,    headingLevel,    content[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      _type == "imageGallery" => {    ...,    title,    description,    layout,    columns,    slidesPerRow,    "images": images[]{      ...,      "image": image{        ...,        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background,      },      caption    }  },      _type == "specificationsTable" => {    ...,    title,    description,    variant,    "specifications": specifications[]{      _key,      label,      "content": content[]{        ...,          markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }      }    }  },      _type == "genericTable" => {    ...,    title,    description,    columnCount,    columnHeaders,    rows[]{      _key,      cells[]{        _key,        content,        isLastColumn,        _type == "richCell" => {          content[]{            ...,              markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }          }        }      }    },    variant  },      _type == "featuredBlogs" => {    ...,    title,    subtitle,    displayMode,    blogCount,    buttonText,    "showViewAllButton": showViewAllButton == "yes",    "blogs": select(      displayMode == "curated" => blogs[]-> {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      },      displayMode == "latest" => *[        _type == "blog"         && (seoHideFromLists != true)      ] | order(publishedAt desc, _createdAt desc)[0...3] {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      }    )  },      _type == "highlightedAspects" => {    title,    description,    columns,    aspects[]{      _key,      title,      variant,      icon,      image{        ...,        "alt": coalesce(asset->altText, asset->originalFilename, "Aspect Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background      },      content[]{        ...,          markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }      }    }  },      _type == "videoBlock" => {    ...,    _key,    _type,    title,    videoType,    "mp4File": coalesce(      mp4File.asset->url,      mp4File.asset->sources[0].url,      null    ),    youtubeUrl,    showControls,    autoplay,    loop,    allowFullscreen  },      _type == "videoHero" => {    ...,    variant,    titleFont,    videoType,    "mp4File": coalesce(      mp4File.asset->url,      mp4File.asset->sources[0].url,      null    ),    youtubeUrl,    showControls,    autoplay,    loop,      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  }  },    "slug": slug.current,    "blogs": *[_type == "blog" && (seoHideFromLists != true)] | order(orderRank asc){        _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }    }  }
 export type QueryBlogIndexPageDataResult = {
   _id: string;
   _type: "blogIndex";
@@ -6863,6 +7303,22 @@ export type QueryBlogIndexPageDataResult = {
               _key: string;
             }
           | {
+              _key: string;
+              _type: "button";
+              variant:
+                | "default"
+                | "link"
+                | "outline"
+                | "primary"
+                | "secondary"
+                | null;
+              text: string | null;
+              icon: "volvo-chevron-right" | null;
+              url?: CustomUrl;
+              openInNewTab: boolean | null;
+              href: string | null;
+            }
+          | {
               asset?: {
                 _ref: string;
                 _type: "reference";
@@ -6875,7 +7331,6 @@ export type QueryBlogIndexPageDataResult = {
               caption?: string;
               _type: "image";
               _key: string;
-              markDefs: null;
             }
         > | null;
         buttons: Array<{
@@ -7068,6 +7523,22 @@ export type QueryBlogIndexPageDataResult = {
                 _key: string;
               }
             | {
+                _key: string;
+                _type: "button";
+                variant:
+                  | "default"
+                  | "link"
+                  | "outline"
+                  | "primary"
+                  | "secondary"
+                  | null;
+                text: string | null;
+                icon: "volvo-chevron-right" | null;
+                url?: CustomUrl;
+                openInNewTab: boolean | null;
+                href: string | null;
+              }
+            | {
                 asset?: {
                   _ref: string;
                   _type: "reference";
@@ -7080,7 +7551,6 @@ export type QueryBlogIndexPageDataResult = {
                 caption?: string;
                 _type: "image";
                 _key: string;
-                markDefs: null;
               }
           > | null;
         }> | null;
@@ -7274,6 +7744,20 @@ export type QueryBlogIndexPageDataResult = {
                       _key: string;
                     }
                   | {
+                      _key: string;
+                      _type: "button";
+                      variant?:
+                        | "default"
+                        | "link"
+                        | "outline"
+                        | "primary"
+                        | "secondary";
+                      text?: string;
+                      icon?: "volvo-chevron-right";
+                      url?: CustomUrl;
+                      markDefs: null;
+                    }
+                  | {
                       asset?: {
                         _ref: string;
                         _type: "reference";
@@ -7336,6 +7820,22 @@ export type QueryBlogIndexPageDataResult = {
               _key: string;
             }
           | {
+              _key: string;
+              _type: "button";
+              variant:
+                | "default"
+                | "link"
+                | "outline"
+                | "primary"
+                | "secondary"
+                | null;
+              text: string | null;
+              icon: "volvo-chevron-right" | null;
+              url?: CustomUrl;
+              openInNewTab: boolean | null;
+              href: string | null;
+            }
+          | {
               asset?: {
                 _ref: string;
                 _type: "reference";
@@ -7348,7 +7848,6 @@ export type QueryBlogIndexPageDataResult = {
               caption?: string;
               _type: "image";
               _key: string;
-              markDefs: null;
             }
         > | null;
         image: {
@@ -7502,6 +8001,22 @@ export type QueryBlogIndexPageDataResult = {
               _key: string;
             }
           | {
+              _key: string;
+              _type: "button";
+              variant:
+                | "default"
+                | "link"
+                | "outline"
+                | "primary"
+                | "secondary"
+                | null;
+              text: string | null;
+              icon: "volvo-chevron-right" | null;
+              url?: CustomUrl;
+              openInNewTab: boolean | null;
+              href: string | null;
+            }
+          | {
               asset?: {
                 _ref: string;
                 _type: "reference";
@@ -7514,7 +8029,6 @@ export type QueryBlogIndexPageDataResult = {
               caption?: string;
               _type: "image";
               _key: string;
-              markDefs: null;
             }
         > | null;
         buttons: Array<{
@@ -7624,6 +8138,22 @@ export type QueryBlogIndexPageDataResult = {
               _key: string;
             }
           | {
+              _key: string;
+              _type: "button";
+              variant:
+                | "default"
+                | "link"
+                | "outline"
+                | "primary"
+                | "secondary"
+                | null;
+              text: string | null;
+              icon: "volvo-chevron-right" | null;
+              url?: CustomUrl;
+              openInNewTab: boolean | null;
+              href: string | null;
+            }
+          | {
               asset?: {
                 _ref: string;
                 _type: "reference";
@@ -7636,7 +8166,6 @@ export type QueryBlogIndexPageDataResult = {
               caption?: string;
               _type: "image";
               _key: string;
-              markDefs: null;
             }
         > | null;
         backgroundType?: "image" | "video";
@@ -7734,6 +8263,20 @@ export type QueryBlogIndexPageDataResult = {
                 level?: number;
                 _type: "block";
                 _key: string;
+              }
+            | {
+                _key: string;
+                _type: "button";
+                variant?:
+                  | "default"
+                  | "link"
+                  | "outline"
+                  | "primary"
+                  | "secondary";
+                text?: string;
+                icon?: "volvo-chevron-right";
+                url?: CustomUrl;
+                markDefs: null;
               }
             | {
                 asset?: {
@@ -7861,6 +8404,22 @@ export type QueryBlogIndexPageDataResult = {
                       _key: string;
                     }
                   | {
+                      _key: string;
+                      _type: "button";
+                      variant:
+                        | "default"
+                        | "link"
+                        | "outline"
+                        | "primary"
+                        | "secondary"
+                        | null;
+                      text: string | null;
+                      icon: "volvo-chevron-right" | null;
+                      url?: CustomUrl;
+                      openInNewTab: boolean | null;
+                      href: string | null;
+                    }
+                  | {
                       asset?: {
                         _ref: string;
                         _type: "reference";
@@ -7873,7 +8432,6 @@ export type QueryBlogIndexPageDataResult = {
                       caption?: string;
                       _type: "image";
                       _key: string;
-                      markDefs: null;
                     }
                 > | null;
                 buttons: Array<{
@@ -8073,6 +8631,22 @@ export type QueryBlogIndexPageDataResult = {
                         _key: string;
                       }
                     | {
+                        _key: string;
+                        _type: "button";
+                        variant:
+                          | "default"
+                          | "link"
+                          | "outline"
+                          | "primary"
+                          | "secondary"
+                          | null;
+                        text: string | null;
+                        icon: "volvo-chevron-right" | null;
+                        url?: CustomUrl;
+                        openInNewTab: boolean | null;
+                        href: string | null;
+                      }
+                    | {
                         asset?: {
                           _ref: string;
                           _type: "reference";
@@ -8085,7 +8659,6 @@ export type QueryBlogIndexPageDataResult = {
                         caption?: string;
                         _type: "image";
                         _key: string;
-                        markDefs: null;
                       }
                   > | null;
                 }> | null;
@@ -8207,6 +8780,9 @@ export type QueryBlogIndexPageDataResult = {
                       }
                     | {
                         content?: Array<
+                          | ({
+                              _key: string;
+                            } & Button)
                           | {
                               children?: Array<{
                                 marks?: Array<string>;
@@ -8306,6 +8882,22 @@ export type QueryBlogIndexPageDataResult = {
                       _key: string;
                     }
                   | {
+                      _key: string;
+                      _type: "button";
+                      variant:
+                        | "default"
+                        | "link"
+                        | "outline"
+                        | "primary"
+                        | "secondary"
+                        | null;
+                      text: string | null;
+                      icon: "volvo-chevron-right" | null;
+                      url?: CustomUrl;
+                      openInNewTab: boolean | null;
+                      href: string | null;
+                    }
+                  | {
                       asset?: {
                         _ref: string;
                         _type: "reference";
@@ -8318,7 +8910,6 @@ export type QueryBlogIndexPageDataResult = {
                       caption?: string;
                       _type: "image";
                       _key: string;
-                      markDefs: null;
                     }
                 > | null;
                 image: {
@@ -8474,6 +9065,22 @@ export type QueryBlogIndexPageDataResult = {
                       _key: string;
                     }
                   | {
+                      _key: string;
+                      _type: "button";
+                      variant:
+                        | "default"
+                        | "link"
+                        | "outline"
+                        | "primary"
+                        | "secondary"
+                        | null;
+                      text: string | null;
+                      icon: "volvo-chevron-right" | null;
+                      url?: CustomUrl;
+                      openInNewTab: boolean | null;
+                      href: string | null;
+                    }
+                  | {
                       asset?: {
                         _ref: string;
                         _type: "reference";
@@ -8486,7 +9093,6 @@ export type QueryBlogIndexPageDataResult = {
                       caption?: string;
                       _type: "image";
                       _key: string;
-                      markDefs: null;
                     }
                 > | null;
                 buttons: Array<{
@@ -8571,6 +9177,22 @@ export type QueryBlogIndexPageDataResult = {
                       _key: string;
                     }
                   | {
+                      _key: string;
+                      _type: "button";
+                      variant:
+                        | "default"
+                        | "link"
+                        | "outline"
+                        | "primary"
+                        | "secondary"
+                        | null;
+                      text: string | null;
+                      icon: "volvo-chevron-right" | null;
+                      url?: CustomUrl;
+                      openInNewTab: boolean | null;
+                      href: string | null;
+                    }
+                  | {
                       asset?: {
                         _ref: string;
                         _type: "reference";
@@ -8583,7 +9205,6 @@ export type QueryBlogIndexPageDataResult = {
                       caption?: string;
                       _type: "image";
                       _key: string;
-                      markDefs: null;
                     }
                 > | null;
                 backgroundType?: "image" | "video";
@@ -8760,6 +9381,9 @@ export type QueryBlogIndexPageDataResult = {
                 title?: string;
                 titleFont?: "default" | "statement";
                 richText?: Array<
+                  | ({
+                      _key: string;
+                    } & Button)
                   | {
                       children?: Array<{
                         marks?: Array<string>;
@@ -8874,6 +9498,22 @@ export type QueryBlogIndexPageDataResult = {
               _key: string;
             }
           | {
+              _key: string;
+              _type: "button";
+              variant:
+                | "default"
+                | "link"
+                | "outline"
+                | "primary"
+                | "secondary"
+                | null;
+              text: string | null;
+              icon: "volvo-chevron-right" | null;
+              url?: CustomUrl;
+              openInNewTab: boolean | null;
+              href: string | null;
+            }
+          | {
               asset?: {
                 _ref: string;
                 _type: "reference";
@@ -8886,7 +9526,6 @@ export type QueryBlogIndexPageDataResult = {
               caption?: string;
               _type: "image";
               _key: string;
-              markDefs: null;
             }
         > | null;
         videoType: "mp4" | "youtube" | null;
@@ -8975,7 +9614,7 @@ export type QueryBlogIndexPageDataResult = {
   }>;
 } | null;
 // Variable: queryBlogSlugPageData
-// Query: *[_type == "blog" && slug.current == $slug][0]{    ...,    "slug": slug.current,      authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  },      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },      pageBuilder[]{    ...,    _type,      _type == "cta" => {    ...,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },  },      _type == "mainHero" => {    ...,    titleFont,    "backgroundImage": backgroundImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    "backgroundVideo": backgroundVideo.asset->url,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  },      _type == "hero" => {    ...,    variant,    titleFont,    imageAlignment,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  },      _type == "doubleHero" => {    ...,    variant,    primaryBadge,    primaryTitle,    "primaryRichText": primaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "primaryImage": primaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    primaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    secondaryBadge,    secondaryTitle,    "secondaryRichText": secondaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "secondaryImage": secondaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    secondaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },      _type == "faqAccordion" => {    ...,      "faqs": array::compact(faqs[]->{    title,    _id,    _type,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  }),    link{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },      _type == "subscribeNewsletter" => {    ...,    "subTitle": subTitle[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "helperText": helperText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      _type == "imageLinkCards" => {    ...,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },    "cards": array::compact(cards[]{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      ),        image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    })  },      _type == "formBlock" => {    ...,    title,    description,    variant,    displayMode,    triggerText,    buttonPosition,    "form": form->{      _id,      title,      description,        fields[]{    label,    name,    type,    required,    options,    placeholder  },  emailRecipients,  submitButtonText,  successMessage,  errorMessage,      submitButtonText,      successMessage,      errorMessage    }  },      _type == "tabs" => {    ...,    title,    description,    tabs[]{      _key,      label,      content[]{        ...,        _type,        _key,          _type == "cta" => {    ...,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },  },          _type == "mainHero" => {    ...,    titleFont,    "backgroundImage": backgroundImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    "backgroundVideo": backgroundVideo.asset->url,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  },          _type == "hero" => {    ...,    variant,    titleFont,    imageAlignment,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  },          _type == "doubleHero" => {    ...,    variant,    primaryBadge,    primaryTitle,    "primaryRichText": primaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "primaryImage": primaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    primaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    secondaryBadge,    secondaryTitle,    "secondaryRichText": secondaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "secondaryImage": secondaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    secondaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },          _type == "faqAccordion" => {    ...,      "faqs": array::compact(faqs[]->{    title,    _id,    _type,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  }),    link{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },          _type == "subscribeNewsletter" => {    ...,    "subTitle": subTitle[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "helperText": helperText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },          _type == "imageLinkCards" => {    ...,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },    "cards": array::compact(cards[]{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      ),        image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    })  },          _type == "formBlock" => {    ...,    title,    description,    variant,    displayMode,    triggerText,    buttonPosition,    "form": form->{      _id,      title,      description,        fields[]{    label,    name,    type,    required,    options,    placeholder  },  emailRecipients,  submitButtonText,  successMessage,  errorMessage,      submitButtonText,      successMessage,      errorMessage    }  },          _type == "imageGallery" => {    ...,    title,    description,    layout,    columns,    slidesPerRow,    "images": images[]{      ...,      "image": image{        ...,        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background,      },      caption    }  },          _type == "featuredBlogs" => {    ...,    title,    subtitle,    displayMode,    blogCount,    buttonText,    "showViewAllButton": showViewAllButton == "yes",    "blogs": select(      displayMode == "curated" => blogs[]-> {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      },      displayMode == "latest" => *[        _type == "blog"         && (seoHideFromLists != true)      ] | order(publishedAt desc, _createdAt desc)[0...3] {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      }    )  },        _type == "tabs" => {          ...,          title,          description,          tabs[]{            _key,            label,            content[]{               ...,              _type,              _key            }          }        }      }    }  },      _type == "infoSection" => {    ...,    title,    headingLevel,    content[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      _type == "imageGallery" => {    ...,    title,    description,    layout,    columns,    slidesPerRow,    "images": images[]{      ...,      "image": image{        ...,        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background,      },      caption    }  },      _type == "specificationsTable" => {    ...,    title,    description,    variant,    "specifications": specifications[]{      _key,      label,      "content": content[]{        ...,          markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }      }    }  },      _type == "genericTable" => {    ...,    title,    description,    columnCount,    columnHeaders,    rows[]{      _key,      cells[]{        _key,        content,        isLastColumn,        _type == "richCell" => {          content[]{            ...,              markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }          }        }      }    },    variant  },      _type == "featuredBlogs" => {    ...,    title,    subtitle,    displayMode,    blogCount,    buttonText,    "showViewAllButton": showViewAllButton == "yes",    "blogs": select(      displayMode == "curated" => blogs[]-> {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      },      displayMode == "latest" => *[        _type == "blog"         && (seoHideFromLists != true)      ] | order(publishedAt desc, _createdAt desc)[0...3] {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      }    )  },      _type == "highlightedAspects" => {    title,    description,    columns,    aspects[]{      _key,      title,      variant,      icon,      image{        ...,        "alt": coalesce(asset->altText, asset->originalFilename, "Aspect Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background      },      content[]{        ...,          markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }      }    }  },      _type == "videoBlock" => {    ...,    _key,    _type,    title,    videoType,    "mp4File": coalesce(      mp4File.asset->url,      mp4File.asset->sources[0].url,      null    ),    youtubeUrl,    showControls,    autoplay,    loop,    allowFullscreen  },      _type == "videoHero" => {    ...,    variant,    titleFont,    videoType,    "mp4File": coalesce(      mp4File.asset->url,      mp4File.asset->sources[0].url,      null    ),    youtubeUrl,    showControls,    autoplay,    loop,      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  }  },      "categoryData": {    "label": category,    "slug": category,    "iri": "/camiones/" + category,    "parent": null  }  }
+// Query: *[_type == "blog" && slug.current == $slug][0]{    ...,    "slug": slug.current,      authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  },      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      pageBuilder[]{    ...,    _type,      _type == "cta" => {    ...,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },  },      _type == "mainHero" => {    ...,    titleFont,    "backgroundImage": backgroundImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    "backgroundVideo": backgroundVideo.asset->url,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  },      _type == "hero" => {    ...,    variant,    titleFont,    imageAlignment,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  },      _type == "doubleHero" => {    ...,    variant,    primaryBadge,    primaryTitle,    "primaryRichText": primaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "primaryImage": primaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    primaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    secondaryBadge,    secondaryTitle,    "secondaryRichText": secondaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "secondaryImage": secondaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    secondaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },      _type == "faqAccordion" => {    ...,      "faqs": array::compact(faqs[]->{    title,    _id,    _type,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  }),    link{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },      _type == "subscribeNewsletter" => {    ...,    "subTitle": subTitle[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "helperText": helperText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      _type == "imageLinkCards" => {    ...,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },    "cards": array::compact(cards[]{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      ),        image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    })  },      _type == "formBlock" => {    ...,    title,    description,    variant,    displayMode,    triggerText,    buttonPosition,    "form": form->{      _id,      title,      description,        fields[]{    label,    name,    type,    required,    options,    placeholder  },  emailRecipients,  submitButtonText,  successMessage,  errorMessage,      submitButtonText,      successMessage,      errorMessage    }  },      _type == "tabs" => {    ...,    title,    description,    tabs[]{      _key,      label,      content[]{        ...,        _type,        _key,          _type == "cta" => {    ...,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },  },          _type == "mainHero" => {    ...,    titleFont,    "backgroundImage": backgroundImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    "backgroundVideo": backgroundVideo.asset->url,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  },          _type == "hero" => {    ...,    variant,    titleFont,    imageAlignment,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  },          _type == "doubleHero" => {    ...,    variant,    primaryBadge,    primaryTitle,    "primaryRichText": primaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "primaryImage": primaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    primaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    secondaryBadge,    secondaryTitle,    "secondaryRichText": secondaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "secondaryImage": secondaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    secondaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },          _type == "faqAccordion" => {    ...,      "faqs": array::compact(faqs[]->{    title,    _id,    _type,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  }),    link{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },          _type == "subscribeNewsletter" => {    ...,    "subTitle": subTitle[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "helperText": helperText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },          _type == "imageLinkCards" => {    ...,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },    "cards": array::compact(cards[]{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      ),        image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    })  },          _type == "formBlock" => {    ...,    title,    description,    variant,    displayMode,    triggerText,    buttonPosition,    "form": form->{      _id,      title,      description,        fields[]{    label,    name,    type,    required,    options,    placeholder  },  emailRecipients,  submitButtonText,  successMessage,  errorMessage,      submitButtonText,      successMessage,      errorMessage    }  },          _type == "imageGallery" => {    ...,    title,    description,    layout,    columns,    slidesPerRow,    "images": images[]{      ...,      "image": image{        ...,        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background,      },      caption    }  },          _type == "featuredBlogs" => {    ...,    title,    subtitle,    displayMode,    blogCount,    buttonText,    "showViewAllButton": showViewAllButton == "yes",    "blogs": select(      displayMode == "curated" => blogs[]-> {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      },      displayMode == "latest" => *[        _type == "blog"         && (seoHideFromLists != true)      ] | order(publishedAt desc, _createdAt desc)[0...3] {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      }    )  },        _type == "tabs" => {          ...,          title,          description,          tabs[]{            _key,            label,            content[]{               ...,              _type,              _key            }          }        }      }    }  },      _type == "infoSection" => {    ...,    title,    headingLevel,    content[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      _type == "imageGallery" => {    ...,    title,    description,    layout,    columns,    slidesPerRow,    "images": images[]{      ...,      "image": image{        ...,        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background,      },      caption    }  },      _type == "specificationsTable" => {    ...,    title,    description,    variant,    "specifications": specifications[]{      _key,      label,      "content": content[]{        ...,          markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }      }    }  },      _type == "genericTable" => {    ...,    title,    description,    columnCount,    columnHeaders,    rows[]{      _key,      cells[]{        _key,        content,        isLastColumn,        _type == "richCell" => {          content[]{            ...,              markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }          }        }      }    },    variant  },      _type == "featuredBlogs" => {    ...,    title,    subtitle,    displayMode,    blogCount,    buttonText,    "showViewAllButton": showViewAllButton == "yes",    "blogs": select(      displayMode == "curated" => blogs[]-> {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      },      displayMode == "latest" => *[        _type == "blog"         && (seoHideFromLists != true)      ] | order(publishedAt desc, _createdAt desc)[0...3] {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      }    )  },      _type == "highlightedAspects" => {    title,    description,    columns,    aspects[]{      _key,      title,      variant,      icon,      image{        ...,        "alt": coalesce(asset->altText, asset->originalFilename, "Aspect Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background      },      content[]{        ...,          markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }      }    }  },      _type == "videoBlock" => {    ...,    _key,    _type,    title,    videoType,    "mp4File": coalesce(      mp4File.asset->url,      mp4File.asset->sources[0].url,      null    ),    youtubeUrl,    showControls,    autoplay,    loop,    allowFullscreen  },      _type == "videoHero" => {    ...,    variant,    titleFont,    videoType,    "mp4File": coalesce(      mp4File.asset->url,      mp4File.asset->sources[0].url,      null    ),    youtubeUrl,    showControls,    autoplay,    loop,      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  }  },      "categoryData": {    "label": category,    "slug": category,    "iri": "/camiones/" + category,    "parent": null  }  }
 export type QueryBlogSlugPageDataResult = {
   _id: string;
   _type: "blog";
@@ -9051,6 +9690,22 @@ export type QueryBlogSlugPageDataResult = {
         _key: string;
       }
     | {
+        _key: string;
+        _type: "button";
+        variant:
+          | "default"
+          | "link"
+          | "outline"
+          | "primary"
+          | "secondary"
+          | null;
+        text: string | null;
+        icon: "volvo-chevron-right" | null;
+        url?: CustomUrl;
+        openInNewTab: boolean | null;
+        href: string | null;
+      }
+    | {
         asset?: {
           _ref: string;
           _type: "reference";
@@ -9063,7 +9718,6 @@ export type QueryBlogSlugPageDataResult = {
         caption?: string;
         _type: "image";
         _key: string;
-        markDefs: null;
       }
   > | null;
   seoTitle?: string;
@@ -9404,7 +10058,7 @@ export type QueryFormBySlugResult = {
   errorMessage: string | null;
 } | null;
 // Variable: queryCamionesData
-// Query: *[_type == "camiones"]{  _id,  _type,  title,  subtitle,  description,  "slug": slug.current,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },  "taxonomy": taxonomias->{    prefLabel,    conceptId,    "slug": lower(prefLabel)  }}
+// Query: *[_type == "camiones"]{  _id,  _type,  title,  subtitle,  description,  "slug": slug.current,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },  "taxonomy": taxonomias->{    prefLabel,    conceptId,    "slug": lower(prefLabel)  }}
 export type QueryCamionesDataResult = Array<{
   _id: string;
   _type: "camiones";
@@ -9456,6 +10110,22 @@ export type QueryCamionesDataResult = Array<{
         _key: string;
       }
     | {
+        _key: string;
+        _type: "button";
+        variant:
+          | "default"
+          | "link"
+          | "outline"
+          | "primary"
+          | "secondary"
+          | null;
+        text: string | null;
+        icon: "volvo-chevron-right" | null;
+        url?: CustomUrl;
+        openInNewTab: boolean | null;
+        href: string | null;
+      }
+    | {
         asset?: {
           _ref: string;
           _type: "reference";
@@ -9468,7 +10138,6 @@ export type QueryCamionesDataResult = Array<{
         caption?: string;
         _type: "image";
         _key: string;
-        markDefs: null;
       }
   > | null;
   taxonomy: {
@@ -9478,7 +10147,7 @@ export type QueryCamionesDataResult = Array<{
   } | null;
 }>;
 // Variable: queryCamionOrPageBySlug
-// Query: *[  (_type == "camiones" || _type == "page")  && slug.current == $slug ][0]{  _id,  _type,  title,  subtitle,  description,  "slug": slug.current,  _type == "camiones" => {       image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },     taxonomias->{      "label": prefLabel,      "slug": prefLabel,      "iri": "/camiones/" + lower(prefLabel)    }  },    pageBuilder[]{    ...,    _type,      _type == "cta" => {    ...,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },  },      _type == "mainHero" => {    ...,    titleFont,    "backgroundImage": backgroundImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    "backgroundVideo": backgroundVideo.asset->url,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  },      _type == "hero" => {    ...,    variant,    titleFont,    imageAlignment,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  },      _type == "doubleHero" => {    ...,    variant,    primaryBadge,    primaryTitle,    "primaryRichText": primaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "primaryImage": primaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    primaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    secondaryBadge,    secondaryTitle,    "secondaryRichText": secondaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "secondaryImage": secondaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    secondaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },      _type == "faqAccordion" => {    ...,      "faqs": array::compact(faqs[]->{    title,    _id,    _type,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  }),    link{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },      _type == "subscribeNewsletter" => {    ...,    "subTitle": subTitle[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "helperText": helperText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      _type == "imageLinkCards" => {    ...,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },    "cards": array::compact(cards[]{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      ),        image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    })  },      _type == "formBlock" => {    ...,    title,    description,    variant,    displayMode,    triggerText,    buttonPosition,    "form": form->{      _id,      title,      description,        fields[]{    label,    name,    type,    required,    options,    placeholder  },  emailRecipients,  submitButtonText,  successMessage,  errorMessage,      submitButtonText,      successMessage,      errorMessage    }  },      _type == "tabs" => {    ...,    title,    description,    tabs[]{      _key,      label,      content[]{        ...,        _type,        _key,          _type == "cta" => {    ...,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },  },          _type == "mainHero" => {    ...,    titleFont,    "backgroundImage": backgroundImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    "backgroundVideo": backgroundVideo.asset->url,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  },          _type == "hero" => {    ...,    variant,    titleFont,    imageAlignment,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  },          _type == "doubleHero" => {    ...,    variant,    primaryBadge,    primaryTitle,    "primaryRichText": primaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "primaryImage": primaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    primaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    secondaryBadge,    secondaryTitle,    "secondaryRichText": secondaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "secondaryImage": secondaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    secondaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },          _type == "faqAccordion" => {    ...,      "faqs": array::compact(faqs[]->{    title,    _id,    _type,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  }),    link{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },          _type == "subscribeNewsletter" => {    ...,    "subTitle": subTitle[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "helperText": helperText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },          _type == "imageLinkCards" => {    ...,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },    "cards": array::compact(cards[]{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      ),        image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    })  },          _type == "formBlock" => {    ...,    title,    description,    variant,    displayMode,    triggerText,    buttonPosition,    "form": form->{      _id,      title,      description,        fields[]{    label,    name,    type,    required,    options,    placeholder  },  emailRecipients,  submitButtonText,  successMessage,  errorMessage,      submitButtonText,      successMessage,      errorMessage    }  },          _type == "imageGallery" => {    ...,    title,    description,    layout,    columns,    slidesPerRow,    "images": images[]{      ...,      "image": image{        ...,        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background,      },      caption    }  },          _type == "featuredBlogs" => {    ...,    title,    subtitle,    displayMode,    blogCount,    buttonText,    "showViewAllButton": showViewAllButton == "yes",    "blogs": select(      displayMode == "curated" => blogs[]-> {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      },      displayMode == "latest" => *[        _type == "blog"         && (seoHideFromLists != true)      ] | order(publishedAt desc, _createdAt desc)[0...3] {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      }    )  },        _type == "tabs" => {          ...,          title,          description,          tabs[]{            _key,            label,            content[]{               ...,              _type,              _key            }          }        }      }    }  },      _type == "infoSection" => {    ...,    title,    headingLevel,    content[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      _type == "imageGallery" => {    ...,    title,    description,    layout,    columns,    slidesPerRow,    "images": images[]{      ...,      "image": image{        ...,        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background,      },      caption    }  },      _type == "specificationsTable" => {    ...,    title,    description,    variant,    "specifications": specifications[]{      _key,      label,      "content": content[]{        ...,          markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }      }    }  },      _type == "genericTable" => {    ...,    title,    description,    columnCount,    columnHeaders,    rows[]{      _key,      cells[]{        _key,        content,        isLastColumn,        _type == "richCell" => {          content[]{            ...,              markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }          }        }      }    },    variant  },      _type == "featuredBlogs" => {    ...,    title,    subtitle,    displayMode,    blogCount,    buttonText,    "showViewAllButton": showViewAllButton == "yes",    "blogs": select(      displayMode == "curated" => blogs[]-> {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      },      displayMode == "latest" => *[        _type == "blog"         && (seoHideFromLists != true)      ] | order(publishedAt desc, _createdAt desc)[0...3] {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      }    )  },      _type == "highlightedAspects" => {    title,    description,    columns,    aspects[]{      _key,      title,      variant,      icon,      image{        ...,        "alt": coalesce(asset->altText, asset->originalFilename, "Aspect Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background      },      content[]{        ...,          markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }      }    }  },      _type == "videoBlock" => {    ...,    _key,    _type,    title,    videoType,    "mp4File": coalesce(      mp4File.asset->url,      mp4File.asset->sources[0].url,      null    ),    youtubeUrl,    showControls,    autoplay,    loop,    allowFullscreen  },      _type == "videoHero" => {    ...,    variant,    titleFont,    videoType,    "mp4File": coalesce(      mp4File.asset->url,      mp4File.asset->sources[0].url,      null    ),    youtubeUrl,    showControls,    autoplay,    loop,      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  }  } }
+// Query: *[  (_type == "camiones" || _type == "page")  && slug.current == $slug ][0]{  _id,  _type,  title,  subtitle,  description,  "slug": slug.current,  _type == "camiones" => {       image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },     taxonomias->{      "label": prefLabel,      "slug": prefLabel,      "iri": "/camiones/" + lower(prefLabel)    }  },    pageBuilder[]{    ...,    _type,      _type == "cta" => {    ...,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },  },      _type == "mainHero" => {    ...,    titleFont,    "backgroundImage": backgroundImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    "backgroundVideo": backgroundVideo.asset->url,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  },      _type == "hero" => {    ...,    variant,    titleFont,    imageAlignment,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  },      _type == "doubleHero" => {    ...,    variant,    primaryBadge,    primaryTitle,    "primaryRichText": primaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "primaryImage": primaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    primaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    secondaryBadge,    secondaryTitle,    "secondaryRichText": secondaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "secondaryImage": secondaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    secondaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },      _type == "faqAccordion" => {    ...,      "faqs": array::compact(faqs[]->{    title,    _id,    _type,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  }),    link{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },      _type == "subscribeNewsletter" => {    ...,    "subTitle": subTitle[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "helperText": helperText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      _type == "imageLinkCards" => {    ...,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },    "cards": array::compact(cards[]{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      ),        image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    })  },      _type == "formBlock" => {    ...,    title,    description,    variant,    displayMode,    triggerText,    buttonPosition,    "form": form->{      _id,      title,      description,        fields[]{    label,    name,    type,    required,    options,    placeholder  },  emailRecipients,  submitButtonText,  successMessage,  errorMessage,      submitButtonText,      successMessage,      errorMessage    }  },      _type == "tabs" => {    ...,    title,    description,    tabs[]{      _key,      label,      content[]{        ...,        _type,        _key,          _type == "cta" => {    ...,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },  },          _type == "mainHero" => {    ...,    titleFont,    "backgroundImage": backgroundImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    "backgroundVideo": backgroundVideo.asset->url,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  },          _type == "hero" => {    ...,    variant,    titleFont,    imageAlignment,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  },          _type == "doubleHero" => {    ...,    variant,    primaryBadge,    primaryTitle,    "primaryRichText": primaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "primaryImage": primaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    primaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    secondaryBadge,    secondaryTitle,    "secondaryRichText": secondaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "secondaryImage": secondaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    secondaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },          _type == "faqAccordion" => {    ...,      "faqs": array::compact(faqs[]->{    title,    _id,    _type,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  }),    link{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },          _type == "subscribeNewsletter" => {    ...,    "subTitle": subTitle[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "helperText": helperText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },          _type == "imageLinkCards" => {    ...,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },    "cards": array::compact(cards[]{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      ),        image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    })  },          _type == "formBlock" => {    ...,    title,    description,    variant,    displayMode,    triggerText,    buttonPosition,    "form": form->{      _id,      title,      description,        fields[]{    label,    name,    type,    required,    options,    placeholder  },  emailRecipients,  submitButtonText,  successMessage,  errorMessage,      submitButtonText,      successMessage,      errorMessage    }  },          _type == "imageGallery" => {    ...,    title,    description,    layout,    columns,    slidesPerRow,    "images": images[]{      ...,      "image": image{        ...,        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background,      },      caption    }  },          _type == "featuredBlogs" => {    ...,    title,    subtitle,    displayMode,    blogCount,    buttonText,    "showViewAllButton": showViewAllButton == "yes",    "blogs": select(      displayMode == "curated" => blogs[]-> {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      },      displayMode == "latest" => *[        _type == "blog"         && (seoHideFromLists != true)      ] | order(publishedAt desc, _createdAt desc)[0...3] {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      }    )  },        _type == "tabs" => {          ...,          title,          description,          tabs[]{            _key,            label,            content[]{               ...,              _type,              _key            }          }        }      }    }  },      _type == "infoSection" => {    ...,    title,    headingLevel,    content[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      _type == "imageGallery" => {    ...,    title,    description,    layout,    columns,    slidesPerRow,    "images": images[]{      ...,      "image": image{        ...,        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background,      },      caption    }  },      _type == "specificationsTable" => {    ...,    title,    description,    variant,    "specifications": specifications[]{      _key,      label,      "content": content[]{        ...,          markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }      }    }  },      _type == "genericTable" => {    ...,    title,    description,    columnCount,    columnHeaders,    rows[]{      _key,      cells[]{        _key,        content,        isLastColumn,        _type == "richCell" => {          content[]{            ...,              markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }          }        }      }    },    variant  },      _type == "featuredBlogs" => {    ...,    title,    subtitle,    displayMode,    blogCount,    buttonText,    "showViewAllButton": showViewAllButton == "yes",    "blogs": select(      displayMode == "curated" => blogs[]-> {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      },      displayMode == "latest" => *[        _type == "blog"         && (seoHideFromLists != true)      ] | order(publishedAt desc, _createdAt desc)[0...3] {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      }    )  },      _type == "highlightedAspects" => {    title,    description,    columns,    aspects[]{      _key,      title,      variant,      icon,      image{        ...,        "alt": coalesce(asset->altText, asset->originalFilename, "Aspect Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background      },      content[]{        ...,          markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }      }    }  },      _type == "videoBlock" => {    ...,    _key,    _type,    title,    videoType,    "mp4File": coalesce(      mp4File.asset->url,      mp4File.asset->sources[0].url,      null    ),    youtubeUrl,    showControls,    autoplay,    loop,    allowFullscreen  },      _type == "videoHero" => {    ...,    variant,    titleFont,    videoType,    "mp4File": coalesce(      mp4File.asset->url,      mp4File.asset->sources[0].url,      null    ),    youtubeUrl,    showControls,    autoplay,    loop,      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  }  } }
 export type QueryCamionOrPageBySlugResult =
   | {
       _id: string;
@@ -9531,6 +10200,22 @@ export type QueryCamionOrPageBySlugResult =
             _key: string;
           }
         | {
+            _key: string;
+            _type: "button";
+            variant:
+              | "default"
+              | "link"
+              | "outline"
+              | "primary"
+              | "secondary"
+              | null;
+            text: string | null;
+            icon: "volvo-chevron-right" | null;
+            url?: CustomUrl;
+            openInNewTab: boolean | null;
+            href: string | null;
+          }
+        | {
             asset?: {
               _ref: string;
               _type: "reference";
@@ -9543,7 +10228,6 @@ export type QueryCamionOrPageBySlugResult =
             caption?: string;
             _type: "image";
             _key: string;
-            markDefs: null;
           }
       > | null;
       taxonomias: {
@@ -9593,6 +10277,22 @@ export type QueryCamionOrPageBySlugResult =
                   _key: string;
                 }
               | {
+                  _key: string;
+                  _type: "button";
+                  variant:
+                    | "default"
+                    | "link"
+                    | "outline"
+                    | "primary"
+                    | "secondary"
+                    | null;
+                  text: string | null;
+                  icon: "volvo-chevron-right" | null;
+                  url?: CustomUrl;
+                  openInNewTab: boolean | null;
+                  href: string | null;
+                }
+              | {
                   asset?: {
                     _ref: string;
                     _type: "reference";
@@ -9605,7 +10305,6 @@ export type QueryCamionOrPageBySlugResult =
                   caption?: string;
                   _type: "image";
                   _key: string;
-                  markDefs: null;
                 }
             > | null;
             buttons: Array<{
@@ -9805,6 +10504,22 @@ export type QueryCamionOrPageBySlugResult =
                     _key: string;
                   }
                 | {
+                    _key: string;
+                    _type: "button";
+                    variant:
+                      | "default"
+                      | "link"
+                      | "outline"
+                      | "primary"
+                      | "secondary"
+                      | null;
+                    text: string | null;
+                    icon: "volvo-chevron-right" | null;
+                    url?: CustomUrl;
+                    openInNewTab: boolean | null;
+                    href: string | null;
+                  }
+                | {
                     asset?: {
                       _ref: string;
                       _type: "reference";
@@ -9817,7 +10532,6 @@ export type QueryCamionOrPageBySlugResult =
                     caption?: string;
                     _type: "image";
                     _key: string;
-                    markDefs: null;
                   }
               > | null;
             }> | null;
@@ -10011,6 +10725,20 @@ export type QueryCamionOrPageBySlugResult =
                           _key: string;
                         }
                       | {
+                          _key: string;
+                          _type: "button";
+                          variant?:
+                            | "default"
+                            | "link"
+                            | "outline"
+                            | "primary"
+                            | "secondary";
+                          text?: string;
+                          icon?: "volvo-chevron-right";
+                          url?: CustomUrl;
+                          markDefs: null;
+                        }
+                      | {
                           asset?: {
                             _ref: string;
                             _type: "reference";
@@ -10080,6 +10808,22 @@ export type QueryCamionOrPageBySlugResult =
                   _key: string;
                 }
               | {
+                  _key: string;
+                  _type: "button";
+                  variant:
+                    | "default"
+                    | "link"
+                    | "outline"
+                    | "primary"
+                    | "secondary"
+                    | null;
+                  text: string | null;
+                  icon: "volvo-chevron-right" | null;
+                  url?: CustomUrl;
+                  openInNewTab: boolean | null;
+                  href: string | null;
+                }
+              | {
                   asset?: {
                     _ref: string;
                     _type: "reference";
@@ -10092,7 +10836,6 @@ export type QueryCamionOrPageBySlugResult =
                   caption?: string;
                   _type: "image";
                   _key: string;
-                  markDefs: null;
                 }
             > | null;
             image: {
@@ -10253,6 +10996,22 @@ export type QueryCamionOrPageBySlugResult =
                   _key: string;
                 }
               | {
+                  _key: string;
+                  _type: "button";
+                  variant:
+                    | "default"
+                    | "link"
+                    | "outline"
+                    | "primary"
+                    | "secondary"
+                    | null;
+                  text: string | null;
+                  icon: "volvo-chevron-right" | null;
+                  url?: CustomUrl;
+                  openInNewTab: boolean | null;
+                  href: string | null;
+                }
+              | {
                   asset?: {
                     _ref: string;
                     _type: "reference";
@@ -10265,7 +11024,6 @@ export type QueryCamionOrPageBySlugResult =
                   caption?: string;
                   _type: "image";
                   _key: string;
-                  markDefs: null;
                 }
             > | null;
             buttons: Array<{
@@ -10382,6 +11140,22 @@ export type QueryCamionOrPageBySlugResult =
                   _key: string;
                 }
               | {
+                  _key: string;
+                  _type: "button";
+                  variant:
+                    | "default"
+                    | "link"
+                    | "outline"
+                    | "primary"
+                    | "secondary"
+                    | null;
+                  text: string | null;
+                  icon: "volvo-chevron-right" | null;
+                  url?: CustomUrl;
+                  openInNewTab: boolean | null;
+                  href: string | null;
+                }
+              | {
                   asset?: {
                     _ref: string;
                     _type: "reference";
@@ -10394,7 +11168,6 @@ export type QueryCamionOrPageBySlugResult =
                   caption?: string;
                   _type: "image";
                   _key: string;
-                  markDefs: null;
                 }
             > | null;
             backgroundType?: "image" | "video";
@@ -10499,6 +11272,20 @@ export type QueryCamionOrPageBySlugResult =
                     level?: number;
                     _type: "block";
                     _key: string;
+                  }
+                | {
+                    _key: string;
+                    _type: "button";
+                    variant?:
+                      | "default"
+                      | "link"
+                      | "outline"
+                      | "primary"
+                      | "secondary";
+                    text?: string;
+                    icon?: "volvo-chevron-right";
+                    url?: CustomUrl;
+                    markDefs: null;
                   }
                 | {
                     asset?: {
@@ -10626,6 +11413,22 @@ export type QueryCamionOrPageBySlugResult =
                           _key: string;
                         }
                       | {
+                          _key: string;
+                          _type: "button";
+                          variant:
+                            | "default"
+                            | "link"
+                            | "outline"
+                            | "primary"
+                            | "secondary"
+                            | null;
+                          text: string | null;
+                          icon: "volvo-chevron-right" | null;
+                          url?: CustomUrl;
+                          openInNewTab: boolean | null;
+                          href: string | null;
+                        }
+                      | {
                           asset?: {
                             _ref: string;
                             _type: "reference";
@@ -10638,7 +11441,6 @@ export type QueryCamionOrPageBySlugResult =
                           caption?: string;
                           _type: "image";
                           _key: string;
-                          markDefs: null;
                         }
                     > | null;
                     buttons: Array<{
@@ -10838,6 +11640,22 @@ export type QueryCamionOrPageBySlugResult =
                             _key: string;
                           }
                         | {
+                            _key: string;
+                            _type: "button";
+                            variant:
+                              | "default"
+                              | "link"
+                              | "outline"
+                              | "primary"
+                              | "secondary"
+                              | null;
+                            text: string | null;
+                            icon: "volvo-chevron-right" | null;
+                            url?: CustomUrl;
+                            openInNewTab: boolean | null;
+                            href: string | null;
+                          }
+                        | {
                             asset?: {
                               _ref: string;
                               _type: "reference";
@@ -10850,7 +11668,6 @@ export type QueryCamionOrPageBySlugResult =
                             caption?: string;
                             _type: "image";
                             _key: string;
-                            markDefs: null;
                           }
                       > | null;
                     }> | null;
@@ -10972,6 +11789,9 @@ export type QueryCamionOrPageBySlugResult =
                           }
                         | {
                             content?: Array<
+                              | ({
+                                  _key: string;
+                                } & Button)
                               | {
                                   children?: Array<{
                                     marks?: Array<string>;
@@ -11071,6 +11891,22 @@ export type QueryCamionOrPageBySlugResult =
                           _key: string;
                         }
                       | {
+                          _key: string;
+                          _type: "button";
+                          variant:
+                            | "default"
+                            | "link"
+                            | "outline"
+                            | "primary"
+                            | "secondary"
+                            | null;
+                          text: string | null;
+                          icon: "volvo-chevron-right" | null;
+                          url?: CustomUrl;
+                          openInNewTab: boolean | null;
+                          href: string | null;
+                        }
+                      | {
                           asset?: {
                             _ref: string;
                             _type: "reference";
@@ -11083,7 +11919,6 @@ export type QueryCamionOrPageBySlugResult =
                           caption?: string;
                           _type: "image";
                           _key: string;
-                          markDefs: null;
                         }
                     > | null;
                     image: {
@@ -11239,6 +12074,22 @@ export type QueryCamionOrPageBySlugResult =
                           _key: string;
                         }
                       | {
+                          _key: string;
+                          _type: "button";
+                          variant:
+                            | "default"
+                            | "link"
+                            | "outline"
+                            | "primary"
+                            | "secondary"
+                            | null;
+                          text: string | null;
+                          icon: "volvo-chevron-right" | null;
+                          url?: CustomUrl;
+                          openInNewTab: boolean | null;
+                          href: string | null;
+                        }
+                      | {
                           asset?: {
                             _ref: string;
                             _type: "reference";
@@ -11251,7 +12102,6 @@ export type QueryCamionOrPageBySlugResult =
                           caption?: string;
                           _type: "image";
                           _key: string;
-                          markDefs: null;
                         }
                     > | null;
                     buttons: Array<{
@@ -11336,6 +12186,22 @@ export type QueryCamionOrPageBySlugResult =
                           _key: string;
                         }
                       | {
+                          _key: string;
+                          _type: "button";
+                          variant:
+                            | "default"
+                            | "link"
+                            | "outline"
+                            | "primary"
+                            | "secondary"
+                            | null;
+                          text: string | null;
+                          icon: "volvo-chevron-right" | null;
+                          url?: CustomUrl;
+                          openInNewTab: boolean | null;
+                          href: string | null;
+                        }
+                      | {
                           asset?: {
                             _ref: string;
                             _type: "reference";
@@ -11348,7 +12214,6 @@ export type QueryCamionOrPageBySlugResult =
                           caption?: string;
                           _type: "image";
                           _key: string;
-                          markDefs: null;
                         }
                     > | null;
                     backgroundType?: "image" | "video";
@@ -11530,6 +12395,9 @@ export type QueryCamionOrPageBySlugResult =
                     title?: string;
                     titleFont?: "default" | "statement";
                     richText?: Array<
+                      | ({
+                          _key: string;
+                        } & Button)
                       | {
                           children?: Array<{
                             marks?: Array<string>;
@@ -11651,6 +12519,22 @@ export type QueryCamionOrPageBySlugResult =
                   _key: string;
                 }
               | {
+                  _key: string;
+                  _type: "button";
+                  variant:
+                    | "default"
+                    | "link"
+                    | "outline"
+                    | "primary"
+                    | "secondary"
+                    | null;
+                  text: string | null;
+                  icon: "volvo-chevron-right" | null;
+                  url?: CustomUrl;
+                  openInNewTab: boolean | null;
+                  href: string | null;
+                }
+              | {
                   asset?: {
                     _ref: string;
                     _type: "reference";
@@ -11663,7 +12547,6 @@ export type QueryCamionOrPageBySlugResult =
                   caption?: string;
                   _type: "image";
                   _key: string;
-                  markDefs: null;
                 }
             > | null;
             videoType: "mp4" | "youtube" | null;
@@ -11739,6 +12622,22 @@ export type QueryCamionOrPageBySlugResult =
                   _key: string;
                 }
               | {
+                  _key: string;
+                  _type: "button";
+                  variant:
+                    | "default"
+                    | "link"
+                    | "outline"
+                    | "primary"
+                    | "secondary"
+                    | null;
+                  text: string | null;
+                  icon: "volvo-chevron-right" | null;
+                  url?: CustomUrl;
+                  openInNewTab: boolean | null;
+                  href: string | null;
+                }
+              | {
                   asset?: {
                     _ref: string;
                     _type: "reference";
@@ -11751,7 +12650,6 @@ export type QueryCamionOrPageBySlugResult =
                   caption?: string;
                   _type: "image";
                   _key: string;
-                  markDefs: null;
                 }
             > | null;
             buttons: Array<{
@@ -11951,6 +12849,22 @@ export type QueryCamionOrPageBySlugResult =
                     _key: string;
                   }
                 | {
+                    _key: string;
+                    _type: "button";
+                    variant:
+                      | "default"
+                      | "link"
+                      | "outline"
+                      | "primary"
+                      | "secondary"
+                      | null;
+                    text: string | null;
+                    icon: "volvo-chevron-right" | null;
+                    url?: CustomUrl;
+                    openInNewTab: boolean | null;
+                    href: string | null;
+                  }
+                | {
                     asset?: {
                       _ref: string;
                       _type: "reference";
@@ -11963,7 +12877,6 @@ export type QueryCamionOrPageBySlugResult =
                     caption?: string;
                     _type: "image";
                     _key: string;
-                    markDefs: null;
                   }
               > | null;
             }> | null;
@@ -12157,6 +13070,20 @@ export type QueryCamionOrPageBySlugResult =
                           _key: string;
                         }
                       | {
+                          _key: string;
+                          _type: "button";
+                          variant?:
+                            | "default"
+                            | "link"
+                            | "outline"
+                            | "primary"
+                            | "secondary";
+                          text?: string;
+                          icon?: "volvo-chevron-right";
+                          url?: CustomUrl;
+                          markDefs: null;
+                        }
+                      | {
                           asset?: {
                             _ref: string;
                             _type: "reference";
@@ -12226,6 +13153,22 @@ export type QueryCamionOrPageBySlugResult =
                   _key: string;
                 }
               | {
+                  _key: string;
+                  _type: "button";
+                  variant:
+                    | "default"
+                    | "link"
+                    | "outline"
+                    | "primary"
+                    | "secondary"
+                    | null;
+                  text: string | null;
+                  icon: "volvo-chevron-right" | null;
+                  url?: CustomUrl;
+                  openInNewTab: boolean | null;
+                  href: string | null;
+                }
+              | {
                   asset?: {
                     _ref: string;
                     _type: "reference";
@@ -12238,7 +13181,6 @@ export type QueryCamionOrPageBySlugResult =
                   caption?: string;
                   _type: "image";
                   _key: string;
-                  markDefs: null;
                 }
             > | null;
             image: {
@@ -12399,6 +13341,22 @@ export type QueryCamionOrPageBySlugResult =
                   _key: string;
                 }
               | {
+                  _key: string;
+                  _type: "button";
+                  variant:
+                    | "default"
+                    | "link"
+                    | "outline"
+                    | "primary"
+                    | "secondary"
+                    | null;
+                  text: string | null;
+                  icon: "volvo-chevron-right" | null;
+                  url?: CustomUrl;
+                  openInNewTab: boolean | null;
+                  href: string | null;
+                }
+              | {
                   asset?: {
                     _ref: string;
                     _type: "reference";
@@ -12411,7 +13369,6 @@ export type QueryCamionOrPageBySlugResult =
                   caption?: string;
                   _type: "image";
                   _key: string;
-                  markDefs: null;
                 }
             > | null;
             buttons: Array<{
@@ -12528,6 +13485,22 @@ export type QueryCamionOrPageBySlugResult =
                   _key: string;
                 }
               | {
+                  _key: string;
+                  _type: "button";
+                  variant:
+                    | "default"
+                    | "link"
+                    | "outline"
+                    | "primary"
+                    | "secondary"
+                    | null;
+                  text: string | null;
+                  icon: "volvo-chevron-right" | null;
+                  url?: CustomUrl;
+                  openInNewTab: boolean | null;
+                  href: string | null;
+                }
+              | {
                   asset?: {
                     _ref: string;
                     _type: "reference";
@@ -12540,7 +13513,6 @@ export type QueryCamionOrPageBySlugResult =
                   caption?: string;
                   _type: "image";
                   _key: string;
-                  markDefs: null;
                 }
             > | null;
             backgroundType?: "image" | "video";
@@ -12645,6 +13617,20 @@ export type QueryCamionOrPageBySlugResult =
                     level?: number;
                     _type: "block";
                     _key: string;
+                  }
+                | {
+                    _key: string;
+                    _type: "button";
+                    variant?:
+                      | "default"
+                      | "link"
+                      | "outline"
+                      | "primary"
+                      | "secondary";
+                    text?: string;
+                    icon?: "volvo-chevron-right";
+                    url?: CustomUrl;
+                    markDefs: null;
                   }
                 | {
                     asset?: {
@@ -12772,6 +13758,22 @@ export type QueryCamionOrPageBySlugResult =
                           _key: string;
                         }
                       | {
+                          _key: string;
+                          _type: "button";
+                          variant:
+                            | "default"
+                            | "link"
+                            | "outline"
+                            | "primary"
+                            | "secondary"
+                            | null;
+                          text: string | null;
+                          icon: "volvo-chevron-right" | null;
+                          url?: CustomUrl;
+                          openInNewTab: boolean | null;
+                          href: string | null;
+                        }
+                      | {
                           asset?: {
                             _ref: string;
                             _type: "reference";
@@ -12784,7 +13786,6 @@ export type QueryCamionOrPageBySlugResult =
                           caption?: string;
                           _type: "image";
                           _key: string;
-                          markDefs: null;
                         }
                     > | null;
                     buttons: Array<{
@@ -12984,6 +13985,22 @@ export type QueryCamionOrPageBySlugResult =
                             _key: string;
                           }
                         | {
+                            _key: string;
+                            _type: "button";
+                            variant:
+                              | "default"
+                              | "link"
+                              | "outline"
+                              | "primary"
+                              | "secondary"
+                              | null;
+                            text: string | null;
+                            icon: "volvo-chevron-right" | null;
+                            url?: CustomUrl;
+                            openInNewTab: boolean | null;
+                            href: string | null;
+                          }
+                        | {
                             asset?: {
                               _ref: string;
                               _type: "reference";
@@ -12996,7 +14013,6 @@ export type QueryCamionOrPageBySlugResult =
                             caption?: string;
                             _type: "image";
                             _key: string;
-                            markDefs: null;
                           }
                       > | null;
                     }> | null;
@@ -13118,6 +14134,9 @@ export type QueryCamionOrPageBySlugResult =
                           }
                         | {
                             content?: Array<
+                              | ({
+                                  _key: string;
+                                } & Button)
                               | {
                                   children?: Array<{
                                     marks?: Array<string>;
@@ -13217,6 +14236,22 @@ export type QueryCamionOrPageBySlugResult =
                           _key: string;
                         }
                       | {
+                          _key: string;
+                          _type: "button";
+                          variant:
+                            | "default"
+                            | "link"
+                            | "outline"
+                            | "primary"
+                            | "secondary"
+                            | null;
+                          text: string | null;
+                          icon: "volvo-chevron-right" | null;
+                          url?: CustomUrl;
+                          openInNewTab: boolean | null;
+                          href: string | null;
+                        }
+                      | {
                           asset?: {
                             _ref: string;
                             _type: "reference";
@@ -13229,7 +14264,6 @@ export type QueryCamionOrPageBySlugResult =
                           caption?: string;
                           _type: "image";
                           _key: string;
-                          markDefs: null;
                         }
                     > | null;
                     image: {
@@ -13385,6 +14419,22 @@ export type QueryCamionOrPageBySlugResult =
                           _key: string;
                         }
                       | {
+                          _key: string;
+                          _type: "button";
+                          variant:
+                            | "default"
+                            | "link"
+                            | "outline"
+                            | "primary"
+                            | "secondary"
+                            | null;
+                          text: string | null;
+                          icon: "volvo-chevron-right" | null;
+                          url?: CustomUrl;
+                          openInNewTab: boolean | null;
+                          href: string | null;
+                        }
+                      | {
                           asset?: {
                             _ref: string;
                             _type: "reference";
@@ -13397,7 +14447,6 @@ export type QueryCamionOrPageBySlugResult =
                           caption?: string;
                           _type: "image";
                           _key: string;
-                          markDefs: null;
                         }
                     > | null;
                     buttons: Array<{
@@ -13482,6 +14531,22 @@ export type QueryCamionOrPageBySlugResult =
                           _key: string;
                         }
                       | {
+                          _key: string;
+                          _type: "button";
+                          variant:
+                            | "default"
+                            | "link"
+                            | "outline"
+                            | "primary"
+                            | "secondary"
+                            | null;
+                          text: string | null;
+                          icon: "volvo-chevron-right" | null;
+                          url?: CustomUrl;
+                          openInNewTab: boolean | null;
+                          href: string | null;
+                        }
+                      | {
                           asset?: {
                             _ref: string;
                             _type: "reference";
@@ -13494,7 +14559,6 @@ export type QueryCamionOrPageBySlugResult =
                           caption?: string;
                           _type: "image";
                           _key: string;
-                          markDefs: null;
                         }
                     > | null;
                     backgroundType?: "image" | "video";
@@ -13676,6 +14740,9 @@ export type QueryCamionOrPageBySlugResult =
                     title?: string;
                     titleFont?: "default" | "statement";
                     richText?: Array<
+                      | ({
+                          _key: string;
+                        } & Button)
                       | {
                           children?: Array<{
                             marks?: Array<string>;
@@ -13797,6 +14864,22 @@ export type QueryCamionOrPageBySlugResult =
                   _key: string;
                 }
               | {
+                  _key: string;
+                  _type: "button";
+                  variant:
+                    | "default"
+                    | "link"
+                    | "outline"
+                    | "primary"
+                    | "secondary"
+                    | null;
+                  text: string | null;
+                  icon: "volvo-chevron-right" | null;
+                  url?: CustomUrl;
+                  openInNewTab: boolean | null;
+                  href: string | null;
+                }
+              | {
                   asset?: {
                     _ref: string;
                     _type: "reference";
@@ -13809,7 +14892,6 @@ export type QueryCamionOrPageBySlugResult =
                   caption?: string;
                   _type: "image";
                   _key: string;
-                  markDefs: null;
                 }
             > | null;
             videoType: "mp4" | "youtube" | null;
@@ -13841,7 +14923,7 @@ export type QueryCamionOrPageBySlugResult =
 // Query: *[_type == "camiones" && defined(slug.current)].slug.current
 export type QueryCamionesPathsResult = Array<string | null>;
 // Variable: queryBusesData
-// Query: *[_type == "buses"]{  _id,  _type,  title,  subtitle,  description,  "slug": slug.current,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },  "taxonomy": taxonomias->{    prefLabel,    conceptId,    "slug": lower(prefLabel)  }}
+// Query: *[_type == "buses"]{  _id,  _type,  title,  subtitle,  description,  "slug": slug.current,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },  "taxonomy": taxonomias->{    prefLabel,    conceptId,    "slug": lower(prefLabel)  }}
 export type QueryBusesDataResult = Array<{
   _id: string;
   _type: "buses";
@@ -13893,6 +14975,22 @@ export type QueryBusesDataResult = Array<{
         _key: string;
       }
     | {
+        _key: string;
+        _type: "button";
+        variant:
+          | "default"
+          | "link"
+          | "outline"
+          | "primary"
+          | "secondary"
+          | null;
+        text: string | null;
+        icon: "volvo-chevron-right" | null;
+        url?: CustomUrl;
+        openInNewTab: boolean | null;
+        href: string | null;
+      }
+    | {
         asset?: {
           _ref: string;
           _type: "reference";
@@ -13905,7 +15003,6 @@ export type QueryBusesDataResult = Array<{
         caption?: string;
         _type: "image";
         _key: string;
-        markDefs: null;
       }
   > | null;
   taxonomy: {
@@ -13915,7 +15012,7 @@ export type QueryBusesDataResult = Array<{
   } | null;
 }>;
 // Variable: queryBusOrPageBySlug
-// Query: *[  (_type == "buses" || _type == "page")  && slug.current == $slug ][0]{  _id,  _type,  title,  description,  "slug": slug.current,  _type == "buses" => {       image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },     taxonomias->{      "label": prefLabel,      "slug": prefLabel,      "iri": "/buses/" + lower(prefLabel)    }  },    pageBuilder[]{    ...,    _type,      _type == "cta" => {    ...,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },  },      _type == "mainHero" => {    ...,    titleFont,    "backgroundImage": backgroundImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    "backgroundVideo": backgroundVideo.asset->url,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  },      _type == "hero" => {    ...,    variant,    titleFont,    imageAlignment,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  },      _type == "doubleHero" => {    ...,    variant,    primaryBadge,    primaryTitle,    "primaryRichText": primaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "primaryImage": primaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    primaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    secondaryBadge,    secondaryTitle,    "secondaryRichText": secondaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "secondaryImage": secondaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    secondaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },      _type == "faqAccordion" => {    ...,      "faqs": array::compact(faqs[]->{    title,    _id,    _type,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  }),    link{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },      _type == "subscribeNewsletter" => {    ...,    "subTitle": subTitle[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "helperText": helperText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      _type == "imageLinkCards" => {    ...,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },    "cards": array::compact(cards[]{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      ),        image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    })  },      _type == "formBlock" => {    ...,    title,    description,    variant,    displayMode,    triggerText,    buttonPosition,    "form": form->{      _id,      title,      description,        fields[]{    label,    name,    type,    required,    options,    placeholder  },  emailRecipients,  submitButtonText,  successMessage,  errorMessage,      submitButtonText,      successMessage,      errorMessage    }  },      _type == "tabs" => {    ...,    title,    description,    tabs[]{      _key,      label,      content[]{        ...,        _type,        _key,          _type == "cta" => {    ...,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },  },          _type == "mainHero" => {    ...,    titleFont,    "backgroundImage": backgroundImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    "backgroundVideo": backgroundVideo.asset->url,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  },          _type == "hero" => {    ...,    variant,    titleFont,    imageAlignment,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  },          _type == "doubleHero" => {    ...,    variant,    primaryBadge,    primaryTitle,    "primaryRichText": primaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "primaryImage": primaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    primaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    secondaryBadge,    secondaryTitle,    "secondaryRichText": secondaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "secondaryImage": secondaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    secondaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },          _type == "faqAccordion" => {    ...,      "faqs": array::compact(faqs[]->{    title,    _id,    _type,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  }),    link{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },          _type == "subscribeNewsletter" => {    ...,    "subTitle": subTitle[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "helperText": helperText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },          _type == "imageLinkCards" => {    ...,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },    "cards": array::compact(cards[]{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      ),        image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    })  },          _type == "formBlock" => {    ...,    title,    description,    variant,    displayMode,    triggerText,    buttonPosition,    "form": form->{      _id,      title,      description,        fields[]{    label,    name,    type,    required,    options,    placeholder  },  emailRecipients,  submitButtonText,  successMessage,  errorMessage,      submitButtonText,      successMessage,      errorMessage    }  },          _type == "imageGallery" => {    ...,    title,    description,    layout,    columns,    slidesPerRow,    "images": images[]{      ...,      "image": image{        ...,        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background,      },      caption    }  },          _type == "featuredBlogs" => {    ...,    title,    subtitle,    displayMode,    blogCount,    buttonText,    "showViewAllButton": showViewAllButton == "yes",    "blogs": select(      displayMode == "curated" => blogs[]-> {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      },      displayMode == "latest" => *[        _type == "blog"         && (seoHideFromLists != true)      ] | order(publishedAt desc, _createdAt desc)[0...3] {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      }    )  },        _type == "tabs" => {          ...,          title,          description,          tabs[]{            _key,            label,            content[]{               ...,              _type,              _key            }          }        }      }    }  },      _type == "infoSection" => {    ...,    title,    headingLevel,    content[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      _type == "imageGallery" => {    ...,    title,    description,    layout,    columns,    slidesPerRow,    "images": images[]{      ...,      "image": image{        ...,        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background,      },      caption    }  },      _type == "specificationsTable" => {    ...,    title,    description,    variant,    "specifications": specifications[]{      _key,      label,      "content": content[]{        ...,          markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }      }    }  },      _type == "genericTable" => {    ...,    title,    description,    columnCount,    columnHeaders,    rows[]{      _key,      cells[]{        _key,        content,        isLastColumn,        _type == "richCell" => {          content[]{            ...,              markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }          }        }      }    },    variant  },      _type == "featuredBlogs" => {    ...,    title,    subtitle,    displayMode,    blogCount,    buttonText,    "showViewAllButton": showViewAllButton == "yes",    "blogs": select(      displayMode == "curated" => blogs[]-> {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      },      displayMode == "latest" => *[        _type == "blog"         && (seoHideFromLists != true)      ] | order(publishedAt desc, _createdAt desc)[0...3] {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      }    )  },      _type == "highlightedAspects" => {    title,    description,    columns,    aspects[]{      _key,      title,      variant,      icon,      image{        ...,        "alt": coalesce(asset->altText, asset->originalFilename, "Aspect Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background      },      content[]{        ...,          markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }      }    }  },      _type == "videoBlock" => {    ...,    _key,    _type,    title,    videoType,    "mp4File": coalesce(      mp4File.asset->url,      mp4File.asset->sources[0].url,      null    ),    youtubeUrl,    showControls,    autoplay,    loop,    allowFullscreen  },      _type == "videoHero" => {    ...,    variant,    titleFont,    videoType,    "mp4File": coalesce(      mp4File.asset->url,      mp4File.asset->sources[0].url,      null    ),    youtubeUrl,    showControls,    autoplay,    loop,      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  }  } }
+// Query: *[  (_type == "buses" || _type == "page")  && slug.current == $slug ][0]{  _id,  _type,  title,  description,  "slug": slug.current,  _type == "buses" => {       image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },     taxonomias->{      "label": prefLabel,      "slug": prefLabel,      "iri": "/buses/" + lower(prefLabel)    }  },    pageBuilder[]{    ...,    _type,      _type == "cta" => {    ...,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },  },      _type == "mainHero" => {    ...,    titleFont,    "backgroundImage": backgroundImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    "backgroundVideo": backgroundVideo.asset->url,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  },      _type == "hero" => {    ...,    variant,    titleFont,    imageAlignment,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  },      _type == "doubleHero" => {    ...,    variant,    primaryBadge,    primaryTitle,    "primaryRichText": primaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "primaryImage": primaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    primaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    secondaryBadge,    secondaryTitle,    "secondaryRichText": secondaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "secondaryImage": secondaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    secondaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },      _type == "faqAccordion" => {    ...,      "faqs": array::compact(faqs[]->{    title,    _id,    _type,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  }),    link{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },      _type == "subscribeNewsletter" => {    ...,    "subTitle": subTitle[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "helperText": helperText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      _type == "imageLinkCards" => {    ...,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },    "cards": array::compact(cards[]{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      ),        image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    })  },      _type == "formBlock" => {    ...,    title,    description,    variant,    displayMode,    triggerText,    buttonPosition,    "form": form->{      _id,      title,      description,        fields[]{    label,    name,    type,    required,    options,    placeholder  },  emailRecipients,  submitButtonText,  successMessage,  errorMessage,      submitButtonText,      successMessage,      errorMessage    }  },      _type == "tabs" => {    ...,    title,    description,    tabs[]{      _key,      label,      content[]{        ...,        _type,        _key,          _type == "cta" => {    ...,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },  },          _type == "mainHero" => {    ...,    titleFont,    "backgroundImage": backgroundImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    "backgroundVideo": backgroundVideo.asset->url,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  },          _type == "hero" => {    ...,    variant,    titleFont,    imageAlignment,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  },          _type == "doubleHero" => {    ...,    variant,    primaryBadge,    primaryTitle,    "primaryRichText": primaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "primaryImage": primaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    primaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    secondaryBadge,    secondaryTitle,    "secondaryRichText": secondaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "secondaryImage": secondaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    secondaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },          _type == "faqAccordion" => {    ...,      "faqs": array::compact(faqs[]->{    title,    _id,    _type,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  }),    link{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },          _type == "subscribeNewsletter" => {    ...,    "subTitle": subTitle[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "helperText": helperText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },          _type == "imageLinkCards" => {    ...,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },    "cards": array::compact(cards[]{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      ),        image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    })  },          _type == "formBlock" => {    ...,    title,    description,    variant,    displayMode,    triggerText,    buttonPosition,    "form": form->{      _id,      title,      description,        fields[]{    label,    name,    type,    required,    options,    placeholder  },  emailRecipients,  submitButtonText,  successMessage,  errorMessage,      submitButtonText,      successMessage,      errorMessage    }  },          _type == "imageGallery" => {    ...,    title,    description,    layout,    columns,    slidesPerRow,    "images": images[]{      ...,      "image": image{        ...,        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background,      },      caption    }  },          _type == "featuredBlogs" => {    ...,    title,    subtitle,    displayMode,    blogCount,    buttonText,    "showViewAllButton": showViewAllButton == "yes",    "blogs": select(      displayMode == "curated" => blogs[]-> {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      },      displayMode == "latest" => *[        _type == "blog"         && (seoHideFromLists != true)      ] | order(publishedAt desc, _createdAt desc)[0...3] {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      }    )  },        _type == "tabs" => {          ...,          title,          description,          tabs[]{            _key,            label,            content[]{               ...,              _type,              _key            }          }        }      }    }  },      _type == "infoSection" => {    ...,    title,    headingLevel,    content[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      _type == "imageGallery" => {    ...,    title,    description,    layout,    columns,    slidesPerRow,    "images": images[]{      ...,      "image": image{        ...,        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background,      },      caption    }  },      _type == "specificationsTable" => {    ...,    title,    description,    variant,    "specifications": specifications[]{      _key,      label,      "content": content[]{        ...,          markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }      }    }  },      _type == "genericTable" => {    ...,    title,    description,    columnCount,    columnHeaders,    rows[]{      _key,      cells[]{        _key,        content,        isLastColumn,        _type == "richCell" => {          content[]{            ...,              markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }          }        }      }    },    variant  },      _type == "featuredBlogs" => {    ...,    title,    subtitle,    displayMode,    blogCount,    buttonText,    "showViewAllButton": showViewAllButton == "yes",    "blogs": select(      displayMode == "curated" => blogs[]-> {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      },      displayMode == "latest" => *[        _type == "blog"         && (seoHideFromLists != true)      ] | order(publishedAt desc, _createdAt desc)[0...3] {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      }    )  },      _type == "highlightedAspects" => {    title,    description,    columns,    aspects[]{      _key,      title,      variant,      icon,      image{        ...,        "alt": coalesce(asset->altText, asset->originalFilename, "Aspect Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background      },      content[]{        ...,          markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }      }    }  },      _type == "videoBlock" => {    ...,    _key,    _type,    title,    videoType,    "mp4File": coalesce(      mp4File.asset->url,      mp4File.asset->sources[0].url,      null    ),    youtubeUrl,    showControls,    autoplay,    loop,    allowFullscreen  },      _type == "videoHero" => {    ...,    variant,    titleFont,    videoType,    "mp4File": coalesce(      mp4File.asset->url,      mp4File.asset->sources[0].url,      null    ),    youtubeUrl,    showControls,    autoplay,    loop,      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  }  } }
 export type QueryBusOrPageBySlugResult =
   | {
       _id: string;
@@ -13967,6 +15064,22 @@ export type QueryBusOrPageBySlugResult =
             _key: string;
           }
         | {
+            _key: string;
+            _type: "button";
+            variant:
+              | "default"
+              | "link"
+              | "outline"
+              | "primary"
+              | "secondary"
+              | null;
+            text: string | null;
+            icon: "volvo-chevron-right" | null;
+            url?: CustomUrl;
+            openInNewTab: boolean | null;
+            href: string | null;
+          }
+        | {
             asset?: {
               _ref: string;
               _type: "reference";
@@ -13979,7 +15092,6 @@ export type QueryBusOrPageBySlugResult =
             caption?: string;
             _type: "image";
             _key: string;
-            markDefs: null;
           }
       > | null;
       taxonomias: {
@@ -14029,6 +15141,22 @@ export type QueryBusOrPageBySlugResult =
                   _key: string;
                 }
               | {
+                  _key: string;
+                  _type: "button";
+                  variant:
+                    | "default"
+                    | "link"
+                    | "outline"
+                    | "primary"
+                    | "secondary"
+                    | null;
+                  text: string | null;
+                  icon: "volvo-chevron-right" | null;
+                  url?: CustomUrl;
+                  openInNewTab: boolean | null;
+                  href: string | null;
+                }
+              | {
                   asset?: {
                     _ref: string;
                     _type: "reference";
@@ -14041,7 +15169,6 @@ export type QueryBusOrPageBySlugResult =
                   caption?: string;
                   _type: "image";
                   _key: string;
-                  markDefs: null;
                 }
             > | null;
             buttons: Array<{
@@ -14241,6 +15368,22 @@ export type QueryBusOrPageBySlugResult =
                     _key: string;
                   }
                 | {
+                    _key: string;
+                    _type: "button";
+                    variant:
+                      | "default"
+                      | "link"
+                      | "outline"
+                      | "primary"
+                      | "secondary"
+                      | null;
+                    text: string | null;
+                    icon: "volvo-chevron-right" | null;
+                    url?: CustomUrl;
+                    openInNewTab: boolean | null;
+                    href: string | null;
+                  }
+                | {
                     asset?: {
                       _ref: string;
                       _type: "reference";
@@ -14253,7 +15396,6 @@ export type QueryBusOrPageBySlugResult =
                     caption?: string;
                     _type: "image";
                     _key: string;
-                    markDefs: null;
                   }
               > | null;
             }> | null;
@@ -14447,6 +15589,20 @@ export type QueryBusOrPageBySlugResult =
                           _key: string;
                         }
                       | {
+                          _key: string;
+                          _type: "button";
+                          variant?:
+                            | "default"
+                            | "link"
+                            | "outline"
+                            | "primary"
+                            | "secondary";
+                          text?: string;
+                          icon?: "volvo-chevron-right";
+                          url?: CustomUrl;
+                          markDefs: null;
+                        }
+                      | {
                           asset?: {
                             _ref: string;
                             _type: "reference";
@@ -14516,6 +15672,22 @@ export type QueryBusOrPageBySlugResult =
                   _key: string;
                 }
               | {
+                  _key: string;
+                  _type: "button";
+                  variant:
+                    | "default"
+                    | "link"
+                    | "outline"
+                    | "primary"
+                    | "secondary"
+                    | null;
+                  text: string | null;
+                  icon: "volvo-chevron-right" | null;
+                  url?: CustomUrl;
+                  openInNewTab: boolean | null;
+                  href: string | null;
+                }
+              | {
                   asset?: {
                     _ref: string;
                     _type: "reference";
@@ -14528,7 +15700,6 @@ export type QueryBusOrPageBySlugResult =
                   caption?: string;
                   _type: "image";
                   _key: string;
-                  markDefs: null;
                 }
             > | null;
             image: {
@@ -14689,6 +15860,22 @@ export type QueryBusOrPageBySlugResult =
                   _key: string;
                 }
               | {
+                  _key: string;
+                  _type: "button";
+                  variant:
+                    | "default"
+                    | "link"
+                    | "outline"
+                    | "primary"
+                    | "secondary"
+                    | null;
+                  text: string | null;
+                  icon: "volvo-chevron-right" | null;
+                  url?: CustomUrl;
+                  openInNewTab: boolean | null;
+                  href: string | null;
+                }
+              | {
                   asset?: {
                     _ref: string;
                     _type: "reference";
@@ -14701,7 +15888,6 @@ export type QueryBusOrPageBySlugResult =
                   caption?: string;
                   _type: "image";
                   _key: string;
-                  markDefs: null;
                 }
             > | null;
             buttons: Array<{
@@ -14818,6 +16004,22 @@ export type QueryBusOrPageBySlugResult =
                   _key: string;
                 }
               | {
+                  _key: string;
+                  _type: "button";
+                  variant:
+                    | "default"
+                    | "link"
+                    | "outline"
+                    | "primary"
+                    | "secondary"
+                    | null;
+                  text: string | null;
+                  icon: "volvo-chevron-right" | null;
+                  url?: CustomUrl;
+                  openInNewTab: boolean | null;
+                  href: string | null;
+                }
+              | {
                   asset?: {
                     _ref: string;
                     _type: "reference";
@@ -14830,7 +16032,6 @@ export type QueryBusOrPageBySlugResult =
                   caption?: string;
                   _type: "image";
                   _key: string;
-                  markDefs: null;
                 }
             > | null;
             backgroundType?: "image" | "video";
@@ -14935,6 +16136,20 @@ export type QueryBusOrPageBySlugResult =
                     level?: number;
                     _type: "block";
                     _key: string;
+                  }
+                | {
+                    _key: string;
+                    _type: "button";
+                    variant?:
+                      | "default"
+                      | "link"
+                      | "outline"
+                      | "primary"
+                      | "secondary";
+                    text?: string;
+                    icon?: "volvo-chevron-right";
+                    url?: CustomUrl;
+                    markDefs: null;
                   }
                 | {
                     asset?: {
@@ -15062,6 +16277,22 @@ export type QueryBusOrPageBySlugResult =
                           _key: string;
                         }
                       | {
+                          _key: string;
+                          _type: "button";
+                          variant:
+                            | "default"
+                            | "link"
+                            | "outline"
+                            | "primary"
+                            | "secondary"
+                            | null;
+                          text: string | null;
+                          icon: "volvo-chevron-right" | null;
+                          url?: CustomUrl;
+                          openInNewTab: boolean | null;
+                          href: string | null;
+                        }
+                      | {
                           asset?: {
                             _ref: string;
                             _type: "reference";
@@ -15074,7 +16305,6 @@ export type QueryBusOrPageBySlugResult =
                           caption?: string;
                           _type: "image";
                           _key: string;
-                          markDefs: null;
                         }
                     > | null;
                     buttons: Array<{
@@ -15274,6 +16504,22 @@ export type QueryBusOrPageBySlugResult =
                             _key: string;
                           }
                         | {
+                            _key: string;
+                            _type: "button";
+                            variant:
+                              | "default"
+                              | "link"
+                              | "outline"
+                              | "primary"
+                              | "secondary"
+                              | null;
+                            text: string | null;
+                            icon: "volvo-chevron-right" | null;
+                            url?: CustomUrl;
+                            openInNewTab: boolean | null;
+                            href: string | null;
+                          }
+                        | {
                             asset?: {
                               _ref: string;
                               _type: "reference";
@@ -15286,7 +16532,6 @@ export type QueryBusOrPageBySlugResult =
                             caption?: string;
                             _type: "image";
                             _key: string;
-                            markDefs: null;
                           }
                       > | null;
                     }> | null;
@@ -15408,6 +16653,9 @@ export type QueryBusOrPageBySlugResult =
                           }
                         | {
                             content?: Array<
+                              | ({
+                                  _key: string;
+                                } & Button)
                               | {
                                   children?: Array<{
                                     marks?: Array<string>;
@@ -15507,6 +16755,22 @@ export type QueryBusOrPageBySlugResult =
                           _key: string;
                         }
                       | {
+                          _key: string;
+                          _type: "button";
+                          variant:
+                            | "default"
+                            | "link"
+                            | "outline"
+                            | "primary"
+                            | "secondary"
+                            | null;
+                          text: string | null;
+                          icon: "volvo-chevron-right" | null;
+                          url?: CustomUrl;
+                          openInNewTab: boolean | null;
+                          href: string | null;
+                        }
+                      | {
                           asset?: {
                             _ref: string;
                             _type: "reference";
@@ -15519,7 +16783,6 @@ export type QueryBusOrPageBySlugResult =
                           caption?: string;
                           _type: "image";
                           _key: string;
-                          markDefs: null;
                         }
                     > | null;
                     image: {
@@ -15675,6 +16938,22 @@ export type QueryBusOrPageBySlugResult =
                           _key: string;
                         }
                       | {
+                          _key: string;
+                          _type: "button";
+                          variant:
+                            | "default"
+                            | "link"
+                            | "outline"
+                            | "primary"
+                            | "secondary"
+                            | null;
+                          text: string | null;
+                          icon: "volvo-chevron-right" | null;
+                          url?: CustomUrl;
+                          openInNewTab: boolean | null;
+                          href: string | null;
+                        }
+                      | {
                           asset?: {
                             _ref: string;
                             _type: "reference";
@@ -15687,7 +16966,6 @@ export type QueryBusOrPageBySlugResult =
                           caption?: string;
                           _type: "image";
                           _key: string;
-                          markDefs: null;
                         }
                     > | null;
                     buttons: Array<{
@@ -15772,6 +17050,22 @@ export type QueryBusOrPageBySlugResult =
                           _key: string;
                         }
                       | {
+                          _key: string;
+                          _type: "button";
+                          variant:
+                            | "default"
+                            | "link"
+                            | "outline"
+                            | "primary"
+                            | "secondary"
+                            | null;
+                          text: string | null;
+                          icon: "volvo-chevron-right" | null;
+                          url?: CustomUrl;
+                          openInNewTab: boolean | null;
+                          href: string | null;
+                        }
+                      | {
                           asset?: {
                             _ref: string;
                             _type: "reference";
@@ -15784,7 +17078,6 @@ export type QueryBusOrPageBySlugResult =
                           caption?: string;
                           _type: "image";
                           _key: string;
-                          markDefs: null;
                         }
                     > | null;
                     backgroundType?: "image" | "video";
@@ -15966,6 +17259,9 @@ export type QueryBusOrPageBySlugResult =
                     title?: string;
                     titleFont?: "default" | "statement";
                     richText?: Array<
+                      | ({
+                          _key: string;
+                        } & Button)
                       | {
                           children?: Array<{
                             marks?: Array<string>;
@@ -16087,6 +17383,22 @@ export type QueryBusOrPageBySlugResult =
                   _key: string;
                 }
               | {
+                  _key: string;
+                  _type: "button";
+                  variant:
+                    | "default"
+                    | "link"
+                    | "outline"
+                    | "primary"
+                    | "secondary"
+                    | null;
+                  text: string | null;
+                  icon: "volvo-chevron-right" | null;
+                  url?: CustomUrl;
+                  openInNewTab: boolean | null;
+                  href: string | null;
+                }
+              | {
                   asset?: {
                     _ref: string;
                     _type: "reference";
@@ -16099,7 +17411,6 @@ export type QueryBusOrPageBySlugResult =
                   caption?: string;
                   _type: "image";
                   _key: string;
-                  markDefs: null;
                 }
             > | null;
             videoType: "mp4" | "youtube" | null;
@@ -16174,6 +17485,22 @@ export type QueryBusOrPageBySlugResult =
                   _key: string;
                 }
               | {
+                  _key: string;
+                  _type: "button";
+                  variant:
+                    | "default"
+                    | "link"
+                    | "outline"
+                    | "primary"
+                    | "secondary"
+                    | null;
+                  text: string | null;
+                  icon: "volvo-chevron-right" | null;
+                  url?: CustomUrl;
+                  openInNewTab: boolean | null;
+                  href: string | null;
+                }
+              | {
                   asset?: {
                     _ref: string;
                     _type: "reference";
@@ -16186,7 +17513,6 @@ export type QueryBusOrPageBySlugResult =
                   caption?: string;
                   _type: "image";
                   _key: string;
-                  markDefs: null;
                 }
             > | null;
             buttons: Array<{
@@ -16386,6 +17712,22 @@ export type QueryBusOrPageBySlugResult =
                     _key: string;
                   }
                 | {
+                    _key: string;
+                    _type: "button";
+                    variant:
+                      | "default"
+                      | "link"
+                      | "outline"
+                      | "primary"
+                      | "secondary"
+                      | null;
+                    text: string | null;
+                    icon: "volvo-chevron-right" | null;
+                    url?: CustomUrl;
+                    openInNewTab: boolean | null;
+                    href: string | null;
+                  }
+                | {
                     asset?: {
                       _ref: string;
                       _type: "reference";
@@ -16398,7 +17740,6 @@ export type QueryBusOrPageBySlugResult =
                     caption?: string;
                     _type: "image";
                     _key: string;
-                    markDefs: null;
                   }
               > | null;
             }> | null;
@@ -16592,6 +17933,20 @@ export type QueryBusOrPageBySlugResult =
                           _key: string;
                         }
                       | {
+                          _key: string;
+                          _type: "button";
+                          variant?:
+                            | "default"
+                            | "link"
+                            | "outline"
+                            | "primary"
+                            | "secondary";
+                          text?: string;
+                          icon?: "volvo-chevron-right";
+                          url?: CustomUrl;
+                          markDefs: null;
+                        }
+                      | {
                           asset?: {
                             _ref: string;
                             _type: "reference";
@@ -16661,6 +18016,22 @@ export type QueryBusOrPageBySlugResult =
                   _key: string;
                 }
               | {
+                  _key: string;
+                  _type: "button";
+                  variant:
+                    | "default"
+                    | "link"
+                    | "outline"
+                    | "primary"
+                    | "secondary"
+                    | null;
+                  text: string | null;
+                  icon: "volvo-chevron-right" | null;
+                  url?: CustomUrl;
+                  openInNewTab: boolean | null;
+                  href: string | null;
+                }
+              | {
                   asset?: {
                     _ref: string;
                     _type: "reference";
@@ -16673,7 +18044,6 @@ export type QueryBusOrPageBySlugResult =
                   caption?: string;
                   _type: "image";
                   _key: string;
-                  markDefs: null;
                 }
             > | null;
             image: {
@@ -16834,6 +18204,22 @@ export type QueryBusOrPageBySlugResult =
                   _key: string;
                 }
               | {
+                  _key: string;
+                  _type: "button";
+                  variant:
+                    | "default"
+                    | "link"
+                    | "outline"
+                    | "primary"
+                    | "secondary"
+                    | null;
+                  text: string | null;
+                  icon: "volvo-chevron-right" | null;
+                  url?: CustomUrl;
+                  openInNewTab: boolean | null;
+                  href: string | null;
+                }
+              | {
                   asset?: {
                     _ref: string;
                     _type: "reference";
@@ -16846,7 +18232,6 @@ export type QueryBusOrPageBySlugResult =
                   caption?: string;
                   _type: "image";
                   _key: string;
-                  markDefs: null;
                 }
             > | null;
             buttons: Array<{
@@ -16963,6 +18348,22 @@ export type QueryBusOrPageBySlugResult =
                   _key: string;
                 }
               | {
+                  _key: string;
+                  _type: "button";
+                  variant:
+                    | "default"
+                    | "link"
+                    | "outline"
+                    | "primary"
+                    | "secondary"
+                    | null;
+                  text: string | null;
+                  icon: "volvo-chevron-right" | null;
+                  url?: CustomUrl;
+                  openInNewTab: boolean | null;
+                  href: string | null;
+                }
+              | {
                   asset?: {
                     _ref: string;
                     _type: "reference";
@@ -16975,7 +18376,6 @@ export type QueryBusOrPageBySlugResult =
                   caption?: string;
                   _type: "image";
                   _key: string;
-                  markDefs: null;
                 }
             > | null;
             backgroundType?: "image" | "video";
@@ -17080,6 +18480,20 @@ export type QueryBusOrPageBySlugResult =
                     level?: number;
                     _type: "block";
                     _key: string;
+                  }
+                | {
+                    _key: string;
+                    _type: "button";
+                    variant?:
+                      | "default"
+                      | "link"
+                      | "outline"
+                      | "primary"
+                      | "secondary";
+                    text?: string;
+                    icon?: "volvo-chevron-right";
+                    url?: CustomUrl;
+                    markDefs: null;
                   }
                 | {
                     asset?: {
@@ -17207,6 +18621,22 @@ export type QueryBusOrPageBySlugResult =
                           _key: string;
                         }
                       | {
+                          _key: string;
+                          _type: "button";
+                          variant:
+                            | "default"
+                            | "link"
+                            | "outline"
+                            | "primary"
+                            | "secondary"
+                            | null;
+                          text: string | null;
+                          icon: "volvo-chevron-right" | null;
+                          url?: CustomUrl;
+                          openInNewTab: boolean | null;
+                          href: string | null;
+                        }
+                      | {
                           asset?: {
                             _ref: string;
                             _type: "reference";
@@ -17219,7 +18649,6 @@ export type QueryBusOrPageBySlugResult =
                           caption?: string;
                           _type: "image";
                           _key: string;
-                          markDefs: null;
                         }
                     > | null;
                     buttons: Array<{
@@ -17419,6 +18848,22 @@ export type QueryBusOrPageBySlugResult =
                             _key: string;
                           }
                         | {
+                            _key: string;
+                            _type: "button";
+                            variant:
+                              | "default"
+                              | "link"
+                              | "outline"
+                              | "primary"
+                              | "secondary"
+                              | null;
+                            text: string | null;
+                            icon: "volvo-chevron-right" | null;
+                            url?: CustomUrl;
+                            openInNewTab: boolean | null;
+                            href: string | null;
+                          }
+                        | {
                             asset?: {
                               _ref: string;
                               _type: "reference";
@@ -17431,7 +18876,6 @@ export type QueryBusOrPageBySlugResult =
                             caption?: string;
                             _type: "image";
                             _key: string;
-                            markDefs: null;
                           }
                       > | null;
                     }> | null;
@@ -17553,6 +18997,9 @@ export type QueryBusOrPageBySlugResult =
                           }
                         | {
                             content?: Array<
+                              | ({
+                                  _key: string;
+                                } & Button)
                               | {
                                   children?: Array<{
                                     marks?: Array<string>;
@@ -17652,6 +19099,22 @@ export type QueryBusOrPageBySlugResult =
                           _key: string;
                         }
                       | {
+                          _key: string;
+                          _type: "button";
+                          variant:
+                            | "default"
+                            | "link"
+                            | "outline"
+                            | "primary"
+                            | "secondary"
+                            | null;
+                          text: string | null;
+                          icon: "volvo-chevron-right" | null;
+                          url?: CustomUrl;
+                          openInNewTab: boolean | null;
+                          href: string | null;
+                        }
+                      | {
                           asset?: {
                             _ref: string;
                             _type: "reference";
@@ -17664,7 +19127,6 @@ export type QueryBusOrPageBySlugResult =
                           caption?: string;
                           _type: "image";
                           _key: string;
-                          markDefs: null;
                         }
                     > | null;
                     image: {
@@ -17820,6 +19282,22 @@ export type QueryBusOrPageBySlugResult =
                           _key: string;
                         }
                       | {
+                          _key: string;
+                          _type: "button";
+                          variant:
+                            | "default"
+                            | "link"
+                            | "outline"
+                            | "primary"
+                            | "secondary"
+                            | null;
+                          text: string | null;
+                          icon: "volvo-chevron-right" | null;
+                          url?: CustomUrl;
+                          openInNewTab: boolean | null;
+                          href: string | null;
+                        }
+                      | {
                           asset?: {
                             _ref: string;
                             _type: "reference";
@@ -17832,7 +19310,6 @@ export type QueryBusOrPageBySlugResult =
                           caption?: string;
                           _type: "image";
                           _key: string;
-                          markDefs: null;
                         }
                     > | null;
                     buttons: Array<{
@@ -17917,6 +19394,22 @@ export type QueryBusOrPageBySlugResult =
                           _key: string;
                         }
                       | {
+                          _key: string;
+                          _type: "button";
+                          variant:
+                            | "default"
+                            | "link"
+                            | "outline"
+                            | "primary"
+                            | "secondary"
+                            | null;
+                          text: string | null;
+                          icon: "volvo-chevron-right" | null;
+                          url?: CustomUrl;
+                          openInNewTab: boolean | null;
+                          href: string | null;
+                        }
+                      | {
                           asset?: {
                             _ref: string;
                             _type: "reference";
@@ -17929,7 +19422,6 @@ export type QueryBusOrPageBySlugResult =
                           caption?: string;
                           _type: "image";
                           _key: string;
-                          markDefs: null;
                         }
                     > | null;
                     backgroundType?: "image" | "video";
@@ -18111,6 +19603,9 @@ export type QueryBusOrPageBySlugResult =
                     title?: string;
                     titleFont?: "default" | "statement";
                     richText?: Array<
+                      | ({
+                          _key: string;
+                        } & Button)
                       | {
                           children?: Array<{
                             marks?: Array<string>;
@@ -18232,6 +19727,22 @@ export type QueryBusOrPageBySlugResult =
                   _key: string;
                 }
               | {
+                  _key: string;
+                  _type: "button";
+                  variant:
+                    | "default"
+                    | "link"
+                    | "outline"
+                    | "primary"
+                    | "secondary"
+                    | null;
+                  text: string | null;
+                  icon: "volvo-chevron-right" | null;
+                  url?: CustomUrl;
+                  openInNewTab: boolean | null;
+                  href: string | null;
+                }
+              | {
                   asset?: {
                     _ref: string;
                     _type: "reference";
@@ -18244,7 +19755,6 @@ export type QueryBusOrPageBySlugResult =
                   caption?: string;
                   _type: "image";
                   _key: string;
-                  markDefs: null;
                 }
             > | null;
             videoType: "mp4" | "youtube" | null;
@@ -18276,7 +19786,7 @@ export type QueryBusOrPageBySlugResult =
 // Query: *[_type == "buses" && defined(slug.current)].slug.current
 export type QueryBusesPathsResult = Array<string | null>;
 // Variable: queryMotoresPentaData
-// Query: *[_type == "motoresPenta"]{  _id,  _type,  title,  subtitle,  description,  "slug": slug.current,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },  "taxonomy": taxonomias->{    prefLabel,    conceptId,    "slug": lower(prefLabel)  }}
+// Query: *[_type == "motoresPenta"]{  _id,  _type,  title,  subtitle,  description,  "slug": slug.current,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },  "taxonomy": taxonomias->{    prefLabel,    conceptId,    "slug": lower(prefLabel)  }}
 export type QueryMotoresPentaDataResult = Array<{
   _id: string;
   _type: "motoresPenta";
@@ -18328,6 +19838,22 @@ export type QueryMotoresPentaDataResult = Array<{
         _key: string;
       }
     | {
+        _key: string;
+        _type: "button";
+        variant:
+          | "default"
+          | "link"
+          | "outline"
+          | "primary"
+          | "secondary"
+          | null;
+        text: string | null;
+        icon: "volvo-chevron-right" | null;
+        url?: CustomUrl;
+        openInNewTab: boolean | null;
+        href: string | null;
+      }
+    | {
         asset?: {
           _ref: string;
           _type: "reference";
@@ -18340,7 +19866,6 @@ export type QueryMotoresPentaDataResult = Array<{
         caption?: string;
         _type: "image";
         _key: string;
-        markDefs: null;
       }
   > | null;
   taxonomy: {
@@ -18350,7 +19875,7 @@ export type QueryMotoresPentaDataResult = Array<{
   } | null;
 }>;
 // Variable: queryMotorPentaOrPageBySlug
-// Query: *[  (_type == "motoresPenta" || _type == "page")  && slug.current == $slug ][0]{  _id,  _type,  title,  subtitle,  description,  "slug": slug.current,  _type == "motoresPenta" => {       image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },     taxonomias->{      "label": prefLabel,      "slug": prefLabel,      "iri": "/motores-penta/" + lower(prefLabel)    }  },    pageBuilder[]{    ...,    _type,      _type == "cta" => {    ...,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },  },      _type == "mainHero" => {    ...,    titleFont,    "backgroundImage": backgroundImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    "backgroundVideo": backgroundVideo.asset->url,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  },      _type == "hero" => {    ...,    variant,    titleFont,    imageAlignment,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  },      _type == "doubleHero" => {    ...,    variant,    primaryBadge,    primaryTitle,    "primaryRichText": primaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "primaryImage": primaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    primaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    secondaryBadge,    secondaryTitle,    "secondaryRichText": secondaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "secondaryImage": secondaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    secondaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },      _type == "faqAccordion" => {    ...,      "faqs": array::compact(faqs[]->{    title,    _id,    _type,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  }),    link{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },      _type == "subscribeNewsletter" => {    ...,    "subTitle": subTitle[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "helperText": helperText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      _type == "imageLinkCards" => {    ...,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },    "cards": array::compact(cards[]{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      ),        image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    })  },      _type == "formBlock" => {    ...,    title,    description,    variant,    displayMode,    triggerText,    buttonPosition,    "form": form->{      _id,      title,      description,        fields[]{    label,    name,    type,    required,    options,    placeholder  },  emailRecipients,  submitButtonText,  successMessage,  errorMessage,      submitButtonText,      successMessage,      errorMessage    }  },      _type == "tabs" => {    ...,    title,    description,    tabs[]{      _key,      label,      content[]{        ...,        _type,        _key,          _type == "cta" => {    ...,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },  },          _type == "mainHero" => {    ...,    titleFont,    "backgroundImage": backgroundImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    "backgroundVideo": backgroundVideo.asset->url,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  },          _type == "hero" => {    ...,    variant,    titleFont,    imageAlignment,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  },          _type == "doubleHero" => {    ...,    variant,    primaryBadge,    primaryTitle,    "primaryRichText": primaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "primaryImage": primaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    primaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    secondaryBadge,    secondaryTitle,    "secondaryRichText": secondaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "secondaryImage": secondaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    secondaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },          _type == "faqAccordion" => {    ...,      "faqs": array::compact(faqs[]->{    title,    _id,    _type,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  }),    link{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },          _type == "subscribeNewsletter" => {    ...,    "subTitle": subTitle[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "helperText": helperText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },          _type == "imageLinkCards" => {    ...,      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },    "cards": array::compact(cards[]{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      ),        image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    })  },          _type == "formBlock" => {    ...,    title,    description,    variant,    displayMode,    triggerText,    buttonPosition,    "form": form->{      _id,      title,      description,        fields[]{    label,    name,    type,    required,    options,    placeholder  },  emailRecipients,  submitButtonText,  successMessage,  errorMessage,      submitButtonText,      successMessage,      errorMessage    }  },          _type == "imageGallery" => {    ...,    title,    description,    layout,    columns,    slidesPerRow,    "images": images[]{      ...,      "image": image{        ...,        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background,      },      caption    }  },          _type == "featuredBlogs" => {    ...,    title,    subtitle,    displayMode,    blogCount,    buttonText,    "showViewAllButton": showViewAllButton == "yes",    "blogs": select(      displayMode == "curated" => blogs[]-> {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      },      displayMode == "latest" => *[        _type == "blog"         && (seoHideFromLists != true)      ] | order(publishedAt desc, _createdAt desc)[0...3] {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      }    )  },        _type == "tabs" => {          ...,          title,          description,          tabs[]{            _key,            label,            content[]{               ...,              _type,              _key            }          }        }      }    }  },      _type == "infoSection" => {    ...,    title,    headingLevel,    content[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      _type == "imageGallery" => {    ...,    title,    description,    layout,    columns,    slidesPerRow,    "images": images[]{      ...,      "image": image{        ...,        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background,      },      caption    }  },      _type == "specificationsTable" => {    ...,    title,    description,    variant,    "specifications": specifications[]{      _key,      label,      "content": content[]{        ...,          markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }      }    }  },      _type == "genericTable" => {    ...,    title,    description,    columnCount,    columnHeaders,    rows[]{      _key,      cells[]{        _key,        content,        isLastColumn,        _type == "richCell" => {          content[]{            ...,              markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }          }        }      }    },    variant  },      _type == "featuredBlogs" => {    ...,    title,    subtitle,    displayMode,    blogCount,    buttonText,    "showViewAllButton": showViewAllButton == "yes",    "blogs": select(      displayMode == "curated" => blogs[]-> {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      },      displayMode == "latest" => *[        _type == "blog"         && (seoHideFromLists != true)      ] | order(publishedAt desc, _createdAt desc)[0...3] {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      }    )  },      _type == "highlightedAspects" => {    title,    description,    columns,    aspects[]{      _key,      title,      variant,      icon,      image{        ...,        "alt": coalesce(asset->altText, asset->originalFilename, "Aspect Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background      },      content[]{        ...,          markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }      }    }  },      _type == "videoBlock" => {    ...,    _key,    _type,    title,    videoType,    "mp4File": coalesce(      mp4File.asset->url,      mp4File.asset->sources[0].url,      null    ),    youtubeUrl,    showControls,    autoplay,    loop,    allowFullscreen  },      _type == "videoHero" => {    ...,    variant,    titleFont,    videoType,    "mp4File": coalesce(      mp4File.asset->url,      mp4File.asset->sources[0].url,      null    ),    youtubeUrl,    showControls,    autoplay,    loop,      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,      markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }  }  }  } }
+// Query: *[  (_type == "motoresPenta" || _type == "page")  && slug.current == $slug ][0]{  _id,  _type,  title,  subtitle,  description,  "slug": slug.current,  _type == "motoresPenta" => {       image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },     taxonomias->{      "label": prefLabel,      "slug": prefLabel,      "iri": "/motores-penta/" + lower(prefLabel)    }  },    pageBuilder[]{    ...,    _type,      _type == "cta" => {    ...,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },  },      _type == "mainHero" => {    ...,    titleFont,    "backgroundImage": backgroundImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    "backgroundVideo": backgroundVideo.asset->url,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  },      _type == "hero" => {    ...,    variant,    titleFont,    imageAlignment,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  },      _type == "doubleHero" => {    ...,    variant,    primaryBadge,    primaryTitle,    "primaryRichText": primaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "primaryImage": primaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    primaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    secondaryBadge,    secondaryTitle,    "secondaryRichText": secondaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "secondaryImage": secondaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    secondaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },      _type == "faqAccordion" => {    ...,      "faqs": array::compact(faqs[]->{    title,    _id,    _type,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  }),    link{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },      _type == "subscribeNewsletter" => {    ...,    "subTitle": subTitle[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "helperText": helperText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      _type == "imageLinkCards" => {    ...,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },    "cards": array::compact(cards[]{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      ),        image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    })  },      _type == "formBlock" => {    ...,    title,    description,    variant,    displayMode,    triggerText,    buttonPosition,    "form": form->{      _id,      title,      description,        fields[]{    label,    name,    type,    required,    options,    placeholder  },  emailRecipients,  submitButtonText,  successMessage,  errorMessage,      submitButtonText,      successMessage,      errorMessage    }  },      _type == "tabs" => {    ...,    title,    description,    tabs[]{      _key,      label,      content[]{        ...,        _type,        _key,          _type == "cta" => {    ...,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },  },          _type == "mainHero" => {    ...,    titleFont,    "backgroundImage": backgroundImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    "backgroundVideo": backgroundVideo.asset->url,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  },          _type == "hero" => {    ...,    variant,    titleFont,    imageAlignment,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  },          _type == "doubleHero" => {    ...,    variant,    primaryBadge,    primaryTitle,    "primaryRichText": primaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "primaryImage": primaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    primaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    secondaryBadge,    secondaryTitle,    "secondaryRichText": secondaryRichText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "secondaryImage": secondaryImage{      ...,      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background,    },    secondaryButtons[]{      text,      variant,      icon,      _key,      _type,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },          _type == "faqAccordion" => {    ...,      "faqs": array::compact(faqs[]->{    title,    _id,    _type,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  }),    link{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    }  },          _type == "subscribeNewsletter" => {    ...,    "subTitle": subTitle[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    },    "helperText": helperText[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },          _type == "imageLinkCards" => {    ...,      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },    "cards": array::compact(cards[]{      ...,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      ),        image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    })  },          _type == "formBlock" => {    ...,    title,    description,    variant,    displayMode,    triggerText,    buttonPosition,    "form": form->{      _id,      title,      description,        fields[]{    label,    name,    type,    required,    options,    placeholder  },  emailRecipients,  submitButtonText,  successMessage,  errorMessage,      submitButtonText,      successMessage,      errorMessage    }  },          _type == "imageGallery" => {    ...,    title,    description,    layout,    columns,    slidesPerRow,    "images": images[]{      ...,      "image": image{        ...,        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background,      },      caption    }  },          _type == "featuredBlogs" => {    ...,    title,    subtitle,    displayMode,    blogCount,    buttonText,    "showViewAllButton": showViewAllButton == "yes",    "blogs": select(      displayMode == "curated" => blogs[]-> {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      },      displayMode == "latest" => *[        _type == "blog"         && (seoHideFromLists != true)      ] | order(publishedAt desc, _createdAt desc)[0...3] {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      }    )  },        _type == "tabs" => {          ...,          title,          description,          tabs[]{            _key,            label,            content[]{               ...,              _type,              _key            }          }        }      }    }  },      _type == "infoSection" => {    ...,    title,    headingLevel,    content[]{      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  },      _type == "imageGallery" => {    ...,    title,    description,    layout,    columns,    slidesPerRow,    "images": images[]{      ...,      "image": image{        ...,        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background,      },      caption    }  },      _type == "specificationsTable" => {    ...,    title,    description,    variant,    "specifications": specifications[]{      _key,      label,      "content": content[]{        ...,          markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }      }    }  },      _type == "genericTable" => {    ...,    title,    description,    columnCount,    columnHeaders,    rows[]{      _key,      cells[]{        _key,        content,        isLastColumn,        _type == "richCell" => {          content[]{            ...,              markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }          }        }      }    },    variant  },      _type == "featuredBlogs" => {    ...,    title,    subtitle,    displayMode,    blogCount,    buttonText,    "showViewAllButton": showViewAllButton == "yes",    "blogs": select(      displayMode == "curated" => blogs[]-> {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      },      displayMode == "latest" => *[        _type == "blog"         && (seoHideFromLists != true)      ] | order(publishedAt desc, _createdAt desc)[0...3] {          _type,  _id,  title,  description,  "slug":slug.current,  richText,  orderRank,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  publishedAt,    authors[0]->{    _id,    name,    position,      image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }  }      }    )  },      _type == "highlightedAspects" => {    title,    description,    columns,    aspects[]{      _key,      title,      variant,      icon,      image{        ...,        "alt": coalesce(asset->altText, asset->originalFilename, "Aspect Image"),        "blurData": asset->metadata.lqip,        "dominantColor": asset->metadata.palette.dominant.background      },      content[]{        ...,          markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }      }    }  },      _type == "videoBlock" => {    ...,    _key,    _type,    title,    videoType,    "mp4File": coalesce(      mp4File.asset->url,      mp4File.asset->sources[0].url,      null    ),    youtubeUrl,    showControls,    autoplay,    loop,    allowFullscreen  },      _type == "videoHero" => {    ...,    variant,    titleFont,    videoType,    "mp4File": coalesce(      mp4File.asset->url,      mp4File.asset->sources[0].url,      null    ),    youtubeUrl,    showControls,    autoplay,    loop,      buttons[]{    text,    variant,    icon,    _key,    _type,    "openInNewTab": url.openInNewTab,    "href": select(      url.type == "internal" => url.internal->slug.current,      url.type == "external" => url.external,      url.href    ),  },      richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      "#"    ),  }  }    }  }  }  } }
 export type QueryMotorPentaOrPageBySlugResult =
   | {
       _id: string;
@@ -18403,6 +19928,22 @@ export type QueryMotorPentaOrPageBySlugResult =
             _key: string;
           }
         | {
+            _key: string;
+            _type: "button";
+            variant:
+              | "default"
+              | "link"
+              | "outline"
+              | "primary"
+              | "secondary"
+              | null;
+            text: string | null;
+            icon: "volvo-chevron-right" | null;
+            url?: CustomUrl;
+            openInNewTab: boolean | null;
+            href: string | null;
+          }
+        | {
             asset?: {
               _ref: string;
               _type: "reference";
@@ -18415,7 +19956,6 @@ export type QueryMotorPentaOrPageBySlugResult =
             caption?: string;
             _type: "image";
             _key: string;
-            markDefs: null;
           }
       > | null;
       taxonomias: {
@@ -18465,6 +20005,22 @@ export type QueryMotorPentaOrPageBySlugResult =
                   _key: string;
                 }
               | {
+                  _key: string;
+                  _type: "button";
+                  variant:
+                    | "default"
+                    | "link"
+                    | "outline"
+                    | "primary"
+                    | "secondary"
+                    | null;
+                  text: string | null;
+                  icon: "volvo-chevron-right" | null;
+                  url?: CustomUrl;
+                  openInNewTab: boolean | null;
+                  href: string | null;
+                }
+              | {
                   asset?: {
                     _ref: string;
                     _type: "reference";
@@ -18477,7 +20033,6 @@ export type QueryMotorPentaOrPageBySlugResult =
                   caption?: string;
                   _type: "image";
                   _key: string;
-                  markDefs: null;
                 }
             > | null;
             buttons: Array<{
@@ -18677,6 +20232,22 @@ export type QueryMotorPentaOrPageBySlugResult =
                     _key: string;
                   }
                 | {
+                    _key: string;
+                    _type: "button";
+                    variant:
+                      | "default"
+                      | "link"
+                      | "outline"
+                      | "primary"
+                      | "secondary"
+                      | null;
+                    text: string | null;
+                    icon: "volvo-chevron-right" | null;
+                    url?: CustomUrl;
+                    openInNewTab: boolean | null;
+                    href: string | null;
+                  }
+                | {
                     asset?: {
                       _ref: string;
                       _type: "reference";
@@ -18689,7 +20260,6 @@ export type QueryMotorPentaOrPageBySlugResult =
                     caption?: string;
                     _type: "image";
                     _key: string;
-                    markDefs: null;
                   }
               > | null;
             }> | null;
@@ -18883,6 +20453,20 @@ export type QueryMotorPentaOrPageBySlugResult =
                           _key: string;
                         }
                       | {
+                          _key: string;
+                          _type: "button";
+                          variant?:
+                            | "default"
+                            | "link"
+                            | "outline"
+                            | "primary"
+                            | "secondary";
+                          text?: string;
+                          icon?: "volvo-chevron-right";
+                          url?: CustomUrl;
+                          markDefs: null;
+                        }
+                      | {
                           asset?: {
                             _ref: string;
                             _type: "reference";
@@ -18952,6 +20536,22 @@ export type QueryMotorPentaOrPageBySlugResult =
                   _key: string;
                 }
               | {
+                  _key: string;
+                  _type: "button";
+                  variant:
+                    | "default"
+                    | "link"
+                    | "outline"
+                    | "primary"
+                    | "secondary"
+                    | null;
+                  text: string | null;
+                  icon: "volvo-chevron-right" | null;
+                  url?: CustomUrl;
+                  openInNewTab: boolean | null;
+                  href: string | null;
+                }
+              | {
                   asset?: {
                     _ref: string;
                     _type: "reference";
@@ -18964,7 +20564,6 @@ export type QueryMotorPentaOrPageBySlugResult =
                   caption?: string;
                   _type: "image";
                   _key: string;
-                  markDefs: null;
                 }
             > | null;
             image: {
@@ -19125,6 +20724,22 @@ export type QueryMotorPentaOrPageBySlugResult =
                   _key: string;
                 }
               | {
+                  _key: string;
+                  _type: "button";
+                  variant:
+                    | "default"
+                    | "link"
+                    | "outline"
+                    | "primary"
+                    | "secondary"
+                    | null;
+                  text: string | null;
+                  icon: "volvo-chevron-right" | null;
+                  url?: CustomUrl;
+                  openInNewTab: boolean | null;
+                  href: string | null;
+                }
+              | {
                   asset?: {
                     _ref: string;
                     _type: "reference";
@@ -19137,7 +20752,6 @@ export type QueryMotorPentaOrPageBySlugResult =
                   caption?: string;
                   _type: "image";
                   _key: string;
-                  markDefs: null;
                 }
             > | null;
             buttons: Array<{
@@ -19254,6 +20868,22 @@ export type QueryMotorPentaOrPageBySlugResult =
                   _key: string;
                 }
               | {
+                  _key: string;
+                  _type: "button";
+                  variant:
+                    | "default"
+                    | "link"
+                    | "outline"
+                    | "primary"
+                    | "secondary"
+                    | null;
+                  text: string | null;
+                  icon: "volvo-chevron-right" | null;
+                  url?: CustomUrl;
+                  openInNewTab: boolean | null;
+                  href: string | null;
+                }
+              | {
                   asset?: {
                     _ref: string;
                     _type: "reference";
@@ -19266,7 +20896,6 @@ export type QueryMotorPentaOrPageBySlugResult =
                   caption?: string;
                   _type: "image";
                   _key: string;
-                  markDefs: null;
                 }
             > | null;
             backgroundType?: "image" | "video";
@@ -19371,6 +21000,20 @@ export type QueryMotorPentaOrPageBySlugResult =
                     level?: number;
                     _type: "block";
                     _key: string;
+                  }
+                | {
+                    _key: string;
+                    _type: "button";
+                    variant?:
+                      | "default"
+                      | "link"
+                      | "outline"
+                      | "primary"
+                      | "secondary";
+                    text?: string;
+                    icon?: "volvo-chevron-right";
+                    url?: CustomUrl;
+                    markDefs: null;
                   }
                 | {
                     asset?: {
@@ -19498,6 +21141,22 @@ export type QueryMotorPentaOrPageBySlugResult =
                           _key: string;
                         }
                       | {
+                          _key: string;
+                          _type: "button";
+                          variant:
+                            | "default"
+                            | "link"
+                            | "outline"
+                            | "primary"
+                            | "secondary"
+                            | null;
+                          text: string | null;
+                          icon: "volvo-chevron-right" | null;
+                          url?: CustomUrl;
+                          openInNewTab: boolean | null;
+                          href: string | null;
+                        }
+                      | {
                           asset?: {
                             _ref: string;
                             _type: "reference";
@@ -19510,7 +21169,6 @@ export type QueryMotorPentaOrPageBySlugResult =
                           caption?: string;
                           _type: "image";
                           _key: string;
-                          markDefs: null;
                         }
                     > | null;
                     buttons: Array<{
@@ -19710,6 +21368,22 @@ export type QueryMotorPentaOrPageBySlugResult =
                             _key: string;
                           }
                         | {
+                            _key: string;
+                            _type: "button";
+                            variant:
+                              | "default"
+                              | "link"
+                              | "outline"
+                              | "primary"
+                              | "secondary"
+                              | null;
+                            text: string | null;
+                            icon: "volvo-chevron-right" | null;
+                            url?: CustomUrl;
+                            openInNewTab: boolean | null;
+                            href: string | null;
+                          }
+                        | {
                             asset?: {
                               _ref: string;
                               _type: "reference";
@@ -19722,7 +21396,6 @@ export type QueryMotorPentaOrPageBySlugResult =
                             caption?: string;
                             _type: "image";
                             _key: string;
-                            markDefs: null;
                           }
                       > | null;
                     }> | null;
@@ -19844,6 +21517,9 @@ export type QueryMotorPentaOrPageBySlugResult =
                           }
                         | {
                             content?: Array<
+                              | ({
+                                  _key: string;
+                                } & Button)
                               | {
                                   children?: Array<{
                                     marks?: Array<string>;
@@ -19943,6 +21619,22 @@ export type QueryMotorPentaOrPageBySlugResult =
                           _key: string;
                         }
                       | {
+                          _key: string;
+                          _type: "button";
+                          variant:
+                            | "default"
+                            | "link"
+                            | "outline"
+                            | "primary"
+                            | "secondary"
+                            | null;
+                          text: string | null;
+                          icon: "volvo-chevron-right" | null;
+                          url?: CustomUrl;
+                          openInNewTab: boolean | null;
+                          href: string | null;
+                        }
+                      | {
                           asset?: {
                             _ref: string;
                             _type: "reference";
@@ -19955,7 +21647,6 @@ export type QueryMotorPentaOrPageBySlugResult =
                           caption?: string;
                           _type: "image";
                           _key: string;
-                          markDefs: null;
                         }
                     > | null;
                     image: {
@@ -20111,6 +21802,22 @@ export type QueryMotorPentaOrPageBySlugResult =
                           _key: string;
                         }
                       | {
+                          _key: string;
+                          _type: "button";
+                          variant:
+                            | "default"
+                            | "link"
+                            | "outline"
+                            | "primary"
+                            | "secondary"
+                            | null;
+                          text: string | null;
+                          icon: "volvo-chevron-right" | null;
+                          url?: CustomUrl;
+                          openInNewTab: boolean | null;
+                          href: string | null;
+                        }
+                      | {
                           asset?: {
                             _ref: string;
                             _type: "reference";
@@ -20123,7 +21830,6 @@ export type QueryMotorPentaOrPageBySlugResult =
                           caption?: string;
                           _type: "image";
                           _key: string;
-                          markDefs: null;
                         }
                     > | null;
                     buttons: Array<{
@@ -20208,6 +21914,22 @@ export type QueryMotorPentaOrPageBySlugResult =
                           _key: string;
                         }
                       | {
+                          _key: string;
+                          _type: "button";
+                          variant:
+                            | "default"
+                            | "link"
+                            | "outline"
+                            | "primary"
+                            | "secondary"
+                            | null;
+                          text: string | null;
+                          icon: "volvo-chevron-right" | null;
+                          url?: CustomUrl;
+                          openInNewTab: boolean | null;
+                          href: string | null;
+                        }
+                      | {
                           asset?: {
                             _ref: string;
                             _type: "reference";
@@ -20220,7 +21942,6 @@ export type QueryMotorPentaOrPageBySlugResult =
                           caption?: string;
                           _type: "image";
                           _key: string;
-                          markDefs: null;
                         }
                     > | null;
                     backgroundType?: "image" | "video";
@@ -20402,6 +22123,9 @@ export type QueryMotorPentaOrPageBySlugResult =
                     title?: string;
                     titleFont?: "default" | "statement";
                     richText?: Array<
+                      | ({
+                          _key: string;
+                        } & Button)
                       | {
                           children?: Array<{
                             marks?: Array<string>;
@@ -20523,6 +22247,22 @@ export type QueryMotorPentaOrPageBySlugResult =
                   _key: string;
                 }
               | {
+                  _key: string;
+                  _type: "button";
+                  variant:
+                    | "default"
+                    | "link"
+                    | "outline"
+                    | "primary"
+                    | "secondary"
+                    | null;
+                  text: string | null;
+                  icon: "volvo-chevron-right" | null;
+                  url?: CustomUrl;
+                  openInNewTab: boolean | null;
+                  href: string | null;
+                }
+              | {
                   asset?: {
                     _ref: string;
                     _type: "reference";
@@ -20535,7 +22275,6 @@ export type QueryMotorPentaOrPageBySlugResult =
                   caption?: string;
                   _type: "image";
                   _key: string;
-                  markDefs: null;
                 }
             > | null;
             videoType: "mp4" | "youtube" | null;
@@ -20611,6 +22350,22 @@ export type QueryMotorPentaOrPageBySlugResult =
                   _key: string;
                 }
               | {
+                  _key: string;
+                  _type: "button";
+                  variant:
+                    | "default"
+                    | "link"
+                    | "outline"
+                    | "primary"
+                    | "secondary"
+                    | null;
+                  text: string | null;
+                  icon: "volvo-chevron-right" | null;
+                  url?: CustomUrl;
+                  openInNewTab: boolean | null;
+                  href: string | null;
+                }
+              | {
                   asset?: {
                     _ref: string;
                     _type: "reference";
@@ -20623,7 +22378,6 @@ export type QueryMotorPentaOrPageBySlugResult =
                   caption?: string;
                   _type: "image";
                   _key: string;
-                  markDefs: null;
                 }
             > | null;
             buttons: Array<{
@@ -20823,6 +22577,22 @@ export type QueryMotorPentaOrPageBySlugResult =
                     _key: string;
                   }
                 | {
+                    _key: string;
+                    _type: "button";
+                    variant:
+                      | "default"
+                      | "link"
+                      | "outline"
+                      | "primary"
+                      | "secondary"
+                      | null;
+                    text: string | null;
+                    icon: "volvo-chevron-right" | null;
+                    url?: CustomUrl;
+                    openInNewTab: boolean | null;
+                    href: string | null;
+                  }
+                | {
                     asset?: {
                       _ref: string;
                       _type: "reference";
@@ -20835,7 +22605,6 @@ export type QueryMotorPentaOrPageBySlugResult =
                     caption?: string;
                     _type: "image";
                     _key: string;
-                    markDefs: null;
                   }
               > | null;
             }> | null;
@@ -21029,6 +22798,20 @@ export type QueryMotorPentaOrPageBySlugResult =
                           _key: string;
                         }
                       | {
+                          _key: string;
+                          _type: "button";
+                          variant?:
+                            | "default"
+                            | "link"
+                            | "outline"
+                            | "primary"
+                            | "secondary";
+                          text?: string;
+                          icon?: "volvo-chevron-right";
+                          url?: CustomUrl;
+                          markDefs: null;
+                        }
+                      | {
                           asset?: {
                             _ref: string;
                             _type: "reference";
@@ -21098,6 +22881,22 @@ export type QueryMotorPentaOrPageBySlugResult =
                   _key: string;
                 }
               | {
+                  _key: string;
+                  _type: "button";
+                  variant:
+                    | "default"
+                    | "link"
+                    | "outline"
+                    | "primary"
+                    | "secondary"
+                    | null;
+                  text: string | null;
+                  icon: "volvo-chevron-right" | null;
+                  url?: CustomUrl;
+                  openInNewTab: boolean | null;
+                  href: string | null;
+                }
+              | {
                   asset?: {
                     _ref: string;
                     _type: "reference";
@@ -21110,7 +22909,6 @@ export type QueryMotorPentaOrPageBySlugResult =
                   caption?: string;
                   _type: "image";
                   _key: string;
-                  markDefs: null;
                 }
             > | null;
             image: {
@@ -21271,6 +23069,22 @@ export type QueryMotorPentaOrPageBySlugResult =
                   _key: string;
                 }
               | {
+                  _key: string;
+                  _type: "button";
+                  variant:
+                    | "default"
+                    | "link"
+                    | "outline"
+                    | "primary"
+                    | "secondary"
+                    | null;
+                  text: string | null;
+                  icon: "volvo-chevron-right" | null;
+                  url?: CustomUrl;
+                  openInNewTab: boolean | null;
+                  href: string | null;
+                }
+              | {
                   asset?: {
                     _ref: string;
                     _type: "reference";
@@ -21283,7 +23097,6 @@ export type QueryMotorPentaOrPageBySlugResult =
                   caption?: string;
                   _type: "image";
                   _key: string;
-                  markDefs: null;
                 }
             > | null;
             buttons: Array<{
@@ -21400,6 +23213,22 @@ export type QueryMotorPentaOrPageBySlugResult =
                   _key: string;
                 }
               | {
+                  _key: string;
+                  _type: "button";
+                  variant:
+                    | "default"
+                    | "link"
+                    | "outline"
+                    | "primary"
+                    | "secondary"
+                    | null;
+                  text: string | null;
+                  icon: "volvo-chevron-right" | null;
+                  url?: CustomUrl;
+                  openInNewTab: boolean | null;
+                  href: string | null;
+                }
+              | {
                   asset?: {
                     _ref: string;
                     _type: "reference";
@@ -21412,7 +23241,6 @@ export type QueryMotorPentaOrPageBySlugResult =
                   caption?: string;
                   _type: "image";
                   _key: string;
-                  markDefs: null;
                 }
             > | null;
             backgroundType?: "image" | "video";
@@ -21517,6 +23345,20 @@ export type QueryMotorPentaOrPageBySlugResult =
                     level?: number;
                     _type: "block";
                     _key: string;
+                  }
+                | {
+                    _key: string;
+                    _type: "button";
+                    variant?:
+                      | "default"
+                      | "link"
+                      | "outline"
+                      | "primary"
+                      | "secondary";
+                    text?: string;
+                    icon?: "volvo-chevron-right";
+                    url?: CustomUrl;
+                    markDefs: null;
                   }
                 | {
                     asset?: {
@@ -21644,6 +23486,22 @@ export type QueryMotorPentaOrPageBySlugResult =
                           _key: string;
                         }
                       | {
+                          _key: string;
+                          _type: "button";
+                          variant:
+                            | "default"
+                            | "link"
+                            | "outline"
+                            | "primary"
+                            | "secondary"
+                            | null;
+                          text: string | null;
+                          icon: "volvo-chevron-right" | null;
+                          url?: CustomUrl;
+                          openInNewTab: boolean | null;
+                          href: string | null;
+                        }
+                      | {
                           asset?: {
                             _ref: string;
                             _type: "reference";
@@ -21656,7 +23514,6 @@ export type QueryMotorPentaOrPageBySlugResult =
                           caption?: string;
                           _type: "image";
                           _key: string;
-                          markDefs: null;
                         }
                     > | null;
                     buttons: Array<{
@@ -21856,6 +23713,22 @@ export type QueryMotorPentaOrPageBySlugResult =
                             _key: string;
                           }
                         | {
+                            _key: string;
+                            _type: "button";
+                            variant:
+                              | "default"
+                              | "link"
+                              | "outline"
+                              | "primary"
+                              | "secondary"
+                              | null;
+                            text: string | null;
+                            icon: "volvo-chevron-right" | null;
+                            url?: CustomUrl;
+                            openInNewTab: boolean | null;
+                            href: string | null;
+                          }
+                        | {
                             asset?: {
                               _ref: string;
                               _type: "reference";
@@ -21868,7 +23741,6 @@ export type QueryMotorPentaOrPageBySlugResult =
                             caption?: string;
                             _type: "image";
                             _key: string;
-                            markDefs: null;
                           }
                       > | null;
                     }> | null;
@@ -21990,6 +23862,9 @@ export type QueryMotorPentaOrPageBySlugResult =
                           }
                         | {
                             content?: Array<
+                              | ({
+                                  _key: string;
+                                } & Button)
                               | {
                                   children?: Array<{
                                     marks?: Array<string>;
@@ -22089,6 +23964,22 @@ export type QueryMotorPentaOrPageBySlugResult =
                           _key: string;
                         }
                       | {
+                          _key: string;
+                          _type: "button";
+                          variant:
+                            | "default"
+                            | "link"
+                            | "outline"
+                            | "primary"
+                            | "secondary"
+                            | null;
+                          text: string | null;
+                          icon: "volvo-chevron-right" | null;
+                          url?: CustomUrl;
+                          openInNewTab: boolean | null;
+                          href: string | null;
+                        }
+                      | {
                           asset?: {
                             _ref: string;
                             _type: "reference";
@@ -22101,7 +23992,6 @@ export type QueryMotorPentaOrPageBySlugResult =
                           caption?: string;
                           _type: "image";
                           _key: string;
-                          markDefs: null;
                         }
                     > | null;
                     image: {
@@ -22257,6 +24147,22 @@ export type QueryMotorPentaOrPageBySlugResult =
                           _key: string;
                         }
                       | {
+                          _key: string;
+                          _type: "button";
+                          variant:
+                            | "default"
+                            | "link"
+                            | "outline"
+                            | "primary"
+                            | "secondary"
+                            | null;
+                          text: string | null;
+                          icon: "volvo-chevron-right" | null;
+                          url?: CustomUrl;
+                          openInNewTab: boolean | null;
+                          href: string | null;
+                        }
+                      | {
                           asset?: {
                             _ref: string;
                             _type: "reference";
@@ -22269,7 +24175,6 @@ export type QueryMotorPentaOrPageBySlugResult =
                           caption?: string;
                           _type: "image";
                           _key: string;
-                          markDefs: null;
                         }
                     > | null;
                     buttons: Array<{
@@ -22354,6 +24259,22 @@ export type QueryMotorPentaOrPageBySlugResult =
                           _key: string;
                         }
                       | {
+                          _key: string;
+                          _type: "button";
+                          variant:
+                            | "default"
+                            | "link"
+                            | "outline"
+                            | "primary"
+                            | "secondary"
+                            | null;
+                          text: string | null;
+                          icon: "volvo-chevron-right" | null;
+                          url?: CustomUrl;
+                          openInNewTab: boolean | null;
+                          href: string | null;
+                        }
+                      | {
                           asset?: {
                             _ref: string;
                             _type: "reference";
@@ -22366,7 +24287,6 @@ export type QueryMotorPentaOrPageBySlugResult =
                           caption?: string;
                           _type: "image";
                           _key: string;
-                          markDefs: null;
                         }
                     > | null;
                     backgroundType?: "image" | "video";
@@ -22548,6 +24468,9 @@ export type QueryMotorPentaOrPageBySlugResult =
                     title?: string;
                     titleFont?: "default" | "statement";
                     richText?: Array<
+                      | ({
+                          _key: string;
+                        } & Button)
                       | {
                           children?: Array<{
                             marks?: Array<string>;
@@ -22669,6 +24592,22 @@ export type QueryMotorPentaOrPageBySlugResult =
                   _key: string;
                 }
               | {
+                  _key: string;
+                  _type: "button";
+                  variant:
+                    | "default"
+                    | "link"
+                    | "outline"
+                    | "primary"
+                    | "secondary"
+                    | null;
+                  text: string | null;
+                  icon: "volvo-chevron-right" | null;
+                  url?: CustomUrl;
+                  openInNewTab: boolean | null;
+                  href: string | null;
+                }
+              | {
                   asset?: {
                     _ref: string;
                     _type: "reference";
@@ -22681,7 +24620,6 @@ export type QueryMotorPentaOrPageBySlugResult =
                   caption?: string;
                   _type: "image";
                   _key: string;
-                  markDefs: null;
                 }
             > | null;
             videoType: "mp4" | "youtube" | null;
@@ -23033,6 +24971,9 @@ export type CAMION_BY_SLUG_QUERYResult = {
         eyebrow?: string;
         title?: string;
         richText?: Array<
+          | ({
+              _key: string;
+            } & Button)
           | {
               children?: Array<{
                 marks?: Array<string>;
@@ -23314,6 +25255,9 @@ export type CAMION_BY_SLUG_QUERYResult = {
               }
             | {
                 content?: Array<
+                  | ({
+                      _key: string;
+                    } & Button)
                   | {
                       children?: Array<{
                         marks?: Array<string>;
@@ -23372,6 +25316,9 @@ export type CAMION_BY_SLUG_QUERYResult = {
         title?: string;
         titleFont?: "default" | "statement";
         richText?: Array<
+          | ({
+              _key: string;
+            } & Button)
           | {
               children?: Array<{
                 marks?: Array<string>;
@@ -23497,6 +25444,9 @@ export type CAMION_BY_SLUG_QUERYResult = {
         eyebrow?: string;
         title?: string;
         richText?: Array<
+          | ({
+              _key: string;
+            } & Button)
           | {
               children?: Array<{
                 marks?: Array<string>;
@@ -23604,6 +25554,9 @@ export type CAMION_BY_SLUG_QUERYResult = {
         title?: string;
         titleFont?: "default" | "statement";
         richText?: Array<
+          | ({
+              _key: string;
+            } & Button)
           | {
               children?: Array<{
                 marks?: Array<string>;
@@ -23765,6 +25718,9 @@ export type CAMION_BY_SLUG_QUERYResult = {
                 eyebrow?: string;
                 title?: string;
                 richText?: Array<
+                  | ({
+                      _key: string;
+                    } & Button)
                   | {
                       children?: Array<{
                         marks?: Array<string>;
@@ -24026,6 +25982,9 @@ export type CAMION_BY_SLUG_QUERYResult = {
                       }
                     | {
                         content?: Array<
+                          | ({
+                              _key: string;
+                            } & Button)
                           | {
                               children?: Array<{
                                 marks?: Array<string>;
@@ -24084,6 +26043,9 @@ export type CAMION_BY_SLUG_QUERYResult = {
                 title?: string;
                 titleFont?: "default" | "statement";
                 richText?: Array<
+                  | ({
+                      _key: string;
+                    } & Button)
                   | {
                       children?: Array<{
                         marks?: Array<string>;
@@ -24213,6 +26175,9 @@ export type CAMION_BY_SLUG_QUERYResult = {
                 eyebrow?: string;
                 title?: string;
                 richText?: Array<
+                  | ({
+                      _key: string;
+                    } & Button)
                   | {
                       children?: Array<{
                         marks?: Array<string>;
@@ -24285,6 +26250,9 @@ export type CAMION_BY_SLUG_QUERYResult = {
                 title?: string;
                 titleFont?: "default" | "statement";
                 richText?: Array<
+                  | ({
+                      _key: string;
+                    } & Button)
                   | {
                       children?: Array<{
                         marks?: Array<string>;
@@ -24474,6 +26442,9 @@ export type CAMION_BY_SLUG_QUERYResult = {
                 title?: string;
                 titleFont?: "default" | "statement";
                 richText?: Array<
+                  | ({
+                      _key: string;
+                    } & Button)
                   | {
                       children?: Array<{
                         marks?: Array<string>;
@@ -24571,6 +26542,9 @@ export type CAMION_BY_SLUG_QUERYResult = {
         title?: string;
         titleFont?: "default" | "statement";
         richText?: Array<
+          | ({
+              _key: string;
+            } & Button)
           | {
               children?: Array<{
                 marks?: Array<string>;
@@ -24671,6 +26645,9 @@ export type BUS_BY_SLUG_QUERYResult = {
         eyebrow?: string;
         title?: string;
         richText?: Array<
+          | ({
+              _key: string;
+            } & Button)
           | {
               children?: Array<{
                 marks?: Array<string>;
@@ -24952,6 +26929,9 @@ export type BUS_BY_SLUG_QUERYResult = {
               }
             | {
                 content?: Array<
+                  | ({
+                      _key: string;
+                    } & Button)
                   | {
                       children?: Array<{
                         marks?: Array<string>;
@@ -25010,6 +26990,9 @@ export type BUS_BY_SLUG_QUERYResult = {
         title?: string;
         titleFont?: "default" | "statement";
         richText?: Array<
+          | ({
+              _key: string;
+            } & Button)
           | {
               children?: Array<{
                 marks?: Array<string>;
@@ -25135,6 +27118,9 @@ export type BUS_BY_SLUG_QUERYResult = {
         eyebrow?: string;
         title?: string;
         richText?: Array<
+          | ({
+              _key: string;
+            } & Button)
           | {
               children?: Array<{
                 marks?: Array<string>;
@@ -25242,6 +27228,9 @@ export type BUS_BY_SLUG_QUERYResult = {
         title?: string;
         titleFont?: "default" | "statement";
         richText?: Array<
+          | ({
+              _key: string;
+            } & Button)
           | {
               children?: Array<{
                 marks?: Array<string>;
@@ -25403,6 +27392,9 @@ export type BUS_BY_SLUG_QUERYResult = {
                 eyebrow?: string;
                 title?: string;
                 richText?: Array<
+                  | ({
+                      _key: string;
+                    } & Button)
                   | {
                       children?: Array<{
                         marks?: Array<string>;
@@ -25664,6 +27656,9 @@ export type BUS_BY_SLUG_QUERYResult = {
                       }
                     | {
                         content?: Array<
+                          | ({
+                              _key: string;
+                            } & Button)
                           | {
                               children?: Array<{
                                 marks?: Array<string>;
@@ -25722,6 +27717,9 @@ export type BUS_BY_SLUG_QUERYResult = {
                 title?: string;
                 titleFont?: "default" | "statement";
                 richText?: Array<
+                  | ({
+                      _key: string;
+                    } & Button)
                   | {
                       children?: Array<{
                         marks?: Array<string>;
@@ -25851,6 +27849,9 @@ export type BUS_BY_SLUG_QUERYResult = {
                 eyebrow?: string;
                 title?: string;
                 richText?: Array<
+                  | ({
+                      _key: string;
+                    } & Button)
                   | {
                       children?: Array<{
                         marks?: Array<string>;
@@ -25923,6 +27924,9 @@ export type BUS_BY_SLUG_QUERYResult = {
                 title?: string;
                 titleFont?: "default" | "statement";
                 richText?: Array<
+                  | ({
+                      _key: string;
+                    } & Button)
                   | {
                       children?: Array<{
                         marks?: Array<string>;
@@ -26112,6 +28116,9 @@ export type BUS_BY_SLUG_QUERYResult = {
                 title?: string;
                 titleFont?: "default" | "statement";
                 richText?: Array<
+                  | ({
+                      _key: string;
+                    } & Button)
                   | {
                       children?: Array<{
                         marks?: Array<string>;
@@ -26209,6 +28216,9 @@ export type BUS_BY_SLUG_QUERYResult = {
         title?: string;
         titleFont?: "default" | "statement";
         richText?: Array<
+          | ({
+              _key: string;
+            } & Button)
           | {
               children?: Array<{
                 marks?: Array<string>;
@@ -26309,6 +28319,9 @@ export type MOTOR_PENTA_BY_SLUG_QUERYResult = {
         eyebrow?: string;
         title?: string;
         richText?: Array<
+          | ({
+              _key: string;
+            } & Button)
           | {
               children?: Array<{
                 marks?: Array<string>;
@@ -26590,6 +28603,9 @@ export type MOTOR_PENTA_BY_SLUG_QUERYResult = {
               }
             | {
                 content?: Array<
+                  | ({
+                      _key: string;
+                    } & Button)
                   | {
                       children?: Array<{
                         marks?: Array<string>;
@@ -26648,6 +28664,9 @@ export type MOTOR_PENTA_BY_SLUG_QUERYResult = {
         title?: string;
         titleFont?: "default" | "statement";
         richText?: Array<
+          | ({
+              _key: string;
+            } & Button)
           | {
               children?: Array<{
                 marks?: Array<string>;
@@ -26773,6 +28792,9 @@ export type MOTOR_PENTA_BY_SLUG_QUERYResult = {
         eyebrow?: string;
         title?: string;
         richText?: Array<
+          | ({
+              _key: string;
+            } & Button)
           | {
               children?: Array<{
                 marks?: Array<string>;
@@ -26880,6 +28902,9 @@ export type MOTOR_PENTA_BY_SLUG_QUERYResult = {
         title?: string;
         titleFont?: "default" | "statement";
         richText?: Array<
+          | ({
+              _key: string;
+            } & Button)
           | {
               children?: Array<{
                 marks?: Array<string>;
@@ -27041,6 +29066,9 @@ export type MOTOR_PENTA_BY_SLUG_QUERYResult = {
                 eyebrow?: string;
                 title?: string;
                 richText?: Array<
+                  | ({
+                      _key: string;
+                    } & Button)
                   | {
                       children?: Array<{
                         marks?: Array<string>;
@@ -27302,6 +29330,9 @@ export type MOTOR_PENTA_BY_SLUG_QUERYResult = {
                       }
                     | {
                         content?: Array<
+                          | ({
+                              _key: string;
+                            } & Button)
                           | {
                               children?: Array<{
                                 marks?: Array<string>;
@@ -27360,6 +29391,9 @@ export type MOTOR_PENTA_BY_SLUG_QUERYResult = {
                 title?: string;
                 titleFont?: "default" | "statement";
                 richText?: Array<
+                  | ({
+                      _key: string;
+                    } & Button)
                   | {
                       children?: Array<{
                         marks?: Array<string>;
@@ -27489,6 +29523,9 @@ export type MOTOR_PENTA_BY_SLUG_QUERYResult = {
                 eyebrow?: string;
                 title?: string;
                 richText?: Array<
+                  | ({
+                      _key: string;
+                    } & Button)
                   | {
                       children?: Array<{
                         marks?: Array<string>;
@@ -27561,6 +29598,9 @@ export type MOTOR_PENTA_BY_SLUG_QUERYResult = {
                 title?: string;
                 titleFont?: "default" | "statement";
                 richText?: Array<
+                  | ({
+                      _key: string;
+                    } & Button)
                   | {
                       children?: Array<{
                         marks?: Array<string>;
@@ -27750,6 +29790,9 @@ export type MOTOR_PENTA_BY_SLUG_QUERYResult = {
                 title?: string;
                 titleFont?: "default" | "statement";
                 richText?: Array<
+                  | ({
+                      _key: string;
+                    } & Button)
                   | {
                       children?: Array<{
                         marks?: Array<string>;
@@ -27847,6 +29890,9 @@ export type MOTOR_PENTA_BY_SLUG_QUERYResult = {
         title?: string;
         titleFont?: "default" | "statement";
         richText?: Array<
+          | ({
+              _key: string;
+            } & Button)
           | {
               children?: Array<{
                 marks?: Array<string>;
@@ -27925,11 +29971,11 @@ export type MOTOR_PENTA_BY_SLUG_QUERYResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '*[_type == "homePage" && _id == "homePage"][0]{\n    ...,\n    _id,\n    _type,\n    "slug": slug.current,\n    title,\n    description,\n    \n  pageBuilder[]{\n    ...,\n    _type,\n    \n  _type == "cta" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n,\n    \n  _type == "mainHero" => {\n    ...,\n    titleFont,\n    "backgroundImage": backgroundImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    "backgroundVideo": backgroundVideo.asset->url,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n    \n  _type == "hero" => {\n    ...,\n    variant,\n    titleFont,\n    imageAlignment,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n    \n  _type == "doubleHero" => {\n    ...,\n    variant,\n    primaryBadge,\n    primaryTitle,\n    "primaryRichText": primaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "primaryImage": primaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    secondaryBadge,\n    secondaryTitle,\n    "secondaryRichText": secondaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "secondaryImage": secondaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n    \n  _type == "faqAccordion" => {\n    ...,\n    \n  "faqs": array::compact(faqs[]->{\n    title,\n    _id,\n    _type,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  })\n,\n    link{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n    \n  _type == "subscribeNewsletter" => {\n    ...,\n    "subTitle": subTitle[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "helperText": helperText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  _type == "imageLinkCards" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    "cards": array::compact(cards[]{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      ),\n      \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    })\n  }\n,\n    \n  _type == "formBlock" => {\n    ...,\n    title,\n    description,\n    variant,\n    displayMode,\n    triggerText,\n    buttonPosition,\n    "form": form->{\n      _id,\n      title,\n      description,\n      \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n      submitButtonText,\n      successMessage,\n      errorMessage\n    }\n  }\n,\n    \n  _type == "tabs" => {\n    ...,\n    title,\n    description,\n    tabs[]{\n      _key,\n      label,\n      content[]{\n        ...,\n        _type,\n        _key,\n        \n  _type == "cta" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n,\n        \n  _type == "mainHero" => {\n    ...,\n    titleFont,\n    "backgroundImage": backgroundImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    "backgroundVideo": backgroundVideo.asset->url,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n        \n  _type == "hero" => {\n    ...,\n    variant,\n    titleFont,\n    imageAlignment,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n        \n  _type == "doubleHero" => {\n    ...,\n    variant,\n    primaryBadge,\n    primaryTitle,\n    "primaryRichText": primaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "primaryImage": primaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    secondaryBadge,\n    secondaryTitle,\n    "secondaryRichText": secondaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "secondaryImage": secondaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n        \n  _type == "faqAccordion" => {\n    ...,\n    \n  "faqs": array::compact(faqs[]->{\n    title,\n    _id,\n    _type,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  })\n,\n    link{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n        \n  _type == "subscribeNewsletter" => {\n    ...,\n    "subTitle": subTitle[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "helperText": helperText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n        \n  _type == "imageLinkCards" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    "cards": array::compact(cards[]{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      ),\n      \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    })\n  }\n,\n        \n  _type == "formBlock" => {\n    ...,\n    title,\n    description,\n    variant,\n    displayMode,\n    triggerText,\n    buttonPosition,\n    "form": form->{\n      _id,\n      title,\n      description,\n      \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n      submitButtonText,\n      successMessage,\n      errorMessage\n    }\n  }\n,\n        \n  _type == "imageGallery" => {\n    ...,\n    title,\n    description,\n    layout,\n    columns,\n    slidesPerRow,\n    "images": images[]{\n      ...,\n      "image": image{\n        ...,\n        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background,\n      },\n      caption\n    }\n  }\n,\n        \n  _type == "featuredBlogs" => {\n    ...,\n    title,\n    subtitle,\n    displayMode,\n    blogCount,\n    buttonText,\n    "showViewAllButton": showViewAllButton == "yes",\n    "blogs": select(\n      displayMode == "curated" => blogs[]-> {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      },\n      displayMode == "latest" => *[\n        _type == "blog" \n        && (seoHideFromLists != true)\n      ] | order(publishedAt desc, _createdAt desc)[0...3] {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      }\n    )\n  }\n,\n        _type == "tabs" => {\n          ...,\n          title,\n          description,\n          tabs[]{\n            _key,\n            label,\n            content[]{ \n              ...,\n              _type,\n              _key\n            }\n          }\n        }\n      }\n    }\n  }\n,\n    \n  _type == "infoSection" => {\n    ...,\n    title,\n    headingLevel,\n    content[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  _type == "imageGallery" => {\n    ...,\n    title,\n    description,\n    layout,\n    columns,\n    slidesPerRow,\n    "images": images[]{\n      ...,\n      "image": image{\n        ...,\n        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background,\n      },\n      caption\n    }\n  }\n,\n    \n  _type == "specificationsTable" => {\n    ...,\n    title,\n    description,\n    variant,\n    "specifications": specifications[]{\n      _key,\n      label,\n      "content": content[]{\n        ...,\n        \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n      }\n    }\n  }\n,\n    \n  _type == "genericTable" => {\n    ...,\n    title,\n    description,\n    columnCount,\n    columnHeaders,\n    rows[]{\n      _key,\n      cells[]{\n        _key,\n        content,\n        isLastColumn,\n        _type == "richCell" => {\n          content[]{\n            ...,\n            \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n          }\n        }\n      }\n    },\n    variant\n  }\n,\n    \n  _type == "featuredBlogs" => {\n    ...,\n    title,\n    subtitle,\n    displayMode,\n    blogCount,\n    buttonText,\n    "showViewAllButton": showViewAllButton == "yes",\n    "blogs": select(\n      displayMode == "curated" => blogs[]-> {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      },\n      displayMode == "latest" => *[\n        _type == "blog" \n        && (seoHideFromLists != true)\n      ] | order(publishedAt desc, _createdAt desc)[0...3] {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      }\n    )\n  }\n,\n    \n  _type == "highlightedAspects" => {\n    title,\n    description,\n    columns,\n    aspects[]{\n      _key,\n      title,\n      variant,\n      icon,\n      image{\n        ...,\n        "alt": coalesce(asset->altText, asset->originalFilename, "Aspect Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background\n      },\n      content[]{\n        ...,\n        \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n      }\n    }\n  }\n,\n    \n  _type == "videoBlock" => {\n    ...,\n    _key,\n    _type,\n    title,\n    videoType,\n    "mp4File": coalesce(\n      mp4File.asset->url,\n      mp4File.asset->sources[0].url,\n      null\n    ),\n    youtubeUrl,\n    showControls,\n    autoplay,\n    loop,\n    allowFullscreen\n  }\n,\n    \n  _type == "videoHero" => {\n    ...,\n    variant,\n    titleFont,\n    videoType,\n    "mp4File": coalesce(\n      mp4File.asset->url,\n      mp4File.asset->sources[0].url,\n      null\n    ),\n    youtubeUrl,\n    showControls,\n    autoplay,\n    loop,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n\n  }\n,\n    \n  "categoryData": {\n    "label": category,\n    "slug": category,\n    "iri": "/camiones/" + category,\n    "parent": null\n  }\n\n  }': QueryHomePageDataResult;
-    '\n  *[_type == "page" && slug.current == $slug][0]{\n    ...,\n    "slug": slug.current,\n    \n  pageBuilder[]{\n    ...,\n    _type,\n    \n  _type == "cta" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n,\n    \n  _type == "mainHero" => {\n    ...,\n    titleFont,\n    "backgroundImage": backgroundImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    "backgroundVideo": backgroundVideo.asset->url,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n    \n  _type == "hero" => {\n    ...,\n    variant,\n    titleFont,\n    imageAlignment,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n    \n  _type == "doubleHero" => {\n    ...,\n    variant,\n    primaryBadge,\n    primaryTitle,\n    "primaryRichText": primaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "primaryImage": primaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    secondaryBadge,\n    secondaryTitle,\n    "secondaryRichText": secondaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "secondaryImage": secondaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n    \n  _type == "faqAccordion" => {\n    ...,\n    \n  "faqs": array::compact(faqs[]->{\n    title,\n    _id,\n    _type,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  })\n,\n    link{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n    \n  _type == "subscribeNewsletter" => {\n    ...,\n    "subTitle": subTitle[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "helperText": helperText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  _type == "imageLinkCards" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    "cards": array::compact(cards[]{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      ),\n      \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    })\n  }\n,\n    \n  _type == "formBlock" => {\n    ...,\n    title,\n    description,\n    variant,\n    displayMode,\n    triggerText,\n    buttonPosition,\n    "form": form->{\n      _id,\n      title,\n      description,\n      \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n      submitButtonText,\n      successMessage,\n      errorMessage\n    }\n  }\n,\n    \n  _type == "tabs" => {\n    ...,\n    title,\n    description,\n    tabs[]{\n      _key,\n      label,\n      content[]{\n        ...,\n        _type,\n        _key,\n        \n  _type == "cta" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n,\n        \n  _type == "mainHero" => {\n    ...,\n    titleFont,\n    "backgroundImage": backgroundImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    "backgroundVideo": backgroundVideo.asset->url,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n        \n  _type == "hero" => {\n    ...,\n    variant,\n    titleFont,\n    imageAlignment,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n        \n  _type == "doubleHero" => {\n    ...,\n    variant,\n    primaryBadge,\n    primaryTitle,\n    "primaryRichText": primaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "primaryImage": primaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    secondaryBadge,\n    secondaryTitle,\n    "secondaryRichText": secondaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "secondaryImage": secondaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n        \n  _type == "faqAccordion" => {\n    ...,\n    \n  "faqs": array::compact(faqs[]->{\n    title,\n    _id,\n    _type,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  })\n,\n    link{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n        \n  _type == "subscribeNewsletter" => {\n    ...,\n    "subTitle": subTitle[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "helperText": helperText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n        \n  _type == "imageLinkCards" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    "cards": array::compact(cards[]{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      ),\n      \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    })\n  }\n,\n        \n  _type == "formBlock" => {\n    ...,\n    title,\n    description,\n    variant,\n    displayMode,\n    triggerText,\n    buttonPosition,\n    "form": form->{\n      _id,\n      title,\n      description,\n      \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n      submitButtonText,\n      successMessage,\n      errorMessage\n    }\n  }\n,\n        \n  _type == "imageGallery" => {\n    ...,\n    title,\n    description,\n    layout,\n    columns,\n    slidesPerRow,\n    "images": images[]{\n      ...,\n      "image": image{\n        ...,\n        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background,\n      },\n      caption\n    }\n  }\n,\n        \n  _type == "featuredBlogs" => {\n    ...,\n    title,\n    subtitle,\n    displayMode,\n    blogCount,\n    buttonText,\n    "showViewAllButton": showViewAllButton == "yes",\n    "blogs": select(\n      displayMode == "curated" => blogs[]-> {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      },\n      displayMode == "latest" => *[\n        _type == "blog" \n        && (seoHideFromLists != true)\n      ] | order(publishedAt desc, _createdAt desc)[0...3] {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      }\n    )\n  }\n,\n        _type == "tabs" => {\n          ...,\n          title,\n          description,\n          tabs[]{\n            _key,\n            label,\n            content[]{ \n              ...,\n              _type,\n              _key\n            }\n          }\n        }\n      }\n    }\n  }\n,\n    \n  _type == "infoSection" => {\n    ...,\n    title,\n    headingLevel,\n    content[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  _type == "imageGallery" => {\n    ...,\n    title,\n    description,\n    layout,\n    columns,\n    slidesPerRow,\n    "images": images[]{\n      ...,\n      "image": image{\n        ...,\n        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background,\n      },\n      caption\n    }\n  }\n,\n    \n  _type == "specificationsTable" => {\n    ...,\n    title,\n    description,\n    variant,\n    "specifications": specifications[]{\n      _key,\n      label,\n      "content": content[]{\n        ...,\n        \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n      }\n    }\n  }\n,\n    \n  _type == "genericTable" => {\n    ...,\n    title,\n    description,\n    columnCount,\n    columnHeaders,\n    rows[]{\n      _key,\n      cells[]{\n        _key,\n        content,\n        isLastColumn,\n        _type == "richCell" => {\n          content[]{\n            ...,\n            \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n          }\n        }\n      }\n    },\n    variant\n  }\n,\n    \n  _type == "featuredBlogs" => {\n    ...,\n    title,\n    subtitle,\n    displayMode,\n    blogCount,\n    buttonText,\n    "showViewAllButton": showViewAllButton == "yes",\n    "blogs": select(\n      displayMode == "curated" => blogs[]-> {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      },\n      displayMode == "latest" => *[\n        _type == "blog" \n        && (seoHideFromLists != true)\n      ] | order(publishedAt desc, _createdAt desc)[0...3] {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      }\n    )\n  }\n,\n    \n  _type == "highlightedAspects" => {\n    title,\n    description,\n    columns,\n    aspects[]{\n      _key,\n      title,\n      variant,\n      icon,\n      image{\n        ...,\n        "alt": coalesce(asset->altText, asset->originalFilename, "Aspect Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background\n      },\n      content[]{\n        ...,\n        \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n      }\n    }\n  }\n,\n    \n  _type == "videoBlock" => {\n    ...,\n    _key,\n    _type,\n    title,\n    videoType,\n    "mp4File": coalesce(\n      mp4File.asset->url,\n      mp4File.asset->sources[0].url,\n      null\n    ),\n    youtubeUrl,\n    showControls,\n    autoplay,\n    loop,\n    allowFullscreen\n  }\n,\n    \n  _type == "videoHero" => {\n    ...,\n    variant,\n    titleFont,\n    videoType,\n    "mp4File": coalesce(\n      mp4File.asset->url,\n      mp4File.asset->sources[0].url,\n      null\n    ),\n    youtubeUrl,\n    showControls,\n    autoplay,\n    loop,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n\n  }\n\n  }\n  ': QuerySlugPageDataResult;
+    '*[_type == "homePage" && _id == "homePage"][0]{\n    ...,\n    _id,\n    _type,\n    "slug": slug.current,\n    title,\n    description,\n    \n  pageBuilder[]{\n    ...,\n    _type,\n    \n  _type == "cta" => {\n    ...,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n,\n    \n  _type == "mainHero" => {\n    ...,\n    titleFont,\n    "backgroundImage": backgroundImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    "backgroundVideo": backgroundVideo.asset->url,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n,\n    \n  _type == "hero" => {\n    ...,\n    variant,\n    titleFont,\n    imageAlignment,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n,\n    \n  _type == "doubleHero" => {\n    ...,\n    variant,\n    primaryBadge,\n    primaryTitle,\n    "primaryRichText": primaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "primaryImage": primaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    secondaryBadge,\n    secondaryTitle,\n    "secondaryRichText": secondaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "secondaryImage": secondaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n    \n  _type == "faqAccordion" => {\n    ...,\n    \n  "faqs": array::compact(faqs[]->{\n    title,\n    _id,\n    _type,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  })\n,\n    link{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n    \n  _type == "subscribeNewsletter" => {\n    ...,\n    "subTitle": subTitle[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "helperText": helperText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  _type == "imageLinkCards" => {\n    ...,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    "cards": array::compact(cards[]{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      ),\n      \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    })\n  }\n,\n    \n  _type == "formBlock" => {\n    ...,\n    title,\n    description,\n    variant,\n    displayMode,\n    triggerText,\n    buttonPosition,\n    "form": form->{\n      _id,\n      title,\n      description,\n      \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n      submitButtonText,\n      successMessage,\n      errorMessage\n    }\n  }\n,\n    \n  _type == "tabs" => {\n    ...,\n    title,\n    description,\n    tabs[]{\n      _key,\n      label,\n      content[]{\n        ...,\n        _type,\n        _key,\n        \n  _type == "cta" => {\n    ...,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n,\n        \n  _type == "mainHero" => {\n    ...,\n    titleFont,\n    "backgroundImage": backgroundImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    "backgroundVideo": backgroundVideo.asset->url,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n,\n        \n  _type == "hero" => {\n    ...,\n    variant,\n    titleFont,\n    imageAlignment,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n,\n        \n  _type == "doubleHero" => {\n    ...,\n    variant,\n    primaryBadge,\n    primaryTitle,\n    "primaryRichText": primaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "primaryImage": primaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    secondaryBadge,\n    secondaryTitle,\n    "secondaryRichText": secondaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "secondaryImage": secondaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n        \n  _type == "faqAccordion" => {\n    ...,\n    \n  "faqs": array::compact(faqs[]->{\n    title,\n    _id,\n    _type,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  })\n,\n    link{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n        \n  _type == "subscribeNewsletter" => {\n    ...,\n    "subTitle": subTitle[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "helperText": helperText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n        \n  _type == "imageLinkCards" => {\n    ...,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    "cards": array::compact(cards[]{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      ),\n      \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    })\n  }\n,\n        \n  _type == "formBlock" => {\n    ...,\n    title,\n    description,\n    variant,\n    displayMode,\n    triggerText,\n    buttonPosition,\n    "form": form->{\n      _id,\n      title,\n      description,\n      \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n      submitButtonText,\n      successMessage,\n      errorMessage\n    }\n  }\n,\n        \n  _type == "imageGallery" => {\n    ...,\n    title,\n    description,\n    layout,\n    columns,\n    slidesPerRow,\n    "images": images[]{\n      ...,\n      "image": image{\n        ...,\n        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background,\n      },\n      caption\n    }\n  }\n,\n        \n  _type == "featuredBlogs" => {\n    ...,\n    title,\n    subtitle,\n    displayMode,\n    blogCount,\n    buttonText,\n    "showViewAllButton": showViewAllButton == "yes",\n    "blogs": select(\n      displayMode == "curated" => blogs[]-> {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      },\n      displayMode == "latest" => *[\n        _type == "blog" \n        && (seoHideFromLists != true)\n      ] | order(publishedAt desc, _createdAt desc)[0...3] {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      }\n    )\n  }\n,\n        _type == "tabs" => {\n          ...,\n          title,\n          description,\n          tabs[]{\n            _key,\n            label,\n            content[]{ \n              ...,\n              _type,\n              _key\n            }\n          }\n        }\n      }\n    }\n  }\n,\n    \n  _type == "infoSection" => {\n    ...,\n    title,\n    headingLevel,\n    content[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  _type == "imageGallery" => {\n    ...,\n    title,\n    description,\n    layout,\n    columns,\n    slidesPerRow,\n    "images": images[]{\n      ...,\n      "image": image{\n        ...,\n        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background,\n      },\n      caption\n    }\n  }\n,\n    \n  _type == "specificationsTable" => {\n    ...,\n    title,\n    description,\n    variant,\n    "specifications": specifications[]{\n      _key,\n      label,\n      "content": content[]{\n        ...,\n        \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n      }\n    }\n  }\n,\n    \n  _type == "genericTable" => {\n    ...,\n    title,\n    description,\n    columnCount,\n    columnHeaders,\n    rows[]{\n      _key,\n      cells[]{\n        _key,\n        content,\n        isLastColumn,\n        _type == "richCell" => {\n          content[]{\n            ...,\n            \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n          }\n        }\n      }\n    },\n    variant\n  }\n,\n    \n  _type == "featuredBlogs" => {\n    ...,\n    title,\n    subtitle,\n    displayMode,\n    blogCount,\n    buttonText,\n    "showViewAllButton": showViewAllButton == "yes",\n    "blogs": select(\n      displayMode == "curated" => blogs[]-> {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      },\n      displayMode == "latest" => *[\n        _type == "blog" \n        && (seoHideFromLists != true)\n      ] | order(publishedAt desc, _createdAt desc)[0...3] {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      }\n    )\n  }\n,\n    \n  _type == "highlightedAspects" => {\n    title,\n    description,\n    columns,\n    aspects[]{\n      _key,\n      title,\n      variant,\n      icon,\n      image{\n        ...,\n        "alt": coalesce(asset->altText, asset->originalFilename, "Aspect Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background\n      },\n      content[]{\n        ...,\n        \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n      }\n    }\n  }\n,\n    \n  _type == "videoBlock" => {\n    ...,\n    _key,\n    _type,\n    title,\n    videoType,\n    "mp4File": coalesce(\n      mp4File.asset->url,\n      mp4File.asset->sources[0].url,\n      null\n    ),\n    youtubeUrl,\n    showControls,\n    autoplay,\n    loop,\n    allowFullscreen\n  }\n,\n    \n  _type == "videoHero" => {\n    ...,\n    variant,\n    titleFont,\n    videoType,\n    "mp4File": coalesce(\n      mp4File.asset->url,\n      mp4File.asset->sources[0].url,\n      null\n    ),\n    youtubeUrl,\n    showControls,\n    autoplay,\n    loop,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n\n  }\n,\n    \n  "categoryData": {\n    "label": category,\n    "slug": category,\n    "iri": "/camiones/" + category,\n    "parent": null\n  }\n\n  }': QueryHomePageDataResult;
+    '\n  *[_type == "page" && slug.current == $slug][0]{\n    ...,\n    "slug": slug.current,\n    \n  pageBuilder[]{\n    ...,\n    _type,\n    \n  _type == "cta" => {\n    ...,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n,\n    \n  _type == "mainHero" => {\n    ...,\n    titleFont,\n    "backgroundImage": backgroundImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    "backgroundVideo": backgroundVideo.asset->url,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n,\n    \n  _type == "hero" => {\n    ...,\n    variant,\n    titleFont,\n    imageAlignment,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n,\n    \n  _type == "doubleHero" => {\n    ...,\n    variant,\n    primaryBadge,\n    primaryTitle,\n    "primaryRichText": primaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "primaryImage": primaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    secondaryBadge,\n    secondaryTitle,\n    "secondaryRichText": secondaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "secondaryImage": secondaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n    \n  _type == "faqAccordion" => {\n    ...,\n    \n  "faqs": array::compact(faqs[]->{\n    title,\n    _id,\n    _type,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  })\n,\n    link{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n    \n  _type == "subscribeNewsletter" => {\n    ...,\n    "subTitle": subTitle[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "helperText": helperText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  _type == "imageLinkCards" => {\n    ...,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    "cards": array::compact(cards[]{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      ),\n      \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    })\n  }\n,\n    \n  _type == "formBlock" => {\n    ...,\n    title,\n    description,\n    variant,\n    displayMode,\n    triggerText,\n    buttonPosition,\n    "form": form->{\n      _id,\n      title,\n      description,\n      \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n      submitButtonText,\n      successMessage,\n      errorMessage\n    }\n  }\n,\n    \n  _type == "tabs" => {\n    ...,\n    title,\n    description,\n    tabs[]{\n      _key,\n      label,\n      content[]{\n        ...,\n        _type,\n        _key,\n        \n  _type == "cta" => {\n    ...,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n,\n        \n  _type == "mainHero" => {\n    ...,\n    titleFont,\n    "backgroundImage": backgroundImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    "backgroundVideo": backgroundVideo.asset->url,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n,\n        \n  _type == "hero" => {\n    ...,\n    variant,\n    titleFont,\n    imageAlignment,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n,\n        \n  _type == "doubleHero" => {\n    ...,\n    variant,\n    primaryBadge,\n    primaryTitle,\n    "primaryRichText": primaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "primaryImage": primaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    secondaryBadge,\n    secondaryTitle,\n    "secondaryRichText": secondaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "secondaryImage": secondaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n        \n  _type == "faqAccordion" => {\n    ...,\n    \n  "faqs": array::compact(faqs[]->{\n    title,\n    _id,\n    _type,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  })\n,\n    link{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n        \n  _type == "subscribeNewsletter" => {\n    ...,\n    "subTitle": subTitle[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "helperText": helperText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n        \n  _type == "imageLinkCards" => {\n    ...,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    "cards": array::compact(cards[]{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      ),\n      \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    })\n  }\n,\n        \n  _type == "formBlock" => {\n    ...,\n    title,\n    description,\n    variant,\n    displayMode,\n    triggerText,\n    buttonPosition,\n    "form": form->{\n      _id,\n      title,\n      description,\n      \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n      submitButtonText,\n      successMessage,\n      errorMessage\n    }\n  }\n,\n        \n  _type == "imageGallery" => {\n    ...,\n    title,\n    description,\n    layout,\n    columns,\n    slidesPerRow,\n    "images": images[]{\n      ...,\n      "image": image{\n        ...,\n        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background,\n      },\n      caption\n    }\n  }\n,\n        \n  _type == "featuredBlogs" => {\n    ...,\n    title,\n    subtitle,\n    displayMode,\n    blogCount,\n    buttonText,\n    "showViewAllButton": showViewAllButton == "yes",\n    "blogs": select(\n      displayMode == "curated" => blogs[]-> {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      },\n      displayMode == "latest" => *[\n        _type == "blog" \n        && (seoHideFromLists != true)\n      ] | order(publishedAt desc, _createdAt desc)[0...3] {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      }\n    )\n  }\n,\n        _type == "tabs" => {\n          ...,\n          title,\n          description,\n          tabs[]{\n            _key,\n            label,\n            content[]{ \n              ...,\n              _type,\n              _key\n            }\n          }\n        }\n      }\n    }\n  }\n,\n    \n  _type == "infoSection" => {\n    ...,\n    title,\n    headingLevel,\n    content[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  _type == "imageGallery" => {\n    ...,\n    title,\n    description,\n    layout,\n    columns,\n    slidesPerRow,\n    "images": images[]{\n      ...,\n      "image": image{\n        ...,\n        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background,\n      },\n      caption\n    }\n  }\n,\n    \n  _type == "specificationsTable" => {\n    ...,\n    title,\n    description,\n    variant,\n    "specifications": specifications[]{\n      _key,\n      label,\n      "content": content[]{\n        ...,\n        \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n      }\n    }\n  }\n,\n    \n  _type == "genericTable" => {\n    ...,\n    title,\n    description,\n    columnCount,\n    columnHeaders,\n    rows[]{\n      _key,\n      cells[]{\n        _key,\n        content,\n        isLastColumn,\n        _type == "richCell" => {\n          content[]{\n            ...,\n            \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n          }\n        }\n      }\n    },\n    variant\n  }\n,\n    \n  _type == "featuredBlogs" => {\n    ...,\n    title,\n    subtitle,\n    displayMode,\n    blogCount,\n    buttonText,\n    "showViewAllButton": showViewAllButton == "yes",\n    "blogs": select(\n      displayMode == "curated" => blogs[]-> {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      },\n      displayMode == "latest" => *[\n        _type == "blog" \n        && (seoHideFromLists != true)\n      ] | order(publishedAt desc, _createdAt desc)[0...3] {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      }\n    )\n  }\n,\n    \n  _type == "highlightedAspects" => {\n    title,\n    description,\n    columns,\n    aspects[]{\n      _key,\n      title,\n      variant,\n      icon,\n      image{\n        ...,\n        "alt": coalesce(asset->altText, asset->originalFilename, "Aspect Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background\n      },\n      content[]{\n        ...,\n        \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n      }\n    }\n  }\n,\n    \n  _type == "videoBlock" => {\n    ...,\n    _key,\n    _type,\n    title,\n    videoType,\n    "mp4File": coalesce(\n      mp4File.asset->url,\n      mp4File.asset->sources[0].url,\n      null\n    ),\n    youtubeUrl,\n    showControls,\n    autoplay,\n    loop,\n    allowFullscreen\n  }\n,\n    \n  _type == "videoHero" => {\n    ...,\n    variant,\n    titleFont,\n    videoType,\n    "mp4File": coalesce(\n      mp4File.asset->url,\n      mp4File.asset->sources[0].url,\n      null\n    ),\n    youtubeUrl,\n    showControls,\n    autoplay,\n    loop,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n\n  }\n\n  }\n  ': QuerySlugPageDataResult;
     '\n  *[_type == "page" && defined(slug.current)].slug.current\n': QuerySlugPagePathsResult;
-    '\n  *[_type == "blogIndex"][0]{\n    ...,\n    _id,\n    _type,\n    title,\n    description,\n    "displayFeaturedBlogs" : displayFeaturedBlogs == "yes",\n    "featuredBlogsCount" : featuredBlogsCount,\n    \n  pageBuilder[]{\n    ...,\n    _type,\n    \n  _type == "cta" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n,\n    \n  _type == "mainHero" => {\n    ...,\n    titleFont,\n    "backgroundImage": backgroundImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    "backgroundVideo": backgroundVideo.asset->url,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n    \n  _type == "hero" => {\n    ...,\n    variant,\n    titleFont,\n    imageAlignment,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n    \n  _type == "doubleHero" => {\n    ...,\n    variant,\n    primaryBadge,\n    primaryTitle,\n    "primaryRichText": primaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "primaryImage": primaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    secondaryBadge,\n    secondaryTitle,\n    "secondaryRichText": secondaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "secondaryImage": secondaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n    \n  _type == "faqAccordion" => {\n    ...,\n    \n  "faqs": array::compact(faqs[]->{\n    title,\n    _id,\n    _type,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  })\n,\n    link{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n    \n  _type == "subscribeNewsletter" => {\n    ...,\n    "subTitle": subTitle[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "helperText": helperText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  _type == "imageLinkCards" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    "cards": array::compact(cards[]{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      ),\n      \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    })\n  }\n,\n    \n  _type == "formBlock" => {\n    ...,\n    title,\n    description,\n    variant,\n    displayMode,\n    triggerText,\n    buttonPosition,\n    "form": form->{\n      _id,\n      title,\n      description,\n      \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n      submitButtonText,\n      successMessage,\n      errorMessage\n    }\n  }\n,\n    \n  _type == "tabs" => {\n    ...,\n    title,\n    description,\n    tabs[]{\n      _key,\n      label,\n      content[]{\n        ...,\n        _type,\n        _key,\n        \n  _type == "cta" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n,\n        \n  _type == "mainHero" => {\n    ...,\n    titleFont,\n    "backgroundImage": backgroundImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    "backgroundVideo": backgroundVideo.asset->url,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n        \n  _type == "hero" => {\n    ...,\n    variant,\n    titleFont,\n    imageAlignment,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n        \n  _type == "doubleHero" => {\n    ...,\n    variant,\n    primaryBadge,\n    primaryTitle,\n    "primaryRichText": primaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "primaryImage": primaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    secondaryBadge,\n    secondaryTitle,\n    "secondaryRichText": secondaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "secondaryImage": secondaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n        \n  _type == "faqAccordion" => {\n    ...,\n    \n  "faqs": array::compact(faqs[]->{\n    title,\n    _id,\n    _type,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  })\n,\n    link{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n        \n  _type == "subscribeNewsletter" => {\n    ...,\n    "subTitle": subTitle[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "helperText": helperText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n        \n  _type == "imageLinkCards" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    "cards": array::compact(cards[]{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      ),\n      \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    })\n  }\n,\n        \n  _type == "formBlock" => {\n    ...,\n    title,\n    description,\n    variant,\n    displayMode,\n    triggerText,\n    buttonPosition,\n    "form": form->{\n      _id,\n      title,\n      description,\n      \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n      submitButtonText,\n      successMessage,\n      errorMessage\n    }\n  }\n,\n        \n  _type == "imageGallery" => {\n    ...,\n    title,\n    description,\n    layout,\n    columns,\n    slidesPerRow,\n    "images": images[]{\n      ...,\n      "image": image{\n        ...,\n        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background,\n      },\n      caption\n    }\n  }\n,\n        \n  _type == "featuredBlogs" => {\n    ...,\n    title,\n    subtitle,\n    displayMode,\n    blogCount,\n    buttonText,\n    "showViewAllButton": showViewAllButton == "yes",\n    "blogs": select(\n      displayMode == "curated" => blogs[]-> {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      },\n      displayMode == "latest" => *[\n        _type == "blog" \n        && (seoHideFromLists != true)\n      ] | order(publishedAt desc, _createdAt desc)[0...3] {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      }\n    )\n  }\n,\n        _type == "tabs" => {\n          ...,\n          title,\n          description,\n          tabs[]{\n            _key,\n            label,\n            content[]{ \n              ...,\n              _type,\n              _key\n            }\n          }\n        }\n      }\n    }\n  }\n,\n    \n  _type == "infoSection" => {\n    ...,\n    title,\n    headingLevel,\n    content[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  _type == "imageGallery" => {\n    ...,\n    title,\n    description,\n    layout,\n    columns,\n    slidesPerRow,\n    "images": images[]{\n      ...,\n      "image": image{\n        ...,\n        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background,\n      },\n      caption\n    }\n  }\n,\n    \n  _type == "specificationsTable" => {\n    ...,\n    title,\n    description,\n    variant,\n    "specifications": specifications[]{\n      _key,\n      label,\n      "content": content[]{\n        ...,\n        \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n      }\n    }\n  }\n,\n    \n  _type == "genericTable" => {\n    ...,\n    title,\n    description,\n    columnCount,\n    columnHeaders,\n    rows[]{\n      _key,\n      cells[]{\n        _key,\n        content,\n        isLastColumn,\n        _type == "richCell" => {\n          content[]{\n            ...,\n            \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n          }\n        }\n      }\n    },\n    variant\n  }\n,\n    \n  _type == "featuredBlogs" => {\n    ...,\n    title,\n    subtitle,\n    displayMode,\n    blogCount,\n    buttonText,\n    "showViewAllButton": showViewAllButton == "yes",\n    "blogs": select(\n      displayMode == "curated" => blogs[]-> {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      },\n      displayMode == "latest" => *[\n        _type == "blog" \n        && (seoHideFromLists != true)\n      ] | order(publishedAt desc, _createdAt desc)[0...3] {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      }\n    )\n  }\n,\n    \n  _type == "highlightedAspects" => {\n    title,\n    description,\n    columns,\n    aspects[]{\n      _key,\n      title,\n      variant,\n      icon,\n      image{\n        ...,\n        "alt": coalesce(asset->altText, asset->originalFilename, "Aspect Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background\n      },\n      content[]{\n        ...,\n        \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n      }\n    }\n  }\n,\n    \n  _type == "videoBlock" => {\n    ...,\n    _key,\n    _type,\n    title,\n    videoType,\n    "mp4File": coalesce(\n      mp4File.asset->url,\n      mp4File.asset->sources[0].url,\n      null\n    ),\n    youtubeUrl,\n    showControls,\n    autoplay,\n    loop,\n    allowFullscreen\n  }\n,\n    \n  _type == "videoHero" => {\n    ...,\n    variant,\n    titleFont,\n    videoType,\n    "mp4File": coalesce(\n      mp4File.asset->url,\n      mp4File.asset->sources[0].url,\n      null\n    ),\n    youtubeUrl,\n    showControls,\n    autoplay,\n    loop,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n\n  }\n,\n    "slug": slug.current,\n    "blogs": *[_type == "blog" && (seoHideFromLists != true)] | order(orderRank asc){\n      \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n    }\n  }\n': QueryBlogIndexPageDataResult;
-    '\n  *[_type == "blog" && slug.current == $slug][0]{\n    ...,\n    "slug": slug.current,\n    \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  pageBuilder[]{\n    ...,\n    _type,\n    \n  _type == "cta" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n,\n    \n  _type == "mainHero" => {\n    ...,\n    titleFont,\n    "backgroundImage": backgroundImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    "backgroundVideo": backgroundVideo.asset->url,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n    \n  _type == "hero" => {\n    ...,\n    variant,\n    titleFont,\n    imageAlignment,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n    \n  _type == "doubleHero" => {\n    ...,\n    variant,\n    primaryBadge,\n    primaryTitle,\n    "primaryRichText": primaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "primaryImage": primaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    secondaryBadge,\n    secondaryTitle,\n    "secondaryRichText": secondaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "secondaryImage": secondaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n    \n  _type == "faqAccordion" => {\n    ...,\n    \n  "faqs": array::compact(faqs[]->{\n    title,\n    _id,\n    _type,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  })\n,\n    link{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n    \n  _type == "subscribeNewsletter" => {\n    ...,\n    "subTitle": subTitle[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "helperText": helperText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  _type == "imageLinkCards" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    "cards": array::compact(cards[]{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      ),\n      \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    })\n  }\n,\n    \n  _type == "formBlock" => {\n    ...,\n    title,\n    description,\n    variant,\n    displayMode,\n    triggerText,\n    buttonPosition,\n    "form": form->{\n      _id,\n      title,\n      description,\n      \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n      submitButtonText,\n      successMessage,\n      errorMessage\n    }\n  }\n,\n    \n  _type == "tabs" => {\n    ...,\n    title,\n    description,\n    tabs[]{\n      _key,\n      label,\n      content[]{\n        ...,\n        _type,\n        _key,\n        \n  _type == "cta" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n,\n        \n  _type == "mainHero" => {\n    ...,\n    titleFont,\n    "backgroundImage": backgroundImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    "backgroundVideo": backgroundVideo.asset->url,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n        \n  _type == "hero" => {\n    ...,\n    variant,\n    titleFont,\n    imageAlignment,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n        \n  _type == "doubleHero" => {\n    ...,\n    variant,\n    primaryBadge,\n    primaryTitle,\n    "primaryRichText": primaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "primaryImage": primaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    secondaryBadge,\n    secondaryTitle,\n    "secondaryRichText": secondaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "secondaryImage": secondaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n        \n  _type == "faqAccordion" => {\n    ...,\n    \n  "faqs": array::compact(faqs[]->{\n    title,\n    _id,\n    _type,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  })\n,\n    link{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n        \n  _type == "subscribeNewsletter" => {\n    ...,\n    "subTitle": subTitle[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "helperText": helperText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n        \n  _type == "imageLinkCards" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    "cards": array::compact(cards[]{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      ),\n      \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    })\n  }\n,\n        \n  _type == "formBlock" => {\n    ...,\n    title,\n    description,\n    variant,\n    displayMode,\n    triggerText,\n    buttonPosition,\n    "form": form->{\n      _id,\n      title,\n      description,\n      \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n      submitButtonText,\n      successMessage,\n      errorMessage\n    }\n  }\n,\n        \n  _type == "imageGallery" => {\n    ...,\n    title,\n    description,\n    layout,\n    columns,\n    slidesPerRow,\n    "images": images[]{\n      ...,\n      "image": image{\n        ...,\n        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background,\n      },\n      caption\n    }\n  }\n,\n        \n  _type == "featuredBlogs" => {\n    ...,\n    title,\n    subtitle,\n    displayMode,\n    blogCount,\n    buttonText,\n    "showViewAllButton": showViewAllButton == "yes",\n    "blogs": select(\n      displayMode == "curated" => blogs[]-> {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      },\n      displayMode == "latest" => *[\n        _type == "blog" \n        && (seoHideFromLists != true)\n      ] | order(publishedAt desc, _createdAt desc)[0...3] {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      }\n    )\n  }\n,\n        _type == "tabs" => {\n          ...,\n          title,\n          description,\n          tabs[]{\n            _key,\n            label,\n            content[]{ \n              ...,\n              _type,\n              _key\n            }\n          }\n        }\n      }\n    }\n  }\n,\n    \n  _type == "infoSection" => {\n    ...,\n    title,\n    headingLevel,\n    content[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  _type == "imageGallery" => {\n    ...,\n    title,\n    description,\n    layout,\n    columns,\n    slidesPerRow,\n    "images": images[]{\n      ...,\n      "image": image{\n        ...,\n        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background,\n      },\n      caption\n    }\n  }\n,\n    \n  _type == "specificationsTable" => {\n    ...,\n    title,\n    description,\n    variant,\n    "specifications": specifications[]{\n      _key,\n      label,\n      "content": content[]{\n        ...,\n        \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n      }\n    }\n  }\n,\n    \n  _type == "genericTable" => {\n    ...,\n    title,\n    description,\n    columnCount,\n    columnHeaders,\n    rows[]{\n      _key,\n      cells[]{\n        _key,\n        content,\n        isLastColumn,\n        _type == "richCell" => {\n          content[]{\n            ...,\n            \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n          }\n        }\n      }\n    },\n    variant\n  }\n,\n    \n  _type == "featuredBlogs" => {\n    ...,\n    title,\n    subtitle,\n    displayMode,\n    blogCount,\n    buttonText,\n    "showViewAllButton": showViewAllButton == "yes",\n    "blogs": select(\n      displayMode == "curated" => blogs[]-> {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      },\n      displayMode == "latest" => *[\n        _type == "blog" \n        && (seoHideFromLists != true)\n      ] | order(publishedAt desc, _createdAt desc)[0...3] {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      }\n    )\n  }\n,\n    \n  _type == "highlightedAspects" => {\n    title,\n    description,\n    columns,\n    aspects[]{\n      _key,\n      title,\n      variant,\n      icon,\n      image{\n        ...,\n        "alt": coalesce(asset->altText, asset->originalFilename, "Aspect Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background\n      },\n      content[]{\n        ...,\n        \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n      }\n    }\n  }\n,\n    \n  _type == "videoBlock" => {\n    ...,\n    _key,\n    _type,\n    title,\n    videoType,\n    "mp4File": coalesce(\n      mp4File.asset->url,\n      mp4File.asset->sources[0].url,\n      null\n    ),\n    youtubeUrl,\n    showControls,\n    autoplay,\n    loop,\n    allowFullscreen\n  }\n,\n    \n  _type == "videoHero" => {\n    ...,\n    variant,\n    titleFont,\n    videoType,\n    "mp4File": coalesce(\n      mp4File.asset->url,\n      mp4File.asset->sources[0].url,\n      null\n    ),\n    youtubeUrl,\n    showControls,\n    autoplay,\n    loop,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n\n  }\n,\n    \n  "categoryData": {\n    "label": category,\n    "slug": category,\n    "iri": "/camiones/" + category,\n    "parent": null\n  }\n\n  }\n': QueryBlogSlugPageDataResult;
+    '\n  *[_type == "blogIndex"][0]{\n    ...,\n    _id,\n    _type,\n    title,\n    description,\n    "displayFeaturedBlogs" : displayFeaturedBlogs == "yes",\n    "featuredBlogsCount" : featuredBlogsCount,\n    \n  pageBuilder[]{\n    ...,\n    _type,\n    \n  _type == "cta" => {\n    ...,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n,\n    \n  _type == "mainHero" => {\n    ...,\n    titleFont,\n    "backgroundImage": backgroundImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    "backgroundVideo": backgroundVideo.asset->url,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n,\n    \n  _type == "hero" => {\n    ...,\n    variant,\n    titleFont,\n    imageAlignment,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n,\n    \n  _type == "doubleHero" => {\n    ...,\n    variant,\n    primaryBadge,\n    primaryTitle,\n    "primaryRichText": primaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "primaryImage": primaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    secondaryBadge,\n    secondaryTitle,\n    "secondaryRichText": secondaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "secondaryImage": secondaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n    \n  _type == "faqAccordion" => {\n    ...,\n    \n  "faqs": array::compact(faqs[]->{\n    title,\n    _id,\n    _type,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  })\n,\n    link{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n    \n  _type == "subscribeNewsletter" => {\n    ...,\n    "subTitle": subTitle[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "helperText": helperText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  _type == "imageLinkCards" => {\n    ...,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    "cards": array::compact(cards[]{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      ),\n      \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    })\n  }\n,\n    \n  _type == "formBlock" => {\n    ...,\n    title,\n    description,\n    variant,\n    displayMode,\n    triggerText,\n    buttonPosition,\n    "form": form->{\n      _id,\n      title,\n      description,\n      \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n      submitButtonText,\n      successMessage,\n      errorMessage\n    }\n  }\n,\n    \n  _type == "tabs" => {\n    ...,\n    title,\n    description,\n    tabs[]{\n      _key,\n      label,\n      content[]{\n        ...,\n        _type,\n        _key,\n        \n  _type == "cta" => {\n    ...,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n,\n        \n  _type == "mainHero" => {\n    ...,\n    titleFont,\n    "backgroundImage": backgroundImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    "backgroundVideo": backgroundVideo.asset->url,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n,\n        \n  _type == "hero" => {\n    ...,\n    variant,\n    titleFont,\n    imageAlignment,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n,\n        \n  _type == "doubleHero" => {\n    ...,\n    variant,\n    primaryBadge,\n    primaryTitle,\n    "primaryRichText": primaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "primaryImage": primaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    secondaryBadge,\n    secondaryTitle,\n    "secondaryRichText": secondaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "secondaryImage": secondaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n        \n  _type == "faqAccordion" => {\n    ...,\n    \n  "faqs": array::compact(faqs[]->{\n    title,\n    _id,\n    _type,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  })\n,\n    link{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n        \n  _type == "subscribeNewsletter" => {\n    ...,\n    "subTitle": subTitle[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "helperText": helperText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n        \n  _type == "imageLinkCards" => {\n    ...,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    "cards": array::compact(cards[]{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      ),\n      \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    })\n  }\n,\n        \n  _type == "formBlock" => {\n    ...,\n    title,\n    description,\n    variant,\n    displayMode,\n    triggerText,\n    buttonPosition,\n    "form": form->{\n      _id,\n      title,\n      description,\n      \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n      submitButtonText,\n      successMessage,\n      errorMessage\n    }\n  }\n,\n        \n  _type == "imageGallery" => {\n    ...,\n    title,\n    description,\n    layout,\n    columns,\n    slidesPerRow,\n    "images": images[]{\n      ...,\n      "image": image{\n        ...,\n        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background,\n      },\n      caption\n    }\n  }\n,\n        \n  _type == "featuredBlogs" => {\n    ...,\n    title,\n    subtitle,\n    displayMode,\n    blogCount,\n    buttonText,\n    "showViewAllButton": showViewAllButton == "yes",\n    "blogs": select(\n      displayMode == "curated" => blogs[]-> {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      },\n      displayMode == "latest" => *[\n        _type == "blog" \n        && (seoHideFromLists != true)\n      ] | order(publishedAt desc, _createdAt desc)[0...3] {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      }\n    )\n  }\n,\n        _type == "tabs" => {\n          ...,\n          title,\n          description,\n          tabs[]{\n            _key,\n            label,\n            content[]{ \n              ...,\n              _type,\n              _key\n            }\n          }\n        }\n      }\n    }\n  }\n,\n    \n  _type == "infoSection" => {\n    ...,\n    title,\n    headingLevel,\n    content[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  _type == "imageGallery" => {\n    ...,\n    title,\n    description,\n    layout,\n    columns,\n    slidesPerRow,\n    "images": images[]{\n      ...,\n      "image": image{\n        ...,\n        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background,\n      },\n      caption\n    }\n  }\n,\n    \n  _type == "specificationsTable" => {\n    ...,\n    title,\n    description,\n    variant,\n    "specifications": specifications[]{\n      _key,\n      label,\n      "content": content[]{\n        ...,\n        \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n      }\n    }\n  }\n,\n    \n  _type == "genericTable" => {\n    ...,\n    title,\n    description,\n    columnCount,\n    columnHeaders,\n    rows[]{\n      _key,\n      cells[]{\n        _key,\n        content,\n        isLastColumn,\n        _type == "richCell" => {\n          content[]{\n            ...,\n            \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n          }\n        }\n      }\n    },\n    variant\n  }\n,\n    \n  _type == "featuredBlogs" => {\n    ...,\n    title,\n    subtitle,\n    displayMode,\n    blogCount,\n    buttonText,\n    "showViewAllButton": showViewAllButton == "yes",\n    "blogs": select(\n      displayMode == "curated" => blogs[]-> {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      },\n      displayMode == "latest" => *[\n        _type == "blog" \n        && (seoHideFromLists != true)\n      ] | order(publishedAt desc, _createdAt desc)[0...3] {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      }\n    )\n  }\n,\n    \n  _type == "highlightedAspects" => {\n    title,\n    description,\n    columns,\n    aspects[]{\n      _key,\n      title,\n      variant,\n      icon,\n      image{\n        ...,\n        "alt": coalesce(asset->altText, asset->originalFilename, "Aspect Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background\n      },\n      content[]{\n        ...,\n        \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n      }\n    }\n  }\n,\n    \n  _type == "videoBlock" => {\n    ...,\n    _key,\n    _type,\n    title,\n    videoType,\n    "mp4File": coalesce(\n      mp4File.asset->url,\n      mp4File.asset->sources[0].url,\n      null\n    ),\n    youtubeUrl,\n    showControls,\n    autoplay,\n    loop,\n    allowFullscreen\n  }\n,\n    \n  _type == "videoHero" => {\n    ...,\n    variant,\n    titleFont,\n    videoType,\n    "mp4File": coalesce(\n      mp4File.asset->url,\n      mp4File.asset->sources[0].url,\n      null\n    ),\n    youtubeUrl,\n    showControls,\n    autoplay,\n    loop,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n\n  }\n,\n    "slug": slug.current,\n    "blogs": *[_type == "blog" && (seoHideFromLists != true)] | order(orderRank asc){\n      \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n    }\n  }\n': QueryBlogIndexPageDataResult;
+    '\n  *[_type == "blog" && slug.current == $slug][0]{\n    ...,\n    "slug": slug.current,\n    \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  pageBuilder[]{\n    ...,\n    _type,\n    \n  _type == "cta" => {\n    ...,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n,\n    \n  _type == "mainHero" => {\n    ...,\n    titleFont,\n    "backgroundImage": backgroundImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    "backgroundVideo": backgroundVideo.asset->url,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n,\n    \n  _type == "hero" => {\n    ...,\n    variant,\n    titleFont,\n    imageAlignment,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n,\n    \n  _type == "doubleHero" => {\n    ...,\n    variant,\n    primaryBadge,\n    primaryTitle,\n    "primaryRichText": primaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "primaryImage": primaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    secondaryBadge,\n    secondaryTitle,\n    "secondaryRichText": secondaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "secondaryImage": secondaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n    \n  _type == "faqAccordion" => {\n    ...,\n    \n  "faqs": array::compact(faqs[]->{\n    title,\n    _id,\n    _type,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  })\n,\n    link{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n    \n  _type == "subscribeNewsletter" => {\n    ...,\n    "subTitle": subTitle[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "helperText": helperText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  _type == "imageLinkCards" => {\n    ...,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    "cards": array::compact(cards[]{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      ),\n      \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    })\n  }\n,\n    \n  _type == "formBlock" => {\n    ...,\n    title,\n    description,\n    variant,\n    displayMode,\n    triggerText,\n    buttonPosition,\n    "form": form->{\n      _id,\n      title,\n      description,\n      \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n      submitButtonText,\n      successMessage,\n      errorMessage\n    }\n  }\n,\n    \n  _type == "tabs" => {\n    ...,\n    title,\n    description,\n    tabs[]{\n      _key,\n      label,\n      content[]{\n        ...,\n        _type,\n        _key,\n        \n  _type == "cta" => {\n    ...,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n,\n        \n  _type == "mainHero" => {\n    ...,\n    titleFont,\n    "backgroundImage": backgroundImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    "backgroundVideo": backgroundVideo.asset->url,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n,\n        \n  _type == "hero" => {\n    ...,\n    variant,\n    titleFont,\n    imageAlignment,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n,\n        \n  _type == "doubleHero" => {\n    ...,\n    variant,\n    primaryBadge,\n    primaryTitle,\n    "primaryRichText": primaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "primaryImage": primaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    secondaryBadge,\n    secondaryTitle,\n    "secondaryRichText": secondaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "secondaryImage": secondaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n        \n  _type == "faqAccordion" => {\n    ...,\n    \n  "faqs": array::compact(faqs[]->{\n    title,\n    _id,\n    _type,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  })\n,\n    link{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n        \n  _type == "subscribeNewsletter" => {\n    ...,\n    "subTitle": subTitle[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "helperText": helperText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n        \n  _type == "imageLinkCards" => {\n    ...,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    "cards": array::compact(cards[]{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      ),\n      \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    })\n  }\n,\n        \n  _type == "formBlock" => {\n    ...,\n    title,\n    description,\n    variant,\n    displayMode,\n    triggerText,\n    buttonPosition,\n    "form": form->{\n      _id,\n      title,\n      description,\n      \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n      submitButtonText,\n      successMessage,\n      errorMessage\n    }\n  }\n,\n        \n  _type == "imageGallery" => {\n    ...,\n    title,\n    description,\n    layout,\n    columns,\n    slidesPerRow,\n    "images": images[]{\n      ...,\n      "image": image{\n        ...,\n        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background,\n      },\n      caption\n    }\n  }\n,\n        \n  _type == "featuredBlogs" => {\n    ...,\n    title,\n    subtitle,\n    displayMode,\n    blogCount,\n    buttonText,\n    "showViewAllButton": showViewAllButton == "yes",\n    "blogs": select(\n      displayMode == "curated" => blogs[]-> {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      },\n      displayMode == "latest" => *[\n        _type == "blog" \n        && (seoHideFromLists != true)\n      ] | order(publishedAt desc, _createdAt desc)[0...3] {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      }\n    )\n  }\n,\n        _type == "tabs" => {\n          ...,\n          title,\n          description,\n          tabs[]{\n            _key,\n            label,\n            content[]{ \n              ...,\n              _type,\n              _key\n            }\n          }\n        }\n      }\n    }\n  }\n,\n    \n  _type == "infoSection" => {\n    ...,\n    title,\n    headingLevel,\n    content[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  _type == "imageGallery" => {\n    ...,\n    title,\n    description,\n    layout,\n    columns,\n    slidesPerRow,\n    "images": images[]{\n      ...,\n      "image": image{\n        ...,\n        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background,\n      },\n      caption\n    }\n  }\n,\n    \n  _type == "specificationsTable" => {\n    ...,\n    title,\n    description,\n    variant,\n    "specifications": specifications[]{\n      _key,\n      label,\n      "content": content[]{\n        ...,\n        \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n      }\n    }\n  }\n,\n    \n  _type == "genericTable" => {\n    ...,\n    title,\n    description,\n    columnCount,\n    columnHeaders,\n    rows[]{\n      _key,\n      cells[]{\n        _key,\n        content,\n        isLastColumn,\n        _type == "richCell" => {\n          content[]{\n            ...,\n            \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n          }\n        }\n      }\n    },\n    variant\n  }\n,\n    \n  _type == "featuredBlogs" => {\n    ...,\n    title,\n    subtitle,\n    displayMode,\n    blogCount,\n    buttonText,\n    "showViewAllButton": showViewAllButton == "yes",\n    "blogs": select(\n      displayMode == "curated" => blogs[]-> {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      },\n      displayMode == "latest" => *[\n        _type == "blog" \n        && (seoHideFromLists != true)\n      ] | order(publishedAt desc, _createdAt desc)[0...3] {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      }\n    )\n  }\n,\n    \n  _type == "highlightedAspects" => {\n    title,\n    description,\n    columns,\n    aspects[]{\n      _key,\n      title,\n      variant,\n      icon,\n      image{\n        ...,\n        "alt": coalesce(asset->altText, asset->originalFilename, "Aspect Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background\n      },\n      content[]{\n        ...,\n        \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n      }\n    }\n  }\n,\n    \n  _type == "videoBlock" => {\n    ...,\n    _key,\n    _type,\n    title,\n    videoType,\n    "mp4File": coalesce(\n      mp4File.asset->url,\n      mp4File.asset->sources[0].url,\n      null\n    ),\n    youtubeUrl,\n    showControls,\n    autoplay,\n    loop,\n    allowFullscreen\n  }\n,\n    \n  _type == "videoHero" => {\n    ...,\n    variant,\n    titleFont,\n    videoType,\n    "mp4File": coalesce(\n      mp4File.asset->url,\n      mp4File.asset->sources[0].url,\n      null\n    ),\n    youtubeUrl,\n    showControls,\n    autoplay,\n    loop,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n\n  }\n,\n    \n  "categoryData": {\n    "label": category,\n    "slug": category,\n    "iri": "/camiones/" + category,\n    "parent": null\n  }\n\n  }\n': QueryBlogSlugPageDataResult;
     '\n  *[_type == "blog" && defined(slug.current)].slug.current\n': QueryBlogPathsResult;
     '\n  *[_type == "homePage" && _id == $id][0]{\n    \n  _id,\n  _type,\n  "title": select(\n    defined(ogTitle) => ogTitle,\n    defined(seoTitle) => seoTitle,\n    title\n  ),\n  "description": select(\n    defined(ogDescription) => ogDescription,\n    defined(seoDescription) => seoDescription,\n    description\n  ),\n  "image": image.asset->url + "?w=566&h=566&dpr=2&fit=max",\n  "dominantColor": image.asset->metadata.palette.dominant.background,\n  "seoImage": seoImage.asset->url + "?w=1200&h=630&dpr=2&fit=max", \n  "logo": *[_type == "settings"][0].logo.asset->url + "?w=80&h=40&dpr=3&fit=max&q=100",\n  "date": coalesce(date, _createdAt)\n\n  }\n  ': QueryHomePageOGDataResult;
     '\n  *[_type == "page" && _id == $id][0]{\n    \n  _id,\n  _type,\n  "title": select(\n    defined(ogTitle) => ogTitle,\n    defined(seoTitle) => seoTitle,\n    title\n  ),\n  "description": select(\n    defined(ogDescription) => ogDescription,\n    defined(seoDescription) => seoDescription,\n    description\n  ),\n  "image": image.asset->url + "?w=566&h=566&dpr=2&fit=max",\n  "dominantColor": image.asset->metadata.palette.dominant.background,\n  "seoImage": seoImage.asset->url + "?w=1200&h=630&dpr=2&fit=max", \n  "logo": *[_type == "settings"][0].logo.asset->url + "?w=80&h=40&dpr=3&fit=max&q=100",\n  "date": coalesce(date, _createdAt)\n\n  }\n': QuerySlugPageOGDataResult;
@@ -27941,14 +29987,14 @@ declare module "@sanity/client" {
     '\n  *[_type == "settings"][0]{\n    _id,\n    _type,\n    siteTitle,\n    siteDescription,\n    socialLinks{\n      linkedin,\n      facebook,\n      twitter,\n      instagram,\n      youtube\n    },\n    \n  cotizadorFormTitle,\n  cotizadorFormDescription,\n  "cotizadorForm": coalesce(cotizadorForm->{\n    _id,\n    _type,\n    title,\n    description,\n    "slug": slug.current,\n    \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n\n  }, null)\n\n  }\n': QueryGlobalSeoSettingsResult;
     '*[_type == "formularios"]{\n  _id,\n  title,\n  "slug": slug.current,\n  description\n}': QueryAllFormsResult;
     '*[\n  _type == "formularios" \n  && slug.current == $slug\n][0]{\n  _id,\n  title,\n  description,\n  \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n  submitButtonText,\n  successMessage,\n  errorMessage\n}': QueryFormBySlugResult;
-    '*[_type == "camiones"]{\n  _id,\n  _type,\n  title,\n  subtitle,\n  description,\n  "slug": slug.current,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n  "taxonomy": taxonomias->{\n    prefLabel,\n    conceptId,\n    "slug": lower(prefLabel)\n  }\n}': QueryCamionesDataResult;
-    '*[\n  (_type == "camiones" || _type == "page")\n  && slug.current == $slug \n][0]{\n  _id,\n  _type,\n  title,\n  subtitle,\n  description,\n  "slug": slug.current,\n  _type == "camiones" => { \n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n, \n    taxonomias->{\n      "label": prefLabel,\n      "slug": prefLabel,\n      "iri": "/camiones/" + lower(prefLabel)\n    }\n  },\n  \n  pageBuilder[]{\n    ...,\n    _type,\n    \n  _type == "cta" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n,\n    \n  _type == "mainHero" => {\n    ...,\n    titleFont,\n    "backgroundImage": backgroundImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    "backgroundVideo": backgroundVideo.asset->url,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n    \n  _type == "hero" => {\n    ...,\n    variant,\n    titleFont,\n    imageAlignment,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n    \n  _type == "doubleHero" => {\n    ...,\n    variant,\n    primaryBadge,\n    primaryTitle,\n    "primaryRichText": primaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "primaryImage": primaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    secondaryBadge,\n    secondaryTitle,\n    "secondaryRichText": secondaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "secondaryImage": secondaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n    \n  _type == "faqAccordion" => {\n    ...,\n    \n  "faqs": array::compact(faqs[]->{\n    title,\n    _id,\n    _type,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  })\n,\n    link{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n    \n  _type == "subscribeNewsletter" => {\n    ...,\n    "subTitle": subTitle[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "helperText": helperText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  _type == "imageLinkCards" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    "cards": array::compact(cards[]{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      ),\n      \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    })\n  }\n,\n    \n  _type == "formBlock" => {\n    ...,\n    title,\n    description,\n    variant,\n    displayMode,\n    triggerText,\n    buttonPosition,\n    "form": form->{\n      _id,\n      title,\n      description,\n      \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n      submitButtonText,\n      successMessage,\n      errorMessage\n    }\n  }\n,\n    \n  _type == "tabs" => {\n    ...,\n    title,\n    description,\n    tabs[]{\n      _key,\n      label,\n      content[]{\n        ...,\n        _type,\n        _key,\n        \n  _type == "cta" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n,\n        \n  _type == "mainHero" => {\n    ...,\n    titleFont,\n    "backgroundImage": backgroundImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    "backgroundVideo": backgroundVideo.asset->url,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n        \n  _type == "hero" => {\n    ...,\n    variant,\n    titleFont,\n    imageAlignment,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n        \n  _type == "doubleHero" => {\n    ...,\n    variant,\n    primaryBadge,\n    primaryTitle,\n    "primaryRichText": primaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "primaryImage": primaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    secondaryBadge,\n    secondaryTitle,\n    "secondaryRichText": secondaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "secondaryImage": secondaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n        \n  _type == "faqAccordion" => {\n    ...,\n    \n  "faqs": array::compact(faqs[]->{\n    title,\n    _id,\n    _type,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  })\n,\n    link{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n        \n  _type == "subscribeNewsletter" => {\n    ...,\n    "subTitle": subTitle[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "helperText": helperText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n        \n  _type == "imageLinkCards" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    "cards": array::compact(cards[]{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      ),\n      \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    })\n  }\n,\n        \n  _type == "formBlock" => {\n    ...,\n    title,\n    description,\n    variant,\n    displayMode,\n    triggerText,\n    buttonPosition,\n    "form": form->{\n      _id,\n      title,\n      description,\n      \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n      submitButtonText,\n      successMessage,\n      errorMessage\n    }\n  }\n,\n        \n  _type == "imageGallery" => {\n    ...,\n    title,\n    description,\n    layout,\n    columns,\n    slidesPerRow,\n    "images": images[]{\n      ...,\n      "image": image{\n        ...,\n        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background,\n      },\n      caption\n    }\n  }\n,\n        \n  _type == "featuredBlogs" => {\n    ...,\n    title,\n    subtitle,\n    displayMode,\n    blogCount,\n    buttonText,\n    "showViewAllButton": showViewAllButton == "yes",\n    "blogs": select(\n      displayMode == "curated" => blogs[]-> {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      },\n      displayMode == "latest" => *[\n        _type == "blog" \n        && (seoHideFromLists != true)\n      ] | order(publishedAt desc, _createdAt desc)[0...3] {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      }\n    )\n  }\n,\n        _type == "tabs" => {\n          ...,\n          title,\n          description,\n          tabs[]{\n            _key,\n            label,\n            content[]{ \n              ...,\n              _type,\n              _key\n            }\n          }\n        }\n      }\n    }\n  }\n,\n    \n  _type == "infoSection" => {\n    ...,\n    title,\n    headingLevel,\n    content[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  _type == "imageGallery" => {\n    ...,\n    title,\n    description,\n    layout,\n    columns,\n    slidesPerRow,\n    "images": images[]{\n      ...,\n      "image": image{\n        ...,\n        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background,\n      },\n      caption\n    }\n  }\n,\n    \n  _type == "specificationsTable" => {\n    ...,\n    title,\n    description,\n    variant,\n    "specifications": specifications[]{\n      _key,\n      label,\n      "content": content[]{\n        ...,\n        \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n      }\n    }\n  }\n,\n    \n  _type == "genericTable" => {\n    ...,\n    title,\n    description,\n    columnCount,\n    columnHeaders,\n    rows[]{\n      _key,\n      cells[]{\n        _key,\n        content,\n        isLastColumn,\n        _type == "richCell" => {\n          content[]{\n            ...,\n            \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n          }\n        }\n      }\n    },\n    variant\n  }\n,\n    \n  _type == "featuredBlogs" => {\n    ...,\n    title,\n    subtitle,\n    displayMode,\n    blogCount,\n    buttonText,\n    "showViewAllButton": showViewAllButton == "yes",\n    "blogs": select(\n      displayMode == "curated" => blogs[]-> {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      },\n      displayMode == "latest" => *[\n        _type == "blog" \n        && (seoHideFromLists != true)\n      ] | order(publishedAt desc, _createdAt desc)[0...3] {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      }\n    )\n  }\n,\n    \n  _type == "highlightedAspects" => {\n    title,\n    description,\n    columns,\n    aspects[]{\n      _key,\n      title,\n      variant,\n      icon,\n      image{\n        ...,\n        "alt": coalesce(asset->altText, asset->originalFilename, "Aspect Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background\n      },\n      content[]{\n        ...,\n        \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n      }\n    }\n  }\n,\n    \n  _type == "videoBlock" => {\n    ...,\n    _key,\n    _type,\n    title,\n    videoType,\n    "mp4File": coalesce(\n      mp4File.asset->url,\n      mp4File.asset->sources[0].url,\n      null\n    ),\n    youtubeUrl,\n    showControls,\n    autoplay,\n    loop,\n    allowFullscreen\n  }\n,\n    \n  _type == "videoHero" => {\n    ...,\n    variant,\n    titleFont,\n    videoType,\n    "mp4File": coalesce(\n      mp4File.asset->url,\n      mp4File.asset->sources[0].url,\n      null\n    ),\n    youtubeUrl,\n    showControls,\n    autoplay,\n    loop,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n\n  }\n \n}': QueryCamionOrPageBySlugResult;
+    '*[_type == "camiones"]{\n  _id,\n  _type,\n  title,\n  subtitle,\n  description,\n  "slug": slug.current,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n  "taxonomy": taxonomias->{\n    prefLabel,\n    conceptId,\n    "slug": lower(prefLabel)\n  }\n}': QueryCamionesDataResult;
+    '*[\n  (_type == "camiones" || _type == "page")\n  && slug.current == $slug \n][0]{\n  _id,\n  _type,\n  title,\n  subtitle,\n  description,\n  "slug": slug.current,\n  _type == "camiones" => { \n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n, \n    taxonomias->{\n      "label": prefLabel,\n      "slug": prefLabel,\n      "iri": "/camiones/" + lower(prefLabel)\n    }\n  },\n  \n  pageBuilder[]{\n    ...,\n    _type,\n    \n  _type == "cta" => {\n    ...,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n,\n    \n  _type == "mainHero" => {\n    ...,\n    titleFont,\n    "backgroundImage": backgroundImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    "backgroundVideo": backgroundVideo.asset->url,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n,\n    \n  _type == "hero" => {\n    ...,\n    variant,\n    titleFont,\n    imageAlignment,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n,\n    \n  _type == "doubleHero" => {\n    ...,\n    variant,\n    primaryBadge,\n    primaryTitle,\n    "primaryRichText": primaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "primaryImage": primaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    secondaryBadge,\n    secondaryTitle,\n    "secondaryRichText": secondaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "secondaryImage": secondaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n    \n  _type == "faqAccordion" => {\n    ...,\n    \n  "faqs": array::compact(faqs[]->{\n    title,\n    _id,\n    _type,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  })\n,\n    link{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n    \n  _type == "subscribeNewsletter" => {\n    ...,\n    "subTitle": subTitle[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "helperText": helperText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  _type == "imageLinkCards" => {\n    ...,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    "cards": array::compact(cards[]{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      ),\n      \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    })\n  }\n,\n    \n  _type == "formBlock" => {\n    ...,\n    title,\n    description,\n    variant,\n    displayMode,\n    triggerText,\n    buttonPosition,\n    "form": form->{\n      _id,\n      title,\n      description,\n      \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n      submitButtonText,\n      successMessage,\n      errorMessage\n    }\n  }\n,\n    \n  _type == "tabs" => {\n    ...,\n    title,\n    description,\n    tabs[]{\n      _key,\n      label,\n      content[]{\n        ...,\n        _type,\n        _key,\n        \n  _type == "cta" => {\n    ...,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n,\n        \n  _type == "mainHero" => {\n    ...,\n    titleFont,\n    "backgroundImage": backgroundImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    "backgroundVideo": backgroundVideo.asset->url,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n,\n        \n  _type == "hero" => {\n    ...,\n    variant,\n    titleFont,\n    imageAlignment,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n,\n        \n  _type == "doubleHero" => {\n    ...,\n    variant,\n    primaryBadge,\n    primaryTitle,\n    "primaryRichText": primaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "primaryImage": primaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    secondaryBadge,\n    secondaryTitle,\n    "secondaryRichText": secondaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "secondaryImage": secondaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n        \n  _type == "faqAccordion" => {\n    ...,\n    \n  "faqs": array::compact(faqs[]->{\n    title,\n    _id,\n    _type,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  })\n,\n    link{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n        \n  _type == "subscribeNewsletter" => {\n    ...,\n    "subTitle": subTitle[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "helperText": helperText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n        \n  _type == "imageLinkCards" => {\n    ...,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    "cards": array::compact(cards[]{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      ),\n      \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    })\n  }\n,\n        \n  _type == "formBlock" => {\n    ...,\n    title,\n    description,\n    variant,\n    displayMode,\n    triggerText,\n    buttonPosition,\n    "form": form->{\n      _id,\n      title,\n      description,\n      \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n      submitButtonText,\n      successMessage,\n      errorMessage\n    }\n  }\n,\n        \n  _type == "imageGallery" => {\n    ...,\n    title,\n    description,\n    layout,\n    columns,\n    slidesPerRow,\n    "images": images[]{\n      ...,\n      "image": image{\n        ...,\n        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background,\n      },\n      caption\n    }\n  }\n,\n        \n  _type == "featuredBlogs" => {\n    ...,\n    title,\n    subtitle,\n    displayMode,\n    blogCount,\n    buttonText,\n    "showViewAllButton": showViewAllButton == "yes",\n    "blogs": select(\n      displayMode == "curated" => blogs[]-> {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      },\n      displayMode == "latest" => *[\n        _type == "blog" \n        && (seoHideFromLists != true)\n      ] | order(publishedAt desc, _createdAt desc)[0...3] {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      }\n    )\n  }\n,\n        _type == "tabs" => {\n          ...,\n          title,\n          description,\n          tabs[]{\n            _key,\n            label,\n            content[]{ \n              ...,\n              _type,\n              _key\n            }\n          }\n        }\n      }\n    }\n  }\n,\n    \n  _type == "infoSection" => {\n    ...,\n    title,\n    headingLevel,\n    content[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  _type == "imageGallery" => {\n    ...,\n    title,\n    description,\n    layout,\n    columns,\n    slidesPerRow,\n    "images": images[]{\n      ...,\n      "image": image{\n        ...,\n        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background,\n      },\n      caption\n    }\n  }\n,\n    \n  _type == "specificationsTable" => {\n    ...,\n    title,\n    description,\n    variant,\n    "specifications": specifications[]{\n      _key,\n      label,\n      "content": content[]{\n        ...,\n        \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n      }\n    }\n  }\n,\n    \n  _type == "genericTable" => {\n    ...,\n    title,\n    description,\n    columnCount,\n    columnHeaders,\n    rows[]{\n      _key,\n      cells[]{\n        _key,\n        content,\n        isLastColumn,\n        _type == "richCell" => {\n          content[]{\n            ...,\n            \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n          }\n        }\n      }\n    },\n    variant\n  }\n,\n    \n  _type == "featuredBlogs" => {\n    ...,\n    title,\n    subtitle,\n    displayMode,\n    blogCount,\n    buttonText,\n    "showViewAllButton": showViewAllButton == "yes",\n    "blogs": select(\n      displayMode == "curated" => blogs[]-> {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      },\n      displayMode == "latest" => *[\n        _type == "blog" \n        && (seoHideFromLists != true)\n      ] | order(publishedAt desc, _createdAt desc)[0...3] {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      }\n    )\n  }\n,\n    \n  _type == "highlightedAspects" => {\n    title,\n    description,\n    columns,\n    aspects[]{\n      _key,\n      title,\n      variant,\n      icon,\n      image{\n        ...,\n        "alt": coalesce(asset->altText, asset->originalFilename, "Aspect Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background\n      },\n      content[]{\n        ...,\n        \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n      }\n    }\n  }\n,\n    \n  _type == "videoBlock" => {\n    ...,\n    _key,\n    _type,\n    title,\n    videoType,\n    "mp4File": coalesce(\n      mp4File.asset->url,\n      mp4File.asset->sources[0].url,\n      null\n    ),\n    youtubeUrl,\n    showControls,\n    autoplay,\n    loop,\n    allowFullscreen\n  }\n,\n    \n  _type == "videoHero" => {\n    ...,\n    variant,\n    titleFont,\n    videoType,\n    "mp4File": coalesce(\n      mp4File.asset->url,\n      mp4File.asset->sources[0].url,\n      null\n    ),\n    youtubeUrl,\n    showControls,\n    autoplay,\n    loop,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n\n  }\n \n}': QueryCamionOrPageBySlugResult;
     '\n  *[_type == "camiones" && defined(slug.current)].slug.current\n': QueryCamionesPathsResult;
-    '*[_type == "buses"]{\n  _id,\n  _type,\n  title,\n  subtitle,\n  description,\n  "slug": slug.current,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n  "taxonomy": taxonomias->{\n    prefLabel,\n    conceptId,\n    "slug": lower(prefLabel)\n  }\n}': QueryBusesDataResult;
-    '*[\n  (_type == "buses" || _type == "page")\n  && slug.current == $slug \n][0]{\n  _id,\n  _type,\n  title,\n  description,\n  "slug": slug.current,\n  _type == "buses" => { \n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n, \n    taxonomias->{\n      "label": prefLabel,\n      "slug": prefLabel,\n      "iri": "/buses/" + lower(prefLabel)\n    }\n  },\n  \n  pageBuilder[]{\n    ...,\n    _type,\n    \n  _type == "cta" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n,\n    \n  _type == "mainHero" => {\n    ...,\n    titleFont,\n    "backgroundImage": backgroundImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    "backgroundVideo": backgroundVideo.asset->url,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n    \n  _type == "hero" => {\n    ...,\n    variant,\n    titleFont,\n    imageAlignment,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n    \n  _type == "doubleHero" => {\n    ...,\n    variant,\n    primaryBadge,\n    primaryTitle,\n    "primaryRichText": primaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "primaryImage": primaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    secondaryBadge,\n    secondaryTitle,\n    "secondaryRichText": secondaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "secondaryImage": secondaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n    \n  _type == "faqAccordion" => {\n    ...,\n    \n  "faqs": array::compact(faqs[]->{\n    title,\n    _id,\n    _type,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  })\n,\n    link{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n    \n  _type == "subscribeNewsletter" => {\n    ...,\n    "subTitle": subTitle[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "helperText": helperText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  _type == "imageLinkCards" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    "cards": array::compact(cards[]{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      ),\n      \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    })\n  }\n,\n    \n  _type == "formBlock" => {\n    ...,\n    title,\n    description,\n    variant,\n    displayMode,\n    triggerText,\n    buttonPosition,\n    "form": form->{\n      _id,\n      title,\n      description,\n      \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n      submitButtonText,\n      successMessage,\n      errorMessage\n    }\n  }\n,\n    \n  _type == "tabs" => {\n    ...,\n    title,\n    description,\n    tabs[]{\n      _key,\n      label,\n      content[]{\n        ...,\n        _type,\n        _key,\n        \n  _type == "cta" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n,\n        \n  _type == "mainHero" => {\n    ...,\n    titleFont,\n    "backgroundImage": backgroundImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    "backgroundVideo": backgroundVideo.asset->url,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n        \n  _type == "hero" => {\n    ...,\n    variant,\n    titleFont,\n    imageAlignment,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n        \n  _type == "doubleHero" => {\n    ...,\n    variant,\n    primaryBadge,\n    primaryTitle,\n    "primaryRichText": primaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "primaryImage": primaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    secondaryBadge,\n    secondaryTitle,\n    "secondaryRichText": secondaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "secondaryImage": secondaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n        \n  _type == "faqAccordion" => {\n    ...,\n    \n  "faqs": array::compact(faqs[]->{\n    title,\n    _id,\n    _type,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  })\n,\n    link{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n        \n  _type == "subscribeNewsletter" => {\n    ...,\n    "subTitle": subTitle[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "helperText": helperText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n        \n  _type == "imageLinkCards" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    "cards": array::compact(cards[]{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      ),\n      \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    })\n  }\n,\n        \n  _type == "formBlock" => {\n    ...,\n    title,\n    description,\n    variant,\n    displayMode,\n    triggerText,\n    buttonPosition,\n    "form": form->{\n      _id,\n      title,\n      description,\n      \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n      submitButtonText,\n      successMessage,\n      errorMessage\n    }\n  }\n,\n        \n  _type == "imageGallery" => {\n    ...,\n    title,\n    description,\n    layout,\n    columns,\n    slidesPerRow,\n    "images": images[]{\n      ...,\n      "image": image{\n        ...,\n        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background,\n      },\n      caption\n    }\n  }\n,\n        \n  _type == "featuredBlogs" => {\n    ...,\n    title,\n    subtitle,\n    displayMode,\n    blogCount,\n    buttonText,\n    "showViewAllButton": showViewAllButton == "yes",\n    "blogs": select(\n      displayMode == "curated" => blogs[]-> {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      },\n      displayMode == "latest" => *[\n        _type == "blog" \n        && (seoHideFromLists != true)\n      ] | order(publishedAt desc, _createdAt desc)[0...3] {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      }\n    )\n  }\n,\n        _type == "tabs" => {\n          ...,\n          title,\n          description,\n          tabs[]{\n            _key,\n            label,\n            content[]{ \n              ...,\n              _type,\n              _key\n            }\n          }\n        }\n      }\n    }\n  }\n,\n    \n  _type == "infoSection" => {\n    ...,\n    title,\n    headingLevel,\n    content[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  _type == "imageGallery" => {\n    ...,\n    title,\n    description,\n    layout,\n    columns,\n    slidesPerRow,\n    "images": images[]{\n      ...,\n      "image": image{\n        ...,\n        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background,\n      },\n      caption\n    }\n  }\n,\n    \n  _type == "specificationsTable" => {\n    ...,\n    title,\n    description,\n    variant,\n    "specifications": specifications[]{\n      _key,\n      label,\n      "content": content[]{\n        ...,\n        \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n      }\n    }\n  }\n,\n    \n  _type == "genericTable" => {\n    ...,\n    title,\n    description,\n    columnCount,\n    columnHeaders,\n    rows[]{\n      _key,\n      cells[]{\n        _key,\n        content,\n        isLastColumn,\n        _type == "richCell" => {\n          content[]{\n            ...,\n            \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n          }\n        }\n      }\n    },\n    variant\n  }\n,\n    \n  _type == "featuredBlogs" => {\n    ...,\n    title,\n    subtitle,\n    displayMode,\n    blogCount,\n    buttonText,\n    "showViewAllButton": showViewAllButton == "yes",\n    "blogs": select(\n      displayMode == "curated" => blogs[]-> {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      },\n      displayMode == "latest" => *[\n        _type == "blog" \n        && (seoHideFromLists != true)\n      ] | order(publishedAt desc, _createdAt desc)[0...3] {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      }\n    )\n  }\n,\n    \n  _type == "highlightedAspects" => {\n    title,\n    description,\n    columns,\n    aspects[]{\n      _key,\n      title,\n      variant,\n      icon,\n      image{\n        ...,\n        "alt": coalesce(asset->altText, asset->originalFilename, "Aspect Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background\n      },\n      content[]{\n        ...,\n        \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n      }\n    }\n  }\n,\n    \n  _type == "videoBlock" => {\n    ...,\n    _key,\n    _type,\n    title,\n    videoType,\n    "mp4File": coalesce(\n      mp4File.asset->url,\n      mp4File.asset->sources[0].url,\n      null\n    ),\n    youtubeUrl,\n    showControls,\n    autoplay,\n    loop,\n    allowFullscreen\n  }\n,\n    \n  _type == "videoHero" => {\n    ...,\n    variant,\n    titleFont,\n    videoType,\n    "mp4File": coalesce(\n      mp4File.asset->url,\n      mp4File.asset->sources[0].url,\n      null\n    ),\n    youtubeUrl,\n    showControls,\n    autoplay,\n    loop,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n\n  }\n \n}': QueryBusOrPageBySlugResult;
+    '*[_type == "buses"]{\n  _id,\n  _type,\n  title,\n  subtitle,\n  description,\n  "slug": slug.current,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n  "taxonomy": taxonomias->{\n    prefLabel,\n    conceptId,\n    "slug": lower(prefLabel)\n  }\n}': QueryBusesDataResult;
+    '*[\n  (_type == "buses" || _type == "page")\n  && slug.current == $slug \n][0]{\n  _id,\n  _type,\n  title,\n  description,\n  "slug": slug.current,\n  _type == "buses" => { \n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n, \n    taxonomias->{\n      "label": prefLabel,\n      "slug": prefLabel,\n      "iri": "/buses/" + lower(prefLabel)\n    }\n  },\n  \n  pageBuilder[]{\n    ...,\n    _type,\n    \n  _type == "cta" => {\n    ...,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n,\n    \n  _type == "mainHero" => {\n    ...,\n    titleFont,\n    "backgroundImage": backgroundImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    "backgroundVideo": backgroundVideo.asset->url,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n,\n    \n  _type == "hero" => {\n    ...,\n    variant,\n    titleFont,\n    imageAlignment,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n,\n    \n  _type == "doubleHero" => {\n    ...,\n    variant,\n    primaryBadge,\n    primaryTitle,\n    "primaryRichText": primaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "primaryImage": primaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    secondaryBadge,\n    secondaryTitle,\n    "secondaryRichText": secondaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "secondaryImage": secondaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n    \n  _type == "faqAccordion" => {\n    ...,\n    \n  "faqs": array::compact(faqs[]->{\n    title,\n    _id,\n    _type,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  })\n,\n    link{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n    \n  _type == "subscribeNewsletter" => {\n    ...,\n    "subTitle": subTitle[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "helperText": helperText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  _type == "imageLinkCards" => {\n    ...,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    "cards": array::compact(cards[]{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      ),\n      \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    })\n  }\n,\n    \n  _type == "formBlock" => {\n    ...,\n    title,\n    description,\n    variant,\n    displayMode,\n    triggerText,\n    buttonPosition,\n    "form": form->{\n      _id,\n      title,\n      description,\n      \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n      submitButtonText,\n      successMessage,\n      errorMessage\n    }\n  }\n,\n    \n  _type == "tabs" => {\n    ...,\n    title,\n    description,\n    tabs[]{\n      _key,\n      label,\n      content[]{\n        ...,\n        _type,\n        _key,\n        \n  _type == "cta" => {\n    ...,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n,\n        \n  _type == "mainHero" => {\n    ...,\n    titleFont,\n    "backgroundImage": backgroundImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    "backgroundVideo": backgroundVideo.asset->url,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n,\n        \n  _type == "hero" => {\n    ...,\n    variant,\n    titleFont,\n    imageAlignment,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n,\n        \n  _type == "doubleHero" => {\n    ...,\n    variant,\n    primaryBadge,\n    primaryTitle,\n    "primaryRichText": primaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "primaryImage": primaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    secondaryBadge,\n    secondaryTitle,\n    "secondaryRichText": secondaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "secondaryImage": secondaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n        \n  _type == "faqAccordion" => {\n    ...,\n    \n  "faqs": array::compact(faqs[]->{\n    title,\n    _id,\n    _type,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  })\n,\n    link{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n        \n  _type == "subscribeNewsletter" => {\n    ...,\n    "subTitle": subTitle[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "helperText": helperText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n        \n  _type == "imageLinkCards" => {\n    ...,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    "cards": array::compact(cards[]{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      ),\n      \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    })\n  }\n,\n        \n  _type == "formBlock" => {\n    ...,\n    title,\n    description,\n    variant,\n    displayMode,\n    triggerText,\n    buttonPosition,\n    "form": form->{\n      _id,\n      title,\n      description,\n      \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n      submitButtonText,\n      successMessage,\n      errorMessage\n    }\n  }\n,\n        \n  _type == "imageGallery" => {\n    ...,\n    title,\n    description,\n    layout,\n    columns,\n    slidesPerRow,\n    "images": images[]{\n      ...,\n      "image": image{\n        ...,\n        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background,\n      },\n      caption\n    }\n  }\n,\n        \n  _type == "featuredBlogs" => {\n    ...,\n    title,\n    subtitle,\n    displayMode,\n    blogCount,\n    buttonText,\n    "showViewAllButton": showViewAllButton == "yes",\n    "blogs": select(\n      displayMode == "curated" => blogs[]-> {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      },\n      displayMode == "latest" => *[\n        _type == "blog" \n        && (seoHideFromLists != true)\n      ] | order(publishedAt desc, _createdAt desc)[0...3] {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      }\n    )\n  }\n,\n        _type == "tabs" => {\n          ...,\n          title,\n          description,\n          tabs[]{\n            _key,\n            label,\n            content[]{ \n              ...,\n              _type,\n              _key\n            }\n          }\n        }\n      }\n    }\n  }\n,\n    \n  _type == "infoSection" => {\n    ...,\n    title,\n    headingLevel,\n    content[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  _type == "imageGallery" => {\n    ...,\n    title,\n    description,\n    layout,\n    columns,\n    slidesPerRow,\n    "images": images[]{\n      ...,\n      "image": image{\n        ...,\n        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background,\n      },\n      caption\n    }\n  }\n,\n    \n  _type == "specificationsTable" => {\n    ...,\n    title,\n    description,\n    variant,\n    "specifications": specifications[]{\n      _key,\n      label,\n      "content": content[]{\n        ...,\n        \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n      }\n    }\n  }\n,\n    \n  _type == "genericTable" => {\n    ...,\n    title,\n    description,\n    columnCount,\n    columnHeaders,\n    rows[]{\n      _key,\n      cells[]{\n        _key,\n        content,\n        isLastColumn,\n        _type == "richCell" => {\n          content[]{\n            ...,\n            \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n          }\n        }\n      }\n    },\n    variant\n  }\n,\n    \n  _type == "featuredBlogs" => {\n    ...,\n    title,\n    subtitle,\n    displayMode,\n    blogCount,\n    buttonText,\n    "showViewAllButton": showViewAllButton == "yes",\n    "blogs": select(\n      displayMode == "curated" => blogs[]-> {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      },\n      displayMode == "latest" => *[\n        _type == "blog" \n        && (seoHideFromLists != true)\n      ] | order(publishedAt desc, _createdAt desc)[0...3] {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      }\n    )\n  }\n,\n    \n  _type == "highlightedAspects" => {\n    title,\n    description,\n    columns,\n    aspects[]{\n      _key,\n      title,\n      variant,\n      icon,\n      image{\n        ...,\n        "alt": coalesce(asset->altText, asset->originalFilename, "Aspect Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background\n      },\n      content[]{\n        ...,\n        \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n      }\n    }\n  }\n,\n    \n  _type == "videoBlock" => {\n    ...,\n    _key,\n    _type,\n    title,\n    videoType,\n    "mp4File": coalesce(\n      mp4File.asset->url,\n      mp4File.asset->sources[0].url,\n      null\n    ),\n    youtubeUrl,\n    showControls,\n    autoplay,\n    loop,\n    allowFullscreen\n  }\n,\n    \n  _type == "videoHero" => {\n    ...,\n    variant,\n    titleFont,\n    videoType,\n    "mp4File": coalesce(\n      mp4File.asset->url,\n      mp4File.asset->sources[0].url,\n      null\n    ),\n    youtubeUrl,\n    showControls,\n    autoplay,\n    loop,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n\n  }\n \n}': QueryBusOrPageBySlugResult;
     '\n  *[_type == "buses" && defined(slug.current)].slug.current\n': QueryBusesPathsResult;
-    '*[_type == "motoresPenta"]{\n  _id,\n  _type,\n  title,\n  subtitle,\n  description,\n  "slug": slug.current,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n  "taxonomy": taxonomias->{\n    prefLabel,\n    conceptId,\n    "slug": lower(prefLabel)\n  }\n}': QueryMotoresPentaDataResult;
-    '*[\n  (_type == "motoresPenta" || _type == "page")\n  && slug.current == $slug \n][0]{\n  _id,\n  _type,\n  title,\n  subtitle,\n  description,\n  "slug": slug.current,\n  _type == "motoresPenta" => { \n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n, \n    taxonomias->{\n      "label": prefLabel,\n      "slug": prefLabel,\n      "iri": "/motores-penta/" + lower(prefLabel)\n    }\n  },\n  \n  pageBuilder[]{\n    ...,\n    _type,\n    \n  _type == "cta" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n,\n    \n  _type == "mainHero" => {\n    ...,\n    titleFont,\n    "backgroundImage": backgroundImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    "backgroundVideo": backgroundVideo.asset->url,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n    \n  _type == "hero" => {\n    ...,\n    variant,\n    titleFont,\n    imageAlignment,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n    \n  _type == "doubleHero" => {\n    ...,\n    variant,\n    primaryBadge,\n    primaryTitle,\n    "primaryRichText": primaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "primaryImage": primaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    secondaryBadge,\n    secondaryTitle,\n    "secondaryRichText": secondaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "secondaryImage": secondaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n    \n  _type == "faqAccordion" => {\n    ...,\n    \n  "faqs": array::compact(faqs[]->{\n    title,\n    _id,\n    _type,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  })\n,\n    link{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n    \n  _type == "subscribeNewsletter" => {\n    ...,\n    "subTitle": subTitle[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "helperText": helperText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  _type == "imageLinkCards" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    "cards": array::compact(cards[]{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      ),\n      \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    })\n  }\n,\n    \n  _type == "formBlock" => {\n    ...,\n    title,\n    description,\n    variant,\n    displayMode,\n    triggerText,\n    buttonPosition,\n    "form": form->{\n      _id,\n      title,\n      description,\n      \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n      submitButtonText,\n      successMessage,\n      errorMessage\n    }\n  }\n,\n    \n  _type == "tabs" => {\n    ...,\n    title,\n    description,\n    tabs[]{\n      _key,\n      label,\n      content[]{\n        ...,\n        _type,\n        _key,\n        \n  _type == "cta" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n,\n        \n  _type == "mainHero" => {\n    ...,\n    titleFont,\n    "backgroundImage": backgroundImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    "backgroundVideo": backgroundVideo.asset->url,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n        \n  _type == "hero" => {\n    ...,\n    variant,\n    titleFont,\n    imageAlignment,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n,\n        \n  _type == "doubleHero" => {\n    ...,\n    variant,\n    primaryBadge,\n    primaryTitle,\n    "primaryRichText": primaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "primaryImage": primaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    secondaryBadge,\n    secondaryTitle,\n    "secondaryRichText": secondaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "secondaryImage": secondaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n        \n  _type == "faqAccordion" => {\n    ...,\n    \n  "faqs": array::compact(faqs[]->{\n    title,\n    _id,\n    _type,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  })\n,\n    link{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n        \n  _type == "subscribeNewsletter" => {\n    ...,\n    "subTitle": subTitle[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "helperText": helperText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n        \n  _type == "imageLinkCards" => {\n    ...,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    "cards": array::compact(cards[]{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      ),\n      \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    })\n  }\n,\n        \n  _type == "formBlock" => {\n    ...,\n    title,\n    description,\n    variant,\n    displayMode,\n    triggerText,\n    buttonPosition,\n    "form": form->{\n      _id,\n      title,\n      description,\n      \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n      submitButtonText,\n      successMessage,\n      errorMessage\n    }\n  }\n,\n        \n  _type == "imageGallery" => {\n    ...,\n    title,\n    description,\n    layout,\n    columns,\n    slidesPerRow,\n    "images": images[]{\n      ...,\n      "image": image{\n        ...,\n        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background,\n      },\n      caption\n    }\n  }\n,\n        \n  _type == "featuredBlogs" => {\n    ...,\n    title,\n    subtitle,\n    displayMode,\n    blogCount,\n    buttonText,\n    "showViewAllButton": showViewAllButton == "yes",\n    "blogs": select(\n      displayMode == "curated" => blogs[]-> {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      },\n      displayMode == "latest" => *[\n        _type == "blog" \n        && (seoHideFromLists != true)\n      ] | order(publishedAt desc, _createdAt desc)[0...3] {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      }\n    )\n  }\n,\n        _type == "tabs" => {\n          ...,\n          title,\n          description,\n          tabs[]{\n            _key,\n            label,\n            content[]{ \n              ...,\n              _type,\n              _key\n            }\n          }\n        }\n      }\n    }\n  }\n,\n    \n  _type == "infoSection" => {\n    ...,\n    title,\n    headingLevel,\n    content[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  _type == "imageGallery" => {\n    ...,\n    title,\n    description,\n    layout,\n    columns,\n    slidesPerRow,\n    "images": images[]{\n      ...,\n      "image": image{\n        ...,\n        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background,\n      },\n      caption\n    }\n  }\n,\n    \n  _type == "specificationsTable" => {\n    ...,\n    title,\n    description,\n    variant,\n    "specifications": specifications[]{\n      _key,\n      label,\n      "content": content[]{\n        ...,\n        \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n      }\n    }\n  }\n,\n    \n  _type == "genericTable" => {\n    ...,\n    title,\n    description,\n    columnCount,\n    columnHeaders,\n    rows[]{\n      _key,\n      cells[]{\n        _key,\n        content,\n        isLastColumn,\n        _type == "richCell" => {\n          content[]{\n            ...,\n            \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n          }\n        }\n      }\n    },\n    variant\n  }\n,\n    \n  _type == "featuredBlogs" => {\n    ...,\n    title,\n    subtitle,\n    displayMode,\n    blogCount,\n    buttonText,\n    "showViewAllButton": showViewAllButton == "yes",\n    "blogs": select(\n      displayMode == "curated" => blogs[]-> {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      },\n      displayMode == "latest" => *[\n        _type == "blog" \n        && (seoHideFromLists != true)\n      ] | order(publishedAt desc, _createdAt desc)[0...3] {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      }\n    )\n  }\n,\n    \n  _type == "highlightedAspects" => {\n    title,\n    description,\n    columns,\n    aspects[]{\n      _key,\n      title,\n      variant,\n      icon,\n      image{\n        ...,\n        "alt": coalesce(asset->altText, asset->originalFilename, "Aspect Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background\n      },\n      content[]{\n        ...,\n        \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n      }\n    }\n  }\n,\n    \n  _type == "videoBlock" => {\n    ...,\n    _key,\n    _type,\n    title,\n    videoType,\n    "mp4File": coalesce(\n      mp4File.asset->url,\n      mp4File.asset->sources[0].url,\n      null\n    ),\n    youtubeUrl,\n    showControls,\n    autoplay,\n    loop,\n    allowFullscreen\n  }\n,\n    \n  _type == "videoHero" => {\n    ...,\n    variant,\n    titleFont,\n    videoType,\n    "mp4File": coalesce(\n      mp4File.asset->url,\n      mp4File.asset->sources[0].url,\n      null\n    ),\n    youtubeUrl,\n    showControls,\n    autoplay,\n    loop,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n  }\n\n  }\n\n  }\n \n}': QueryMotorPentaOrPageBySlugResult;
+    '*[_type == "motoresPenta"]{\n  _id,\n  _type,\n  title,\n  subtitle,\n  description,\n  "slug": slug.current,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n  "taxonomy": taxonomias->{\n    prefLabel,\n    conceptId,\n    "slug": lower(prefLabel)\n  }\n}': QueryMotoresPentaDataResult;
+    '*[\n  (_type == "motoresPenta" || _type == "page")\n  && slug.current == $slug \n][0]{\n  _id,\n  _type,\n  title,\n  subtitle,\n  description,\n  "slug": slug.current,\n  _type == "motoresPenta" => { \n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n, \n    taxonomias->{\n      "label": prefLabel,\n      "slug": prefLabel,\n      "iri": "/motores-penta/" + lower(prefLabel)\n    }\n  },\n  \n  pageBuilder[]{\n    ...,\n    _type,\n    \n  _type == "cta" => {\n    ...,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n,\n    \n  _type == "mainHero" => {\n    ...,\n    titleFont,\n    "backgroundImage": backgroundImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    "backgroundVideo": backgroundVideo.asset->url,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n,\n    \n  _type == "hero" => {\n    ...,\n    variant,\n    titleFont,\n    imageAlignment,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n,\n    \n  _type == "doubleHero" => {\n    ...,\n    variant,\n    primaryBadge,\n    primaryTitle,\n    "primaryRichText": primaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "primaryImage": primaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    secondaryBadge,\n    secondaryTitle,\n    "secondaryRichText": secondaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "secondaryImage": secondaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n    \n  _type == "faqAccordion" => {\n    ...,\n    \n  "faqs": array::compact(faqs[]->{\n    title,\n    _id,\n    _type,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  })\n,\n    link{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n    \n  _type == "subscribeNewsletter" => {\n    ...,\n    "subTitle": subTitle[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "helperText": helperText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  _type == "imageLinkCards" => {\n    ...,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    "cards": array::compact(cards[]{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      ),\n      \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    })\n  }\n,\n    \n  _type == "formBlock" => {\n    ...,\n    title,\n    description,\n    variant,\n    displayMode,\n    triggerText,\n    buttonPosition,\n    "form": form->{\n      _id,\n      title,\n      description,\n      \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n      submitButtonText,\n      successMessage,\n      errorMessage\n    }\n  }\n,\n    \n  _type == "tabs" => {\n    ...,\n    title,\n    description,\n    tabs[]{\n      _key,\n      label,\n      content[]{\n        ...,\n        _type,\n        _key,\n        \n  _type == "cta" => {\n    ...,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n  }\n,\n        \n  _type == "mainHero" => {\n    ...,\n    titleFont,\n    "backgroundImage": backgroundImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    "backgroundVideo": backgroundVideo.asset->url,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n,\n        \n  _type == "hero" => {\n    ...,\n    variant,\n    titleFont,\n    imageAlignment,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n,\n        \n  _type == "doubleHero" => {\n    ...,\n    variant,\n    primaryBadge,\n    primaryTitle,\n    "primaryRichText": primaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "primaryImage": primaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Primary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    primaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    secondaryBadge,\n    secondaryTitle,\n    "secondaryRichText": secondaryRichText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "secondaryImage": secondaryImage{\n      ...,\n      "alt": coalesce(asset->altText, asset->originalFilename, "Secondary Image"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background,\n    },\n    secondaryButtons[]{\n      text,\n      variant,\n      icon,\n      _key,\n      _type,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n        \n  _type == "faqAccordion" => {\n    ...,\n    \n  "faqs": array::compact(faqs[]->{\n    title,\n    _id,\n    _type,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  })\n,\n    link{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    }\n  }\n,\n        \n  _type == "subscribeNewsletter" => {\n    ...,\n    "subTitle": subTitle[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    },\n    "helperText": helperText[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n        \n  _type == "imageLinkCards" => {\n    ...,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    "cards": array::compact(cards[]{\n      ...,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      ),\n      \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n    })\n  }\n,\n        \n  _type == "formBlock" => {\n    ...,\n    title,\n    description,\n    variant,\n    displayMode,\n    triggerText,\n    buttonPosition,\n    "form": form->{\n      _id,\n      title,\n      description,\n      \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n,\n      submitButtonText,\n      successMessage,\n      errorMessage\n    }\n  }\n,\n        \n  _type == "imageGallery" => {\n    ...,\n    title,\n    description,\n    layout,\n    columns,\n    slidesPerRow,\n    "images": images[]{\n      ...,\n      "image": image{\n        ...,\n        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background,\n      },\n      caption\n    }\n  }\n,\n        \n  _type == "featuredBlogs" => {\n    ...,\n    title,\n    subtitle,\n    displayMode,\n    blogCount,\n    buttonText,\n    "showViewAllButton": showViewAllButton == "yes",\n    "blogs": select(\n      displayMode == "curated" => blogs[]-> {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      },\n      displayMode == "latest" => *[\n        _type == "blog" \n        && (seoHideFromLists != true)\n      ] | order(publishedAt desc, _createdAt desc)[0...3] {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      }\n    )\n  }\n,\n        _type == "tabs" => {\n          ...,\n          title,\n          description,\n          tabs[]{\n            _key,\n            label,\n            content[]{ \n              ...,\n              _type,\n              _key\n            }\n          }\n        }\n      }\n    }\n  }\n,\n    \n  _type == "infoSection" => {\n    ...,\n    title,\n    headingLevel,\n    content[]{\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n,\n    \n  _type == "imageGallery" => {\n    ...,\n    title,\n    description,\n    layout,\n    columns,\n    slidesPerRow,\n    "images": images[]{\n      ...,\n      "image": image{\n        ...,\n        "alt": coalesce(alt, asset->altText, asset->originalFilename, "Gallery Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background,\n      },\n      caption\n    }\n  }\n,\n    \n  _type == "specificationsTable" => {\n    ...,\n    title,\n    description,\n    variant,\n    "specifications": specifications[]{\n      _key,\n      label,\n      "content": content[]{\n        ...,\n        \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n      }\n    }\n  }\n,\n    \n  _type == "genericTable" => {\n    ...,\n    title,\n    description,\n    columnCount,\n    columnHeaders,\n    rows[]{\n      _key,\n      cells[]{\n        _key,\n        content,\n        isLastColumn,\n        _type == "richCell" => {\n          content[]{\n            ...,\n            \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n          }\n        }\n      }\n    },\n    variant\n  }\n,\n    \n  _type == "featuredBlogs" => {\n    ...,\n    title,\n    subtitle,\n    displayMode,\n    blogCount,\n    buttonText,\n    "showViewAllButton": showViewAllButton == "yes",\n    "blogs": select(\n      displayMode == "curated" => blogs[]-> {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      },\n      displayMode == "latest" => *[\n        _type == "blog" \n        && (seoHideFromLists != true)\n      ] | order(publishedAt desc, _createdAt desc)[0...3] {\n        \n  _type,\n  _id,\n  title,\n  description,\n  "slug":slug.current,\n  richText,\n  orderRank,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  publishedAt,\n  \n  authors[0]->{\n    _id,\n    name,\n    position,\n    \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n  }\n\n\n      }\n    )\n  }\n,\n    \n  _type == "highlightedAspects" => {\n    title,\n    description,\n    columns,\n    aspects[]{\n      _key,\n      title,\n      variant,\n      icon,\n      image{\n        ...,\n        "alt": coalesce(asset->altText, asset->originalFilename, "Aspect Image"),\n        "blurData": asset->metadata.lqip,\n        "dominantColor": asset->metadata.palette.dominant.background\n      },\n      content[]{\n        ...,\n        \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n      }\n    }\n  }\n,\n    \n  _type == "videoBlock" => {\n    ...,\n    _key,\n    _type,\n    title,\n    videoType,\n    "mp4File": coalesce(\n      mp4File.asset->url,\n      mp4File.asset->sources[0].url,\n      null\n    ),\n    youtubeUrl,\n    showControls,\n    autoplay,\n    loop,\n    allowFullscreen\n  }\n,\n    \n  _type == "videoHero" => {\n    ...,\n    variant,\n    titleFont,\n    videoType,\n    "mp4File": coalesce(\n      mp4File.asset->url,\n      mp4File.asset->sources[0].url,\n      null\n    ),\n    youtubeUrl,\n    showControls,\n    autoplay,\n    loop,\n    \n  buttons[]{\n    text,\n    variant,\n    icon,\n    _key,\n    _type,\n    "openInNewTab": url.openInNewTab,\n    "href": select(\n      url.type == "internal" => url.internal->slug.current,\n      url.type == "external" => url.external,\n      url.href\n    ),\n  }\n,\n    \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n  }\n\n  }\n \n}': QueryMotorPentaOrPageBySlugResult;
     '\n  *[_type == "motoresPenta" && defined(slug.current)].slug.current\n': QueryMotoresPentaPathsResult;
     '*[\n  _type == "settings"\n][0]{\n  _id,\n  \n  cotizadorFormTitle,\n  cotizadorFormDescription,\n  "cotizadorForm": coalesce(cotizadorForm->{\n    _id,\n    _type,\n    title,\n    description,\n    "slug": slug.current,\n    \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n\n  }, null)\n\n}': COTIZADOR_SETTINGS_QUERYResult;
     '*[\n  _type == "formularios" \n  && _id == $formId\n][0]{\n  _id,\n  title,\n  description,\n  \n  fields[]{\n    label,\n    name,\n    type,\n    required,\n    options,\n    placeholder\n  },\n  emailRecipients,\n  submitButtonText,\n  successMessage,\n  errorMessage\n\n}': COTIZADOR_FORM_BY_ID_QUERYResult;
