@@ -24,6 +24,7 @@ import { HighlightedAspects } from "./sections/highlighted-aspects";
 import { ProductListing } from "./sections/product-listing";
 import { VideoBlock } from "./sections/video-block";
 import { VideoHeroBlock } from "./sections/video-hero";
+import { GenericTable } from "./sections/generic-table";
 
 type PageBlock = NonNullable<
   NonNullable<QueryHomePageDataResult>["pageBuilder"]
@@ -55,6 +56,7 @@ const BLOCK_COMPONENTS = {
   tabs: TabsBlock,
   infoSection: InfoSection,
   specificationsTable: SpecificationsTable,
+  genericTable: GenericTable,
   featuredBlogs: FeaturedBlogs,
   highlightedAspects: HighlightedAspects,
   productListing: ProductListing,

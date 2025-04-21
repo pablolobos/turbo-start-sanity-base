@@ -30,6 +30,7 @@ import { HeroBlock } from "./hero"
 import { ImageLinkCards } from "./image-link-cards"
 import { MainHeroBlock } from "./main-hero"
 import { SubscribeNewsletter } from "./subscribe-newsletter"
+import { GenericTable } from "./generic-table"
 
 // Map of block types to their components
 const blockComponents = {
@@ -43,6 +44,7 @@ const blockComponents = {
     mainHero: MainHeroBlock,
     subscribeNewsletter: SubscribeNewsletter,
     tabs: TabsBlock,
+    genericTable: GenericTable,
 } as const
 
 export function TabsBlock({ title, description, tabs }: TabsBlockProps) {
