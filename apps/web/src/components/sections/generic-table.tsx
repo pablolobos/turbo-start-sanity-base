@@ -53,18 +53,28 @@ export function GenericTable({
     }
 
     const getGridClassName = () => {
-        const gridCols = `md:grid-cols-${columnCount}`;
-        const baseGridStyle = `grid grid-cols-1 ${gridCols} gap-px`;
+        // Separate mobile and desktop grid classes to ensure proper merging
+        const baseClasses = {
+            base: "grid gap-px",
+            mobile: "grid-cols-5",
+            desktop: `md:grid-cols-${columnCount}`,
+        };
+
+        const gridClasses = cn(
+            baseClasses.base,
+            baseClasses.mobile,
+            baseClasses.desktop
+        );
 
         switch (variant) {
             case 'striped':
-                return cn(baseGridStyle);
+                return gridClasses;
             case 'bordered':
-                return cn(baseGridStyle);
+                return gridClasses;
             case 'compact':
-                return cn(baseGridStyle, "text-sm");
+                return cn(gridClasses, "text-sm");
             default:
-                return baseGridStyle;
+                return gridClasses;
         }
     };
 
@@ -85,7 +95,7 @@ export function GenericTable({
                 {/* Header row - hidden on mobile */}
                 <div className={cn(
                     getGridClassName(),
-                    "hidden md:grid bg-gray-100"
+                    "hidden md:grid bg-gray-100",
                 )}>
                     {columnHeaders.map((header, index) => (
                         <TableCell
@@ -103,7 +113,7 @@ export function GenericTable({
                         className={cn(
                             getGridClassName(),
                             rowIndex % 2 === 0 ? "bg-white" : "bg-gray-50",
-                            "border-b border-gray-200 last:border-b-0 grid grid-cols-4 "
+                            "border-b border-gray-200 last:border-b-0"
                         )}
                     >
                         {(row.cells || []).map((cell, cellIndex) => (
@@ -113,8 +123,12 @@ export function GenericTable({
                                 header={columnHeaders[cellIndex]}
                                 isLastColumn={cell.isLastColumn || false}
                                 className={cn(
-                                    "border-b-0 first:col-span-4 md:first:col-span-1 last:col-span-4 md:last:col-span-1",
-                                    cellIndex === 0 && "font-medium"
+                                    "border-b-0",
+                                    {
+                                        'first:col-span-5 md:first:col-span-1': cellIndex === 0,
+                                        'last:col-span-5 md:last:col-span-1': cell.isLastColumn,
+                                        'font-medium': cellIndex === 0
+                                    }
                                 )}
                             />
                         ))}
