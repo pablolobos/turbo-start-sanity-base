@@ -79,7 +79,8 @@ export function TabsBlock({ title, description, tabs }: TabsBlockProps) {
                         value={tab._key}
                         className={cn(
                             "mt-0 focus-visible:outline-none focus-visible:ring-0",
-                            "data-[state=active]:animate-in data-[state=active]:fade-in-0"
+                            "data-[state=active]:animate-in data-[state=active]:fade-in-0",
+                            "[&>section:first-of-type]:pt-0"
                         )}
                     >
                         {tab.content?.map((block: any) => {

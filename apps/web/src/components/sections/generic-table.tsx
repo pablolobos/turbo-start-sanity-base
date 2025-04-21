@@ -8,12 +8,13 @@ import { TitleDescriptionBlock } from "@/components/title-description-block";
 
 interface TableCellProps {
     content: any;
+    header?: string;
     isHeader?: boolean;
     isLastColumn?: boolean;
     className?: string;
 }
 
-const TableCell = ({ content, isHeader = false, isLastColumn = false, className }: TableCellProps) => {
+const TableCell = ({ content, header, isHeader = false, isLastColumn = false, className }: TableCellProps) => {
     return (
         <div className={cn(
             "py-3 px-4",
@@ -21,8 +22,13 @@ const TableCell = ({ content, isHeader = false, isLastColumn = false, className 
             isLastColumn ? "prose prose-sm max-w-none" : "",
             className
         )}>
+            {!isHeader && header && (
+                <span className="md:hidden block mb-1 font-medium text-gray-800 text-sm">
+                    {header}
+                </span>
+            )}
             {isLastColumn && typeof content === 'object' ? (
-                <RichText richText={content} className="prose-p:first:mt-0 prose-p:last-of-type:mb-0" />
+                <RichText richText={content} className="prose-p:first-of-type:mt-0 prose-p:last-of-type:mb-0" />
             ) : (
                 <span className="md:block">
                     {content}
@@ -52,24 +58,14 @@ export function GenericTable({
 
         switch (variant) {
             case 'striped':
-                return cn(baseGridStyle, "bg-gray-200 divide-y divide-gray-200 md:divide-y-0");
+                return cn(baseGridStyle);
             case 'bordered':
-                return cn(baseGridStyle, "divide-y divide-gray-200");
+                return cn(baseGridStyle);
             case 'compact':
-                return cn(baseGridStyle, "divide-y divide-gray-200 text-sm");
+                return cn(baseGridStyle, "text-sm");
             default:
-                return cn(baseGridStyle, "divide-y divide-gray-200");
+                return baseGridStyle;
         }
-    };
-
-    const getRowClassName = (index: number) => {
-        if (variant === 'striped') {
-            return cn(
-                index % 2 === 0 ? "bg-gray-50" : "bg-white",
-                "md:divide-x divide-gray-200"
-            );
-        }
-        return cn("bg-white", "md:divide-x divide-gray-200");
     };
 
     return (
@@ -85,41 +81,45 @@ export function GenericTable({
                 </div>
             )}
 
-            <div className={getGridClassName()}>
-                {/* Headers - only visible on desktop */}
-                {columnHeaders.map((header, index) => (
-                    <TableCell
-                        key={`header-${index}`}
-                        content={header}
-                        isHeader={true}
-                        isLastColumn={index === columnHeaders.length - 1}
+            <div className="border border-gray-200 md:border-0 divide-y divide-gray-200 overflow-hidden">
+                {/* Header row - hidden on mobile */}
+                <div className={cn(
+                    getGridClassName(),
+                    "hidden md:grid bg-gray-100"
+                )}>
+                    {columnHeaders.map((header, index) => (
+                        <TableCell
+                            key={`header-${index}`}
+                            content={header}
+                            isHeader={true}
+                        />
+                    ))}
+                </div>
+
+                {/* Data rows */}
+                {rows.map((row, rowIndex) => (
+                    <div
+                        key={`row-${rowIndex}`}
                         className={cn(
-                            "border-gray-300 border-b",
-                            "hidden md:block" // Hide on mobile
+                            getGridClassName(),
+                            rowIndex % 2 === 0 ? "bg-white" : "bg-gray-50",
+                            "border-b border-gray-200 last:border-b-0 grid grid-cols-4 "
                         )}
-                    />
+                    >
+                        {(row.cells || []).map((cell, cellIndex) => (
+                            <TableCell
+                                key={`cell-${rowIndex}-${cellIndex}`}
+                                content={cell.content}
+                                header={columnHeaders[cellIndex]}
+                                isLastColumn={cell.isLastColumn || false}
+                                className={cn(
+                                    "border-b-0 first:col-span-4 md:first:col-span-1 last:col-span-4 md:last:col-span-1",
+                                    cellIndex === 0 && "font-medium"
+                                )}
+                            />
+                        ))}
+                    </div>
                 ))}
-            </div>
-            <div className={getGridClassName()}>
-                {/* Rows */}
-                {rows.map((row, rowIndex) =>
-                    (row.cells || []).map((cell, cellIndex) => (
-                        <div key={`cell-${rowIndex}-${cellIndex}`} className="md:block flex md:mb-0">
-                            {/* Mobile header label */}
-                            <div className="md:hidden px-4 w-1/3 font-medium text-gray-800">
-                                {columnHeaders[cellIndex]}
-                            </div>
-                            {/* Cell content */}
-                            <div className="flex-1 md:w-full">
-                                <TableCell
-                                    content={cell.content}
-                                    isLastColumn={cell.isLastColumn || false}
-                                    className={getRowClassName(rowIndex)}
-                                />
-                            </div>
-                        </div>
-                    ))
-                )}
             </div>
         </section>
     );
