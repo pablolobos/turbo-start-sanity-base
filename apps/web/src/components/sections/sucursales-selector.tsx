@@ -116,11 +116,11 @@ export function SucursalesSelector({
                 </div>
 
                 {/* Region selector */}
-                <div className="mx-auto mb-8 max-w-xs">
+                <div className="mx-auto mb-8 w-full max-w-xs">
                     <select
                         value={selectedRegion}
                         onChange={(e) => setSelectedRegion(e.target.value)}
-                        className="p-2 border rounded-md w-full"
+                        className="bg-muted p-2 border rounded-md w-full"
                     >
                         {availableRegions.map((region) => (
                             <option key={region} value={region}>
