@@ -4,6 +4,7 @@ import { doubleHero } from "./double-hero"
 import { faqAccordion } from "./faq-accordion"
 import { featureCardsIcon } from "./feature-cards-icon"
 import { formBlock } from "./form-block"
+import { genericTable } from "./generic-table"
 import { hero } from "./hero"
 import { highlightedAspects } from "./highlighted-aspects"
 import { imageGallery } from "./image-gallery"
@@ -28,6 +29,7 @@ export const baseBlocks: ObjectDefinition[] = [
     subscribeNewsletter,
     formBlock,
     specificationsTable,
+    genericTable,
     highlightedAspects,
     productListing,
     videoBlock,

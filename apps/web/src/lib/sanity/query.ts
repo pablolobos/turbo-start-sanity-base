@@ -300,6 +300,31 @@ const specificationsTableBlock = `
   }
 `;
 
+const genericTableBlock = `
+  _type == "genericTable" => {
+    ...,
+    title,
+    description,
+    columnCount,
+    columnHeaders,
+    rows[]{
+      _key,
+      cells[]{
+        _key,
+        content,
+        isLastColumn,
+        _type == "richCell" => {
+          content[]{
+            ...,
+            ${markDefsFragment}
+          }
+        }
+      }
+    },
+    variant
+  }
+`;
+
 const featuredBlogsBlock = `
   _type == "featuredBlogs" => {
     ...,
@@ -467,6 +492,7 @@ const pageBuilderFragment = `
     ${infoSectionBlock},
     ${imageGalleryBlock},
     ${specificationsTableBlock},
+    ${genericTableBlock},
     ${featuredBlogsBlock},
     ${highlightedAspectsBlock},
     ${videoBlock},
