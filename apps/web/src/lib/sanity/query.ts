@@ -445,7 +445,22 @@ const highlightedAspectsBlock = `
       },
       content[]{
         ...,
-        ${markDefsFragment}
+        _type == "button" => {
+          ...,
+          text,
+          variant,
+          icon,
+          "openInNewTab": url.openInNewTab,
+          "href": select(
+            url.type == "internal" => url.internal->slug.current,
+            url.type == "external" => url.external,
+            url.href
+          )
+        },
+        _type == "block" => {
+          ...,
+          ${markDefsFragment}
+        }
       }
     }
   }

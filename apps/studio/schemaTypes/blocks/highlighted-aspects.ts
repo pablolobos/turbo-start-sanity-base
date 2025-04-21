@@ -72,7 +72,7 @@ export const highlightedAspects = defineType({
                                 return true
                             })
                         }),
-                        customRichText(['block'], {
+                        customRichText(['block', 'button'], {
                             name: 'content',
                             title: 'Contenido'
                         })
