@@ -220,6 +220,7 @@ const mainHeroBlock = `
   _type == "mainHero" => {
     ...,
     titleFont,
+    layout,
     "backgroundImage": backgroundImage{
       ...,
       "alt": coalesce(asset->altText, asset->originalFilename, "Background Image"),

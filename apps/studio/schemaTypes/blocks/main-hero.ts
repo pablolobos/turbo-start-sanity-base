@@ -37,6 +37,20 @@ export const mainHero = defineType({
             },
             initialValue: "default",
         }),
+        defineField({
+            name: "layout",
+            type: "string",
+            title: "Diseño de Layout",
+            description: "Selecciona el tipo de layout para el hero",
+            options: {
+                list: [
+                    { title: "Default", value: "default" },
+                    { title: "Imagen Completa", value: "fullImage" },
+                ],
+                layout: "radio",
+            },
+            initialValue: "default",
+        }),
         richTextField,
         defineField({
             name: "backgroundType",
@@ -90,10 +104,11 @@ export const mainHero = defineType({
             title: "title",
             backgroundType: "backgroundType",
             titleFont: "titleFont",
+            layout: "layout",
         },
-        prepare: ({ title, backgroundType, titleFont }) => ({
+        prepare: ({ title, backgroundType, titleFont, layout }) => ({
             title,
-            subtitle: `Bloque Hero Principal (${backgroundType}) - Fuente: ${titleFont || "default"}`,
+            subtitle: `Bloque Hero Principal (${backgroundType}) - Fuente: ${titleFont || "default"} - Layout: ${layout || "default"}`,
         }),
     },
 });

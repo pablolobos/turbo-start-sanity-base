@@ -33,6 +33,7 @@ export function MainHeroBlock({
     backgroundImage,
     backgroundVideo,
     titleFont,
+    layout = "default",
 }: MainHeroBlockProps) {
     const videoRef = useRef<HTMLVideoElement>(null);
     const [isPlaying, setIsPlaying] = useState(true);
@@ -106,10 +107,20 @@ export function MainHeroBlock({
         setVideoError(target.error ? `Error: ${target.error.message}` : "Unknown video error");
     };
 
+    // Set container classes based on layout
+    const containerClasses = layout === "fullImage"
+        ? "group/hero relative flex items-center overflow-hidden max-container"
+        : "group/hero relative flex items-center overflow-hidden component-height max-container";
+
+    // Set background container classes based on layout
+    const backgroundContainerClasses = layout === "fullImage"
+        ? "w-full h-full"
+        : "absolute inset-0 w-full h-full component-height";
+
     return (
-        <section id="main-hero" className="group/hero relative flex items-center overflow-hidden component-height max-container">
+        <section id="main-hero" className={containerClasses}>
             {/* Background Media */}
-            <div className="absolute inset-0 w-full h-full component-height">
+            <div className={backgroundContainerClasses}>
                 {backgroundType === "video" && videoUrl ? (
                     <div className="relative w-full h-full">
                         {/* Optional poster image while video loads */}
@@ -149,44 +160,77 @@ export function MainHeroBlock({
                         />
                     </div>
                 ) : backgroundImage?.asset ? (
-                    <SanityImage
-                        asset={backgroundImage}
-                        alt={backgroundImage.alt ?? "Background"}
-                        fill
-                        priority
-                        quality={90}
-                        className="object-cover"
-                    />
+                    <div className={layout === "fullImage" ? "relative w-full aspect-video" : "absolute inset-0 w-full h-full"}>
+                        <SanityImage
+                            asset={backgroundImage}
+                            alt={backgroundImage.alt ?? "Background"}
+                            fill
+                            priority
+                            quality={90}
+                            className="object-cover"
+                        />
+                    </div>
                 ) : null}
-                {/* Overlay gradient */}
-                <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/30" />
+                {/* Only show overlay for default layout */}
+                {layout === "default" && (
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/30" />
+                )}
             </div>
 
             {/* Content */}
-            <div className="z-10 relative mx-auto px-4 sm:px-6 lg:px-8 w-full max-w-7xl">
-                <div className="items-center gap-8 grid lg:grid-cols-2">
-                    <div className="space-y-6">
-                        {badge && (
-                            <Badge className="bg-white/10 hover:bg-white/20 text-white">
-                                {badge}
-                            </Badge>
-                        )}
-                        <h1 className={`font-bold text-foreground-inverse ${titleFont === 'statement' ? 'statement-1' : 'heading-1'}`}>
-                            {title}
-                        </h1>
-                        <RichText
-                            richText={richText}
-                            className="prose-invert text-foreground-inverse/90 text-lg md:text-xl"
-                        />
-                        <SanityButtons
-                            buttons={buttons}
-                            buttonClassName="w-full sm:w-auto"
-                            size="default"
-                            className="lg:justify-start gap-2 grid sm:grid-flow-col mb-8 w-full sm:w-fit"
-                        />
+            {layout === "fullImage" ? (
+                <div className="z-10 absolute inset-0 flex items-center">
+                    <div className="mx-auto px-4 sm:px-6 lg:px-8 w-full max-w-7xl">
+                        <div className="items-center gap-8 grid lg:grid-cols-2">
+                            <div className="space-y-6">
+                                {badge && (
+                                    <Badge className="bg-white/10 hover:bg-white/20 text-white">
+                                        {badge}
+                                    </Badge>
+                                )}
+                                <h1 className={`font-bold text-foreground-inverse ${titleFont === 'statement' ? 'statement-1' : 'heading-1'}`}>
+                                    {title}
+                                </h1>
+                                <RichText
+                                    richText={richText}
+                                    className="prose-invert text-foreground-inverse/90 text-lg md:text-xl"
+                                />
+                                <SanityButtons
+                                    buttons={buttons}
+                                    buttonClassName="w-full sm:w-auto"
+                                    size="default"
+                                    className="lg:justify-start gap-2 grid sm:grid-flow-col mb-8 w-full sm:w-fit"
+                                />
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            ) : (
+                <div className="z-10 relative mx-auto px-4 sm:px-6 lg:px-8 w-full max-w-7xl">
+                    <div className="items-center gap-8 grid lg:grid-cols-2">
+                        <div className="space-y-6">
+                            {badge && (
+                                <Badge className="bg-white/10 hover:bg-white/20 text-white">
+                                    {badge}
+                                </Badge>
+                            )}
+                            <h1 className={`font-bold text-foreground-inverse ${titleFont === 'statement' ? 'statement-1' : 'heading-1'}`}>
+                                {title}
+                            </h1>
+                            <RichText
+                                richText={richText}
+                                className="prose-invert text-foreground-inverse/90 text-lg md:text-xl"
+                            />
+                            <SanityButtons
+                                buttons={buttons}
+                                buttonClassName="w-full sm:w-auto"
+                                size="default"
+                                className="lg:justify-start gap-2 grid sm:grid-flow-col mb-8 w-full sm:w-fit"
+                            />
+                        </div>
+                    </div>
+                </div>
+            )}
         </section>
     );
 } 

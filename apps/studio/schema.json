@@ -725,6 +725,23 @@
                               },
                               "optional": true
                             },
+                            "layout": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "union",
+                                "of": [
+                                  {
+                                    "type": "string",
+                                    "value": "default"
+                                  },
+                                  {
+                                    "type": "string",
+                                    "value": "fullImage"
+                                  }
+                                ]
+                              },
+                              "optional": true
+                            },
                             "richText": {
                               "type": "objectAttribute",
                               "value": {
@@ -6358,6 +6375,88 @@
                               }
                             }
                           }
+                        },
+                        {
+                          "type": "object",
+                          "attributes": {
+                            "title": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              },
+                              "optional": true
+                            },
+                            "description": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              },
+                              "optional": true
+                            },
+                            "showMap": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "boolean"
+                              },
+                              "optional": true
+                            },
+                            "showAllRegions": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "boolean"
+                              },
+                              "optional": true
+                            },
+                            "selectedRegions": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "array",
+                                "of": {
+                                  "type": "string"
+                                }
+                              },
+                              "optional": true
+                            },
+                            "variant": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "union",
+                                "of": [
+                                  {
+                                    "type": "string",
+                                    "value": "default"
+                                  },
+                                  {
+                                    "type": "string",
+                                    "value": "cards"
+                                  },
+                                  {
+                                    "type": "string",
+                                    "value": "compact"
+                                  }
+                                ]
+                              },
+                              "optional": true
+                            },
+                            "_type": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string",
+                                "value": "sucursalesSelector"
+                              }
+                            }
+                          },
+                          "rest": {
+                            "type": "object",
+                            "attributes": {
+                              "_key": {
+                                "type": "objectAttribute",
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
                         }
                       ]
                     }
@@ -6384,6 +6483,81 @@
                 }
               }
             }
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
+    "name": "sucursalesSelector",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "sucursalesSelector"
+          }
+        },
+        "title": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "description": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "showMap": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        },
+        "showAllRegions": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        },
+        "selectedRegions": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "array",
+            "of": {
+              "type": "string"
+            }
+          },
+          "optional": true
+        },
+        "variant": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "default"
+              },
+              {
+                "type": "string",
+                "value": "cards"
+              },
+              {
+                "type": "string",
+                "value": "compact"
+              }
+            ]
           },
           "optional": true
         }
@@ -11427,6 +11601,23 @@
           },
           "optional": true
         },
+        "layout": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "default"
+              },
+              {
+                "type": "string",
+                "value": "fullImage"
+              }
+            ]
+          },
+          "optional": true
+        },
         "richText": {
           "type": "objectAttribute",
           "value": {
@@ -12601,6 +12792,21 @@
             "rest": {
               "type": "inline",
               "name": "textBlock"
+            }
+          },
+          {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "sucursalesSelector"
             }
           },
           {
