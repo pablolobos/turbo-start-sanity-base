@@ -517,6 +517,13 @@ const videoHeroBlock = `
   }
 `;
 
+const textBlock = `
+  _type == "textBlock" => {
+    ...,
+    ${richTextFragment}
+  }
+`;
+
 const pageBuilderFragment = `
   pageBuilder[]{
     ...,
@@ -537,7 +544,8 @@ const pageBuilderFragment = `
     ${featuredBlogsBlock},
     ${highlightedAspectsBlock},
     ${videoBlock},
-    ${videoHeroBlock}
+    ${videoHeroBlock},
+    ${textBlock}
   }
 `;
 

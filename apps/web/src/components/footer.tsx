@@ -184,7 +184,7 @@ function Footer({ data }: FooterProps) {
                   <Link href="/terms">Terms and Conditions</Link>
                 </li>
                 <li className="hover:text-primary">
-                  <Link href="/privacy">Políticas de privacidad</Link>
+                  <Link href="/politica-de-privacidad">Política de privacidad</Link>
                 </li>
                 <li className="hover:text-primary">
                   <CookieConsentButton />
