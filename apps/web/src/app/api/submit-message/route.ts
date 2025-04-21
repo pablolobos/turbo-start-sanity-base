@@ -11,6 +11,7 @@ interface FormData {
   name: string
   email: string
   subject: string
+  pageTitle?: string
   fields: FormField[]
   emailRecipients: string
   utmParams?: Record<string, string>
@@ -116,7 +117,9 @@ export async function POST(req: NextRequest) {
             <p><strong>Nombre:</strong> ${formData.name}</p>
             <p><strong>Email:</strong> ${formData.email}</p>
             <p><strong>Asunto:</strong> ${formData.subject}</p>
+            ${formData.pageTitle ? `<p><strong>Página de origen:</strong> ${formData.pageTitle}</p>` : ''}
             ${fieldsHtml}
+            ${utmParamsHtml}
           `,
         })
 

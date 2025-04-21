@@ -516,6 +516,7 @@ function ModalFormBlock({
                 name: formData.get('name')?.toString() || 'No name provided',
                 email: formData.get('email')?.toString() || 'No email provided',
                 subject: form.title,
+                pageTitle: typeof document !== 'undefined' ? document.title : null,
                 fields: allFields,
                 emailRecipients: form.emailRecipients,
                 utmParams: utmParams
@@ -745,6 +746,7 @@ export default function FormBlock({
                 name: formData.get('name')?.toString() || 'No name provided',
                 email: formData.get('email')?.toString() || 'No email provided',
                 subject: form.title,
+                pageTitle: typeof document !== 'undefined' ? document.title : null,
                 fields: allFields,
                 emailRecipients: form.emailRecipients,
                 utmParams: utmParams

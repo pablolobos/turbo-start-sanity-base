@@ -13,6 +13,7 @@ interface Message {
     email: string;
     starred: boolean;
     fields: Field[];
+    pageTitle?: string;
     [key: string]: any;
 }
 
@@ -93,7 +94,7 @@ function DialogHeading({ message }: DialogHeadingProps) {
 }
 
 function DialogContent({ message }: DialogContentProps) {
-    const { name, email, fields } = message
+    const { name, email, pageTitle, fields } = message
 
     return (
         <Flex
@@ -106,6 +107,7 @@ function DialogContent({ message }: DialogContentProps) {
         >
             <DialogItem name="Name" value={name} />
             <DialogItem name="Email" value={email} />
+            {pageTitle && <DialogItem name="Page Title" value={pageTitle} />}
             {fields.map((field, index) => (
                 <DialogItem
                     key={index}

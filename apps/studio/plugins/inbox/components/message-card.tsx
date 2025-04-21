@@ -8,6 +8,7 @@ interface Message {
     name: string;
     email: string;
     subject: string;
+    pageTitle?: string;
     read: boolean;
     starred: boolean;
     fields: Array<{ name: string; value: string; }>;
@@ -93,7 +94,7 @@ export default function MessageCard({
 }
 
 function MessageCardContent({ message }: MessageCardContentProps) {
-    const { name, email, subject } = message
+    const { name, email, subject, pageTitle } = message
 
     return (
         <Flex
@@ -115,6 +116,11 @@ function MessageCardContent({ message }: MessageCardContentProps) {
                 <Text style={{ marginTop: '12px' }}>
                     {subject}
                 </Text>
+                {pageTitle && (
+                    <Text size={1} muted style={{ marginTop: '4px' }}>
+                        From: {pageTitle}
+                    </Text>
+                )}
             </Stack>
         </Flex>
     )

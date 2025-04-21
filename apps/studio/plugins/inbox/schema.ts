@@ -19,6 +19,12 @@ export const message = {
       title: 'Subject',
     },
     {
+      type: 'string',
+      name: 'pageTitle',
+      title: 'Page Title',
+      description: 'The title of the page where the form was submitted',
+    },
+    {
       type: 'array',
       name: 'fields',
       title: 'Fields',
