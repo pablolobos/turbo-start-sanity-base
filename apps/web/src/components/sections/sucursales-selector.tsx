@@ -5,6 +5,7 @@ import { querySucursalesData } from "@/lib/sanity/query";
 import { createClient } from "next-sanity";
 import { MapPin, Phone, Mail, User } from "lucide-react";
 import { dataset, projectId } from "@/lib/sanity/api";
+import { GoogleMapsComponent, MapLocation } from "@/components/ui/google-map";
 
 // Create a Sanity client
 const client = createClient({
@@ -85,7 +86,7 @@ export function SucursalesSelector({
     // Loading state
     if (loading) {
         return (
-            <div className="mx-auto px-4 container">
+            <div className="mx-auto px-4 max-container padding-center">
                 <div className="flex justify-center py-12">
                     <div className="text-center">
                         <p>Cargando sucursales...</p>
@@ -98,7 +99,7 @@ export function SucursalesSelector({
     // No regions found
     if (availableRegions.length === 0) {
         return (
-            <div className="mx-auto px-4 container">
+            <div className="mx-auto px-4 max-container padding-center">
                 <div className="py-12 text-center">
                     <h2 className="mb-4 font-bold text-2xl">{title}</h2>
                     <p>No se encontraron regiones disponibles.</p>
@@ -108,19 +109,23 @@ export function SucursalesSelector({
     }
 
     return (
-        <div className="mx-auto px-4 container">
-            <div className="py-12">
+        <div className="max-container padding-center">
+            <div>
                 <div className="mb-8 text-center">
                     <h2 className="mb-2 font-bold text-3xl">{title}</h2>
                     {description && <p className="text-gray-600">{description}</p>}
                 </div>
 
                 {/* Region selector */}
-                <div className="mx-auto mb-8 w-full max-w-xs">
+                <div className="mb-8 w-full max-w-xs">
+                    <label htmlFor="region-selector" className="block mb-2">
+                        Selecciona una ciudad:
+                    </label>
                     <select
+                        id="region-selector"
                         value={selectedRegion}
                         onChange={(e) => setSelectedRegion(e.target.value)}
-                        className="bg-muted p-2 border rounded-md w-full"
+                        className="bg-muted p-2 border rounded-sm w-full"
                     >
                         {availableRegions.map((region) => (
                             <option key={region} value={region}>
@@ -130,30 +135,36 @@ export function SucursalesSelector({
                     </select>
                 </div>
 
-                {/* Sucursales list */}
-                <div className={variant === 'cards' ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6' : 'space-y-6'}>
-                    {filteredSucursales.length > 0 ? (
-                        filteredSucursales.map((sucursal) => (
-                            <SucursalCard key={sucursal._id} sucursal={sucursal} variant={variant} />
-                        ))
-                    ) : (
-                        <div className="text-center">
-                            <p>No hay sucursales disponibles en esta región.</p>
+                <div className="lg:items-stretch gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
+                    {/* Sucursales list */}
+                    <div className={variant === 'cards' ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6' : 'space-y-6'}>
+                        {filteredSucursales.length > 0 ? (
+                            filteredSucursales.map((sucursal) => (
+                                <SucursalCard key={sucursal._id} sucursal={sucursal} variant={variant} />
+                            ))
+                        ) : (
+                            <div className="text-center">
+                                <p>No hay sucursales disponibles en esta región.</p>
+                            </div>
+                        )}
+                    </div>
+                    {/* Map section */}
+                    {showMap && selectedRegion && filteredSucursales.length > 0 && (
+                        <div className="bg-red-500 mt-8 lg:mt-0">
+                            <GoogleMapsComponent
+                                locations={filteredSucursales.map(sucursal => ({
+                                    id: sucursal._id,
+                                    title: sucursal.title || '',
+                                    lat: sucursal.latitud || 0,
+                                    lng: sucursal.longitud || 0,
+                                    address: sucursal.direccion || '',
+                                    telefono: sucursal.telefono || ''
+                                }))}
+                                zoom={15}
+                            />
                         </div>
                     )}
                 </div>
-
-                {/* Map section */}
-                {showMap && selectedRegion && filteredSucursales.length > 0 && (
-                    <div className="mt-12">
-                        <h3 className="mb-4 font-bold text-xl text-center">Ubicaciones</h3>
-                        <div className="flex justify-center items-center bg-gray-100 rounded-lg h-[400px]">
-                            <p className="text-gray-500">
-                                Mapa será implementado aquí
-                            </p>
-                        </div>
-                    </div>
-                )}
             </div>
         </div>
     );
@@ -179,7 +190,7 @@ function SucursalCard({ sucursal, variant }: { sucursal: any, variant: string })
     }
 
     return (
-        <div className={`p-4 border rounded-lg overflow-hidden ${variant === 'cards' ? '' : 'max-w-4xl mx-auto'}`}>
+        <div className={`p-4 border rounded-sm overflow-hidden ${variant === 'cards' ? '' : 'max-w-4xl mx-auto'}`}>
             <div className="flex flex-col gap-4 p-4">
                 <h3 className="font-bold text-lg heading-3">{sucursal.title}</h3>
                 <div className="flex items-center text-gray-600 text-sm">
@@ -206,17 +217,17 @@ function SucursalCard({ sucursal, variant }: { sucursal: any, variant: string })
                 {/* Personas */}
                 {sucursal.personas && sucursal.personas.length > 0 && (
                     <div className="mt-4">
-                        <div className="gap-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
+                        <div className="gap-2 lg:gap-3 grid grid-cols-1 md:grid-cols-2">
                             {sucursal.personas.map((persona: any, index: number) => (
                                 <div
                                     key={`${sucursal._id}-persona-${index}`}
                                     className="pt-2"
                                 >
                                     <div className="flex items-center mb-1">
-                                        <User className="mr-2 w-4 h-4 text-gray-500" />
+                                        <User className="hidden lg:block mr-2 w-4 h-4 text-gray-500" />
                                         <span className="font-medium">{persona.nombre}</span>
                                     </div>
-                                    <div className="ml-6 text-gray-600 text-sm">
+                                    <div className="lg:ml-6 text-gray-600 text-xs lg:text-sm">
                                         <p>{persona.cargo}</p>
                                         {persona.telefono && <p>Tel: {persona.telefono}</p>}
                                         {persona.email && <p>Email: {persona.email}</p>}
