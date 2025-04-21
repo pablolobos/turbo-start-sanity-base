@@ -51,7 +51,7 @@ export function AspectCard({ aspect, className = "" }: AspectCardProps) {
                     <div className="group relative">
                         <RichText
                             richText={content}
-                            className="prose-p:first:mt-0 prose-p:last-of-type:mb-0 prose-sm"
+                            className={`prose-p:first:mt-0 prose-p:last-of-type:mb-0 prose-sm ${variant === 'icon' ? 'text-center' : ''}`}
                         />
                     </div>
                 )}

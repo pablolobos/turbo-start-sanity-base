@@ -17,6 +17,7 @@ const customLinkFragment = `
     "href": select(
       type == "internal" => internal->slug.current,
       type == "external" => external,
+      type == "file" => file.asset->url,
       "#"
     ),
   }
@@ -73,6 +74,26 @@ const blogCardFragment = `
   ${blogAuthorFragment}
 `;
 
+// Add a new fragment for handling both URL structures
+const buttonUrlFragment = `
+  "href": select(
+    defined(url.type) => select(
+      url.type == "internal" => url.internal->slug.current,
+      url.type == "external" => url.external,
+      url.type == "file" => url.file.asset->url,
+      "#"
+    ),
+    defined(url.customUrl.type) => select(
+      url.customUrl.type == "internal" => url.customUrl.internal->slug.current,
+      url.customUrl.type == "external" => url.customUrl.external,
+      url.customUrl.type == "file" => url.customUrl.file.asset->url,
+      "#"
+    ),
+    "#"
+  ),
+  "openInNewTab": coalesce(url.openInNewTab, url.customUrl.openInNewTab, false)
+`;
+
 const buttonsFragment = `
   buttons[]{
     text,
@@ -80,12 +101,7 @@ const buttonsFragment = `
     icon,
     _key,
     _type,
-    "openInNewTab": url.openInNewTab,
-    "href": select(
-      url.type == "internal" => url.internal->slug.current,
-      url.type == "external" => url.external,
-      url.href
-    ),
+    ${buttonUrlFragment}
   }
 `;
 
@@ -426,7 +442,7 @@ const aspectImageFragment = `
   }
 `;
 
-// Add a new fragment for the highlighted aspects block
+// Update the highlightedAspectsBlock to use the new buttonUrlFragment
 const highlightedAspectsBlock = `
   _type == "highlightedAspects" => {
     title,
@@ -450,12 +466,7 @@ const highlightedAspectsBlock = `
           text,
           variant,
           icon,
-          "openInNewTab": url.openInNewTab,
-          "href": select(
-            url.type == "internal" => url.internal->slug.current,
-            url.type == "external" => url.external,
-            url.href
-          )
+          ${buttonUrlFragment}
         },
         _type == "block" => {
           ...,

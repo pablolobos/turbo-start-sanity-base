@@ -1,5 +1,7 @@
 import { cn } from "@workspace/ui/lib/utils";
 import { Button } from "@workspace/ui/components/button";
+import { ChevronRight, FileDown } from "lucide-react";
+
 import Link from "next/link";
 import {
   PortableText,
@@ -101,6 +103,39 @@ const components: Partial<PortableTextReactComponents> = {
         console.warn("🚀 button link is not set", value);
         return null;
       }
+
+      // Check if the href is a file URL (from Sanity's CDN)
+      const isFileUrl = value.href.includes('sanity.io/files/');
+
+      const ButtonContent = () => (
+        <>
+          {value.text}
+          {value.icon === 'volvo-chevron-right' && <ChevronRight className="ml-2 w-4 h-4" />}
+          {value.icon === 'volvo-file-down' && <FileDown className="ml-2 w-4 h-4" />}
+        </>
+      );
+
+      if (isFileUrl) {
+        return (
+          <div className="my-6">
+            <Button
+              variant={value.variant || "default"}
+              asChild
+            >
+              <a
+                href={value.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                download
+                className="no-underline"
+              >
+                <ButtonContent />
+              </a>
+            </Button>
+          </div>
+        );
+      }
+
       return (
         <div className="my-6">
           <Button
@@ -111,7 +146,7 @@ const components: Partial<PortableTextReactComponents> = {
               href={value.href}
               target={value.openInNewTab ? "_blank" : "_self"}
             >
-              {value.text}
+              <ButtonContent />
             </Link>
           </Button>
         </div>
