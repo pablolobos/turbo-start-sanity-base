@@ -37,8 +37,9 @@ export function HighlightedAspects({
                         <TitleDescriptionBlock
                             title={title || ""}
                             description={description || ""}
-                            variant="default"
+                            variant="tight"
                             headingLevel="h2"
+                            className="pt-0"
                         />
                     </div>
                 )}
