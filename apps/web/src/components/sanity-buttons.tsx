@@ -22,7 +22,7 @@ function SanityButton({
   text,
   href,
   variant = "default",
-  openInNewTab,
+  openInNewTab = false,
   className,
   icon,
   ...props

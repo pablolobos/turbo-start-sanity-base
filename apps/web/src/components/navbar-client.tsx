@@ -237,7 +237,10 @@ function MobileNavbar({ data }: { data: NonNullable<NAVBAR_QUERYResult> }) {
 
           <div className="pt-4 border-t">
             <SanityButtons
-              buttons={data.buttons ?? []}
+              buttons={data.buttons?.map(button => ({
+                ...button,
+                openInNewTab: button.openInNewTab === true
+              })) ?? []}
               buttonClassName="w-full"
               className="flex flex-col gap-3 mt-2"
             />
@@ -360,7 +363,10 @@ function DesktopNavbar({ data }: { data: NonNullable<NAVBAR_QUERYResult> }) {
         </NavigationMenu>
         <div className="flex justify-self-end items-center gap-4">
           <SanityButtons
-            buttons={data.buttons ?? []}
+            buttons={data.buttons?.map(button => ({
+              ...button,
+              openInNewTab: button.openInNewTab === true
+            })) ?? []}
             size="sm"
             className="flex items-center gap-4"
             buttonClassName="boton"
