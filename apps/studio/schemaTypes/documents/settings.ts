@@ -61,6 +61,10 @@ export const settings = defineType({
       name: "cotizador",
       title: "Cotizador",
     },
+    {
+      name: "contact",
+      title: "Contacto",
+    },
   ],
   fields: [
     defineField({
@@ -137,6 +141,61 @@ export const settings = defineType({
       validation: (rule) =>
         rule.required().error("Debe seleccionar un formulario para cotizaciones"),
       group: "cotizador",
+    }),
+    defineField({
+      name: "customerServicePhone",
+      type: "string",
+      title: "Teléfono Servicio al Cliente",
+      description: "Número de teléfono para servicio al cliente",
+      group: "contact",
+    }),
+    defineField({
+      name: "roadEmergencyPhone",
+      type: "string",
+      title: "Teléfono Emergencia en Ruta",
+      description: "Número de teléfono principal para emergencias en ruta",
+      group: "contact",
+    }),
+    defineField({
+      name: "roadEmergencyPhone2",
+      type: "string",
+      title: "Teléfono Emergencia en Ruta 2",
+      description: "Número de teléfono secundario para emergencias en ruta",
+      group: "contact",
+    }),
+    defineField({
+      name: "contactPageUrl",
+      type: "object",
+      title: "Página de Contacto",
+      description: "URL de la página de contacto",
+      group: "contact",
+      fields: [
+        defineField({
+          name: "type",
+          title: "Tipo de URL",
+          type: "string",
+          options: {
+            list: [
+              { title: "Página Interna", value: "internal" },
+              { title: "URL Externa", value: "external" },
+            ],
+          },
+          initialValue: "internal",
+        }),
+        defineField({
+          name: "internal",
+          title: "Página Interna",
+          type: "reference",
+          to: [{ type: "page" }],
+          hidden: ({ parent }) => parent?.type !== "internal",
+        }),
+        defineField({
+          name: "external",
+          title: "URL Externa",
+          type: "url",
+          hidden: ({ parent }) => parent?.type !== "external",
+        }),
+      ],
     }),
   ],
   preview: {

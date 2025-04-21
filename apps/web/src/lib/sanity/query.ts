@@ -674,29 +674,35 @@ export const queryGenericPageOGData = defineQuery(`
   }
 `);
 
-export const queryFooterData = defineQuery(`
-  *[_type == "footer" && _id == "footer"][0]{
-    _id,
-    subtitle,
-    columns[]{
+export const queryFooterData = defineQuery(`*[_type == "footer" && _id == "footer"][0]{
+  _id,
+  subtitle,
+  columns[]{
+    _key,
+    title,
+    links[]{
       _key,
-      title,
-      links[]{
-        _key,
-        name,
-        "openInNewTab": url.openInNewTab,
-        "href": select(
-          url.type == "internal" => url.internal->slug.current,
-          url.type == "external" => url.external,
-          url.href
-        ),
-      }
-    },
-    "logo": *[_type == "settings"][0].logo.asset->url + "?w=80&h=40&dpr=3&fit=max",
-    "siteTitle": *[_type == "settings"][0].siteTitle,
-    "socialLinks": *[_type == "settings"][0].socialLinks,
-  }
-`);
+      name,
+      "openInNewTab": url.openInNewTab,
+      "href": select(
+        url.type == "internal" => url.internal->slug.current,
+        url.type == "external" => url.external,
+        url.href
+      ),
+    }
+  },
+  "logo": *[_type == "settings"][0].logo.asset->url + "?w=80&h=40&dpr=3&fit=max",
+  "siteTitle": *[_type == "settings"][0].siteTitle,
+  "socialLinks": *[_type == "settings"][0].socialLinks,
+  "customerServicePhone": *[_type == "settings"][0].customerServicePhone,
+  "roadEmergencyPhone": *[_type == "settings"][0].roadEmergencyPhone,
+  "roadEmergencyPhone2": *[_type == "settings"][0].roadEmergencyPhone2,
+  "contactPageUrl": select(
+    *[_type == "settings"][0].contactPageUrl.type == "internal" => *[_type == "settings"][0].contactPageUrl.internal->slug.current,
+    *[_type == "settings"][0].contactPageUrl.type == "external" => *[_type == "settings"][0].contactPageUrl.external,
+    null
+  )
+}`)
 
 export const NAVBAR_QUERY = defineQuery(`*[
   _type == "navbar" 
@@ -767,6 +773,14 @@ export const NAVBAR_QUERY = defineQuery(`*[
   },
   "logo": *[_type == "settings"][0].logo.asset->url + "?w=80&h=40&dpr=3&fit=max",
   "siteTitle": *[_type == "settings"][0].siteTitle,
+  "customerServicePhone": *[_type == "settings"][0].customerServicePhone,
+  "roadEmergencyPhone": *[_type == "settings"][0].roadEmergencyPhone,
+  "roadEmergencyPhone2": *[_type == "settings"][0].roadEmergencyPhone2,
+  "contactPageUrl": select(
+    *[_type == "settings"][0].contactPageUrl.type == "internal" => *[_type == "settings"][0].contactPageUrl.internal->slug.current,
+    *[_type == "settings"][0].contactPageUrl.type == "external" => *[_type == "settings"][0].contactPageUrl.external,
+    null
+  )
 }`)
 
 export const querySitemapData = defineQuery(`{
@@ -793,6 +807,14 @@ export const queryGlobalSeoSettings = defineQuery(`
       instagram,
       youtube
     },
+    customerServicePhone,
+    roadEmergencyPhone,
+    roadEmergencyPhone2,
+    "contactPageUrl": select(
+      contactPageUrl.type == "internal" => contactPageUrl.internal->slug.current,
+      contactPageUrl.type == "external" => contactPageUrl.external,
+      null
+    ),
     ${cotizadorSettingsFragment}
   }
 `);
@@ -1175,4 +1197,15 @@ export const MOTOR_PENTA_BY_SLUG_QUERY = defineQuery(`*[_type == "motoresPenta" 
   ${PRODUCT_PAGE_BUILDER_FRAGMENT},
   taxonomias,
   slug
+}`);
+
+export const CONTACT_INFO_QUERY = defineQuery(`*[_type == "settings"][0]{
+  customerServicePhone,
+  roadEmergencyPhone,
+  roadEmergencyPhone2,
+  "contactPageUrl": select(
+    contactPageUrl.type == "internal" => contactPageUrl.internal->slug.current,
+    contactPageUrl.type == "external" => contactPageUrl.external,
+    null
+  )
 }`);
