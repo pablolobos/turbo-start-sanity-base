@@ -40,6 +40,7 @@ export const genericTable = defineType({
             group: 'settings',
             options: {
                 list: [
+                    { title: '3 Columnas', value: 3 },
                     { title: '4 Columnas', value: 4 },
                     { title: '5 Columnas', value: 5 },
                     { title: '6 Columnas', value: 6 },
@@ -63,9 +64,9 @@ export const genericTable = defineType({
             ],
             validation: (rule) =>
                 rule.required()
-                    .min(4)
+                    .min(3)
                     .max(6)
-                    .error('Debe tener entre 4 y 6 encabezados'),
+                    .error('Debe tener entre 3 y 6 encabezados'),
         }),
         defineField({
             name: 'rows',
@@ -118,9 +119,9 @@ export const genericTable = defineType({
                             ],
                             validation: (rule) =>
                                 rule.required()
-                                    .min(4)
+                                    .min(3)
                                     .max(6)
-                                    .error('Cada fila debe tener entre 4 y 6 celdas'),
+                                    .error('Cada fila debe tener entre 3 y 6 celdas'),
                         }),
                     ],
                     preview: {
