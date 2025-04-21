@@ -150,7 +150,7 @@ export function SucursalesSelector({
                     </div>
                     {/* Map section */}
                     {showMap && selectedRegion && filteredSucursales.length > 0 && (
-                        <div className="bg-red-500 mt-8 lg:mt-0">
+                        <div className="bg-background mt-8 lg:mt-0">
                             <GoogleMapsComponent
                                 locations={filteredSucursales.map(sucursal => ({
                                     id: sucursal._id,
