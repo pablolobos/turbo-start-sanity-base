@@ -524,6 +524,18 @@ const textBlock = `
   }
 `;
 
+const sucursalesSelectorBlock = `
+  _type == "sucursalesSelector" => {
+    ...,
+    title,
+    description,
+    showMap,
+    showAllRegions,
+    selectedRegions,
+    variant
+  }
+`;
+
 const pageBuilderFragment = `
   pageBuilder[]{
     ...,
@@ -545,7 +557,8 @@ const pageBuilderFragment = `
     ${highlightedAspectsBlock},
     ${videoBlock},
     ${videoHeroBlock},
-    ${textBlock}
+    ${textBlock},
+    ${sucursalesSelectorBlock}
   }
 `;
 
