@@ -7,7 +7,10 @@ import { RichText } from "../richtext";
 import { SanityButtons } from "../sanity-buttons";
 import { SanityImage } from "../sanity-image";
 
-type HeroBlockProps = PagebuilderType<"hero">;
+type HeroBlockProps = PagebuilderType<"hero"> & {
+  variant?: string;
+  imageAlignment?: "default" | "fit";
+};
 
 // Function to map variant to background color classes
 const getVariantClasses = (variant?: string | null): string => {
@@ -81,9 +84,10 @@ export function HeroBlock({
                 height={800}
                 priority
                 quality={90}
+                preserveAspectRatio={imageAlignment === "fit"}
                 className={cn(
                   "w-full h-full",
-                  imageAlignment === "default" ? "object-cover" : "object-contain p-4 bg-red-400 w-[80%]"
+                  imageAlignment === "default" ? "object-cover" : "object-contain"
                 )}
               />
             </div>

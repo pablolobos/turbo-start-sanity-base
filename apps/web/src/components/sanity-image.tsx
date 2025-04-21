@@ -9,6 +9,7 @@ type ImageProps = {
   asset: SanityImageProps;
   alt?: string;
   priority?: boolean;
+  preserveAspectRatio?: boolean;
 } & Omit<NextImageProps, "alt" | "src">;
 
 function getBlurDataURL(asset: SanityImageProps) {
@@ -21,7 +22,7 @@ function getBlurDataURL(asset: SanityImageProps) {
   return {};
 }
 
-// Helper to calculate optimal image dimensions
+// Helper to calculate optimal dimensions
 function getOptimalDimensions(originalWidth: number, originalHeight: number, maxWidth = 2048) {
   if (originalWidth <= maxWidth) {
     return { width: originalWidth, height: originalHeight };
@@ -41,21 +42,24 @@ export function SanityImage({
   quality = 85,
   fill,
   priority = false,
+  preserveAspectRatio = false,
   ...props
 }: ImageProps) {
   if (!asset?.asset) return null;
   const dimensions = getImageDimensions(asset.asset);
 
-  // Calculate optimal dimensions
-  const optimalDimensions = getOptimalDimensions(dimensions.width, dimensions.height);
+  // If preserveAspectRatio is true, use original dimensions
+  const finalDimensions = preserveAspectRatio
+    ? dimensions
+    : getOptimalDimensions(dimensions.width, dimensions.height);
 
   // Calculate dynamic quality based on image size
   const dynamicQuality = dimensions.width > 1200 ? 80 : quality;
 
   const url = urlFor({ ...asset, _id: asset?.asset?._ref })
     .size(
-      Number(width ?? optimalDimensions.width),
-      Number(height ?? optimalDimensions.height),
+      preserveAspectRatio ? dimensions.width : Number(width ?? finalDimensions.width),
+      preserveAspectRatio ? dimensions.height : Number(height ?? finalDimensions.height),
     )
     .dpr(2)
     .auto("format")
@@ -82,8 +86,8 @@ export function SanityImage({
     return (
       <Image
         {...imageProps}
-        width={width ?? optimalDimensions.width}
-        height={height ?? optimalDimensions.height}
+        width={preserveAspectRatio ? dimensions.width : (width ?? finalDimensions.width)}
+        height={preserveAspectRatio ? dimensions.height : (height ?? finalDimensions.height)}
       />
     );
   }

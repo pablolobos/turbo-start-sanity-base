@@ -63,7 +63,7 @@ export const motoresPenta = defineType({
             type: 'reference',
             to: { type: 'skosConcept' },
             options: {
-                filter: branchFilter({ schemeId: '4bb257', branchId: 'cff000' }),
+                filter: branchFilter({ schemeId: '4bb257', branchId: '8d61db' }),
                 disableNew: true,
             },
             components: { field: ReferenceHierarchyInput },
