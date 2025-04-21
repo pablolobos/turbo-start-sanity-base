@@ -10,6 +10,8 @@ import * as Dialog from "@radix-ui/react-dialog"
 import { X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { toast } from 'sonner'
+import * as Checkbox from "@radix-ui/react-checkbox"
+import { Check } from "lucide-react"
 
 interface FormField {
     label: string
@@ -308,13 +310,15 @@ function FormContent({ form, onSubmit, isSubmitting, formRef, variant }: {
                 return (
                     <div className="flex items-center gap-2">
                         <Form.Control asChild>
-                            <input
-                                type="checkbox"
+                            <Checkbox.Root
                                 required={field.required === 'yes'}
-                                className="bg-zinc-900 border-zinc-800 rounded focus:ring-blue-600/50 text-blue-600"
-                            />
+                                className="flex justify-center items-center bg-white data-[state=checked]:bg-blue-600 mt-2 border border-zinc-300 rounded-sm w-6 h-6"
+                            >
+                                <Checkbox.Indicator>
+                                    <Check className="w-3 h-3 text-white" />
+                                </Checkbox.Indicator>
+                            </Checkbox.Root>
                         </Form.Control>
-                        <span className="text-white">{field.label}</span>
                     </div>
                 )
             default:
@@ -339,43 +343,55 @@ function FormContent({ form, onSubmit, isSubmitting, formRef, variant }: {
                 <Form.Field
                     key={field.name}
                     name={field.name}
-                    className="gap-2 grid"
+                    className={cn(
+                        "gap-2",
+                        field.type === 'checkbox' ? "flex items-start gap-4 py-8" : "grid"
+                    )}
                 >
-                    <div className="flex justify-between items-baseline">
-                        <Form.Label className="font-medium text-sm">
+                    <div className={cn(
+                        field.type === 'checkbox' ? "order-2" : "flex justify-between items-baseline"
+                    )}>
+                        <Form.Label className={cn(
+                            "font-medium text-sm",
+                            field.type === 'checkbox' && "mb-0"
+                        )}>
                             {field.label}
-                            {field.required === 'yes' && (
+                            {field.required === 'yes' && field.type !== 'checkbox' && (
                                 <span className="ml-1 text-red-500">*</span>
                             )}
                         </Form.Label>
-                        <div className="flex gap-2">
-                            <Form.Message
-                                className="text-red-500 text-sm"
-                                match="valueMissing"
-                            >
-                                Campo requerido
-                            </Form.Message>
-                            {field.type === 'email' && (
+                        {field.type !== 'checkbox' && (
+                            <div className="flex gap-2">
                                 <Form.Message
                                     className="text-red-500 text-sm"
-                                    match="typeMismatch"
+                                    match="valueMissing"
                                 >
-                                    Email inválido
+                                    Campo requerido
                                 </Form.Message>
-                            )}
-                            {field.type === 'rut' && (
-                                <Form.Message
-                                    className="text-red-500 text-sm"
-                                    match={(value: string) => {
-                                        return !validateRut(value);
-                                    }}
-                                >
-                                    RUT inválido
-                                </Form.Message>
-                            )}
-                        </div>
+                                {field.type === 'email' && (
+                                    <Form.Message
+                                        className="text-red-500 text-sm"
+                                        match="typeMismatch"
+                                    >
+                                        Email inválido
+                                    </Form.Message>
+                                )}
+                                {field.type === 'rut' && (
+                                    <Form.Message
+                                        className="text-red-500 text-sm"
+                                        match={(value: string) => {
+                                            return !validateRut(value);
+                                        }}
+                                    >
+                                        RUT inválido
+                                    </Form.Message>
+                                )}
+                            </div>
+                        )}
                     </div>
-                    {renderField(field)}
+                    <div className={field.type === 'checkbox' ? "order-1" : ""}>
+                        {renderField(field)}
+                    </div>
                 </Form.Field>
             ))}
 
@@ -781,9 +797,9 @@ export default function FormBlock({
 
     // Default inline display mode
     const containerClasses = cn(
-        'mx-auto max-w-2xl py-12',
+        'mx-auto padding-center max-w-2xl section-y-padding',
         {
-            'bg-zinc-900 px-4 sm:px-6 lg:px-8 rounded-lg': variant === 'withBackground',
+            'bg-zinc-900 rounded-lg': variant === 'withBackground',
             'text-center': variant === 'centered',
         }
     )
@@ -791,7 +807,7 @@ export default function FormBlock({
     return (
         <div className={containerClasses}>
             {(title || form.title) && (
-                <h2 className="mb-4 font-bold text-3xl sm:text-4xl tracking-tight">
+                <h2 className="pb-8 lg:pb-12 font-bold text-3xl sm:text-4xl tracking-tight">
                     {title || form.title}
                 </h2>
             )}
