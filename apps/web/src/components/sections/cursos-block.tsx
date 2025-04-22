@@ -43,7 +43,7 @@ export function CursosBlock({
     cursos,
 }: CursosBlockProps) {
     return (
-        <section className="space-y-8 py-12 container">
+        <section className="space-y-8 py-12 w-full container">
             {/* Header */}
             {(title || description) && (
                 <div className="space-y-4 text-center">
