@@ -1315,7 +1315,7 @@ export const queryAllRegiones = defineQuery(`
 // Add sucursales to search query
 export const SEARCH_QUERY_WITH_SUCURSALES = defineQuery(`{
   "results": *[
-    _type in ["page", "blog", "camiones", "buses", "motoresPenta", "sucursales"]
+    _type in ["page", "blog", "camiones", "buses", "motoresPenta", "sucursales", "cursos"]
     && (
       title match $searchTerm || 
       description match $searchTerm ||
@@ -1340,6 +1340,47 @@ export const SEARCH_QUERY_WITH_SUCURSALES = defineQuery(`{
       region,
       direccion
     },
+    _type == "cursos" => {
+      "fechasProximas": *[_type == "cursos" && _id == ^._id][0].fechasCapacitacion[fecha > now()][0..1]
+    },
     _createdAt
   }
 }`);
+
+// Cursos queries
+export const queryCursosData = defineQuery(`*[_type == "cursos"]{
+  _id,
+  _type,
+  title,
+  description,
+  "slug": slug.current,
+  ${imageFragment},
+  "fechasCapacitacion": fechasCapacitacion[]{
+    nombre,
+    profesor,
+    fecha,
+    hora
+  }
+} | order(title asc)`);
+
+export const queryCursoBySlug = defineQuery(`*[
+  _type == "cursos" 
+  && slug.current == $slug
+][0]{
+  _id,
+  _type,
+  title,
+  description,
+  "slug": slug.current,
+  ${imageFragment},
+  "fechasCapacitacion": fechasCapacitacion[]{
+    nombre,
+    profesor,
+    fecha,
+    hora
+  }
+}`);
+
+export const queryCursosPaths = defineQuery(`
+  *[_type == "cursos" && defined(slug.current)].slug.current
+`);

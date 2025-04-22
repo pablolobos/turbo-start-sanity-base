@@ -2065,6 +2065,38 @@ export type HomePage = {
   ogDescription?: string;
 };
 
+export type Cursos = {
+  _id: string;
+  _type: "cursos";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  description?: RichText;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  slug?: Slug;
+  fechasCapacitacion?: Array<{
+    nombre?: string;
+    profesor?: "Patricio Barahona" | "Abraham Medina";
+    fecha?: string;
+    hora?: string;
+    _type: "fechaCapacitacion";
+    _key: string;
+  }>;
+};
+
 export type Sucursales = {
   _id: string;
   _type: "sucursales";
@@ -2841,6 +2873,7 @@ export type AllSanitySchemaTypes =
   | Footer
   | Settings
   | HomePage
+  | Cursos
   | Sucursales
   | Author
   | Faq
@@ -13075,6 +13108,17 @@ export type QueryGenericPageOGDataResult =
       image: string | null;
       dominantColor: string | null;
       seoImage: string | null;
+      logo: string | null;
+      date: string;
+    }
+  | {
+      _id: string;
+      _type: "cursos";
+      title: string | null;
+      description: RichText | null;
+      image: string | null;
+      dominantColor: string | null;
+      seoImage: null;
       logo: string | null;
       date: string;
     }
@@ -34464,6 +34508,38 @@ export type PRODUCT_LISTING_QUERYResult = Array<
   | {
       _id: string;
       title: string | null;
+      slug: string | null;
+      description: RichText | null;
+      image: {
+        asset: {
+          _id: string;
+          _type: "sanity.imageAsset";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          originalFilename?: string;
+          label?: string;
+          title?: string;
+          description?: string;
+          altText?: string;
+          sha1hash?: string;
+          extension?: string;
+          mimeType?: string;
+          size?: number;
+          assetId?: string;
+          uploadId?: string;
+          path?: string;
+          url?: string;
+          metadata?: SanityImageMetadata;
+          source?: SanityAssetSourceData;
+        } | null;
+        _type: "image";
+      } | null;
+      taxonomy: null;
+    }
+  | {
+      _id: string;
+      title: string | null;
       slug: null;
       description: string | null;
       image: null;
@@ -40153,7 +40229,7 @@ export type QuerySucursalesByRegionResult = Array<{
 // Query: *[_type == "sucursales" && defined(slug.current)].slug.current
 export type QuerySucursalesPathsResult = Array<string | null>;
 // Variable: SEARCH_QUERY_WITH_SUCURSALES
-// Query: {  "results": *[    _type in ["page", "blog", "camiones", "buses", "motoresPenta", "sucursales"]    && (      title match $searchTerm ||       description match $searchTerm ||      region match $searchTerm    )  ] | order(_createdAt desc) [0...20] {    _id,    _type,    title,    description,    "slug": slug.current,    "image": image{      "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background    },    "taxonomy": coalesce(taxonomias->{      prefLabel,      conceptId    }, null),    _type == "sucursales" => {      region,      direccion    },    _createdAt  }}
+// Query: {  "results": *[    _type in ["page", "blog", "camiones", "buses", "motoresPenta", "sucursales", "cursos"]    && (      title match $searchTerm ||       description match $searchTerm ||      region match $searchTerm    )  ] | order(_createdAt desc) [0...20] {    _id,    _type,    title,    description,    "slug": slug.current,    "image": image{      "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background    },    "taxonomy": coalesce(taxonomias->{      prefLabel,      conceptId    }, null),    _type == "sucursales" => {      region,      direccion    },    _type == "cursos" => {      "fechasProximas": *[_type == "cursos" && _id == ^._id][0].fechasCapacitacion[fecha > now()][0..1]    },    _createdAt  }}
 export type SEARCH_QUERY_WITH_SUCURSALESResult = {
   results: Array<
     | {
@@ -40206,6 +40282,28 @@ export type SEARCH_QUERY_WITH_SUCURSALESResult = {
       }
     | {
         _id: string;
+        _type: "cursos";
+        title: string | null;
+        description: RichText | null;
+        slug: string | null;
+        image: {
+          alt: string | "Image-Broken";
+          blurData: string | null;
+          dominantColor: string | null;
+        } | null;
+        taxonomy: null;
+        fechasProximas: Array<{
+          nombre?: string;
+          profesor?: "Abraham Medina" | "Patricio Barahona";
+          fecha?: string;
+          hora?: string;
+          _type: "fechaCapacitacion";
+          _key: string;
+        }> | null;
+        _createdAt: string;
+      }
+    | {
+        _id: string;
         _type: "motoresPenta";
         title: string | null;
         description: string | null;
@@ -40249,6 +40347,69 @@ export type SEARCH_QUERY_WITH_SUCURSALESResult = {
       }
   >;
 };
+// Variable: queryCursosData
+// Query: *[_type == "cursos"]{  _id,  _type,  title,  description,  "slug": slug.current,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  "fechasCapacitacion": fechasCapacitacion[]{    nombre,    profesor,    fecha,    hora  }} | order(title asc)
+export type QueryCursosDataResult = Array<{
+  _id: string;
+  _type: "cursos";
+  title: string | null;
+  description: RichText | null;
+  slug: string | null;
+  image: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string | "Image-Broken";
+    _type: "image";
+    blurData: string | null;
+    dominantColor: string | null;
+  } | null;
+  fechasCapacitacion: Array<{
+    nombre: string | null;
+    profesor: "Abraham Medina" | "Patricio Barahona" | null;
+    fecha: string | null;
+    hora: string | null;
+  }> | null;
+}>;
+// Variable: queryCursoBySlug
+// Query: *[  _type == "cursos"   && slug.current == $slug][0]{  _id,  _type,  title,  description,  "slug": slug.current,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },  "fechasCapacitacion": fechasCapacitacion[]{    nombre,    profesor,    fecha,    hora  }}
+export type QueryCursoBySlugResult = {
+  _id: string;
+  _type: "cursos";
+  title: string | null;
+  description: RichText | null;
+  slug: string | null;
+  image: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string | "Image-Broken";
+    _type: "image";
+    blurData: string | null;
+    dominantColor: string | null;
+  } | null;
+  fechasCapacitacion: Array<{
+    nombre: string | null;
+    profesor: "Abraham Medina" | "Patricio Barahona" | null;
+    fecha: string | null;
+    hora: string | null;
+  }> | null;
+} | null;
+// Variable: queryCursosPaths
+// Query: *[_type == "cursos" && defined(slug.current)].slug.current
+export type QueryCursosPathsResult = Array<string | null>;
 
 // Query TypeMap
 import "@sanity/client";
@@ -40292,6 +40453,9 @@ declare module "@sanity/client" {
     '*[\n  _type == "sucursales" \n  && slug.current == $slug\n][0]{\n  _id,\n  _type,\n  title,\n  region,\n  telefono,\n  email,\n  direccion,\n  latitud,\n  longitud,\n  "slug": slug.current,\n  "personas": personas[]{\n    nombre,\n    cargo,\n    telefono,\n    email\n  }\n}': QuerySucursalBySlugResult;
     '*[\n  _type == "sucursales" \n  && region == $region\n]{\n  _id,\n  _type,\n  title,\n  region,\n  telefono,\n  email,\n  direccion,\n  latitud,\n  longitud,\n  "slug": slug.current,\n  "personas": personas[]{\n    nombre,\n    cargo,\n    telefono,\n    email\n  }\n} | order(title asc)': QuerySucursalesByRegionResult;
     '\n  *[_type == "sucursales" && defined(slug.current)].slug.current\n': QuerySucursalesPathsResult;
-    '{\n  "results": *[\n    _type in ["page", "blog", "camiones", "buses", "motoresPenta", "sucursales"]\n    && (\n      title match $searchTerm || \n      description match $searchTerm ||\n      region match $searchTerm\n    )\n  ] | order(_createdAt desc) [0...20] {\n    _id,\n    _type,\n    title,\n    description,\n    "slug": slug.current,\n    "image": image{\n      "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background\n    },\n    "taxonomy": coalesce(taxonomias->{\n      prefLabel,\n      conceptId\n    }, null),\n    _type == "sucursales" => {\n      region,\n      direccion\n    },\n    _createdAt\n  }\n}': SEARCH_QUERY_WITH_SUCURSALESResult;
+    '{\n  "results": *[\n    _type in ["page", "blog", "camiones", "buses", "motoresPenta", "sucursales", "cursos"]\n    && (\n      title match $searchTerm || \n      description match $searchTerm ||\n      region match $searchTerm\n    )\n  ] | order(_createdAt desc) [0...20] {\n    _id,\n    _type,\n    title,\n    description,\n    "slug": slug.current,\n    "image": image{\n      "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background\n    },\n    "taxonomy": coalesce(taxonomias->{\n      prefLabel,\n      conceptId\n    }, null),\n    _type == "sucursales" => {\n      region,\n      direccion\n    },\n    _type == "cursos" => {\n      "fechasProximas": *[_type == "cursos" && _id == ^._id][0].fechasCapacitacion[fecha > now()][0..1]\n    },\n    _createdAt\n  }\n}': SEARCH_QUERY_WITH_SUCURSALESResult;
+    '*[_type == "cursos"]{\n  _id,\n  _type,\n  title,\n  description,\n  "slug": slug.current,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  "fechasCapacitacion": fechasCapacitacion[]{\n    nombre,\n    profesor,\n    fecha,\n    hora\n  }\n} | order(title asc)': QueryCursosDataResult;
+    '*[\n  _type == "cursos" \n  && slug.current == $slug\n][0]{\n  _id,\n  _type,\n  title,\n  description,\n  "slug": slug.current,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  "fechasCapacitacion": fechasCapacitacion[]{\n    nombre,\n    profesor,\n    fecha,\n    hora\n  }\n}': QueryCursoBySlugResult;
+    '\n  *[_type == "cursos" && defined(slug.current)].slug.current\n': QueryCursosPathsResult;
   }
 }

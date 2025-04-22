@@ -12,7 +12,8 @@ import { page } from "./page";
 import { settings } from "./settings";
 import { formulariosType } from "./formularios";
 import { sucursales } from "./sucursales";
+import { cursos } from "./cursos";
 
 export const singletons = [homePage, blogIndex, settings, footer, navbar];
 
-export const documents = [blog, page, faq, author, formulariosType, camiones, buses, motoresPenta, sucursales, ...singletons];
+export const documents = [blog, page, faq, author, formulariosType, camiones, buses, motoresPenta, sucursales, cursos, ...singletons];
