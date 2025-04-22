@@ -27,6 +27,7 @@ import { VideoHeroBlock } from "./sections/video-hero";
 import { GenericTable } from "./sections/generic-table";
 import { TextBlock } from "./sections/text-block";
 import { SucursalesSelector } from "./sections/sucursales-selector";
+import { CursosBlock } from "./sections/cursos-block";
 
 type PageBlock = NonNullable<
   NonNullable<QueryHomePageDataResult>["pageBuilder"]
@@ -66,6 +67,7 @@ const BLOCK_COMPONENTS = {
   videoHero: VideoHeroBlock,
   textBlock: TextBlock,
   sucursalesSelector: SucursalesSelector,
+  cursosBlock: CursosBlock,
 } as const;
 
 type BlockType = keyof typeof BLOCK_COMPONENTS;

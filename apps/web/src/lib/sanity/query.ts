@@ -549,6 +549,38 @@ const sucursalesSelectorBlock = `
   }
 `;
 
+const cursosBlock = `
+  _type == "cursosBlock" => {
+    ...,
+    title,
+    description,
+    displayMode,
+    "showAllDates": showAllDates == "yes",
+    "cursos": cursos[]-> {
+      _id,
+      _type,
+      title,
+      description,
+      "slug": slug.current,
+      ${imageFragment},
+      "fechasCapacitacion": select(
+        ^.showAllDates == "yes" => fechasCapacitacion[]{
+          nombre,
+          profesor,
+          fecha,
+          hora
+        } | order(fecha asc),
+        fechasCapacitacion[fecha > now()]{
+          nombre,
+          profesor,
+          fecha,
+          hora
+        } | order(fecha asc)
+      )
+    }
+  }
+`;
+
 const pageBuilderFragment = `
   pageBuilder[]{
     ...,
@@ -571,7 +603,8 @@ const pageBuilderFragment = `
     ${videoBlock},
     ${videoHeroBlock},
     ${textBlock},
-    ${sucursalesSelectorBlock}
+    ${sucursalesSelectorBlock},
+    ${cursosBlock}
   }
 `;
 

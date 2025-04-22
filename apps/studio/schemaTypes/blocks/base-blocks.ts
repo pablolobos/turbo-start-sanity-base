@@ -17,6 +17,7 @@ import { videoBlock } from "./video-block"
 import { videoHero } from "./video-hero"
 import { textBlock } from "./text-block"
 import { sucursalesSelector } from "./sucursales-selector"
+import { cursosBlock } from "./cursos-block"
 
 // Base blocks without tabs to avoid circular dependency
 export const baseBlocks: ObjectDefinition[] = [
@@ -38,4 +39,5 @@ export const baseBlocks: ObjectDefinition[] = [
     videoHero,
     textBlock,
     sucursalesSelector,
+    cursosBlock,
 ]; 

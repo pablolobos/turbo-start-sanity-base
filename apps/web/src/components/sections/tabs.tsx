@@ -4,7 +4,7 @@ import { Tabs as UITabs, TabsContent, TabsList, TabsTrigger } from "@workspace/u
 import { cn } from "@workspace/ui/lib/utils"
 
 
-type BlockType = "cta" | "doubleHero" | "faqAccordion" | "featureCardsIcon" | "formBlock" | "hero" | "imageLinkCards" | "mainHero" | "subscribeNewsletter" | "tabs" | "genericTable" | "productListing"
+type BlockType = "cta" | "doubleHero" | "faqAccordion" | "featureCardsIcon" | "formBlock" | "hero" | "imageLinkCards" | "mainHero" | "subscribeNewsletter" | "tabs" | "genericTable" | "productListing" | "cursosBlock"
 interface TabItem {
     _key: string
     label: string
@@ -31,6 +31,7 @@ import { MainHeroBlock } from "./main-hero"
 import { SubscribeNewsletter } from "./subscribe-newsletter"
 import { GenericTable } from "./generic-table"
 import { ProductListing } from "./product-listing"
+import { CursosBlock } from "./cursos-block"
 // Map of block types to their components
 const blockComponents = {
     cta: CTABlock,
@@ -45,6 +46,7 @@ const blockComponents = {
     tabs: TabsBlock,
     genericTable: GenericTable,
     productListing: ProductListing,
+    cursosBlock: CursosBlock,
 } as const
 
 export function TabsBlock({ title, description, tabs }: TabsBlockProps) {
