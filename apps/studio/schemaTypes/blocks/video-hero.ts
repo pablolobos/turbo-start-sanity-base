@@ -98,6 +98,15 @@ export const videoHero = defineType({
                 }),
         }),
         defineField({
+            name: "posterImage",
+            type: "image",
+            title: "Imagen de Portada",
+            description: "Imagen opcional para mostrar mientras se carga el video",
+            options: {
+                hotspot: true,
+            },
+        }),
+        defineField({
             name: "showControls",
             title: "Mostrar controles",
             type: "string",
@@ -147,10 +156,12 @@ export const videoHero = defineType({
             variant: "variant",
             titleFont: "titleFont",
             videoType: "videoType",
+            posterImage: "posterImage",
         },
-        prepare: ({ title, variant, titleFont, videoType }) => ({
+        prepare: ({ title, variant, titleFont, videoType, posterImage }) => ({
             title,
             subtitle: `Video Hero - Variante: ${variant || "default"} - Fuente: ${titleFont || "default"} - Video: ${videoType}`,
+            media: posterImage || Star,
         }),
     },
 }); 

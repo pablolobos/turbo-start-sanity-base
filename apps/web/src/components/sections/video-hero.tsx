@@ -8,6 +8,8 @@ import type { SanityFile } from '@/types/sanity'
 
 import { RichText } from "../richtext";
 import { SanityButtons } from "../sanity-buttons";
+import { SanityImage } from "../sanity-image";
+import { VideoPlayOverlay } from "../video-play-overlay";
 
 // Dynamically import ReactPlayer for better performance
 const ReactPlayer = dynamic(() => import('react-player/lazy'), {
@@ -44,6 +46,7 @@ export function VideoHeroBlock({
     showControls = 'yes',
     autoplay = 'no',
     loop = 'no',
+    posterImage,
     ...rest
 }: VideoHeroBlockProps) {
     // @ts-ignore - variant property is added to the schema but not yet in the TypeScript types
@@ -52,6 +55,7 @@ export function VideoHeroBlock({
 
     const [videoUrl, setVideoUrl] = useState<string | null>(null)
     const [videoError, setVideoError] = useState<string | null>(null)
+    const [showVideo, setShowVideo] = useState(false)
 
     // Process video URL
     useEffect(() => {
@@ -101,6 +105,13 @@ export function VideoHeroBlock({
         }
     }, [videoType, mp4File, youtubeUrl])
 
+    // Show video immediately if no poster image or if autoplay is enabled
+    useEffect(() => {
+        if (!posterImage?.asset || autoplay === 'yes') {
+            setShowVideo(true)
+        }
+    }, [posterImage, autoplay])
+
     return (
         <section id="video-hero" className={cn(backgroundClasses, "max-container mt-12")}>
             <div className="mx-auto">
@@ -135,34 +146,53 @@ export function VideoHeroBlock({
                     {videoUrl && (
                         <div className="col-span-1 lg:group-odd/component:col-start-1 row-span-1 row-start-1 w-full h-full">
                             <div className="relative w-full aspect-video">
-                                <ReactPlayer
-                                    url={videoUrl}
-                                    width="100%"
-                                    height="100%"
-                                    controls={showControls === 'yes'}
-                                    playing={autoplay === 'yes'}
-                                    loop={loop === 'yes'}
-                                    playsinline
-                                    onError={(e) => {
-                                        console.error('VideoHeroBlock: Player error', e)
-                                        setVideoError("Error playing video")
-                                    }}
-                                    config={{
-                                        youtube: {
-                                            playerVars: {
-                                                modestbranding: 1,
-                                                rel: 0,
+                                {/* Poster image */}
+                                {posterImage?.asset && !showVideo && (
+                                    <div className="absolute inset-0 w-full h-full">
+                                        <SanityImage
+                                            asset={posterImage}
+                                            alt={posterImage.alt ?? "Video poster"}
+                                            fill
+                                            priority
+                                            quality={90}
+                                            className="object-cover"
+                                        />
+                                        <VideoPlayOverlay onClick={() => setShowVideo(true)} />
+                                    </div>
+                                )}
+
+                                {/* Video player */}
+                                {showVideo && (
+                                    <ReactPlayer
+                                        url={videoUrl}
+                                        width="100%"
+                                        height="100%"
+                                        controls={showControls === 'yes'}
+                                        playing={autoplay === 'yes'}
+                                        loop={loop === 'yes'}
+                                        playsinline
+                                        onError={(e) => {
+                                            console.error('VideoHeroBlock: Player error', e)
+                                            setVideoError("Error playing video")
+                                        }}
+                                        config={{
+                                            youtube: {
+                                                playerVars: {
+                                                    modestbranding: 1,
+                                                    rel: 0,
+                                                },
                                             },
-                                        },
-                                        file: {
-                                            attributes: {
-                                                controlsList: 'nodownload',
-                                                disablePictureInPicture: true,
+                                            file: {
+                                                attributes: {
+                                                    controlsList: 'nodownload',
+                                                    disablePictureInPicture: true,
+                                                },
+                                                forceVideo: true,
                                             },
-                                            forceVideo: true,
-                                        },
-                                    }}
-                                />
+                                        }}
+                                    />
+                                )}
+
                                 {videoError && (
                                     <div className="right-8 bottom-20 absolute bg-red-500/80 p-2 rounded text-white text-sm">
                                         {videoError}

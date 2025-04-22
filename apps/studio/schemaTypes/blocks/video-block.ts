@@ -80,6 +80,16 @@ export const videoBlock = defineType({
             group: 'content',
         }),
         defineField({
+            name: 'posterImage',
+            type: 'image',
+            title: 'Imagen de Portada',
+            description: 'Imagen opcional para mostrar mientras se carga el video',
+            options: {
+                hotspot: true,
+            },
+            group: 'content',
+        }),
+        defineField({
             name: 'showControls',
             title: 'Mostrar controles',
             type: 'string',
@@ -146,14 +156,15 @@ export const videoBlock = defineType({
             videoType: 'videoType',
             mp4File: 'mp4File',
             youtubeUrl: 'youtubeUrl',
+            posterImage: 'posterImage',
         },
-        prepare({ title, videoType, mp4File, youtubeUrl }) {
+        prepare({ title, videoType, mp4File, youtubeUrl, posterImage }) {
             return {
                 title: title || 'Bloque de Video',
                 subtitle: videoType === 'mp4'
                     ? (mp4File?.asset?._ref || 'No hay archivo seleccionado')
                     : (youtubeUrl || 'No hay URL configurada'),
-                media: PlayIcon,
+                media: posterImage || PlayIcon,
             }
         },
     },

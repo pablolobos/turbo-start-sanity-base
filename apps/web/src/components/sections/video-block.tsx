@@ -2,6 +2,8 @@ import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
 import type { PagebuilderType } from '@/types'
 import type { SanityFile } from '@/types/sanity'
+import { SanityImage } from "../sanity-image"
+import { VideoPlayOverlay } from "../video-play-overlay"
 
 // Dynamically import ReactPlayer for better performance
 const ReactPlayer = dynamic(() => import('react-player/lazy'), {
@@ -20,10 +22,12 @@ export function VideoBlock(props: Props) {
         autoplay = 'no',
         loop = 'no',
         allowFullscreen = 'no',
+        posterImage,
     } = props
 
     const [videoUrl, setVideoUrl] = useState<string | null>(null)
     const [videoError, setVideoError] = useState<string | null>(null)
+    const [showVideo, setShowVideo] = useState(false)
 
     // Process video URL similar to main-hero
     useEffect(() => {
@@ -73,6 +77,13 @@ export function VideoBlock(props: Props) {
         }
     }, [videoType, mp4File, youtubeUrl])
 
+    // Show video immediately if no poster image or if autoplay is enabled
+    useEffect(() => {
+        if (!posterImage?.asset || autoplay === 'yes') {
+            setShowVideo(true)
+        }
+    }, [posterImage, autoplay])
+
     // Only render if we have a valid URL
     if (!videoUrl) {
         if (videoError) {
@@ -89,37 +100,56 @@ export function VideoBlock(props: Props) {
                 </h2>
             )}
             <div className="relative w-full aspect-video">
-                <ReactPlayer
-                    url={videoUrl}
-                    width="100%"
-                    height="100%"
-                    controls={showControls === 'yes'}
-                    playing={autoplay === 'yes'}
-                    loop={loop === 'yes'}
-                    playsinline
-                    onError={(e) => {
-                        console.error('VideoBlock: Player error', e)
-                        setVideoError("Error playing video")
-                    }}
-                    config={{
-                        youtube: {
-                            playerVars: {
-                                // YouTube player options
-                                modestbranding: 1,
-                                rel: 0,
-                                fs: allowFullscreen === 'yes' ? 1 : 0,
+                {/* Poster image */}
+                {posterImage?.asset && !showVideo && (
+                    <div className="absolute inset-0 w-full h-full">
+                        <SanityImage
+                            asset={posterImage}
+                            alt={posterImage.alt ?? "Video poster"}
+                            fill
+                            priority
+                            quality={90}
+                            className="object-cover"
+                        />
+                        <VideoPlayOverlay onClick={() => setShowVideo(true)} />
+                    </div>
+                )}
+
+                {/* Video player */}
+                {showVideo && (
+                    <ReactPlayer
+                        url={videoUrl}
+                        width="100%"
+                        height="100%"
+                        controls={showControls === 'yes'}
+                        playing={autoplay === 'yes'}
+                        loop={loop === 'yes'}
+                        playsinline
+                        onError={(e) => {
+                            console.error('VideoBlock: Player error', e)
+                            setVideoError("Error playing video")
+                        }}
+                        config={{
+                            youtube: {
+                                playerVars: {
+                                    // YouTube player options
+                                    modestbranding: 1,
+                                    rel: 0,
+                                    fs: allowFullscreen === 'yes' ? 1 : 0,
+                                },
                             },
-                        },
-                        file: {
-                            attributes: {
-                                // HTML5 video attributes for MP4
-                                controlsList: 'nodownload',
-                                disablePictureInPicture: true,
+                            file: {
+                                attributes: {
+                                    // HTML5 video attributes for MP4
+                                    controlsList: 'nodownload',
+                                    disablePictureInPicture: true,
+                                },
+                                forceVideo: true,
                             },
-                            forceVideo: true,
-                        },
-                    }}
-                />
+                        }}
+                    />
+                )}
+
                 {videoError && (
                     <div className="right-8 bottom-20 absolute bg-red-500/80 p-2 rounded text-white text-sm">
                         {videoError}

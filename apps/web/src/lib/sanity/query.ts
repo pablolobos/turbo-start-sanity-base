@@ -494,7 +494,13 @@ const videoBlock = `
     showControls,
     autoplay,
     loop,
-    allowFullscreen
+    allowFullscreen,
+    "posterImage": posterImage{
+      ...,
+      "alt": coalesce(asset->altText, asset->originalFilename, "Video Poster"),
+      "blurData": asset->metadata.lqip,
+      "dominantColor": asset->metadata.palette.dominant.background,
+    }
   }
 `;
 
@@ -513,6 +519,12 @@ const videoHeroBlock = `
     showControls,
     autoplay,
     loop,
+    "posterImage": posterImage{
+      ...,
+      "alt": coalesce(asset->altText, asset->originalFilename, "Video Hero Poster"),
+      "blurData": asset->metadata.lqip,
+      "dominantColor": asset->metadata.palette.dominant.background,
+    },
     ${buttonsFragment},
     ${richTextFragment}
   }
