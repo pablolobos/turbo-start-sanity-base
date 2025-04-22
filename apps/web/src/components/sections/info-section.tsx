@@ -11,8 +11,8 @@ export function InfoSection({ title, headingLevel, content }: InfoSectionProps) 
     const Heading = headingLevel
 
     return (
-        <div className="flex flex-col gap-8 lg:grid lg:grid-cols-2 py-12 lg:py-20 container-padding padding-center max-container">
-            <Heading className="mb-4 font-semibold text-4xl">
+        <div className="flex flex-col gap-8 lg:grid lg:grid-cols-[1fr_2fr] pt-20 section-y-padding container-padding padding-center max-container">
+            <Heading className="font-semibold text-4xl">
                 {title}
             </Heading>
             <div className="dark:prose-invert text-base prose prose-neutral">

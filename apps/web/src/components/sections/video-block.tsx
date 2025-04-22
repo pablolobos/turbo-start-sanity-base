@@ -82,7 +82,7 @@ export function VideoBlock(props: Props) {
     }
 
     return (
-        <section className="max-container padding-center section-y-padding">
+        <section className="max-container padding-center section-y-padding-tb">
             {title && (
                 <h2 className="mb-8 font-bold text-2xl md:text-3xl text-center">
                     {title}
