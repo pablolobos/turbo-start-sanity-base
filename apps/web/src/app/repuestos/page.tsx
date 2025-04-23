@@ -1,25 +1,45 @@
+import { notFound } from "next/navigation";
+
 import { RepuestoCard } from "@/components/repuesto-card";
-import { queryRepuestosCategories, queryRepuestosData } from "@/lib/sanity/query";
-import { client } from "@/lib/sanity/client";
-import { Metadata } from "next";
+import { queryRepuestosIndexPageData } from "@/lib/sanity/query";
+import { sanityFetch } from "@/lib/sanity/live";
+import { getMetaData } from "@/lib/seo";
+import { handleErrors } from "@/utils";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@workspace/ui/components/tabs";
 import { CategoryFilter } from "@/components/category-filter";
 import { TitleDescriptionBlock } from "@/components/title-description-block";
+import { PageBuilder } from "@/components/pagebuilder";
 
-export const metadata: Metadata = {
-    title: "Repuestos | Volvo Chile",
-    description: "Explora nuestra amplia gama de repuestos originales Volvo",
-};
+async function fetchRepuestosData() {
+    return await handleErrors(sanityFetch({ query: queryRepuestosIndexPageData }));
+}
+
+export async function generateMetadata() {
+    const result = await sanityFetch({ query: queryRepuestosIndexPageData });
+    return await getMetaData(result?.data ?? {});
+}
 
 export default async function RepuestosPage() {
-    const repuestos = await client.fetch(queryRepuestosData) || [];
-    const categoriesData = await client.fetch(queryRepuestosCategories) || [];
+    const [res, err] = await fetchRepuestosData();
+    if (err || !res?.data) notFound();
+
+    const {
+        repuestos = [],
+        title,
+        description,
+        pageBuilder = [],
+        _id,
+        _type,
+        displayFeaturedCategories,
+        featuredCategoriesCount,
+        featuredCategories = [] as string[],
+    } = res.data;
 
     // Extract unique categories
     const categories: string[] = [];
-    categoriesData.forEach((item: { category: string }) => {
-        if (!categories.includes(item.category)) {
-            categories.push(item.category);
+    repuestos.forEach((repuesto: any) => {
+        if (repuesto.category && !categories.includes(repuesto.category)) {
+            categories.push(repuesto.category);
         }
     });
 
@@ -36,29 +56,60 @@ export default async function RepuestosPage() {
         {}
     );
 
+    // Check if we have valid featured data
+    const shouldDisplayFeaturedCategories =
+        displayFeaturedCategories &&
+        featuredCategories.length > 0;
+
+    // If featured categories are enabled, sort them according to the order in the CMS
+    const sortedCategories = [...categories];
+    if (shouldDisplayFeaturedCategories) {
+        sortedCategories.sort((a, b) => {
+            const aIndex = featuredCategories.indexOf(a);
+            const bIndex = featuredCategories.indexOf(b);
+
+            // If both are featured, sort by their position in featuredCategories
+            if (aIndex !== -1 && bIndex !== -1) {
+                return aIndex - bIndex;
+            }
+
+            // If only a is featured, it comes first
+            if (aIndex !== -1) return -1;
+
+            // If only b is featured, it comes first
+            if (bIndex !== -1) return 1;
+
+            // If neither is featured, maintain alphabetical order
+            return a.localeCompare(b);
+        });
+    }
+
     return (
-        <main className="flex-1">
-            <div className="flex flex-col gap-8 lg:gap-20 max-container padding-center section-y-padding">
-                <div className="space-y-4">
-                    <TitleDescriptionBlock
-                        variant="default"
-                        title="Repuestos Originales Volvo"
-                        description="Descubre nuestra amplia gama de repuestos originales para garantizar el máximo rendimiento de tu vehículo Volvo."
-                    />
-                </div>
+        <main className="bg-background">
+            <div className="max-container padding-center section-y-padding">
+                {(title || description) && (
+                    <div className="mb-8">
+                        <TitleDescriptionBlock
+                            title={title || "Repuestos Originales Volvo"}
+                            description={description || "Descubre nuestra amplia gama de repuestos originales para garantizar el máximo rendimiento de tu vehículo Volvo."}
+                            variant="default"
+                            headingLevel="h1"
+                        />
+                    </div>
+                )}
 
                 {categories.length > 0 ? (
                     <div className="w-full">
                         {/* Mobile Select Filter - Client Component */}
-                        <CategoryFilter categories={categories} />
+                        <CategoryFilter categories={sortedCategories} />
 
                         {/* Desktop Tabs */}
-                        <div className="hidden md:block">
+                        <div className="hidden md:block mt-8">
                             <Tabs defaultValue="all" className="w-full">
                                 <div className="pb-2">
                                     <TabsList className="flex flex-wrap gap-4 bg-muted mb-6 h-auto">
                                         <TabsTrigger value="all">Todos</TabsTrigger>
-                                        {categories.map((category: string) => (
+                                        {sortedCategories.map((category: string) => (
                                             <TabsTrigger key={category} value={category}>
                                                 {category}
                                             </TabsTrigger>
@@ -80,7 +131,7 @@ export default async function RepuestosPage() {
                                     )}
                                 </TabsContent>
 
-                                {categories.map((category: string) => (
+                                {sortedCategories.map((category: string) => (
                                     <TabsContent
                                         key={category}
                                         value={category}
@@ -122,7 +173,7 @@ export default async function RepuestosPage() {
                             </div>
 
                             {/* Individual Category Sections */}
-                            {categories.map((category: string) => {
+                            {sortedCategories.map((category: string) => {
                                 const categoryId = category.replace(/\s+/g, '-').toLowerCase();
                                 return (
                                     <div
@@ -152,9 +203,12 @@ export default async function RepuestosPage() {
                     <p className="py-8 text-muted-foreground text-center">
                         No hay categorías de repuestos disponibles en este momento.
                     </p>
-                )
-                }
-            </div >
-        </main >
+                )}
+            </div>
+
+            {pageBuilder && pageBuilder.length > 0 && (
+                <PageBuilder pageBuilder={pageBuilder} id={_id} type={_type} />
+            )}
+        </main>
     );
 } 

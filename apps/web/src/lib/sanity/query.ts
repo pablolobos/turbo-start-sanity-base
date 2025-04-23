@@ -1440,7 +1440,7 @@ export const queryRepuestosData = defineQuery(`*[_type == "repuestos"]{
   content,
   category,
   ${imageFragment}
-} | order(title asc)`);
+} | order(orderRank asc)`);
 
 export const queryRepuestoBySlug = defineQuery(`*[
   _type == "repuestos" 
@@ -1466,7 +1466,7 @@ export const queryRepuestosByCategory = defineQuery(`*[
   content,
   category,
   ${imageFragment}
-} | order(title asc)`);
+} | order(orderRank asc)`);
 
 export const queryRepuestosPaths = defineQuery(`
   *[_type == "repuestos" && defined(slug.current)].slug.current
@@ -1514,4 +1514,29 @@ export const SEARCH_QUERY_WITH_REPUESTOS = defineQuery(`{
 // Get all available repuesto categories
 export const queryRepuestosCategories = defineQuery(`
   *[_type == "repuestos" && defined(category)]{category} | order(category asc)
+`);
+
+// RepuestosIndex query
+export const queryRepuestosIndexPageData = defineQuery(`
+  *[_type == "repuestosIndex"][0]{
+    ...,
+    _id,
+    _type,
+    title,
+    description,
+    "displayFeaturedCategories" : displayFeaturedCategories == "yes",
+    "featuredCategoriesCount" : featuredCategoriesCount,
+    "featuredCategories": featuredCategories,
+    ${pageBuilderFragment},
+    "slug": slug.current,
+    "repuestos": *[_type == "repuestos"] | order(orderRank asc){
+      _id,
+      _type,
+      title,
+      "slug": slug.current,
+      content,
+      category,
+      ${imageFragment}
+    }
+  }
 `);

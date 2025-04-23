@@ -1,5 +1,6 @@
 import { defineField, defineType } from 'sanity'
 import { Wrench } from 'lucide-react'
+import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-list";
 
 const categories = [
     'Lubricantes y refrigerantes',
@@ -18,7 +19,9 @@ export const repuestos = defineType({
     title: 'Repuestos',
     type: 'document',
     icon: Wrench,
+    orderings: [orderRankOrdering],
     fields: [
+        orderRankField({ type: "repuestos" }),
         defineField({
             name: 'title',
             title: 'Nombre del repuesto',

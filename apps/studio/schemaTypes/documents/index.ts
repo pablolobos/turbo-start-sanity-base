@@ -9,12 +9,13 @@ import { homePage } from "./home-page";
 import { motoresPenta } from "./motores-penta";
 import { navbar } from "./navbar";
 import { page } from "./page";
+import { repuestos } from "./repuestos";
+import { repuestosIndex } from "./repuestos-index";
 import { settings } from "./settings";
 import { formulariosType } from "./formularios";
 import { sucursales } from "./sucursales";
 import { cursos } from "./cursos";
-import { repuestos } from "./repuestos";
 
-export const singletons = [homePage, blogIndex, settings, footer, navbar];
+export const singletons = [homePage, blogIndex, repuestosIndex, settings, footer, navbar];
 
 export const documents = [blog, page, faq, author, formulariosType, camiones, buses, motoresPenta, sucursales, cursos, repuestos, ...singletons];
