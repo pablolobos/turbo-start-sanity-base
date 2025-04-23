@@ -1,19 +1,25 @@
 import Link from "next/link";
+import { Button } from "@workspace/ui/components/button";
 
 export default function NotFound() {
   return (
-    <div className="flex min-h-[calc(100vh-400px)] flex-col items-center justify-center gap-4 p-4">
-      <h1 className="text-6xl font-bold text-foreground animate-bounce">404</h1>
-      <p className="text-lg text-muted-foreground animate-fade-in">
-        The page you are looking for does not exist.
+    <div className="flex flex-col justify-center items-center gap-4 p-4 min-h-[calc(100vh-400px)]">
+      <h1 className="font-bold text-foreground text-6xl animate-bounce">404</h1>
+      <p className="text-muted-foreground text-lg animate-fade-in">
+        La página que estás buscando no existe.
       </p>
-      <Link
-        href="/"
-        aria-label="Return Home"
-        className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 hover:scale-105 transition-all duration-200 ease-in-out animate-fade-in-up"
+      <Button
+        variant="default"
+        asChild
+        className="hover:scale-105 transition-all animate-fade-in-up duration-200 ease-in-out"
       >
-        Return Home
-      </Link>
+        <Link
+          href="/"
+          aria-label="Return Home"
+        >
+          Volver al Home
+        </Link>
+      </Button>
     </div>
   );
 }
