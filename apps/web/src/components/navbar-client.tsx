@@ -98,7 +98,7 @@ function MenuItemLink({
   return (
     <Link
       className={cn(
-        "flex select-none gap-4 rounded-none p-3 leading-none outline-none transition-colors hover:bg-accent hover:text-accent-foreground items-center focus:bg-accent focus:text-accent-foreground",
+        "flex select-none gap-4 rounded-none p-3 leading-none outline-none transition-colors hover:bg-accent hover:text-accent-foreground items-center focus:bg-accent focus:text-accent-foreground lg:min-w-[150px]",
         isActive && "bg-accent text-accent-foreground font-light"
       )}
       aria-label={`Link to ${item.title ?? item.href}`}
@@ -140,7 +140,9 @@ function MobileNavbarAccordionColumn({
           <div key={item._key}>
             {item.type === "group" ? (
               <div className="space-y-2 mb-4">
-                <h4 className="mb-2 px-2 font-medium text-muted-foreground text-sm">{item.title}</h4>
+                {item.title && (
+                  <h4 className="mb-2 px-2 font-medium text-muted-foreground text-sm">{item.title}</h4>
+                )}
                 <div className="gap-2 grid">
                   {item.links?.map((groupLink) => (
                     <MenuItemLink
@@ -273,7 +275,7 @@ function NavbarColumnLink({ column }: { column: NavbarLinkType }) {
 }
 
 function getColumnLayoutClass(itemCount: number, hasGroups: boolean) {
-  if (hasGroups) return "flex gap-8 w-fit  w-full justify-between flex-wrap min-w-[500px]";
+  if (hasGroups) return "flex gap-8 w-fit w-full justify-between flex-wrap min-w-[300px]";
   if (itemCount <= 4) return "w-80";
   if (itemCount <= 8) return "grid grid-cols-2 gap-2 w-[500px]";
   return "grid grid-cols-3 gap-2 w-[700px]";

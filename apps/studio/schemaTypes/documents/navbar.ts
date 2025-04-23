@@ -2,8 +2,6 @@ import { LayoutPanelLeft, Link, PanelTop } from "lucide-react";
 import { defineField, defineType } from "sanity";
 
 import { buttonsField } from "../common";
-import { navbarColumnLink } from "../definitions/navbarColumnLink";
-import { navbarLinkGroup } from "../definitions/navbarLinkGroup";
 
 const navbarLink = defineField({
   name: "navbarLink",

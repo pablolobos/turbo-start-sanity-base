@@ -15,7 +15,6 @@ export const navbarLinkGroup = defineType({
             type: "string",
             title: "Group Title",
             description: "The heading text displayed above this group of links",
-            validation: (rule) => rule.required().error("A group title is required"),
         }),
         defineField({
             name: "links",

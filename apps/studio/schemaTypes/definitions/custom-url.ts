@@ -9,6 +9,10 @@ const allLinkableTypes = [
   { type: "camiones" },
   { type: "buses" },
   { type: "motoresPenta" },
+  { type: "repuestosIndex" },
+  { type: "repuestos" },
+  { type: "cursos" },
+  { type: "sucursales" },
 ];
 
 export const customUrl = defineType({
