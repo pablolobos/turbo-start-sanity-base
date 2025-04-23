@@ -17,4 +17,4 @@ import { repuestos } from "./repuestos";
 
 export const singletons = [homePage, blogIndex, settings, footer, navbar];
 
-export const documents = [blog, page, faq, author, formulariosType, camiones, buses, motoresPenta, sucursales, cursos, repuestos, ...singletons];
+export const documents = [blog, page, faq, author, formulariosType, camiones, buses, motoresPenta, sucursales, cursos, repuestos, ...singletons]; 

@@ -1430,3 +1430,88 @@ export const queryCursoBySlug = defineQuery(`*[
 export const queryCursosPaths = defineQuery(`
   *[_type == "cursos" && defined(slug.current)].slug.current
 `);
+
+// Repuestos queries
+export const queryRepuestosData = defineQuery(`*[_type == "repuestos"]{
+  _id,
+  _type,
+  title,
+  "slug": slug.current,
+  content,
+  category,
+  ${imageFragment}
+} | order(title asc)`);
+
+export const queryRepuestoBySlug = defineQuery(`*[
+  _type == "repuestos" 
+  && slug.current == $slug
+][0]{
+  _id,
+  _type,
+  title,
+  "slug": slug.current,
+  category,
+  ${imageFragment},
+  content
+}`);
+
+export const queryRepuestosByCategory = defineQuery(`*[
+  _type == "repuestos" 
+  && category == $category
+]{
+  _id,
+  _type,
+  title,
+  "slug": slug.current,
+  content,
+  category,
+  ${imageFragment}
+} | order(title asc)`);
+
+export const queryRepuestosPaths = defineQuery(`
+  *[_type == "repuestos" && defined(slug.current)].slug.current
+`);
+
+// Update search query to include repuestos
+export const SEARCH_QUERY_WITH_REPUESTOS = defineQuery(`{
+  "results": *[
+    _type in ["page", "blog", "camiones", "buses", "motoresPenta", "sucursales", "cursos", "repuestos"]
+    && (
+      title match $searchTerm || 
+      description match $searchTerm ||
+      region match $searchTerm ||
+      category match $searchTerm
+    )
+  ] | order(_createdAt desc) [0...20] {
+    _id,
+    _type,
+    title,
+    description,
+    "slug": slug.current,
+    "image": image{
+      "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),
+      "blurData": asset->metadata.lqip,
+      "dominantColor": asset->metadata.palette.dominant.background
+    },
+    "taxonomy": coalesce(taxonomias->{
+      prefLabel,
+      conceptId
+    }, null),
+    _type == "sucursales" => {
+      region,
+      direccion
+    },
+    _type == "cursos" => {
+      "fechasProximas": *[_type == "cursos" && _id == ^._id][0].fechasCapacitacion[fecha > now()][0..1]
+    },
+    _type == "repuestos" => {
+      category
+    },
+    _createdAt
+  }
+}`);
+
+// Get all available repuesto categories
+export const queryRepuestosCategories = defineQuery(`
+  *[_type == "repuestos" && defined(category)]{category} | order(category asc)
+`);

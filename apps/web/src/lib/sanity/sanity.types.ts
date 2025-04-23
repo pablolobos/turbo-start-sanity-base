@@ -41547,6 +41547,140 @@ export type QueryCursoBySlugResult = {
 // Variable: queryCursosPaths
 // Query: *[_type == "cursos" && defined(slug.current)].slug.current
 export type QueryCursosPathsResult = Array<string | null>;
+// Variable: queryRepuestosData
+// Query: *[_type == "repuestos"]{  _id,  _type,  title,  "slug": slug.current,  content,  category,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }} | order(title asc)
+export type QueryRepuestosDataResult = Array<never>;
+// Variable: queryRepuestoBySlug
+// Query: *[  _type == "repuestos"   && slug.current == $slug][0]{  _id,  _type,  title,  "slug": slug.current,  category,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  },    richText[]{    ...,    _type == "button" => {      ...,      text,      variant,      icon,      "openInNewTab": url.openInNewTab,      "href": select(        url.type == "internal" => url.internal->slug.current,        url.type == "external" => url.external,        url.href      )    },    _type == "block" => {      ...,        markDefs[]{    ...,      ...customLink{    openInNewTab,    "href": select(      type == "internal" => internal->slug.current,      type == "external" => external,      type == "file" => file.asset->url,      "#"    ),  }  }    }  }}
+export type QueryRepuestoBySlugResult = null;
+// Variable: queryRepuestosByCategory
+// Query: *[  _type == "repuestos"   && category == $category]{  _id,  _type,  title,  "slug": slug.current,  content,  category,    image{    ...,    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),    "blurData": asset->metadata.lqip,    "dominantColor": asset->metadata.palette.dominant.background,  }} | order(title asc)
+export type QueryRepuestosByCategoryResult = Array<never>;
+// Variable: queryRepuestosPaths
+// Query: *[_type == "repuestos" && defined(slug.current)].slug.current
+export type QueryRepuestosPathsResult = Array<never>;
+// Variable: SEARCH_QUERY_WITH_REPUESTOS
+// Query: {  "results": *[    _type in ["page", "blog", "camiones", "buses", "motoresPenta", "sucursales", "cursos", "repuestos"]    && (      title match $searchTerm ||       description match $searchTerm ||      region match $searchTerm ||      category match $searchTerm    )  ] | order(_createdAt desc) [0...20] {    _id,    _type,    title,    description,    "slug": slug.current,    "image": image{      "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),      "blurData": asset->metadata.lqip,      "dominantColor": asset->metadata.palette.dominant.background    },    "taxonomy": coalesce(taxonomias->{      prefLabel,      conceptId    }, null),    _type == "sucursales" => {      region,      direccion    },    _type == "cursos" => {      "fechasProximas": *[_type == "cursos" && _id == ^._id][0].fechasCapacitacion[fecha > now()][0..1]    },    _type == "repuestos" => {      category    },    _createdAt  }}
+export type SEARCH_QUERY_WITH_REPUESTOSResult = {
+  results: Array<
+    | {
+        _id: string;
+        _type: "blog";
+        title: string | null;
+        description: string | null;
+        slug: string | null;
+        image: {
+          alt: string | "Image-Broken";
+          blurData: string | null;
+          dominantColor: string | null;
+        } | null;
+        taxonomy: null;
+        _createdAt: string;
+      }
+    | {
+        _id: string;
+        _type: "buses";
+        title: string | null;
+        description: string | null;
+        slug: string | null;
+        image: {
+          alt: string | "Image-Broken";
+          blurData: string | null;
+          dominantColor: string | null;
+        } | null;
+        taxonomy: {
+          prefLabel: string | null;
+          conceptId: string | null;
+        } | null;
+        _createdAt: string;
+      }
+    | {
+        _id: string;
+        _type: "camiones";
+        title: string | null;
+        description: string | null;
+        slug: string | null;
+        image: {
+          alt: string | "Image-Broken";
+          blurData: string | null;
+          dominantColor: string | null;
+        } | null;
+        taxonomy: {
+          prefLabel: string | null;
+          conceptId: string | null;
+        } | null;
+        _createdAt: string;
+      }
+    | {
+        _id: string;
+        _type: "cursos";
+        title: string | null;
+        description: RichText | null;
+        slug: string | null;
+        image: {
+          alt: string | "Image-Broken";
+          blurData: string | null;
+          dominantColor: string | null;
+        } | null;
+        taxonomy: null;
+        fechasProximas: Array<{
+          nombre?: string;
+          profesor?: "Abraham Medina" | "Patricio Barahona";
+          fecha?: string;
+          hora?: string;
+          _type: "fechaCapacitacion";
+          _key: string;
+        }> | null;
+        _createdAt: string;
+      }
+    | {
+        _id: string;
+        _type: "motoresPenta";
+        title: string | null;
+        description: string | null;
+        slug: string | null;
+        image: {
+          alt: string | "Image-Broken";
+          blurData: string | null;
+          dominantColor: string | null;
+        } | null;
+        taxonomy: {
+          prefLabel: string | null;
+          conceptId: string | null;
+        } | null;
+        _createdAt: string;
+      }
+    | {
+        _id: string;
+        _type: "page";
+        title: string | null;
+        description: string | null;
+        slug: string | null;
+        image: {
+          alt: string | "Image-Broken";
+          blurData: string | null;
+          dominantColor: string | null;
+        } | null;
+        taxonomy: null;
+        _createdAt: string;
+      }
+    | {
+        _id: string;
+        _type: "sucursales";
+        title: string | null;
+        description: null;
+        slug: string | null;
+        image: null;
+        taxonomy: null;
+        region: string | null;
+        direccion: string | null;
+        _createdAt: string;
+      }
+  >;
+};
+// Variable: queryRepuestosCategories
+// Query: *[_type == "repuestos" && defined(category)].category | order(category asc) | unique
+export type QueryRepuestosCategoriesResult = Array<never>;
 
 // Query TypeMap
 import "@sanity/client";
@@ -41595,5 +41729,11 @@ declare module "@sanity/client" {
     '*[_type == "cursos"]{\n  _id,\n  _type,\n  title,\n  description,\n  "slug": slug.current,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  "fechasCapacitacion": fechasCapacitacion[]{\n    nombre,\n    profesor,\n    fecha,\n    hora\n  }\n} | order(title asc)': QueryCursosDataResult;
     '*[\n  _type == "cursos" \n  && slug.current == $slug\n][0]{\n  _id,\n  _type,\n  title,\n  description,\n  "slug": slug.current,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  "fechasCapacitacion": fechasCapacitacion[]{\n    nombre,\n    profesor,\n    fecha,\n    hora\n  }\n}': QueryCursoBySlugResult;
     '\n  *[_type == "cursos" && defined(slug.current)].slug.current\n': QueryCursosPathsResult;
+    '*[_type == "repuestos"]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  content,\n  category,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n} | order(title asc)': QueryRepuestosDataResult;
+    '*[\n  _type == "repuestos" \n  && slug.current == $slug\n][0]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  category,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n,\n  \n  richText[]{\n    ...,\n    _type == "button" => {\n      ...,\n      text,\n      variant,\n      icon,\n      "openInNewTab": url.openInNewTab,\n      "href": select(\n        url.type == "internal" => url.internal->slug.current,\n        url.type == "external" => url.external,\n        url.href\n      )\n    },\n    _type == "block" => {\n      ...,\n      \n  markDefs[]{\n    ...,\n    \n  ...customLink{\n    openInNewTab,\n    "href": select(\n      type == "internal" => internal->slug.current,\n      type == "external" => external,\n      type == "file" => file.asset->url,\n      "#"\n    ),\n  }\n\n  }\n\n    }\n  }\n\n}': QueryRepuestoBySlugResult;
+    '*[\n  _type == "repuestos" \n  && category == $category\n]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  content,\n  category,\n  \n  image{\n    ...,\n    "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n    "blurData": asset->metadata.lqip,\n    "dominantColor": asset->metadata.palette.dominant.background,\n  }\n\n} | order(title asc)': QueryRepuestosByCategoryResult;
+    '\n  *[_type == "repuestos" && defined(slug.current)].slug.current\n': QueryRepuestosPathsResult;
+    '{\n  "results": *[\n    _type in ["page", "blog", "camiones", "buses", "motoresPenta", "sucursales", "cursos", "repuestos"]\n    && (\n      title match $searchTerm || \n      description match $searchTerm ||\n      region match $searchTerm ||\n      category match $searchTerm\n    )\n  ] | order(_createdAt desc) [0...20] {\n    _id,\n    _type,\n    title,\n    description,\n    "slug": slug.current,\n    "image": image{\n      "alt": coalesce(asset->altText, asset->originalFilename, "Image-Broken"),\n      "blurData": asset->metadata.lqip,\n      "dominantColor": asset->metadata.palette.dominant.background\n    },\n    "taxonomy": coalesce(taxonomias->{\n      prefLabel,\n      conceptId\n    }, null),\n    _type == "sucursales" => {\n      region,\n      direccion\n    },\n    _type == "cursos" => {\n      "fechasProximas": *[_type == "cursos" && _id == ^._id][0].fechasCapacitacion[fecha > now()][0..1]\n    },\n    _type == "repuestos" => {\n      category\n    },\n    _createdAt\n  }\n}': SEARCH_QUERY_WITH_REPUESTOSResult;
+    '\n  *[_type == "repuestos" && defined(category)].category | order(category asc) | unique\n': QueryRepuestosCategoriesResult;
   }
 }

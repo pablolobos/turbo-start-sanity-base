@@ -17,6 +17,7 @@ import {
   Box,
   MapPin,
   GraduationCap,
+  Wrench,
 } from "lucide-react";
 import type {
   StructureBuilder,
@@ -135,6 +136,7 @@ export const structure = (
         ),
       createList({ S, type: "sucursales", title: "Sucursales", icon: MapPin }),
       createList({ S, type: "cursos", title: "Cursos", icon: GraduationCap }),
+      createList({ S, type: "repuestos", title: "Repuestos", icon: Wrench }),
       S.divider(),
       S.listItem()
         .title("Configuración del sitio")
