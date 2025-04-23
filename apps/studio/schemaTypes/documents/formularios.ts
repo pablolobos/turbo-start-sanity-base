@@ -1,6 +1,7 @@
 import { defineField, defineType, defineArrayMember } from 'sanity'
 import { DocumentTextIcon } from '@sanity/icons'
 import { RegionComunaInput } from '../../components/inputs/RegionComunaInput'
+import type { ValidationContext } from 'sanity'
 
 export const formulariosType = defineType({
     name: 'formularios',
@@ -123,6 +124,7 @@ export const formulariosType = defineType({
                                     { title: 'Radio', value: 'radio' },
                                     { title: 'Checkbox', value: 'checkbox' },
                                     { title: 'Dirección', value: 'direccion' },
+                                    { title: 'Detalle de capacitación', value: 'curso' },
                                 ],
                                 layout: 'radio',
                             },

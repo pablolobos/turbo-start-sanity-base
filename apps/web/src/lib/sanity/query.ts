@@ -113,7 +113,20 @@ const formFieldsFragment = `
     type,
     required,
     options,
-    placeholder
+    placeholder,
+    type == "curso" => {
+      courseReference->{
+        _id,
+        title,
+        "fechasCapacitacion": fechasCapacitacion[]{
+          nombre,
+          profesor,
+          fecha,
+          hora
+        }
+      },
+      selectedTrainingDate
+    }
   },
   emailRecipients,
   submitButtonText,

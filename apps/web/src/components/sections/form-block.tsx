@@ -223,6 +223,144 @@ function RegionComunaSelector({ fieldName, required }: { fieldName: string, requ
     );
 }
 
+// Add CursoSelector component
+function CursoSelector({ fieldName, required }: { fieldName: string, required: boolean }) {
+    console.log('CursoSelector initialized with fieldName:', fieldName)
+    const [cursos, setCursos] = useState<Array<{
+        _id: string
+        title: string
+        fechasCapacitacion: Array<{
+            nombre: string
+            profesor: string
+            fecha: string
+            hora: string
+        }>
+    }>>([])
+    const [selectedCurso, setSelectedCurso] = useState<string>('')
+    const [selectedFecha, setSelectedFecha] = useState<string>('')
+    const [fechas, setFechas] = useState<Array<{
+        nombre: string
+        profesor: string
+        fecha: string
+        hora: string
+    }>>([])
+
+    useEffect(() => {
+        const fetchCursos = async () => {
+            try {
+                const response = await fetch('/api/cursos')
+                const data = await response.json()
+                console.log('Fetched cursos:', data)
+                setCursos(data)
+            } catch (error) {
+                console.error('Error fetching cursos:', error)
+            }
+        }
+        fetchCursos()
+    }, [])
+
+    useEffect(() => {
+        console.log('Selected curso changed:', selectedCurso)
+        if (selectedCurso) {
+            const curso = cursos.find(c => c._id === selectedCurso)
+            console.log('Found curso:', curso)
+            setFechas(curso?.fechasCapacitacion || [])
+            setSelectedFecha('')
+
+            // Update the hidden detallecapacitacion input if it exists
+            if (curso) {
+                const detallecapInput = document.querySelector(`input[name="detallecapacitacion"]`) as HTMLInputElement
+                if (detallecapInput) {
+                    console.log('Found detallecapacitacion input, setting value:', curso.title)
+                    detallecapInput.value = curso.title
+                }
+            }
+        } else {
+            setFechas([])
+            setSelectedFecha('')
+        }
+    }, [selectedCurso, cursos])
+
+    useEffect(() => {
+        if (selectedFecha) {
+            try {
+                // Update the hidden detallecapacitacion input with full details if fecha is selected
+                const fechaData = JSON.parse(selectedFecha)
+                const curso = cursos.find(c => c._id === selectedCurso)
+
+                if (curso && fechaData) {
+                    const detallecapInput = document.querySelector(`input[name="detallecapacitacion"]`) as HTMLInputElement
+                    if (detallecapInput) {
+                        const detailValue = `${curso.title} - ${new Date(fechaData.fecha).toLocaleDateString('es-CL')} - ${fechaData.nombre} - ${fechaData.profesor} - ${fechaData.hora}`
+                        console.log('Updating detallecapacitacion with fecha details:', detailValue)
+                        detallecapInput.value = detailValue
+                    }
+                }
+            } catch (e) {
+                console.error('Error updating detallecapacitacion with fecha:', e)
+            }
+        }
+    }, [selectedFecha, selectedCurso, cursos])
+
+    const handleCursoChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        console.log('Raw event:', e)
+        const value = e.target.value
+        console.log(`Curso change event for ${fieldName}_curso:`, { value })
+        setSelectedCurso(value)
+    }
+
+    const handleFechaChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const value = e.target.value
+        console.log(`Fecha change event for ${fieldName}_fecha:`, { value })
+        setSelectedFecha(value)
+    }
+
+    console.log(`CursoSelector state for ${fieldName}:`, { selectedCurso, selectedFecha, fechasCount: fechas.length })
+
+    return (
+        <div className="space-y-4">
+            {/* Curso Select */}
+            <div className="space-y-2">
+                <label className="font-medium text-sm">Curso</label>
+                <select
+                    name={`${fieldName}_curso`}
+                    value={selectedCurso}
+                    onChange={handleCursoChange}
+                    required={required}
+                    className="bg-background disabled:opacity-50 px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring ring-offset-background focus:ring-offset-2 w-full text-sm disabled:cursor-not-allowed"
+                >
+                    <option value="">Seleccione un curso</option>
+                    {cursos.map((curso) => (
+                        <option key={curso._id} value={curso._id}>
+                            {curso.title}
+                        </option>
+                    ))}
+                </select>
+            </div>
+
+            {/* Fecha Select */}
+            <div className="space-y-2">
+                <label className="font-medium text-sm">Fecha de capacitación</label>
+                <select
+                    name={`${fieldName}_fecha`}
+                    value={selectedFecha}
+                    onChange={handleFechaChange}
+                    required={required}
+                    disabled={!selectedCurso}
+                    className="bg-background disabled:opacity-50 px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring ring-offset-background focus:ring-offset-2 w-full text-sm disabled:cursor-not-allowed"
+                >
+                    <option value="">Seleccione una fecha</option>
+                    {fechas.map((fecha, index) => (
+                        <option key={index} value={JSON.stringify(fecha)}>
+                            {new Date(fecha.fecha).toLocaleDateString('es-CL')} - {fecha.nombre} - {fecha.profesor} - {fecha.hora}
+                        </option>
+                    ))}
+                </select>
+            </div>
+        </div>
+    )
+}
+
 // FormContent component to avoid duplication
 function FormContent({ form, onSubmit, isSubmitting, formRef, variant }: {
     form: FormData
@@ -231,7 +369,13 @@ function FormContent({ form, onSubmit, isSubmitting, formRef, variant }: {
     formRef: React.MutableRefObject<HTMLFormElement | null>
     variant?: 'default' | 'withBackground' | 'centered'
 }) {
+    // Log what fields we have
+    useEffect(() => {
+        console.log('Form fields:', form.fields.map(f => ({ name: f.name, type: f.type, label: f.label })))
+    }, [form.fields])
+
     const renderField = (field: FormField) => {
+        console.log(`Rendering field: ${field.name} of type ${field.type}`)
         const commonProps = {
             required: field.required === 'yes',
             placeholder: field.placeholder,
@@ -244,6 +388,8 @@ function FormContent({ form, onSubmit, isSubmitting, formRef, variant }: {
         }
 
         switch (field.type) {
+            case 'curso':
+                return <CursoSelector fieldName={field.name} required={field.required === 'yes'} />
             case 'direccion':
                 return <RegionComunaSelector fieldName={field.name} required={field.required === 'yes'} />
             case 'rut':
@@ -449,6 +595,13 @@ function ModalFormBlock({
         setIsSubmitting(true)
 
         const formData = new FormData(event.currentTarget)
+
+        // Log all form data entries for debugging
+        console.log('Form data entries:')
+        for (const pair of formData.entries()) {
+            console.log(`${pair[0]}: ${pair[1]}`)
+        }
+
         const fields = form.fields.map(field => {
             let value = formData.get(field.name)?.toString() || ''
 
@@ -463,6 +616,8 @@ function ModalFormBlock({
                 const calle = formData.get(`${field.name}_calle`)?.toString() || ''
                 const region = formData.get(`${field.name}_region`)?.toString() || ''
                 const comuna = formData.get(`${field.name}_comuna`)?.toString() || ''
+
+                console.log(`Direccion field ${field.name}:`, { calle, region, comuna })
 
                 // Format the value as a combined address string
                 value = `${calle}, ${comuna}, ${region}`.trim()
@@ -483,6 +638,29 @@ function ModalFormBlock({
                         _key: generateID(),
                         name: `${field.name}_comuna`,
                         value: comuna
+                    }
+                ]
+            }
+
+            // Handle curso field type
+            if (field.type === 'curso') {
+                // Get values from the curso and fecha fields
+                const curso = formData.get(`${field.name}_curso`)?.toString() || ''
+                const fecha = formData.get(`${field.name}_fecha`)?.toString() || ''
+
+                console.log(`Curso field ${field.name}:`, { curso, fecha })
+
+                // Return separate fields for each component
+                return [
+                    {
+                        _key: generateID(),
+                        name: `${field.name}_curso`,
+                        value: curso
+                    },
+                    {
+                        _key: generateID(),
+                        name: `${field.name}_fecha`,
+                        value: fecha
                     }
                 ]
             }
@@ -679,6 +857,13 @@ export default function FormBlock({
         setIsSubmitting(true)
 
         const formData = new FormData(event.currentTarget)
+
+        // Log all form data entries for debugging
+        console.log('Form data entries:')
+        for (const pair of formData.entries()) {
+            console.log(`${pair[0]}: ${pair[1]}`)
+        }
+
         const fields = form.fields.map(field => {
             let value = formData.get(field.name)?.toString() || ''
 
@@ -693,6 +878,8 @@ export default function FormBlock({
                 const calle = formData.get(`${field.name}_calle`)?.toString() || ''
                 const region = formData.get(`${field.name}_region`)?.toString() || ''
                 const comuna = formData.get(`${field.name}_comuna`)?.toString() || ''
+
+                console.log(`Direccion field ${field.name}:`, { calle, region, comuna })
 
                 // Format the value as a combined address string
                 value = `${calle}, ${comuna}, ${region}`.trim()
@@ -713,6 +900,29 @@ export default function FormBlock({
                         _key: generateID(),
                         name: `${field.name}_comuna`,
                         value: comuna
+                    }
+                ]
+            }
+
+            // Handle curso field type
+            if (field.type === 'curso') {
+                // Get values from the curso and fecha fields
+                const curso = formData.get(`${field.name}_curso`)?.toString() || ''
+                const fecha = formData.get(`${field.name}_fecha`)?.toString() || ''
+
+                console.log(`Curso field ${field.name}:`, { curso, fecha })
+
+                // Return separate fields for each component
+                return [
+                    {
+                        _key: generateID(),
+                        name: `${field.name}_curso`,
+                        value: curso
+                    },
+                    {
+                        _key: generateID(),
+                        name: `${field.name}_fecha`,
+                        value: fecha
                     }
                 ]
             }
