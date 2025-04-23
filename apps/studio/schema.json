@@ -17091,6 +17091,10 @@
                     {
                       "type": "string",
                       "value": "direccion"
+                    },
+                    {
+                      "type": "string",
+                      "value": "curso"
                     }
                   ]
                 },

@@ -37,7 +37,7 @@ type DominantColorSeoImageRenderProps = {
   dominantColor?: Maybe<string>;
   date?: Maybe<string>;
   _type?: Maybe<string>;
-  description?: Maybe<string>;
+  description?: any;
 };
 
 const seoImageRender = ({ seoImage }: SeoImageRenderProps) => {
@@ -57,11 +57,16 @@ const dominantColorSeoImageRender = ({
   description,
   _type,
 }: DominantColorSeoImageRenderProps) => {
+  const descriptionText = typeof description === 'string'
+    ? description
+    : description && typeof description === 'object'
+      ? 'Description available'
+      : null;
+
   return (
     <div
-      tw={`bg-[${
-        dominantColor ?? "#12061F"
-      }] flex flex-row overflow-hidden relative w-full`}
+      tw={`bg-[${dominantColor ?? "#12061F"
+        }] flex flex-row overflow-hidden relative w-full`}
       style={{ fontFamily: "Inter" }}
     >
       <svg
@@ -94,12 +99,11 @@ const dominantColorSeoImageRender = ({
         <h1 tw="text-5xl font-bold leading-tight max-w-[90%] text-white">
           {title}
         </h1>
-        {description && <p tw="text-lg text-white">{description}</p>}
+        {descriptionText && <p tw="text-lg text-white">{descriptionText}</p>}
         {_type && (
           <div
-            tw={`bg-white text-[${
-              dominantColor ?? "#12061F"
-            }] flex px-5 py-2 rounded-full text-base font-semibold self-start`}
+            tw={`bg-white text-[${dominantColor ?? "#12061F"
+              }] flex px-5 py-2 rounded-full text-base font-semibold self-start`}
           >
             {getTitleCase(_type)}
           </div>

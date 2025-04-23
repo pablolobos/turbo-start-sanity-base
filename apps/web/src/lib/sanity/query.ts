@@ -1355,7 +1355,7 @@ export const querySucursalesPaths = defineQuery(`
 `);
 
 export const queryAllRegiones = defineQuery(`
-  *[_type == "sucursales" && defined(region)].region | order() | unique
+  *[_type == "sucursales" && defined(region)].region | order(region asc) | unique
 `);
 
 // Add sucursales to search query
