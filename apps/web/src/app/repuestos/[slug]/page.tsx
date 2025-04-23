@@ -4,16 +4,18 @@ import { SanityImage } from "@/components/sanity-image";
 import { queryRepuestoBySlug, queryRepuestosPaths } from "@/lib/sanity/query";
 import { client } from "@/lib/sanity/client";
 import { Metadata } from "next";
-import { RichText } from "@/components/richtext";
+import { PortableText } from "next-sanity";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
-import { PortableText } from "next-sanity";
 
-interface RepuestoPageProps {
-    params: {
-        slug: string;
-    };
-}
+type PageParams = {
+    slug: string;
+};
+
+type Props = {
+    params: Promise<PageParams>;
+    searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
+};
 
 interface Repuesto {
     _id: string;
@@ -29,8 +31,13 @@ export async function generateStaticParams() {
     return slugs.map((slug: string) => ({ slug }));
 }
 
-export async function generateMetadata({ params }: RepuestoPageProps): Promise<Metadata> {
-    const repuesto = await client.fetch<Repuesto | null>(queryRepuestoBySlug, { slug: params.slug });
+export async function generateMetadata({
+    params
+}: {
+    params: Promise<PageParams>
+}): Promise<Metadata> {
+    const resolvedParams = await params;
+    const repuesto = await client.fetch<Repuesto | null>(queryRepuestoBySlug, { slug: resolvedParams.slug });
 
     if (!repuesto) {
         return {
@@ -45,8 +52,13 @@ export async function generateMetadata({ params }: RepuestoPageProps): Promise<M
     };
 }
 
-export default async function RepuestoPage({ params }: RepuestoPageProps) {
-    const repuesto = await client.fetch<Repuesto | null>(queryRepuestoBySlug, { slug: params.slug });
+export default async function RepuestoPage({
+    params
+}: {
+    params: Promise<PageParams>
+}) {
+    const resolvedParams = await params;
+    const repuesto = await client.fetch<Repuesto | null>(queryRepuestoBySlug, { slug: resolvedParams.slug });
 
     if (!repuesto) {
         notFound();

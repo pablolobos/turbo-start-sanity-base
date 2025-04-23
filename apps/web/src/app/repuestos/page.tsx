@@ -4,6 +4,7 @@ import { client } from "@/lib/sanity/client";
 import { Metadata } from "next";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@workspace/ui/components/tabs";
 import { CategoryFilter } from "@/components/category-filter";
+import { TitleDescriptionBlock } from "@/components/title-description-block";
 
 export const metadata: Metadata = {
     title: "Repuestos | Volvo Chile",
@@ -39,12 +40,11 @@ export default async function RepuestosPage() {
         <main className="flex-1">
             <div className="flex flex-col gap-8 lg:gap-20 max-container padding-center section-y-padding">
                 <div className="space-y-4">
-                    <h1 className="heading-1">
-                        Repuestos Originales Volvo
-                    </h1>
-                    <p className="text-muted-foreground text-xl">
-                        Descubre nuestra amplia gama de repuestos originales para garantizar el máximo rendimiento de tu vehículo Volvo.
-                    </p>
+                    <TitleDescriptionBlock
+                        variant="default"
+                        title="Repuestos Originales Volvo"
+                        description="Descubre nuestra amplia gama de repuestos originales para garantizar el máximo rendimiento de tu vehículo Volvo."
+                    />
                 </div>
 
                 {categories.length > 0 ? (

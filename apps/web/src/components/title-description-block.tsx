@@ -22,14 +22,15 @@ export function TitleDescriptionBlock({
 
     return (
         <div className={cn(
-            "flex flex-col gap-8  py-12 lg:py-20  padding-center max-container",
-            variant === 'compact' ? 'lg:py-2 px-4' : 'container-padding gap-8',
-            variant === 'center' ? 'text-center lg:flex-col lg:items-center' : 'lg:grid lg:grid-cols-2',
+            "flex flex-col gap-8 lg:gap-12 py-12 lg:py-20 lg:grid lg:grid-cols-[1fr_2fr] padding-center max-container",
+            variant === 'default' ? '' : '',
+            variant === 'compact' ? 'lg:py-2 px-4' : '',
+            variant === 'center' ? 'text-center lg:flex-col lg:items-center' : '',
             variant === 'tight' ? 'lg:pt-0 lg:pb-8' : '',
             className
         )}>
             <Heading className={cn("mb-4 ", headingLevel === 'h1' ? 'heading-1' : 'heading-2')}>{title}{subtitle && <span>. {subtitle}</span>}</Heading>
-            {description && <p className="text-base">{description}</p>}
+            {description && <p className="text-base lg:text-xl">{description}</p>}
         </div>
     );
 } 
