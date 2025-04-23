@@ -122,12 +122,6 @@ export const structure = (
         list: { type: "blog", title: "Artículos", icon: FileText },
         context,
       }),
-      createIndexListWithOrderableItems({
-        S,
-        index: { type: "repuestosIndex", icon: Wrench },
-        list: { type: "repuestos", title: "Repuestos", icon: Wrench },
-        context,
-      }),
       S.listItem()
         .title("Nuestros productos")
         .icon(Truck)
@@ -142,6 +136,12 @@ export const structure = (
         ),
       createList({ S, type: "sucursales", title: "Sucursales", icon: MapPin }),
       createList({ S, type: "cursos", title: "Cursos", icon: GraduationCap }),
+      createIndexListWithOrderableItems({
+        S,
+        index: { type: "repuestosIndex", icon: Wrench },
+        list: { type: "repuestos", title: "Repuestos", icon: Wrench },
+        context,
+      }),
       S.divider(),
       S.listItem()
         .title("Configuración del sitio")
