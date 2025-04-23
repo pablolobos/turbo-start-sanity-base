@@ -266,41 +266,11 @@ function CursoSelector({ fieldName, required }: { fieldName: string, required: b
             console.log('Found curso:', curso)
             setFechas(curso?.fechasCapacitacion || [])
             setSelectedFecha('')
-
-            // Update the hidden detallecapacitacion input if it exists
-            if (curso) {
-                const detallecapInput = document.querySelector(`input[name="detallecapacitacion"]`) as HTMLInputElement
-                if (detallecapInput) {
-                    console.log('Found detallecapacitacion input, setting value:', curso.title)
-                    detallecapInput.value = curso.title
-                }
-            }
         } else {
             setFechas([])
             setSelectedFecha('')
         }
     }, [selectedCurso, cursos])
-
-    useEffect(() => {
-        if (selectedFecha) {
-            try {
-                // Update the hidden detallecapacitacion input with full details if fecha is selected
-                const fechaData = JSON.parse(selectedFecha)
-                const curso = cursos.find(c => c._id === selectedCurso)
-
-                if (curso && fechaData) {
-                    const detallecapInput = document.querySelector(`input[name="detallecapacitacion"]`) as HTMLInputElement
-                    if (detallecapInput) {
-                        const detailValue = `${curso.title} - ${new Date(fechaData.fecha).toLocaleDateString('es-CL')} - ${fechaData.nombre} - ${fechaData.profesor} - ${fechaData.hora}`
-                        console.log('Updating detallecapacitacion with fecha details:', detailValue)
-                        detallecapInput.value = detailValue
-                    }
-                }
-            } catch (e) {
-                console.error('Error updating detallecapacitacion with fecha:', e)
-            }
-        }
-    }, [selectedFecha, selectedCurso, cursos])
 
     const handleCursoChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         console.log('Raw event:', e)
@@ -317,45 +287,58 @@ function CursoSelector({ fieldName, required }: { fieldName: string, required: b
 
     console.log(`CursoSelector state for ${fieldName}:`, { selectedCurso, selectedFecha, fechasCount: fechas.length })
 
+    // Use exactly the same props as in RegionComunaSelector
+    const commonProps = {
+        required: required,
+        className: cn(
+            "w-full rounded-sm border border-border bg-input",
+            "px-4 py-3 text-base",
+            "placeholder:text-zinc-500",
+            "focus:border-black focus:outline-none focus:ring-2 focus:ring-ring"
+        )
+    };
+
     return (
         <div className="space-y-4">
             {/* Curso Select */}
-            <div className="space-y-2">
-                <label className="font-medium text-sm">Curso</label>
-                <select
-                    name={`${fieldName}_curso`}
-                    value={selectedCurso}
-                    onChange={handleCursoChange}
-                    required={required}
-                    className="bg-background disabled:opacity-50 px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring ring-offset-background focus:ring-offset-2 w-full text-sm disabled:cursor-not-allowed"
-                >
-                    <option value="">Seleccione un curso</option>
-                    {cursos.map((curso) => (
-                        <option key={curso._id} value={curso._id}>
-                            {curso.title}
-                        </option>
-                    ))}
-                </select>
+            <div>
+                <label className="block mb-1 font-medium text-sm">Curso</label>
+                <Form.Control asChild>
+                    <select
+                        name={`${fieldName}_curso`}
+                        value={selectedCurso}
+                        onChange={handleCursoChange}
+                        {...commonProps}
+                    >
+                        <option value="">Seleccione un curso</option>
+                        {cursos.map((curso) => (
+                            <option key={curso._id} value={curso._id}>
+                                {curso.title}
+                            </option>
+                        ))}
+                    </select>
+                </Form.Control>
             </div>
 
             {/* Fecha Select */}
-            <div className="space-y-2">
-                <label className="font-medium text-sm">Fecha de capacitación</label>
-                <select
-                    name={`${fieldName}_fecha`}
-                    value={selectedFecha}
-                    onChange={handleFechaChange}
-                    required={required}
-                    disabled={!selectedCurso}
-                    className="bg-background disabled:opacity-50 px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring ring-offset-background focus:ring-offset-2 w-full text-sm disabled:cursor-not-allowed"
-                >
-                    <option value="">Seleccione una fecha</option>
-                    {fechas.map((fecha, index) => (
-                        <option key={index} value={JSON.stringify(fecha)}>
-                            {new Date(fecha.fecha).toLocaleDateString('es-CL')} - {fecha.nombre} - {fecha.profesor} - {fecha.hora}
-                        </option>
-                    ))}
-                </select>
+            <div>
+                <label className="block mb-1 font-medium text-sm">Fecha de capacitación</label>
+                <Form.Control asChild>
+                    <select
+                        name={`${fieldName}_fecha`}
+                        value={selectedFecha}
+                        onChange={handleFechaChange}
+                        disabled={!selectedCurso}
+                        {...commonProps}
+                    >
+                        <option value="">Seleccione una fecha</option>
+                        {fechas.map((fecha, index) => (
+                            <option key={index} value={JSON.stringify(fecha)}>
+                                {new Date(fecha.fecha).toLocaleDateString('es-CL')} - {fecha.nombre} - {fecha.profesor} - {fecha.hora}
+                            </option>
+                        ))}
+                    </select>
+                </Form.Control>
             </div>
         </div>
     )
