@@ -1452,7 +1452,32 @@ export const queryRepuestoBySlug = defineQuery(`*[
   "slug": slug.current,
   category,
   ${imageFragment},
-  content
+  content,
+  ${pageBuilderFragment},
+  "globalPageBuilder": *[_type == "repuestosIndex"][0].repuestosPageBuilder[]{
+    ...,
+    _type,
+    ${ctaBlock},
+    ${mainHeroBlock},
+    ${heroBlock},
+    ${doubleHeroBlock},
+    ${faqAccordionBlock},
+    ${subscribeNewsletterBlock},
+    ${imageLinkCardsBlock},
+    ${formBlock},
+    ${tabsBlock},
+    ${infoSectionBlock},
+    ${imageGalleryBlock},
+    ${specificationsTableBlock},
+    ${genericTableBlock},
+    ${featuredBlogsBlock},
+    ${highlightedAspectsBlock},
+    ${videoBlock},
+    ${videoHeroBlock},
+    ${textBlock},
+    ${sucursalesSelectorBlock},
+    ${cursosBlock}
+  }
 }`);
 
 export const queryRepuestosByCategory = defineQuery(`*[

@@ -135,6 +135,13 @@ export const repuestosIndex = defineType({
             group: GROUP.MAIN_CONTENT,
         }),
         pageBuilderField,
+        defineField({
+            name: "repuestosPageBuilder",
+            title: "Bloques para todas las páginas de repuestos",
+            description: "Estos bloques aparecerán en todas las páginas de detalle de repuestos",
+            type: "pageBuilder",
+            group: GROUP.MAIN_CONTENT
+        }),
         ...seoFields.filter(
             (field) => !["seoNoIndex", "seoHideFromLists"].includes(field.name),
         ),

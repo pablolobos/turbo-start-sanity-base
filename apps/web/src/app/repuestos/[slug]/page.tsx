@@ -7,6 +7,7 @@ import { Metadata } from "next";
 import { PortableText } from "next-sanity";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
+import { PageBuilder } from "@/components/pagebuilder";
 
 type PageParams = {
     slug: string;
@@ -24,6 +25,8 @@ interface Repuesto {
     category: string;
     content: any[];
     image: any;
+    pageBuilder?: any[];
+    globalPageBuilder?: any[];
 }
 
 export async function generateStaticParams() {
@@ -114,6 +117,16 @@ export default async function RepuestoPage({
                     </div>
                 </div>
             </Container>
+
+            {/* Individual page builder blocks (if any) */}
+            {repuesto.pageBuilder && repuesto.pageBuilder.length > 0 && (
+                <PageBuilder pageBuilder={repuesto.pageBuilder} id={repuesto._id} type="repuestos" />
+            )}
+
+            {/* Global page builder blocks from repuestosIndex */}
+            {repuesto.globalPageBuilder && repuesto.globalPageBuilder.length > 0 && (
+                <PageBuilder pageBuilder={repuesto.globalPageBuilder} id={repuesto._id} type="repuestos" />
+            )}
         </main>
     );
 } 
